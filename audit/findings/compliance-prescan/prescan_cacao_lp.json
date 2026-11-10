@@ -1,0 +1,68 @@
+[
+  {
+    "source": "crawl2/cacao_lp_mobile.txt",
+    "findings": [
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 48,
+        "match": "guarantee",
+        "context": "30-day money-back guarantee. Love it or your money back."
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 103,
+        "match": "GUARANTEE",
+        "context": "30-DAY GUARANTEE"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 108,
+        "match": "GUARANTEE",
+        "context": "30-DAY GUARANTEE"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 265,
+        "match": "Guarantee",
+        "context": "Guarantee"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 367,
+        "match": "guarantee",
+        "context": "How does the guarantee work?"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "time_bound_transformation",
+        "line": 110,
+        "match": "Transform",
+        "context": "Transform your daily routine."
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 138,
+        "match": "support",
+        "context": "of complete protein per serving to support strength, recovery, and everyday nutrition."
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 567,
+        "match": "SUPPORT",
+        "context": "CUSTOMER SUPPORT"
+      }
+    ],
+    "counts": {
+      "CRITICAL": 0,
+      "HIGH": 6,
+      "MEDIUM": 2
+    }
+  }
+]

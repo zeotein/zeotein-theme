@@ -1,0 +1,54 @@
+[
+  {
+    "source": "crawl2/cacao_sticks30_mobile.txt",
+    "findings": [
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 48,
+        "match": "Guarantee",
+        "context": "30-Day Money-Back Guarantee"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 90,
+        "match": "Guarantee",
+        "context": "30-Day Money-Back Guarantee"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 92,
+        "match": "guarantee",
+        "context": "Love it or your money back. The guarantee covers your first order, one supply per customer. Your order ships in 1 to 2 business days."
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 169,
+        "match": "guarantee",
+        "context": "What is your shipping and guarantee policy?"
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 353,
+        "match": "SUPPORT",
+        "context": "CUSTOMER SUPPORT"
+      },
+      {
+        "tier": "CRITICAL",
+        "rule": "supplement_facts_mismatch",
+        "line": 0,
+        "match": "Calories: 6 (spec: 140)",
+        "context": "Page shows Calories=6, locked cacao spec says 140."
+      }
+    ],
+    "counts": {
+      "CRITICAL": 1,
+      "HIGH": 4,
+      "MEDIUM": 1
+    }
+  }
+]

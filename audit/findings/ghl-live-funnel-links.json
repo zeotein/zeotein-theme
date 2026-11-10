@@ -1,0 +1,626 @@
+{
+ "https://gift.zeotein.com/": {
+  "links": [],
+  "other": [
+   "https://try.zeotein.com/holiday-guide"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://gift.zeotein.com/final-thank-you": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://gift.zeotein.com/holiday-guide": {
+  "links": [],
+  "other": [
+   "https://try.zeotein.com/holiday-guide"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://gift.zeotein.com/holiday-guide-opt-in-landing-page": {
+  "links": [],
+  "other": [
+   "https://try.zeotein.com/holiday-guide"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://gift.zeotein.com/thank-you-/-download-page": {
+  "links": [
+   "https://zeotein.com/cart/add?items[0][id]=67706369638613&items[0][quantity]=1&items[0][properties][_zt_bb_gift]=1&items[1][id]=67706369605845&items[1][quantity]=1&items[1][properties][_zt_bb_gift]=1&items[2][id]=67706369540309&items[2][quantity]=1&items[2][properties][_zt_bb_gift]=1&items[3][id]=67706369507541&items[3][quantity]=1&items[3][properties][_zt_bb_gift]=1&items[4][id]=67706369704149&items[4][quantity]=1&items[4][properties][_zt_bb_gift]=cleanblend_shaker&items[5][id]=67596435783893&items[5][quantity]=1&items[5][selling_plan]=6565560533",
+   "https://zeotein.com/cart/add?items[0][id]=67706369638613&items[0][quantity]=1&items[0][properties][_zt_bb_gift]=1&items[1][id]=67706369605845&items[1][quantity]=1&items[1][properties][_zt_bb_gift]=1&items[2][id]=67706369540309&items[2][quantity]=1&items[2][properties][_zt_bb_gift]=1&items[3][id]=67706369507541&items[3][quantity]=1&items[3][properties][_zt_bb_gift]=1&items[4][id]=67706369704149&items[4][quantity]=1&items[4][properties][_zt_bb_gift]=cleanblend_shaker&items[5][id]=67596435783893&items[5][quantity]=1&items[5][selling_plan]=6565560533&utm_source=ghl&utm_medium=funnel&utm_campaign=holiday-guide&utm_content=thankyou-offer"
+  ],
+  "other": [
+   "https://gift.zeotein.com/final-thank-you"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://go.zeotein.com/cacao-protein-starter-kit": {
+  "links": [
+   "https://zeotein.com/cart/54944151634133:1?utm_source=howie&utm_medium=landing_page&utm_campaign=howie_bulk_offer&utm_content=bulkbag_onetime",
+   "https://zeotein.com/cart/67775397986517:1?utm_source=howie&utm_medium=landing_page&utm_campaign=howie_bulk_offer&utm_content=stickpacks_onetime"
+  ],
+  "other": [],
+  "variants": [
+   "54944151634133",
+   "67775397986517"
+  ],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/cacao-protein-starter-kit-bag": {
+  "links": [
+   "https://zeotein.com/cart/54944151634133:1?utm_source=howie&utm_medium=landing_page&utm_campaign=howie_bulk_offer&utm_content=bulkbag_onetime",
+   "https://zeotein.com/cart/67775397986517:1?utm_source=howie&utm_medium=landing_page&utm_campaign=howie_bulk_offer&utm_content=stickpacks_onetime"
+  ],
+  "other": [],
+  "variants": [
+   "54944151634133",
+   "67775397986517"
+  ],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/cacao-starter-kit": {
+  "links": [
+   "https://zeotein.com/cart/54944151634133:1?utm_source=howie&utm_medium=landing_page&utm_campaign=howie_bulk_offer&utm_content=bulkbag_onetime",
+   "https://zeotein.com/cart/67775397986517:1?utm_source=howie&utm_medium=landing_page&utm_campaign=howie_bulk_offer&utm_content=stickpacks_onetime"
+  ],
+  "other": [],
+  "variants": [
+   "54944151634133",
+   "67775397986517"
+  ],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/checkout-265915": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/checkout-574507": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/howie": {
+  "links": [],
+  "other": [
+   "https://go.zeotein.com/howie-mandel-exclusive-offer"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/howie-bulk-offer": {
+  "links": [
+   "https://zeotein.com/cart/54476558565589:1?utm_source=howie&utm_medium=landing_page&utm_campaign=howie_bulk_offer&utm_content=bulkbag_onetime",
+   "https://zeotein.com/cart/54502400131285:1?utm_source=howie&utm_medium=landing_page&utm_campaign=howie_bulk_offer&utm_content=other_onetime",
+   "https://zeotein.com/cart/54502402719957:1?utm_source=howie&utm_medium=landing_page&utm_campaign=howie_bulk_offer&utm_content=stickpacks_onetime"
+  ],
+  "other": [
+   "https://go.zeotein.com/howie-bulk-offer--landing-page-page?howie_popup_done=1"
+  ],
+  "variants": [
+   "54476558565589",
+   "54502400131285",
+   "54502402719957"
+  ],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/howie-bulk-offer--landing-page": {
+  "links": [
+   "https://zeotein.com/cart/54476558565589:1?utm_source=howie&utm_medium=landing_page&utm_campaign=howie_bulk_offer&utm_content=bulkbag_onetime",
+   "https://zeotein.com/cart/54502400131285:1?utm_source=howie&utm_medium=landing_page&utm_campaign=howie_bulk_offer&utm_content=other_onetime",
+   "https://zeotein.com/cart/54502402719957:1?utm_source=howie&utm_medium=landing_page&utm_campaign=howie_bulk_offer&utm_content=stickpacks_onetime"
+  ],
+  "other": [
+   "https://go.zeotein.com/howie-bulk-offer--landing-page-page?howie_popup_done=1"
+  ],
+  "variants": [
+   "54476558565589",
+   "54502400131285",
+   "54502402719957"
+  ],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/landing-page": {
+  "links": [],
+  "other": [
+   "https://go.zeotein.com/howie-mandel-exclusive-offer"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/test-0123123123123123-donotuse": {
+  "links": [],
+  "other": [
+   "https://go.zeotein.com/howie-mandel-exclusive-offer"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/test-03123123123231-donotuse": {
+  "links": [],
+  "other": [
+   "https://go.zeotein.com/howie-mandel-exclusive-offer"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/thank-you-page": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/thank-you-page-885642": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/upsell": {
+  "links": [],
+  "other": [
+   "https://go.zeotein.com/copy---exclusive-checkout-page",
+   "https://go.zeotein.com/thank-you-page-7960-page"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://go.zeotein.com/upsell-1352": {
+  "links": [],
+  "other": [
+   "https://go.zeotein.com/copy---exclusive-checkout-page",
+   "https://go.zeotein.com/thank-you-page-7960-page"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://marketing.zeotein.com/": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/cacao-sales-page": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/cacao-stick-packs-starter-kit": {
+  "links": [
+   "https://zeotein.com/products/zeotein-cacao-30-day-stick-packs-one-time-purchase",
+   "https://zeotein.com/products/zeotein-cacao-starter-kit-30-day-stick-packs"
+  ],
+  "other": [
+   "https://go.zeotein.com/howie-bulk-offer--landing-page-page?howie_popup_done=1",
+   "https://try.zeotein.com/cacao-30-day-sticks"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://marketing.zeotein.com/email": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/google-kit": {
+  "links": [
+   "https://zeotein.com/products/zeotein-cacao-30-day-bulk-bag-one-time-starter-kit-93-49",
+   "https://zeotein.com/products/zeotein-cacao-bulk-bag-starter-kit-try-99-99-renewal"
+  ],
+  "other": [
+   "https://marketing.zeotein.com/starter-kit-google"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/landing-page-cacao": {
+  "links": [
+   "https://zeotein.com/collections/all",
+   "https://zeotein.com/collections/zeotein",
+   "https://zeotein.com/pages/about-zeotein",
+   "https://zeotein.com/pages/contact",
+   "https://zeotein.com/pages/faqs",
+   "https://zeotein.com/pages/the-zeotein-difference",
+   "https://zeotein.com/products/zeotein-30-day-supply",
+   "https://zeotein.com/products/zeotein-30-day-supply#reviews",
+   "https://zeotein.com/products/zeotein-cacao-30-day-bulk-powder",
+   "https://zeotein.com/products/zeotein-protein-cacao"
+  ],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/q1": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/q1-9460": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/q2": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/q2-1246": {
+  "links": [],
+  "other": [
+   "https://marketing.zeotein.com/quiz/animal-goals",
+   "https://marketing.zeotein.com/quiz/plant-goals",
+   "https://marketing.zeotein.com/results-for-cacao",
+   "https://marketing.zeotein.com/results-for-vegan",
+   "https://marketing.zeotein.com/v2-email-vegan-3231",
+   "https://marketing.zeotein.com/v2-result-cacao-6451"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/q3": {
+  "links": [],
+  "other": [
+   "https://marketing.zeotein.com/quiz/cacao-result",
+   "https://marketing.zeotein.com/quiz/vegan-result",
+   "https://marketing.zeotein.com/results-for-cacao",
+   "https://marketing.zeotein.com/results-for-vegan",
+   "https://marketing.zeotein.com/v2-email-vegan-3231",
+   "https://marketing.zeotein.com/v2-result-cacao-6451"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/q4": {
+  "links": [],
+  "other": [
+   "https://marketing.zeotein.com/quiz/cacao-result",
+   "https://marketing.zeotein.com/quiz/vegan-result",
+   "https://marketing.zeotein.com/results-for-cacao",
+   "https://marketing.zeotein.com/results-for-vegan",
+   "https://marketing.zeotein.com/v2-email-vegan-3231",
+   "https://marketing.zeotein.com/v2-result-cacao-6451"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/quiz": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/result-cacao": {
+  "links": [
+   "https://zeotein.com/products/cacao"
+  ],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/result-cacao-2454": {
+  "links": [
+   "https://zeotein.com/cart/52649698132181:1?discount=WELCOME15"
+  ],
+  "other": [],
+  "variants": [
+   "52649698132181"
+  ],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/result-vegan": {
+  "links": [
+   "https://zeotein.com/products/vegan"
+  ],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/result-vegan-4655": {
+  "links": [
+   "https://zeotein.com/cart/53061513511125:1?discount=WELCOME15"
+  ],
+  "other": [],
+  "variants": [
+   "53061513511125"
+  ],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/start": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/starter-kit": {
+  "links": [
+   "https://zeotein.com/products/zeotein-cacao-30-day-bulk-bag-one-time-starter-kit-93-49",
+   "https://zeotein.com/products/zeotein-cacao-bulk-bag-starter-kit-try-99-99-renewal"
+  ],
+  "other": [
+   "https://marketing.zeotein.com/starter-kit"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/starter-kit-google": {
+  "links": [
+   "https://zeotein.com/products/zeotein-cacao-30-day-bulk-bag-one-time-starter-kit-93-49",
+   "https://zeotein.com/products/zeotein-cacao-bulk-bag-starter-kit-try-99-99-renewal"
+  ],
+  "other": [
+   "https://marketing.zeotein.com/starter-kit-google"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/starter-kit-page": {
+  "links": [
+   "https://zeotein.com/products/zeotein-cacao-30-day-bulk-bag-one-time-starter-kit-93-49",
+   "https://zeotein.com/products/zeotein-cacao-bulk-bag-starter-kit-try-99-99-renewal"
+  ],
+  "other": [
+   "https://marketing.zeotein.com/starter-kit"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/stick-packs": {
+  "links": [
+   "https://zeotein.com/products/zeotein-cacao-30-day-stick-packs-one-time-purchase",
+   "https://zeotein.com/products/zeotein-cacao-starter-kit-30-day-stick-packs"
+  ],
+  "other": [
+   "https://go.zeotein.com/howie-bulk-offer--landing-page-page?howie_popup_done=1",
+   "https://try.zeotein.com/cacao-30-day-sticks"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ },
+ "https://marketing.zeotein.com/v2-email-cacao": {
+  "links": [],
+  "other": [
+   "https://marketing.zeotein.com/v2-result-cacao",
+   "https://marketing.zeotein.com/v2-result-cacao-page"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/v2-email-vegan": {
+  "links": [],
+  "other": [
+   "https://marketing.zeotein.com/v2-result-vegan",
+   "https://marketing.zeotein.com/v2-result-vegan-page"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/v2-q1": {
+  "links": [],
+  "other": [
+   "https://marketing.zeotein.com/v2-q2-cacao",
+   "https://marketing.zeotein.com/v2-q2-vegan"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/v2-q2-cacao": {
+  "links": [],
+  "other": [
+   "https://marketing.zeotein.com/v2-email-cacao-page"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/v2-q2-vegan": {
+  "links": [],
+  "other": [
+   "https://marketing.zeotein.com/v2-email-vegan-page"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/v2-result-cacao": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/v2-result-vegan": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/v2-start": {
+  "links": [],
+  "other": [
+   "https://marketing.zeotein.com/v2-q1-page"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/zeotein-cacao": {
+  "links": [
+   "https://zeotein.com/collections/all",
+   "https://zeotein.com/collections/zeotein",
+   "https://zeotein.com/pages/about-zeotein",
+   "https://zeotein.com/pages/contact",
+   "https://zeotein.com/pages/faqs",
+   "https://zeotein.com/pages/the-zeotein-difference",
+   "https://zeotein.com/products/zeotein-30-day-supply",
+   "https://zeotein.com/products/zeotein-30-day-supply#reviews",
+   "https://zeotein.com/products/zeotein-cacao-30-day-bag-pre-launch-bundle",
+   "https://zeotein.com/products/zeotein-protein-cacao"
+  ],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/zeotein-cacao-946213": {
+  "links": [
+   "https://zeotein.com/collections/all",
+   "https://zeotein.com/collections/zeotein",
+   "https://zeotein.com/pages/about-zeotein",
+   "https://zeotein.com/pages/contact",
+   "https://zeotein.com/pages/faqs",
+   "https://zeotein.com/pages/the-zeotein-difference",
+   "https://zeotein.com/products/zeotein-30-day-supply",
+   "https://zeotein.com/products/zeotein-30-day-supply#reviews",
+   "https://zeotein.com/products/zeotein-cacao-30-day-bulk-powder",
+   "https://zeotein.com/products/zeotein-protein-cacao"
+  ],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/zeotein-cacao-landing-page": {
+  "links": [
+   "https://zeotein.com/collections/all",
+   "https://zeotein.com/collections/zeotein",
+   "https://zeotein.com/pages/about-zeotein",
+   "https://zeotein.com/pages/contact",
+   "https://zeotein.com/pages/faqs",
+   "https://zeotein.com/pages/the-zeotein-difference",
+   "https://zeotein.com/products/zeotein-30-day-supply",
+   "https://zeotein.com/products/zeotein-30-day-supply#reviews",
+   "https://zeotein.com/products/zeotein-cacao-30-day-bag-pre-launch-bundle",
+   "https://zeotein.com/products/zeotein-protein-cacao"
+  ],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/zeotein-cacao-offer": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/zeotein-formula-finder": {
+  "links": [],
+  "other": [],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://marketing.zeotein.com/zeotein-formula-finder-v2": {
+  "links": [],
+  "other": [
+   "https://marketing.zeotein.com/v2-q1-page"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": false
+ },
+ "https://try.zeotein.com/": {
+  "links": [
+   "https://zeotein.com/pages/faqs",
+   "https://zeotein.com/products/cacao-protein-starter-kit",
+   "https://zeotein.com/products/free-gift-collagen-thanks-for-3-months",
+   "https://zeotein.com/products/lp-gift-cacao-recipe-guide",
+   "https://zeotein.com/products/lp-gift-cleanblend-shaker",
+   "https://zeotein.com/products/lp-gift-save-a-scoop",
+   "https://zeotein.com/products/lp-gift-starter-guide",
+   "https://zeotein.com/products/lp-gift-vegan-recipe-guide",
+   "https://zeotein.com/products/zeotein-15-day-reset",
+   "https://zeotein.com/products/zeotein-cacao-30-day-bulk-bag-one-time-starter-kit-93-49",
+   "https://zeotein.com/products/zeotein-cacao-30-day-bulk-powder-99-99",
+   "https://zeotein.com/products/zeotein-cacao-30-day-bulk-powder-best-value-84-99",
+   "https://zeotein.com/products/zeotein-cacao-30-day-stick-packs-one-time-15-off-114-74",
+   "https://zeotein.com/products/zeotein-cacao-30-day-stick-packs-subscription-15-off-97-74-month",
+   "https://zeotein.com/products/zeotein-cacao-30-day-subscription",
+   "https://zeotein.com/products/zeotein-cacao-30-day-supply",
+   "https://zeotein.com/products/zeotein-cacao-30-day-supply-free-shaker-3-guides",
+   "https://zeotein.com/products/zeotein-cacao-7-day-stick-packs",
+   "https://zeotein.com/products/zeotein-cacao-7-day-stick-packs-15-off-33-99",
+   "https://zeotein.com/products/zeotein-cacao-bulk-bag-cacao-lp",
+   "https://zeotein.com/products/zeotein-cacao-bulk-bag-starter-kit-try-99-99-renewal",
+   "https://zeotein.com/products/zeotein-cacao-protein-powder-bulk-bag-cacao-landing-page",
+   "https://zeotein.com/products/zeotein-cacao-starter-kit",
+   "https://zeotein.com/products/zeotein-keep-it-clean-heavyweight-long-sleeve-shirt"
+  ],
+  "other": [
+   "http://try.zeotein.com/cdn/shop/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?height=628&pad_color=ffffff&v=1762380884&width=1200",
+   "https://try.zeotein.com/.well-known/shopify/monorail/unstable/produce_batch",
+   "https://try.zeotein.com/api/collect",
+   "https://try.zeotein.com/cdn",
+   "https://try.zeotein.com/cdn/shop/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?height=628&pad_color=ffffff&v=1762380884&width=1200",
+   "https://try.zeotein.com/cdn/shop/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?v=1762380884",
+   "https://try.zeotein.com/cdn/shopifycloud/perf-kit/shopify-perf-kit-3.15.1.min.js",
+   "https://try.zeotein.com/cdn/shopifycloud/portable-wallets/latest/accelerated-checkout-backwards-compat.css",
+   "https://try.zeotein.com/cdn/shopifycloud/portable-wallets/latest/portable-wallets.en.js",
+   "https://try.zeotein.com/cdn/shopifycloud/privacy-banner/privacy-banner.js"
+  ],
+  "variants": [],
+  "selling_plans": [],
+  "mentions_howie": true
+ }
+}

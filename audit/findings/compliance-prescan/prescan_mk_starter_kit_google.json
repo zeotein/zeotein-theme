@@ -1,0 +1,26 @@
+[
+  {
+    "source": "crawl2/mk_starter_kit_google_mobile.txt",
+    "findings": [
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 275,
+        "match": "Guarantee",
+        "context": "Shipping is free on every order from this page. Your first 30-day bag is covered by our 30-Day Guarantee. To start a return, email hello@zeotein.com"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 285,
+        "match": "guarantee",
+        "context": "What is the money-back guarantee?"
+      }
+    ],
+    "counts": {
+      "CRITICAL": 0,
+      "HIGH": 2,
+      "MEDIUM": 0
+    }
+  }
+]

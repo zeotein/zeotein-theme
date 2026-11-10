@@ -1,0 +1,1031 @@
+<title>Zeotein Store Audit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: an operator's dossier. One reading column, a sticky section index, and phone-sized before/after pairs for every page. */
+:root{
+  --bg:#FBFAFD; --surface:#FFFFFF; --ink:#1D1530; --ink-2:#4A425C; --muted:#736C84; --line:#E6E1EE;
+  --purple:#5F2D90; --purple-soft:#F2ECF9; --teal:#32BAC0; --teal-ink:#0E7C82; --teal-soft:#E5F6F7;
+  --s1:#7C48B8; --s2:#00A1A8; --grid:#ECE8F2;
+  --good:#23784A; --good-soft:#E6F4EC; --warn:#A6620F; --warn-soft:#FBF0DF; --bad:#B53A33; --bad-soft:#FBE9E7;
+  --f-display:"Poppins", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Manrope", "Segoe UI", system-ui, sans-serif;
+  /* Store mockup palette: fixed, because the mockups show the real light-themed storefront in every theme */
+  --zt-bg:#FFFFFF; --zt-ink:#1B1B24; --zt-ink-2:#4B4B5A; --zt-muted:#7B7B8A; --zt-line:#E8E5EE; --zt-purple:#4B2D8F;
+  --zt-purple-2:#5F2D90; --zt-teal:#32BAC0; --zt-teal-dk:#1F8F94; --zt-soft:#F4F0FA; --zt-cream:#F7F5F2; --zt-star:#0F8C7A;
+  --zt-h:"Poppins", "Segoe UI", system-ui, sans-serif; --zt-b:"Inter", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#120E1A; --surface:#1B1626; --ink:#EEEAF6; --ink-2:#CAC3D9; --muted:#9E96AF; --line:#2E2741;
+    --purple:#BC98EC; --purple-soft:#241B34; --teal:#32BAC0; --teal-ink:#61D1D6; --teal-soft:#14292C;
+    --s1:#9866D6; --s2:#18A3A9; --grid:#2A2338;
+    --good:#62C690; --good-soft:#15291F; --warn:#E3A853; --warn-soft:#2E2312; --bad:#EF8078; --bad-soft:#331816;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#120E1A; --surface:#1B1626; --ink:#EEEAF6; --ink-2:#CAC3D9; --muted:#9E96AF; --line:#2E2741;
+  --purple:#BC98EC; --purple-soft:#241B34; --teal:#32BAC0; --teal-ink:#61D1D6; --teal-soft:#14292C;
+  --s1:#9866D6; --s2:#18A3A9; --grid:#2A2338;
+  --good:#62C690; --good-soft:#15291F; --warn:#E3A853; --warn-soft:#2E2312; --bad:#EF8078; --bad-soft:#331816;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+a{color:var(--purple);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.55rem,1.1rem + 1.6vw,2.2rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.2rem;font-weight:600}
+h4{font-size:1rem;font-weight:600}
+p{margin:0}
+.eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-ink)}
+.lede{font-size:1.08rem;color:var(--ink-2);max-width:68ch}
+.muted{color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+/* Masthead */
+.mast{background:var(--surface);border-bottom:1px solid var(--line)}
+.mast .wrap{padding-block:clamp(28px,5vw,56px);display:grid;gap:28px}
+.mast h1{font-size:clamp(2rem,1.3rem + 3vw,3.3rem);font-weight:700;letter-spacing:-.02em}
+.mast h1 span{color:var(--purple)}
+.verdict{font-size:clamp(1.05rem,1rem + .35vw,1.25rem);color:var(--ink-2);max-width:70ch}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.85rem;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.kpi{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--bg);display:grid;gap:4px;min-width:0}
+.kpi .k-label{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kpi .k-val{font-family:var(--f-display);font-size:clamp(1.6rem,1.2rem + 1.4vw,2.2rem);font-weight:700;font-variant-numeric:tabular-nums}
+.kpi .k-sub{font-size:.85rem;color:var(--ink-2)}
+.kpi.bad .k-val{color:var(--bad)}
+@media (max-width:820px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Section index */
+.index{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.index .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:thin}
+.index a{flex:none;font-size:.82rem;font-weight:600;color:var(--ink-2);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid transparent}
+.index a:hover{border-color:var(--line);color:var(--purple)}
+
+section.block{padding-block:clamp(36px,6vw,72px);border-bottom:1px solid var(--line)}
+section.block > .wrap{display:grid;gap:24px}
+.sec-head{display:grid;gap:10px;max-width:780px}
+
+/* Leak list */
+.leaks{display:grid;gap:14px;counter-reset:leak}
+.leak{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 18px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.leak .rank{font-family:var(--f-display);font-weight:700;font-size:1.5rem;color:var(--purple);line-height:1;padding-top:2px;font-variant-numeric:tabular-nums}
+.leak h3{font-size:1.08rem}
+.leak p{color:var(--ink-2);font-size:.95rem;margin-top:6px}
+.leak .fix{margin-top:8px;font-size:.92rem}
+.leak .fix b{color:var(--teal-ink)}
+.leak .impact{font-size:.8rem;font-weight:700;white-space:nowrap;border-radius:999px;padding:4px 10px;background:var(--bad-soft);color:var(--bad)}
+.leak .impact.w{background:var(--warn-soft);color:var(--warn)}
+@media (max-width:640px){.leak{grid-template-columns:auto minmax(0,1fr)}.leak .impact{grid-column:2;justify-self:start}}
+
+/* Done list */
+.done{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.done-item{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--surface);display:grid;gap:6px;min-width:0}
+.done-item h4{display:flex;gap:8px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.chip.good{background:var(--good-soft);color:var(--good)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.bad{background:var(--bad-soft);color:var(--bad)}
+.chip.info{background:var(--purple-soft);color:var(--purple)}
+.chip.teal{background:var(--teal-soft);color:var(--teal-ink)}
+.done-item p,.done-item li{font-size:.92rem;color:var(--ink-2)}
+.done-item ul{margin:0;padding-left:18px;display:grid;gap:2px}
+@media (max-width:760px){.done{grid-template-columns:minmax(0,1fr)}}
+
+/* Charts */
+.charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.chart-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;min-width:0}
+.chart-card h3{font-size:1rem}
+.chart-card .note{font-size:.82rem;color:var(--muted)}
+.chart-card svg{width:100%;height:auto;display:block}
+.chart-card svg text{fill:var(--muted);font-family:var(--f-body);font-size:11px}
+.chart-card svg .lbl{fill:var(--ink);font-weight:700}
+.chart-card svg .grid{stroke:var(--grid);stroke-width:1}
+.chart-card svg .s1{fill:var(--s1)}
+.chart-card svg .s2{fill:var(--s2)}
+.chart-card svg .sN{fill:var(--line)}
+.chart-card svg .mark:hover{opacity:.82}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;color:var(--ink-2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+@media (max-width:820px){.charts{grid-template-columns:minmax(0,1fr)}}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+td code,li code,p code{font-size:.82em;background:var(--purple-soft);color:var(--purple);padding:1px 5px;border-radius:5px;word-break:break-word}
+
+/* Two-column callouts */
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:10px;min-width:0;align-content:start}
+.panel ul{margin:0;padding-left:20px;display:grid;gap:6px;color:var(--ink-2);font-size:.94rem}
+.panel.say{border-top:4px solid var(--good)}
+.panel.nosay{border-top:4px solid var(--bad)}
+@media (max-width:760px){.split{grid-template-columns:minmax(0,1fr)}}
+
+/* Before / after */
+.page-ba{display:grid;gap:18px;padding-top:12px}
+.page-ba + .page-ba{border-top:1px dashed var(--line);padding-top:36px;margin-top:12px}
+.ba-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.ba-head h3{font-size:1.35rem}
+.ba-head .url{font-size:.84rem;color:var(--muted);word-break:break-all}
+.ba{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:22px;align-items:start}
+.ba figure{margin:0;display:grid;gap:10px;justify-items:center}
+.ba figcaption{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted)}
+.tag-now{background:var(--bad-soft);color:var(--bad)}
+.tag-new{background:var(--good-soft);color:var(--good)}
+.phone{width:356px;max-width:100%;border-radius:36px;padding:10px;background:#16121F;box-shadow:0 18px 40px -22px rgba(30,15,60,.55)}
+.screen{height:700px;border-radius:27px;overflow-y:auto;overflow-x:hidden;background:var(--zt-bg);position:relative;scrollbar-width:none}
+.screen::-webkit-scrollbar{display:none}
+.screen img.shot{display:block;width:100%;height:auto}
+.scroll-hint{font-size:.74rem;color:var(--muted)}
+.changes{display:grid;gap:12px;min-width:0}
+.changes ol{margin:0;padding-left:20px;display:grid;gap:8px;font-size:.93rem;color:var(--ink-2)}
+.changes ol b{color:var(--ink)}
+.changes .why{font-size:.86rem;background:var(--purple-soft);border-radius:12px;padding:12px 14px;color:var(--ink-2)}
+@media (max-width:1060px){.ba{grid-template-columns:auto auto}.ba .changes{grid-column:1 / -1}}
+@media (max-width:760px){.ba{grid-template-columns:minmax(0,1fr)}.ba .changes{grid-column:auto}}
+
+/* ===== Storefront mockup components (fixed light store palette) ===== */
+.zt{font-family:var(--zt-b);color:var(--zt-ink);font-size:13px;line-height:1.45;background:var(--zt-bg)}
+.zt *{box-sizing:border-box}
+.zt h1,.zt h2,.zt h3,.zt h4{font-family:var(--zt-h);color:var(--zt-ink);margin:0;line-height:1.15}
+.zt p{margin:0}
+.zt .ann{background:var(--zt-purple);color:#fff;text-align:center;font-weight:600;font-size:11.5px;padding:8px 10px;letter-spacing:.01em}
+.zt .ann b{color:#9BE7EA}
+.zt .hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--zt-line);background:#fff}
+.zt .logo{font-family:var(--zt-h);font-weight:700;font-size:20px;letter-spacing:-.02em;color:var(--zt-purple)}
+.zt .logo span{color:var(--zt-teal)}
+.zt .ico{display:flex;gap:14px}
+.zt .ico i{width:18px;height:18px;border:2px solid var(--zt-ink-2);border-radius:50%;display:block}
+.zt .ico i.bag{border-radius:4px}
+.zt .gal{position:relative;background:#F6F4FA}
+.zt .gal img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
+.zt .gal .dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:5px}
+.zt .gal .dots i{width:6px;height:6px;border-radius:50%;background:rgba(75,45,143,.25)}
+.zt .gal .dots i:first-child{background:var(--zt-purple)}
+.zt .gal .chips{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:5px}
+.zt .gal .chips span{background:rgba(255,255,255,.94);color:var(--zt-purple);font-weight:700;font-size:10.5px;padding:4px 8px;border-radius:999px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.zt .pad{padding:14px}
+.zt .eyb{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--zt-teal-dk)}
+.zt .ttl{font-size:23px;font-weight:700;margin-top:4px}
+.zt .sub{color:var(--zt-ink-2);margin-top:4px}
+.zt .stars{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;color:var(--zt-ink-2)}
+.zt .stars b{color:var(--zt-star);letter-spacing:1px;font-size:13px}
+.zt .price{display:flex;align-items:baseline;gap:8px;margin-top:10px;flex-wrap:wrap}
+.zt .price .now{font-family:var(--zt-h);font-weight:700;font-size:22px}
+.zt .price s{color:var(--zt-muted)}
+.zt .price .pps{font-size:12px;color:var(--zt-teal-dk);font-weight:700}
+.zt .opt{border:1.5px solid var(--zt-line);border-radius:12px;padding:11px 12px;margin-top:8px;display:grid;gap:6px;background:#fff}
+.zt .opt.on{border-color:var(--zt-purple);background:var(--zt-soft)}
+.zt .opt .row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.zt .opt .rad{width:16px;height:16px;border-radius:50%;border:2px solid var(--zt-muted);flex:none}
+.zt .opt.on .rad{border-color:var(--zt-purple);box-shadow:inset 0 0 0 3px #fff;background:var(--zt-purple)}
+.zt .opt .nm{font-weight:700;display:flex;align-items:center;gap:8px}
+.zt .opt .save{background:var(--zt-teal);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:999px;letter-spacing:.03em}
+.zt .opt .pr{font-weight:700;font-family:var(--zt-h)}
+.zt .opt ul{margin:0;padding-left:16px;color:var(--zt-ink-2);font-size:12px;display:grid;gap:2px}
+.zt .freq{display:flex;gap:6px;flex-wrap:wrap}
+.zt .freq span{font-size:11px;border:1px solid var(--zt-line);border-radius:999px;padding:3px 9px;background:#fff}
+.zt .freq span.on{border-color:var(--zt-purple);color:var(--zt-purple);font-weight:700}
+.zt .cta{display:block;text-align:center;background:var(--zt-purple);color:#fff;font-weight:700;font-family:var(--zt-h);border-radius:12px;padding:13px;margin-top:12px;font-size:14px}
+.zt .cta.teal{background:var(--zt-teal);color:#10373A}
+.zt .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px}
+.zt .trust div{font-size:10.5px;text-align:center;color:var(--zt-ink-2);background:var(--zt-cream);border-radius:10px;padding:8px 4px;line-height:1.3}
+.zt .trust b{display:block;color:var(--zt-ink);font-size:11px}
+.zt .ship{font-size:11.5px;color:var(--zt-ink-2);margin-top:10px;display:flex;gap:6px;align-items:center}
+.zt .ship i{width:8px;height:8px;border-radius:50%;background:#2DA44E;display:inline-block}
+.zt .sec{padding:18px 14px;border-top:8px solid var(--zt-cream)}
+.zt .sec h3{font-size:17px;font-weight:700}
+.zt .sec .sh{margin-bottom:10px;display:grid;gap:4px}
+.zt .feat{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.zt .feat div{border:1px solid var(--zt-line);border-radius:12px;padding:10px;display:grid;gap:2px}
+.zt .feat b{font-family:var(--zt-h);font-size:15px;color:var(--zt-purple)}
+.zt .feat span{font-size:11.5px;color:var(--zt-ink-2)}
+.zt .ing{display:grid;gap:0;border:1px solid var(--zt-line);border-radius:12px;overflow:hidden}
+.zt .ing div{display:flex;justify-content:space-between;gap:10px;padding:9px 11px;border-bottom:1px solid var(--zt-line);font-size:12px}
+.zt .ing div:last-child{border-bottom:0}
+.zt .ing span{color:var(--zt-muted);text-align:right}
+.zt .rev{border:1px solid var(--zt-line);border-radius:12px;padding:11px;display:grid;gap:5px;margin-top:8px}
+.zt .rev .st{color:var(--zt-star);font-size:12px;letter-spacing:1px}
+.zt .rev q{font-size:12.5px;color:var(--zt-ink)}
+.zt .rev small{color:var(--zt-muted);font-size:11px}
+.zt .faq div{border-bottom:1px solid var(--zt-line);padding:10px 0;display:flex;justify-content:space-between;font-weight:600;font-size:12.5px}
+.zt .faq div::after{content:"+";color:var(--zt-purple);font-weight:700}
+.zt .x{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:center;border:1px solid var(--zt-line);border-radius:12px;padding:8px;margin-top:8px}
+.zt .x img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+.zt .x b{font-size:12.5px;display:block}
+.zt .x span{font-size:11.5px;color:var(--zt-ink-2)}
+.zt .disc{font-size:10px;color:var(--zt-muted);padding:14px;border-top:1px solid var(--zt-line)}
+.zt .sticky{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--zt-line);padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 -6px 16px -10px rgba(0,0,0,.25);z-index:3}
+.zt .sticky .sp{font-size:11px;color:var(--zt-ink-2);line-height:1.25}
+.zt .sticky .sp b{display:block;font-family:var(--zt-h);font-size:15px;color:var(--zt-ink)}
+.zt .sticky .btn{background:var(--zt-purple);color:#fff;font-weight:700;border-radius:10px;padding:10px 16px;font-family:var(--zt-h);font-size:13px;white-space:nowrap}
+.zt .rewards{position:sticky;bottom:64px;margin-left:10px;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#4B2D8F,#2C7C99);display:grid;place-items:center;color:#fff;font-size:16px;z-index:2;margin-top:-40px;box-shadow:0 4px 10px rgba(0,0,0,.2)}
+.zt .hero{position:relative;background:var(--zt-cream)}
+.zt .hero img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.zt .hero .copy{padding:16px 14px;display:grid;gap:8px;background:#fff}
+.zt .hero h1{font-size:25px;font-weight:700;letter-spacing:-.01em}
+.zt .hero h1 em{font-style:normal;color:var(--zt-purple)}
+.zt .btns{display:grid;grid-template-columns:1.4fr 1fr;gap:8px}
+.zt .btns span{display:block;text-align:center;border-radius:12px;padding:12px 8px;font-weight:700;font-family:var(--zt-h);font-size:13px}
+.zt .btns .p{background:var(--zt-purple);color:#fff}
+.zt .btns .s{border:1.5px solid var(--zt-purple);color:var(--zt-purple)}
+.zt .proof{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:11px;color:var(--zt-ink-2)}
+.zt .proof b{color:var(--zt-star)}
+.zt .cards{display:grid;gap:10px}
+.zt .pc{display:grid;grid-template-columns:96px 1fr;gap:10px;border:1px solid var(--zt-line);border-radius:14px;padding:10px;align-items:center}
+.zt .pc img{width:96px;height:96px;object-fit:cover;border-radius:10px;background:#F6F4FA}
+.zt .pc h4{font-size:14px}
+.zt .pc .meta{font-size:11.5px;color:var(--zt-ink-2)}
+.zt .pc .pp{font-family:var(--zt-h);font-weight:700;font-size:14px;margin-top:4px}
+.zt .pc .pp small{font-family:var(--zt-b);font-weight:600;color:var(--zt-teal-dk);font-size:11px}
+.zt .pc .bd{display:inline-block;background:var(--zt-teal);color:#10373A;font-size:9.5px;font-weight:800;border-radius:999px;padding:2px 7px;margin-bottom:3px;letter-spacing:.04em}
+.zt .six{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.zt .six div{background:var(--zt-soft);border-radius:10px;padding:9px 6px;text-align:center;font-size:10.5px;color:var(--zt-ink-2);line-height:1.3}
+.zt .six b{display:block;color:var(--zt-purple);font-size:11.5px}
+.zt .band{background:var(--zt-purple);color:#fff;border-radius:14px;padding:16px;display:grid;gap:6px}
+.zt .band h3{color:#fff}
+.zt .band p{color:#E4DCF5;font-size:12px}
+.zt .filters{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;border-bottom:1px solid var(--zt-line)}
+.zt .filters span{flex:none;font-size:11.5px;font-weight:600;border:1px solid var(--zt-line);border-radius:999px;padding:5px 11px}
+.zt .filters span.on{background:var(--zt-purple);color:#fff;border-color:var(--zt-purple)}
+.zt .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 14px}
+.zt .g{display:grid;gap:4px}
+.zt .g img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;background:#F6F4FA}
+.zt .g h4{font-size:12.5px;font-weight:600}
+.zt .g .st{font-size:10.5px;color:var(--zt-star)}
+.zt .g .pp{font-family:var(--zt-h);font-weight:700;font-size:13px}
+.zt .g .pp small{display:block;font-family:var(--zt-b);font-weight:600;font-size:10.5px;color:var(--zt-teal-dk)}
+.zt .g .add{border:1.5px solid var(--zt-purple);color:var(--zt-purple);text-align:center;border-radius:10px;padding:6px;font-weight:700;font-size:11.5px}
+.zt .grouphd{padding:12px 14px 0;font-family:var(--zt-h);font-weight:700;font-size:14px}
+.zt .sizes{display:grid;gap:6px;margin-top:10px}
+.zt .size{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;border:1.5px solid var(--zt-line);border-radius:12px;padding:10px 11px}
+.zt .size.on{border-color:var(--zt-purple);background:var(--zt-soft)}
+.zt .size b{font-family:var(--zt-h)}
+.zt .size small{display:block;color:var(--zt-ink-2);font-size:11px}
+.zt .size .flag{font-size:9.5px;font-weight:800;color:#8A4B00;background:#FFE8C2;border-radius:999px;padding:2px 7px;display:inline-block;margin-top:2px}
+.zt .size .best{font-size:9.5px;font-weight:800;color:#10373A;background:var(--zt-teal);border-radius:999px;padding:2px 7px;display:inline-block;margin-top:2px}
+.zt .final{margin-top:8px;font-size:11.5px;background:#FFF4E5;color:#7A4A00;border-radius:10px;padding:8px 10px}
+.zt .prog{margin-top:10px;font-size:11.5px;color:var(--zt-ink-2)}
+.zt .bar{height:7px;background:#EEE9F6;border-radius:999px;margin-top:5px;overflow:hidden}
+.zt .bar i{display:block;height:100%;background:var(--zt-teal);border-radius:999px}
+.zt .drawer{background:#fff}
+.zt .drawer .dh{display:flex;justify-content:space-between;align-items:center;padding:14px;border-bottom:1px solid var(--zt-line)}
+.zt .line{display:grid;grid-template-columns:70px 1fr auto;gap:10px;padding:12px 14px;border-bottom:1px solid var(--zt-line);align-items:start}
+.zt .line img{width:70px;height:70px;object-fit:cover;border-radius:10px}
+.zt .line b{font-size:12.5px;display:block}
+.zt .line small{display:block;color:var(--zt-ink-2);font-size:11px}
+.zt .line .lp{font-family:var(--zt-h);font-weight:700;text-align:right}
+.zt .line .lp s{display:block;font-family:var(--zt-b);font-weight:400;color:var(--zt-muted);font-size:11px}
+.zt .nudge{margin:12px 14px;border:1.5px dashed var(--zt-teal);border-radius:12px;padding:10px 12px;font-size:12px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.zt .nudge span{font-weight:700;color:var(--zt-teal-dk);white-space:nowrap}
+.zt .tot{padding:12px 14px;display:grid;gap:4px;font-size:12.5px}
+.zt .tot div{display:flex;justify-content:space-between}
+.zt .tot .g2{font-weight:700;font-family:var(--zt-h);font-size:15px}
+.zt .muted-note{font-size:10.5px;color:var(--zt-muted)}
+
+/* Action plan */
+.plan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.plan .col{display:grid;gap:12px;align-content:start;min-width:0}
+.plan .col > h3{display:flex;gap:8px;align-items:center}
+.task{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px}
+.task h4{font-size:.98rem}
+.task p{font-size:.9rem;color:var(--ink-2)}
+.task .who{font-size:.78rem;color:var(--muted)}
+@media (max-width:900px){.plan{grid-template-columns:minmax(0,1fr)}}
+
+details.more{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+details.more summary{cursor:pointer;font-weight:700;font-family:var(--f-display)}
+details.more[open] summary{margin-bottom:10px}
+.steps{margin:0;padding-left:20px;display:grid;gap:6px;color:var(--ink-2);font-size:.94rem}
+footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:grid;gap:8px}
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="meta-row"><span>zeotein.com · GoHighLevel · Google &amp; Meta ads</span><span>Audit date: November 10, 2026</span><span>Data window: last 90 days unless noted</span></div>
+    <div style="display:grid;gap:14px">
+      <p class="eyebrow">Store audit</p>
+      <h1>Your store isn't short on traffic. It's losing the sale <span>between the product page and the cart</span>, and paying too much to get people there.</h1>
+      <p class="verdict">95% of shoppers never add anything to their cart. Shoppers who do get hit with $8 to $20 shipping on every core product. Meanwhile ads cost about $176 per new customer, almost three times your $60 target. Below: what's leaking, what I already fixed, and a full visual of each page as it should be.</p>
+    </div>
+    <div class="kpis">
+      <div class="kpi bad"><span class="k-label">Net sales, October</span><span class="k-val num">$7,879</span><span class="k-sub">March was $29,473 (−73%)</span></div>
+      <div class="kpi bad"><span class="k-label">New customers, October</span><span class="k-val num">17</span><span class="k-sub">March was 94, December 164</span></div>
+      <div class="kpi bad"><span class="k-label">Ad $ per new customer</span><span class="k-val num">$176</span><span class="k-sub">90 days · target $60, red line $90</span></div>
+      <div class="kpi bad"><span class="k-label">Store conversion, Nov 1–9</span><span class="k-val num">0.6%</span><span class="k-sub">Target 2% · March was 6.4%</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="index" aria-label="Sections">
+  <div class="wrap">
+    <a href="#leaks">Money leaks</a><a href="#done">Fixed today</a><a href="#dropoff">Drop-off</a><a href="#google">Google</a><a href="#ads">Ads</a><a href="#pricing">Pricing</a><a href="#pages">Page redesigns</a><a href="#compliance">What you can say</a><a href="#ghl">GoHighLevel</a><a href="#catalog">Catalog</a><a href="#tech">Speed &amp; SEO</a><a href="#plan">Action plan</a>
+  </div>
+</nav>
+
+<main>
+<section class="block" id="leaks">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Where the money is going</p>
+      <h2>Six leaks, ranked by what they cost you</h2>
+      <p class="lede">Each one is backed by your own Shopify, Google, Meta and GoHighLevel data. Dollar figures use the inputs in your Numbers Playbook (50% of each sales dollar kept, $6,722 fixed costs a month).</p>
+    </div>
+    <div class="leaks">
+      <article class="leak">
+        <span class="rank">1</span>
+        <div><h3>Ads are buying customers at three times break-even</h3>
+          <p>Last 90 days: $13,723 in ad spend ($9,473 Meta, $4,250 Google) and 78 new customers from every source combined. That's $176 per new customer against your $90 red line. At this spend the store needs about $22,600 a month in sales to break even; it averaged $11,372.</p>
+          <p class="fix"><b>Fix:</b> stop funding what doesn't sell (list in the Ads section) and send paid traffic where it converts. Meta ads that went straight to a store product page cost $65 per purchase over 30 days; the funnel pages cost $378 to $434.</p></div>
+        <span class="impact">≈ −$5,600 / month</span>
+      </article>
+      <article class="leak">
+        <span class="rank">2</span>
+        <div><h3>95% of shoppers never add to cart</h3>
+          <p>Add-to-cart rate fell from 13.2% of sessions in March to 4.7% in November. On a phone, the Rewards button sits on top of the price or the Add to Cart button on product pages. The top bar tells every shopper they'll pay shipping. In a simulated phone test, the main image on your best seller took 7.3 seconds to appear. The reviews under your protein are about shaker cups and scoops.</p>
+          <p class="fix"><b>Fix:</b> the product page redesign below, starting with the Rewards button (15 minutes in the app settings).</p></div>
+        <span class="impact">Largest drop-off</span>
+      </article>
+      <article class="leak">
+        <span class="rank">3</span>
+        <div><h3>Shipping surprise at checkout</h3>
+          <p>Free shipping starts at $150. Every core product is under that, so store shoppers pay $8 to $20 at checkout: a $99.99 bag became $120.50, a $29.99 zeolite bag became $41.53. Funnel buyers ship free. Your notes assume subscriptions ship free, but renewals are being charged $8 to $15 each ($863 in 90 days).</p>
+          <p class="fix"><b>Fix:</b> free shipping on every 30-day supply (a $99 threshold). Cost at today's volume: up to about $690 a month in shipping you no longer collect. Your decision.</p></div>
+        <span class="impact w">Decision needed</span>
+      </article>
+      <article class="leak">
+        <span class="rank">4</span>
+        <div><h3>Google brings the wrong buyers to the wrong page</h3>
+          <p>Non-brand search sent 148 clicks to marketing.zeotein.com: 0 add-to-carts, 0 sales, and Google rates that page "Below average," which raises your cost per click. Shopping sells mostly $30 single ingredients, and the zeolite flag limits ads on your core blends.</p>
+          <p class="fix"><b>Fix:</b> pause non-brand search until the funnel page is tracked, switch the broad brand keyword to phrase, and request a policy review on the blends. Your live ad copy is already free of detox wording (checked today).</p></div>
+        <span class="impact">$681 / 90 days with 0 sales</span>
+      </article>
+      <article class="leak">
+        <span class="rank">5</span>
+        <div><h3>The offer is weaker than it looks next to competitors</h3>
+          <p>Cacao is priced fine: cheaper per serving than Ka'Chava. But the $150 free-shipping line is higher than any competitor checked ($35–$100), the bag subscription saves only 9% (15–25% is normal), the 7-day trial is the priciest trial per serving, and Vegan costs more than Cacao with 3g less protein.</p>
+          <p class="fix"><b>Fix:</b> show price per serving everywhere, fix shipping, and review Vegan and the zeolite 1 lb price (details in Pricing).</p></div>
+        <span class="impact w">Decision needed</span>
+      </article>
+      <article class="leak">
+        <span class="rank">6</span>
+        <div><h3>Old pages and products still live</h3>
+          <p>8 retired GoHighLevel funnels are still public, including Howie pages with "Save 15% Today," old prices and checkout pages. 38 unlisted Shopify products, 16 theme copies and 259 never-used funnel templates make every change slower and riskier.</p>
+          <p class="fix"><b>Fix:</b> 7 dead products retired today; the funnel shut-off takes about 10 minutes in GoHighLevel (steps below).</p></div>
+        <span class="impact w">Partly fixed</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="done">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Already done</p>
+      <h2>What I changed today, and checked</h2>
+      <p class="lede">Only reversible cleanup. Nothing on your live theme, prices, ads, emails or funnels was touched.</p>
+    </div>
+    <div class="done">
+      <div class="done-item">
+        <h4><span class="chip good">Done</span> Retired 7 dead unlisted products</h4>
+        <ul>
+          <li>Zeotein 15-Day Reset (product image read "15-Day Weight Loss Program"; page said "A Better You in 15 Days"; last sale June)</li>
+          <li>Cacao 7-Day Stick Packs (15% Off Offer) and the older 7-Day legacy listing</li>
+          <li>Cacao 30-Day Supply (15% Off Offer)</li>
+          <li>Both "Second Bag 25% Off" upsell products</li>
+          <li>Keep It Clean long-sleeve shirt (0 sales)</li>
+        </ul>
+        <p>Each one had no subscription plan, no sale in months, and no link from any live funnel page (I crawled all 58 live funnel URLs). Five of them were also still published to Shop, Point of Sale and Microsoft Copilot. Archived, not deleted: one click restores any of them.</p>
+      </div>
+      <div class="done-item">
+        <h4><span class="chip good">Done</span> Fixed 18 redirects, 2 of them broken</h4>
+        <ul>
+          <li>Every old URL for the retired products now lands on the live product (15 tested, all load)</li>
+          <li>The two old "weight-loss-program" URLs now go to Cacao 30 stick packs</li>
+          <li>Fixed a redirect that ended on a 404 (/products/zeotein-cacao-bulk-bag-cacao-lp)</li>
+          <li>Fixed /products/vegan, a 404 that an old Formula Finder result page still links to</li>
+        </ul>
+      </div>
+      <div class="done-item">
+        <h4><span class="chip good">Done</span> Collagen page no longer says "organic"</h4>
+        <p>The Google title read "Organic Collagen Peptides." Your own rules say collagen isn't organic. It now reads "Grass-Fed Collagen Peptides — Unflavored, Hydrolyzed," with a new meta description. Live and checked.</p>
+      </div>
+      <div class="done-item">
+        <h4><span class="chip warn">Blocked</span> GoHighLevel shut-offs and Microsoft Clarity</h4>
+        <p>GoHighLevel's API refuses a redirect on a path a live funnel page still uses (tested: "combination already exists"), and has no unpublish call. The 8 retired funnels need a few clicks from you (steps in the GoHighLevel section). The Clarity token request was declined, so session recordings and heatmaps aren't in this audit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="dropoff">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Where people drop off</p>
+      <h2>Sales fell with new customers. The cart is where it breaks.</h2>
+      <p class="lede">Returning customers and subscription renewals have held the store up. New-customer volume is down about 90% from December, and the share of visitors who add anything to the cart has fallen by about two thirds since spring.</p>
+    </div>
+    <div class="charts">
+      <div class="chart-card"><h3>Net sales by month</h3>{{SVG:sales}}<p class="note">Shopify net sales. November covers Nov 1–9 only. Hover a bar for the exact figure.</p></div>
+      <div class="chart-card"><h3>New customers by month</h3>{{SVG:newcust}}<p class="note">First-time buyers from every source. November covers Nov 1–9.</p></div>
+      <div class="chart-card"><h3>Out of 100 visitors, how many get to each step</h3>{{SVG:funnel}}<div class="legend"><span><i style="background:var(--s1)"></i>March 2026</span><span><i style="background:var(--s2)"></i>Nov 1–9, 2026</span></div><p class="note">Shopify sessions. The steepest fall is at "added to cart." Checkout completion among people who enter their details is about 7 in 10 (GA4), so checkout is the second leak, not the first.</p></div>
+      <div class="chart-card"><h3>What shoppers paid at checkout (abandoned carts)</h3>
+        <div class="tbl-wrap"><table><thead><tr><th>In the cart</th><th class="r">Product</th><th class="r">At checkout</th><th class="r">Added</th></tr></thead><tbody>
+          <tr><td>Cacao Bulk Bag, subscribe</td><td class="r">$99.99</td><td class="r">$120.50</td><td class="r">+$20.51</td></tr>
+          <tr><td>Cacao Bulk Bag, one-time</td><td class="r">$109.99</td><td class="r">$126.76</td><td class="r">+$16.77</td></tr>
+          <tr><td>Cacao 30 sticks, subscribe</td><td class="r">$114.99</td><td class="r">$123.98</td><td class="r">+$8.99</td></tr>
+          <tr><td>Zeolite ½ lb</td><td class="r">$29.99</td><td class="r">$41.53</td><td class="r">+$11.54</td></tr>
+          <tr><td>Collagen 1 lb</td><td class="r">$46.99</td><td class="r">$56.75</td><td class="r">+$9.76</td></tr>
+        </tbody></table></div>
+        <p class="note">Real abandoned checkouts from Aug–Nov 2026 (no customer details shown). Shipping is the only thing added; none of these carried tax.</p></div>
+    </div>
+    <div class="split">
+      <div class="panel"><h3>What the traffic says (last 90 days)</h3>
+        <ul>
+          <li><b>Direct:</b> 5,299 sessions, 1.7% convert. Includes funnel hand-offs and untagged ad clicks.</li>
+          <li><b>Search:</b> 1,712 sessions, 2.1% convert. Zeolite is your #1 Google entry page for new customers.</li>
+          <li><b>Social:</b> 584 sessions, 0.3% convert.</li>
+          <li><b>Email:</b> 78 sessions, 6.4% convert. Your best channel per visit.</li>
+          <li><b>Mobile</b> converts 2.5%, <b>desktop</b> 1.1%, on about the same number of sessions.</li>
+          <li>September's bump came from the Labor Day sale and the stock-up email. Without a promotion, direct purchases fell from 42 to 7.</li>
+        </ul></div>
+      <div class="panel"><h3>Microsoft Clarity: what's missing</h3>
+        <ul>
+          <li>Clarity is installed on the theme (project <code>v65ogd4cbw</code>), but I couldn't read it: the API token form was declined.</li>
+          <li>With a token I'd pull rage clicks, dead clicks and scroll depth for each product page, plus where mobile shoppers quit.</li>
+          <li>To share it: Clarity → Settings → Data Export → Generate new API token, then ask me to pull Clarity data and save the token in the secure form when it appears.</li>
+          <li>Your call notes show Jewels asked for a Clarity heatmap read on Oct 14 and it never happened.</li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="google">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Why Google searches aren't selling</p>
+      <h2>Small brand demand, policy limits, and clicks sent off the store</h2>
+    </div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Problem</th><th>Evidence</th><th>What to do</th></tr></thead>
+      <tbody>
+        <tr><td><b>Almost no one searches "Zeotein"</b></td><td>221 impressions for the brand name in 90 days. Brand clicks that land on the homepage do convert: 6.6%.</td><td>Keep brand search. Switch the broad "zeotein" keyword to phrase: broad cost $468.54 for 1 sale (and leaked $152.97 into searches like "healthycell" and "bicarb"); phrase cost $397.15 for 11.</td></tr>
+        <tr><td><b>Non-brand clicks never reach the store</b></td><td>97% of non-brand clicks go to marketing.zeotein.com. 148 clicks, about 14 store page views, 0 add-to-carts, 0 sales ($332 lifetime). Every scored keyword has a "Below average" landing page rating (Quality Score 1–4).</td><td>Pause non-brand search until that page carries GA4 and passes the Google click ID through. Then retest.</td></tr>
+        <tr><td><b>Zeolite limits the core blends</b></td><td>Brand and both Performance Max campaigns are "limited by policy." The blends got 14.4% of Shopping impressions and 3 sales on $723. The flagship 30-stick product had 4,347 impressions in 90 days.</td><td>Live ad copy is already clean (no detox or binding wording in any active ad, checked Nov 10). Request a policy review on the blends and check their status in Merchant Center. Your Oct 29 decision keeps the zeolite single on Shopping; not reopened.</td></tr>
+        <tr><td><b>Shopping sells low-value singles</b></td><td>Single-ingredient Shopping averages $57 per order at $163 cost per sale. Since Nov 1: $238.63 spent, 0 sales. Generic "cacao powder" and "cocoa" searches eat budget.</td><td>Restrict singles to proven items and add the commodity negatives already staged in your Ad Decisions doc.</td></tr>
+        <tr><td><b>Tracking can't see the funnels</b></td><td>GA4 gets no data from marketing.zeotein.com or go.zeotein.com and sees about 7% of Meta clicks. Hand-off links overwrite the source with hard-coded tags. Paid Shopping URLs carry <code>utm_campaign=sag_organic</code>.</td><td>Add GA4 to the funnel domains, pass incoming UTMs and click IDs through, filter internal traffic.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="block" id="ads">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Paid ads</p>
+      <h2>What's converting and what's burning money</h2>
+      <p class="lede">Per-campaign numbers are what Meta and Google report; per-customer cost uses Shopify. Samples are small, so treat single-ad results as direction, not proof.</p>
+    </div>
+    <div class="split">
+      <div class="panel say"><h3>Converting</h3>
+        <ul>
+          <li><b>Google brand search:</b> $63 per purchase (30 days), $71 over 90.</li>
+          <li><b>Meta ads that went straight to a store product page:</b> $64.92 per purchase, 3.2x ROAS (30 days). Same ad set: product page 4 sales on $260, marketing pages 2 sales on $812.</li>
+          <li><b>Meta, age 65+:</b> $165 per purchase, the best age band.</li>
+          <li><b>Email:</b> 6.4% of email visits buy. Promotions to your list drove September.</li>
+        </ul></div>
+      <div class="panel nosay"><h3>Burning money</h3>
+        <ul>
+          <li><b>Meta campaigns with zero purchases:</b> $1,253 (two still active: CONVERSIONS oSUBSCRIBE and westonprice).</li>
+          <li><b>Meta campaigns at one purchase for $300+ each:</b> $1,590.</li>
+          <li><b>Meta Old_Try:</b> $3,033 at $169 per purchase; only 5% of its clicks registered a page view.</li>
+          <li><b>Google campaigns with zero purchases:</b> $681 (Blends, single-ingredient PMax, non-brand search).</li>
+          <li><b>Meta costs:</b> CPM $42–46 (target $18), cost per link click $2.93–$3.56 (target $1.20).</li>
+        </ul></div>
+    </div>
+    <details class="more"><summary>Your guardrails and this data disagree on one point</summary>
+      <p class="muted">Your Ad Setup Guardrails rule store product pages out as Meta destinations (only /products/cacao is allowed). The last 30 days say the store product page converted about 6 times cheaper than the funnel pages in the same ad set. The sample is small (6 purchases), so this is a test for you to approve, not a change I'd make on my own. Destinations stay as your guardrails say until you decide.</p>
+    </details>
+  </div>
+</section>
+
+<section class="block" id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Are prices the problem?</p>
+      <h2>Cacao's price is fine. The way it's offered isn't.</h2>
+      <p class="lede">Prices from 18 brands' own sites and retailers (Nov 2026, search results; verify before quoting publicly). Per serving, one-time price.</p>
+    </div>
+    <div class="charts">
+      <div class="chart-card" style="grid-column:1 / -1"><h3>Price per serving, one-time purchase</h3>{{SVG:price}}<div class="legend"><span><i style="background:var(--s1)"></i>Zeotein</span><span><i style="background:var(--s2)"></i>Competitor</span></div><p class="note">Zeotein Cacao bag is cheaper per serving than Ka'Chava's bag and close to Huel. Plain bone broth and collagen tubs are cheaper, so the page has to sell "six ingredients in one" rather than "protein."</p></div>
+    </div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Issue</th><th>Zeotein</th><th>Market</th><th>Recommendation</th></tr></thead>
+      <tbody>
+        <tr><td>Free shipping threshold</td><td>$150 (every core product is under it)</td><td>$35–$100; many subscriptions ship free</td><td>Free shipping on every 30-day supply ($99 threshold)</td></tr>
+        <tr><td>Bag subscription discount</td><td>9% ($109.99 → $99.99)</td><td>15–25%</td><td>Renewal price is settled at $99.99 (not reopened). Lead with "$3.33 a serving" and the free shaker instead of the percentage.</td></tr>
+        <tr><td>Vegan 30 sticks</td><td>$139.99, 20g protein ($2.33 per 10g protein, highest of all brands checked)</td><td>Ritual, Truvani, KOS: $1.07–$1.63 per 10g</td><td>Price it at or below Cacao ($134.99), or add a Vegan bag if COGS allows. Needs Vegan COGS.</td></tr>
+        <tr><td>7-day trial</td><td>$39.99 ($5.71 a serving)</td><td>Highest trial per serving in the set</td><td>Keep the price; add "put your $39.99 toward a 30-day subscription" or a 30-day upgrade nudge on the page.</td></tr>
+        <tr><td>Zeolite 1 lb</td><td>$64.99 for 520 servings</td><td>Your ½ lb is cheaper per serving, your 2 lb much cheaper</td><td>Likely a pricing error. $49.99 fits the ladder.</td></tr>
+        <tr><td>Hemp, pumpkin seed, sea moss, lion's mane</td><td>About 1.5–2.2x mass-market brands</td><td>Amazon commodity pricing</td><td>Fine as add-ons; don't advertise them on their own (your guardrails already say so).</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="block" id="pages">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Page-by-page redesign</p>
+      <h2>Every page, as it is now and as it should be</h2>
+      <p class="lede">Left: your live page on an iPhone today (scroll inside the phone). Right: the proposed page. Product titles in Shopify stay exactly as they are, because your automations run off them. The shorter name on the page is a display label only. Items marked "decision" depend on your shipping and pricing calls.</p>
+    </div>
+
+    <div class="page-ba">
+      <div class="ba-head"><h3>Core product page (template for all 30-day supplies)</h3><span class="url">zeotein.com/products/zeotein-cacao-sticks-30 · same layout for the Bulk Bag and Vegan</span></div>
+      <div class="ba">
+        <figure><figcaption><span class="chip tag-now">Now</span>Cacao, 30 stick packs</figcaption>
+          <div class="phone"><div class="screen"><img class="shot" src="{{IMG:before_sticks30}}" alt="Current Cacao 30 stick pack page, first screen on iPhone"><img class="shot" src="{{IMG:before_sticks30_2}}" alt="Current Cacao 30 stick pack page, second screen"></div></div>
+          <span class="scroll-hint">Scroll inside the phone</span></figure>
+        <figure><figcaption><span class="chip tag-new">Proposed</span>Same product</figcaption>
+          <div class="phone"><div class="screen zt">
+            <div class="ann">Free U.S. shipping on every <b>30-day supply</b></div>
+            <div class="hdr"><span class="logo">ZE<span>O</span>TEIN</span><span class="ico"><i></i><i></i><i class="bag"></i></span></div>
+            <div class="gal"><img src="{{IMG:p_sticks30}}" alt="Zeotein Cacao 30 stick packs"><div class="chips"><span>23g protein</span><span>6 ingredients</span><span>0g sugar</span></div><div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="pad">
+              <p class="eyb">Zeotein Cacao · 30 stick packs</p>
+              <h1 class="ttl">Zeotein Cacao</h1>
+              <p class="sub">Grass-fed bone broth and collagen protein shake. Six ingredients, no sweeteners.</p>
+              <div class="stars"><b>★★★★★</b> 4.99 · 78 reviews</div>
+              <div class="price"><span class="now">$114.99</span><s>$134.99</s><span class="pps">$3.83 a serving</span></div>
+              <div class="opt on"><div class="row"><span class="nm"><span class="rad"></span>Subscribe &amp; Save <span class="save">SAVE $20</span></span><span class="pr">$114.99</span></div>
+                <ul><li>Free shaker with your first order</li><li>Skip, pause or cancel in your account anytime</li></ul>
+                <div class="freq"><span class="on">Every 30 days</span><span>6 weeks</span><span>8 weeks</span></div></div>
+              <div class="opt"><div class="row"><span class="nm"><span class="rad"></span>One-time purchase</span><span class="pr">$134.99</span></div></div>
+              <span class="cta">Add to cart · $114.99</span>
+              <div class="trust"><div><b>30-day</b>money-back guarantee</div><div><b>Ships</b>in 1–2 business days</div><div><b>Free</b>U.S. shipping</div></div>
+            </div>
+            <div class="sec"><div class="sh"><h3>Your whole shelf in one stick</h3><p class="sub">Tear, pour, shake into 10 to 12 oz of water, milk or coffee.</p></div><img src="{{IMG:l_shelf}}" alt="Zeotein Cacao stick packs with cacao beans and sea moss" style="width:100%;border-radius:12px;display:block"></div>
+            <div class="sec"><div class="feat"><div><b>23g</b><span>protein from grass-fed bone broth and collagen</span></div><div><b>6</b><span>ingredients, every one on the label</span></div><div><b>0g</b><span>sugar and no sweeteners of any kind</span></div><div><b>140</b><span>calories per stick</span></div></div></div>
+            <div class="sec"><div class="sh"><h3>What's inside</h3></div><div class="ing">
+              <div>Grass-fed collagen peptides<span>14g per stick</span></div><div>Grass-fed beef bone broth protein<span>beef, not chicken</span></div><div>Organic fermented cacao<span>never alkalized</span></div><div>Organic MCT powder<span>from coconut</span></div><div>Organic sea moss<span>wildcrafted, St. Lucia</span></div><div>A naturally occurring volcanic mineral<span>finely milled</span></div></div>
+              <p class="muted-note" style="margin-top:8px">See the full Supplement Facts panel ›</p></div>
+            <div class="sec"><div class="sh"><h3>What customers say</h3><p class="sub">From 78 verified reviews of Zeotein Cacao</p></div>
+              <div class="rev"><span class="st">★★★★★</span><q>It tastes great and I love how clean the ingredients are. I'm definitely going to keep this as a staple in my house!</q><small>Melissa M. · Verified buyer</small></div>
+              <div class="rev"><span class="st">★★★★★</span><q>Great taste. Keeps me full and satisfied for hours.</q><small>Quinn B.</small></div>
+              <div class="rev"><span class="st">★★★★★</span><q>Love, love, LOVE this shake! I've been making protein shakes for years, and most are loaded with ingredients and added sugar.</q><small>J. Grace</small></div></div>
+            <div class="sec"><div class="sh"><h3>Questions</h3></div><div class="faq"><div>How does Subscribe &amp; Save work?</div><div>What does it taste like?</div><div>Sticks or the bulk bag?</div><div>What if it isn't for me?</div></div></div>
+            <div class="sec"><div class="sh"><h3>Also from Zeotein</h3></div>
+              <div class="x"><img src="{{IMG:p_bag30}}" alt=""><div><b>Prefer a scoop? Cacao Bulk Bag</b><span>$99.99 with Subscribe &amp; Save · $3.33 a serving</span></div></div>
+              <div class="x"><img src="{{IMG:p_sticks7}}" alt=""><div><b>New to Zeotein? Try 7 sticks</b><span>$39.99 · ships in 1–2 business days</span></div></div></div>
+            <p class="disc">†These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+            <div class="rewards" aria-hidden="true">★</div>
+            <div class="sticky"><span class="sp">Subscribe &amp; Save<b>$114.99</b></span><span class="btn">Add to cart</span></div>
+          </div></div>
+          <span class="scroll-hint">Scroll inside the phone</span></figure>
+        <div class="changes">
+          <h4>What changes</h4>
+          <ol>
+            <li><b>One slim top bar</b> instead of two, and it says something good: free shipping on every 30-day supply (decision).</li>
+            <li><b>Full-width photo</b> with the three facts people buy on: 23g, 6 ingredients, 0g sugar.</li>
+            <li><b>Short display name.</b> "Zeotein Cacao" on the page; the Shopify title stays "Zeotein Cacao Protein Powder - 30 Stick Packs, Collagen &amp; Bone Broth" for your automations and Google.</li>
+            <li><b>Price per serving</b> right under the price: $3.83 a serving.</li>
+            <li><b>Subscribe &amp; Save as a card</b>, preselected, with the free shaker and "cancel anytime" on it, and one big button that repeats the price.</li>
+            <li><b>Rewards button shrunk to an icon</b> and moved above a sticky Add to Cart bar, so it never covers the price or the button.</li>
+            <li><b>Reviews about the shake only.</b> No shaker, scoop or "Easy shopping" reviews on the protein page, and no appetite or "feel stronger" quotes.</li>
+            <li><b>Cross-sells</b> to the bag and the 7-day pack sit at the bottom, not between the price and the button.</li>
+          </ol>
+          <p class="why"><b>Why:</b> today the first screen on a phone has a small photo, a 3-line title, and no reason to subscribe. The things that sell (price per serving, free shaker, guarantee) are 3 screens down in the description.</p>
+          <p class="why"><b>Bulk Bag version:</b> same layout. "Two scoops per serving," Save-A-Scoop free with the first bag, $99.99 subscribe ($3.33 a serving), $109.99 one-time, "Best value" chip. <b>Vegan version:</b> 20g plant protein, 5 ingredients, $124.99 subscribe ($4.17 a serving). Never show 23g on Vegan.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-ba">
+      <div class="ba-head"><h3>7-day trial page</h3><span class="url">zeotein.com/products/zeotein-cacao-sticks-7 · same for Vegan 7-day</span></div>
+      <div class="ba">
+        <figure><figcaption><span class="chip tag-now">Now</span>Cacao, 7 stick packs</figcaption>
+          <div class="phone"><div class="screen"><img class="shot" src="{{IMG:before_sticks7}}" alt="Current 7-day page on iPhone, Rewards button over the quantity box"><img class="shot" src="{{IMG:before_sticks7_2}}" alt="Current 7-day page, second screen"></div></div>
+          <span class="scroll-hint">The Rewards button covers the quantity box</span></figure>
+        <figure><figcaption><span class="chip tag-new">Proposed</span>Same product</figcaption>
+          <div class="phone"><div class="screen zt">
+            <div class="ann">Free U.S. shipping on every <b>30-day supply</b></div>
+            <div class="hdr"><span class="logo">ZE<span>O</span>TEIN</span><span class="ico"><i></i><i></i><i class="bag"></i></span></div>
+            <div class="gal"><img src="{{IMG:p_sticks7}}" alt="Zeotein Cacao 7 stick packs"><div class="chips"><span>23g protein</span><span>7 sticks</span></div><div class="dots"><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="pad">
+              <p class="eyb">Try a week</p>
+              <h1 class="ttl">Zeotein Cacao, 7 sticks</h1>
+              <p class="sub">One week of the shake. Find out if it fits your routine.</p>
+              <div class="stars"><b>★★★★★</b> 4.99 · 78 reviews</div>
+              <div class="price"><span class="now">$39.99</span><span class="pps">7 single-serve sticks</span></div>
+              <span class="cta">Add 7-day pack · $39.99</span>
+              <div class="opt on" style="margin-top:12px"><div class="row"><span class="nm">Already sure? Get 30 days</span><span class="pr">$114.99</span></div>
+                <ul><li>$3.83 a serving instead of $5.71</li><li>Free shaker with your first subscription order</li><li>Skip, pause or cancel anytime</li></ul></div>
+              <div class="trust"><div><b>30-day</b>money-back guarantee</div><div><b>Ships</b>in 1–2 business days</div><div><b>Fits</b>a purse or gym bag</div></div>
+            </div>
+            <div class="sec"><div class="sh"><h3>A week in your bag</h3></div><img src="{{IMG:l_taste}}" alt="Creamy chocolate shake with a stick pack" style="width:100%;border-radius:12px;display:block"></div>
+            <div class="sec"><div class="feat"><div><b>23g</b><span>protein per stick</span></div><div><b>6</b><span>ingredients</span></div><div><b>0g</b><span>sugar, no sweeteners</span></div><div><b>10 sec</b><span>tear, pour, shake</span></div></div></div>
+            <p class="disc">†These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+            <div class="rewards" aria-hidden="true">★</div>
+            <div class="sticky"><span class="sp">7-day pack<b>$39.99</b></span><span class="btn">Add to cart</span></div>
+          </div></div>
+          <span class="scroll-hint">Scroll inside the phone</span></figure>
+        <div class="changes">
+          <h4>What changes</h4>
+          <ol>
+            <li><b>The trial points to the subscription.</b> A second card shows what 30 days costs per serving ($3.83 vs $5.71) and the free shaker.</li>
+            <li><b>Rewards button moved</b>; on smaller phones it currently lands on the Add to Cart button.</li>
+            <li><b>Short name and one-line promise</b> instead of the full catalog title.</li>
+            <li><b>Shipping message stops undercutting the offer.</b> Today the first line says free shipping starts at $150, on a $39.99 product.</li>
+          </ol>
+          <p class="why"><b>Why:</b> the 7-day pack is your entry product (287 sold this year). Each buyer should leave the page knowing what the next step costs.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-ba">
+      <div class="ba-head"><h3>Single-ingredient page (template for all 9)</h3><span class="url">zeotein.com/products/zeolite · your #1 Google entry page for new customers</span></div>
+      <div class="ba">
+        <figure><figcaption><span class="chip tag-now">Now</span>Zeolite Powder</figcaption>
+          <div class="phone"><div class="screen"><img class="shot" src="{{IMG:before_zeolite}}" alt="Current zeolite page on iPhone, Rewards button covering the price"><img class="shot" src="{{IMG:before_zeolite_2}}" alt="Current zeolite page, second screen"></div></div>
+          <span class="scroll-hint">The Rewards button covers the price</span></figure>
+        <figure><figcaption><span class="chip tag-new">Proposed</span>Same product</figcaption>
+          <div class="phone"><div class="screen zt">
+            <div class="ann">Free U.S. shipping on every <b>30-day supply</b></div>
+            <div class="hdr"><span class="logo">ZE<span>O</span>TEIN</span><span class="ico"><i></i><i></i><i class="bag"></i></span></div>
+            <div class="gal"><img src="{{IMG:p_zeolite}}" alt="Zeotein Zeolite Powder pouch"><div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="pad">
+              <p class="eyb">Single ingredient</p>
+              <h1 class="ttl">Zeolite Powder</h1>
+              <p class="sub">100% clinoptilolite. Unflavored, finely milled.</p>
+              <div class="sizes">
+                <div class="size on"><span><b>½ lb</b></span><span><small>260 servings · $0.12 a serving</small></span><b>$29.99</b></div>
+                <div class="size"><span><b>1 lb</b></span><span><small>520 servings · $0.12 a serving</small><span class="flag">Price check: costs more per serving than ½ lb</span></span><b>$64.99</b></div>
+                <div class="size"><span><b>2 lb</b></span><span><small>1,035 servings · $0.08 a serving</small><span class="best">BEST VALUE</span></span><b>$79.99</b></div>
+              </div>
+              <span class="cta">Add to cart · $29.99</span>
+              <p class="final">Final sale: single ingredients aren't covered by the 30-day money-back guarantee.</p>
+              <div class="prog">Add a 30-day supply of Zeotein to ship free<div class="bar"><i style="width:30%"></i></div></div>
+            </div>
+            <div class="sec"><div class="sh"><h3>Already inside Zeotein Cacao</h3><p class="sub">The same mineral is one of six ingredients in every stick, with 23g of protein.</p></div>
+              <div class="x"><img src="{{IMG:p_sticks30}}" alt=""><div><b>Zeotein Cacao, 30 stick packs</b><span>$114.99 with Subscribe &amp; Save · $3.83 a serving</span></div></div></div>
+            <div class="sec"><div class="sh"><h3>How to use it</h3></div><p class="sub">Mix ¼ teaspoon (0.9 g) into 8 to 12 oz of water, milk, coffee, tea or a smoothie. Hot or cold both work.</p></div>
+            <p class="disc">†These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+            <div class="rewards" aria-hidden="true">★</div>
+            <div class="sticky"><span class="sp">½ lb · 260 servings<b>$29.99</b></span><span class="btn">Add to cart</span></div>
+          </div></div>
+          <span class="scroll-hint">Scroll inside the phone</span></figure>
+        <div class="changes">
+          <h4>What changes</h4>
+          <ol>
+            <li><b>Price and sizes on the first screen.</b> Today the 3-line title pushes the price down, and the Rewards button sits on top of it.</li>
+            <li><b>Each size shows servings and cost per serving.</b> That exposes the 1 lb price problem ($64.99 is worse per serving than both other sizes). Suggested: $49.99.</li>
+            <li><b>"Final sale" stated next to the button.</b> These items are excluded from your guarantee, but the page never says so while the site banner promises a 30-day money-back guarantee.</li>
+            <li><b>The cross-sell to Zeotein Cacao moves up</b> and shows a price. Google buyers who land here for zeolite should see that the blend already contains it.</li>
+            <li><b>Hide stars until a product has 5+ reviews.</b> "★★★★★ 1 review" reads as empty.</li>
+          </ol>
+          <p class="why"><b>Copy stays composition-only</b> ("a naturally occurring volcanic mineral," "finely milled"). No binding, detox or cleansing language anywhere on this page.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-ba">
+      <div class="ba-head"><h3>Homepage</h3><span class="url">zeotein.com · 3,470 sessions in 90 days, your biggest landing page</span></div>
+      <div class="ba">
+        <figure><figcaption><span class="chip tag-now">Now</span>Homepage</figcaption>
+          <div class="phone"><div class="screen"><img class="shot" src="{{IMG:before_home}}" alt="Current homepage on iPhone, first screen"><img class="shot" src="{{IMG:before_home_2}}" alt="Current homepage, second screen"></div></div>
+          <span class="scroll-hint">15 screens long on a phone</span></figure>
+        <figure><figcaption><span class="chip tag-new">Proposed</span>Homepage</figcaption>
+          <div class="phone"><div class="screen zt">
+            <div class="ann">Free U.S. shipping on every <b>30-day supply</b></div>
+            <div class="hdr"><span class="logo">ZE<span>O</span>TEIN</span><span class="ico"><i></i><i></i><i class="bag"></i></span></div>
+            <div class="hero"><img src="{{IMG:l_bagshelf}}" alt="Zeotein Cacao bulk bag beside a chocolate shake">
+              <div class="copy"><h1>23g of protein. Six ingredients. <em>Nothing to look up.</em></h1>
+                <p class="sub">A bone broth and collagen protein shake with no sweeteners. Or the plant-based version.</p>
+                <div class="btns"><span class="p">Shop Zeotein Cacao</span><span class="s">Shop Vegan</span></div>
+                <div class="proof"><span><b>★★★★★</b> 4.9 from 155 reviews</span><span>30-day money-back guarantee</span></div></div></div>
+            <div class="sec"><div class="sh"><h3>Pick your 30 days</h3><p class="sub">Subscribe &amp; Save prices. Skip, pause or cancel anytime.</p></div>
+              <div class="cards">
+                <div class="pc"><img src="{{IMG:p_sticks30}}" alt=""><div><span class="bd">MOST POPULAR</span><h4>Cacao Stick Packs</h4><p class="meta">30 single-serve sticks · 23g protein</p><p class="pp">$114.99 <small>$3.83 a serving</small></p></div></div>
+                <div class="pc"><img src="{{IMG:p_bag30}}" alt=""><div><span class="bd">BEST VALUE</span><h4>Cacao Bulk Bag</h4><p class="meta">30 servings · 2 scoops each</p><p class="pp">$99.99 <small>$3.33 a serving</small></p></div></div>
+                <div class="pc"><img src="{{IMG:p_vegan30}}" alt=""><div><h4>Vegan Stick Packs</h4><p class="meta">30 sticks · 20g plant protein</p><p class="pp">$124.99 <small>$4.17 a serving</small></p></div></div>
+              </div>
+              <p class="sub" style="margin-top:10px">Not sure yet? <b style="color:var(--zt-purple)">Try 7 sticks for $39.99 ›</b></p></div>
+            <div class="sec"><div class="sh"><h3>Six ingredients. That's the whole list.</h3></div>
+              <div class="six"><div><b>Bone broth</b>grass-fed beef</div><div><b>Collagen</b>grass-fed</div><div><b>Cacao</b>organic, fermented</div><div><b>MCT</b>organic, coconut</div><div><b>Sea moss</b>organic, St. Lucia</div><div><b>Mineral</b>volcanic</div></div></div>
+            <div class="sec"><div class="sh"><h3>What customers say</h3></div>
+              <div class="rev"><span class="st">★★★★★</span><q>It tastes great and I love how clean the ingredients are.</q><small>Melissa M. · Verified buyer</small></div></div>
+            <div class="sec"><div class="band"><h3>Try it for 30 days</h3><p>Love it or get your money back on your first order of a protein blend.</p></div></div>
+            <div class="sec"><div class="x"><img src="{{IMG:l_singles}}" alt=""><div><b>Single ingredients</b><span>Collagen, bone broth, MCT, sea moss and more ›</span></div></div></div>
+            <p class="disc">†These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+          </div></div>
+          <span class="scroll-hint">Scroll inside the phone</span></figure>
+        <div class="changes">
+          <h4>What changes</h4>
+          <ol>
+            <li><b>The first screen says what the product is.</b> "Real Nutrition. Made for Real Life." could be any brand; the new headline uses your own proven lines (23g, six ingredients).</li>
+            <li><b>Prices and cost per serving on the homepage.</b> Today no product card shows a price.</li>
+            <li><b>Half the length.</b> The current page asks shoppers to choose a product twice and repeats the ingredient story three times. Keep your Howie section (your call) lower on the page.</li>
+            <li><b>Google title fixed.</b> The homepage shows up in Google as "Zeotein LLC." Set Online Store → Preferences → Homepage title to "Zeotein | Bone Broth &amp; Collagen Protein Shake, No Sweeteners."</li>
+            <li><b>Guarantee scoped correctly:</b> "first order of a protein blend," matching your guardrails.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-ba">
+      <div class="ba-head"><h3>Shop All collection</h3><span class="url">zeotein.com/collections/shop-all</span></div>
+      <div class="ba">
+        <figure><figcaption><span class="chip tag-now">Now</span>Shop All</figcaption>
+          <div class="phone"><div class="screen"><img class="shot" src="{{IMG:before_shopall}}" alt="Current Shop All page on iPhone"><img class="shot" src="{{IMG:before_shopall_2}}" alt="Current Shop All page, second screen"></div></div>
+          <span class="scroll-hint">Scroll inside the phone</span></figure>
+        <figure><figcaption><span class="chip tag-new">Proposed</span>Shop All</figcaption>
+          <div class="phone"><div class="screen zt">
+            <div class="ann">Free U.S. shipping on every <b>30-day supply</b></div>
+            <div class="hdr"><span class="logo">ZE<span>O</span>TEIN</span><span class="ico"><i></i><i></i><i class="bag"></i></span></div>
+            <div class="pad" style="padding-bottom:0"><h1 class="ttl">Shop Zeotein</h1></div>
+            <div class="filters"><span class="on">All</span><span>Protein blends</span><span>Try a week</span><span>Single ingredients</span><span>Accessories</span></div>
+            <p class="grouphd">Protein blends</p>
+            <div class="grid2">
+              <div class="g"><img src="{{IMG:p_sticks30}}" alt=""><h4>Cacao Stick Packs</h4><span class="st">★★★★★ 78</span><p class="pp">$114.99<small>$3.83 a serving · subscribe</small></p><span class="add">Add to cart</span></div>
+              <div class="g"><img src="{{IMG:p_bag30}}" alt=""><h4>Cacao Bulk Bag</h4><span class="st">★★★★★ 13</span><p class="pp">$99.99<small>$3.33 a serving · subscribe</small></p><span class="add">Add to cart</span></div>
+              <div class="g"><img src="{{IMG:p_vegan30}}" alt=""><h4>Vegan Stick Packs</h4><span class="st">★★★★★ 8</span><p class="pp">$124.99<small>$4.17 a serving · subscribe</small></p><span class="add">Add to cart</span></div>
+              <div class="g"><img src="{{IMG:p_sticks7}}" alt=""><h4>Cacao, 7 sticks</h4><span class="st">★★★★★ 78</span><p class="pp">$39.99<small>try a week</small></p><span class="add">Add to cart</span></div>
+            </div>
+            <p class="grouphd">Single ingredients</p>
+            <div class="grid2">
+              <div class="g"><img src="{{IMG:p_zeolite}}" alt=""><h4>Zeolite Powder</h4><p class="pp">From $29.99<small>final sale</small></p><span class="add">Choose size</span></div>
+              <div class="g"><img src="{{IMG:p_shaker}}" alt=""><h4>CleanBlend Shaker</h4><p class="pp">$15.99<small>free with a subscription</small></p><span class="add">Add to cart</span></div>
+            </div>
+          </div></div>
+          <span class="scroll-hint">Scroll inside the phone</span></figure>
+        <div class="changes">
+          <h4>What changes</h4>
+          <ol>
+            <li><b>Grouped by what people shop for:</b> blends first, then the trial, singles, accessories.</li>
+            <li><b>Subscribe price and cost per serving on every card</b>, plus star counts and a quick add button.</li>
+            <li><b>Short display names</b> on cards (Shopify titles unchanged).</li>
+            <li><b>Clean up the menu:</b> "Zeotein Merchandise" opens a page with only a shaker and a scoop (the apparel is in draft). Rename it "Accessories" or remove it.</li>
+            <li><b>Retire stale collections:</b> Halloween Sale is still live and in your sitemap, as are the Labor Day page and "Final Sale - No Returns."</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-ba">
+      <div class="ba-head"><h3>Cart</h3><span class="url">Cart drawer on every page</span></div>
+      <div class="ba">
+        <figure><figcaption><span class="chip tag-new">Proposed</span>Cart, one-time buyer</figcaption>
+          <div class="phone"><div class="screen zt"><div class="drawer">
+            <div class="dh"><h3 style="font-size:16px">Your cart (1)</h3><span class="muted-note">Close</span></div>
+            <div class="pad" style="padding-bottom:4px"><div class="prog" style="margin-top:0"><b style="color:var(--zt-teal-dk)">You've got free shipping.</b><div class="bar"><i style="width:100%"></i></div></div></div>
+            <div class="line"><img src="{{IMG:p_bag30}}" alt=""><div><b>Zeotein Cacao Bulk Bag</b><small>One-time purchase · 30 servings</small><small>Qty 1</small></div><span class="lp">$109.99</span></div>
+            <div class="nudge">Switch to Subscribe &amp; Save: $99.99, free shaker, cancel anytime<span>Save $10 ›</span></div>
+            <div class="tot"><div><span>Subtotal</span><span>$109.99</span></div><div><span>Shipping</span><span>Free</span></div><div class="g2"><span>Total</span><span>$109.99</span></div></div>
+            <div class="pad" style="padding-top:0"><span class="cta">Checkout · $109.99</span><p class="muted-note" style="text-align:center;margin-top:8px">30-day money-back guarantee on your first order · Ships in 1–2 business days</p></div>
+          </div></div></div>
+          <span class="scroll-hint">Proposed</span></figure>
+        <figure><figcaption><span class="chip tag-new">Proposed</span>Cart, single ingredient</figcaption>
+          <div class="phone"><div class="screen zt"><div class="drawer">
+            <div class="dh"><h3 style="font-size:16px">Your cart (1)</h3><span class="muted-note">Close</span></div>
+            <div class="pad" style="padding-bottom:4px"><div class="prog" style="margin-top:0">Add a 30-day supply of Zeotein and shipping is free<div class="bar"><i style="width:30%"></i></div></div></div>
+            <div class="line"><img src="{{IMG:p_zeolite}}" alt=""><div><b>Zeolite Powder</b><small>½ lb · 260 servings · final sale</small><small>Qty 1</small></div><span class="lp">$29.99</span></div>
+            <div class="x" style="margin:12px 14px"><img src="{{IMG:p_sticks7}}" alt=""><div><b>Add 7 sticks of Zeotein Cacao</b><span>$39.99 · the same mineral plus 23g protein</span></div></div>
+            <div class="tot"><div><span>Subtotal</span><span>$29.99</span></div><div><span>Shipping</span><span>Calculated at checkout</span></div></div>
+            <div class="pad" style="padding-top:0"><span class="cta">Checkout · $29.99</span></div>
+          </div></div></div>
+          <span class="scroll-hint">Proposed</span></figure>
+        <div class="changes">
+          <h4>What changes</h4>
+          <ol>
+            <li><b>Shipping status before checkout.</b> Shoppers see "free shipping" or what unlocks it, instead of finding $8 to $20 at checkout.</li>
+            <li><b>One-tap switch to Subscribe &amp; Save</b> for one-time buyers of a 30-day supply.</li>
+            <li><b>A relevant add-on for single-ingredient carts</b> (the 7-day pack), which also raises the order value.</li>
+            <li><b>Final sale shown on the line item.</b></li>
+          </ol>
+          <p class="why"><b>Build note:</b> your cart lock script for the landing-page gifts lives in the footer group and must keep working. Test the 1, 2 and 3 bag landing-page carts after any cart change.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="compliance">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">What you can and can't say</p>
+      <h2>Compliance findings across the store, funnels and ads</h2>
+      <p class="lede">Screened against your compliance rules (Google healthcare policy, FDA supplement rules, FTC). The scanner flags every "guarantee"; your money-back guarantee is a commercial term and is fine.</p>
+    </div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Level</th><th>Where</th><th>What it says</th><th>Replace with</th></tr></thead>
+      <tbody>
+        <tr><td><span class="chip good">Fixed</span></td><td>15-Day Reset page</td><td>"A Better You in 15 Days"; product image "15-Day Weight Loss Program"</td><td>Retired today; all its URLs now go to Cacao 30 sticks</td></tr>
+        <tr><td><span class="chip good">Fixed</span></td><td>Collagen page, Google title</td><td>"Organic Collagen Peptides"</td><td>"Grass-Fed Collagen Peptides — Unflavored, Hydrolyzed"</td></tr>
+        <tr><td><span class="chip info">Low</span></td><td>Google non-brand search ad</td><td>"Boost Energy and Digestion", "Support Muscles and Joints"</td><td>Legal with the FDA disclaimer that's on the landing page, but Google is stricter than the FDA. Safer: "Six Ingredients, No Sweeteners" · "23g Protein Per Serving" (no detox wording is live anywhere, checked Nov 10)</td></tr>
+        <tr><td><span class="chip bad">High</span></td><td>gift.zeotein.com (Holiday Guide)</td><td>"REAL INGREDIENTS. REAL RESULTS." and no FDA disclaimer on the page</td><td>"Real ingredients. Real recipes." and add the two-part disclaimer to the page footer</td></tr>
+        <tr><td><span class="chip warn">Medium</span></td><td>All single-ingredient and shaker pages</td><td>No "final sale" notice, while the site banner promises a 30-day money-back guarantee</td><td>"Final sale: single ingredients aren't covered by the 30-day money-back guarantee." next to the price</td></tr>
+        <tr><td><span class="chip warn">Medium</span></td><td>Reviews shown on protein pages</td><td>"Surprisingly it curved my appetite…"; "I feel stronger and more energized, better focused"</td><td>Hide the appetite review in Judge.me. Your call on the second; taste and convenience reviews are safer</td></tr>
+        <tr><td><span class="chip warn">Medium</span></td><td>Blog and product tags</td><td>Post "Why We Combine Organic Collagen Peptides and Bone Broth Protein"; tag "organic collagen" on 9 products</td><td>Retitle the post "Why We Combine Grass-Fed Collagen Peptides and Bone Broth Protein" (keep the URL); drop the tag after checking automations</td></tr>
+        <tr><td><span class="chip info">Low</span></td><td>Cacao landing page (Meta)</td><td>"Transform your daily routine."</td><td>"Simplify your daily routine."</td></tr>
+        <tr><td><span class="chip info">Low</span></td><td>Retired Howie pages on go.zeotein.com</td><td>"Save 15% Today," old prices, working checkout pages</td><td>Take them offline (GoHighLevel section)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="split">
+      <div class="panel say"><h3>Say it</h3>
+        <ul>
+          <li>23g protein (Cacao only) · 20g plant protein (Vegan)</li>
+          <li>Six ingredients, every one on the label · no sweeteners · 0g sugar</li>
+          <li>Grass-fed bone broth and grass-fed collagen · organic cacao, organic MCT, organic sea moss</li>
+          <li>"A naturally occurring volcanic mineral" (on Google pages and ads, leave it unnamed)</li>
+          <li>Keeps you full and satisfied · steady energy (with the FDA disclaimer on the page)</li>
+          <li>Taste, mixing, travel, shipping speed, price per serving, the first-order guarantee</li>
+        </ul></div>
+      <div class="panel nosay"><h3>Don't say it</h3>
+        <ul>
+          <li>Detox, cleanse, toxins, flush, binding, heavy metals, in any form or hedged</li>
+          <li>Any condition: parasites, candida, inflammation, IBS, anxiety, and so on</li>
+          <li>Cure, treat, heal, eliminate, fight · weight loss, fat burn, appetite suppression</li>
+          <li>Outcome deadlines: "a better you in 15 days," "real results," "transform"</li>
+          <li>GLP-1 or drug names · "organic" on collagen, bone broth or zeolite · 23g on Vegan</li>
+          <li>Reviews that make these claims count as your claims: hide them</li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="ghl">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">GoHighLevel funnels</p>
+      <h2>296 funnels. 6 are working for you.</h2>
+      <p class="lede">259 are never-used template imports from December 2025 with no domain, so nobody can reach them. The 8 below are retired but still live on your domains. GoHighLevel's API can't unpublish them, so they need a few clicks from you.</p>
+    </div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Status</th><th>Funnel</th><th>Public address</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr><td><span class="chip good">Keep</span></td><td>Purple — Clean Protein Offer</td><td>go.zeotein.com/clean-protein (A/B), go.zeotein.com root</td><td>Approved Meta destination; 13 leads Nov 7–8</td></tr>
+        <tr><td><span class="chip good">Keep</span></td><td>Zeotein Cacao Starter Kit</td><td>marketing.zeotein.com/starter-kit-page</td><td>Approved destination; Meta ads running</td></tr>
+        <tr><td><span class="chip good">Keep</span></td><td>Cacao Starter Kit, Google Ads</td><td>marketing.zeotein.com/starter-kit-google</td><td>Google Search destination (0 sales so far)</td></tr>
+        <tr><td><span class="chip good">Keep</span></td><td>Cacao 30-Day Stick Packs Starter Kit</td><td>marketing.zeotein.com/stick-packs</td><td>Approved destination; Meta ads running</td></tr>
+        <tr><td><span class="chip good">Keep</span></td><td>Holiday Guide opt-in</td><td>gift.zeotein.com</td><td>Seasonal; 1 lead in 60 days, none since Oct 7</td></tr>
+        <tr><td><span class="chip good">Keep</span></td><td>Quiz (Cacao or Vegan), new version</td><td>marketing.zeotein.com/quiz</td><td>1 lead in 60 days; not an ad destination</td></tr>
+        <tr><td><span class="chip bad">Turn off</span></td><td>[Not in use] Howie Mandel Final Version 2.0</td><td>go.zeotein.com/howie, /landing-page, /checkout, /upsell, /thank-you-page</td><td>Labeled not in use; last real charge Aug 23; all 13 subscriptions canceled</td></tr>
+        <tr><td><span class="chip bad">Turn off</span></td><td>[DO NOT USE] Test Site, Howie</td><td>go.zeotein.com/test-…-donotuse, /checkout-265915, /upsell-1352</td><td>Test-mode only; still public</td></tr>
+        <tr><td><span class="chip bad">Turn off</span></td><td>Howie Mandel with Bulk Bag</td><td>go.zeotein.com/howie-bulk-offer, /howie-bulk-offer--landing-page</td><td>Retired in your guardrails; "Save 15% Today"; links to 3 retired 15%-off products</td></tr>
+        <tr><td><span class="chip bad">Turn off</span></td><td>Zeotein Cacao Landing Page (2 versions) and Cacao Offer Funnel</td><td>marketing.zeotein.com/zeotein-cacao, /landing-page-cacao, /cacao-sales-page</td><td>Not approved destinations; no traffic, no leads</td></tr>
+        <tr><td><span class="chip bad">Turn off</span></td><td>Formula Finder V1 and V2</td><td>marketing.zeotein.com/zeotein-formula-finder, /start, /q1, /v2-start …</td><td>Last edited May; replaced by the quiz; links to a 404 (fixed today)</td></tr>
+        <tr><td><span class="chip info">Leave</span></td><td>23 dormant funnels</td><td>No domain</td><td>Includes 3 November drafts in progress (BF Google, Holiday revamp, Stocking Stuffers) and 6 old Howie copies</td></tr>
+        <tr><td><span class="chip info">Leave</span></td><td>259 template imports</td><td>No domain</td><td>Harmless; move to a folder named "Unused templates" if they slow you down</td></tr>
+      </tbody>
+    </table></div>
+    <details class="more" open><summary>How to turn off a retired funnel (about a minute each)</summary>
+      <ol class="steps">
+        <li>In GoHighLevel, open Sites → Funnels and click the funnel name.</li>
+        <li>Open the funnel's Settings tab.</li>
+        <li>Set Domain to none (or "Select domain" with nothing chosen) and save. The pages stay in GoHighLevel; they just stop being public.</li>
+        <li>Repeat for the 8 funnels marked "Turn off."</li>
+        <li>Tell me when it's done. I'll add redirects so those old links land on your live offer, and archive the 3 retired 15%-off products the Howie bulk page still links to.</li>
+      </ol>
+    </details>
+    <details class="more"><summary>Other things found in GoHighLevel</summary>
+      <ul class="steps">
+        <li>GoHighLevel's own checkout ran only on the three Howie funnels: 100 orders, 9 real charges, last one Aug 23. All 16 GoHighLevel subscriptions are canceled or expired.</li>
+        <li>110 workflows (55 published, 55 drafts). Their triggers can't be read through the API (not enabled for this account), so I couldn't check which product names they filter on.</li>
+        <li>14 GoHighLevel product names no longer match the Shopify title for the same item. If any workflow matches by name, check those first.</li>
+        <li>A step named "(DRAFT)" sits on the live Purple funnel at go.zeotein.com/cacao-protein-starter-kit-bag, titled "Howie Mandel's Exclusive Zeotein Offer | Up to 55% Off."</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section class="block" id="catalog">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Shopify catalog</p>
+      <h2>38 unlisted products: what stays, what goes</h2>
+      <p class="lede">Unlisted products power your funnels, gifts and win-back offers, so most must stay. Products tied to subscription plans stay too: subscribers can be renewing or paused on them.</p>
+    </div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Group</th><th class="r">Count</th><th>Products</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><span class="chip good">Retired today</span></td><td class="r">7</td><td>15-Day Reset; Cacao 7-Day (15% off) and 7-Day legacy; Cacao 30-Day (15% off); both "Second Bag 25% off"; long-sleeve shirt</td><td>Archived; URLs redirect</td></tr>
+        <tr><td><span class="chip warn">Retire after GHL</span></td><td class="r">3</td><td>Cacao Bulk Bag 15% off ($93.49), Cacao 7-Day 15% off ($33.99), Cacao 30 sticks 15% off ($114.74)</td><td>Archive once the Howie bulk page is offline; I'll do it when you say</td></tr>
+        <tr><td><span class="chip info">Confirm</span></td><td class="r">2</td><td>Cacao Bulk Bag "$84.99/month" (no plan attached); Cacao 30-Day Subscription + Free Shaker (no plan attached, sold in July and August)</td><td>Your notes mention a win-back link to an unlisted $84.99 product. Confirm which one, or check in Seal for contracts, before I retire these</td></tr>
+        <tr><td><span class="chip good">Keep</span></td><td class="r">26</td><td>Funnel products (Starter Kits, buy-once links, LP bag), the Cacao landing page product, 7 gift products, Black Friday and Stocking Stuffers, resubscribe and returning-subscriber offers, every product with a subscription plan</td><td>In use</td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted">Also worth a decision: 5 draft apparel products and the draft "Buy 3, Get 1 Free" 4-pack (it sold $4,422 in August). Drafts are invisible, so they cost nothing but clutter.</p>
+  </div>
+</section>
+
+<section class="block" id="tech">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Speed, SEO and tracking</p>
+      <h2>The store is slow on phones, and Google sees "Zeotein LLC"</h2>
+    </div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Page (mobile)</th><th class="r">Speed score</th><th class="r">Main content shows</th><th class="r">Blocked time</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Cacao 30 sticks (best seller)</td><td class="r">39</td><td class="r">7.3 s</td><td class="r">1,020 ms</td><td><span class="chip bad">Poor</span></td></tr>
+        <tr><td>Zeolite</td><td class="r">52</td><td class="r">6.8 s</td><td class="r">560 ms</td><td><span class="chip bad">Poor</span></td></tr>
+        <tr><td>Homepage</td><td class="r">57</td><td class="r">5.8 s</td><td class="r">610 ms</td><td><span class="chip warn">Needs work</span></td></tr>
+        <tr><td>Cacao landing page (Meta ads)</td><td class="r">47</td><td class="r">5.1 s</td><td class="r">1,110 ms</td><td><span class="chip bad">Poor</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted">Lighthouse 12.8, simulated mid-range phone on 4G. Google's "good" mark for main content is 2.5 seconds. Real phones also load the Meta, Google and Clarity scripts that were blocked in this test, so real numbers are likely worse.</p>
+    <div class="split">
+      <div class="panel"><h3>Why it's slow</h3>
+        <ul>
+          <li>About 160 scripts load on each product page; the page itself has 2,298 elements and takes 2.8 s of processing.</li>
+          <li>Seven tracking pixels run through Shopify's pixel manager (2.3 s), including Printful and Replo, which may no longer be needed.</li>
+          <li>Judge.me (about 1 s), the Shop delivery-date widget (0.7 s), Seal, BON Loyalty and OptiMonk each add more.</li>
+          <li>Images are larger than the screen needs (about 250–450 KB extra per page), and the theme stores four landing-page PNGs of 1–1.7 MB each.</li>
+          <li>16 copies of the theme. One live, one Black Friday draft scheduled for Nov 27. <b>Fixes made to the live theme won't carry into the Black Friday theme</b>; port them before you publish it.</li>
+        </ul></div>
+      <div class="panel"><h3>SEO fixes</h3>
+        <ul>
+          <li>Homepage title is "Zeotein LLC" and the page has two H1s. Set a real homepage title and description in Preferences.</li>
+          <li>Every page title ends in "– Zeotein LLC." Change the theme's title suffix to "Zeotein."</li>
+          <li>No collection has an SEO title or description; Shop All has no meta description.</li>
+          <li>The sitemap still lists Halloween Sale, the Labor Day page, Final Sale and the old Cacao landing page.</li>
+          <li>The Cacao landing page (Meta) scores 69 on SEO: 24 images without alt text and no product schema.</li>
+          <li>25 blog articles are a good base. Link each to the matching product.</li>
+        </ul></div>
+    </div>
+    <div class="panel"><h3>Tracking fixes</h3>
+      <ul>
+        <li>Add GA4 to marketing.zeotein.com and go.zeotein.com, and pass incoming UTMs and click IDs through to the store instead of hard-coding "howie" or "ghl."</li>
+        <li>Filter Shopify admin and test sessions out of GA4 (October's add-to-cart count is mostly test noise; three test purchases came from localhost).</li>
+        <li>Remove <code>utm_campaign=sag_organic</code> from paid Shopping URLs.</li>
+        <li>Your Numbers Playbook assumes subscriptions ship free. Shopify shows renewals charged $7.83 to $15.48 shipping ($863 in 90 days). Margins are slightly better than modeled; the churn risk is real.</li>
+      </ul></div>
+  </div>
+</section>
+
+<section class="block" id="plan">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Action plan</p>
+      <h2>What to do, in order</h2>
+    </div>
+    <div class="plan">
+      <div class="col"><h3><span class="chip bad">This week</span></h3>
+        <div class="task"><h4>Fix the Rewards button on phones</h4><p>BON Loyalty → launcher: icon only, raise it, or hide it on product pages. Unblocks the price and Add to Cart on every product page.</p><p class="who">Rafael · 15 minutes</p></div>
+        <div class="task"><h4>Decide shipping</h4><p>Free shipping on every 30-day supply ($99 threshold). Up to about $690 a month in shipping revenue at today's volume; removes the $8–$20 checkout surprise.</p><p class="who">Dana · decision</p></div>
+        <div class="task"><h4>Stop the ad spend that isn't selling</h4><p>Pause the two zero-purchase Meta campaigns and Google non-brand search; move broad "zeotein" to phrase.</p><p class="who">Jewels / ORBIT · with your approval</p></div>
+        <div class="task"><h4>Turn off the 8 retired funnels</h4><p>About 10 minutes in GoHighLevel. Then I add redirects and retire the last 3 products.</p><p class="who">Dana or Rafael</p></div>
+        <div class="task"><h4>Homepage Google title</h4><p>Online Store → Preferences: "Zeotein | Bone Broth &amp; Collagen Protein Shake, No Sweeteners."</p><p class="who">Anyone · 2 minutes</p></div>
+      </div>
+      <div class="col"><h3><span class="chip warn">Next 2 weeks</span></h3>
+        <div class="task"><h4>Build the new product page template</h4><p>Build on a copy of the live theme from the mockups above; port it into the Black Friday theme before Nov 27.</p><p class="who">Rafael · I can build the theme copy for review</p></div>
+        <div class="task"><h4>Speed pass</h4><p>Remove unused pixels and apps, delay Judge.me until scroll, compress landing page images, delete old theme copies.</p><p class="who">Rafael</p></div>
+        <div class="task"><h4>Fix tracking</h4><p>GA4 on funnel domains, pass-through tags, internal traffic filter, fix sag_organic.</p><p class="who">ORBIT / Rafael</p></div>
+        <div class="task"><h4>Compliance cleanup</h4><p>Holiday Guide headline and disclaimer, final-sale notice on singles, hide two reviews, retitle the collagen blog post.</p><p class="who">Rafael / Daniel</p></div>
+        <div class="task"><h4>Share Clarity</h4><p>Generate a Data Export token so I can pull rage clicks and scroll depth for each product page.</p><p class="who">Dana · 2 minutes</p></div>
+      </div>
+      <div class="col"><h3><span class="chip info">Your decisions</span></h3>
+        <div class="task"><h4>Vegan price</h4><p>$139.99 for 20g protein vs Cacao's $134.99 for 23g. Match or go below Cacao.</p></div>
+        <div class="task"><h4>Zeolite 1 lb price</h4><p>$64.99 is worse per serving than the ½ lb. Suggested $49.99.</p></div>
+        <div class="task"><h4>Test product pages as a Meta destination</h4><p>30-day data favors the store page about 6 to 1 on a small sample. Your guardrails currently rule it out.</p></div>
+        <div class="task"><h4>Merch in the menu</h4><p>Rename "Zeotein Merchandise" to "Accessories" or remove it.</p></div>
+        <div class="task"><h4>Two products to confirm</h4><p>The "$84.99/month" bag and the "30-Day Subscription + Free Shaker" listing (see Catalog).</p></div>
+      </div>
+    </div>
+    <details class="more"><summary>Already decided, so not reopened here</summary>
+      <ul class="steps">
+        <li>Renewal prices: $99.99 bag, $114.99 sticks; grandfathered $84.99 contracts stay as they are.</li>
+        <li>Intro first-order prices live only on funnels and landing pages, not on listed product pages.</li>
+        <li>The zeolite single stays on Google Shopping (Oct 29).</li>
+        <li>Howie creative and the HOWIE15 code (your September calls); Meta AI images with the disclosure label; Advantage+ audiences where they can't be switched off.</li>
+        <li>"Free shipping" stays on funnel pages, where it's true.</li>
+        <li>The Cacao landing page uses the store-wide Judge.me review set.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer class="end">
+  <div class="wrap">
+    <p><b>Sources:</b> Shopify Admin and analytics (orders, sessions, abandoned checkouts, catalog, redirects, theme files), GoHighLevel through the Automator connector (296 funnels, orders, forms, workflows), Google Ads, Meta Ads and GA4 through Supermetrics, live crawls of zeotein.com and all four funnel domains, Lighthouse 12.8, and competitor pricing from brand and retailer search results.</p>
+    <p><b>Not available:</b> Microsoft Clarity (token declined), Google Merchant Center item status (not in your Supermetrics plan), GoHighLevel workflow triggers (API not enabled), Seal subscription contracts (no access).</p>
+    <p><b>Supporting files:</b> <a href="files/CHANGES-2026-11-10.md">Change log with IDs and undo steps</a> · <a href="files/ghl-funnel-audit.md">GoHighLevel funnel audit (all 296)</a> · <a href="files/ads-and-analytics.md">Google, Meta and GA4 analysis</a> · <a href="files/pricing-research.md">Competitor pricing with sources</a></p>
+    <p>Prepared November 10, 2026. Dollar estimates use your Numbers Playbook inputs and are estimates, not accounting.</p>
+  </div>
+</footer>

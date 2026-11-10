@@ -1,0 +1,19 @@
+[
+  {
+    "source": "crawl2/bone_broth_mobile.txt",
+    "findings": [
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 173,
+        "match": "SUPPORT",
+        "context": "CUSTOMER SUPPORT"
+      }
+    ],
+    "counts": {
+      "CRITICAL": 0,
+      "HIGH": 0,
+      "MEDIUM": 1
+    }
+  }
+]

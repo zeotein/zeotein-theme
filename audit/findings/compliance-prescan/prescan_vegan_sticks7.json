@@ -1,0 +1,47 @@
+[
+  {
+    "source": "crawl2/vegan_sticks7_mobile.txt",
+    "findings": [
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 36,
+        "match": "Guarantee",
+        "context": "30-Day Money-Back Guarantee"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 76,
+        "match": "Guarantee",
+        "context": "30-Day Money-Back Guarantee"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 78,
+        "match": "guarantee",
+        "context": "Love it or your money back. The guarantee covers your first order, one supply per customer. Your order ships in 1 to 2 business days."
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 125,
+        "match": "guarantee",
+        "context": "What is your shipping and guarantee policy?"
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 308,
+        "match": "SUPPORT",
+        "context": "CUSTOMER SUPPORT"
+      }
+    ],
+    "counts": {
+      "CRITICAL": 0,
+      "HIGH": 4,
+      "MEDIUM": 1
+    }
+  }
+]

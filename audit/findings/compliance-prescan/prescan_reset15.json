@@ -1,0 +1,117 @@
+[
+  {
+    "source": "crawl2/reset15_mobile.txt",
+    "findings": [
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 41,
+        "match": "Guarantee",
+        "context": "30-Day Money-Back Guarantee"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 148,
+        "match": "guarantee",
+        "context": "What is your shipping and guarantee policy?"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "time_bound_transformation",
+        "line": 25,
+        "match": "15-Day Reset",
+        "context": "Zeotein 15-Day Reset"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "time_bound_transformation",
+        "line": 37,
+        "match": "15-Day Reset",
+        "context": "Decrease quantity for Zeotein 15-Day Reset"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "time_bound_transformation",
+        "line": 38,
+        "match": "15-Day Reset",
+        "context": "Increase quantity for Zeotein 15-Day Reset"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "time_bound_transformation",
+        "line": 48,
+        "match": "A Better You",
+        "context": "Honest Ingredients. Real Nutrition. A Better You in 15 Days."
+      },
+      {
+        "tier": "HIGH",
+        "rule": "time_bound_transformation",
+        "line": 48,
+        "match": "in 15 Days",
+        "context": "Honest Ingredients. Real Nutrition. A Better You in 15 Days."
+      },
+      {
+        "tier": "HIGH",
+        "rule": "time_bound_transformation",
+        "line": 50,
+        "match": "15-Day Reset",
+        "context": "The Zeotein 15-Day Reset is a simple daily system built around one habit: two clean, protein-forward shakes a day. No complicated diets. No extreme routines. Just 15 days of consistent, clean nutritio"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "time_bound_transformation",
+        "line": 54,
+        "match": "15-Day Reset",
+        "context": "\u2b50 What\u2019s Inside the 15-Day Reset"
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 73,
+        "match": "balanced",
+        "context": "\u2714 Food Guidelines Guide \u2014 Clear do\u2019s and don\u2019ts to take the guesswork out of what to eat, what to avoid, and how to build balanced plates"
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 75,
+        "match": "support",
+        "context": "\u2714 Optional Add-On Guide\u00a0\u2014 A simple overview of how to take your results even further with additional support, if you choose to use it."
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 77,
+        "match": "support",
+        "context": "These guides turn your 15-day journey into a full support system \u2014 not just a shake routine."
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 183,
+        "match": "boost",
+        "context": "I am loving my Zeotein! I not only look forward to drinking it everyday, but I crave it! It makes me feel satisfied and so much better, like a little mid-day boost. Love it!"
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 245,
+        "match": "SUPPORT",
+        "context": "CUSTOMER SUPPORT"
+      },
+      {
+        "tier": "CRITICAL",
+        "rule": "supplement_facts_mismatch",
+        "line": 0,
+        "match": "Calories: 6 (spec: 140)",
+        "context": "Page shows Calories=6, locked cacao spec says 140."
+      }
+    ],
+    "counts": {
+      "CRITICAL": 1,
+      "HIGH": 9,
+      "MEDIUM": 5
+    }
+  }
+]

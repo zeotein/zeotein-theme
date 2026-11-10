@@ -1,0 +1,19 @@
+[
+  {
+    "source": "crawl2/zeolite_mobile.txt",
+    "findings": [
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 206,
+        "match": "SUPPORT",
+        "context": "CUSTOMER SUPPORT"
+      }
+    ],
+    "counts": {
+      "CRITICAL": 0,
+      "HIGH": 0,
+      "MEDIUM": 1
+    }
+  }
+]

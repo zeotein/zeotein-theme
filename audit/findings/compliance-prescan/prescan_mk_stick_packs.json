@@ -1,0 +1,47 @@
+[
+  {
+    "source": "crawl2/mk_stick_packs_mobile.txt",
+    "findings": [
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 25,
+        "match": "guarantee",
+        "context": "Free shipping \u2022 30-day money back guarantee \u2022 Cancel anytime"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 165,
+        "match": "Guarantee",
+        "context": "Try your 30-day supply. If it's not for you, contact us within 30 days to request a refund under our 30-Day Money-Back Guarantee."
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 266,
+        "match": "Guarantee",
+        "context": "Shipping is free on every order from this page. Your first order is covered by our 30-Day Money-Back Guarantee. To start a return, email hello@zeotein.com."
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 280,
+        "match": "guarantee",
+        "context": "What is the money-back guarantee?"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 282,
+        "match": "Guarantee",
+        "context": "Try your 30-day supply. If it's not for you, contact us within 30 days at hello@zeotein.com to request a refund under our 30-Day Money-Back Guarantee."
+      }
+    ],
+    "counts": {
+      "CRITICAL": 0,
+      "HIGH": 5,
+      "MEDIUM": 0
+    }
+  }
+]

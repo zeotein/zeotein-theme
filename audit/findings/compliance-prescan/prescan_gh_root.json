@@ -1,0 +1,68 @@
+[
+  {
+    "source": "crawl2/gh_root_mobile.txt",
+    "findings": [
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 20,
+        "match": "guarantee",
+        "context": "\u26ca 30-day money-back guarantee: love it or your money back"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 196,
+        "match": "guarantee",
+        "context": "\u26ca Backed by our 30-day money-back guarantee"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 206,
+        "match": "guarantee",
+        "context": "\u26ca Backed by our 30-day money-back guarantee"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 218,
+        "match": "GUARANTEE",
+        "context": "GUARANTEE"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 220,
+        "match": "guarantee",
+        "context": "Our 30-day money-back guarantee applies to first-time orders, one per customer or household. Contact support within 30 days of delivery for a full refund of the product price (original shipping exclud"
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 215,
+        "match": "SUPPORT",
+        "context": "SUPPORT"
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 220,
+        "match": "support",
+        "context": "Our 30-day money-back guarantee applies to first-time orders, one per customer or household. Contact support within 30 days of delivery for a full refund of the product price (original shipping exclud"
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "binding_agent",
+        "line": 31,
+        "match": "negative charge",
+        "context": "A rare, ancient volcanic ash mineral (clinoptilolite) with a naturally negative charge and a microscopic honeycomb structure. It's expensive and hard to source, so most brands skip it and fill that sp"
+      }
+    ],
+    "counts": {
+      "CRITICAL": 0,
+      "HIGH": 5,
+      "MEDIUM": 3
+    }
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "source": "crawl2/gift_root_mobile.txt",
+    "findings": [
+      {
+        "tier": "CRITICAL",
+        "rule": "treatment_verb",
+        "line": 30,
+        "match": "treats",
+        "context": "From cozy breakfasts to delicious treats, all made with Zeotein Cacao."
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 40,
+        "match": "REAL RESULTS",
+        "context": "REAL INGREDIENTS. REAL RESULTS."
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 38,
+        "match": "balanced",
+        "context": "Practical tips to stay energized, balanced and feeling your best during the holidays."
+      },
+      {
+        "tier": "CRITICAL",
+        "rule": "missing_fda_disclaimer",
+        "line": 0,
+        "match": "(page-level)",
+        "context": "Structure/function claims present but no FDA/DSHEA disclaimer found on page."
+      }
+    ],
+    "counts": {
+      "CRITICAL": 2,
+      "HIGH": 1,
+      "MEDIUM": 1
+    }
+  }
+]

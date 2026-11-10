@@ -1,0 +1,68 @@
+[
+  {
+    "source": "crawl2/home_mobile.txt",
+    "findings": [
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 27,
+        "match": "Guarantee",
+        "context": "30-Day Money-Back Guarantee"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 208,
+        "match": "GUARANTEE",
+        "context": "MONEY-BACK GUARANTEE \u2022 MONEY-BACK GUARANTEE \u2022"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 208,
+        "match": "GUARANTEE",
+        "context": "MONEY-BACK GUARANTEE \u2022 MONEY-BACK GUARANTEE \u2022"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 212,
+        "match": "Guarantee",
+        "context": "30-Day Money-Back Guarantee"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 214,
+        "match": "Guarantee",
+        "context": "See Guarantee Details"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 233,
+        "match": "guarantee",
+        "context": "What is your shipping and guarantee policy?"
+      },
+      {
+        "tier": "HIGH",
+        "rule": "guaranteed_outcome",
+        "line": 278,
+        "match": "GUARANTEE",
+        "context": "30-DAY MONEY-BACK GUARANTEE ON PROTEIN BLENDS"
+      },
+      {
+        "tier": "MEDIUM",
+        "rule": "structure_function",
+        "line": 291,
+        "match": "SUPPORT",
+        "context": "CUSTOMER SUPPORT"
+      }
+    ],
+    "counts": {
+      "CRITICAL": 0,
+      "HIGH": 7,
+      "MEDIUM": 1
+    }
+  }
+]
