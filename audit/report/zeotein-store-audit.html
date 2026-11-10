@@ -356,7 +356,7 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
       <article class="leak">
         <span class="rank">2</span>
         <div><h3>95% of shoppers never add to cart</h3>
-          <p>Add-to-cart rate fell from 13.2% of sessions in March to 4.7% in November. On a phone, the Rewards button sits on top of the price or the Add to Cart button on product pages. The top bar tells every shopper they'll pay shipping. In a simulated phone test, the main image on your best seller took 7.3 seconds to appear. The reviews under your protein are about shaker cups and scoops.</p>
+          <p>Add-to-cart rate fell from 13.2% of sessions in March to 4.7% in November. On a phone, the Rewards button sits on top of the price or the Add to Cart button on product pages. The top bar tells every shopper they'll pay shipping. In a simulated phone test, the main image on your best seller took 7.3 seconds to appear. The reviews under your protein are about shaker cups and scoops. Clarity shows the average visitor scrolls only 42% of a page (17% on the Meta landing page), so the first screen decides the sale.</p>
           <p class="fix"><b>Fix:</b> the product page redesign below, starting with the Rewards button (15 minutes in the app settings).</p></div>
         <span class="impact">Largest drop-off</span>
       </article>
@@ -425,8 +425,8 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
         <p>The Google title read "Organic Collagen Peptides." Your own rules say collagen isn't organic. It now reads "Grass-Fed Collagen Peptides — Unflavored, Hydrolyzed," with a new meta description. Live and checked.</p>
       </div>
       <div class="done-item">
-        <h4><span class="chip warn">Blocked</span> GoHighLevel shut-offs and Microsoft Clarity</h4>
-        <p>GoHighLevel's API refuses a redirect on a path a live funnel page still uses (tested: "combination already exists"), and has no unpublish call. The 8 retired funnels need a few clicks from you (steps in the GoHighLevel section). The Clarity token request was declined, so session recordings and heatmaps aren't in this audit.</p>
+        <h4><span class="chip warn">Blocked</span> GoHighLevel shut-offs</h4>
+        <p>GoHighLevel's API refuses a redirect on a path a live funnel page still uses (tested: "combination already exists"), and has no unpublish call. The 8 retired funnels need a few clicks from you (steps in the GoHighLevel section). Microsoft Clarity is now connected (last 3 days of data; findings in the Drop-off section).</p>
       </div>
     </div>
   </div>
@@ -463,12 +463,14 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
           <li><b>Mobile</b> converts 2.5%, <b>desktop</b> 1.1%, on about the same number of sessions.</li>
           <li>September's bump came from the Labor Day sale and the stock-up email. Without a promotion, direct purchases fell from 42 to 7.</li>
         </ul></div>
-      <div class="panel"><h3>Microsoft Clarity: what's missing</h3>
+      <div class="panel"><h3>Microsoft Clarity, Nov 8–10</h3>
         <ul>
-          <li>Clarity is installed on the theme (project <code>v65ogd4cbw</code>), but I couldn't read it: the API token form was declined.</li>
-          <li>With a token I'd pull rage clicks, dead clicks and scroll depth for each product page, plus where mobile shoppers quit.</li>
-          <li>To share it: Clarity → Settings → Data Export → Generate new API token, then ask me to pull Clarity data and save the token in the secure form when it appears.</li>
-          <li>Your call notes show Jewels asked for a Clarity heatmap read on Oct 14 and it never happened.</li>
+          <li><b>People leave after the first screen.</b> Average scroll depth is 42%. The Cacao landing page your Meta ads use: 17%. Bulk Bag page: 24%. Bone broth: 26%. The first screen has to do the selling.</li>
+          <li><b>41% of visits are bots:</b> 119 bot sessions on top of 169 real ones. Another 29 "real" sessions came from Malaysia while every Google ad click was in the US. Your true conversion rate is higher than the store reports.</li>
+          <li><b>Paid search is 40% of real visits</b> (68 of 169) at 1.4 pages per visit, mostly on single-ingredient pages.</li>
+          <li><b>Script errors in 22% of sessions,</b> 66 of them on the Meta landing page. Two causes found: the header on every page imports a module the theme never defines (<code>@theme/section-hydration</code>), and the landing page loads its cart code twice. Checkout still worked in my tests; both are quick developer fixes.</li>
+          <li>No rage clicks. Dead clicks in 4.7% of sessions, quick-backs in 4.1%.</li>
+          <li>Clarity also records your team's GoHighLevel preview pages (link.automator.ai). Exclude them in Clarity's settings so they don't skew the numbers.</li>
         </ul></div>
     </div>
   </div>
@@ -997,7 +999,7 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
         <div class="task"><h4>Speed pass</h4><p>Remove unused pixels and apps, delay Judge.me until scroll, compress landing page images, delete old theme copies.</p><p class="who">Rafael</p></div>
         <div class="task"><h4>Fix tracking</h4><p>GA4 on funnel domains, pass-through tags, internal traffic filter, fix sag_organic.</p><p class="who">ORBIT / Rafael</p></div>
         <div class="task"><h4>Compliance cleanup</h4><p>Holiday Guide headline and disclaimer, final-sale notice on singles, hide two reviews, retitle the collagen blog post.</p><p class="who">Rafael / Daniel</p></div>
-        <div class="task"><h4>Share Clarity</h4><p>Generate a Data Export token so I can pull rage clicks and scroll depth for each product page.</p><p class="who">Dana · 2 minutes</p></div>
+        <div class="task"><h4>Fix the two script errors</h4><p>Map or remove the header's <code>@theme/section-hydration</code> import, and load the landing page's cart scripts once. Clears most of Clarity's error count.</p><p class="who">Rafael · 30 minutes</p></div>
       </div>
       <div class="col"><h3><span class="chip info">Your decisions</span></h3>
         <div class="task"><h4>Vegan price</h4><p>$139.99 for 20g protein vs Cacao's $134.99 for 23g. Match or go below Cacao.</p></div>
@@ -1023,8 +1025,8 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
 
 <footer class="end">
   <div class="wrap">
-    <p><b>Sources:</b> Shopify Admin and analytics (orders, sessions, abandoned checkouts, catalog, redirects, theme files), GoHighLevel through the Automator connector (296 funnels, orders, forms, workflows), Google Ads, Meta Ads and GA4 through Supermetrics, live crawls of zeotein.com and all four funnel domains, Lighthouse 12.8, and competitor pricing from brand and retailer search results.</p>
-    <p><b>Not available:</b> Microsoft Clarity (token declined), Google Merchant Center item status (not in your Supermetrics plan), GoHighLevel workflow triggers (API not enabled), Seal subscription contracts (no access).</p>
+    <p><b>Sources:</b> Shopify Admin and analytics (orders, sessions, abandoned checkouts, catalog, redirects, theme files), Microsoft Clarity Data Export (Nov 8–10), GoHighLevel through the Automator connector (296 funnels, orders, forms, workflows), Google Ads, Meta Ads and GA4 through Supermetrics, live crawls of zeotein.com and all four funnel domains, Lighthouse 12.8, and competitor pricing from brand and retailer search results.</p>
+    <p><b>Not available:</b> Google Merchant Center item status (not in your Supermetrics plan), GoHighLevel workflow triggers (API not enabled), Seal subscription contracts (no access). Microsoft Clarity's export covers the last 3 days only (Nov 8–10).</p>
     <p><b>Supporting files:</b> <a href="files/CHANGES-2026-11-10.md">Change log with IDs and undo steps</a> · <a href="files/ghl-funnel-audit.md">GoHighLevel funnel audit (all 296)</a> · <a href="files/ads-and-analytics.md">Google, Meta and GA4 analysis</a> · <a href="files/pricing-research.md">Competitor pricing with sources</a></p>
     <p>Prepared November 10, 2026. Dollar estimates use your Numbers Playbook inputs and are estimates, not accounting.</p>
   </div>
