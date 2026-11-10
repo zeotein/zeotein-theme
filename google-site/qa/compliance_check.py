@@ -50,6 +50,7 @@ BANNED = {  # rule -> regex, applies to every page, text + attributes + schema
     "founder language (ownership-sensitive)": r"\b(founder|founded by|i started)\b",
     "organic collagen / bone broth / mineral (they are not organic)": r"\borganic (collagen|bone broth|zeolite|volcanic|mineral)\b",
     "counts what the bag replaces": r"\b(instead of|replaces?)\s+(two|three|four|five|six|\d+)\b",
+    "em dash (build prompt: no em dashes)": r"\u2014",
 }
 # Quoted customer reviews are allowed to use their own words for time of day / frequency,
 # but every other rule still applies to them.
