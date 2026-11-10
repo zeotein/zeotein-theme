@@ -42,8 +42,8 @@ conversion work exactly as they do today.
    `dist/ghl/`, save. Set the page's SEO title and description from `dist/manifest.json`.
 2. Leave the website's Tracking code (Head and Body) as it is. It already carries the Google Ads tag
    AW-18130788543, Meta pixel, Clarity and the gclid/UTM passthrough. The page blocks do not repeat them.
-3. Connect a domain (recommended `shop.zeotein.com`), set this website as the domain's default, publish.
-4. Re-scan the live pages (`python3 prescan.py --url https://<domain>/cacao` and the others), then move Google
+3. Connect `shop.zeotein.com` (approved 10 Nov), set this website as the domain's default, publish.
+4. Re-scan the live pages (`python3 prescan.py --url https://shop.zeotein.com/cacao` and the others), then move Google
    final URLs and sitelinks over. Final URL expansion stays OFF.
 
 ## Change something

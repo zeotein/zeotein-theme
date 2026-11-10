@@ -33,12 +33,9 @@ for c in comp:
     })
 
 ITEMS = [
-    {"level": "crit", "tag": "Decide", "title": "Approve the domain: shop.zeotein.com",
-     "why": "The site needs a domain before it can be published, re-scanned or used in ads. Any zeotein.com subdomain works for Google; this one reads cleanly in an ad and doesn't collide with go., try., gift. or marketing.",
-     "closes": "the domain is connected in GoHighLevel and the bare domain opens Home."},
     {"level": "crit", "tag": "Do first", "title": "Paste the eight blocks, publish, re-scan, then move Google over",
      "why": "Until then every Google campaign with its own final URL still lands on marketing.zeotein.com/starter-kit-google.",
-     "closes": "Search_NB_Sales and Z_Pmax_RET point at /cacao on the new domain and the Ad Setup Guardrails list it as approved."},
+     "closes": "Search_NB_Sales and Z_Pmax_RET point at https://shop.zeotein.com/cacao and the Ad Setup Guardrails list it as approved."},
     {"level": "crit", "tag": "Fix soon", "title": "Stop sending Google traffic to /starter-kit-google",
      "why": "Read live on 10 Nov. The hero bag photo still shows <b>INFLAMMATION SUPPORT</b> in full; the new site garbles it along with ZEOLITE, IMMUNE and DETOX. The old page also shows <b>4.8 average, 214 verified reviews</b> while Judge.me shows 4.94 from 155, lists refills at <b>$2.83 a serving</b> when $99.99 over 30 servings is $3.33, shows Josh M.'s review of Vegan 7 Stick Packs on the Cacao page, and uses \"zero grams of added sugar\" and \"Nothing hidden\", both retired wording.",
      "closes": "no Google campaign points at it and the new site has replaced it."},
