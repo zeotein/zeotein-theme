@@ -15,9 +15,9 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 539,
+          "line": 540,
           "match": "guarantee",
-          "context": "Zeotein home Zeotein Open menu Main Zeotein Cacao bulk bag with its scoop Zeotein Cacao bulk bag Zeotein Vegan pouch 5 out of 5 stars 5 out of 5 stars 5 out of 5 stars Money-back guarantee Get started"
+          "context": "Zeotein home Zeotein Open menu Main Zeotein Cacao bulk bag with the CleanBlend shaker and a scoop of cacao protein Zeotein Cacao bulk bag with a scoop of cacao protein Zeotein Vegan pouch A typical pr"
         }
       ],
       "counts": {
@@ -65,16 +65,16 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 667,
+          "line": 668,
           "match": "guarantee",
           "context": "How does the 30-day guarantee work?"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 824,
+          "line": 825,
           "match": "guarantee",
-          "context": "Zeotein home Zeotein Open menu Main Zeotein Cacao bulk bag with its scoop Per serving       Man holding a Zeotein CleanBlend shaker in a home gym 5 out of 5 stars 5 out of 5 stars 5 out of 5 stars 5 o"
+          "context": "Zeotein home Zeotein Open menu Main Zeotein Cacao Starter Kit: bulk bag, CleanBlend shaker, Save-A-Scoop and three guides Per serving       Man holding a Zeotein CleanBlend shaker in a home gym A typi"
         }
       ],
       "counts": {
@@ -226,7 +226,7 @@
           "rule": "guaranteed_outcome",
           "line": 309,
           "match": "guarantee",
-          "context": "Zeotein home Zeotein Open menu Main Zeotein Vegan ingredients laid out in bowls Zeotein Cacao bulk bag Zeotein Vegan pouch Money-back guarantee Zeotein home Zeotein"
+          "context": "Zeotein home Zeotein Open menu Main Zeotein Vegan ingredients laid out in bowls Zeotein Cacao bulk bag with a scoop of cacao protein Zeotein Vegan pouch Money-back guarantee Zeotein home Zeotein"
         }
       ],
       "counts": {

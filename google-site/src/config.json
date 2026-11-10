@@ -43,10 +43,6 @@
     "pathShipping": "/shipping",
     "pathRefund": "/refund-policy",
     "imgLogo": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?v=1762380884",
-    "imgCacaoBagTop": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bulk-bag-BADGED_1f1ad9f1-3eed-43bf-ad8f-3466c8b9ef9f.png?v=1792154253&width=1024&height=648&crop=top",
-    "imgCacaoBagTopSm": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bulk-bag-BADGED_1f1ad9f1-3eed-43bf-ad8f-3466c8b9ef9f.png?v=1792154253&width=640&height=405&crop=top",
-    "imgVeganBagTop": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-vegan-protein-powder-image.png?v=1791952185&width=1089&height=920&crop=top",
-    "imgVeganBagTopSm": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-vegan-protein-powder-image.png?v=1791952185&width=640&height=541&crop=top",
     "imgShaker": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cleanblend-shaker-bottle-black-27oz.png?v=1791444108&width=600",
     "imgScoop": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-save-a-scoop-protein-powder-scoop.png?v=1791447033&width=600",
     "imgStarterGuide": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-starter-guide_905e6def-794d-4f75-8dd0-1a50e955f217.png?v=1787105401&width=600",
@@ -63,7 +59,16 @@
     "judgemePublicToken": "",
     "announceHtml": "Cacao Starter Kit: <b>{{cacaoKitPrice}} first order</b> &middot; free US shipping",
     "navCtaLabel": "Claim My 55% Off",
-    "navCtaHref": "{{urlCacaoKit}}"
+    "navCtaHref": "{{urlCacaoKit}}",
+    "imgCacaoKit": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-starter-kit.webp?v=1794315719",
+    "imgCacaoKitSm": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-starter-kit.webp?v=1794315719&width=700",
+    "imgCacaoBagShaker": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bag-and-shaker.webp?v=1794315719",
+    "imgCacaoBagShakerSm": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bag-and-shaker.webp?v=1794315719&width=640",
+    "imgCacaoBag": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bag.webp?v=1794315719",
+    "imgCacaoBagSm": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bag.webp?v=1794315719&width=640",
+    "imgVeganPouch": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-vegan-pouch.webp?v=1794315719",
+    "imgVeganPouchSm": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-vegan-pouch.webp?v=1794315719&width=640",
+    "imgTypicalRoutine": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/typical-protein-routine.webp?v=1794315719&width=640"
   },
   "pages": [
     {
@@ -135,5 +140,6 @@
       "seoTitle": "Refund Policy | Zeotein",
       "seoDescription": "Our 30-day money-back guarantee on your first order of a protein blend, and how to start a claim."
     }
-  ]
+  ],
+  "_images": "Packaging photos are never cropped (Dana's standing rule). Google-site pouch photos are full shots with ZEOLITE, IMMUNE, DETOX and INFLAMMATION garbled on the label; the rest of the label stays as printed. Hosted in Shopify Files (uploaded 10 Nov 2026). Checked with the OCR gate at full size and 640px: none of the four words is read."
 }

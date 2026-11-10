@@ -63,9 +63,10 @@ Re-paste only the pages whose block changed.
 - Describes the mineral as "a naturally occurring volcanic mineral" and points to the Supplement Facts panel on
   the bag for the full name (Guardrails section 4).
 - No disease, detox, immune, inflammation, weight-loss or GLP-1 language anywhere, including alt text and schema.
-- Product photos are the real Shopify photos, unaltered. Pouch shots are cropped to the top of the bag (logo,
-  protein badge, flavor), which keeps the printed claim icons out of frame without changing what the bag looks like.
-  No softened, scrambled or retouched label images are used.
+- Packaging photos are never cropped. Every pouch photo is the full shot with four label words garbled
+  (ZEOLITE, IMMUNE, DETOX, INFLAMMATION) by reordering the bag's own printed letters, so the font and lighting stay
+  as photographed; the rest of the label reads as printed. Each file passes the OCR gate (3x upscale, contrast,
+  inverted, several page modes) at full size and at 640px. Files live in Shopify Files (uploaded 10 Nov 2026).
 - Star ratings appear only as the live store-wide Judge.me figure, read when the page loads. Set
   `judgemePublicToken` in `src/config.json` to switch them on; without it the rating line stays hidden.
 - 23g is Cacao only, Vegan is 20g. Cacao says "zero sugar", Vegan says "zero added sugar". "First order", never

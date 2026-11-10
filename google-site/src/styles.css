@@ -84,8 +84,9 @@
 .ztg .stars .s{color:var(--gold);letter-spacing:2px;font-size:1rem}
 .ztg .hero-media{position:relative}
 .ztg .hero-media .bag{border-radius:var(--r-lg);background:linear-gradient(180deg,#fff, #F6F2FB);box-shadow:var(--shadow-lg);overflow:hidden}
-.ztg .hero-media .bag img{width:100%;aspect-ratio:1024/648;object-fit:cover}
-.ztg .hero-media .bag.vegan img{aspect-ratio:1089/920}
+.ztg .hero-media .bag img{width:100%;height:auto}
+.ztg .hero-media .bag.vegan img{width:auto;max-width:100%;max-height:540px;margin:0 auto}
+.ztg .hero-media .cutout img{width:100%;height:auto;filter:drop-shadow(0 28px 36px rgba(0,0,0,.38))}
 .ztg .caption{margin-top:12px;font-size:.84rem;color:#CFC4E1;text-align:center}
 .ztg .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;justify-content:center}
 .ztg .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);font-size:.8rem;font-weight:500;color:#EDE6F7}
@@ -165,6 +166,7 @@
 @media (max-width:760px){.ztg .steps{grid-template-columns:1fr}.ztg .step{min-height:0}}
 
 /* Compare */
+.ztg .col .routine{display:block;width:100%;max-width:340px;height:auto;margin:0 auto 12px}
 .ztg .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .ztg .col{border-radius:var(--r-lg);padding:24px}
 .ztg .col.them{background:var(--white);border:1px solid var(--line)}
@@ -224,8 +226,9 @@
 /* Product chooser */
 .ztg .choose{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .ztg .pcard{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:var(--white);display:grid;grid-template-rows:auto 1fr;box-shadow:var(--shadow)}
-.ztg .pcard .ph{background:linear-gradient(180deg,#fff,#F3EEFA)}
-.ztg .pcard .ph img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top}
+.ztg .pcard .ph{background:#fff;border-bottom:1px solid var(--line)}
+.ztg .pcard .ph{display:block;padding:16px;aspect-ratio:4/3}
+.ztg .pcard .ph img{display:block;width:100%;height:100%;object-fit:contain}
 .ztg .pcard .bd{padding:22px;display:grid;gap:10px;align-content:start}
 .ztg .pcard h3{font-size:1.7rem}
 .ztg .pcard .meta{display:flex;flex-wrap:wrap;gap:6px}
