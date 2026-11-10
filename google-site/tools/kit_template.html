@@ -1,0 +1,309 @@
+<title>Zeotein Google Site Kit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column with a sticky section bar; the page blocks are the working surface, everything else supports them. */
+:root{
+  --bg:#FAF8FD; --surface:#FFFFFF; --sunk:#F2EDF8; --ink:#1E1630; --muted:#625C76; --line:#E3DCEE;
+  --purple:#5F2D90; --purple-ink:#5F2D90; --teal:#32BAC0; --teal-ink:#11767B; --on-teal:#1E1630;
+  --ok:#147A55; --ok-bg:#E3F4EC; --warn:#946200; --warn-bg:#FBF0D6; --crit:#B02E43; --crit-bg:#FBE4E8;
+  --display:"DM Serif Display",Georgia,"Times New Roman",serif; --body:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#130C1F; --surface:#1C1330; --sunk:#241938; --ink:#EEE8F7; --muted:#B3A9C7; --line:#35284D;
+  --purple:#B48DE6; --purple-ink:#C9A9F2; --teal:#3FC7CD; --teal-ink:#5ED7DC; --on-teal:#130C1F;
+  --ok:#5FD3A2; --ok-bg:#163327; --warn:#F2C25B; --warn-bg:#3A2D0E; --crit:#F2879A; --crit-bg:#3D1720; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#130C1F; --surface:#1C1330; --sunk:#241938; --ink:#EEE8F7; --muted:#B3A9C7; --line:#35284D;
+  --purple:#B48DE6; --purple-ink:#C9A9F2; --teal:#3FC7CD; --teal-ink:#5ED7DC; --on-teal:#130C1F;
+  --ok:#5FD3A2; --ok-bg:#163327; --warn:#F2C25B; --warn-bg:#3A2D0E; --crit:#F2879A; --crit-bg:#3D1720; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+a{color:var(--purple-ink)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2{font-family:var(--display);font-weight:400;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,4.6vw,3rem)}
+h2{font-size:clamp(1.5rem,3vw,2rem)}
+h3{font-size:1.02rem;margin:0;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-ink)}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono);font-size:.84em}
+.stack{display:grid;gap:14px}
+
+header.top{background:var(--surface);border-bottom:1px solid var(--line)}
+header.top .wrap{padding-block:34px 28px;display:grid;gap:16px}
+.status{display:flex;flex-wrap:wrap;gap:10px}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:600;border:1px solid var(--line);background:var(--sunk)}
+.pill i{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+.pill.ok{color:var(--ok);background:var(--ok-bg);border-color:transparent}
+.pill.warn{color:var(--warn);background:var(--warn-bg);border-color:transparent}
+.pill.crit{color:var(--crit);background:var(--crit-bg);border-color:transparent}
+.lede{max-width:68ch;font-size:1.02rem}
+
+nav.sections{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.sections .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:none}
+nav.sections a{flex:0 0 auto;text-decoration:none;color:var(--muted);font-weight:500;font-size:.88rem;padding:8px 12px;border-radius:10px}
+nav.sections a:hover,nav.sections a:focus-visible{color:var(--ink);background:var(--sunk)}
+
+section.band{padding-block:46px}
+section.band + section.band{border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:8px;margin-bottom:22px;max-width:70ch}
+
+/* Install steps */
+ol.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
+ol.steps > li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+ol.steps > li::before{content:counter(s);font-family:var(--display);font-size:1.6rem;line-height:1;color:var(--purple);min-width:1.4em;text-align:center}
+ol.steps .body{display:grid;gap:6px;min-width:0}
+ol.steps label{display:flex;gap:10px;align-items:flex-start;font-weight:600;cursor:pointer}
+ol.steps input[type=checkbox]{margin-top:4px;width:18px;height:18px;accent-color:var(--teal-ink);flex:0 0 auto}
+ol.steps > li.done{opacity:.6}
+ol.steps ul{margin:4px 0 0;padding-left:1.1em;color:var(--muted)}
+ol.steps ul li{padding:2px 0}
+
+/* Page blocks */
+.pages{display:grid;gap:12px}
+.page{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:12px}
+.page .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.page .name{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.page .name h3{font-size:1.1rem}
+.path{font-family:var(--mono);font-size:.8rem;color:var(--teal-ink);background:var(--sunk);padding:2px 8px;border-radius:6px}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--line);background:var(--sunk);color:var(--ink);padding:8px 13px;font-size:.86rem;font-weight:600}
+button:hover{border-color:var(--purple)}
+button.primary{background:var(--teal);color:var(--on-teal);border-color:transparent}
+button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.seo{display:grid;grid-template-columns:auto 1fr auto;gap:6px 12px;align-items:start;font-size:.88rem}
+.seo dt{color:var(--muted);font-weight:500;padding-top:6px}
+.seo dd{margin:0;padding-top:6px;min-width:0;overflow-wrap:anywhere}
+.seo button{padding:5px 10px;font-size:.78rem}
+details.code summary{cursor:pointer;color:var(--muted);font-size:.86rem;font-weight:500}
+details.code textarea{margin-top:10px;width:100%;min-height:220px;font-family:var(--mono);font-size:.74rem;line-height:1.5;color:var(--ink);background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:12px;resize:vertical}
+.toast{font-size:.8rem;color:var(--ok);font-weight:600;min-height:1.2em}
+@media (max-width:640px){.seo{grid-template-columns:1fr}.seo dt{padding-top:10px}.seo dd{padding-top:0}}
+
+/* Preview */
+.shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.shot{display:grid;gap:8px;min-width:0}
+.shot img{width:100%;max-width:100%;height:auto;border-radius:14px;border:1px solid var(--line);background:var(--sunk)}
+.shot p{font-size:.84rem;color:var(--muted)}
+.desk{margin-top:18px;display:grid;gap:8px}
+.desk img{width:100%;max-width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
+@media (max-width:760px){.shots{grid-template-columns:1fr}}
+
+/* Tables */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.88rem}
+th,td{padding:11px 14px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+thead th{border-top:0;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--sunk)}
+td.num{font-variant-numeric:tabular-nums;text-align:center}
+.chip{display:inline-block;font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.chip.ok{color:var(--ok);background:var(--ok-bg)}
+.chip.warn{color:var(--warn);background:var(--warn-bg)}
+.chip.crit{color:var(--crit);background:var(--crit-bg)}
+.note{background:var(--sunk);border-left:4px solid var(--teal);border-radius:10px;padding:14px 16px;font-size:.92rem}
+
+/* Items */
+.items{display:grid;gap:10px}
+.item{display:grid;grid-template-columns:auto 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.item .chip{align-self:start;margin-top:2px}
+.item .body{display:grid;gap:5px;min-width:0}
+.item .body p{color:var(--muted);font-size:.92rem}
+.item .body p b{color:var(--ink);font-weight:600}
+footer.end{padding-block:28px 40px;color:var(--muted);font-size:.84rem;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">GoHighLevel website · Zeotein Google Site</p>
+    <h1>Zeotein Google Site Kit</h1>
+    <p class="lede">Eight pages, built and checked, ready to paste into the GoHighLevel website that already exists. Checkout stays on Shopify through the same unlisted products the current Google funnel uses, so orders, subscriptions and the Google purchase conversion keep working as they do today.</p>
+    <div class="status">
+      <span class="pill ok"><i></i>8 of 8 pages built</span>
+      <span class="pill ok"><i></i>Compliance gate: 0 blocking</span>
+      <span class="pill ok"><i></i>Phone and desktop render: 0 errors</span>
+      <span class="pill ok"><i></i>Prices match Shopify (read 10 Nov)</span>
+      <span class="pill warn"><i></i>Not yet pasted, no domain, not published</span>
+    </div>
+  </div>
+</header>
+
+<nav class="sections" aria-label="Sections">
+  <div class="wrap">
+    <a href="#install">Install</a><a href="#pages">Page blocks</a><a href="#preview">Preview</a><a href="#ads">Google Ads</a><a href="#compliance">Compliance</a><a href="#open">Open items</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="install">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">About 30 minutes in GoHighLevel</p>
+      <h2>Install</h2>
+      <p class="muted">The eight pages already exist in the website with the right paths. Tick steps off as you go; ticks are saved in this browser only.</p>
+    </div>
+    <ol class="steps" id="steps">
+      <li><div class="body"><label><input type="checkbox" id="s1"> Open the website</label><ul><li>Sites → Websites → <b>Zeotein Google Site</b>. You should see Home, Cacao, Vegan, Our story, FAQ, Contact, Shipping and Refund policy.</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s2"> Paste each page (repeat for all eight)</label><ul>
+        <li>Open the page in the builder. Remove the draft sections that are there now (clone the page first if you want a copy).</li>
+        <li>Add one <b>full-width</b> section with one row and one column. Set section, row and column padding to 0 and background to none.</li>
+        <li>Add a <b>Custom JS/HTML</b> element (newer builders call it Code). Paste that page's block from <a href="#pages">Page blocks</a>. Save.</li>
+        <li>Page settings → SEO meta data: paste the page's title and description. Save.</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s3"> Leave the website tracking code alone</label><ul><li>Website settings → Tracking code already holds the Google Ads tag AW-18130788543, the Meta pixel, Clarity and the gclid/UTM passthrough. The page blocks do not repeat any of them, and they add one thing it lacks: ad parameters now follow a visitor from page to page.</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s4"> Preview on a phone and a desktop</label><ul><li>Use the builder's preview link. Every buy button should open a zeotein.com product page: Cacao Starter Kit at $76.99, Vegan Starter Kit at $96.99.</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s5"> Connect the domain</label><ul><li>Recommended: <span class="mono">shop.zeotein.com</span>. It reads cleanly in an ad, Google treats it as zeotein.com, and it does not collide with go., try., gift. or marketing.</li><li>Settings → Domains → Add domain → add the DNS record GoHighLevel shows at the zeotein.com DNS host → Verify → make <b>Zeotein Google Site</b> the domain's default website so the bare domain opens Home.</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s6"> Publish, then re-scan the live pages</label><ul><li>Ask Claude to run the compliance prescan on every live URL, as the Guardrails require before any campaign moves.</li><li>Click test: open <span class="mono">https://shop.zeotein.com/cacao?gclid=TEST&amp;utm_source=google</span>, tap Claim My 55% Off, and confirm the Shopify page shows $76.99 with gclid=TEST in the address bar.</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s7"> Move Google over</label><ul><li>See <a href="#ads">Google Ads</a> for the final URLs and sitelinks. Then update the Ad Setup Guardrails destination list (Dana edits that doc).</li></ul></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band" id="pages">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Paste one block per page</p>
+      <h2>Page blocks</h2>
+      <p class="muted">Each block is self-contained: fonts, styles, header, page, footer and script. Copy exactly; don't edit inside GoHighLevel. Change prices or links in <span class="mono">src/config.json</span> and rebuild instead.</p>
+    </div>
+    <div class="pages" id="pageList"></div>
+  </div>
+</section>
+
+<section class="band" id="preview">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Rendered 10 Nov 2026 from the build</p>
+      <h2>Preview</h2>
+      <p class="muted">First phone screen on an iPhone 13: headline, button, price, terms and guarantee all show before any scrolling. Pouch photos are your real Shopify photos, cropped to the top of the bag. Nothing on the label is altered.</p>
+    </div>
+    <div class="shots">
+      <figure class="shot"><img alt="Home page, first phone screen" src="__SHOT_home_m__" width="390" height="664"><p>Home</p></figure>
+      <figure class="shot"><img alt="Cacao page, first phone screen" src="__SHOT_cacao_m__" width="390" height="664"><p>Cacao</p></figure>
+      <figure class="shot"><img alt="Vegan page, first phone screen" src="__SHOT_vegan_m__" width="390" height="664"><p>Vegan</p></figure>
+    </div>
+    <figure class="desk"><img alt="Cacao page on desktop" src="__SHOT_cacao_d__" width="960" height="600"><p class="muted">Cacao page, desktop</p></figure>
+  </div>
+</section>
+
+<section class="band" id="ads">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">After the site is live and re-scanned</p>
+      <h2>Google Ads</h2>
+      <p class="muted">Keep Final URL expansion OFF on every campaign. The account-level final URL suffix already adds the UTMs, so nothing changes there.</p>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Campaign / asset group</th><th>Final URL today</th><th>Change to</th></tr></thead>
+      <tbody>
+        <tr><td>Search_NB_Sales</td><td class="mono">marketing.zeotein.com/starter-kit-google</td><td class="mono">https://shop.zeotein.com/cacao</td></tr>
+        <tr><td>Z_Pmax_RET · RET - TRY</td><td class="mono">marketing.zeotein.com/starter-kit-google</td><td class="mono">https://shop.zeotein.com/cacao</td></tr>
+        <tr><td>Z_Pmax_Blends_Only (unpublished)</td><td class="mono">marketing.zeotein.com/starter-kit-google</td><td class="mono">https://shop.zeotein.com/cacao</td></tr>
+      </tbody>
+    </table></div>
+    <h3 style="margin:26px 0 10px">Sitelinks (all within Google's 25 and 35 character limits)</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Sitelink text</th><th>Description 1</th><th>Description 2</th><th>Final URL path</th></tr></thead>
+      <tbody id="sitelinks"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="band" id="compliance">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Two layers, run on every built page</p>
+      <h2>Compliance</h2>
+      <p class="muted">Layer 1 is your zeotein-compliance-scrub prescan (Google healthcare, FDA/DSHEA, FTC patterns) run on page text, alt text, attributes and schema. Layer 2 is your house rules from the Guardrails, the Headlines Test Queue, the Ad Comment Replies rules and the Decisions log.</p>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Page</th><th>Critical</th><th>High</th><th>House rules</th><th>Facts vs locked spec</th><th>FDA line</th><th>Images</th></tr></thead>
+      <tbody id="compRows"></tbody>
+    </table></div>
+    <p class="note" style="margin-top:14px">Every High hit is the word "guarantee" in the 30-day money-back terms, or "not guaranteed" in the shipping policy's legal text. The Guardrails approve the money-back guarantee for ads, so these are classed compliant. There are no outcome promises anywhere on the site, and no structure/function claims beyond the plain composition facts.</p>
+  </div>
+</section>
+
+<section class="band" id="open">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Ranked by impact</p>
+      <h2>Open items</h2>
+    </div>
+    <div class="items" id="items"></div>
+  </div>
+</section>
+</main>
+
+<footer class="end"><div class="wrap">Source: github.com/zeotein/zeotein-theme, branch claude/go-automator-ai-website-jdhgjg, folder google-site. Built __BUILT__.</div></footer>
+
+<script type="application/json" id="blocks">__BLOCKS_JSON__</script>
+<script type="application/json" id="pagesData">__PAGES_JSON__</script>
+<script type="application/json" id="compData">__COMP_JSON__</script>
+<script>
+(function(){
+  var blocks = JSON.parse(document.getElementById('blocks').textContent);
+  var pages = JSON.parse(document.getElementById('pagesData').textContent);
+  var comp = JSON.parse(document.getElementById('compData').textContent);
+
+  function flash(btn, msg){ var t = btn.textContent; btn.textContent = msg; setTimeout(function(){ btn.textContent = t; }, 1600); }
+  function copy(text, btn, area){
+    var done = function(){ flash(btn, 'Copied'); };
+    var fallback = function(){ if (area){ var d = area.closest('details'); if (d) d.open = true; area.focus(); area.select(); flash(btn, 'Selected, press Ctrl or Cmd + C'); } else { flash(btn, 'Copy blocked here'); } };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch(e){ fallback(); }
+  }
+  function el(tag, attrs, html){ var e = document.createElement(tag); for (var k in (attrs||{})) e.setAttribute(k, attrs[k]); if (html != null) e.innerHTML = html; return e; }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  var list = document.getElementById('pageList');
+  pages.forEach(function(p){
+    var card = el('article', {'class':'page'});
+    var kb = Math.round(p.bytes/1024);
+    card.innerHTML = '<div class="row"><div class="name"><h3>' + p.order + '. ' + esc(p.name) + '</h3><span class="path">' + esc(p.path) + '</span><span class="muted mono">' + kb + ' KB</span></div><div class="btns"><button class="primary" type="button" data-act="block">Copy block</button></div></div>' +
+      '<dl class="seo"><dt>SEO title</dt><dd>' + esc(p.seoTitle) + '</dd><dd><button type="button" data-act="title">Copy</button></dd><dt>Description</dt><dd>' + esc(p.seoDescription) + '</dd><dd><button type="button" data-act="desc">Copy</button></dd></dl>' +
+      '<details class="code"><summary>Show the code</summary><textarea readonly spellcheck="false" id="code-' + p.slug + '" aria-label="' + esc(p.name) + ' page block"></textarea></details>';
+    var area = card.querySelector('textarea'); area.value = blocks[p.slug];
+    card.querySelector('[data-act=block]').addEventListener('click', function(e){ copy(blocks[p.slug], e.currentTarget, area); });
+    card.querySelector('[data-act=title]').addEventListener('click', function(e){ copy(p.seoTitle, e.currentTarget); });
+    card.querySelector('[data-act=desc]').addEventListener('click', function(e){ copy(p.seoDescription, e.currentTarget); });
+    list.appendChild(card);
+  });
+
+  var sl = [
+    ['Cacao Starter Kit','23g protein, 14g collagen','First order $76.99, ships free','/cacao'],
+    ['Zeotein Vegan','20g plant protein per stick','Five ingredients, 0g added sugar','/vegan'],
+    ['Our Story','Protein first, rest built in','Labels you can read in seconds','/our-story'],
+    ['Questions Answered','Ingredients, mixing, shipping','Plus how subscriptions work','/faq'],
+    ['Shipping Info','Ships in 1 to 2 business days','Free US shipping on Cacao kit','/shipping'],
+    ['30-Day Money Back','Covers your first order','One 30-day supply per customer','/refund-policy'],
+    ['Contact Us','Real replies in 1-2 days','Manage subscriptions online','/contact']
+  ];
+  var tb = document.getElementById('sitelinks');
+  sl.forEach(function(r){
+    var ok = r[0].length <= 25 && r[1].length <= 35 && r[2].length <= 35;
+    tb.appendChild(el('tr', null, '<td>' + esc(r[0]) + ' <span class="muted mono">(' + r[0].length + ')</span></td><td>' + esc(r[1]) + ' <span class="muted mono">(' + r[1].length + ')</span></td><td>' + esc(r[2]) + ' <span class="muted mono">(' + r[2].length + ')</span></td><td class="mono">https://shop.zeotein.com' + esc(r[3]) + (ok ? '' : ' <span class="chip crit">too long</span>') + '</td>'));
+  });
+
+  var cr = document.getElementById('compRows');
+  comp.forEach(function(c){
+    var chip = function(ok, yes, no){ return '<span class="chip ' + (ok ? 'ok' : 'crit') + '">' + (ok ? yes : no) + '</span>'; };
+    cr.appendChild(el('tr', null, '<td>' + esc(c.page) + '</td><td class="num">' + chip(c.critical === 0, '0', String(c.critical)) + '</td><td class="num"><span class="chip ' + (c.high ? 'warn' : 'ok') + '">' + c.high + (c.high ? ' guarantee' : '') + '</span></td><td class="num">' + chip(c.house === 0, '0', String(c.house)) + '</td><td>' + (c.facts ? '<span class="chip ok">' + esc(c.facts) + '</span>' : '<span class="muted">no facts table</span>') + '</td><td>' + chip(c.fda, 'present', 'missing') + '</td><td>' + chip(c.images, 'approved only', 'check') + '</td>'));
+  });
+
+  var items = __ITEMS_JSON__;
+  var box = document.getElementById('items');
+  items.forEach(function(it){
+    box.appendChild(el('article', {'class':'item'}, '<span class="chip ' + it.level + '">' + esc(it.tag) + '</span><div class="body"><h3>' + esc(it.title) + '</h3><p>' + it.why + '</p><p><b>Closes when:</b> ' + it.closes + '</p></div>'));
+  });
+
+  var KEY = 'zt-kit-steps';
+  var saved = {}; try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){}
+  document.querySelectorAll('#steps input[type=checkbox]').forEach(function(cb){
+    var li = cb.closest('li'); if (saved[cb.id]) { cb.checked = true; li.classList.add('done'); }
+    cb.addEventListener('change', function(){ li.classList.toggle('done', cb.checked); saved[cb.id] = cb.checked; try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e){} });
+  });
+})();
+</script>
