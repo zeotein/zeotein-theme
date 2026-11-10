@@ -3,7 +3,7 @@
 
   python3 tools/make_kit.py      (run after build.py, qa/compliance_check.py and qa/render_check.js)
 """
-import json, pathlib, base64, io, datetime
+import json, pathlib, base64, io, datetime, html as htmllib
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 TPL = (ROOT / "tools" / "kit_template.html").read_text()
@@ -33,8 +33,8 @@ for c in comp:
     })
 
 ITEMS = [
-    {"level": "crit", "tag": "Do first", "title": "Paste the eight blocks, publish, re-scan, then move Google over",
-     "why": "Until then every Google campaign with its own final URL still lands on marketing.zeotein.com/starter-kit-google.",
+    {"level": "crit", "tag": "Do first", "title": "Finish the install: Refund policy block, Head snippet, DNS",
+     "why": "Checked in GoHighLevel's preview on 10 Nov: Home, Cacao, Vegan, Our story, FAQ, Contact and Shipping match the build exactly. Refund policy still shows the old draft. Without the Head snippet GoHighLevel adds a 40px band and side gutters, boxes the page at 1150px on desktop and unpins the header, and all eight SEO titles are empty. shop.zeotein.com has no DNS record yet. Until it does, every Google campaign with its own final URL still lands on marketing.zeotein.com/starter-kit-google.",
      "closes": "Search_NB_Sales and Z_Pmax_RET point at https://shop.zeotein.com/cacao and the Ad Setup Guardrails list it as approved."},
     {"level": "crit", "tag": "Fix soon", "title": "Stop sending Google traffic to /starter-kit-google",
      "why": "Read live on 10 Nov. The hero bag photo still shows <b>INFLAMMATION SUPPORT</b> in full; the new site garbles it along with ZEOLITE, IMMUNE and DETOX. The old page also shows <b>4.8 average, 214 verified reviews</b> while Judge.me shows 4.94 from 155, lists refills at <b>$2.83 a serving</b> when $99.99 over 30 servings is $3.33, shows Josh M.'s review of Vegan 7 Stick Packs on the Cacao page, and uses \"zero grams of added sugar\" and \"Nothing hidden\", both retired wording.",
@@ -89,8 +89,9 @@ html = html.replace("__PAGES_JSON__", jsafe(manifest["pages"]))
 html = html.replace("__COMP_JSON__", jsafe(comp_rows))
 html = html.replace("__ITEMS_JSON__", jsafe(ITEMS))
 html = html.replace("__BUILT__", manifest["built"])
+html = html.replace("__HEAD_SNIPPET__", htmllib.escape((ROOT / "dist" / "ghl" / "00-website-head.html").read_text()))
 assert "__" not in "".join(x for x in [html[:200]]), "placeholder left at top"
-left = [t for t in ["__SHOT_", "__BLOCKS_JSON__", "__PAGES_JSON__", "__COMP_JSON__", "__ITEMS_JSON__", "__BUILT__"] if t in html]
+left = [t for t in ["__SHOT_", "__BLOCKS_JSON__", "__PAGES_JSON__", "__COMP_JSON__", "__ITEMS_JSON__", "__BUILT__", "__HEAD_SNIPPET__"] if t in html]
 if left:
     raise SystemExit(f"unfilled placeholders: {left}")
 out = ROOT / "dist" / "install-kit.html"

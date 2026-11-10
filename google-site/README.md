@@ -14,6 +14,7 @@ conversion work exactly as they do today.
 | Path | What it is |
 |---|---|
 | `dist/ghl/01-home.html` … `08-refund-policy.html` | **The deliverable.** One paste-ready block per GoHighLevel page. |
+| `dist/ghl/00-website-head.html` | Pasted once at the end of the website's Head tracking code: removes GoHighLevel's default padding and 1170px row, keeps the header pinned, fills empty SEO titles. |
 | `dist/install-kit.html` | Install steps, copy buttons for every block and SEO field, compliance results, open items. |
 | `dist/preview/` | The same pages as plain HTML for testing (`python3 -m http.server --directory dist/preview`). |
 | `src/config.json` | Every price, link and image in one place. Prices verified live in Shopify on 10 Nov 2026. |
@@ -40,9 +41,10 @@ conversion work exactly as they do today.
 1. GoHighLevel: Sites, Websites, **Zeotein Google Site**. Open each page in the builder, remove what's there,
    add one full-width section with one column, add a **Custom JS/HTML** element, paste that page's block from
    `dist/ghl/`, save. Set the page's SEO title and description from `dist/manifest.json`.
-2. Leave the website's Tracking code (Head and Body) as it is. It already carries the Google Ads tag
-   AW-18130788543, Meta pixel, Clarity and the gclid/UTM passthrough. The page blocks do not repeat them.
-3. Connect `shop.zeotein.com` (approved 10 Nov), set this website as the domain's default, publish.
+2. Website settings, Tracking code, Head: keep what is there (Google Ads tag AW-18130788543, Meta pixel, Clarity) and
+   paste `dist/ghl/00-website-head.html` at the very end. Leave the Body code (gclid/UTM passthrough) as it is.
+3. DNS is at GoDaddy: add a CNAME `shop` → `sites.ludicrous.cloud` (same target as marketing.zeotein.com). Then connect
+   `shop.zeotein.com` (approved 10 Nov) in GoHighLevel, set this website as the domain's default, publish.
 4. Re-scan the live pages (`python3 prescan.py --url https://shop.zeotein.com/cacao` and the others), then move Google
    final URLs and sitelinks over. Final URL expansion stays OFF.
 

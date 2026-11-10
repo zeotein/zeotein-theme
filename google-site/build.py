@@ -97,6 +97,42 @@ def render(text: str, vars_: dict, slug: str, depth=0) -> str:
     return text
 
 
+def write_head_snippet(manifest):
+    """dist/ghl/00-website-head.html: pasted once at the end of the website's Head tracking code.
+    Fit CSS (same text as the ghl-fit block in styles.css) plus page titles/descriptions used only when a
+    page's own SEO fields are empty."""
+    raw = (SRC / "styles.css").read_text()
+    m = re.search(r"/\* ghl-fit:start.*?\*/\n(.*?)/\* ghl-fit:end \*/", raw, re.S)
+    if not m:
+        raise SystemExit("styles.css: ghl-fit markers missing")
+    seo = {p["path"]: [p["seoTitle"], p["seoDescription"]] for p in manifest}
+    seo["/"] = seo["/home"]
+    snippet = (
+        "<!-- Zeotein Google Site fit: paste at the END of Website settings > Tracking code > Head -->\n"
+        "<style id=\"zt-ghl-fit\">\n/* Zeotein Google Site: page blocks run edge to edge, header stays pinned */\n"
+        + m.group(1).strip() + "\n</style>\n"
+        "<script id=\"zt-ghl-seo\">\n"
+        "/* Zeotein Google Site: page title and description, used only when a page's SEO fields are empty */\n"
+        "(function () {\n"
+        f"  var SEO = {json.dumps(seo, ensure_ascii=False)};\n"
+        "  var m = SEO[location.pathname.replace(/\\/+$/, '') || '/'];\n"
+        "  if (!m) return;\n"
+        "  function apply() {\n"
+        "    if (!document.title.trim()) document.title = m[0];\n"
+        "    var d = document.querySelector('meta[name=\"description\"]');\n"
+        "    if (!d) { d = document.createElement('meta'); d.setAttribute('name', 'description'); document.head.appendChild(d); }\n"
+        "    if (!d.getAttribute('content')) d.setAttribute('content', m[1]);\n"
+        "  }\n"
+        "  apply();\n"
+        "  document.addEventListener('DOMContentLoaded', apply);\n"
+        "  window.addEventListener('load', apply);\n"
+        "})();\n"
+        "</script>\n"
+    )
+    (DIST / "ghl" / "00-website-head.html").write_text(snippet)
+    print(f"built dist/ghl/00-website-head.html  {len(snippet.encode('utf-8')):>6} bytes")
+
+
 def main():
     cfg = json.loads((SRC / "config.json").read_text())
     v = cfg["vars"]
@@ -155,6 +191,7 @@ def main():
         print(f"built {out.relative_to(ROOT)}  {len(block.encode('utf-8')):>6} bytes")
 
     (DIST / "manifest.json").write_text(json.dumps({"built": stamp, "pages": manifest}, indent=2))
+    write_head_snippet(manifest)
     print("ok")
 
 
