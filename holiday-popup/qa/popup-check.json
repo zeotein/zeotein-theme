@@ -1,0 +1,82 @@
+[
+ [
+  "PASS",
+  "desktop: blocks empty submit"
+ ],
+ [
+  "PASS",
+  "desktop: blocks bad email"
+ ],
+ [
+  "PASS",
+  "desktop: step1 payload"
+ ],
+ [
+  "PASS",
+  "desktop: blocks short phone"
+ ],
+ [
+  "PASS",
+  "desktop: step2 payload + consent text"
+ ],
+ [
+  "PASS",
+  "desktop: submitted flag stored"
+ ],
+ [
+  "PASS",
+  "mobile: blocks empty submit"
+ ],
+ [
+  "PASS",
+  "mobile: blocks bad email"
+ ],
+ [
+  "PASS",
+  "mobile: step1 payload"
+ ],
+ [
+  "PASS",
+  "mobile: blocks short phone"
+ ],
+ [
+  "PASS",
+  "mobile: step2 payload + consent text"
+ ],
+ [
+  "PASS",
+  "mobile: submitted flag stored"
+ ],
+ [
+  "PASS",
+  "desktop: exit intent ignored before 8s"
+ ],
+ [
+  "PASS",
+  "desktop: no time/scroll trigger (exit-only)"
+ ],
+ [
+  "PASS",
+  "desktop: exit intent opens after 8s"
+ ],
+ [
+  "PASS",
+  "desktop: Maybe later closes + sets 7-day dismiss"
+ ],
+ [
+  "PASS",
+  "desktop: stays suppressed after dismiss"
+ ],
+ [
+  "PASS",
+  "mobile: not shown at 3s even with scroll"
+ ],
+ [
+  "PASS",
+  "mobile: shown after 25s + 40% scroll"
+ ],
+ [
+  "PASS",
+  "suppressed for visitors from our own email/SMS"
+ ]
+]
