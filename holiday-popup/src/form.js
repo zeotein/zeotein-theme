@@ -18,13 +18,14 @@ window.ztHgBind = function (form, onSuccess) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) return err('Please enter a valid email.');
     if (raw && digits.length !== 10) return err('Please enter a 10-digit US mobile number, or leave it blank.');
     if (consent && !raw) return err('Add your mobile number to get texts, or uncheck the box.');
-    var payload = { firstName: fn, email: em, company: form.company.value, source: cfg.source, pageUrl: location.href };
+    var source = form.getAttribute('data-source') || cfg.source;
+    var payload = { firstName: fn, email: em, company: form.company.value, source: source, pageUrl: location.href };
     // Phone is only sent with explicit consent (box is unchecked by default).
     if (raw && consent) { payload.phone = '+1' + digits; payload.smsConsent = true; payload.consentText = form.querySelector('[data-zt-consent]').innerText.trim(); }
     var btn = form.querySelector('.zt-hg-btn'); btn.disabled = true;
     post(payload).then(function () {
-      try { if (typeof window.fbq === 'function') fbq('track', 'Lead', { content_name: 'Holiday Recipe Guide', content_category: cfg.source }); } catch (x) {}
-      try { (window.dataLayer = window.dataLayer || []).push({ event: 'zt_holiday_guide_lead', source: cfg.source, sms: !!payload.smsConsent }); } catch (x) {}
+      try { if (typeof window.fbq === 'function') fbq('track', 'Lead', { content_name: 'Holiday Recipe Guide', content_category: source }); } catch (x) {}
+      try { (window.dataLayer = window.dataLayer || []).push({ event: 'zt_holiday_guide_lead', source: source, sms: !!payload.smsConsent }); } catch (x) {}
       onSuccess && onSuccess(form, { email: em, sms: !!payload.smsConsent });
     }).catch(function () { err('Something went wrong. Please try again.'); })
       .then(function () { btn.disabled = false; });

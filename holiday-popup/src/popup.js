@@ -17,7 +17,7 @@
   var form = root.querySelector('.zt-hg-form');
   var opened = false, done = false;
   function open(trigger) {
-    if (opened) return; opened = true;
+    if (opened || (!force && store().submitted)) return; opened = true;
     try { sessionStorage.setItem(KEY + '_shown', '1'); } catch (e) {}
     root.hidden = false; root.setAttribute('aria-hidden', 'false');
     requestAnimationFrame(function () { root.classList.add('is-open'); });

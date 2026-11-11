@@ -4,13 +4,14 @@
 // Env vars (wrangler secret / dashboard):
 //   GHL_TOKEN        Private Integration token, scopes: contacts.write, contacts.readonly
 //   GHL_LOCATION_ID  Kch9YmRfzpmQrAs5Bchz
-//   ALLOWED_ORIGINS  comma list, e.g. https://zeotein.com,https://www.zeotein.com,https://zeotein-llc.myshopify.com
+//   ALLOWED_ORIGINS  comma list: https://gift.zeotein.com (landing page) plus https://zeotein.com,https://www.zeotein.com if the store pop-up is ever turned on
 //   CF_SMS_TS, CF_SMS_SOURCE, CF_SMS_TEXT, CF_SMS_PAGE   GHL custom field ids (see README)
 
 const GHL = 'https://services.leadconnectorhq.com';
-const EMAIL_TAGS = ['holiday-guide', 'acq-holiday-popup'];        // holiday-guide fires the guide email workflow
+// holiday-guide fires the guide email workflow; the acq-* tag records which form the lead came from.
+const SOURCES = { 'holiday-popup': 'acq-holiday-popup', 'holiday-guide-lp': 'acq-holiday-lp', 'holiday-popup-store': 'acq-holiday-popup' };
+const EMAIL_TAGS = ['holiday-guide'];
 const SMS_TAGS = ['sms-opted-in', 'holiday-popup-sms'];
-const SOURCE = 'holiday-popup';
 
 export default {
   async fetch(req, env) {
@@ -48,31 +49,33 @@ export async function handle(b, env, fetchImpl = fetch) {
   const now = new Date().toISOString();
 
   if (!firstName) throw httpErr('first_name', 400);
+  const source = SOURCES[b.source] ? b.source : 'holiday-popup';
+  const emailTags = [...EMAIL_TAGS, SOURCES[source]];
   const wantsSms = b.smsConsent === true && b.phone != null;
   if (wantsSms && !/^\+1\d{10}$/.test(String(b.phone))) throw httpErr('phone', 400);
 
   // One request from the pop-up: email lead always; phone + SMS consent only when the box was checked.
   const body = wantsSms
-    ? { ...buildEmailUpsert({ email, firstName }, env), ...buildSmsUpsert({ email, phone: String(b.phone), consentText: b.consentText, pageUrl: b.pageUrl, now }, env) }
-    : buildEmailUpsert({ email, firstName }, env);
+    ? { ...buildEmailUpsert({ email, firstName, source }, env), ...buildSmsUpsert({ email, phone: String(b.phone), consentText: b.consentText, pageUrl: b.pageUrl, now, source }, env) }
+    : buildEmailUpsert({ email, firstName, source }, env);
   const c = await ghl('/contacts/upsert', body, env, fetchImpl);
-  await addTags(c.id, wantsSms ? [...EMAIL_TAGS, ...SMS_TAGS] : EMAIL_TAGS, env, fetchImpl);
+  await addTags(c.id, wantsSms ? [...emailTags, ...SMS_TAGS] : emailTags, env, fetchImpl);
   return { contactId: c.id, sms: wantsSms };
 }
 
-export function buildEmailUpsert({ email, firstName, pageUrl }, env) {
+export function buildEmailUpsert({ email, firstName, source }, env) {
   // pageUrl is not written on the email step so existing attribution fields are never overwritten.
   // NOTE: never send `tags` on upsert: GHL overwrites ALL existing tags. Tags are added separately.
-  return { locationId: env.GHL_LOCATION_ID, email, firstName, source: SOURCE };
+  return { locationId: env.GHL_LOCATION_ID, email, firstName, source };
 }
 
-export function buildSmsUpsert({ email, firstName, phone, consentText, pageUrl, now }, env) {
+export function buildSmsUpsert({ email, phone, consentText, pageUrl, now, source }, env) {
   return {
     locationId: env.GHL_LOCATION_ID, email, phone,
-    dndSettings: { sms: { status: 'inactive', message: 'SMS opt-in via holiday-popup ' + now } },
+    dndSettings: { sms: { status: 'inactive', message: 'SMS opt-in via ' + source + ' ' + now } },
     customFields: cf(env, {
       CF_SMS_TS: now,
-      CF_SMS_SOURCE: SOURCE,
+      CF_SMS_SOURCE: source,
       CF_SMS_TEXT: String(consentText || '').slice(0, 1000),
       CF_SMS_PAGE: String(pageUrl || '').slice(0, 500),
     }),

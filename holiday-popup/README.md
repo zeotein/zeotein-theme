@@ -1,43 +1,49 @@
-# Holiday Recipe Guide pop-up
+# Holiday Recipe Guide pop-up + one-step landing form
 
-v3 design (Dana approved Nov 11, 2026). It's built on a Shopify draft theme and isn't live.
+**Scope (Dana, Nov 11):** the pop-up goes on the **new GHL holiday guide landing page only**. The draft funnel is "[DRAFT] Holiday Guide — Christmassy revamp", step "Holiday Guide opt-in landing page". Homepage and store placement is a later decision. Nothing is live.
 
-| Piece | Where |
+Preview page with live demo, landing-page screenshots and open items: https://claude.ai/artifact/V9HGzW78ttmmoHZAduxiAH (private until shared).
+
+## What's here
+| Path | What |
 |---|---|
-| Pop-up (HTML/CSS/JS, Liquid) | `snippet/zt-holiday-popup.liquid` → `snippets/zt-holiday-popup.liquid` on the draft theme |
-| Footer-group section that renders it | `sections/zt-holiday-popup.liquid` + entry in `sections/footer-group.json` (draft theme only) |
-| Cover image | `assets/zt-holiday-guide-cover.webp` |
-| GHL relay (keeps the API key off the browser) | `worker/worker.js` (Cloudflare Worker) |
-| QA | `qa/popup_check.js` (26 behavior checks), `qa/live_check.js`, `qa/screens/` |
+| `src/` | Single source: `form.*` (shared one-step form + submit logic), `popup.*` (festive pop-up), `landing-form.html` |
+| `build.py` | Builds everything below. Set `ENDPOINT` (and optionally `NEXT_URL`) and rerun. |
+| `dist/ghl-popup.html` | **Paste into the GHL landing page** as a Custom Code element (or the step's Footer Tracking Code). |
+| `dist/ghl-landing-form.html` | **Paste into the GHL landing page** as a Custom Code element in place of the native form. |
+| `snippet/zt-holiday-popup.liquid` | Shopify build, parked and not rendered anywhere. |
+| `worker/worker.js` | Cloudflare Worker relay. It keeps the GHL key off the page. |
+| `qa/popup_check.js` | 40 behavior checks against a local mock: `python3 build.py && node qa/popup_check.js` |
+| `qa/lp_context.js` | Injects both blocks into the real gift.zeotein.com landing page (mock relay) and screenshots it. |
 
-Draft theme: **Holiday Popup DRAFT (Nov 11) - do not publish** (id 187982840021), a copy of the live "Cacao LP updates 2026-11-05".
-Preview: https://zeotein.com/?preview_theme_id=187982840021&zt_popup=1 (`zt_popup=1` opens it right away and skips the triggers).
+The cover image is hosted on Shopify Files: `zt-holiday-guide-cover-v3-hd.webp`.
 
 ## Behavior
-- **Desktop:** centered modal. It opens on **exit intent only**, and only after 8s on the page, so it can't fire early.
-- **Mobile:** bottom sheet. It opens after **35s on the same page** (Dana's 30-45s window). Leaving the page or switching tabs cancels it.
-- **Suppression:** it never shows again after a submit. "Maybe later" or close hides it for 7 days. It shows at most once per session. It's skipped for logged-in customers who accept marketing and for visitors arriving from our own email or SMS (`utm_source`/`utm_medium` containing email, sms, ghl, klaviyo). It's also skipped on cart, account, subscription portal and checkout pages.
-- **One step (Dana, Nov 11):** first name, email, an optional mobile number, and an SMS consent checkbox that is **unchecked by default**. The relay always upserts the contact (source `holiday-popup`) and **adds** the tags `holiday-guide` and `acq-holiday-popup`. Only when the box is checked and the number is valid does it also save the phone, set SMS DND to inactive, add `sms-opted-in` and `holiday-popup-sms`, and write the four consent fields:
-  - SMS Consent Timestamp (`dHt8bKGRJDMonW9RxmIK`)
-  - SMS Consent Source = holiday-popup (`moRFFbcOuZUE4Fryigb5`)
-  - SMS Consent Text (`ROBEY26uJci7GEUJ23GQ`)
-  - SMS Consent Page URL (`8kiKSYbmUCWy1ClyClqO`)
-- **A phone typed without the box checked is discarded**, in the browser and again in the relay.
-- **Meta Pixel:** `fbq('track','Lead')` fires once, only after the relay confirms the signup.
-- **Tags are never sent on upsert.** GHL's upsert replaces all of a contact's tags, so tags are added in a separate call.
+- **One step:** first name, email, an optional US mobile number, and an SMS consent checkbox that is **unchecked by default**. A phone number is only sent when the box is checked, and the relay enforces this again.
+- **Meta Pixel:** `fbq('track','Lead')` fires once, only after the relay confirms. The GHL funnel already loads Pixel 2030642037869344 in its head code.
+- **Pop-up triggers:** exit intent only on desktop, armed after 8 seconds. 35 seconds on the page on mobile. It never shows after a signup through either form. "Maybe later" hides it for 7 days. It shows at most once per session and is suppressed for visitors arriving from our own emails or texts.
+- **Relay (GHL writes):**
+  - Upsert the contact (never sending `tags`, because upsert overwrites all tags).
+  - Add `holiday-guide` plus `acq-holiday-popup` or `acq-holiday-lp`.
+  - With consent, also save the phone, set SMS DND to inactive, add `sms-opted-in` and `holiday-popup-sms`, and write these custom fields:
+    - SMS Consent Timestamp `dHt8bKGRJDMonW9RxmIK`
+    - Source `moRFFbcOuZUE4Fryigb5`
+    - Text `ROBEY26uJci7GEUJ23GQ`
+    - Page URL `8kiKSYbmUCWy1ClyClqO`
 
 ## Go-live steps
-1. Deploy `worker/worker.js` to Cloudflare Workers with these settings:
-   - `GHL_TOKEN`: a GHL Private Integration token with the contacts read/write scopes.
+1. Fix the guide email trigger (see the open issue below).
+2. Deploy `worker/worker.js` with these settings:
+   - `GHL_TOKEN`: a Private Integration token with contacts read/write.
    - `GHL_LOCATION_ID=Kch9YmRfzpmQrAs5Bchz`
-   - `ALLOWED_ORIGINS=https://zeotein.com,https://www.zeotein.com`
-   - `CF_SMS_TS`, `CF_SMS_SOURCE`, `CF_SMS_TEXT`, `CF_SMS_PAGE`: the four custom field ids listed above.
-2. Paste the Worker URL into `zt_hp_endpoint` in the snippet. Until then the form shows "Something went wrong" and sends nothing.
-3. Fix the guide-email trigger (see the open issue below).
-4. Turn it on. Either copy the snippet, the section and the footer-group entry into the live theme, or publish this draft. Don't publish the draft if the live theme has changed since Nov 11.
+   - `ALLOWED_ORIGINS=https://gift.zeotein.com`
+   - `CF_SMS_TS`, `CF_SMS_SOURCE`, `CF_SMS_TEXT`, `CF_SMS_PAGE`: the four field ids above.
+3. Set `ENDPOINT` in `build.py`, plus `NEXT_URL` to the funnel's thank-you step if wanted, and run `python3 build.py`.
+4. In the GHL draft funnel page:
+   - Replace the native form with `dist/ghl-landing-form.html`.
+   - Add `dist/ghl-popup.html`.
+   - Save, preview, and submit one test.
+   - Publish only with Dana's OK.
 
 ## Open issue: the guide email didn't fire
-The test contacts `zeotein+hgpopup1111@gmail.com` (tag added after the contact was created) and `zeotein+hgpopup1111b@gmail.com` (created with the tag) both got the `holiday-guide` tag, and neither received the guide email. The Nov 10 QA contact did. The workflow API isn't enabled for this location, so its trigger has to be checked in the GHL UI. The workflow needs a trigger of **Contact Tag added = holiday-guide**, with re-entry allowed and the workflow published.
-
-## Later
-Give the gift.zeotein.com holiday guide landing page form the same one-step layout: name, email, optional phone, and an SMS consent box unchecked by default.
+The test contacts `zeotein+hgpopup1111@gmail.com` and `zeotein+hgpopup1111b@gmail.com` got `holiday-guide`, and no guide email was sent. The workflow API isn't enabled for this location, so the trigger has to be checked in the GHL UI. It needs to be **Contact Tag added = holiday-guide**, with re-entry allowed and the workflow published.

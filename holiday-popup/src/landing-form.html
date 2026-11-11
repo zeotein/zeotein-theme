@@ -1,11 +1,15 @@
 <div id="zt-hg-lp" class="zt-hg zt-hg-lp">
+  <div class="zt-hg-lp__head"><div class="zt-hg-lp__t">Get your free guide</div><div class="zt-hg-lp__s">Enter your details and we'll send the Holiday Recipe Guide straight to your inbox.</div></div>
   __FORM__
   <div class="zt-hg-lp__done" hidden><div class="zt-hg-done">✓ You're in! Your guide is on its way.</div></div>
 </div>
 <style>
-.zt-hg-lp{max-width:460px;margin:0 auto;text-align:left}
+.zt-hg-lp{flex:1 1 100%;width:100%;min-width:0;max-width:460px;margin:0 auto;text-align:left}
 .zt-hg-lp .zt-hg-tcpa{color:inherit;opacity:.8}
 .zt-hg-lp__done{text-align:center}
+.zt-hg-lp__head{text-align:center;margin-bottom:16px}
+.zt-hg-lp__t{font:600 22px/1.2 Poppins,system-ui,sans-serif;text-transform:uppercase;color:#1d1d1f}
+.zt-hg-lp__s{font:400 14px/1.45 Poppins,system-ui,sans-serif;color:#333;margin-top:4px}
 </style>
 <script>
 (function(){
@@ -13,7 +17,7 @@
   window.ztHgBind(box.querySelector('.zt-hg-form'), function(form){
     try{ localStorage.setItem('zt_hp_v1', JSON.stringify({submitted: Date.now()})); }catch(e){}
     document.dispatchEvent(new Event('zt:hg-submitted'));
-    form.hidden = true; box.querySelector('.zt-hg-lp__done').hidden = false;
+    form.hidden = true; box.querySelector('.zt-hg-lp__head').hidden = true; box.querySelector('.zt-hg-lp__done').hidden = false;
     var next = (window.ZT_HG||{}).nextUrl;
     if(next) setTimeout(function(){ location.href = next; }, 900);
   });

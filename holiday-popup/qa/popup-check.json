@@ -21,6 +21,10 @@
  ],
  [
   "PASS",
+  "desktop: popup posts source holiday-popup"
+ ],
+ [
+  "PASS",
   "desktop: one request with email + phone + consent"
  ],
  [
@@ -54,6 +58,10 @@
  [
   "PASS",
   "mobile: no Pixel Lead before success"
+ ],
+ [
+  "PASS",
+  "mobile: popup posts source holiday-popup"
  ],
  [
   "PASS",
@@ -102,5 +110,53 @@
  [
   "PASS",
   "suppressed for visitors from our own email/SMS"
+ ],
+ [
+  "PASS",
+  "LP desktop: consent unchecked by default"
+ ],
+ [
+  "PASS",
+  "LP desktop: blocks consent without phone"
+ ],
+ [
+  "PASS",
+  "LP desktop: one request, source holiday-guide-lp, phone+consent"
+ ],
+ [
+  "PASS",
+  "LP desktop: Pixel Lead fired once"
+ ],
+ [
+  "PASS",
+  "LP desktop: success message shown"
+ ],
+ [
+  "PASS",
+  "LP desktop: pop-up suppressed after LP signup"
+ ],
+ [
+  "PASS",
+  "LP mobile: consent unchecked by default"
+ ],
+ [
+  "PASS",
+  "LP mobile: blocks consent without phone"
+ ],
+ [
+  "PASS",
+  "LP mobile: one request, source holiday-guide-lp, phone+consent"
+ ],
+ [
+  "PASS",
+  "LP mobile: Pixel Lead fired once"
+ ],
+ [
+  "PASS",
+  "LP mobile: success message shown"
+ ],
+ [
+  "PASS",
+  "LP mobile: pop-up suppressed after LP signup"
  ]
 ]
