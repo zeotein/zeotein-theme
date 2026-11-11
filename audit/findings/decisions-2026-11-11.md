@@ -1,0 +1,37 @@
+# Decisions brief, November 11, 2026
+
+Answers to Dana's Nov 11 questions. Data pulled Nov 11 (read-only). Full visual version: the "Decisions Nov 11" section of the audit report.
+
+## Biggest money levers, ranked
+1. Send Meta prospecting to the store product page. Last 30 days, same ad set: product page $64.92 per purchase (4 sales on $259.69); try./marketing./go. pages $415.61 per purchase (5 sales on $2,078.06). Add-to-cart: 30% of product-page visitors vs 4% on the landing page. Small sample, pixel attribution. Conflicts with the current guardrail, so Dana decides.
+2. Pause zero-purchase spend: CONVERSIONS oSUBSCRIBE (~$37/day on Nov 9, 0 purchases, broken URL tags); westonprice ($149.55, 0 purchases, idle since Oct 27). About $1,100/month at Nov 9 pace.
+3. Replace the influencer channel with commission-based creators/affiliates. New customers: Dec 164, Mar 94, Oct 17.
+4. Retention: free renewal shipping (~$229/month now) pays if ~4 subscribers/month stay (each ~$54/month contribution). Win-back offer before Black Friday.
+5. Store friction: BON launcher on phones (mobile ATC 4.2% vs desktop 6.7%), shipping, publish the script-error fix theme.
+
+## Free shipping
+- Recommendation: lower free US shipping from $150 to $25; keep the 7-day trial at $39.99.
+- $150 line is not raising cart size: 90 days of US store orders, 36 in $99–$150 (paid shipping) vs 8 in $150–$175 (mostly 2-bag deals).
+- Abandoned checkouts Oct 12–Nov 11: 8 of 13 US had shipping added (+10% to +34%), all $29.99 and up. A $99 line covers 1 of 8; $25 covers all 8.
+- Cost (US shipping no longer collected, actual orders Aug 14–Nov 11):
+
+| Option | Now / month | Aug–Oct volume / month |
+|---|---|---|
+| $99 line | $209 (renewals $182, new $27) | $431 |
+| $25 line, new and one-time | $151 | $292 |
+| $25 line, renewals (if Seal re-rates) | $229 | $303 |
+
+- Break-even uses COGS from internal notes (bag $32.78, 30 sticks $52.54), 2.9% + $0.30 fees, ~$10 label: one-time bag $63.72, singles ~$15–$50.
+- Intro offers already ship free (Funnel profile). Exception: Vegan Starter Kit (zeotein-vegan-sticks-30-intro) is in the General profile.
+- Open question: Seal renewal shipping (re-rate vs keep original rate).
+
+## Google-only site (shop.zeotein.com)
+- Good: FDA disclaimer on all pages, first-order guarantee wording, no detox/weight/energy claims, Google Ads tag AW-18130788543, Meta pixel, Clarity, click-ID carryover to store links, 4 store links return 200.
+- Fix: add GA4 (cross-domain with zeotein.com); confirm the AW tag belongs to account 957-683-4317 and purchase is primary; Vegan Starter Kit charged shipping; "Organic MCT oil powder" wording; "Claim My 55% Off" counts gift value.
+- Caution: policy limits follow products and claims; get exact reasons from Google Ads Policy manager and Merchant Center; never show Google different content than shoppers (circumventing systems). Cap the test (~$15/day, stop at $250 with no sale).
+
+## Black Friday theme (187825914069) vs live
+- BF = live (Nov 8) + sale marquee, zt-bf-hero section, product sale strip, plus 1 of 5 script fixes and a 69-byte test file (snippets/zt-write-test.liquid).
+- Missing from BF: live's Nov 9 line in sections/header-cacao-lp.liquid (hides BON button and chat widget on cacao-protein-starter-kit).
+- Still to port: header-custom.liquid, header-custom-drawer.liquid, cart-drawer.liquid, buy-box-cacao-lp-v2.liquid fixes (API URL-body writes fail silently on this theme; use the code editor).
+- Copy conflicts: "30% off everything" vs "one-time orders"; /collections/all vs /collections/shop-all; sale strip renders on the gift-card product.

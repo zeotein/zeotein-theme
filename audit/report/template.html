@@ -85,6 +85,8 @@ section.block > .wrap{display:grid;gap:24px}
 .leak .fix b{color:var(--teal-ink)}
 .leak .impact{font-size:.8rem;font-weight:700;white-space:nowrap;border-radius:999px;padding:4px 10px;background:var(--bad-soft);color:var(--bad)}
 .leak .impact.w{background:var(--warn-soft);color:var(--warn)}
+.leak .impact.g{background:var(--good-soft);color:var(--good)}
+.sub-h{font-size:1.1rem;color:var(--purple);margin-top:6px}
 @media (max-width:640px){.leak{grid-template-columns:auto minmax(0,1fr)}.leak .impact{grid-column:2;justify-self:start}}
 
 /* Done list */
@@ -316,7 +318,7 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
 
 <header class="mast">
   <div class="wrap">
-    <div class="meta-row"><span>zeotein.com · GoHighLevel · Google &amp; Meta ads</span><span>Audit date: November 10, 2026</span><span>Data window: last 90 days unless noted</span></div>
+    <div class="meta-row"><span>zeotein.com · GoHighLevel · Google &amp; Meta ads</span><span>Audit date: November 10, 2026 · decisions added November 11</span><span>Data window: last 90 days unless noted</span></div>
     <div style="display:grid;gap:14px">
       <p class="eyebrow">Store audit</p>
       <h1>Your store isn't short on traffic. It's losing the sale <span>between the product page and the cart</span>, and paying too much to get people there.</h1>
@@ -333,11 +335,125 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
 
 <nav class="index" aria-label="Sections">
   <div class="wrap">
-    <a href="#leaks">Money leaks</a><a href="#done">Fixed today</a><a href="#dropoff">Drop-off</a><a href="#google">Google</a><a href="#ads">Ads</a><a href="#pricing">Pricing</a><a href="#pages">Page redesigns</a><a href="#compliance">What you can say</a><a href="#ghl">GoHighLevel</a><a href="#catalog">Catalog</a><a href="#tech">Speed &amp; SEO</a><a href="#plan">Action plan</a>
+    <a href="#decide">Decisions Nov 11</a><a href="#leaks">Money leaks</a><a href="#done">Fixed today</a><a href="#dropoff">Drop-off</a><a href="#google">Google</a><a href="#ads">Ads</a><a href="#pricing">Pricing</a><a href="#pages">Page redesigns</a><a href="#compliance">What you can say</a><a href="#ghl">GoHighLevel</a><a href="#catalog">Catalog</a><a href="#tech">Speed &amp; SEO</a><a href="#plan">Action plan</a>
   </div>
 </nav>
 
 <main>
+<section class="block" id="decide">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Decisions · November 11</p>
+      <h2>Where the money is, and what to do about shipping</h2>
+      <p class="lede">Answers to Dana's Nov 11 questions, using store, ad and checkout data pulled that day. Nothing below has been changed in the store yet.</p>
+    </div>
+
+    <h3 class="sub-h">The five moves that bring in the most money</h3>
+    <div class="leaks">
+      <article class="leak">
+        <span class="rank">1</span>
+        <div><h3>Send Meta traffic to the store product page</h3>
+          <p>Same ad set, same audience, last 30 days. Ads pointing at zeotein.com/products/cacao cost <b>$65 per purchase</b> (4 sales on $260). Ads pointing at the try., marketing. and go. pages cost <b>$416 per purchase</b> (5 sales on $2,078). On the product page 30% of visitors added to cart; on the landing page, 4%. The sample is small and the attribution is the Meta pixel, but nothing else in the audit comes close.</p>
+          <p class="fix"><b>Do:</b> move 70–80% of prospecting budget to product-page ads for 14 days and keep the landing page running as the control. Your current guardrail rules product pages out, so this one is your call.</p></div>
+        <span class="impact g">Biggest lever</span>
+      </article>
+      <article class="leak">
+        <span class="rank">2</span>
+        <div><h3>Stop paying for ads that have never sold</h3>
+          <p>CONVERSIONS oSUBSCRIBE was spending about $37 a day on Nov 9 with 0 purchases, sending people to go.zeotein.com, and its URL tags are broken. westonprice spent $150 with 0 purchases and has been idle since Oct 27.</p>
+          <p class="fix"><b>Do:</b> pause both. Fix the URL tags before anything relaunches.</p></div>
+        <span class="impact g">≈ $1,100 / month saved</span>
+      </article>
+      <article class="leak">
+        <span class="rank">3</span>
+        <div><h3>Replace the influencer</h3>
+          <p>New customers: 164 in December, 94 in March, 17 in October. The slide started when the influencer stopped after April, and paid ads alone haven't replaced that channel at a cost that works.</p>
+          <p class="fix"><b>Do:</b> recruit 5–10 creators who fit the brand on commission (paid per sale through an affiliate app) plus free product. You pay a share of each sale, so the channel can't overspend.</p></div>
+        <span class="impact w">Largest long-term</span>
+      </article>
+      <article class="leak">
+        <span class="rank">4</span>
+        <div><h3>Keep the subscribers you have</h3>
+          <p>Returning customers placed most of the last 30 days' orders (49 of 64 customers). Renewals pay $8–$13 shipping on top of $99.99–$124.99 every month, while most competitors ship subscriptions free.</p>
+          <p class="fix"><b>Do:</b> make renewal shipping free and tell subscribers. It costs about $230 a month today and pays for itself if about 4 subscribers a month stay instead of canceling (each is worth about $54 a month). Send a win-back offer to lapsed subscribers before Black Friday.</p></div>
+        <span class="impact w">Protects most orders</span>
+      </article>
+      <article class="leak">
+        <span class="rank">5</span>
+        <div><h3>Take the friction out of the store checkout</h3>
+          <p>Phones add to cart at 4.2% against 6.7% on desktop, and the Rewards button sits over the price and Add to Cart on phones. Shipping appears only at checkout. The script-error fixes are built and waiting to be published.</p>
+          <p class="fix"><b>Do:</b> set the BON launcher to icon-only or hide it on product pages, lower free shipping to $25, and publish "Live + script error fixes (Nov 10)".</p></div>
+        <span class="impact g">+$350–$750 / month (phones)</span>
+      </article>
+    </div>
+
+    <h3 class="sub-h">Free shipping: lower it to $25, not $99</h3>
+    <div class="split">
+      <div class="panel"><h3>The answer</h3>
+        <p>Lower free US shipping from $150 to <b>$25</b>, and leave the 7-day trial at $39.99.</p>
+        <ul>
+          <li>The $150 line isn't making carts bigger. Over 90 days, 36 store orders landed just under it ($99–$150) and paid shipping; only 8 landed just over, and those were mostly two-bag deals.</li>
+          <li>The shoppers you lose to shipping are buying $30–$75 single ingredients and 7-day packs, the products Google Shopping sends. A $99 line misses them. A $25 line reaches all of them.</li>
+          <li>Intro offers already ship free through the funnel shipping profile, so the intro price doesn't need to reach any threshold. One exception: the Vegan Starter Kit ($96.99 first order) is charged shipping. Move it to the free profile either way.</li>
+          <li>At today's traffic this is close to break-even. It removes a tax on every order and pays more as traffic grows into Black Friday and December. It is not the biggest money lever; where the ads send people is.</li>
+        </ul></div>
+      <div class="chart-card"><h3>Checkouts lost after shipping appeared</h3>
+        <div class="tbl-wrap"><table><thead><tr><th>Cart</th><th class="r">Items</th><th class="r">At checkout</th><th class="r">Added</th></tr></thead><tbody>
+          <tr><td>Zeolite ½ lb</td><td class="r">$29.99</td><td class="r">$40.28</td><td class="r">+34%</td></tr>
+          <tr><td>Zeolite ½ lb</td><td class="r">$29.99</td><td class="r">$38.48</td><td class="r">+28%</td></tr>
+          <tr><td>Sea moss ¼ lb</td><td class="r">$34.99</td><td class="r">$44.29</td><td class="r">+27%</td></tr>
+          <tr><td>Collagen 1 lb</td><td class="r">$46.99</td><td class="r">$56.75</td><td class="r">+21%</td></tr>
+          <tr><td>Bone broth + sea moss</td><td class="r">$64.98</td><td class="r">$75.25</td><td class="r">+16%</td></tr>
+          <tr><td>Collagen 2 lb</td><td class="r">$74.99</td><td class="r">$84.55</td><td class="r">+13%</td></tr>
+          <tr><td>Vegan 7-day × 2</td><td class="r">$80.98</td><td class="r">$90.17</td><td class="r">+11%</td></tr>
+          <tr><td>Cacao 30-day sticks</td><td class="r">$112.50</td><td class="r">$123.81</td><td class="r">+10%</td></tr>
+        </tbody></table></div>
+        <p class="note">8 of the 13 US checkouts abandoned Oct 12–Nov 11 had shipping added (no customer details shown). A $99 line would have covered 1 of them; a $25 line covers all 8.</p></div>
+    </div>
+
+    <div class="chart-card"><h3>What each option costs</h3>
+      <div class="tbl-wrap"><table><thead><tr><th>Option</th><th class="r">Cost / month now</th><th class="r">At Aug–Oct volume</th><th>Pays for itself if</th></tr></thead><tbody>
+        <tr><td>Keep $150</td><td class="r">$0</td><td class="r">$0</td><td>It isn't raising cart size, so it only adds friction</td></tr>
+        <tr><td>$99 line</td><td class="r">$209</td><td class="r">$431</td><td>About 3 extra bag orders a month</td></tr>
+        <tr><td><b>$25 line, new and one-time orders</b></td><td class="r"><b>$151</b></td><td class="r">$292</td><td>About 3–6 extra orders a month</td></tr>
+        <tr><td><b>$25 line, renewals</b> (if Seal re-rates them)</td><td class="r"><b>$229</b></td><td class="r">$303</td><td>About 4 subscribers a month stay instead of canceling</td></tr>
+      </tbody></table></div>
+      <p class="note">Cost is the shipping you'd stop collecting on US orders, from actual orders Aug 14–Nov 11. Break-even uses your COGS: an extra one-time bag earns $63.72 after COGS, card fees and a $10 label; a $30–$75 single earns about $15–$50. One Seal setting decides the renewal line: if Seal re-rates renewals, it applies automatically; if Seal keeps each subscriber's original rate, only the new-order line applies until you change it. Run it for 60 days and judge it on store orders per 1,000 sessions, checkout completion and renewal cancellations.</p>
+    </div>
+
+    <div class="split">
+      <div class="panel"><h3>7-day trial: keep $39.99</h3>
+        <p>Yes, a trial should cost more per serving. $5.71 a serving against $3.67 for the bag (one-time) and $3.33 on subscription is what makes the 30-day the obvious deal.</p>
+        <ul>
+          <li>What hurt was shipping on top: about $50 for 7 servings. Free shipping from $25 removes that, so don't cut the price as well.</li>
+          <li>Give trial buyers a reason to step up: a $10-off-your-first-30-day code in the follow-up email. It only costs money when someone upgrades.</li>
+          <li>Next data pull: what share of trial buyers went on to a 30-day order.</li>
+        </ul></div>
+      <div class="panel"><h3>The Google-only site (shop.zeotein.com), checked Nov 11</h3>
+        <p><b>Built well:</b> the FDA disclaimer is on every page, the guarantee is limited to the first order, and there are no detox, weight or energy claims. It carries the Google Ads tag, the Meta pixel and Clarity, plus a script that copies Google's click ID onto every store link, so store purchases can be credited to the ad. All 4 store links work.</p>
+        <p><b>Fix before spending:</b></p>
+        <ul>
+          <li>Add GA4 with cross-domain linking to zeotein.com. Analytics can't see this site today.</li>
+          <li>Confirm the tag AW-18130788543 belongs to your Google Ads account and the purchase conversion is primary.</li>
+          <li>The Vegan Starter Kit link is charged shipping while the Cacao kits ship free.</li>
+          <li>"Organic MCT oil powder" appears across the site; your rule is "Organic MCT Oil".</li>
+          <li>"Claim My 55% Off" counts the gifts' value in the discount. That's a pricing-claim risk; run it through the compliance check.</li>
+        </ul>
+        <p><b>Cautions:</b> Google's limit is policy-based, and policy follows the product and claims, not the web address. Get the exact reason from Google Ads (Policy manager) and Merchant Center (Needs attention) first. Never show Google different content than shoppers see: Google treats that as circumventing its systems and can suspend the whole account. Off-store pages have been your weakest destinations, so cap the test at about $15 a day and stop at $250 with no sale.</p>
+      </div>
+    </div>
+
+    <div class="chart-card"><h3>Black Friday theme: what's missing before Nov 27</h3>
+      <ul class="steps">
+        <li>It's your live theme from Nov 8 plus the sale banner, a homepage hero and a sale-price strip on product pages. It's missing one live change: the Nov 9 line that hides the Rewards button and chat bubble on the starter-kit landing page.</li>
+        <li>It has 1 of the 5 script fixes. The other 4 still need to go in, by pasting in the code editor (saves through the API fail on this theme). A 69-byte test file left there can be deleted.</li>
+        <li>Copy conflicts: the banner says "30% off everything" while the hero subheading and product strip say "one-time orders". If subscriptions aren't discounted, "everything" overstates the offer. The two sale links go to different pages (/collections/all and /collections/shop-all), and the sale strip also shows on the gift-card product, which the discount doesn't cover.</li>
+        <li>Re-run the live-vs-Black Friday comparison the day before publishing.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <section class="block" id="leaks">
   <div class="wrap">
     <div class="sec-head">
@@ -364,14 +480,14 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
         <span class="rank">3</span>
         <div><h3>Shipping surprise at checkout</h3>
           <p>Free shipping starts at $150. Every core product is under that, so store shoppers pay $8 to $20 at checkout: a $99.99 bag became $120.50, a $29.99 zeolite bag became $41.53. Funnel buyers ship free. Your notes assume subscriptions ship free, but renewals are being charged $8 to $15 each ($863 in 90 days).</p>
-          <p class="fix"><b>Fix:</b> free shipping on every 30-day supply (a $99 threshold). Cost at today's volume: up to about $690 a month in shipping you no longer collect. Your decision.</p></div>
+          <p class="fix"><b>Fix:</b> lower free shipping to $25 (see Decisions). It reaches every checkout lost to shipping in the last 30 days and costs about $150 to $380 a month at today's volume, depending on renewals. Your decision.</p></div>
         <span class="impact w">Decision needed</span>
       </article>
       <article class="leak">
         <span class="rank">4</span>
         <div><h3>Google brings the wrong buyers to the wrong page</h3>
           <p>Non-brand search sent 148 clicks to marketing.zeotein.com: 0 add-to-carts, 0 sales, and Google rates that page "Below average," which raises your cost per click. Shopping sells mostly $30 single ingredients, and the zeolite flag limits ads on your core blends.</p>
-          <p class="fix"><b>Fix:</b> pause non-brand search until the funnel page is tracked, switch the broad brand keyword to phrase, and request a policy review on the blends. Your live ad copy is already free of detox wording (checked today).</p></div>
+          <p class="fix"><b>Fix:</b> retest non-brand search on the new Google site (shop.zeotein.com) once GA4 is added, at about $15 a day, stopping at $250 with no sale. Switch the broad brand keyword to phrase, and get the exact policy reason from Google Ads and Merchant Center. Your live ad copy is already free of detox wording (checked Nov 10).</p></div>
         <span class="impact">$681 / 90 days with 0 sales</span>
       </article>
       <article class="leak">
@@ -988,18 +1104,18 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
     </div>
     <div class="plan">
       <div class="col"><h3><span class="chip bad">This week</span></h3>
-        <div class="task"><h4>Fix the Rewards button on phones</h4><p>BON Loyalty → launcher: icon only, raise it, or hide it on product pages. Unblocks the price and Add to Cart on every product page.</p><p class="who">Rafael · 15 minutes</p></div>
-        <div class="task"><h4>Decide shipping</h4><p>Free shipping on every 30-day supply ($99 threshold). Up to about $690 a month in shipping revenue at today's volume; removes the $8–$20 checkout surprise.</p><p class="who">Dana · decision</p></div>
-        <div class="task"><h4>Stop the ad spend that isn't selling</h4><p>Pause the two zero-purchase Meta campaigns and Google non-brand search; move broad "zeotein" to phrase.</p><p class="who">Jewels / ORBIT · with your approval</p></div>
-        <div class="task"><h4>Turn off the 8 retired funnels</h4><p>About 10 minutes in GoHighLevel. Then I add redirects and retire the last 3 products.</p><p class="who">Dana or Rafael</p></div>
+        <div class="task"><h4>Fix the Rewards button on phones</h4><p>BON Loyalty → launcher: icon only, raise it, or hide it on product pages. Unblocks the price and Add to Cart on every product page.</p><p class="who">Orbit · 15 minutes</p></div>
+        <div class="task"><h4>Decide shipping</h4><p>Lower free shipping to $25: about $150 a month for new and one-time orders, plus about $230 if renewals change too (one Seal setting). Removes the checkout surprise on every order.</p><p class="who">Dana · decision</p></div>
+        <div class="task"><h4>Stop the ad spend that isn't selling</h4><p>Pause the two zero-purchase Meta campaigns, move broad "zeotein" to phrase, and retest non-brand on shop.zeotein.com with a cap.</p><p class="who">Jewels / ORBIT · with your approval</p></div>
+        <div class="task"><h4>Turn off the 8 retired funnels</h4><p>About 10 minutes in GoHighLevel. Then I add redirects and retire the last 3 products.</p><p class="who">Orbit, once Dana says yes</p></div>
         <div class="task"><h4>Homepage Google title</h4><p>Online Store → Preferences: "Zeotein | Bone Broth &amp; Collagen Protein Shake, No Sweeteners."</p><p class="who">Anyone · 2 minutes</p></div>
       </div>
       <div class="col"><h3><span class="chip warn">Next 2 weeks</span></h3>
-        <div class="task"><h4>Build the new product page template</h4><p>Build on a copy of the live theme from the mockups above; port it into the Black Friday theme before Nov 27.</p><p class="who">Rafael · I can build the theme copy for review</p></div>
-        <div class="task"><h4>Speed pass</h4><p>Remove unused pixels and apps, delay Judge.me until scroll, compress landing page images, delete old theme copies.</p><p class="who">Rafael</p></div>
-        <div class="task"><h4>Fix tracking</h4><p>GA4 on funnel domains, pass-through tags, internal traffic filter, fix sag_organic.</p><p class="who">ORBIT / Rafael</p></div>
-        <div class="task"><h4>Compliance cleanup</h4><p>Holiday Guide headline and disclaimer, final-sale notice on singles, hide two reviews, retitle the collagen blog post.</p><p class="who">Rafael / Daniel</p></div>
-        <div class="task"><h4>Fix the two script errors</h4><p>Map or remove the header's <code>@theme/section-hydration</code> import, and load the landing page's cart scripts once. Clears most of Clarity's error count.</p><p class="who">Rafael · 30 minutes</p></div>
+        <div class="task"><h4>Build the new product page template</h4><p>Build on a copy of the live theme from the mockups above; port it into the Black Friday theme before Nov 27.</p><p class="who">Claude builds it in the verified theme copy; Orbit pastes it into the Black Friday theme</p></div>
+        <div class="task"><h4>Speed pass</h4><p>Remove unused pixels and apps, delay Judge.me until scroll, compress landing page images, delete old theme copies.</p><p class="who">Claude + Orbit</p></div>
+        <div class="task"><h4>Fix tracking</h4><p>GA4 on shop.zeotein.com and the funnel domains, pass-through tags, internal traffic filter, fix sag_organic.</p><p class="who">Orbit + Claude</p></div>
+        <div class="task"><h4>Compliance cleanup</h4><p>Holiday Guide headline and disclaimer, final-sale notice on singles, hide two reviews, retitle the collagen blog post.</p><p class="who">Claude / Daniel</p></div>
+        <div class="task"><h4>Publish the script-error fixes</h4><p>Done in the theme "Live + script error fixes (Nov 10)": the header import, 4 missing files, the mobile menu error and the landing page's duplicate cart code. It matches live file for file except those 5 files. Publish it (the old theme stays as a one-click rollback), or have Orbit paste the edits into live.</p><p class="who">Dana · 1 click</p></div>
       </div>
       <div class="col"><h3><span class="chip info">Your decisions</span></h3>
         <div class="task"><h4>Vegan price</h4><p>$139.99 for 20g protein vs Cacao's $134.99 for 23g. Match or go below Cacao.</p></div>
