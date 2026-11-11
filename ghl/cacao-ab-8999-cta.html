@@ -1,0 +1,55 @@
+<!--
+  Zeotein Cacao Starter Kit A/B ($89.99 renewal) - CTA cart builder
+  Paste into the GHL page's Tracking Code > Footer (or a Custom JS/HTML element) on EACH variant page.
+  Set ZK_VARIANT to 'a' on page A and 'b' on page B. Nothing else differs.
+
+  When someone clicks any CTA with class "zk-cta" (or any link to /a/subscriptions/checkout/):
+    1. fires Meta AddToCart + InitiateCheckout (and GA4 add_to_cart/begin_checkout if gtag is on the page)
+    2. POSTs a form to zeotein.com/cart/add: the try variant on Seal plan 4659019989 + the 5 Starter Kit gifts
+       (BXGY 1530084655317 sets the gifts to $0)
+    3. puts the UTMs on the cart as attributes (they carry to the Shopify order), then redirects to /checkout
+
+  One-field swaps: ZK_PLAN / ZK_VARIANT_ID / ZK_GIFTS below.
+  utm_content is always starter_kit_<variant>; an ad's own utm_content is kept as utm_ad_content.
+  Tested 2026-11-11 for both variants: checkout total $76.99, then $89.99/month, all 5 gifts FREE, utm attributes on the cart.
+-->
+<script>
+(function(){
+  var ZK_VARIANT   = 'a';                 // 'a' on page A, 'b' on page B
+  var ZK_VARIANT_ID= '67710100308181';    // try product variant
+  var ZK_PLAN      = '4659019989';        // Seal plan: $76.99 first order, then $89.99/month
+  var ZK_GIFTS     = ['67706369507541','67706369540309','67706369605845','67706369638613','67706369704149'];
+  var DEFAULT_UTM  = {utm_source:'purple-operator', utm_medium:'landing_page', utm_campaign:'cacao_starter_kit_ab'};
+
+  function utms(){
+    var q=new URLSearchParams(location.search), o={};
+    Object.keys(DEFAULT_UTM).forEach(function(k){ o[k]=q.get(k)||DEFAULT_UTM[k]; });
+    if(q.get('utm_term')) o.utm_term=q.get('utm_term');
+    if(q.get('utm_content')) o.utm_ad_content=q.get('utm_content');
+    if(q.get('fbclid')) o.fbclid=q.get('fbclid');
+    o.utm_content='starter_kit_'+ZK_VARIANT;
+    o.landing_variant=ZK_VARIANT;
+    return o;
+  }
+  function add(f,n,v){ var i=document.createElement('input'); i.type='hidden'; i.name=n; i.value=v; f.appendChild(i); }
+
+  function go(){
+    var u=utms(), qs=new URLSearchParams(u).toString();
+    try{ fbq('track','AddToCart',{value:76.99,currency:'USD',content_ids:[ZK_VARIANT_ID],content_type:'product'}); fbq('track','InitiateCheckout',{value:76.99,currency:'USD',num_items:6}); }catch(e){}
+    try{ gtag('event','add_to_cart',{currency:'USD',value:76.99,items:[{item_id:ZK_VARIANT_ID}]}); gtag('event','begin_checkout',{currency:'USD',value:76.99}); }catch(e){}
+    var f=document.createElement('form'); f.method='POST'; f.action='https://zeotein.com/cart/add';
+    add(f,'items[0][id]',ZK_VARIANT_ID); add(f,'items[0][quantity]','1'); add(f,'items[0][selling_plan]',ZK_PLAN);
+    ZK_GIFTS.forEach(function(g,i){ add(f,'items['+(i+1)+'][id]',g); add(f,'items['+(i+1)+'][quantity]','1'); });
+    Object.keys(u).forEach(function(k){ add(f,'attributes['+k+']',u[k]); });
+    add(f,'return_to','/checkout?'+qs);
+    document.body.appendChild(f);
+    setTimeout(function(){ f.submit(); },150);   // give the pixel a moment to send
+  }
+
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest&&e.target.closest('a.zk-cta, a[href*="/a/subscriptions/checkout/"], a[href*="/cart/"]');
+    if(!a) return;
+    e.preventDefault(); e.stopImmediatePropagation(); go();
+  },true);
+})();
+</script>
