@@ -1,0 +1,34 @@
+--- a/sections/header-custom.liquid (live, before)
++++ b/sections/header-custom.liquid (fixed)
+@@ -589,10 +589,7 @@
+   })();
+ </script>
+ 
+-<script
+-  src="{{ 'header.js' | asset_url }}"
+-  type="module"
+-></script>
++{%- comment -%} header.js removed Nov 10 2026: the asset does not exist in this theme (404 on every page). {%- endcomment -%}
+ {% # theme-check-disable MissingAsset %}
+ <script src="{{ 'cacao-lp-cart-plans.js' | asset_url }}" defer="defer"></script>
+ {% # theme-check-enable MissingAsset %}
+@@ -2407,14 +2404,11 @@
+   })();
+ </script>
+ 
+-{% unless request.design_mode %}
+-  <script type="module">
+-    import { hydrate } from '@theme/section-hydration';
+-    const url = new URL(window.location.href);
+-    url.searchParams.delete('page');
+-    hydrate('{{ section.id }}', url);
+-  </script>
+-{% endunless %}
++{%- comment -%}
++  Removed Nov 10 2026: inline module importing '@theme/section-hydration'. These layouts have no
++  import map, so it threw "Failed to resolve module specifier" on every page and never ran.
++  The header menus are fully server-rendered, so hydration had nothing to add.
++{%- endcomment -%}
+ 
+ {% schema %}
+ {

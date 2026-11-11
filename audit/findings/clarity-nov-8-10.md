@@ -44,11 +44,13 @@ GoHighLevel preview pages (link.automator.ai/preview/…) also appear with 14 se
 | Referral | 16 | 6 | 2.75 | 28% |
 | Organic search | 7 | 4 | 2.14 | 35% |
 
-## Script errors, traced
+## Script errors, traced and fixed
 
 Captured in a real browser on Nov 10:
 
-1. Every page: the header section runs an inline module `import { hydrate } from '@theme/section-hydration'`. The theme's layout has no import map, so the import fails ("Failed to resolve module specifier"). Fix: add an import map for the `@theme/*` modules the header uses, or remove that inline script from the header section.
-2. Cacao landing page: "Identifier 'CartRemoveButton' has already been declared" and "'CartDrawer' has already been declared". The landing page layout loads the cart scripts twice. Fix: load cart.js and cart-drawer.js once in `layout/theme.cacao-lp.liquid`.
+1. Every page: the header section runs an inline module `import { hydrate } from '@theme/section-hydration'`. The theme's layout has no import map, so the import fails ("Failed to resolve module specifier").
+2. Every page: 4 header script files are requested that do not exist in the theme (header.js, header-drawer.js, cart-icon.js, header-actions.js).
+3. Mobile menu: every open throws "Cannot read properties of null (reading 'classList')", because Dawn's old menu script takes over the new menu.
+4. Cacao landing page: "Identifier 'CartRemoveButton' has already been declared" and "'CartDrawer' has already been declared". The cart scripts load 3 times and two cart drawers are built.
 
-Neither blocked adding to cart or reaching checkout in testing.
+None blocked adding to cart or reaching checkout in testing. All four are fixed in the unpublished theme "Live + script error fixes (Nov 10)" and verified (0 theme errors, same cart results, pixel-identical pages). See [`../theme-fixes/README.md`](../theme-fixes/README.md). They stay live until that theme is published.

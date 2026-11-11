@@ -9,6 +9,8 @@ Full visual report: https://claude.ai/artifact/CKDzjWHVSwHaAK1Tv6Ar7K (private).
 | `report/zeotein-store-audit.html` | The finished report with before/after page mockups (self-contained, open in a browser) |
 | `report/template.html`, `report/build.py`, `report/img/` | Source for the report; `python3 report/build.py` rebuilds it |
 | `CHANGES-2026-11-10.md` | Every change made to the store on Nov 10, with IDs and how to undo it |
+| `theme-fixes/` | Script-error fixes: what was broken, the diffs, test results, and the unpublished theme to publish |
+| `scripts/theme-qa/` | Error scan, cart, header, menu and pixel-diff tests used to verify the theme fixes |
 | `findings/ghl-funnel-audit.md` | All 296 GoHighLevel funnels classified (in use, retired but live, dormant, template) with evidence |
 | `findings/ads-and-analytics.md` | Google Ads, Meta and GA4 pull (90 and 30 days) with the diagnosis |
 | `findings/pricing-research.md` | Competitor price-per-serving research with source links |

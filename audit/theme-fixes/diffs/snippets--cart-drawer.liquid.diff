@@ -1,0 +1,18 @@
+--- a/snippets/cart-drawer.liquid (live, before)
++++ b/snippets/cart-drawer.liquid (fixed)
+@@ -6,8 +6,15 @@
+ {% endcomment %}
+ 
+ {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
++{%- comment -%}
++  Nov 10 2026: the cacao-lp templates use layout/theme.cacao-lp.liquid, which already loads cart.js and
++  quantity-popover.js in <head> (before cart-drawer.js). Loading cart.js a second time threw
++  "CartRemoveButton has already been declared", so the copies here are skipped on those templates.
++{%- endcomment -%}
++{%- unless template.suffix contains 'cacao-lp' -%}
+ <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+ <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
++{%- endunless -%}
+ 
+ <style>
+   .drawer {

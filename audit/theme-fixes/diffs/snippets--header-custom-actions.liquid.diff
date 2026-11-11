@@ -1,0 +1,28 @@
+--- a/snippets/header-custom-actions.liquid (live, before)
++++ b/snippets/header-custom-actions.liquid (fixed)
+@@ -12,11 +12,7 @@
+   {% render 'header-actions', section: section %}
+ {% enddoc %}
+ 
+-<script
+-  type="module"
+-  src="{{ 'cart-icon.js' | asset_url }}"
+-  fetchpriority="low"
+-></script>
++{%- comment -%} cart-icon.js removed Nov 10 2026: asset does not exist (404). Cart count is synced by the inline script below. {%- endcomment -%}
+ 
+ {% capture cart_icon %}
+   <cart-icon
+@@ -131,11 +127,7 @@
+   ></span>
+ </header-actions>
+ 
+-<script
+-  type="module"
+-  src="{{ 'header-actions.js' | asset_url }}"
+-  fetchpriority="low"
+-></script>
++{%- comment -%} header-actions.js removed Nov 10 2026: asset does not exist (404). {%- endcomment -%}
+ <script>
+   if (!window.__ztCartCount) {
+     window.__ztCartCount = true;

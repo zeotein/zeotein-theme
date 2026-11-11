@@ -1,0 +1,16 @@
+--- a/sections/buy-box-cacao-lp-v2.liquid (live, before)
++++ b/sections/buy-box-cacao-lp-v2.liquid (fixed)
+@@ -641,7 +641,12 @@
+   This slot adds Dawn's existing drawer only on this landing page, so "Open cart drawer"
+   works here while other templates keep the theme cart setting.
+ {%- endcomment -%}
+-{%- unless settings.cart_type == 'drawer' -%}
++{%- comment -%}
++  Nov 10 2026: skipped on the cacao-lp templates. Their layout (theme.cacao-lp) always renders the cart
++  drawer and loads its CSS/JS, so this second copy duplicated #CartDrawer and threw
++  "CartRemoveButton / CartDrawer has already been declared".
++{%- endcomment -%}
++{%- unless settings.cart_type == 'drawer' or template.suffix contains 'cacao-lp' -%}
+   {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+   {{ 'component-cart.css' | asset_url | stylesheet_tag }}
+   {{ 'component-totals.css' | asset_url | stylesheet_tag }}

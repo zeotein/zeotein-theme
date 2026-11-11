@@ -1,0 +1,42 @@
+--- a/snippets/header-custom-drawer.liquid (live, before)
++++ b/snippets/header-custom-drawer.liquid (fixed)
+@@ -43,13 +43,15 @@
+   endif
+ %}
+ 
+-<script
+-  src="{{ 'header-drawer.js' | asset_url }}"
+-  type="module"
+-  fetchpriority="low"
+-></script>
++{%- comment -%} header-drawer.js removed Nov 10 2026: asset does not exist (404). The drawer runs on native <details> plus the inline script at the end of this file. {%- endcomment -%}
+ 
+-<header-drawer
++{%- comment -%}
++  Nov 10 2026: tag renamed from <header-drawer> to <zt-header-drawer>. global.js (Dawn) defines a
++  <header-drawer> element that took over this menu and threw "Cannot read properties of null
++  (reading 'classList')" on every open (it looks for Dawn's .header-wrapper). This menu runs on
++  native <details> plus the inline script at the end of this file; the .header-drawer class is unchanged.
++{%- endcomment -%}
++<zt-header-drawer
+   class="header-drawer {{ class }}"
+   style="--menu-image-border-radius: {{ image_border_radius }}px; --resource-card-corner-radius: {{ image_border_radius }}px;"
+ >
+@@ -734,7 +736,7 @@
+       on:click="header-drawer/close"
+     ></div>
+   </details>
+-</header-drawer>
++</zt-header-drawer>
+ 
+ <script>
+   document.addEventListener(
+@@ -743,6 +745,8 @@
+       const details = event.target;
+       if (!details.classList || !details.classList.contains('menu-drawer-container')) return;
+       details.classList.toggle('menu-open', details.open);
++      const summary = details.querySelector(':scope > summary');
++      if (summary) summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+     },
+     true
+   );
