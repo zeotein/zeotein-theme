@@ -1,0 +1,64 @@
+.zt-hp{position:fixed;inset:0;z-index:2147483000}
+.zt-hp[hidden]{display:none}
+.zt-hp__dim{position:absolute;inset:0;background:rgba(10,20,16,.55);opacity:0;transition:opacity .25s}
+.zt-hp.is-open .zt-hp__dim{opacity:1}
+.zt-hp__modal{position:absolute;left:50%;top:50%;transform:translate(-50%,-46%);opacity:0;transition:transform .3s ease,opacity .3s;width:880px;max-width:calc(100% - 64px);max-height:calc(100% - 32px);overflow:auto;display:grid;grid-template-columns:400px minmax(0,1fr);border-radius:24px;background:var(--cream);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.zt-hp.is-open .zt-hp__modal{transform:translate(-50%,-50%);opacity:1}
+
+/* Festive hero panel */
+.zt-hp__art{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 28px 40px;background:radial-gradient(ellipse 70% 55% at 50% 52%,rgba(240,176,92,.38),rgba(240,176,92,0) 70%),radial-gradient(ellipse at 50% 40%,#1d6249 0%,#0f3b2e 55%,#081f17 100%)}
+.zt-hp__glow{position:absolute;left:50%;top:54%;width:360px;height:360px;margin:-180px 0 0 -180px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,140,.35),rgba(255,214,140,0) 65%);pointer-events:none}
+.zt-hp__bokeh{position:absolute;inset:0;pointer-events:none;opacity:.7;background-image:radial-gradient(10px 10px at 12% 70%,rgba(255,206,120,.55),transparent 70%),radial-gradient(14px 14px at 86% 62%,rgba(255,206,120,.45),transparent 70%),radial-gradient(8px 8px at 22% 36%,rgba(255,226,170,.5),transparent 70%),radial-gradient(12px 12px at 78% 30%,rgba(255,206,120,.4),transparent 70%),radial-gradient(7px 7px at 60% 88%,rgba(255,226,170,.5),transparent 70%),radial-gradient(9px 9px at 36% 90%,rgba(255,206,120,.4),transparent 70%)}
+.zt-hp__snow{position:absolute;inset:0;pointer-events:none;opacity:.6;background-image:radial-gradient(2px 2px at 20px 30px,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 90px 80px,#fff 50%,transparent 51%),radial-gradient(2.5px 2.5px at 160px 20px,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 210px 120px,#fff 50%,transparent 51%),radial-gradient(2px 2px at 60px 150px,#fff 50%,transparent 51%);background-size:240px 180px}
+.zt-hp__pine{position:absolute;width:230px;height:126px;pointer-events:none;filter:drop-shadow(0 6px 8px rgba(0,0,0,.35))}
+.zt-hp__pine--l{left:-36px;bottom:-14px}
+.zt-hp__pine--r{right:-40px;top:-10px;transform:rotate(180deg)}
+.zt-hp__orn{position:absolute;top:0;width:34px;height:102px;pointer-events:none;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35));transform-origin:50% 0;animation:zt-sway 5s ease-in-out infinite}
+.zt-hp__orn--1{left:22px;height:96px}
+.zt-hp__orn--2{left:64px;height:70px;width:26px;animation-delay:-1.5s}
+.zt-hp__orn--3{right:76px;height:58px;width:24px;top:auto;bottom:auto;display:none}
+.zt-hp__orn--4{right:28px;height:84px;width:30px;display:none;animation-delay:-3s}
+@keyframes zt-sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@media (prefers-reduced-motion:reduce){.zt-hp__orn{animation:none}}
+.zt-hp__label{position:relative;z-index:2;font:600 12px Poppins,system-ui,sans-serif;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.zt-hp__label::before,.zt-hp__label::after{content:"";width:22px;height:1px;background:currentColor;opacity:.7}
+.zt-hp__cover{position:relative;z-index:2;display:block;width:264px;max-width:82%;height:auto;opacity:1!important;visibility:visible!important;transform:rotate(-3deg);filter:drop-shadow(0 22px 34px rgba(0,0,0,.55))}
+.zt-hp__handle{display:none}
+
+/* Copy side */
+.zt-hp__body{padding:38px 34px 26px;position:relative;display:flex;flex-direction:column;justify-content:center}
+.zt-hp__corner{position:absolute;top:0;left:0;width:100%;height:8px;background:repeating-linear-gradient(135deg,var(--red) 0 14px,var(--red2) 14px 28px)}
+.zt-hp__x{position:absolute;right:12px;top:12px;font-size:28px;line-height:1;color:#8a8273;background:none;border:0;cursor:pointer;padding:4px 8px;z-index:5}
+.zt-hp__k{color:var(--red);font-weight:700;font-size:13px;letter-spacing:1.8px}
+.zt-hp__h{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:50px;line-height:.95;color:var(--pine);margin:6px 0 10px;letter-spacing:.5px;text-transform:none}
+.zt-hp__h span{color:var(--red);display:block}
+.zt-hp__p{font-size:15px;line-height:1.5;color:#4a443b;margin-bottom:16px}
+.zt-hp__later{display:block;margin:14px auto 0;background:none;border:0;font:400 13px Poppins,system-ui,sans-serif;color:#8a8273;text-decoration:underline;cursor:pointer}
+.zt-hp__s2[hidden],.zt-hp__s1[hidden]{display:none}
+
+/* Mobile: bottom sheet, cover is the hero */
+@media (max-width:700px){
+ .zt-hp__modal{top:auto;bottom:0;left:0;transform:translateY(100%);opacity:1;width:100%;max-width:none;max-height:94%;grid-template-columns:minmax(0,1fr);border-radius:22px 22px 0 0;overflow-x:hidden}
+ .zt-hp.is-open .zt-hp__modal{transform:none}
+ .zt-hp__art{padding:24px 0 16px;justify-content:flex-start}
+ .zt-hp__label{font-size:10.5px;letter-spacing:2.2px;margin-bottom:10px}
+ .zt-hp__cover{width:150px;max-width:none}
+ .zt-hp__glow{top:58%;width:300px;height:300px;margin:-150px 0 0 -150px}
+ .zt-hp__pine{width:170px;height:94px}
+ .zt-hp__pine--l{left:-30px;bottom:-12px;top:auto}
+ .zt-hp__pine--r{right:-30px;bottom:-12px;top:auto;transform:scaleX(-1)}
+ .zt-hp__orn--1{left:18px;height:82px;width:30px}
+ .zt-hp__orn--2{left:56px;height:52px;width:22px}
+ .zt-hp__orn--3{display:block;right:58px;height:60px;width:22px;top:0}
+ .zt-hp__orn--4{display:block;right:16px;height:88px;width:30px}
+ .zt-hp__handle{display:block;position:absolute;top:8px;left:50%;width:44px;height:5px;margin-left:-22px;border-radius:9px;background:rgba(255,255,255,.5);z-index:3}
+ .zt-hp__body{padding:20px 20px calc(16px + env(safe-area-inset-bottom));text-align:center;position:static}
+ .zt-hp__corner{position:relative;top:-20px;left:-20px;width:calc(100% + 40px);margin-bottom:-8px}
+ .zt-hp__x{color:#fff;top:10px;right:8px}
+ .zt-hp__k{font-size:11.5px}
+ .zt-hp__h{font-size:34px;margin:4px 0 6px}
+ .zt-hp__h span{display:inline}
+ .zt-hp__p{font-size:13.5px;margin-bottom:12px}
+ .zt-hg-in{height:46px;margin-bottom:8px}
+ .zt-hg-tcpa{font-size:10px}
+}

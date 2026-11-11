@@ -1,0 +1,21 @@
+<div id="zt-hg-lp" class="zt-hg zt-hg-lp">
+  __FORM__
+  <div class="zt-hg-lp__done" hidden><div class="zt-hg-done">✓ You're in! Your guide is on its way.</div></div>
+</div>
+<style>
+.zt-hg-lp{max-width:460px;margin:0 auto;text-align:left}
+.zt-hg-lp .zt-hg-tcpa{color:inherit;opacity:.8}
+.zt-hg-lp__done{text-align:center}
+</style>
+<script>
+(function(){
+  var box = document.getElementById('zt-hg-lp'); if(!box) return;
+  window.ztHgBind(box.querySelector('.zt-hg-form'), function(form){
+    try{ localStorage.setItem('zt_hp_v1', JSON.stringify({submitted: Date.now()})); }catch(e){}
+    document.dispatchEvent(new Event('zt:hg-submitted'));
+    form.hidden = true; box.querySelector('.zt-hg-lp__done').hidden = false;
+    var next = (window.ZT_HG||{}).nextUrl;
+    if(next) setTimeout(function(){ location.href = next; }, 900);
+  });
+})();
+</script>
