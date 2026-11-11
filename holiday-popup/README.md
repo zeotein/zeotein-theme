@@ -8,7 +8,7 @@ v3 design (Dana approved Nov 11, 2026). It's built on a Shopify draft theme and 
 | Footer-group section that renders it | `sections/zt-holiday-popup.liquid` + entry in `sections/footer-group.json` (draft theme only) |
 | Cover image | `assets/zt-holiday-guide-cover.webp` |
 | GHL relay (keeps the API key off the browser) | `worker/worker.js` (Cloudflare Worker) |
-| QA | `qa/popup_check.js` (20 behavior checks), `qa/live_check.js`, `qa/screens/` |
+| QA | `qa/popup_check.js` (26 behavior checks), `qa/live_check.js`, `qa/screens/` |
 
 Draft theme: **Holiday Popup DRAFT (Nov 11) - do not publish** (id 187982840021), a copy of the live "Cacao LP updates 2026-11-05".
 Preview: https://zeotein.com/?preview_theme_id=187982840021&zt_popup=1 (`zt_popup=1` opens it right away and skips the triggers).
@@ -32,10 +32,12 @@ Preview: https://zeotein.com/?preview_theme_id=187982840021&zt_popup=1 (`zt_popu
    - `GHL_LOCATION_ID=Kch9YmRfzpmQrAs5Bchz`
    - `ALLOWED_ORIGINS=https://zeotein.com,https://www.zeotein.com`
    - `CF_SMS_TS`, `CF_SMS_SOURCE`, `CF_SMS_TEXT`, `CF_SMS_PAGE`: the four custom field ids listed above.
-2. Paste the Worker URL into `zt_hp_endpoint` in the snippet.
-   The holiday guide landing page form should get the same one-step layout later. Until then the form shows "Something went wrong" and sends nothing.
+2. Paste the Worker URL into `zt_hp_endpoint` in the snippet. Until then the form shows "Something went wrong" and sends nothing.
 3. Fix the guide-email trigger (see the open issue below).
 4. Turn it on. Either copy the snippet, the section and the footer-group entry into the live theme, or publish this draft. Don't publish the draft if the live theme has changed since Nov 11.
 
 ## Open issue: the guide email didn't fire
 The test contacts `zeotein+hgpopup1111@gmail.com` (tag added after the contact was created) and `zeotein+hgpopup1111b@gmail.com` (created with the tag) both got the `holiday-guide` tag, and neither received the guide email. The Nov 10 QA contact did. The workflow API isn't enabled for this location, so its trigger has to be checked in the GHL UI. The workflow needs a trigger of **Contact Tag added = holiday-guide**, with re-entry allowed and the workflow published.
+
+## Later
+Give the gift.zeotein.com holiday guide landing page form the same one-step layout: name, email, optional phone, and an SMS consent box unchecked by default.
