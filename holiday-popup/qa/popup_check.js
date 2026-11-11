@@ -9,25 +9,34 @@ const results = []; const ok = (n, c) => { results.push([c ? 'PASS' : 'FAIL', n]
 async function ctx(b, opts) { const c = await b.newContext(opts); const posts = []; await c.route('**/mock', async r => { posts.push(JSON.parse(r.request().postData())); await r.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' }); }); return { c, posts }; }
 (async () => {
   const b = await chromium.launch();
-  // 1. Desktop flow via preview flag
+  // 1. One-step form, desktop + mobile
   for (const [name, opts] of [['desktop', { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 }], ['mobile', { ...devices['iPhone 13'] }]]) {
     const { c, posts } = await ctx(b, opts); const p = await c.newPage();
+    await p.addInitScript(() => { window.__fb = []; window.fbq = function () { window.__fb.push([].slice.call(arguments)); }; });
     await p.goto(URL + '?zt_popup=1'); await p.waitForSelector('#zt-hp.is-open'); await p.waitForTimeout(700);
-    await p.screenshot({ path: `${out}/${name}-step1.png` });
-    await p.click('.zt-hp__s1 .zt-hp__btn'); ok(`${name}: blocks empty submit`, (await p.textContent('.zt-hp__s1 .zt-hp__err')).includes('first name') && posts.length === 0);
-    await p.fill('input[name=firstName]', 'QA'); await p.fill('input[name=email]', 'bad@'); await p.click('.zt-hp__s1 .zt-hp__btn');
-    ok(`${name}: blocks bad email`, posts.length === 0);
-    await p.fill('input[name=email]', 'qa@example.com'); await p.click('.zt-hp__s1 .zt-hp__btn');
+    await p.screenshot({ path: `${out}/${name}-form.png` });
+    ok(`${name}: consent box unchecked by default`, !(await p.isChecked('input[name=smsConsent]')));
+    await p.click('.zt-hp__s1 .zt-hp__btn'); ok(`${name}: blocks empty submit`, posts.length === 0);
+    await p.fill('input[name=firstName]', 'QA'); await p.fill('input[name=email]', 'qa@example.com');
+    await p.check('input[name=smsConsent]'); await p.click('.zt-hp__s1 .zt-hp__btn');
+    ok(`${name}: blocks consent without phone`, posts.length === 0);
+    await p.fill('input[name=phone]', '555 01'); await p.click('.zt-hp__s1 .zt-hp__btn');
+    ok(`${name}: blocks short phone`, posts.length === 0);
+    ok(`${name}: no Pixel Lead before success`, (await p.evaluate(() => window.__fb.length)) === 0);
+    await p.fill('input[name=phone]', '(555) 555-0123'); await p.click('.zt-hp__s1 .zt-hp__btn');
     await p.waitForSelector('.zt-hp__s2:not([hidden])'); await p.waitForTimeout(300);
-    ok(`${name}: step1 payload`, posts[0] && posts[0].step === 'email' && posts[0].email === 'qa@example.com' && posts[0].firstName === 'QA');
-    await p.screenshot({ path: `${out}/${name}-step2.png` });
-    await p.fill('input[name=phone]', '555 01'); await p.click('.zt-hp__s2 .zt-hp__btn'); ok(`${name}: blocks short phone`, posts.length === 1);
-    await p.fill('input[name=phone]', '(555) 555-0123'); await p.click('.zt-hp__s2 .zt-hp__btn'); await p.waitForTimeout(400);
-    ok(`${name}: step2 payload + consent text`, posts[1] && posts[1].phone === '+15555550123' && /Reply STOP to opt out/.test(posts[1].consentText) && posts[1].email === 'qa@example.com');
+    const q = posts[0] || {};
+    ok(`${name}: one request with email + phone + consent`, posts.length === 1 && q.email === 'qa@example.com' && q.phone === '+15555550123' && q.smsConsent === true && /Reply STOP to opt out/.test(q.consentText));
+    const fb = await p.evaluate(() => window.__fb);
+    ok(`${name}: Pixel Lead fired once on success`, fb.length === 1 && fb[0][0] === 'track' && fb[0][1] === 'Lead');
     await p.screenshot({ path: `${out}/${name}-done.png` });
-    // suppression after submit
+    // phone typed but box left unchecked -> phone NOT sent
+    const p3 = await c.newPage(); await p3.goto(URL + '?zt_popup=1'); await p3.waitForSelector('#zt-hp.is-open');
+    await p3.fill('input[name=firstName]', 'QA2'); await p3.fill('input[name=email]', 'qa2@example.com'); await p3.fill('input[name=phone]', '5555550123');
+    await p3.click('.zt-hp__s1 .zt-hp__btn'); await p3.waitForTimeout(500);
+    ok(`${name}: phone without consent is not sent`, posts[1] && !posts[1].phone && !posts[1].smsConsent);
     const p2 = await c.newPage(); await p2.goto(URL); await p2.waitForTimeout(500);
-    const st = await p2.evaluate(() => localStorage.getItem('zt_hp_v1')); ok(`${name}: submitted flag stored`, /submitted/.test(st));
+    ok(`${name}: submitted flag stored`, /submitted/.test(await p2.evaluate(() => localStorage.getItem('zt_hp_v1'))));
     await c.close();
   }
   // 2. Desktop exit intent: must NOT fire in first 8s, must fire after
@@ -42,12 +51,12 @@ async function ctx(b, opts) { const c = await b.newContext(opts); const posts = 
     ok('desktop: Maybe later closes + sets 7-day dismiss', await p.evaluate(() => document.getElementById('zt-hp').hidden && /dismissed/.test(localStorage.getItem('zt_hp_v1'))));
     await p.reload(); await p.waitForTimeout(9000); await exit(); await p.waitForTimeout(300);
     ok('desktop: stays suppressed after dismiss', await p.evaluate(() => document.getElementById('zt-hp').hidden)); await c.close(); }
-  // 3. Mobile: not before 25s, fires after 25s + 40% scroll
+  // 3. Mobile: 35s timer only
   { const { c } = await ctx(b, { ...devices['iPhone 13'] }); const p = await c.newPage(); await p.goto(URL);
-    await p.evaluate(() => window.scrollTo(0, document.body.scrollHeight * .6)); await p.waitForTimeout(3000);
-    ok('mobile: not shown at 3s even with scroll', await p.evaluate(() => document.getElementById('zt-hp').hidden));
-    await p.waitForTimeout(23000); await p.evaluate(() => window.scrollBy(0, 10)); await p.waitForTimeout(500);
-    ok('mobile: shown after 25s + 40% scroll', await p.evaluate(() => !document.getElementById('zt-hp').hidden)); await c.close(); }
+    await p.evaluate(() => window.scrollTo(0, document.body.scrollHeight * .8)); await p.waitForTimeout(30000);
+    ok('mobile: not shown at 30s', await p.evaluate(() => document.getElementById('zt-hp').hidden));
+    await p.waitForTimeout(6000);
+    ok('mobile: shown at ~35s', await p.evaluate(() => !document.getElementById('zt-hp').hidden)); await c.close(); }
   // 4. email/sms traffic suppressed
   { const { c } = await ctx(b, { viewport: { width: 1440, height: 900 } }); const p = await c.newPage(); await p.goto(URL + '?utm_source=ghl&utm_medium=email');
     await p.waitForTimeout(9000); await p.evaluate(() => document.dispatchEvent(new MouseEvent('mouseout', { clientY: -5 }))); await p.waitForTimeout(300);

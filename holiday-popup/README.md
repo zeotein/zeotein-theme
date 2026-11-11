@@ -15,15 +15,15 @@ Preview: https://zeotein.com/?preview_theme_id=187982840021&zt_popup=1 (`zt_popu
 
 ## Behavior
 - **Desktop:** centered modal. It opens on **exit intent only**, and only after 8s on the page, so it can't fire early.
-- **Mobile:** bottom sheet. It opens after **25s on the page AND 40% scroll depth**, or on a fast scroll back up after reading 40%.
+- **Mobile:** bottom sheet. It opens after **35s on the same page** (Dana's 30-45s window). Leaving the page or switching tabs cancels it.
 - **Suppression:** it never shows again after a submit. "Maybe later" or close hides it for 7 days. It shows at most once per session. It's skipped for logged-in customers who accept marketing and for visitors arriving from our own email or SMS (`utm_source`/`utm_medium` containing email, sms, ghl, klaviyo). It's also skipped on cart, account, subscription portal and checkout pages.
-- **Step 1:** first name + email. The relay upserts the contact (source `holiday-popup`) and **adds** the tags `holiday-guide` and `acq-holiday-popup`.
-- **Step 2 (optional):** a US mobile number plus the exact TCPA line from the mockup. The relay sets the phone, sets SMS DND to inactive, and adds the tags `sms-opted-in` and `holiday-popup-sms`. It also writes these custom fields:
+- **One step (Dana, Nov 11):** first name, email, an optional mobile number, and an SMS consent checkbox that is **unchecked by default**. The relay always upserts the contact (source `holiday-popup`) and **adds** the tags `holiday-guide` and `acq-holiday-popup`. Only when the box is checked and the number is valid does it also save the phone, set SMS DND to inactive, add `sms-opted-in` and `holiday-popup-sms`, and write the four consent fields:
   - SMS Consent Timestamp (`dHt8bKGRJDMonW9RxmIK`)
   - SMS Consent Source = holiday-popup (`moRFFbcOuZUE4Fryigb5`)
   - SMS Consent Text (`ROBEY26uJci7GEUJ23GQ`)
   - SMS Consent Page URL (`8kiKSYbmUCWy1ClyClqO`)
-- **Skipping step 2** keeps the email lead.
+- **A phone typed without the box checked is discarded**, in the browser and again in the relay.
+- **Meta Pixel:** `fbq('track','Lead')` fires once, only after the relay confirms the signup.
 - **Tags are never sent on upsert.** GHL's upsert replaces all of a contact's tags, so tags are added in a separate call.
 
 ## Go-live steps
@@ -32,7 +32,8 @@ Preview: https://zeotein.com/?preview_theme_id=187982840021&zt_popup=1 (`zt_popu
    - `GHL_LOCATION_ID=Kch9YmRfzpmQrAs5Bchz`
    - `ALLOWED_ORIGINS=https://zeotein.com,https://www.zeotein.com`
    - `CF_SMS_TS`, `CF_SMS_SOURCE`, `CF_SMS_TEXT`, `CF_SMS_PAGE`: the four custom field ids listed above.
-2. Paste the Worker URL into `zt_hp_endpoint` in the snippet. Until then the form shows "Something went wrong" and sends nothing.
+2. Paste the Worker URL into `zt_hp_endpoint` in the snippet.
+   The holiday guide landing page form should get the same one-step layout later. Until then the form shows "Something went wrong" and sends nothing.
 3. Fix the guide-email trigger (see the open issue below).
 4. Turn it on. Either copy the snippet, the section and the footer-group entry into the live theme, or publish this draft. Don't publish the draft if the live theme has changed since Nov 11.
 

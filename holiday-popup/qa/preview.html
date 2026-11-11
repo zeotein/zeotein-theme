@@ -22,22 +22,20 @@
         <p class="zt-hp__p">14 cozy drinks and festive treats with protein folded right in. For you, and for sharing all season. Yours free.</p>
         <input class="zt-hp__in" type="text" name="firstName" placeholder="First name" autocomplete="given-name" required maxlength="60">
         <input class="zt-hp__in" type="email" name="email" placeholder="Email address" autocomplete="email" required maxlength="120">
+        <label class="zt-hp__in zt-hp__phone"><span class="zt-hp__cc">🇺🇸 +1</span><input type="tel" name="phone" placeholder="Mobile number (optional)" autocomplete="tel-national" inputmode="tel" maxlength="16"></label>
+        <label class="zt-hp__tcpa"><input type="checkbox" name="smsConsent" value="yes"><span data-zt-consent>Yes, text me recipes and holiday offers. By checking this box, you agree to receive recurring automated marketing texts from Zeotein at the number provided. Consent is not a condition of purchase. Msg &amp; data rates may apply. Msg frequency varies. Reply STOP to opt out, HELP for help. <a href="/policies/terms-of-service" target="_blank">Terms</a> &amp; <a href="/policies/privacy-policy" target="_blank">Privacy</a>.</span></label>
         <input class="zt-hp__hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="zt-hp__err" role="alert"></div>
         <button class="zt-hp__btn" type="submit">Send My Free Guide 🎄</button>
         <button type="button" class="zt-hp__later" data-zt-close>Maybe later</button>
       </form>
 
-      <form class="zt-hp__s2" novalidate hidden>
+      <div class="zt-hp__s2" hidden>
         <div class="zt-hp__done">✓ You're in! Your guide is on its way.</div>
-        <h2 class="zt-hp__h zt-hp__h--s2">Want new recipes<br><span>by text?</span></h2>
-        <p class="zt-hp__p">Optional. Cozy recipes and holiday offers, sent straight to your phone.</p>
-        <label class="zt-hp__in zt-hp__phone"><span class="zt-hp__cc">🇺🇸 +1</span><input type="tel" name="phone" placeholder="Mobile number" autocomplete="tel-national" inputmode="tel" maxlength="16"></label>
-        <div class="zt-hp__err" role="alert"></div>
-        <button class="zt-hp__btn" type="submit">Text Me Recipes 📱</button>
-        <div class="zt-hp__tcpa" data-zt-consent>By tapping Text Me Recipes, you agree to receive recurring automated marketing texts from Zeotein at this number. Consent is not a condition of purchase. Msg &amp; data rates may apply. Msg frequency varies. Reply STOP to opt out, HELP for help. <a href="/policies/terms-of-service" target="_blank">Terms</a> &amp; <a href="/policies/privacy-policy" target="_blank">Privacy</a>.</div>
-        <button type="button" class="zt-hp__later" data-zt-close>Skip, email is perfect</button>
-      </form>
+        <h2 class="zt-hp__h zt-hp__h--s2">Check your<br><span>inbox</span></h2>
+        <p class="zt-hp__p">Your Holiday Recipe Guide is headed to your email now.</p>
+        <button type="button" class="zt-hp__btn" data-zt-close>Got It</button>
+      </div>
     </div>
   </div>
 </div>
@@ -74,20 +72,23 @@
 .zt-hp__btn[disabled]{opacity:.7;cursor:wait}
 .zt-hp__later{display:block;margin:14px auto 0;background:none;border:0;font:400 13px Poppins,sans-serif;color:#8a8273;text-decoration:underline;cursor:pointer}
 .zt-hp__done{display:flex;align-items:center;gap:8px;font:600 13.5px Poppins,sans-serif;color:#1f7a55;background:#e6f4ec;border-radius:999px;padding:6px 12px;width:max-content;max-width:100%;margin-bottom:10px}
-.zt-hp__tcpa{font-size:10.5px;line-height:1.45;color:#7a7266;margin-top:12px;text-align:left}
+.zt-hp__tcpa{display:flex;gap:9px;align-items:flex-start;font-size:10.5px;line-height:1.45;color:#7a7266;margin:2px 0 10px;text-align:left;cursor:pointer}
+.zt-hp__tcpa input{flex:0 0 auto;width:17px;height:17px;margin-top:1px;accent-color:var(--pine);cursor:pointer}
 .zt-hp__tcpa a{color:inherit;text-decoration:underline}
 @media (max-width:700px){
  .zt-hp__modal{top:auto;bottom:0;left:0;transform:translateY(100%);opacity:1;width:100%;max-width:none;max-height:92%;grid-template-columns:minmax(0,1fr);overflow-x:hidden;border-radius:22px 22px 0 0}
  .zt-hp.is-open .zt-hp__modal{transform:none}
- .zt-hp__art{padding:22px 0 0;height:170px;align-items:flex-start}
- .zt-hp__cover{width:118px}
+ .zt-hp__art{padding:18px 0 0;height:118px;align-items:flex-start}
+ .zt-hp__cover{width:78px}
  .zt-hp__handle{display:block;position:absolute;top:8px;left:50%;width:44px;height:5px;margin-left:-22px;border-radius:9px;background:rgba(255,255,255,.5);z-index:3}
  .zt-hp__body{padding:18px 20px calc(18px + env(safe-area-inset-bottom));text-align:center;position:static}
  .zt-hp__corner{position:relative;top:-18px;left:-20px;width:calc(100% + 40px);margin-bottom:-8px}
  .zt-hp__x{color:#fff;top:12px;right:10px;z-index:4}
- .zt-hp__h{font-size:40px}
+ .zt-hp__h{font-size:34px;margin:4px 0 6px}
+ .zt-hp__in{height:46px;margin-bottom:8px}
+ .zt-hp__k{font-size:11.5px}
  .zt-hp__h--s2{font-size:34px}
- .zt-hp__p{font-size:14.5px;margin-bottom:12px}
+ .zt-hp__p{font-size:13.5px;margin-bottom:10px}
  .zt-hp__done{margin:0 auto 8px;width:auto;display:inline-flex;font-size:12.5px}
  .zt-hp__s2{display:flex;flex-direction:column}
  .zt-hp__s2[hidden]{display:none}
@@ -101,7 +102,6 @@
   var ENDPOINT = "/mock";
   var KEY = 'zt_hp_v1';
   var DISMISS_DAYS = 7;          // after "Maybe later" / close
-  var SKIP_SMS_DAYS = 365;       // after email submit (never ask for email again)
   var root = document.getElementById('zt-hp'); if(!root) return;
   var q = new URLSearchParams(location.search);
   var force = q.get('zt_popup') === '1';
@@ -143,7 +143,7 @@
   function track(name, data){
     try{ window.dataLayer = window.dataLayer||[]; window.dataLayer.push(Object.assign({event:name}, data||{})); }catch(e){}
     try{ if(window.Shopify && Shopify.analytics && Shopify.analytics.publish) Shopify.analytics.publish(name, data||{}); }catch(e){}
-    try{ if(name==='zt_holiday_popup_email' && window.fbq) fbq('track','Lead',{content_name:'Holiday Recipe Guide'}); }catch(e){}
+    try{ if(name==='zt_holiday_popup_lead' && typeof window.fbq==='function') fbq('track','Lead',{content_name:'Holiday Recipe Guide', content_category:'holiday-popup'}); }catch(e){}
   }
   function post(payload){
     if(!ENDPOINT) return Promise.reject(new Error('not_configured'));
@@ -156,33 +156,24 @@
   s1.addEventListener('submit', function(e){
     e.preventDefault(); err(s1);
     var fn = s1.firstName.value.trim(), em = s1.email.value.trim();
+    var raw = s1.phone.value.trim(), consent = s1.smsConsent.checked;
+    var digits = raw.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'');
     if(!fn){ err(s1,'Please add your first name.'); return; }
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ err(s1,'Please enter a valid email.'); return; }
+    if(raw && digits.length !== 10){ err(s1,'Please enter a 10-digit US mobile number, or leave it blank.'); return; }
+    if(consent && !raw){ err(s1,'Add your mobile number to get texts, or uncheck the box.'); return; }
+    var payload = {firstName:fn, email:em, company:s1.company.value, pageUrl:location.href};
+    // Phone is only sent with explicit consent (unchecked by default).
+    if(raw && consent){ payload.phone = '+1'+digits; payload.smsConsent = true; payload.consentText = s1.querySelector('[data-zt-consent]').innerText.trim(); }
     busy(s1,true);
-    post({step:'email', firstName:fn, email:em, company:s1.company.value, pageUrl:location.href})
+    post(payload)
       .then(function(){
-        lead = {firstName:fn, email:em}; save({submitted: Date.now()});
-        track('zt_holiday_popup_email');
+        lead = {email:em}; save({submitted: Date.now()});
+        track('zt_holiday_popup_lead', {sms: !!payload.smsConsent});
         s1.hidden = true; s2.hidden = false;
-        var p = s2.querySelector('input[name=phone]'); if(window.matchMedia('(pointer:fine)').matches) p.focus();
       })
       .catch(function(){ err(s1,'Something went wrong. Please try again.'); })
       .then(function(){ busy(s1,false); });
-  });
-
-  s2.addEventListener('submit', function(e){
-    e.preventDefault(); err(s2);
-    var digits = s2.phone.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'');
-    if(digits.length !== 10){ err(s2,'Please enter a 10-digit US mobile number.'); return; }
-    busy(s2,true);
-    post({step:'sms', email:lead.email, firstName:lead.firstName, phone:'+1'+digits,
-          consentText: s2.querySelector('[data-zt-consent]').innerText.trim(), pageUrl:location.href})
-      .then(function(){
-        track('zt_holiday_popup_sms');
-        s2.innerHTML = '<div class="zt-hp__done" style="margin:20px auto 10px">✓ All set! Watch for a welcome text.</div><button type="button" class="zt-hp__later" data-zt-close>Close</button>';
-        setTimeout(close, 2600);
-      })
-      .catch(function(){ err(s2,'Something went wrong. Please try again.'); busy(s2,false); });
   });
 
   // Triggers
@@ -198,19 +189,9 @@
       open('exit_intent');
     });
   } else {
-    // Mobile: 25s on page AND 40% scroll, or quick scroll-up back toward the top after 40% (mobile "exit").
-    var maxPct = 0, lastY = window.scrollY, timeOk = false;
-    setTimeout(function(){ timeOk = true; check(); }, 25000);
-    function pct(){ var h = document.documentElement.scrollHeight - innerHeight; return h>0 ? window.scrollY/h : 1; }
-    function check(){
-      var p = pct(); if(p > maxPct) maxPct = p;
-      if(timeOk && maxPct >= 0.4) open('mobile_time_scroll');
-    }
-    window.addEventListener('scroll', function(){
-      var y = window.scrollY;
-      if(maxPct >= 0.4 && lastY - y > 600 && Date.now()-start > 12000) open('mobile_scroll_up');
-      lastY = y; check();
-    }, {passive:true});
+    // Mobile: one timer, 35s on this page (Dana: 30-45s). Leaving the page cancels it.
+    var t = setTimeout(function(){ if(document.visibilityState === 'visible') open('mobile_35s'); }, 35000);
+    window.addEventListener('pagehide', function(){ clearTimeout(t); });
   }
 })();
 </script>

@@ -1,15 +1,15 @@
 [
  [
   "PASS",
+  "desktop: consent box unchecked by default"
+ ],
+ [
+  "PASS",
   "desktop: blocks empty submit"
  ],
  [
   "PASS",
-  "desktop: blocks bad email"
- ],
- [
-  "PASS",
-  "desktop: step1 payload"
+  "desktop: blocks consent without phone"
  ],
  [
   "PASS",
@@ -17,7 +17,19 @@
  ],
  [
   "PASS",
-  "desktop: step2 payload + consent text"
+  "desktop: no Pixel Lead before success"
+ ],
+ [
+  "PASS",
+  "desktop: one request with email + phone + consent"
+ ],
+ [
+  "PASS",
+  "desktop: Pixel Lead fired once on success"
+ ],
+ [
+  "PASS",
+  "desktop: phone without consent is not sent"
  ],
  [
   "PASS",
@@ -25,15 +37,15 @@
  ],
  [
   "PASS",
+  "mobile: consent box unchecked by default"
+ ],
+ [
+  "PASS",
   "mobile: blocks empty submit"
  ],
  [
   "PASS",
-  "mobile: blocks bad email"
- ],
- [
-  "PASS",
-  "mobile: step1 payload"
+  "mobile: blocks consent without phone"
  ],
  [
   "PASS",
@@ -41,7 +53,19 @@
  ],
  [
   "PASS",
-  "mobile: step2 payload + consent text"
+  "mobile: no Pixel Lead before success"
+ ],
+ [
+  "PASS",
+  "mobile: one request with email + phone + consent"
+ ],
+ [
+  "PASS",
+  "mobile: Pixel Lead fired once on success"
+ ],
+ [
+  "PASS",
+  "mobile: phone without consent is not sent"
  ],
  [
   "PASS",
@@ -69,11 +93,11 @@
  ],
  [
   "PASS",
-  "mobile: not shown at 3s even with scroll"
+  "mobile: not shown at 30s"
  ],
  [
   "PASS",
-  "mobile: shown after 25s + 40% scroll"
+  "mobile: shown at ~35s"
  ],
  [
   "PASS",

@@ -47,23 +47,17 @@ export async function handle(b, env, fetchImpl = fetch) {
   const firstName = String(b.firstName || '').trim().slice(0, 60);
   const now = new Date().toISOString();
 
-  if (b.step === 'email') {
-    if (!firstName) throw httpErr('first_name', 400);
-    const body = buildEmailUpsert({ email, firstName, pageUrl: b.pageUrl }, env);
-    const c = await ghl('/contacts/upsert', body, env, fetchImpl);
-    await addTags(c.id, EMAIL_TAGS, env, fetchImpl); // explicit add so the tag-added trigger fires even on existing contacts
-    return { contactId: c.id };
-  }
+  if (!firstName) throw httpErr('first_name', 400);
+  const wantsSms = b.smsConsent === true && b.phone != null;
+  if (wantsSms && !/^\+1\d{10}$/.test(String(b.phone))) throw httpErr('phone', 400);
 
-  if (b.step === 'sms') {
-    const phone = String(b.phone || '');
-    if (!/^\+1\d{10}$/.test(phone)) throw httpErr('phone', 400);
-    const body = buildSmsUpsert({ email, firstName, phone, consentText: b.consentText, pageUrl: b.pageUrl, now }, env);
-    const c = await ghl('/contacts/upsert', body, env, fetchImpl);
-    await addTags(c.id, SMS_TAGS, env, fetchImpl);
-    return { contactId: c.id };
-  }
-  throw httpErr('step', 400);
+  // One request from the pop-up: email lead always; phone + SMS consent only when the box was checked.
+  const body = wantsSms
+    ? { ...buildEmailUpsert({ email, firstName }, env), ...buildSmsUpsert({ email, phone: String(b.phone), consentText: b.consentText, pageUrl: b.pageUrl, now }, env) }
+    : buildEmailUpsert({ email, firstName }, env);
+  const c = await ghl('/contacts/upsert', body, env, fetchImpl);
+  await addTags(c.id, wantsSms ? [...EMAIL_TAGS, ...SMS_TAGS] : EMAIL_TAGS, env, fetchImpl);
+  return { contactId: c.id, sms: wantsSms };
 }
 
 export function buildEmailUpsert({ email, firstName, pageUrl }, env) {
