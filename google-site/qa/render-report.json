@@ -7,11 +7,20 @@
       "failed": [],
       "vw": 390,
       "overflow": 0,
-      "wide": [],
+      "wide": [
+        "A.scard 482",
+        "SPAN.ph 482",
+        "IMG. 482",
+        "SPAN.bd 482",
+        "SPAN.nm 471",
+        "SPAN.fact 471",
+        "SPAN.pr 471",
+        "A.scard 646"
+      ],
       "broken": [],
-      "ctaBottom": 468,
-      "priceBottom": 536,
-      "fineBottom": 617,
+      "ctaBottom": 641,
+      "priceBottom": null,
+      "fineBottom": null,
       "links": [
         "/home",
         "/cacao",
@@ -19,16 +28,25 @@
         "/our-story",
         "/faq",
         "/contact",
-        "https://zeotein.com/products/zeotein-cacao-bag-30-try",
+        "#lineup",
+        "https://zeotein.com/products/zeotein-bone-broth-protein-powder",
+        "https://zeotein.com/products/zeotein-collagen-peptides",
+        "https://zeotein.com/products/organic-hemp-protein-powder-premium-plant-based-protein",
+        "https://zeotein.com/products/organic-pumpkin-seed-protein-powder",
+        "https://zeotein.com/products/organic-fermented-cacao-powder-premium-unsweetened",
+        "https://zeotein.com/products/organic-mct-oil-powder",
+        "https://zeotein.com/products/organic-sea-moss-powder",
+        "https://zeotein.com/products/organic-lion-s-mane-mushroom-powder",
         "/refund-policy",
+        "https://zeotein.com/products/zeotein-cacao-bag-30-try",
         "mailto:hello@zeotein.com",
         "https://zeotein.com/a/subscriptions/login",
         "/shipping",
         "https://zeotein.com/policies/privacy-policy",
         "https://zeotein.com/policies/terms-of-service"
       ],
-      "h1": "Your Protein Shake Shouldn't Need Backup",
-      "height": 9191
+      "h1": "Short Labels You Can Read in Seconds",
+      "height": 8159
     },
     {
       "slug": "home",
@@ -39,9 +57,9 @@
       "overflow": 0,
       "wide": [],
       "broken": [],
-      "ctaBottom": 642,
-      "priceBottom": 691,
-      "fineBottom": 753,
+      "ctaBottom": 755,
+      "priceBottom": null,
+      "fineBottom": null,
       "links": [
         "/home",
         "/cacao",
@@ -49,16 +67,25 @@
         "/our-story",
         "/faq",
         "/contact",
-        "https://zeotein.com/products/zeotein-cacao-bag-30-try",
+        "#lineup",
+        "https://zeotein.com/products/zeotein-bone-broth-protein-powder",
+        "https://zeotein.com/products/zeotein-collagen-peptides",
+        "https://zeotein.com/products/organic-hemp-protein-powder-premium-plant-based-protein",
+        "https://zeotein.com/products/organic-pumpkin-seed-protein-powder",
+        "https://zeotein.com/products/organic-fermented-cacao-powder-premium-unsweetened",
+        "https://zeotein.com/products/organic-mct-oil-powder",
+        "https://zeotein.com/products/organic-sea-moss-powder",
+        "https://zeotein.com/products/organic-lion-s-mane-mushroom-powder",
         "/refund-policy",
+        "https://zeotein.com/products/zeotein-cacao-bag-30-try",
         "mailto:hello@zeotein.com",
         "https://zeotein.com/a/subscriptions/login",
         "/shipping",
         "https://zeotein.com/policies/privacy-policy",
         "https://zeotein.com/policies/terms-of-service"
       ],
-      "h1": "Your Protein Shake Shouldn't Need Backup",
-      "height": 6034
+      "h1": "Short Labels You Can Read in Seconds",
+      "height": 5995
     },
     {
       "slug": "cacao",
@@ -89,7 +116,7 @@
         "https://zeotein.com/policies/terms-of-service"
       ],
       "h1": "One Bag Does What Your Whole Shelf Was Doing",
-      "height": 11841
+      "height": 11997
     },
     {
       "slug": "cacao",
@@ -151,7 +178,7 @@
         "https://zeotein.com/policies/terms-of-service"
       ],
       "h1": "Plant Protein. Five Ingredients. One Stick.",
-      "height": 9306
+      "height": 9295
     },
     {
       "slug": "vegan",

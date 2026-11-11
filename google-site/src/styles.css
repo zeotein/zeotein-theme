@@ -302,6 +302,87 @@
 @media (max-width:600px) and (max-height:620px){.ztg .announce{display:none}.ztg .hero .sub{display:none}}
 @media (prefers-reduced-motion:reduce){.ztg *{transition:none!important}}
 
+/* Home: lineup-first opening (Dana, 11 Nov). Full lineup and why Zeotein before any single-product pitch. */
+.ztg .hero.line{padding:36px 0 44px}
+.ztg .hero.line .wrap{display:grid;grid-template-columns:1.15fr .85fr;grid-template-areas:"intro why" "blends blends" "singles singles";gap:30px 40px;align-items:end}
+.ztg .hero.line .intro{grid-area:intro}
+.ztg .hero.line .why{grid-area:why}
+.ztg .hero.line .blends{grid-area:blends}
+.ztg .hero.line .singles-wrap{grid-area:singles}
+.ztg .hero.line h1{margin:.3em 0 .25em;max-width:13em}
+.ztg .hero.line .sub{max-width:36em}
+.ztg .rating{display:flex;align-items:center;gap:10px;margin-top:14px;font-weight:600;font-size:.95rem;color:#EDE6F7}
+.ztg .rating .s{color:var(--gold);letter-spacing:2px;font-size:1.05rem}
+.ztg .why .eyebrow{margin-bottom:10px}
+.ztg .why ul{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ztg .why li{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:12px 14px}
+.ztg .why li b{display:block;font-size:.98rem;color:var(--white);margin-bottom:3px}
+.ztg .why li span{display:block;font-size:.84rem;line-height:1.45;color:#CFC4E1}
+.ztg .blends{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ztg .blend{display:grid;grid-template-columns:minmax(150px,42%) 1fr;gap:18px;align-items:center;background:var(--white);color:var(--ink);border-radius:var(--r-lg);padding:16px;box-shadow:var(--shadow-lg)}
+.ztg .blend .ph{display:block;aspect-ratio:1/1;border-radius:14px;background:#fff}
+.ztg .blend .ph img{display:block;width:100%;height:100%;object-fit:contain}
+.ztg .blend .bd{display:grid;gap:8px;align-content:center}
+.ztg .blend .kind{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-ink)}
+.ztg .blend h2{font-size:1.9rem}
+.ztg .blend .tags{display:flex;flex-wrap:wrap;gap:6px}
+.ztg .blend .tags span{font-size:.74rem;font-weight:600;background:var(--lav);color:var(--purple);padding:4px 10px;border-radius:999px}
+.ztg .blend .desc{font-size:.9rem;color:var(--muted);line-height:1.5}
+.ztg .blend .from{font-weight:600;font-size:.95rem}
+.ztg .blend .from b{font-size:1.3rem}
+.ztg .blend .btn{min-height:48px;padding:.65em 1.3em;font-size:.98rem;justify-self:start}
+.ztg .singles-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;margin:4px 0 14px}
+.ztg .singles-head h2{font-size:1.55rem;color:var(--white)}
+.ztg .singles-head p{font-size:.88rem;color:#CFC4E1}
+.ztg .singles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.ztg .scard{display:grid;grid-template-rows:auto 1fr;background:var(--white);color:var(--ink);border-radius:16px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.18);transition:transform .15s ease,box-shadow .15s ease}
+.ztg .scard:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(0,0,0,.26)}
+.ztg .scard .ph{display:block;aspect-ratio:1/1;background:#fff}
+.ztg .scard .ph img{display:block;width:100%;height:100%;object-fit:contain}
+.ztg .scard .bd{display:grid;gap:3px;padding:10px 14px 14px;align-content:start;border-top:1px solid var(--line)}
+.ztg .scard .nm{font-weight:700;font-size:.95rem;line-height:1.25}
+.ztg .scard .fact{font-size:.8rem;color:var(--muted);line-height:1.35}
+.ztg .scard .pr{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-top:6px;font-weight:600;font-size:.88rem}
+.ztg .scard .go{color:var(--teal-ink);font-size:.82rem;white-space:nowrap}
+.ztg .line-note{margin-top:16px;font-size:.8rem;color:#BFB3D3;text-align:center}
+@media (max-width:900px){
+  .ztg .hero.line .wrap{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "blends" "singles" "why";gap:22px}
+  .ztg .blends{gap:10px}
+  .ztg .blend{grid-template-columns:minmax(0,1fr);padding:10px;gap:8px;align-content:start;align-items:start}
+  .ztg .blend .bd{gap:6px}
+  .ztg .blend .desc{display:none}
+  .ztg .blend .tags span:nth-child(n+3){display:none}
+  .ztg .blend h2{font-size:1.35rem}
+  .ztg .blend .from{font-size:.82rem}
+  .ztg .blend .from b{font-size:1.1rem}
+  .ztg .blend .btn{justify-self:stretch;min-height:44px;font-size:.9rem;padding:.5em .8em}
+  .ztg .singles{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 -20px;padding:2px 20px 10px;scrollbar-width:none}
+  .ztg .singles::-webkit-scrollbar{display:none}
+  .ztg .scard{flex:0 0 40%;scroll-snap-align:start}
+  .ztg .scard .pr{display:block;white-space:nowrap}
+  .ztg .scard .go{display:none}
+}
+@media (max-width:600px){
+  .ztg .hero.line{padding:16px 0 30px}
+  .ztg .hero.line h1{font-size:1.95rem}
+  .ztg .rating{margin-top:10px;font-size:.88rem}
+  .ztg .why li{padding:10px 12px}
+  .ztg .why li span{font-size:.8rem}
+  .ztg .singles-head h2{font-size:1.3rem}
+  .ztg .scard{flex-basis:44%}
+  .ztg .scard .bd{padding:9px 11px 12px}
+  .ztg .scard .nm{font-size:.88rem}
+  .ztg .scard .fact{font-size:.76rem}
+  .ztg .hero.line .sub .more{display:none}
+  .ztg .blend .kind{display:none}
+  .ztg .blend .tags span:nth-child(n+2){display:none}
+  .ztg .blend h2{font-size:1.22rem}
+}
+/* Product shots are square first images: keep them whole, never cropped */
+.ztg .hero-media .bag.square{max-width:480px;margin:0 auto}
+.ztg .hero-media .bag.square img{width:100%;height:auto}
+.ztg .kit-row .ico{width:64px;height:64px;border-radius:12px;background:var(--lav);color:var(--purple);display:grid;place-items:center;font-size:1.6rem;font-weight:300;line-height:1}
+
 /* ghl-fit:start  GoHighLevel wraps a Custom Code element in a section, row and column with default padding and a 1170px row.
    These rules let the block run edge to edge and keep the header pinned. build.py also writes them to dist/ghl/00-website-head.html. */
 .c-section:has(.ztg),.c-row:has(.ztg),.c-column:has(.ztg){padding:0!important;margin:0!important;max-width:none!important}

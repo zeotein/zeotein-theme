@@ -27,7 +27,7 @@ conversion work exactly as they do today.
 
 | GHL page | Path | Sells / covers |
 |---|---|---|
-| Home | `/home` | Cacao Starter Kit hero, both formulas, label, reviews, FAQ |
+| Home | `/home` | Full lineup first (Cacao, Vegan, eight single-ingredient powders) and why Zeotein, then the Cacao deep-dive, reviews, FAQ |
 | Cacao | `/cacao` | Cacao Starter Kit ($76.99 first order, then $99.99) and the one-time bag ($93.49) |
 | Vegan | `/vegan` | Vegan Starter Kit ($96.99 first order, then $124.99) and the 7-day pack ($44.99) |
 | Our story | `/our-story` | Brand page, no founder story |
@@ -65,12 +65,15 @@ Re-paste only the pages whose block changed.
 - Describes the mineral as "a naturally occurring volcanic mineral" and points to the Supplement Facts panel on
   the bag for the full name (Guardrails section 4).
 - No disease, detox, immune, inflammation, weight-loss or GLP-1 language anywhere, including alt text and schema.
-- Packaging photos are never cropped. Every pouch photo is the full shot with four label words garbled
-  (ZEOLITE, IMMUNE, DETOX, INFLAMMATION) by reordering the bag's own printed letters, so the font and lighting stay
-  as photographed; the rest of the label reads as printed. Each file passes the OCR gate (3x upscale, contrast,
-  inverted, several page modes) at full size and at 640px. Files live in Shopify Files (uploaded 10 Nov 2026).
-- Star ratings appear only as the live store-wide Judge.me figure, read when the page loads. Set
-  `judgemePublicToken` in `src/config.json` to switch them on; without it the rating line stays hidden.
+- Packaging photos are never cropped. Product photos are each product's first image on zeotein.com (Dana, 11 Nov):
+  the bag for Cacao, the stick-pack shot for Vegan, the pouch for each single-ingredient powder. No scoop shots.
+  Where a label prints ZEOLITE, IMMUNE, DETOX or INFLAMMATION (Cacao bag, Vegan stick packs, including the small print
+  on each stick) those words are garbled by reordering the label's own letters, so font and lighting stay as
+  photographed. Each file passes the OCR gate (3x upscale, contrast, inverted, several page modes) at full size and
+  640px. Garbled files live in Shopify Files (uploaded 11 Nov 2026); the job scripts are in `tools/jobs/`.
+- Zeotein Zeolite Powder is not shown: the mineral is never named on Google-facing pages and its pouch name is the word.
+- Ratings read "4.9/5 · Verified Buyers" and nothing else (Dana, 11 Nov; `ratingText` in `src/config.json`).
+  Judge.me showed 4.92 to 4.94 when this was set. No review counts.
 - 23g is Cacao only, Vegan is 20g. Cacao says "zero sugar", Vegan says "zero added sugar". "First order", never
   "first month". No time of day, no frequency, no "one scoop", no founder language.
 - The 30-day guarantee is described exactly as the published refund policy states it (first order, one 30-day

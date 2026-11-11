@@ -1,56 +1,60 @@
-<section class="hero">
+<section class="hero line" id="lineup" aria-labelledby="zt-h1">
   <div class="wrap">
-    <div>
-      <p class="eyebrow">Protein. Collagen. MCT. Sea moss.</p>
-      <h1>Your Protein Shake Shouldn't Need Backup</h1>
-      <p class="sub">One bag instead of a protein tub, a collagen tub and a shelf of add-ons. Shake it with water, milk or coffee and go.</p>
-      <ul class="ticks">
-        <li>23g protein + 14g grass-fed collagen per serving</li>
-        <li>Zero sugar. No sweeteners. Whey-free.</li>
-        <li>Six ingredients, all listed below</li>
+    <div class="intro">
+      <p class="eyebrow">The Zeotein lineup</p>
+      <h1 id="zt-h1">Short Labels You Can Read in Seconds</h1>
+      <p class="sub">Two protein blends and a range of single-ingredient powders. <span class="more">Every pouch lists exactly what's inside, and none of them has a sweetener.</span></p>
+      <p class="rating"><span class="s" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>{{ratingText}}</p>
+    </div>
+    <div class="why">
+      <p class="eyebrow">Why Zeotein</p>
+      <ul>
+        <li><b>Short labels</b><span>Six ingredients in Cacao. Five in Vegan. Each single is built around one ingredient.</span></li>
+        <li><b>Protein first</b><span>23g per Cacao serving. 20g per Vegan stick.</span></li>
+        <li><b>Sourced with care</b><span>Grass-fed collagen and bone broth. Organic plant proteins. Wildcrafted sea moss.</span></li>
+        <li><b>No sweeteners</b><span>Cacao-forward and nutty blends, plain singles. You taste what's in the pouch.</span></li>
       </ul>
-      <div class="offer">
-        <div class="stars" data-zt-stars><span class="s" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span data-zt-stars-text></span></div>
-        <a class="btn btn-primary" data-zt-hero-cta href="{{urlCacaoKit}}">Claim My 55% Off <span class="arrow" aria-hidden="true">&rarr;</span></a>
-        <p class="priceline"><strong>{{cacaoKitPrice}}</strong> your first order, then {{cacaoKitRenewal}} per delivery</p>
-        <p class="fine">First-time subscribers, one per customer. Renews until you cancel; skip, pause or cancel anytime. Free US shipping. 30-day money-back guarantee on your first order.</p>
-      </div>
     </div>
-    <div class="hero-media">
-      <div class="cutout"><img src="{{imgCacaoBagShaker}}" srcset="{{imgCacaoBagShakerSm}} 640w, {{imgCacaoBagShaker}} 1200w" sizes="(max-width:900px) 92vw, 520px" width="1200" height="1096" alt="Zeotein Cacao bulk bag with the CleanBlend shaker and a scoop of cacao protein" fetchpriority="high"></div>
-      <p class="caption">In your first box: the 30-serving bag, a CleanBlend shaker, the Save-A-Scoop and three guides. {{cacaoKitValue}} if bought separately.</p>
-    </div>
-  </div>
-</section>
-
-<section class="block" aria-labelledby="zt-formulas">
-  <div class="wrap">
-    <div class="head">
-      <p class="eyebrow">Two formulas</p>
-      <h2 id="zt-formulas">Pick the one that fits how you eat</h2>
-      <p class="lead">Same idea, two protein bases. Each one keeps the ingredient list short enough to read in seconds.</p>
-    </div>
-    <div class="choose">
-      <article class="pcard">
-        <div class="ph"><img src="{{imgCacaoBagSm}}" width="640" height="512" alt="Zeotein Cacao bulk bag with a scoop of cacao protein" loading="lazy"></div>
+    <div class="blends">
+      <article class="blend">
+        <a class="ph" href="{{pathCacao}}" tabindex="-1" aria-hidden="true"><img src="{{imgCacaoBagFirstSm}}" srcset="{{imgCacaoBagFirstSm}} 640w, {{imgCacaoBagFirst}} 1024w" sizes="(max-width:900px) 44vw, 220px" width="640" height="640" alt="" fetchpriority="high"></a>
         <div class="bd">
-          <h3>Zeotein Cacao</h3>
-          <div class="meta"><span>23g protein</span><span>14g collagen peptides</span><span>Six ingredients</span><span>Zero sugar</span></div>
-          <p class="muted">Grass-fed bone broth and grass-fed collagen with organic fermented cacao. Cacao-forward and unsweetened, closer to dark chocolate than a candy-bar shake.</p>
+          <p class="kind">Protein blend</p>
+          <h2>Zeotein Cacao</h2>
+          <p class="tags"><span>23g protein</span><span>14g collagen</span><span>Six ingredients</span><span>Zero sugar</span></p>
+          <p class="desc">Grass-fed bone broth and collagen with organic fermented cacao. Unsweetened and cacao-forward.</p>
           <p class="from">Starter Kit <b>{{cacaoKitPrice}}</b> your first order</p>
-          <a class="btn btn-dark" href="{{pathCacao}}">See the Cacao Starter Kit <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a class="btn btn-primary" data-zt-hero-cta href="{{pathCacao}}">Shop Cacao <span class="arrow" aria-hidden="true">&rarr;</span></a>
         </div>
       </article>
-      <article class="pcard">
-        <div class="ph"><img src="{{imgVeganPouchSm}}" width="640" height="848" alt="Zeotein Vegan pouch" loading="lazy"></div>
+      <article class="blend">
+        <a class="ph" href="{{pathVegan}}" tabindex="-1" aria-hidden="true"><img src="{{imgVeganSticksFirstSm}}" srcset="{{imgVeganSticksFirstSm}} 640w, {{imgVeganSticksFirst}} 1024w" sizes="(max-width:900px) 44vw, 220px" width="640" height="640" alt="" fetchpriority="high"></a>
         <div class="bd">
-          <h3>Zeotein Vegan</h3>
-          <div class="meta"><span>20g plant protein</span><span>Five ingredients</span><span>Zero added sugar</span><span>Stick packs</span></div>
-          <p class="muted">Organic pumpkin seed and organic hemp protein in single-serve stick packs. Natural nutty flavor. Tear, pour, shake.</p>
-          <p class="from">Vegan Starter Kit <b>{{veganKitPrice}}</b> your first order</p>
-          <a class="btn btn-dark" href="{{pathVegan}}">See Zeotein Vegan <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <p class="kind">Protein blend</p>
+          <h2>Zeotein Vegan</h2>
+          <p class="tags"><span>20g plant protein</span><span>Five ingredients</span><span>Zero added sugar</span><span>Stick packs</span></p>
+          <p class="desc">Organic pumpkin seed and hemp protein in single-serve stick packs. Natural nutty flavor.</p>
+          <p class="from">Starter Kit <b>{{veganKitPrice}}</b> your first order</p>
+          <a class="btn btn-primary" href="{{pathVegan}}">Shop Vegan <span class="arrow" aria-hidden="true">&rarr;</span></a>
         </div>
       </article>
+    </div>
+    <div class="singles-wrap">
+      <div class="singles-head">
+        <h2>Single-ingredient powders</h2>
+        <p>Each pouch is built around one ingredient. Tap one to see sizes on zeotein.com.</p>
+      </div>
+      <div class="singles">
+        <a class="scard" href="{{urlBoneBroth}}"><span class="ph"><img src="{{imgSingleBoneBroth}}" width="480" height="480" alt="Zeotein Grass-Fed Bone Broth Powder pouch" loading="lazy"></span><span class="bd"><span class="nm">Grass-Fed Bone Broth</span><span class="fact">15g protein per serving</span><span class="pr">From {{priceBoneBroth}} <span class="go">Shop <span aria-hidden="true">&rarr;</span></span></span></span></a>
+        <a class="scard" href="{{urlCollagen}}"><span class="ph"><img src="{{imgSingleCollagen}}" width="480" height="480" alt="Zeotein Grass-Fed Collagen Peptides Powder pouch" loading="lazy"></span><span class="bd"><span class="nm">Grass-Fed Collagen Peptides</span><span class="fact">11g protein per serving</span><span class="pr">From {{priceCollagen}} <span class="go">Shop <span aria-hidden="true">&rarr;</span></span></span></span></a>
+        <a class="scard" href="{{urlHemp}}"><span class="ph"><img src="{{imgSingleHemp}}" width="480" height="480" alt="Zeotein Organic Hemp Protein Powder pouch" loading="lazy"></span><span class="bd"><span class="nm">Organic Hemp Protein</span><span class="fact">14g protein per serving</span><span class="pr">From {{priceHemp}} <span class="go">Shop <span aria-hidden="true">&rarr;</span></span></span></span></a>
+        <a class="scard" href="{{urlPumpkin}}"><span class="ph"><img src="{{imgSinglePumpkin}}" width="480" height="480" alt="Zeotein Organic Pumpkin Seed Protein Powder pouch" loading="lazy"></span><span class="bd"><span class="nm">Organic Pumpkin Seed Protein</span><span class="fact">11g protein per serving</span><span class="pr">From {{pricePumpkin}} <span class="go">Shop <span aria-hidden="true">&rarr;</span></span></span></span></a>
+        <a class="scard" href="{{urlCacaoPowder}}"><span class="ph"><img src="{{imgSingleCacao}}" width="480" height="480" alt="Zeotein Organic Cacao Powder pouch" loading="lazy"></span><span class="bd"><span class="nm">Organic Fermented Cacao</span><span class="fact">Raw and fermented, unsweetened</span><span class="pr">From {{priceCacaoPowder}} <span class="go">Shop <span aria-hidden="true">&rarr;</span></span></span></span></a>
+        <a class="scard" href="{{urlMct}}"><span class="ph"><img src="{{imgSingleMct}}" width="480" height="480" alt="Zeotein Organic MCT Oil Powder pouch" loading="lazy"></span><span class="bd"><span class="nm">Organic MCT Oil Powder</span><span class="fact">Made from coconut</span><span class="pr">From {{priceMct}} <span class="go">Shop <span aria-hidden="true">&rarr;</span></span></span></span></a>
+        <a class="scard" href="{{urlSeaMoss}}"><span class="ph"><img src="{{imgSingleSeaMoss}}" width="480" height="480" alt="Zeotein Organic Sea Moss Powder pouch" loading="lazy"></span><span class="bd"><span class="nm">Organic Sea Moss</span><span class="fact">Wildcrafted in St. Lucia</span><span class="pr">From {{priceSeaMoss}} <span class="go">Shop <span aria-hidden="true">&rarr;</span></span></span></span></a>
+        <a class="scard" href="{{urlLionsMane}}"><span class="ph"><img src="{{imgSingleLionsMane}}" width="480" height="480" alt="Zeotein Organic Lion's Mane Mushroom Powder pouch" loading="lazy"></span><span class="bd"><span class="nm">Organic Lion's Mane</span><span class="fact">Finely milled mushroom powder</span><span class="pr">From {{priceLionsMane}} <span class="go">Shop <span aria-hidden="true">&rarr;</span></span></span></span></a>
+      </div>
+      <p class="line-note">Single-ingredient powders are final sale. The 30-day money-back guarantee covers your first order of a protein blend.</p>
     </div>
   </div>
 </section>
@@ -87,6 +91,8 @@
       <details><summary>What comes in the Cacao Starter Kit?</summary><div class="a"><p>The 30-serving Cacao bulk bag, a CleanBlend shaker, the Save-A-Scoop, and three digital guides: the Zeotein Starter Guide, the Cacao Recipe Guide and the Vegan Recipe Guide. That's {{cacaoKitValue}} if bought separately. Your first order is {{cacaoKitPrice}}.</p></div></details>
       <details><summary>What happens after my first order?</summary><div class="a"><p>Your refill bag ships at {{cacaoKitRenewal}} on the schedule you pick: every 30 days, 6 weeks or 8 weeks. Shipping stays free in the US. Skip, pause, change the date or cancel anytime in your account. The shaker, scoop and guides are yours to keep either way.</p></div></details>
       <details><summary>Can I buy once without subscribing?</summary><div class="a"><p>Yes. The bag on its own is {{cacaoOncePrice}} with a free Save-A-Scoop and free US shipping. The shaker and guides come with the Starter Kit only. <a href="{{pathCacao}}">See both options</a>.</p></div></details>
+      <details><summary>Where do I buy the single-ingredient powders?</summary><div class="a"><p>Each one has its own page at zeotein.com with every size and price. Tap any pouch at the top of this page to go straight there.</p></div></details>
+      <details><summary>Which products does the 30-day guarantee cover?</summary><div class="a"><p>Your first order of a protein blend: Zeotein Cacao or Zeotein Vegan, including the Starter Kits. Single-ingredient powders are final sale, and 7-day packs and accessories aren't covered. <a href="{{pathRefund}}">Read the refund policy</a>.</p></div></details>
       <details><summary>How fast does it ship?</summary><div class="a"><p>Orders leave {{city}} in 1 to 2 business days, and tracking is emailed when yours ships.</p></div></details>
     </div>
     <p class="center" style="margin-top:22px"><a class="textlink" href="{{pathFaq}}">See every question</a></p>
@@ -105,6 +111,6 @@
   </div>
 </section>
 
-{{> sticky-cacao}}
+{{> sticky-home}}
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Zeotein LLC","url":"https://zeotein.com","logo":"{{imgLogo}}","email":"{{email}}","address":{"@type":"PostalAddress","addressLocality":"Manitowoc","addressRegion":"WI","addressCountry":"US"}}</script>

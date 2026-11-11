@@ -44,7 +44,6 @@
     "pathRefund": "/refund-policy",
     "imgLogo": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?v=1762380884",
     "imgShaker": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cleanblend-shaker-bottle-black-27oz.png?v=1791444108&width=600",
-    "imgScoop": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-save-a-scoop-protein-powder-scoop.png?v=1791447033&width=600",
     "imgStarterGuide": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-starter-guide_905e6def-794d-4f75-8dd0-1a50e955f217.png?v=1787105401&width=600",
     "imgCacaoGuide": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/cacao_recipe_guide_7a994d77-7260-4e9b-a0d3-e524ab95d482.png?v=1787106037&width=600",
     "imgVeganGuide": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/vegan_recipe_guide.png?v=1787105689&width=600",
@@ -60,15 +59,37 @@
     "announceHtml": "Cacao Starter Kit: <b>{{cacaoKitPrice}} first order</b> &middot; free US shipping",
     "navCtaLabel": "Claim My 55% Off",
     "navCtaHref": "{{urlCacaoKit}}",
-    "imgCacaoKit": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-starter-kit.webp?v=1794315719",
-    "imgCacaoKitSm": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-starter-kit.webp?v=1794315719&width=700",
-    "imgCacaoBagShaker": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bag-and-shaker.webp?v=1794315719",
-    "imgCacaoBagShakerSm": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bag-and-shaker.webp?v=1794315719&width=640",
-    "imgCacaoBag": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bag.webp?v=1794315719",
-    "imgCacaoBagSm": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bag.webp?v=1794315719&width=640",
-    "imgVeganPouch": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-vegan-pouch.webp?v=1794315719",
-    "imgVeganPouchSm": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-vegan-pouch.webp?v=1794315719&width=640",
-    "imgTypicalRoutine": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/typical-protein-routine.webp?v=1794315719&width=640"
+    "imgTypicalRoutine": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/typical-protein-routine.webp?v=1794315719&width=640",
+    "imgCacaoBagFirst": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bag-first.webp?v=1794429317",
+    "imgCacaoBagFirstSm": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bag-first.webp?v=1794429317&width=640",
+    "imgVeganSticksFirst": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-vegan-sticks-30-first.webp?v=1794429317",
+    "imgVeganSticksFirstSm": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-vegan-sticks-30-first.webp?v=1794429317&width=640",
+    "imgSingleBoneBroth": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/grass-fed-bone-broth-protein-hero-strip.png?v=1793754870&width=480",
+    "imgSingleCollagen": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/grass-fed-collagen-peptides-hero-strip.png?v=1793754870&width=480",
+    "imgSingleCacao": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/organic-fermented-cacao-powder-hero-strip.png?v=1793754869&width=480",
+    "imgSingleHemp": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/organic-hemp-protein-hero-strip.png?v=1793754870&width=480",
+    "imgSingleLionsMane": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/organic-lions-mane-hero-strip.png?v=1793754870&width=480",
+    "imgSingleMct": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/organic-mct-oil-powder-hero-strip.png?v=1793754870&width=480",
+    "imgSinglePumpkin": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/organic-pumpkin-seed-protein-hero-strip.png?v=1793754869&width=480",
+    "imgSingleSeaMoss": "https://cdn.shopify.com/s/files/1/0775/5458/1717/files/organic-sea-moss-hero-strip.png?v=1793754871&width=480",
+    "priceBoneBroth": "$29.99",
+    "priceCollagen": "$27.99",
+    "priceCacaoPowder": "$17.99",
+    "priceHemp": "$21.99",
+    "priceLionsMane": "$39.99",
+    "priceMct": "$21.99",
+    "pricePumpkin": "$19.99",
+    "priceSeaMoss": "$34.99",
+    "urlBoneBroth": "https://zeotein.com/products/zeotein-bone-broth-protein-powder",
+    "urlCollagen": "https://zeotein.com/products/zeotein-collagen-peptides",
+    "urlCacaoPowder": "https://zeotein.com/products/organic-fermented-cacao-powder-premium-unsweetened",
+    "urlHemp": "https://zeotein.com/products/organic-hemp-protein-powder-premium-plant-based-protein",
+    "urlLionsMane": "https://zeotein.com/products/organic-lion-s-mane-mushroom-powder",
+    "urlMct": "https://zeotein.com/products/organic-mct-oil-powder",
+    "urlPumpkin": "https://zeotein.com/products/organic-pumpkin-seed-protein-powder",
+    "urlSeaMoss": "https://zeotein.com/products/organic-sea-moss-powder",
+    "ratingText": "4.9/5 &middot; Verified Buyers",
+    "stepsEyebrow": "How it works"
   },
   "pages": [
     {
@@ -77,7 +98,13 @@
       "path": "/home",
       "name": "Home",
       "seoTitle": "Zeotein | Cacao and Vegan Protein Powder, Short Ingredient Lists",
-      "seoDescription": "Cacao protein with grass-fed bone broth and collagen, or plant protein from pumpkin seed and hemp. No sweeteners. Cacao Starter Kit $76.99 first order with free US shipping."
+      "seoDescription": "Cacao protein with grass-fed bone broth and collagen, or plant protein from pumpkin seed and hemp. No sweeteners. Cacao Starter Kit $76.99 first order with free US shipping.",
+      "vars": {
+        "announceHtml": "Starter Kits, first order: Cacao <b>{{cacaoKitPrice}}</b> &middot; Vegan <b>{{veganKitPrice}}</b>",
+        "navCtaLabel": "Shop Starter Kits",
+        "navCtaHref": "#lineup",
+        "stepsEyebrow": "Our flagship blend &middot; Zeotein Cacao"
+      }
     },
     {
       "slug": "cacao",
@@ -141,5 +168,5 @@
       "seoDescription": "Our 30-day money-back guarantee on your first order of a protein blend, and how to start a claim."
     }
   ],
-  "_images": "Packaging photos are never cropped (Dana's standing rule). Google-site pouch photos are full shots with ZEOLITE, IMMUNE, DETOX and INFLAMMATION garbled on the label; the rest of the label stays as printed. Hosted in Shopify Files (uploaded 10 Nov 2026). Checked with the OCR gate at full size and 640px: none of the four words is read."
+  "_images": "Packaging photos are never cropped (Dana's standing rule). Product photos are each product's FIRST image on zeotein.com (Dana, 11 Nov): the bag for Cacao, the stick-pack shot for Vegan, the pouch for each single-ingredient powder. No scoop shots. Where a label prints ZEOLITE, IMMUNE, DETOX or INFLAMMATION (Cacao bag, Vegan stick packs, including the small print on each stick) those words are garbled by reordering the label's own letters; the files live in Shopify Files (uploaded 11 Nov 2026) and pass the OCR gate at full size and 640px. The single-ingredient pouches print none of those words and are used as published on zeotein.com. The Zeolite Powder is left off this site: the house rules never name the mineral and its pouch name is the word itself."
 }

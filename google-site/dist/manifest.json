@@ -1,5 +1,5 @@
 {
-  "built": "2026-11-10",
+  "built": "2026-11-11",
   "pages": [
     {
       "order": 1,
@@ -9,7 +9,7 @@
       "seoTitle": "Zeotein | Cacao and Vegan Protein Powder, Short Ingredient Lists",
       "seoDescription": "Cacao protein with grass-fed bone broth and collagen, or plant protein from pumpkin seed and hemp. No sweeteners. Cacao Starter Kit $76.99 first order with free US shipping.",
       "ghlFile": "dist/ghl/01-home.html",
-      "bytes": 41129
+      "bytes": 51014
     },
     {
       "order": 2,
@@ -19,7 +19,7 @@
       "seoTitle": "Zeotein Cacao Starter Kit | 23g Protein, 14g Collagen, Zero Sugar",
       "seoDescription": "23g protein and 14g grass-fed collagen peptides per serving. Six ingredients, no sweeteners. Bag, shaker, Save-A-Scoop and three guides for $76.99 your first order.",
       "ghlFile": "dist/ghl/02-cacao.html",
-      "bytes": 48714
+      "bytes": 53677
     },
     {
       "order": 3,
@@ -29,7 +29,7 @@
       "seoTitle": "Zeotein Vegan | 20g Plant Protein, Five Ingredients",
       "seoDescription": "20g plant protein from organic pumpkin seed and organic hemp. Five ingredients, zero added sugar, single-serve stick packs. Vegan Starter Kit $96.99 your first order.",
       "ghlFile": "dist/ghl/03-vegan.html",
-      "bytes": 43247
+      "bytes": 48417
     },
     {
       "order": 4,
@@ -39,7 +39,7 @@
       "seoTitle": "Our Story | Zeotein",
       "seoDescription": "Why Zeotein puts protein and the rest of your shelf into one serving, with an ingredient list short enough to read in seconds. Shipped from Manitowoc, Wisconsin.",
       "ghlFile": "dist/ghl/04-our-story.html",
-      "bytes": 34469
+      "bytes": 39634
     },
     {
       "order": 5,
@@ -49,7 +49,7 @@
       "seoTitle": "Questions | Zeotein",
       "seoDescription": "Ingredients, nutrition, how to mix it, subscriptions, shipping and the 30-day money-back guarantee, answered plainly.",
       "ghlFile": "dist/ghl/05-faq.html",
-      "bytes": 38779
+      "bytes": 43906
     },
     {
       "order": 6,
@@ -59,7 +59,7 @@
       "seoTitle": "Contact Zeotein",
       "seoDescription": "Email hello@zeotein.com. Real replies within 1 to 2 business days. Manage or cancel a subscription online anytime.",
       "ghlFile": "dist/ghl/06-contact.html",
-      "bytes": 32791
+      "bytes": 37918
     },
     {
       "order": 7,
@@ -69,7 +69,7 @@
       "seoTitle": "Shipping | Zeotein",
       "seoDescription": "Orders ship from Manitowoc, Wisconsin in 1 to 2 business days. Free US shipping on Cacao Starter Kit and bag orders from this site.",
       "ghlFile": "dist/ghl/07-shipping.html",
-      "bytes": 34474
+      "bytes": 39601
     },
     {
       "order": 8,
@@ -79,7 +79,7 @@
       "seoTitle": "Refund Policy | Zeotein",
       "seoDescription": "Our 30-day money-back guarantee on your first order of a protein blend, and how to start a claim.",
       "ghlFile": "dist/ghl/08-refund-policy.html",
-      "bytes": 35526
+      "bytes": 40653
     }
   ]
 }

@@ -33,12 +33,15 @@ for c in comp:
     })
 
 ITEMS = [
-    {"level": "crit", "tag": "Do first", "title": "Finish the install: Refund policy block, Head snippet, DNS",
-     "why": "Checked in GoHighLevel's preview on 10 Nov: Home, Cacao, Vegan, Our story, FAQ, Contact and Shipping match the build exactly. Refund policy still shows the old draft. Without the Head snippet GoHighLevel adds a 40px band and side gutters, boxes the page at 1150px on desktop and unpins the header, and all eight SEO titles are empty. shop.zeotein.com has no DNS record yet. Until it does, every Google campaign with its own final URL still lands on marketing.zeotein.com/starter-kit-google.",
-     "closes": "Search_NB_Sales and Z_Pmax_RET point at https://shop.zeotein.com/cacao and the Ad Setup Guardrails list it as approved."},
-    {"level": "crit", "tag": "Fix soon", "title": "Stop sending Google traffic to /starter-kit-google",
+    {"level": "crit", "tag": "Do now", "title": "Re-paste four blocks: Home, Cacao, Vegan, Our story",
+     "why": "11 Nov update. Home now opens with the full lineup (Cacao, Vegan and eight single-ingredient powders) and why Zeotein. Product photos are each product's first image on zeotein.com, with ZEOLITE, IMMUNE, DETOX and INFLAMMATION garbled where the label prints them, and no scoop shots. The rating reads <b>4.9/5 &middot; Verified Buyers</b> only. FAQ, Contact, Shipping and Refund policy look the same, so leave those four as they are.",
+     "closes": "the four live pages match the build. Tell Claude and it re-checks them."},
+    {"level": "warn", "tag": "Decision", "title": "Zeolite Powder is left off the Google site",
+     "why": "The house rules never name the mineral on Google-facing pages, and the product's name on its pouch is the word itself, so it can't be shown or garbled sensibly. The other eight single-ingredient powders are on Home and link to their zeotein.com pages, whose descriptions read clean (checked 11 Nov).",
+     "closes": "you confirm, or say otherwise."},
+    {"level": "crit", "tag": "On hold", "title": "Move Google off /starter-kit-google to shop.zeotein.com",
      "why": "Read live on 10 Nov. The hero bag photo still shows <b>INFLAMMATION SUPPORT</b> in full; the new site garbles it along with ZEOLITE, IMMUNE and DETOX. The old page also shows <b>4.8 average, 214 verified reviews</b> while Judge.me shows 4.94 from 155, lists refills at <b>$2.83 a serving</b> when $99.99 over 30 servings is $3.33, shows Josh M.'s review of Vegan 7 Stick Packs on the Cacao page, and uses \"zero grams of added sugar\" and \"Nothing hidden\", both retired wording.",
-     "closes": "no Google campaign points at it and the new site has replaced it."},
+     "closes": "you say go (your call, 11 Nov): Search_NB_Sales and Z_Pmax_RET point at https://shop.zeotein.com/cacao, the sitelinks below are added, and the Ad Setup Guardrails list the domain as approved. Live check 11 Nov: 8 of 8 pages match the build, compliance scan 0 blocking, test ad click carries gclid and UTMs into Shopify at $76.99 and $96.99."},
     {"level": "warn", "tag": "Optional", "title": "Keep the Google rep's OK in writing",
      "why": "You have the reps' go-ahead on the garbled label photos. A short email from Ayesha Ali saying so, kept with the Ad Decisions log, is what you'd point to if an automated review ever flags the images or the volcanic mineral.",
      "closes": "the email is saved and logged in Ad Decisions."},
@@ -51,9 +54,6 @@ ITEMS = [
     {"level": "ok", "tag": "Verify", "title": "Vegan Starter Kit buyers get the guides email",
      "why": "The site says the Starter Guide and two recipe guides arrive by email, matching the Vegan product page. Confirm an order of zeotein-vegan-sticks-30-intro triggers that email in GoHighLevel.",
      "closes": "one order shows the guides email went out."},
-    {"level": "ok", "tag": "Optional", "title": "Turn on the live star rating",
-     "why": "Your rule is the live store-wide Judge.me figure or nothing, so the rating line is hidden for now. Judge.me → Settings → Integrations → View API tokens → copy the Public token into <span class=\"mono\">judgemePublicToken</span> in src/config.json, rebuild, and re-paste Home, Cacao and Vegan. Store-wide today: 4.94 from 155 reviews.",
-     "closes": "the token is set and the rating shows on the live pages."},
 ]
 
 

@@ -8,21 +8,28 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 75,
+          "line": 300,
           "match": "guarantee",
-          "context": "First-time subscribers, one per customer. Renews until you cancel; skip, pause or cancel anytime. Free US shipping. 30-day money-back guarantee on your first order."
+          "context": "Single-ingredient powders are final sale. The 30-day money-back guarantee covers your first order of a protein blend."
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 540,
+          "line": 558,
           "match": "guarantee",
-          "context": "Zeotein home Zeotein Open menu Main Zeotein Cacao bulk bag with the CleanBlend shaker and a scoop of cacao protein Zeotein Cacao bulk bag with a scoop of cacao protein Zeotein Vegan pouch A typical pr"
+          "context": "Which products does the 30-day guarantee cover?"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 703,
+          "match": "guarantee",
+          "context": "Zeotein home Zeotein Open menu Main   Zeotein Grass-Fed Bone Broth Powder pouch Zeotein Grass-Fed Collagen Peptides Powder pouch Zeotein Organic Hemp Protein Powder pouch Zeotein Organic Pumpkin Seed "
         }
       ],
       "counts": {
         "CRITICAL": 0,
-        "HIGH": 2,
+        "HIGH": 3,
         "MEDIUM": 0
       }
     },
@@ -30,7 +37,6 @@
     "checks": {
       "fda_disclaimer": true,
       "product_ctas_consistent": [
-        "Claim My 55% Off",
         "Claim My 55% Off "
       ],
       "images_all_approved": true,
@@ -58,23 +64,23 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 390,
+          "line": 391,
           "match": "guarantee",
           "context": "If it isn't for you, your first order is covered by our 30-day money-back guarantee."
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 668,
+          "line": 669,
           "match": "guarantee",
           "context": "How does the 30-day guarantee work?"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 825,
+          "line": 826,
           "match": "guarantee",
-          "context": "Zeotein home Zeotein Open menu Main Zeotein Cacao Starter Kit: bulk bag, CleanBlend shaker, Save-A-Scoop and three guides Per serving       Man holding a Zeotein CleanBlend shaker in a home gym A typi"
+          "context": "Zeotein home Zeotein Open menu Main Zeotein Cacao protein powder bulk bag, 30 servings Per serving      Man holding a Zeotein CleanBlend shaker in a home gym A typical protein routine: separate tubs o"
         }
       ],
       "counts": {
@@ -160,7 +166,7 @@
           "rule": "guaranteed_outcome",
           "line": 611,
           "match": "guarantee",
-          "context": "Zeotein home Zeotein Open menu Main Zeotein Vegan pouch, natural nutty flavor Per serving The five Zeotein Vegan ingredients in bowls: organic pumpkin seed protein, organic hemp protein, organic MCT, "
+          "context": "Zeotein home Zeotein Open menu Main Zeotein Vegan plant protein, 30 stick packs Per serving The five Zeotein Vegan ingredients in bowls: organic pumpkin seed protein, organic hemp protein, organic MCT"
         }
       ],
       "counts": {
@@ -226,7 +232,7 @@
           "rule": "guaranteed_outcome",
           "line": 309,
           "match": "guarantee",
-          "context": "Zeotein home Zeotein Open menu Main Zeotein Vegan ingredients laid out in bowls Zeotein Cacao bulk bag with a scoop of cacao protein Zeotein Vegan pouch Money-back guarantee Zeotein home Zeotein"
+          "context": "Zeotein home Zeotein Open menu Main Zeotein Vegan ingredients laid out in bowls Zeotein Cacao protein powder bulk bag, 30 servings Zeotein Vegan plant protein, 30 stick packs Money-back guarantee Zeot"
         }
       ],
       "counts": {

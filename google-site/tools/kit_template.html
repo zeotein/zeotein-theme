@@ -118,10 +118,10 @@ td.num{font-variant-numeric:tabular-nums;text-align:center}
 
 /* Items */
 .items{display:grid;gap:10px}
-.item{display:grid;grid-template-columns:auto 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
 .item .chip{align-self:start;margin-top:2px}
 .item .body{display:grid;gap:5px;min-width:0}
-.item .body p{color:var(--muted);font-size:.92rem}
+.item .body p{color:var(--muted);font-size:.92rem;overflow-wrap:anywhere}
 .item .body p b{color:var(--ink);font-weight:600}
 footer.end{padding-block:28px 40px;color:var(--muted);font-size:.84rem;border-top:1px solid var(--line)}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
@@ -137,9 +137,8 @@ footer.end{padding-block:28px 40px;color:var(--muted);font-size:.84rem;border-to
       <span class="pill ok"><i></i>Compliance gate: 0 blocking</span>
       <span class="pill ok"><i></i>Phone and desktop render: 0 errors</span>
       <span class="pill ok"><i></i>Prices match Shopify (read 10 Nov)</span>
-      <span class="pill ok"><i></i>Domain approved: shop.zeotein.com</span>
-      <span class="pill ok"><i></i>7 of 8 pages pasted (checked 10 Nov)</span>
-      <span class="pill warn"><i></i>To do: Refund policy block, Head snippet, DNS</span>
+      <span class="pill ok"><i></i>Live on shop.zeotein.com (checked 11 Nov)</span>
+      <span class="pill warn"><i></i>To do: re-paste Home, Cacao, Vegan, Our story</span>
     </div>
   </div>
 </header>
@@ -165,7 +164,7 @@ footer.end{padding-block:28px 40px;color:var(--muted);font-size:.84rem;border-to
 
 Everything is in the install kit: https://claude.ai/artifact/7xHhZwMmCAHnwAEc7dAmmb. It has a Copy block button for each of the 8 pages, plus each page's SEO title and description.
 
-1. GoHighLevel → Sites → Websites → Zeotein Google Site. For each page that doesn't already show the new design (on 10 Nov only Refund policy still needed it): open it in the builder, remove the draft sections, add one full-width section with one column (padding 0, no background), add a Custom JS/HTML (Code) element, paste that page's block from the kit, save. Then paste the page's SEO title and description into its page settings and save. Then open the website's Settings → Tracking code → Head, keep what's there, paste the fit snippet from the kit (Install step 3) at the very end, and save.
+1. GoHighLevel → Sites → Websites → Zeotein Google Site. For each page that doesn't already show the current design (on 11 Nov: Home, Cacao, Vegan and Our story): open it in the builder, remove the draft sections, add one full-width section with one column (padding 0, no background), add a Custom JS/HTML (Code) element, paste that page's block from the kit, save. Then paste the page's SEO title and description into its page settings and save. Then open the website's Settings → Tracking code → Head, keep what's there, paste the fit snippet from the kit (Install step 3) at the very end, and save.
 
 2. At GoDaddy (zeotein.com DNS), add a CNAME record: Name shop, Value sites.ludicrous.cloud, TTL 1 hour (stop and ask me if I need to sign in). Then GoHighLevel → Settings → Domains → add shop.zeotein.com and connect it to Zeotein Google Site with Home as the default page.
 
@@ -184,7 +183,7 @@ Don't change Google Ads, Shopify, or the Ad Setup Guardrails doc. Report what pa
         <li>Page settings → SEO meta data: paste the page's title and description. Save.</li></ul></div></li>
       <li><div class="body"><label><input type="checkbox" id="s3"> Add the fit snippet to the website's Head tracking code</label><ul><li>Website settings → Tracking code → <b>Head</b>. Keep everything already there (Google Ads tag AW-18130788543, Meta pixel, Clarity) and paste this at the very end. Save. Leave the Body tracking code as it is.</li><li>It removes GoHighLevel's default section padding and 1170px row so every page runs edge to edge, keeps the header pinned while scrolling, and fills each page's title and description wherever the SEO fields are empty.</li></ul><div class="snip"><button class="primary" type="button" id="copyHead">Copy snippet</button><textarea readonly spellcheck="false" id="headText" aria-label="Head tracking code snippet">__HEAD_SNIPPET__</textarea></div></div></li>
       <li><div class="body"><label><input type="checkbox" id="s4"> Preview on a phone and a desktop</label><ul><li>Use the builder's preview link. Every buy button should open a zeotein.com product page: Cacao Starter Kit at $76.99, Vegan Starter Kit at $96.99.</li></ul></div></li>
-      <li><div class="body"><label><input type="checkbox" id="s5"> Connect the domain</label><ul><li>Approved: <span class="mono">shop.zeotein.com</span>.</li><li>At <b>GoDaddy</b>, where zeotein.com's DNS lives: zeotein.com → DNS → Add record → Type <b>CNAME</b>, Name <span class="mono">shop</span>, Value <span class="mono">sites.ludicrous.cloud</span>, TTL 1 hour → Save. It's the same target marketing.zeotein.com uses.</li><li>GoHighLevel: Settings → Domains → Add domain → <span class="mono">shop.zeotein.com</span> → connect it to <b>Zeotein Google Site</b> with Home as the default page → Save.</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s5"> Connect the domain</label><ul><li>Done 11 Nov: <span class="mono">shop.zeotein.com</span> is connected and serves over HTTPS.</li><li>At <b>GoDaddy</b>, where zeotein.com's DNS lives: zeotein.com → DNS → Add record → Type <b>CNAME</b>, Name <span class="mono">shop</span>, Value <span class="mono">sites.ludicrous.cloud</span>, TTL 1 hour → Save. It's the same target marketing.zeotein.com uses.</li><li>GoHighLevel: Settings → Domains → Add domain → <span class="mono">shop.zeotein.com</span> → connect it to <b>Zeotein Google Site</b> with Home as the default page → Save.</li></ul></div></li>
       <li><div class="body"><label><input type="checkbox" id="s6"> Publish, then re-scan the live pages</label><ul><li>Ask Claude to run the compliance prescan on every live URL, as the Guardrails require before any campaign moves.</li><li>Click test: open <span class="mono">https://shop.zeotein.com/cacao?gclid=TEST&amp;utm_source=google</span>, tap Claim My 55% Off, and confirm the Shopify page shows $76.99 with gclid=TEST in the address bar.</li></ul></div></li>
       <li><div class="body"><label><input type="checkbox" id="s7"> Move Google over</label><ul><li>See <a href="#ads">Google Ads</a> for the final URLs and sitelinks. Then update the Ad Setup Guardrails destination list (Dana edits that doc).</li></ul></div></li>
     </ol>
