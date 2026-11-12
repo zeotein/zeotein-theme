@@ -51,9 +51,9 @@ python3 google-site/qa/verify_noindex.py
 It checks all 16 pages plus the quiz, confirms zeotein.com is still indexable and that robots.txt blocks nothing,
 and ends with `RESULT: PASS`. The baseline taken before the change is in `noindex-check-baseline.txt` next to this file.
 
-## Re-check, 12 Nov 05:12 UTC (after Zeus/Dana's paste)
+## Re-check, 12 Nov 05:00 UTC (after Zeus/Dana's paste)
 
-Full output: `noindex-check-0512utc.txt` (server HTML via `qa/verify_noindex.py`, then the robots tag after JavaScript runs).
+Full output: `noindex-check-0500utc.txt` (server HTML via `qa/verify_noindex.py`, then the robots tag after JavaScript runs).
 
 | URL | Page HTML | After JavaScript | Verdict |
 |---|---|---|---|

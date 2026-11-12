@@ -12,7 +12,7 @@ Install kit (blocks, steps, approval, results): https://claude.ai/artifact/7xHhZ
 |---|---|---|
 | Every buy option, delivery schedule, size and Add to cart button adds the exact Shopify variant + selling plan at the catalog price | **250 of 250 pass** | `e2e/e2e-results.json` |
 | (a) Single item → live Shopify checkout (Collagen 1 lb, from the on-site Checkout button) | **Pass:** checkout shows 1 × Collagen Peptides 1 lb, $46.99 | `checkout/A-single-item-onsite-cart.png`, `checkout/A-single-item-LIVE-shopify-checkout.png` |
-| (b) Blend + single → live Shopify checkout (Cacao Starter Kit every 6 weeks + Sea Moss ½ lb) | **Pass:** $136.98; "First payment $76.99, then $99.99 every 6 weeks"; gclid, utm_source and landing_page saved on the cart. The live run (04:30 UTC) sent the exact chain the Checkout button builds for this cart (asserted field by field in part C); the later button-click run was stopped by the bot check | `checkout/B-blend-plus-single-onsite-cart.png`, `checkout/B-blend-plus-single-LIVE-shopify-checkout.png` |
+| (b) Blend + single → live Shopify checkout (Cacao Starter Kit every 6 weeks + Sea Moss ½ lb) | **Pass:** $136.98; "First payment $76.99, then $99.99 every 6 weeks"; gclid, utm_source and landing_page saved on the cart. The live run (04:28 UTC) sent the exact chain the Checkout button builds for this cart (asserted field by field in part C); the later button-click run was stopped by the bot check | `checkout/B-blend-plus-single-onsite-cart.png`, `checkout/B-blend-plus-single-LIVE-shopify-checkout.png` |
 | Checkout → back → add more → checkout again | **Fixed:** checkout now clears the Shopify cart first. Verified live that a stale 2 × Collagen cart was wiped before the new items were added | `checkout/B-blend-plus-single-LIVE-shopify-checkout.png` |
 | Vegan kit + Hemp; Cacao stick-pack subscription + Lion's Mane | Cart and checkout link pass. **The live runs were blocked by Shopify's bot check** on this cloud machine (see below). Retest after paste | `checkout/D-…-onsite-cart.png`, `checkout/E-…-onsite-cart.png`, `checkout/BLOCKED-shopify-bot-check-0450UTC.png` |
 | UTM + gclid passthrough | **Pass:** gclid, utm_source/medium/campaign/term/content, landing_page and source_site are written to the Shopify cart (they become the order's additional details) and also ride on the first zeotein.com request | `e2e/e2e-results.json`, part C |
@@ -58,7 +58,7 @@ still worked; every cart change was challenged, with or without the new chain. T
 the site: real shoppers' browsers normally pass that check automatically. The check was not bypassed. Retest after
 paste: `node qa/e2e_cart.js https://shop.zeotein.com reports/live --only-checkout --gap=45`.
 
-## Noindex (Zeus and Dana's item): re-checked 05:12 UTC
+## Noindex (Zeus and Dana's item): re-checked 05:00 UTC
 
 | Pages | Status |
 |---|---|
@@ -69,7 +69,7 @@ paste: `node qa/e2e_cart.js https://shop.zeotein.com reports/live --only-checkou
 | Quiz at marketing.zeotein.com/ | Not noindexed (Zeus and Dana handling) |
 | zeotein.com, robots.txt | Correct: indexable, no bot blocks |
 
-Details: `NOINDEX.md`, `noindex-check-0512utc.txt`.
+Details: `NOINDEX.md`, `noindex-check-0500utc.txt`.
 
 ## What needs a person
 
