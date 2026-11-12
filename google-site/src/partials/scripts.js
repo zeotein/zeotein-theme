@@ -22,11 +22,13 @@
       return o.p || {};
     } catch (e) { return {}; }
   }
-  var params = fromUrl();
+  var params = fromUrl(), landing = '';
   if (Object.keys(params).length) {
-    try { window.localStorage.setItem(STORE, JSON.stringify({ t: Date.now(), p: params })); } catch (e) {}
+    landing = window.location.hostname + window.location.pathname;
+    try { window.localStorage.setItem(STORE, JSON.stringify({ t: Date.now(), p: params, l: landing })); } catch (e) {}
   } else {
     params = fromStore();
+    try { landing = (JSON.parse(window.localStorage.getItem(STORE) || '{}') || {}).l || ''; } catch (e) {}
   }
   function decorate(a) {
     try {
@@ -98,4 +100,148 @@
 
   /* 5. Footer year */
   document.querySelectorAll('.ztg [data-zt-year]').forEach(function (el) { el.textContent = String(new Date().getFullYear()); });
+
+  /* 6. On-site cart. Visitors add protein blends and single ingredients here, on shop.zeotein.com, and check out once.
+     Checkout adds every line (with its subscription plan) to the zeotein.com cart in one request, saves the ad
+     parameters on the order as cart attributes, then opens Shopify checkout. Nobody is sent to browse the live store. */
+  var CATALOG = {};
+  try { CATALOG = JSON.parse((document.getElementById('zt-catalog') || {}).textContent || '{}'); } catch (e) {}
+  var ITEMS = CATALOG.items || {}, SHOPIFY = CATALOG.store || 'https://zeotein.com';
+  var CART_KEY = 'zt_cart_v1', CART_TTL = 14 * 24 * 60 * 60 * 1000;
+  var cartEl = document.querySelector('.ztg [data-zt-cart]');
+  function loadCart() {
+    try { var o = JSON.parse(window.localStorage.getItem(CART_KEY) || 'null'); if (o && o.t && (Date.now() - o.t) < CART_TTL && o.lines) return o.lines; } catch (e) {}
+    return [];
+  }
+  var lines = loadCart().filter(function (l) { return ITEMS[l.id]; });
+  function saveCart() { try { window.localStorage.setItem(CART_KEY, JSON.stringify({ t: Date.now(), lines: lines })); } catch (e) {} }
+  function money(n) { return '$' + (Math.round(n * 100) / 100).toFixed(2); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function makeLine(id, opt) {
+    var it = ITEMS[id]; if (!it) return null; opt = parseInt(opt || 0, 10) || 0;
+    if (it.sizes) {
+      var s = it.sizes[opt] || it.sizes[0];
+      return { key: id + '|' + s[1], id: id, vid: s[1], sp: null, name: it.name, detail: s[0], price: s[2], img: it.img, qty: 1 };
+    }
+    var p = it.plans ? (it.plans[opt] || it.plans[0]) : null;
+    return { key: id + '|' + it.variant + '|' + (p ? p[1] : ''), id: id, vid: it.variant, sp: p ? p[1] : null, name: it.name,
+      detail: it.detail + (p ? ' · ' + p[0].toLowerCase() : ''), price: it.price, renew: it.renew || 0, max: it.max || 0,
+      img: it.img, qty: 1, freeShip: !!it.freeShip };
+  }
+  function addLine(id, opt) {
+    var l = makeLine(id, opt); if (!l) return;
+    if (l.max) { lines = lines.filter(function (x) { return x.id !== l.id; }); lines.push(l); }
+    else {
+      var ex = null; lines.forEach(function (x) { if (x.key === l.key) ex = x; });
+      if (ex) ex.qty = Math.min(ex.qty + 1, 10); else lines.push(l);
+    }
+    saveCart(); renderCart(); openCart();
+  }
+  function checkoutUrl() {
+    var q = [], a = [], E = encodeURIComponent;
+    lines.forEach(function (l, i) {
+      q.push(E('items[' + i + '][id]') + '=' + l.vid, E('items[' + i + '][quantity]') + '=' + l.qty);
+      if (l.sp) q.push(E('items[' + i + '][selling_plan]') + '=' + l.sp);
+    });
+    Object.keys(params).forEach(function (k) { a.push(E('attributes[' + k + ']') + '=' + E(params[k])); });
+    a.push(E('attributes[source_site]') + '=' + E(window.location.hostname || 'shop.zeotein.com'));
+    if (landing) a.push(E('attributes[landing_page]') + '=' + E(landing));
+    a.push('return_to=' + E('/checkout'));
+    q.push('return_to=' + E('/cart/update?' + a.join('&')));
+    Object.keys(params).forEach(function (k) { q.push(E(k) + '=' + E(params[k])); });
+    return SHOPIFY + '/cart/add?' + q.join('&');
+  }
+  function renderCart() {
+    var count = 0, total = 0, anyFree = false, subs = [];
+    lines.forEach(function (l) { count += l.qty; total += l.price * l.qty; if (l.freeShip) anyFree = true; if (l.sp && l.renew) subs.push(l); });
+    document.querySelectorAll('.ztg [data-zt-cart-count]').forEach(function (b) { b.textContent = String(count); b.hidden = !count; });
+    if (!cartEl) return;
+    var box = cartEl.querySelector('[data-zt-cart-items]');
+    if (!lines.length) {
+      box.innerHTML = '<div class="cart-empty"><p>Your cart is empty.</p><p><a href="' + esc(cartEl.getAttribute('data-cacao')) + '">Shop Cacao</a> &middot; <a href="' +
+        esc(cartEl.getAttribute('data-vegan')) + '">Shop Vegan</a> &middot; <a href="' + esc(cartEl.getAttribute('data-singles')) + '">Single ingredients</a></p></div>';
+    } else {
+      box.innerHTML = lines.map(function (l) {
+        var k = esc(l.key);
+        var qty = l.max ? '<span class="one">1 per customer</span>' :
+          '<span class="stepper"><button type="button" data-zt-qty="-1" data-key="' + k + '" aria-label="One fewer">&minus;</button><b>' + l.qty +
+          '</b><button type="button" data-zt-qty="1" data-key="' + k + '" aria-label="One more">+</button></span>';
+        var renew = (l.sp && l.renew) ? '<span class="renew">' + (l.renew !== l.price ? 'First order ' + money(l.price) + ', then ' : '') + money(l.renew) + ' per delivery until you cancel</span>' : '';
+        return '<div class="cl"><img src="' + esc(l.img) + '" width="64" height="64" alt=""><div class="cl-info"><b>' + esc(l.name) + '</b><span>' + esc(l.detail) + '</span>' + renew +
+          '<div class="cl-row">' + qty + '<button type="button" class="rm" data-zt-remove data-key="' + k + '">Remove</button></div></div><div class="cl-price">' + money(l.price * l.qty) + '</div></div>';
+      }).join('');
+    }
+    var t = cartEl.querySelector('[data-zt-cart-total]'); if (t) t.textContent = money(total);
+    var note = cartEl.querySelector('[data-zt-cart-note]');
+    if (note) note.textContent = 'Shipping and tax are calculated at checkout.' + (anyFree ? ' The Cacao Starter Kit and Cacao bulk bag ship free in the US.' : '') +
+      (subs.length ? ' Subscriptions renew at the price shown until you cancel; skip, pause or cancel anytime.' : '');
+    var go = cartEl.querySelector('[data-zt-checkout]');
+    if (go) {
+      if (lines.length) { go.setAttribute('href', checkoutUrl()); go.removeAttribute('aria-disabled'); }
+      else { go.setAttribute('href', '#'); go.setAttribute('aria-disabled', 'true'); }
+    }
+  }
+  var lastFocus = null;
+  function openCart() {
+    if (!cartEl) return; lastFocus = document.activeElement;
+    cartEl.hidden = false; document.documentElement.classList.add('zt-cart-open');
+    window.requestAnimationFrame(function () { cartEl.classList.add('open'); var x = cartEl.querySelector('.cart-x'); if (x) x.focus(); });
+  }
+  function closeCart() {
+    if (!cartEl || cartEl.hidden) return;
+    cartEl.classList.remove('open'); document.documentElement.classList.remove('zt-cart-open');
+    setTimeout(function () { cartEl.hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }, 220);
+  }
+  function chosen(form) {
+    var r = form.querySelector('input[type="radio"]:checked'), id = r ? r.value : form.getAttribute('data-zt-default');
+    var plan = form.querySelector('[data-zt-plan]');
+    return { id: id, opt: (ITEMS[id] && ITEMS[id].plans && plan) ? plan.value : 0 };
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target; if (!t || !t.closest) return;
+    var b;
+    if ((b = t.closest('.ztg [data-zt-add]'))) {
+      e.preventDefault(); var opt = 0, src = b.getAttribute('data-zt-opt-from');
+      if (src) { var s = document.querySelector(src); if (s) opt = s.value; } else if (b.hasAttribute('data-zt-opt')) opt = b.getAttribute('data-zt-opt');
+      addLine(b.getAttribute('data-zt-add'), opt); return;
+    }
+    if ((b = t.closest('.ztg [data-zt-buy-add]'))) { e.preventDefault(); var f = b.closest('[data-zt-buy]'); if (f) { var c = chosen(f); addLine(c.id, c.opt); } return; }
+    if (t.closest('.ztg [data-zt-cart-open]')) { e.preventDefault(); openCart(); return; }
+    if (t.closest('.ztg [data-zt-cart-close]')) { e.preventDefault(); closeCart(); return; }
+    if ((b = t.closest('.ztg [data-zt-qty]'))) {
+      var key = b.getAttribute('data-key'), d = parseInt(b.getAttribute('data-zt-qty'), 10);
+      lines = lines.map(function (x) { if (x.key === key) x.qty = Math.max(0, Math.min(10, x.qty + d)); return x; }).filter(function (x) { return x.qty > 0; });
+      saveCart(); renderCart(); return;
+    }
+    if ((b = t.closest('.ztg [data-zt-remove]'))) { var rk = b.getAttribute('data-key'); lines = lines.filter(function (x) { return x.key !== rk; }); saveCart(); renderCart(); return; }
+    if ((b = t.closest('.ztg [data-zt-checkout]'))) {
+      if (!lines.length) { e.preventDefault(); return; }
+      b.setAttribute('href', checkoutUrl());
+    }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCart(); });
+  window.addEventListener('storage', function (e) { if (e.key === CART_KEY) { lines = loadCart().filter(function (l) { return ITEMS[l.id]; }); renderCart(); } });
+  window.__ztgCart = { lines: function () { return lines; }, url: checkoutUrl, add: addLine };
+  renderCart();
+
+  /* 7. Buy box: show the delivery schedule only for subscriptions, keep price, note and photo in step with the option */
+  document.querySelectorAll('.ztg [data-zt-buy]').forEach(function (form) {
+    function sync() {
+      var c = chosen(form), it = ITEMS[c.id] || {};
+      var fq = form.querySelector('[data-zt-freq]'); if (fq) fq.hidden = !it.plans;
+      var pr = form.querySelector('[data-zt-buy-price]'); if (pr) pr.textContent = money(it.price || 0);
+      var nt = form.querySelector('[data-zt-buy-note]');
+      if (nt) nt.textContent = it.plans ? ((it.renew && it.renew !== it.price) ? 'First order, then ' + money(it.renew) + ' per delivery. Skip, pause or cancel anytime.' : money(it.renew || it.price) + ' per delivery. Skip, pause or cancel anytime.') : 'One-time purchase.';
+      var img = document.querySelector(form.getAttribute('data-zt-img') || 'x-none'); if (img && it.img) { img.src = it.img; img.removeAttribute('srcset'); }
+      form.querySelectorAll('.opt').forEach(function (o) { var r = o.querySelector('input'); o.classList.toggle('on', !!(r && r.checked)); });
+    }
+    form.addEventListener('change', sync); sync();
+  });
+
+  /* 8. Size pickers on single-ingredient cards and pages */
+  document.querySelectorAll('.ztg [data-zt-size]').forEach(function (sel) {
+    var it = ITEMS[sel.getAttribute('data-zt-size')], card = sel.closest('[data-zt-card]');
+    function sync() { var s = it && it.sizes[parseInt(sel.value, 10) || 0]; var out = card && card.querySelector('[data-zt-price]'); if (s && out) out.textContent = money(s[2]); }
+    sel.addEventListener('change', sync); sync();
+  });
 })();

@@ -8,37 +8,56 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 300,
+          "line": 76,
           "match": "guarantee",
-          "context": "Single-ingredient powders are final sale. The 30-day money-back guarantee covers your first order of a protein blend."
+          "context": "30-day money-back guarantee on blends"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 558,
-          "match": "guarantee",
-          "context": "Which products does the 30-day guarantee cover?"
+          "line": 331,
+          "match": "Guarantee",
+          "context": "30-Day Money-Back Guarantee"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 703,
+          "line": 335,
           "match": "guarantee",
-          "context": "Zeotein home Zeotein Open menu Main   Zeotein Grass-Fed Bone Broth Powder pouch Zeotein Grass-Fed Collagen Peptides Powder pouch Zeotein Organic Hemp Protein Powder pouch Zeotein Organic Pumpkin Seed "
+          "context": "See guarantee details"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 394,
+          "match": "guarantee",
+          "context": "What do shipping and the guarantee cover?"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 397,
+          "match": "guarantee",
+          "context": "Orders ship from Manitowoc, Wisconsin in 1 to 2 business days, and US orders over $150 ship free. The Cacao Starter Kit and bulk bag always ship free in the US. The 30-day money-back guarantee covers "
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 545,
+          "match": "guarantee",
+          "context": "Zeotein home Zeotein Main Open cart Open menu A woman holding a Zeotein shaker in a bright kitchen, with a bag of Zeotein Cacao on the counter Why people choose Zeotein Zeotein Cacao protein powder bu"
         }
       ],
       "counts": {
         "CRITICAL": 0,
-        "HIGH": 3,
+        "HIGH": 6,
         "MEDIUM": 0
       }
     },
     "house_rules": [],
     "checks": {
       "fda_disclaimer": true,
-      "product_ctas_consistent": [
-        "Claim My 55% Off "
-      ],
+      "product_ctas_consistent": [],
       "images_all_approved": true,
       "image_hosts": [
         "cdn.shopify.com"
@@ -57,30 +76,30 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 75,
+          "line": 163,
           "match": "guarantee",
-          "context": "First-time subscribers, one per customer. Renews until you cancel; skip, pause or cancel anytime. Free US shipping. 30-day money-back guarantee on your first order."
+          "context": "30-day money-back guarantee on your first 30-day supply"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 391,
+          "line": 424,
           "match": "guarantee",
           "context": "If it isn't for you, your first order is covered by our 30-day money-back guarantee."
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 669,
+          "line": 702,
           "match": "guarantee",
           "context": "How does the 30-day guarantee work?"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 826,
+          "line": 897,
           "match": "guarantee",
-          "context": "Zeotein home Zeotein Open menu Main Zeotein Cacao protein powder bulk bag, 30 servings Per serving      Man holding a Zeotein CleanBlend shaker in a home gym A typical protein routine: separate tubs o"
+          "context": "Zeotein home Zeotein Main Open cart Open menu Zeotein Cacao protein powder Per serving      Man holding a Zeotein CleanBlend shaker in a home gym A typical protein routine: separate tubs of protein po"
         }
       ],
       "counts": {
@@ -120,11 +139,7 @@
         "23"
       ],
       "fda_disclaimer": true,
-      "product_ctas_consistent": [
-        "Buy the bag once ",
-        "Claim My 55% Off",
-        "Claim My 55% Off "
-      ],
+      "product_ctas_consistent": [],
       "images_all_approved": true,
       "image_hosts": [
         "cdn.shopify.com"
@@ -143,30 +158,30 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 75,
+          "line": 137,
           "match": "guarantee",
-          "context": "First-time subscribers, one per customer. Free shaker with your first order. Renews until you cancel; skip, pause or cancel anytime. Shipping calculated at checkout. 30-day money-back guarantee on you"
+          "context": "30-day money-back guarantee on your first 30-day supply"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 464,
+          "line": 445,
           "match": "guarantee",
           "context": "What does the 30-day guarantee cover?"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 469,
+          "line": 450,
           "match": "guarantee",
           "context": "and we'll send return instructions. Opened product is fine. The 7-day pack is not part of the guarantee."
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 611,
+          "line": 630,
           "match": "guarantee",
-          "context": "Zeotein home Zeotein Open menu Main Zeotein Vegan plant protein, 30 stick packs Per serving The five Zeotein Vegan ingredients in bowls: organic pumpkin seed protein, organic hemp protein, organic MCT"
+          "context": "Zeotein home Zeotein Main Open cart Open menu Zeotein Vegan plant protein stick packs Per serving The five Zeotein Vegan ingredients in bowls: organic pumpkin seed protein, organic hemp protein, organ"
         }
       ],
       "counts": {
@@ -206,12 +221,7 @@
         "20"
       ],
       "fda_disclaimer": true,
-      "product_ctas_consistent": [
-        "Get My Starter Kit",
-        "Get My Starter Kit ",
-        "Try the 7-day pack",
-        "Try the 7-day pack "
-      ],
+      "product_ctas_consistent": [],
       "images_all_approved": true,
       "image_hosts": [
         "cdn.shopify.com"
@@ -230,9 +240,9 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 309,
+          "line": 353,
           "match": "guarantee",
-          "context": "Zeotein home Zeotein Open menu Main Zeotein Vegan ingredients laid out in bowls Zeotein Cacao protein powder bulk bag, 30 servings Zeotein Vegan plant protein, 30 stick packs Money-back guarantee Zeot"
+          "context": "Zeotein home Zeotein Main Open cart Open menu Zeotein Vegan ingredients laid out in bowls Zeotein Cacao protein powder bulk bag, 30 servings Zeotein Vegan plant protein, 30 stick packs Money-back guar"
         }
       ],
       "counts": {
@@ -244,9 +254,7 @@
     "house_rules": [],
     "checks": {
       "fda_disclaimer": true,
-      "product_ctas_consistent": [
-        "Claim My 55% Off"
-      ],
+      "product_ctas_consistent": [],
       "images_all_approved": true,
       "image_hosts": [
         "cdn.shopify.com"
@@ -265,28 +273,28 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 49,
+          "line": 57,
           "match": "guarantee",
           "context": "Straight answers on the formulas, the Starter Kits, shipping and the guarantee. Still stuck? Email"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 250,
+          "line": 258,
           "match": "guarantee",
           "context": "How does the 30-day money-back guarantee work?"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 260,
+          "line": 268,
           "match": "guarantee",
           "context": "What isn't covered by the guarantee?"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 425,
+          "line": 469,
           "match": "guarantee",
           "context": "Ingredients, nutrition, how to mix it, subscriptions, shipping and the 30-day money-back guarantee, answered plainly."
         }
@@ -300,10 +308,7 @@
     "house_rules": [],
     "checks": {
       "fda_disclaimer": true,
-      "product_ctas_consistent": [
-        "Claim My 55% Off",
-        "Claim My 55% Off "
-      ],
+      "product_ctas_consistent": [],
       "images_all_approved": true,
       "image_hosts": [
         "cdn.shopify.com"
@@ -322,7 +327,7 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 85,
+          "line": 93,
           "match": "guarantee",
           "context": "The 30-day guarantee"
         }
@@ -336,9 +341,7 @@
     "house_rules": [],
     "checks": {
       "fda_disclaimer": true,
-      "product_ctas_consistent": [
-        "Claim My 55% Off"
-      ],
+      "product_ctas_consistent": [],
       "images_all_approved": true,
       "image_hosts": [
         "cdn.shopify.com"
@@ -357,28 +360,28 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 114,
+          "line": 122,
           "match": "guarantees",
           "context": "estimates, not guarantees"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 133,
+          "line": 141,
           "match": "guaranteed",
           "context": "not guaranteed"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 185,
+          "line": 193,
           "match": "guaranteed",
           "context": "Address changes are not guaranteed once an order enters processing."
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 219,
+          "line": 227,
           "match": "guaranteed",
           "context": "International delivery times vary and are not guaranteed"
         }
@@ -392,9 +395,7 @@
     "house_rules": [],
     "checks": {
       "fda_disclaimer": true,
-      "product_ctas_consistent": [
-        "Claim My 55% Off"
-      ],
+      "product_ctas_consistent": [],
       "images_all_approved": true,
       "image_hosts": [
         "cdn.shopify.com"
@@ -413,84 +414,84 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 79,
+          "line": 87,
           "match": "Guarantee",
           "context": "30-Day Money-Back Guarantee"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 86,
+          "line": 94,
           "match": "guarantee",
           "context": "The guarantee covers our"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 92,
+          "line": 100,
           "match": "guarantee",
           "context": "If an order contains more than one bag or box of a protein blend, the guarantee covers one 30-day supply. Additional bags or boxes in the same order are not refundable."
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 101,
+          "line": 109,
           "match": "guarantee",
           "context": "one guarantee claim per customer"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 156,
+          "line": 164,
           "match": "guarantee",
           "context": "Accounts where a prior guarantee claim has already been honored."
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 161,
+          "line": 169,
           "match": "guarantee",
           "context": "Subscriptions can be paused, skipped, or cancelled anytime from your customer portal. Cancelling stops future charges; it does not retroactively refund shipped orders. Renewal orders are not covered b"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 174,
+          "line": 182,
           "match": "Guarantee",
           "context": "This section covers damaged and missing items. It is separate from our 30-Day Guarantee, which is described above."
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 183,
+          "line": 191,
           "match": "guarantee",
           "context": "Cancelling stops future deliveries. Orders that have already shipped are handled under the guarantee terms above. If a guarantee refund is issued on a subscription order, the subscription is cancelled"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 183,
+          "line": 191,
           "match": "guarantee",
           "context": "Cancelling stops future deliveries. Orders that have already shipped are handled under the guarantee terms above. If a guarantee refund is issued on a subscription order, the subscription is cancelled"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 188,
+          "line": 196,
           "match": "guarantee",
           "context": "International orders are eligible for the 30-day guarantee on the same terms. Return shipping and any customs charges are the customer\u2019s responsibility. Customs duties, taxes, and VAT are set by your "
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 301,
+          "line": 345,
           "match": "guarantee",
           "context": "Our 30-day money-back guarantee on your first order of a protein blend, and how to start a claim."
         },
         {
           "tier": "MEDIUM",
           "rule": "structure_function",
-          "line": 136,
+          "line": 144,
           "match": "promotional",
           "context": "Free or promotional items included with the order (shaker, Save-A-Scoop, digital guides) are not refunded and do not need to be returned."
         }
@@ -504,9 +505,232 @@
     "house_rules": [],
     "checks": {
       "fda_disclaimer": true,
-      "product_ctas_consistent": [
-        "Claim My 55% Off"
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
       ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "single-ingredients",
+    "file": "dist/ghl/09-single-ingredients.html",
+    "prescan": {
+      "source": "single-ingredients",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "collagen",
+    "file": "dist/ghl/10-collagen.html",
+    "prescan": {
+      "source": "collagen",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "bone-broth",
+    "file": "dist/ghl/11-bone-broth.html",
+    "prescan": {
+      "source": "bone-broth",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "hemp-protein",
+    "file": "dist/ghl/12-hemp-protein.html",
+    "prescan": {
+      "source": "hemp-protein",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "pumpkin-seed-protein",
+    "file": "dist/ghl/13-pumpkin-seed-protein.html",
+    "prescan": {
+      "source": "pumpkin-seed-protein",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "cacao-powder",
+    "file": "dist/ghl/14-cacao-powder.html",
+    "prescan": {
+      "source": "cacao-powder",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "mct-oil-powder",
+    "file": "dist/ghl/15-mct-oil-powder.html",
+    "prescan": {
+      "source": "mct-oil-powder",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "sea-moss",
+    "file": "dist/ghl/16-sea-moss.html",
+    "prescan": {
+      "source": "sea-moss",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "lions-mane",
+    "file": "dist/ghl/17-lions-mane.html",
+    "prescan": {
+      "source": "lions-mane",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
       "images_all_approved": true,
       "image_hosts": [
         "cdn.shopify.com"

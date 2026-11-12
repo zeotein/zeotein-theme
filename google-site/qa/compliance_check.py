@@ -16,6 +16,8 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 PRESCAN = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else None
 cfg = json.loads((ROOT / "src" / "config.json").read_text())
 V = cfg["vars"]
+_cat = json.loads((ROOT / "src" / "catalog.json").read_text())["items"]
+CATALOG_PRICES = {f"${x:,.2f}" for it in _cat.values() for x in ([it.get("price"), it.get("renew")] + [sz[2] for sz in it.get("sizes", [])]) if x}
 
 
 def load_prescan(path):
@@ -39,7 +41,7 @@ BANNED = {  # rule -> regex, applies to every page, text + attributes + schema
     "names the mineral (Google rule: describe, never name)": r"\b(zeolite|clinoptilolite)\b",
     "detox / cleanse / toxin / heavy-metal wording": r"\b(detox\w*|cleans\w*|toxin\w*|heavy metals?|chelat\w*|purif\w*)\b",
     "immune / inflammation / disease wording": r"\b(immun\w*|inflammat\w*|disease-?\s*free|bloat\w*|gut health|brain fog)\b",
-    "weight-loss or appetite-suppression wording": r"\b(weight|slim\w*|fat[- ]?burn\w*|lose \d+|lbs?\b|appetite suppress\w*|curb\w* (your )?appetite|metaboli\w*)\b",
+    "weight-loss or appetite-suppression wording": r"\b(weight|slim\w*|fat[- ]?burn\w*|lose \d+|(?<![0-9]\s)lbs?\b|appetite suppress\w*|curb\w* (your )?appetite|metaboli\w*)\b",  # "1/2 lb" pouch sizes are package weights
     "GLP-1 / medication wording": r"\b(glp-?1|ozempic|wegovy|zepbound|mounjaro|semaglutide|tirzepatide|the shot|medication side)\b",
     "outcome / transformation promise": r"\b(real results|just results|proven|transform\w*|a (better|new) you|clinically)\b",
     "time of day (Jewels' rule)": r"\b(morning|evening|night|bedtime|breakfast|lunch|dinner|afternoon)\b",
@@ -57,7 +59,7 @@ BANNED = {  # rule -> regex, applies to every page, text + attributes + schema
 REVIEW_EXEMPT = {"time of day (Jewels' rule)", "frequency (no 'daily', 'once a day')"}
 
 PER_PAGE = {
-    "cacao": {"must_not": {r"\badded sugar": "Cacao copy says 'zero sugar', never 'added sugar'", r"\b20 ?g\b": "20g is the Vegan number", r"\bone packet|stick pack": "no packet/stick wording on the bag page"}},
+    "cacao": {"must_not": {r"\badded sugar": "Cacao copy says 'zero sugar', never 'added sugar'", r"\b20 ?g\b": "20g is the Vegan number"}},
     "vegan": {"must_not": {r"\b23 ?g\b": "23g is Cacao only", r"\bsix ingredients\b": "Vegan has five ingredients", r"55%": "55% off is the Cacao kit offer"}},
     "home": {"must_not": {}},
 }
@@ -72,7 +74,7 @@ def main():
     report, blocking = [], 0
     for page in cfg["pages"]:
         slug = page["slug"]
-        f = next((ROOT / "dist" / "ghl").glob(f"*-{slug}.html"))
+        f = next(x for x in (ROOT / "dist" / "ghl").glob("*.html") if re.fullmatch(rf"\d\d-{re.escape(slug)}\.html", x.name))
         raw = f.read_text()
         text = all_text(raw) + "\n" + page["seoTitle"] + "\n" + page["seoDescription"]
         text_no_reviews = all_text(strip_reviews(raw)) + "\n" + page["seoTitle"] + "\n" + page["seoDescription"]
@@ -115,14 +117,14 @@ def main():
         # Structural checks
         entry["checks"]["fda_disclaimer"] = bool(re.search(r"not been evaluated by the Food and Drug Administration", text))
         entry["checks"]["product_ctas_consistent"] = sorted(set(re.findall(r'href="https://zeotein\.com/products/[^"]+">([^<]+)<', raw)))
-        imgs = sorted(set(re.findall(r'<img[^>]+src="([^"]+)"', raw)))
+        imgs = sorted(set(re.findall(r'<img[^>]+src="([^"]+)"', re.sub(r"(?is)<script.*?</script>", " ", raw))))
         allowed = {v for k, v in V.items() if k.startswith("img")}
         entry["checks"]["images_all_approved"] = all(any(i.startswith(a.split("&width")[0].split("?")[0]) for a in allowed) for i in imgs)
         entry["checks"]["image_hosts"] = sorted(set(re.sub(r"^https://([^/]+)/.*", r"\1", i) for i in imgs))
         entry["checks"]["ghl_assets_referenced"] = bool(re.search(r"filesafe\.space|leadconnectorhq", raw))
         for price_key in ("cacaoKitPrice", "cacaoKitRenewal", "cacaoKitValue", "cacaoKitSave", "cacaoOncePrice", "veganKitPrice", "veganKitRenewal", "vegan7Price"):
             pass
-        stray_prices = sorted(set(re.findall(r"\$\d+(?:\.\d\d)?", text)) - {v for k, v in V.items() if isinstance(v, str) and v.startswith("$")})
+        stray_prices = sorted(set(re.findall(r"\$\d+(?:\.\d\d)?", text)) - {v for k, v in V.items() if isinstance(v, str) and v.startswith("$")} - CATALOG_PRICES)
         entry["checks"]["prices_not_in_config"] = stray_prices
 
         blocking_here = len(entry["house_rules"]) + (entry["prescan"]["counts"]["CRITICAL"] if entry["prescan"] else 0)

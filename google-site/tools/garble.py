@@ -36,6 +36,9 @@ def garble_word(img, box, order=None, light_thresh=None, pad=3, seed=7):
         else:
             merged.append(s)
     segs = merged
+    if len(segs) < 2:
+        # letters merged into one group (tiny or tilted print): nothing to reorder; caller must handle it
+        raise ValueError(f"word split into {len(segs)} glyph group(s); use letter-by-letter cutting")
     if order is None:
         rng = np.random.default_rng(seed)
         order = list(range(len(segs)))

@@ -1,5 +1,5 @@
 {
-  "built": "2026-11-11",
+  "built": "2026-11-12",
   "pages": [
     {
       "order": 1,
@@ -9,7 +9,7 @@
       "seoTitle": "Zeotein | Cacao and Vegan Protein Powder, Short Ingredient Lists",
       "seoDescription": "Cacao protein with grass-fed bone broth and collagen, or plant protein from pumpkin seed and hemp. No sweeteners. Cacao Starter Kit $76.99 first order with free US shipping.",
       "ghlFile": "dist/ghl/01-home.html",
-      "bytes": 51014
+      "bytes": 69247
     },
     {
       "order": 2,
@@ -19,7 +19,7 @@
       "seoTitle": "Zeotein Cacao Starter Kit | 23g Protein, 14g Collagen, Zero Sugar",
       "seoDescription": "23g protein and 14g grass-fed collagen peptides per serving. Six ingredients, no sweeteners. Bag, shaker, Save-A-Scoop and three guides for $76.99 your first order.",
       "ghlFile": "dist/ghl/02-cacao.html",
-      "bytes": 53677
+      "bytes": 77732
     },
     {
       "order": 3,
@@ -29,7 +29,7 @@
       "seoTitle": "Zeotein Vegan | 20g Plant Protein, Five Ingredients",
       "seoDescription": "20g plant protein from organic pumpkin seed and organic hemp. Five ingredients, zero added sugar, single-serve stick packs. Vegan Starter Kit $96.99 your first order.",
       "ghlFile": "dist/ghl/03-vegan.html",
-      "bytes": 48417
+      "bytes": 71187
     },
     {
       "order": 4,
@@ -39,7 +39,7 @@
       "seoTitle": "Our Story | Zeotein",
       "seoDescription": "Why Zeotein puts protein and the rest of your shelf into one serving, with an ingredient list short enough to read in seconds. Shipped from Manitowoc, Wisconsin.",
       "ghlFile": "dist/ghl/04-our-story.html",
-      "bytes": 39634
+      "bytes": 63366
     },
     {
       "order": 5,
@@ -49,7 +49,7 @@
       "seoTitle": "Questions | Zeotein",
       "seoDescription": "Ingredients, nutrition, how to mix it, subscriptions, shipping and the 30-day money-back guarantee, answered plainly.",
       "ghlFile": "dist/ghl/05-faq.html",
-      "bytes": 43906
+      "bytes": 67610
     },
     {
       "order": 6,
@@ -59,7 +59,7 @@
       "seoTitle": "Contact Zeotein",
       "seoDescription": "Email hello@zeotein.com. Real replies within 1 to 2 business days. Manage or cancel a subscription online anytime.",
       "ghlFile": "dist/ghl/06-contact.html",
-      "bytes": 37918
+      "bytes": 61631
     },
     {
       "order": 7,
@@ -69,7 +69,7 @@
       "seoTitle": "Shipping | Zeotein",
       "seoDescription": "Orders ship from Manitowoc, Wisconsin in 1 to 2 business days. Free US shipping on Cacao Starter Kit and bag orders from this site.",
       "ghlFile": "dist/ghl/07-shipping.html",
-      "bytes": 39601
+      "bytes": 63333
     },
     {
       "order": 8,
@@ -79,7 +79,97 @@
       "seoTitle": "Refund Policy | Zeotein",
       "seoDescription": "Our 30-day money-back guarantee on your first order of a protein blend, and how to start a claim.",
       "ghlFile": "dist/ghl/08-refund-policy.html",
-      "bytes": 40653
+      "bytes": 64385
+    },
+    {
+      "order": 9,
+      "slug": "single-ingredients",
+      "name": "Single Ingredients",
+      "path": "/single-ingredients",
+      "seoTitle": "Single-Ingredient Powders | Zeotein",
+      "seoDescription": "Collagen, bone broth, hemp, pumpkin seed, cacao, MCT, sea moss and lion's mane. Plain, unsweetened powders you can add to any Zeotein order.",
+      "ghlFile": "dist/ghl/09-single-ingredients.html",
+      "bytes": 67706
+    },
+    {
+      "order": 10,
+      "slug": "collagen",
+      "name": "Grass-Fed Collagen Peptides",
+      "path": "/collagen",
+      "seoTitle": "Grass-Fed Collagen Peptides Powder, Unflavored | Zeotein",
+      "seoDescription": "Collagen peptides from grass-fed cattle, 11g protein per serving. Dissolves clear in hot or cold drinks. 1/2 lb, 1 lb and 2 lb pouches.",
+      "ghlFile": "dist/ghl/10-collagen.html",
+      "bytes": 61891
+    },
+    {
+      "order": 11,
+      "slug": "bone-broth",
+      "name": "Grass-Fed Bone Broth Protein",
+      "path": "/bone-broth",
+      "seoTitle": "Grass-Fed Bone Broth Protein Powder, Unflavored | Zeotein",
+      "seoDescription": "Grass-fed beef bone broth protein powder, 15g protein per serving. Mild and unflavored for coffee, soup or a smoothie. 1/2 lb to 2 lb pouches.",
+      "ghlFile": "dist/ghl/11-bone-broth.html",
+      "bytes": 61920
+    },
+    {
+      "order": 12,
+      "slug": "hemp-protein",
+      "name": "Organic Hemp Protein",
+      "path": "/hemp-protein",
+      "seoTitle": "Organic Hemp Protein Powder | Zeotein",
+      "seoDescription": "Organic hemp protein, 14g protein and 6g fiber per serving. Naturally nutty, and the same hemp protein in Zeotein Vegan. 1/2 lb to 2 lb pouches.",
+      "ghlFile": "dist/ghl/12-hemp-protein.html",
+      "bytes": 61880
+    },
+    {
+      "order": 13,
+      "slug": "pumpkin-seed-protein",
+      "name": "Organic Pumpkin Seed Protein",
+      "path": "/pumpkin-seed-protein",
+      "seoTitle": "Organic Styrian Pumpkin Seed Protein Powder | Zeotein",
+      "seoDescription": "Organic Styrian pumpkin seed protein, 11g protein per serving. Mild and nutty, and the same pumpkin seed protein in Zeotein Vegan.",
+      "ghlFile": "dist/ghl/13-pumpkin-seed-protein.html",
+      "bytes": 62050
+    },
+    {
+      "order": 14,
+      "slug": "cacao-powder",
+      "name": "Organic Fermented Cacao Powder",
+      "path": "/cacao-powder",
+      "seoTitle": "Organic Fermented Cacao Powder, Unsweetened | Zeotein",
+      "seoDescription": "Raw, fermented organic cacao with a deep dark chocolate taste, the same cacao in Zeotein Cacao. Swap it 1:1 for cocoa powder.",
+      "ghlFile": "dist/ghl/14-cacao-powder.html",
+      "bytes": 61984
+    },
+    {
+      "order": 15,
+      "slug": "mct-oil-powder",
+      "name": "Organic MCT Oil Powder",
+      "path": "/mct-oil-powder",
+      "seoTitle": "Organic MCT Oil Powder, Unflavored | Zeotein",
+      "seoDescription": "MCT oil from coconut in an easy powder that mixes into coffee, shakes and smoothies. 1/2 lb, 1 lb and 2 lb pouches.",
+      "ghlFile": "dist/ghl/15-mct-oil-powder.html",
+      "bytes": 61949
+    },
+    {
+      "order": 16,
+      "slug": "sea-moss",
+      "name": "Organic Sea Moss Powder",
+      "path": "/sea-moss",
+      "seoTitle": "Organic Sea Moss Powder, Wildcrafted in St. Lucia | Zeotein",
+      "seoDescription": "Wildcrafted organic sea moss from St. Lucia, 75% gold and 25% purple, finely milled. A mild taste that disappears in a fruit smoothie.",
+      "ghlFile": "dist/ghl/16-sea-moss.html",
+      "bytes": 62079
+    },
+    {
+      "order": 17,
+      "slug": "lions-mane",
+      "name": "Organic Lion's Mane Powder",
+      "path": "/lions-mane",
+      "seoTitle": "Organic Lion's Mane Mushroom Powder, Unflavored | Zeotein",
+      "seoDescription": "Organic lion's mane mushroom powder, finely milled, 1,400 mg per serving. Mild and earthy, and it disappears into coffee.",
+      "ghlFile": "dist/ghl/17-lions-mane.html",
+      "bytes": 61905
     }
   ]
 }

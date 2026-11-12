@@ -1,0 +1,15 @@
+<div class="cart" data-zt-cart hidden data-cacao="{{pathCacao}}" data-vegan="{{pathVegan}}" data-singles="{{pathSingles}}">
+  <div class="cart-scrim" data-zt-cart-close></div>
+  <aside class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="zt-cart-h">
+    <div class="cart-head"><h2 id="zt-cart-h">Your cart</h2><button type="button" class="cart-x" data-zt-cart-close aria-label="Close cart">&times;</button></div>
+    <div class="cart-body" data-zt-cart-items></div>
+    <div class="cart-foot">
+      <div class="cart-sub"><span>Subtotal</span><b data-zt-cart-total></b></div>
+      <p class="cart-note" data-zt-cart-note>Shipping and tax are calculated at checkout.</p>
+      <a class="btn btn-primary btn-block" data-zt-checkout href="#" aria-disabled="true">Checkout <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <button type="button" class="btn-link" data-zt-cart-close>Keep shopping</button>
+      <p class="cart-secure">Secure checkout by Shopify on zeotein.com</p>
+    </div>
+  </aside>
+</div>
+<script type="application/json" id="zt-catalog">{{catalogJson}}</script>

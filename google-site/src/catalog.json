@@ -1,0 +1,279 @@
+{
+ "_note": "Every buy button on shop.zeotein.com adds one of these to the on-site cart. Variant and selling-plan IDs read from Shopify on 12 Nov 2026. The Cacao Starter Kit uses ONLY the 'Starter Kit — first-time subscribers' plans (renew at $99.99); never plan 4659019989 (renews at $89.99, on hold). Zeolite Powder is not listed (hold).",
+ "store": "https://zeotein.com",
+ "items": {
+  "cacao-kit": {
+   "name": "Zeotein Cacao Starter Kit",
+   "detail": "30-day bulk bag, shaker, Save-A-Scoop and 3 guides",
+   "img": "{{imgCacaoBagFirstSm}}",
+   "variant": 67710100308181,
+   "price": 76.99,
+   "renew": 99.99,
+   "max": 1,
+   "freeShip": true,
+   "plans": [
+    [
+     "Every 30 days",
+     6596853973
+    ],
+    [
+     "Every 6 weeks",
+     6622773461
+    ],
+    [
+     "Every 8 weeks",
+     6622806229
+    ]
+   ]
+  },
+  "cacao-bag": {
+   "name": "Zeotein Cacao 30-Day Bulk Bag",
+   "detail": "Buy once",
+   "img": "{{imgCacaoBagFirstSm}}",
+   "variant": 54506852319445,
+   "price": 93.49,
+   "freeShip": true
+  },
+  "cacao-sticks-sub": {
+   "name": "Zeotein Cacao 30 Stick Packs",
+   "detail": "Subscribe & save",
+   "img": "{{imgCacaoSticksFirstSm}}",
+   "variant": 52649698132181,
+   "price": 114.99,
+   "renew": 114.99,
+   "plans": [
+    [
+     "Every 30 days",
+     6671335637
+    ],
+    [
+     "Every 6 weeks",
+     6671368405
+    ],
+    [
+     "Every 8 weeks",
+     6671401173
+    ]
+   ]
+  },
+  "cacao-sticks-30": {
+   "name": "Zeotein Cacao 30 Stick Packs",
+   "detail": "Buy once",
+   "img": "{{imgCacaoSticksFirstSm}}",
+   "variant": 52649698132181,
+   "price": 134.99
+  },
+  "cacao-sticks-7": {
+   "name": "Zeotein Cacao 7 Stick Packs",
+   "detail": "Buy once",
+   "img": "{{imgCacaoSticks7FirstSm}}",
+   "variant": 52342958031061,
+   "price": 39.99
+  },
+  "vegan-kit": {
+   "name": "Zeotein Vegan Starter Kit",
+   "detail": "30 stick packs, free shaker and 3 digital guides",
+   "img": "{{imgVeganSticksFirstSm}}",
+   "variant": 68049376313557,
+   "price": 96.99,
+   "renew": 124.99,
+   "max": 1,
+   "plans": [
+    [
+     "Every 30 days",
+     4565729493
+    ],
+    [
+     "Every 6 weeks",
+     6561136853
+    ],
+    [
+     "Every 8 weeks",
+     6561169621
+    ]
+   ]
+  },
+  "vegan-sticks-30": {
+   "name": "Zeotein Vegan 30 Stick Packs",
+   "detail": "Buy once",
+   "img": "{{imgVeganSticksFirstSm}}",
+   "variant": 53061513511125,
+   "price": 139.99
+  },
+  "vegan-sticks-7": {
+   "name": "Zeotein Vegan 7 Stick Packs",
+   "detail": "Buy once, with 3 digital guides",
+   "img": "{{imgVeganSticks7FirstSm}}",
+   "variant": 53059759112405,
+   "price": 44.99
+  },
+  "bone-broth": {
+   "name": "Grass-Fed Bone Broth Powder",
+   "img": "{{imgSingleBoneBroth}}",
+   "sizes": [
+    [
+     "1/2 lb",
+     53107187056853,
+     29.99
+    ],
+    [
+     "1 lb",
+     53107187089621,
+     49.99
+    ],
+    [
+     "2 lb",
+     53107187122389,
+     79.99
+    ]
+   ]
+  },
+  "collagen": {
+   "name": "Grass-Fed Collagen Peptides",
+   "img": "{{imgSingleCollagen}}",
+   "sizes": [
+    [
+     "1/2 lb",
+     53174839181525,
+     27.99
+    ],
+    [
+     "1 lb",
+     53174839214293,
+     46.99
+    ],
+    [
+     "2 lb",
+     53174839247061,
+     74.99
+    ]
+   ]
+  },
+  "hemp-protein": {
+   "name": "Organic Hemp Protein",
+   "img": "{{imgSingleHemp}}",
+   "sizes": [
+    [
+     "1/2 lb",
+     53196989235413,
+     21.99
+    ],
+    [
+     "1 lb",
+     53196989268181,
+     36.99
+    ],
+    [
+     "2 lb",
+     53196989300949,
+     58.99
+    ]
+   ]
+  },
+  "pumpkin-seed-protein": {
+   "name": "Organic Pumpkin Seed Protein",
+   "img": "{{imgSinglePumpkin}}",
+   "sizes": [
+    [
+     "1/2 lb",
+     53207147708629,
+     19.99
+    ],
+    [
+     "1 lb",
+     53207147741397,
+     36.99
+    ],
+    [
+     "2 lb",
+     53207147774165,
+     56.99
+    ]
+   ]
+  },
+  "cacao-powder": {
+   "name": "Organic Fermented Cacao Powder",
+   "img": "{{imgSingleCacao}}",
+   "sizes": [
+    [
+     "1/2 lb",
+     53196659327189,
+     17.99
+    ],
+    [
+     "1 lb",
+     53196659359957,
+     28.99
+    ],
+    [
+     "2 lb",
+     53196659392725,
+     48.99
+    ]
+   ]
+  },
+  "mct-oil-powder": {
+   "name": "Organic MCT Oil Powder",
+   "img": "{{imgSingleMct}}",
+   "sizes": [
+    [
+     "1/2 lb",
+     53176161272021,
+     21.99
+    ],
+    [
+     "1 lb",
+     53176161304789,
+     36.99
+    ],
+    [
+     "2 lb",
+     53176161337557,
+     58.99
+    ]
+   ]
+  },
+  "sea-moss": {
+   "name": "Organic Sea Moss Powder",
+   "img": "{{imgSingleSeaMoss}}",
+   "sizes": [
+    [
+     "1/4 lb",
+     53196544966869,
+     34.99
+    ],
+    [
+     "1/2 lb",
+     53196544999637,
+     59.99
+    ],
+    [
+     "1 lb",
+     53196545032405,
+     109.99
+    ]
+   ]
+  },
+  "lions-mane": {
+   "name": "Organic Lion's Mane Powder",
+   "img": "{{imgSingleLionsMane}}",
+   "sizes": [
+    [
+     "1/2 lb",
+     53196571869397,
+     39.99
+    ],
+    [
+     "1 lb",
+     53196571902165,
+     69.99
+    ],
+    [
+     "2 lb",
+     53196571934933,
+     119.99
+    ]
+   ]
+  }
+ }
+}

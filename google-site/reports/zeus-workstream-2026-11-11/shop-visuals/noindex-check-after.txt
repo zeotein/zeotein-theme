@@ -1,0 +1,5 @@
+{"url":"https://shop.zeotein.com/","http":"ERR getaddrinfo ENOTFOUND shop.zeotein.com","xRobotsTag":"-","serverHtml":[],"afterJs":["noindex, follow"]}
+{"url":"https://shop.zeotein.com/cacao","http":"ERR getaddrinfo ENOTFOUND shop.zeotein.com","xRobotsTag":"-","serverHtml":[],"afterJs":["noindex, follow"]}
+{"url":"https://shop.zeotein.com/vegan","http":"ERR getaddrinfo ENOTFOUND shop.zeotein.com","xRobotsTag":"-","serverHtml":[],"afterJs":["noindex, follow"]}
+{"url":"https://marketing.zeotein.com/starter-kit-google","http":"ERR getaddrinfo ENOTFOUND marketing.zeotein.com","xRobotsTag":"-","serverHtml":[],"afterJs":["noindex, follow"]}
+{"url":"https://zeotein.com/","http":"ERR getaddrinfo ENOTFOUND zeotein.com","xRobotsTag":"-","serverHtml":[],"afterJs":[]}

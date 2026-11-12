@@ -1,0 +1,48 @@
+<section class="pdp" id="buy" aria-labelledby="zt-h1">
+  <div class="wrap pdp-grid">
+    <div class="gallery"><img src="{{s_img}}" width="600" height="600" alt="{{s_alt}}" fetchpriority="high"></div>
+    <div class="buy" data-zt-card>
+      <p class="eyebrow">Single ingredient</p>
+      <h1 id="zt-h1">{{s_name}}</h1>
+      <p class="sum"><b>{{s_head}}</b> {{s_intro}}</p>
+      <div class="freq"><label for="size-@ID@-pdp">Size</label><select id="size-@ID@-pdp" data-zt-size="@ID@">{{sizes:@ID@}}</select></div>
+      <div class="buy-total"><b data-zt-price>{{sizeprice:@ID@}}</b><span>One-time purchase</span></div>
+      <button type="button" class="btn btn-primary" data-zt-add="@ID@" data-zt-opt-from="#size-@ID@-pdp">Add to cart <span class="arrow" aria-hidden="true">&rarr;</span></button>
+      <ul class="assure">
+        <li>Ships from {{city}} in 1 to 2 business days</li>
+        <li>Free US shipping on orders over {{shipFreeOver}}</li>
+        <li>Final sale: single-ingredient powders can't be returned</li>
+      </ul>
+      <p class="fine"><a href="{{pathSingles}}">See all single ingredients</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="block cream" aria-label="How to use it">
+  <div class="wrap">
+    <div class="tiles two">
+      <div class="tile"><h3>How to use it</h3><p>{{s_how}}</p></div>
+      <div class="tile"><h3>In the bag</h3><p>{{s_bag}}</p><p>{{s_note}}</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="zt-pair">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Pair it with a protein blend</p>
+      <h2 id="zt-pair">Build one order</h2>
+      <p class="lead">Add a blend and any single ingredients to the same cart, then check out once.</p>
+    </div>
+    <div class="choose">
+      <article class="pcard">
+        <a class="ph" href="{{pathCacao}}"><img src="{{imgCacaoBagFirstSm}}" width="640" height="640" alt="Zeotein Cacao protein powder bulk bag, 30 servings" loading="lazy"></a>
+        <div class="bd"><h3>Zeotein Cacao</h3><p class="from">Starter Kit <b>{{cacaoKitPrice}}</b> your first order</p><a class="btn btn-primary" href="{{pathCacao}}">Shop Cacao</a></div>
+      </article>
+      <article class="pcard">
+        <a class="ph" href="{{pathVegan}}"><img src="{{imgVeganSticksFirstSm}}" width="640" height="640" alt="Zeotein Vegan plant protein, 30 stick packs" loading="lazy"></a>
+        <div class="bd"><h3>Zeotein Vegan</h3><p class="from">Starter Kit <b>{{veganKitPrice}}</b> your first order</p><a class="btn btn-primary" href="{{pathVegan}}">Shop Vegan</a></div>
+      </article>
+    </div>
+  </div>
+</section>

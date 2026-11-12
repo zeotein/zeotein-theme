@@ -1,25 +1,18 @@
-<section class="hero">
-  <div class="wrap">
-    <div>
-      <p class="eyebrow">Fully plant-based. Five ingredients.</p>
-      <h1>Plant Protein. Five Ingredients. One Stick.</h1>
-      <p class="sub">Tear, pour, shake. Every stick is already measured, so there is no scoop to find and nothing to level off.</p>
-      <ul class="ticks">
-        <li>20g plant protein from organic pumpkin seed and hemp</li>
-        <li>Zero added sugar. No artificial sweeteners.</li>
+<section class="pdp" id="buy" aria-labelledby="zt-h1">
+  <div class="wrap pdp-grid">
+    <div class="gallery"><img id="zt-pdp-img" src="{{imgVeganSticksFirst}}" srcset="{{imgVeganSticksFirstSm}} 640w, {{imgVeganSticksFirst}} 1024w" sizes="(max-width:900px) 92vw, 560px" width="1024" height="1024" alt="Zeotein Vegan plant protein stick packs" fetchpriority="high"></div>
+    <div class="buy">
+      <p class="eyebrow">Plant-based protein blend</p>
+      <h1 id="zt-h1">Zeotein Vegan</h1>
+      <p class="rating"><span class="s" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>{{ratingText}} across&nbsp;Zeotein</p>
+      <p class="sum">20g plant protein from organic pumpkin seed and hemp in single-serve stick packs. Five ingredients, zero added sugar, no artificial sweeteners. Tear, pour, shake.</p>
+      {{buybox:vegan}}
+      <ul class="assure">
+        <li>Ships from {{city}} in 1 to 2 business days</li>
         <li>Gluten-free and dairy-free</li>
+        <li>30-day money-back guarantee on your first 30-day supply</li>
       </ul>
-      <div class="offer">
-        <div class="stars" data-zt-stars><span class="s" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span data-zt-stars-text></span></div>
-        <a class="btn btn-primary" data-zt-hero-cta href="{{urlVeganKit}}">Get My Starter Kit <span class="arrow" aria-hidden="true">&rarr;</span></a>
-        <p class="priceline"><strong>{{veganKitPrice}}</strong> your first order, then {{veganKitRenewal}} per delivery</p>
-        <p class="fine">First-time subscribers, one per customer. Free shaker with your first order. Renews until you cancel; skip, pause or cancel anytime. Shipping calculated at checkout. 30-day money-back guarantee on your first order.</p>
-        <p class="fine" style="margin-top:10px;color:#EDE6F7">Not ready to subscribe? <a href="{{urlVegan7}}">Try the 7-day pack</a>, {{vegan7Price}}.</p>
-      </div>
-    </div>
-    <div class="hero-media">
-      <div class="bag square"><img src="{{imgVeganSticksFirst}}" srcset="{{imgVeganSticksFirstSm}} 640w, {{imgVeganSticksFirst}} 1024w" sizes="(max-width:900px) 92vw, 480px" width="1024" height="1024" alt="Zeotein Vegan plant protein, 30 stick packs" fetchpriority="high"></div>
-      <p class="caption">Single-serve stick packs. One stick is one serving, 30 in every Starter Kit box.</p>
+      <p class="fine">Starter Kit pricing is for first-time subscribers, one per customer; the free shaker comes with the Starter Kit. Subscriptions renew at the price shown until you cancel; skip, pause or cancel anytime. Shipping is calculated at checkout. <a href="{{pathRefund}}">Refund policy</a></p>
     </div>
   </div>
 </section>
@@ -33,49 +26,6 @@
   </div>
 </div>
 
-<section class="block" id="offer" aria-labelledby="zt-vkit">
-  <div class="wrap">
-    <div class="head">
-      <p class="eyebrow">Zeotein Vegan</p>
-      <h2 id="zt-vkit">Choose how you start</h2>
-      <p class="lead">Subscribe for the best price and a free shaker, or try a week first.</p>
-    </div>
-    <div class="kit">
-      <div class="plan best">
-        <span class="tag">Best value</span>
-        <h3>Vegan Starter Kit subscription</h3>
-        <p class="big">{{veganKitPrice}} <small>your first order</small></p>
-        <p class="muted small">Then {{veganKitRenewal}} per delivery. One-time price is {{veganListPrice}}.</p>
-        <ul>
-          <li>30 single-serve stick packs</li>
-          <li>A free CleanBlend shaker with your first order</li>
-          <li>The Starter Guide and two recipe guides, by email</li>
-          <li>About {{veganKitPerServing}} a serving on your first order</li>
-          <li>Pick every 30 days, 6 weeks or 8 weeks. Skip, pause or cancel anytime online.</li>
-        </ul>
-        <a class="btn btn-primary btn-block" href="{{urlVeganKit}}">Get My Starter Kit <span class="arrow" aria-hidden="true">&rarr;</span></a>
-        <p class="terms">{{veganKitPrice}} today, then {{veganKitRenewal}} on the schedule you pick until you cancel. Vegan Starter Kit pricing is for first-time subscribers, one per customer. Shipping is calculated at checkout, and US orders of {{veganFreeShipThreshold}} or more ship free. Manage or cancel in your account at zeotein.com or by emailing {{email}}.</p>
-      </div>
-      <div class="plans">
-        <div class="plan alt">
-          <h3>Try a week first</h3>
-          <p class="big">{{vegan7Price}} <small>one time</small></p>
-          <ul>
-            <li>7 single-serve stick packs</li>
-            <li>The Starter Guide and two recipe guides, by email</li>
-            <li>No subscription, no renewal</li>
-          </ul>
-          <a class="textlink" href="{{urlVegan7}}">Try the 7-day pack <span aria-hidden="true">&rarr;</span></a>
-          <p class="terms">The free shaker comes with the Vegan Starter Kit subscription. Shipping is calculated at checkout.</p>
-        </div>
-        <div class="plan alt">
-          <h3>Goes where you go</h3>
-          <p class="muted">Purse, glovebox, desk drawer, gym bag. Each stick is sealed and pre-measured, so your protein travels as well as it mixes.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="block tint" aria-labelledby="zt-vhow">
   <div class="wrap">
@@ -179,19 +129,19 @@
 
 <section class="block dark" aria-label="Get started">
   <div class="wrap narrow center">
-    <p class="eyebrow" style="color:var(--teal)">Zeotein Vegan Starter Kit</p>
+    <p class="eyebrow">Zeotein Vegan Starter Kit</p>
     <h2 style="margin:.3em 0 .4em">Plant protein you can read in ten seconds.</h2>
     <p class="lead">30 stick packs and a free shaker in your first box.</p>
     <div style="max-width:420px;margin:22px auto 0">
-      <a class="btn btn-primary btn-block" href="{{urlVeganKit}}">Get My Starter Kit <span class="arrow" aria-hidden="true">&rarr;</span></a>
-      <p class="small" style="margin-top:10px;color:#CFC4E1">{{veganKitPrice}} your first order, then {{veganKitRenewal}} per delivery. Cancel anytime.</p>
+      <button type="button" class="btn btn-primary btn-block" data-zt-add="vegan-kit" data-zt-opt="0">Add the Starter Kit to cart <span class="arrow" aria-hidden="true">&rarr;</span></button>
+      <p class="small" style="margin-top:10px;color:#E3D9F1">{{veganKitPrice}} your first order, then {{veganKitRenewal}} per delivery, every 30 days. Change the schedule or cancel anytime. <a href="#buy" style="text-decoration:underline">Other options</a></p>
     </div>
   </div>
 </section>
 
 <div class="stickybar" data-zt-sticky aria-hidden="true">
   <div class="p"><b>{{veganKitPrice}} first order</b>Vegan Starter Kit &middot; free shaker</div>
-  <a class="btn btn-primary" href="{{urlVeganKit}}">Get My Starter Kit</a>
+  <button type="button" class="btn btn-primary" data-zt-add="vegan-kit" data-zt-opt="0">Add to cart</button>
 </div>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Zeotein Vegan Starter Kit","brand":{"@type":"Brand","name":"Zeotein"},"image":["{{imgVeganSticksFirst}}"],"description":"Plant protein from organic pumpkin seed and organic hemp. 20g plant protein, 170 calories and zero added sugar per stick pack. Five ingredients. Gluten-free and dairy-free.","offers":[{"@type":"Offer","price":"{{veganKitPriceNum}}","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"{{urlVeganKit}}"},{"@type":"Offer","price":"{{vegan7PriceNum}}","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"{{urlVegan7}}"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Zeotein Vegan Starter Kit","brand":{"@type":"Brand","name":"Zeotein"},"image":["{{imgVeganSticksFirst}}"],"description":"Plant protein from organic pumpkin seed and organic hemp. 20g plant protein, 170 calories and zero added sugar per stick pack. Five ingredients. Gluten-free and dairy-free.","offers":[{"@type":"Offer","price":"{{veganKitPriceNum}}","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"{{siteUrl}}{{pathVegan}}"},{"@type":"Offer","price":"{{vegan7PriceNum}}","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"{{siteUrl}}{{pathVegan}}"}]}</script>
