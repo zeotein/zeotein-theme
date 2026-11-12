@@ -1,0 +1,95 @@
+{
+ "head": [
+  "Brand",
+  "Free shipping, one-time orders",
+  "Subscriptions ship free?",
+  "Charge under the line"
+ ],
+ "rows": [
+  [
+   "<b>Zeotein (store)</b>",
+   "<b>$150+</b>",
+   "<b>Only renewals of $150+</b> (funnel subscriptions do)",
+   "<b>USPS rate + $2 (about $11 to $12)</b>"
+  ],
+  [
+   "Ka'Chava",
+   "$99+",
+   "No by default; some new single-bag subscribers get it",
+   "$7.95 to $10.95 (unconfirmed)"
+  ],
+  [
+   "Huel",
+   "$65+",
+   "Not stated",
+   "$9.99"
+  ],
+  [
+   "Ancient Nutrition",
+   "$49+",
+   "Yes",
+   ""
+  ],
+  [
+   "Paleovalley",
+   "$75+",
+   "Not confirmed",
+   "$7.95 (Nov 10)"
+  ],
+  [
+   "Equip",
+   "$90+",
+   "Only orders of $90+",
+   ""
+  ],
+  [
+   "Vital Proteins",
+   "$50+",
+   "Yes",
+   ""
+  ],
+  [
+   "Bulletproof",
+   "$49+",
+   "Yes",
+   ""
+  ],
+  [
+   "Perfect Keto",
+   "$75+ (unconfirmed)",
+   "Yes, always",
+   ""
+  ],
+  [
+   "Primal Kitchen",
+   "$25+ (unconfirmed)",
+   "Yes, $25+",
+   ""
+  ],
+  [
+   "Truvani",
+   "$65+ (unconfirmed)",
+   "Yes, single bag",
+   ""
+  ],
+  [
+   "KOS",
+   "$75+",
+   "Most plans",
+   "$8.99"
+  ],
+  [
+   "Orgain",
+   "$75+",
+   "Yes",
+   ""
+  ],
+  [
+   "Ritual",
+   "Not stated",
+   "Yes, always",
+   ""
+  ]
+ ],
+ "note": "Brand sites and help centers, checked Nov 12, 2026 (some figures from the Nov 10 research). Every rival's line is $25 to $99. Subscriptions ship free at 9 of the 13."
+}

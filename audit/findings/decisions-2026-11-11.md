@@ -1,5 +1,7 @@
 # Decisions brief, November 11, 2026
 
+> **Superseded in part, Nov 12 (evening).** After Dana's notes: the win-back workflows are live (customer journey map), Meta landing decisions stay with Dana and the new media buyer (product-page recommendation withdrawn), the Vegan Starter Kit change is withdrawn, and "keep $150" is replaced by a six-week holiday free-shipping test (Dec 1 – Jan 11, $35+, new orders only). See `pricing-audit-2026-11-12.md`.
+
 Answers to Dana's Nov 11 questions. Data pulled Nov 11 (read-only). Full visual version: the "Decisions Nov 11" section of the audit report.
 
 ## Biggest money levers, ranked

@@ -1,0 +1,157 @@
+{
+ "head": [
+  "Product (chocolate)",
+  "Protein",
+  "Protein from",
+  "Sweetened with",
+  "Organic",
+  "Testing, as the brand states it",
+  "Per serving",
+  "Per 10 g protein"
+ ],
+ "rows": [
+  [
+   "<b>Zeotein Cacao (bag)</b>",
+   "23 g",
+   "Grass-fed bone broth + grass-fed collagen",
+   "<span class='yes'>None</span>",
+   "Organic cacao, MCT oil and sea moss",
+   "<span class='no'>None shown on site</span>",
+   "$3.67",
+   "$1.59"
+  ],
+  [
+   "Ancient Nutrition Bone Broth Protein",
+   "20 g",
+   "Bone broth protein (brand says beef; listing says chicken)",
+   "Stevia",
+   "Organic cocoa only",
+   "Non-GMO Tested, B Corp; heavy-metal tests, COAs for some",
+   "$2.65",
+   "$1.32"
+  ],
+  [
+   "Paleovalley Bone Broth Protein",
+   "13 g",
+   "100% grass-fed beef bone broth",
+   "Monk fruit",
+   "Organic ingredients",
+   "Tested for 40+ pesticides",
+   "$2.00",
+   "$1.54"
+  ],
+  [
+   "Equip Prime Protein",
+   "21 g",
+   "Grass-fed beef protein isolate",
+   "Stevia",
+   "No",
+   "Every lot tested at an outside lab",
+   "$2.13",
+   "$1.02"
+  ],
+  [
+   "Bulletproof Chocolate Collagen + MCT",
+   "\u224818 g",
+   "Grass-fed collagen",
+   "Erythritol + stevia",
+   "No",
+   "Says it tests for purity",
+   "$3.00",
+   "$1.66"
+  ],
+  [
+   "Perfect Keto Collagen + MCT",
+   "10 g",
+   "Grass-fed collagen",
+   "Stevia",
+   "No",
+   "None found",
+   "$2.20",
+   "$2.20"
+  ],
+  [
+   "Primal Kitchen Collagen Fuel",
+   "11 g",
+   "Collagen (no grass-fed claim)",
+   "Monk fruit",
+   "Organic cocoa",
+   "None found",
+   "$1.67",
+   "$1.51"
+  ],
+  [
+   "Vital Proteins Chocolate Collagen",
+   "18 g",
+   "Grass-fed collagen",
+   "Stevia",
+   "No",
+   "NSF Certified for Sport",
+   "$1.93",
+   "$1.07"
+  ],
+  [
+   "Ka'Chava shake",
+   "25 g",
+   "Pea, rice and grains",
+   "Coconut nectar + monk fruit (\u22484 g added sugar)",
+   "Organic ingredients",
+   "NSF Certified for Sport",
+   "$4.66",
+   "$1.87"
+  ],
+  [
+   "Huel Black Edition",
+   "40 g",
+   "Pea + brown rice",
+   "Stevia + coconut sugar (4 g added)",
+   "No",
+   "NSF 229 listed; Consumer Reports flagged lead, Huel disputes",
+   "$3.53",
+   "$0.88"
+  ],
+  [
+   "Ritual Essential Protein 18+",
+   "20 g",
+   "Organic pea",
+   "Monk fruit",
+   "Partly",
+   "Informed Sport every lot; Clean Label Project",
+   "$3.27",
+   "$1.63"
+  ],
+  [
+   "Truvani plant protein",
+   "20 g",
+   "Organic pea, pumpkin, chia",
+   "Monk fruit",
+   "USDA Organic",
+   "Publishes heavy-metal results",
+   "$3.00",
+   "$1.50"
+  ],
+  [
+   "KOS plant protein",
+   "20 g",
+   "Organic pea and seeds",
+   "Coconut sugar, stevia, monk fruit (2 g added)",
+   "USDA Organic",
+   "Non-GMO Project; batch COA lookup",
+   "$2.14",
+   "$1.07"
+  ],
+  [
+   "Orgain plant protein",
+   "21 g",
+   "Organic pea, rice, chia",
+   "Stevia",
+   "USDA Organic",
+   "Says it tests; results not published",
+   "$1.90",
+   "$0.90"
+  ]
+ ],
+ "lead": "Cacao is the only chocolate product in this set with no sweetener of any kind, and the only one that pairs bone broth with added collagen. Its 23 g of protein beats every bone-broth and collagen rival. Where it falls behind is proof: most rivals point to third-party testing or a certification, and your pages don't mention testing at all.",
+ "note": "As each brand states it on its own site or in a certifier's directory, checked Nov 12, 2026. \"USDA Organic\" means a certified product; \"organic ingredients\" means only some ingredients are organic. One-time prices; Bulletproof and Vital are their chocolate tubs.",
+ "panels": "<div class='panel'><h4>Your quality edge</h4><p>All 13 rivals sweeten their chocolate flavor with stevia, monk fruit, erythritol or sugar. Yours has none. You get bone broth and collagen in one scoop, 23 g of protein against 10 to 21 g from the bone-broth and collagen brands, plus organic cacao, MCT oil and sea moss. Per 10 g of protein you're level with Paleovalley ($1.54) and below the collagen-plus-MCT mixes from Bulletproof ($1.66) and Perfect Keto ($2.20).</p></div><div class='panel'><h4>Your quality gap</h4><p>Ka'Chava, Vital Proteins and Ritual carry NSF or Informed Sport certification. KOS and Truvani publish batch results, and Ancient Nutrition and Equip say they test every lot. Since <a href='https://www.consumerreports.org/health/supplements/protein-powders-and-shakes-contain-high-levels-of-lead-a4206364640/' target='_blank' rel='noopener'>Consumer Reports' October 2025 lead tests</a>, shoppers look for this. If you have test results, showing them backs up a premium price. Keep any zeolite wording clear of detox or binding claims.</p></div>"
+}

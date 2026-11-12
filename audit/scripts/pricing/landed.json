@@ -1,0 +1,64 @@
+{
+ "rows": [
+  {
+   "name": "Zeotein 30 sticks, store one-time",
+   "price": 134.99,
+   "ship": 11.95,
+   "servings": 30,
+   "cls": "zt"
+  },
+  {
+   "name": "Zeotein bag, store one-time",
+   "price": 109.99,
+   "ship": 12.39,
+   "servings": 30,
+   "cls": "zt"
+  },
+  {
+   "name": "Ka'Chava bag",
+   "price": 69.95,
+   "ship": 7.95,
+   "servings": 15
+  },
+  {
+   "name": "Zeotein bag, first order on Meta page",
+   "price": 76.99,
+   "ship": 0.0,
+   "servings": 30,
+   "cls": "zt"
+  },
+  {
+   "name": "Huel Black Edition",
+   "price": 60.0,
+   "ship": 9.99,
+   "servings": 17
+  },
+  {
+   "name": "KOS plant protein",
+   "price": 59.99,
+   "ship": 8.99,
+   "servings": 28
+  },
+  {
+   "name": "Paleovalley bone broth",
+   "price": 59.99,
+   "ship": 7.95,
+   "servings": 30
+  },
+  {
+   "name": "Ancient Nutrition bone broth",
+   "price": 52.95,
+   "ship": 0.0,
+   "servings": 20
+  },
+  {
+   "name": "Zeotein 7-Day",
+   "price": 39.99,
+   "ship": 10.23,
+   "servings": 7,
+   "cls": "zt"
+  }
+ ],
+ "lead": "Shoppers compare totals before they compare servings. A one-time bag on the store comes to $122.38 with shipping. Rivals get a first order in for $53 to $78 because they sell 15 to 30 servings and ship free sooner. Your Meta page's first bag, $76.99 delivered, sits right in that range with 30 servings.",
+ "note": "Zeotein shipping is the average paid by customers who paid it, single-item orders, last 90 days. Rival shipping is the stated fee under their free-shipping line. Ka'Chava's fee is $7.95 per the Nov 10 research, but its site data says up to $10.95. Paleovalley's $7.95 wasn't re-confirmed on Nov 12. Ancient Nutrition ships free from $49."
+}
