@@ -78,7 +78,6 @@ def buybox_html(name, cat):
     for i, (cid, title, sub, flag, was) in enumerate(spec["options"]):
         it = items[cid]
         then = f'<s>{money(float(was))}</s>' if was else ""
-        per = ' / delivery' if it.get("plans") and not it.get("renew", 0) != it["price"] else ''
         opts.append(
             f'<label class="opt{" on" if i == 0 else ""}"><input type="radio" name="opt-{name}" value="{cid}"{" checked" if i == 0 else ""}>'
             f'<span class="t"><b>{title}</b><span>{sub}</span>{f"<span class=\"flag\">{flag}</span>" if flag else ""}</span>'
@@ -215,7 +214,8 @@ def main():
     cfg = json.loads((SRC / "config.json").read_text())
     v = cfg["vars"]
     cat = json.loads(render((SRC / "catalog.json").read_text(), v, ""))
-    v = {**v, "catalogJson": json.dumps(cat, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")}
+    # internal notes (keys starting with "_") stay in the repo, not in the page source
+    v = {**v, "catalogJson": json.dumps({k: x for k, x in cat.items() if not k.startswith("_")}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")}
     css = minify_css((SRC / "styles.css").read_text())
     js_src = (SRC / "partials" / "scripts.js").read_text()
     stamp = datetime.date.today().isoformat()
@@ -247,6 +247,12 @@ def main():
         )
         out = DIST / "ghl" / f"{i:02d}-{slug}.html"
         out.write_text(block)
+        # The same block without the store-wide star-rating line, ready in case that copy is not approved.
+        if '<p class="rating">' in block:
+            alt = re.sub(r'<p class="rating">.*?</p>', '', block, flags=re.S)
+            alt = alt.replace("Paste this whole block", "NO-RATING VARIANT: use only if the star-rating line is not approved. Paste this whole block", 1)
+            (DIST / "ghl" / "no-rating").mkdir(parents=True, exist_ok=True)
+            (DIST / "ghl" / "no-rating" / out.name).write_text(alt)
 
         preview = (
             "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"

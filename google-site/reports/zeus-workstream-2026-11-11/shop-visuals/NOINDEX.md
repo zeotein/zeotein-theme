@@ -50,3 +50,20 @@ python3 google-site/qa/verify_noindex.py
 
 It checks all 16 pages plus the quiz, confirms zeotein.com is still indexable and that robots.txt blocks nothing,
 and ends with `RESULT: PASS`. The baseline taken before the change is in `noindex-check-baseline.txt` next to this file.
+
+## Re-check, 12 Nov 05:12 UTC (after Zeus/Dana's paste)
+
+Full output: `noindex-check-0512utc.txt` (server HTML via `qa/verify_noindex.py`, then the robots tag after JavaScript runs).
+
+| URL | Page HTML | After JavaScript | Verdict |
+|---|---|---|---|
+| shop.zeotein.com: /, /home, /cacao, /vegan, /our-story, /faq, /contact, /shipping, /refund-policy | `noindex, follow` | `noindex, follow` | Done |
+| marketing.zeotein.com/zeotein-cacao, /landing-page-cacao, /cacao-sales-page | `noindex, follow` | `noindex, follow` | Done |
+| marketing.zeotein.com/starter-kit-google, /starter-kit-page, /starter-kit | `index, follow, max-image-preview:large…` | `noindex, follow` | Script-only: add the meta line to each funnel step's Head for a reliable noindex |
+| marketing.zeotein.com/cacao-stick-packs-starter-kit | none | none | Not noindexed |
+| marketing.zeotein.com/ (quiz) | none | none | Zeus and Dana are handling it |
+| zeotein.com/ | none (indexable) | | Correct: must stay indexable |
+| shop. and marketing. robots.txt | empty | | Correct: no Googlebot or AdsBot block |
+
+Per the latest relay, noindex is Zeus and Dana's item and the Starter Kit funnel is not to be touched from this
+workstream, so the last three rows are reported, not changed.

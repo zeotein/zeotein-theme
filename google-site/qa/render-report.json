@@ -9,7 +9,7 @@
       "overflow": 0,
       "wide": [],
       "broken": [],
-      "ctaBottom": 667,
+      "ctaBottom": 648,
       "priceBottom": null,
       "fineBottom": null,
       "links": [
@@ -20,10 +20,9 @@
         "/our-story",
         "/faq",
         "#choose",
-        "/cacao#label",
+        "/cacao#zt-label",
         "/refund-policy",
         "https://zeotein.com/a/subscriptions/login",
-        "#lineup",
         "mailto:hello@zeotein.com",
         "/contact",
         "/shipping",
@@ -32,7 +31,7 @@
         "#"
       ],
       "h1": "Real Nutrition. Made for Real Life.",
-      "height": 7709
+      "height": 7690
     },
     {
       "slug": "home",
@@ -43,7 +42,7 @@
       "overflow": 0,
       "wide": [],
       "broken": [],
-      "ctaBottom": 590,
+      "ctaBottom": 624,
       "priceBottom": null,
       "fineBottom": null,
       "links": [
@@ -54,10 +53,9 @@
         "/our-story",
         "/faq",
         "#choose",
-        "/cacao#label",
+        "/cacao#zt-label",
         "/refund-policy",
         "https://zeotein.com/a/subscriptions/login",
-        "#lineup",
         "mailto:hello@zeotein.com",
         "/contact",
         "/shipping",
@@ -77,7 +75,7 @@
       "overflow": 0,
       "wide": [],
       "broken": [],
-      "ctaBottom": 1547,
+      "ctaBottom": 1525,
       "priceBottom": null,
       "fineBottom": null,
       "links": [
@@ -98,7 +96,7 @@
         "#"
       ],
       "h1": "Zeotein Cacao",
-      "height": 11869
+      "height": 11848
     },
     {
       "slug": "cacao",
@@ -109,7 +107,7 @@
       "overflow": 0,
       "wide": [],
       "broken": [],
-      "ctaBottom": 1028,
+      "ctaBottom": 1027,
       "priceBottom": null,
       "fineBottom": null,
       "links": [
@@ -130,7 +128,7 @@
         "#"
       ],
       "h1": "Zeotein Cacao",
-      "height": 8496
+      "height": 8494
     },
     {
       "slug": "vegan",
@@ -141,7 +139,7 @@
       "overflow": 0,
       "wide": [],
       "broken": [],
-      "ctaBottom": 1331,
+      "ctaBottom": 1309,
       "priceBottom": null,
       "fineBottom": null,
       "links": [
@@ -162,7 +160,7 @@
         "#"
       ],
       "h1": "Zeotein Vegan",
-      "height": 8363
+      "height": 8341
     },
     {
       "slug": "vegan",
@@ -173,7 +171,7 @@
       "overflow": 0,
       "wide": [],
       "broken": [],
-      "ctaBottom": 878,
+      "ctaBottom": 877,
       "priceBottom": null,
       "fineBottom": null,
       "links": [
@@ -194,7 +192,7 @@
         "#"
       ],
       "h1": "Zeotein Vegan",
-      "height": 6472
+      "height": 6471
     },
     {
       "slug": "our-story",
@@ -225,7 +223,7 @@
         "#"
       ],
       "h1": "Protein first. The rest of the shelf, built in.",
-      "height": 5304
+      "height": 5285
     },
     {
       "slug": "our-story",
@@ -287,7 +285,7 @@
         "#"
       ],
       "h1": "Everything people ask us",
-      "height": 3988
+      "height": 3969
     },
     {
       "slug": "faq",
@@ -350,7 +348,7 @@
         "#"
       ],
       "h1": "Talk to a real person",
-      "height": 3263
+      "height": 3244
     },
     {
       "slug": "contact",
@@ -413,7 +411,7 @@
         "#"
       ],
       "h1": "Shipping",
-      "height": 5146
+      "height": 5127
     },
     {
       "slug": "shipping",
@@ -475,7 +473,7 @@
         "#"
       ],
       "h1": "Love it or your money back",
-      "height": 5388
+      "height": 5370
     },
     {
       "slug": "refund-policy",
@@ -545,7 +543,7 @@
         "#"
       ],
       "h1": "Single Ingredients",
-      "height": 4575
+      "height": 4445
     },
     {
       "slug": "single-ingredients",
@@ -615,7 +613,7 @@
         "#"
       ],
       "h1": "Grass-Fed Collagen Peptides",
-      "height": 3699
+      "height": 3680
     },
     {
       "slug": "collagen",
@@ -677,7 +675,7 @@
         "#"
       ],
       "h1": "Grass-Fed Bone Broth Protein",
-      "height": 3699
+      "height": 3680
     },
     {
       "slug": "bone-broth",
@@ -739,7 +737,7 @@
         "#"
       ],
       "h1": "Organic Hemp Protein",
-      "height": 3664
+      "height": 3645
     },
     {
       "slug": "hemp-protein",
@@ -801,7 +799,7 @@
         "#"
       ],
       "h1": "Organic Pumpkin Seed Protein",
-      "height": 3748
+      "height": 3729
     },
     {
       "slug": "pumpkin-seed-protein",
@@ -863,7 +861,7 @@
         "#"
       ],
       "h1": "Organic Fermented Cacao Powder",
-      "height": 3725
+      "height": 3706
     },
     {
       "slug": "cacao-powder",
@@ -925,7 +923,7 @@
         "#"
       ],
       "h1": "Organic MCT Oil Powder",
-      "height": 3696
+      "height": 3677
     },
     {
       "slug": "mct-oil-powder",
@@ -987,7 +985,7 @@
         "#"
       ],
       "h1": "Organic Sea Moss Powder",
-      "height": 3822
+      "height": 3803
     },
     {
       "slug": "sea-moss",
@@ -1049,7 +1047,7 @@
         "#"
       ],
       "h1": "Organic Lion's Mane Powder",
-      "height": 3722
+      "height": 3703
     },
     {
       "slug": "lions-mane",
@@ -1094,7 +1092,7 @@
   },
   "sticky": {
     "hiddenAtTop": true,
-    "shownAfterScroll": false
+    "shownAfterScroll": true
   },
   "ratingParser": {
     "single": {

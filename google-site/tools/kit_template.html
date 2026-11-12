@@ -123,6 +123,21 @@ td.num{font-variant-numeric:tabular-nums;text-align:center}
 .item .body{display:grid;gap:5px;min-width:0}
 .item .body p{color:var(--muted);font-size:.92rem;overflow-wrap:anywhere}
 .item .body p b{color:var(--ink);font-weight:600}
+/* Approval, tests */
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 18px}
+.choice{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:6px}
+.choice .chip{justify-self:start}
+.choice h3{font-size:1rem}
+.choice p{color:var(--muted);font-size:.92rem}
+.board{display:grid;gap:8px;margin:0}
+.board img{width:100%;max-width:100%;height:auto;border-radius:14px;border:1px solid var(--line);background:#fff}
+.board figcaption{font-size:.84rem;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 18px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:2px}
+.kpi b{font-size:1.5rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi span{font-size:.82rem;color:var(--muted)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+@media (max-width:760px){.choices,.pair{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}}
 footer.end{padding-block:28px 40px;color:var(--muted);font-size:.84rem;border-top:1px solid var(--line)}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
@@ -131,61 +146,77 @@ footer.end{padding-block:28px 40px;color:var(--muted);font-size:.84rem;border-to
   <div class="wrap">
     <p class="eyebrow">GoHighLevel website · Zeotein Google Site</p>
     <h1>Zeotein Google Site Kit</h1>
-    <p class="lede">Eight pages, built and checked, ready to paste into the GoHighLevel website that already exists. Checkout stays on Shopify through the same unlisted products the current Google funnel uses, so orders, subscriptions and the Google purchase conversion keep working as they do today.</p>
+    <p class="lede">The 12 Nov rebuild: a bright, zeotein.com-style shop with real product options (Starter Kits, 30-day bulk bag, stick packs), eight single-ingredient pages and an on-site cart, so a shopper can put a blend and a single ingredient in one order and check out once on Shopify. No browsing on zeotein.com, no $89.99 renewal, no Zeolite. Seventeen blocks, built and tested, ready to paste.</p>
     <div class="status">
-      <span class="pill ok"><i></i>8 of 8 pages built</span>
+      <span class="pill ok"><i></i><span><b id="stPages">17</b> pages built, 9 of them new</span></span>
       <span class="pill ok"><i></i>Compliance gate: 0 blocking</span>
-      <span class="pill ok"><i></i>Phone and desktop render: 0 errors</span>
-      <span class="pill ok"><i></i>Prices match Shopify (read 10 Nov)</span>
-      <span class="pill ok"><i></i>Live on shop.zeotein.com (checked 11 Nov)</span>
-      <span class="pill warn"><i></i>To do: re-paste Home, Cacao, Vegan, Our story</span>
+      <span class="pill ok"><i></i><span>Render: <b id="stRender"></b> clean</span></span>
+      <span class="pill ok"><i></i><span>Cart tests: <b id="stE2E"></b> pass</span></span>
+      <span class="pill ok"><i></i>Live Shopify checkout reached, no orders placed</span>
+      <span class="pill warn"><i></i>Needs Dana: approve the rating line</span>
+      <span class="pill warn"><i></i>To do: create 9 pages, paste 17 blocks</span>
     </div>
   </div>
 </header>
 
 <nav class="sections" aria-label="Sections">
   <div class="wrap">
-    <a href="#install">Install</a><a href="#pages">Page blocks</a><a href="#preview">Preview</a><a href="#ads">Google Ads</a><a href="#compliance">Compliance</a><a href="#open">Open items</a>
+    <a href="#approval">Approval</a><a href="#install">Install</a><a href="#pages">Page blocks</a><a href="#preview">Preview</a><a href="#tests">Tests</a><a href="#ads">Google Ads</a><a href="#compliance">Compliance</a><a href="#open">Open items</a>
   </div>
 </nav>
 
 <main>
+<section class="band" id="approval">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Needs Dana before anything is pasted</p>
+      <h2>Approval: the rating line</h2>
+      <p class="muted">The rebuilt Home, Cacao and Vegan pages add a store-wide rating line using the figure Zeus confirmed: <b>4.9 from 155 reviews</b>. Product pages say <b>across Zeotein</b> because the 155 reviews cover the whole store, not one product. Today's live pages show no overall rating. On 11 Nov Dana chose <b>4.9/5 &middot; Verified Buyers</b> with no review count; that version was built but never pasted. Zeus's 12 Nov brief sets the claim as 4.9 from 155 reviews, the figure zeotein.com shows. The three review quotes are verified Judge.me reviews, quoted as written. Nothing else on the site depends on this choice.</p>
+    </div>
+    <div class="choices">
+      <div class="choice"><span class="chip ok">Yes</span><h3>Use "4.9 from 155 reviews"</h3><p>Paste the standard Home, Cacao and Vegan blocks.</p></div>
+      <div class="choice"><span class="chip warn">No</span><h3>Leave the rating off</h3><p>Paste the <b>no-rating</b> versions of Home, Cacao and Vegan (second button on those cards in Page blocks). The review cards stay. Prefer the 11 Nov wording instead? Ask Claude: it is a one-line change and a rebuild.</p></div>
+    </div>
+    <figure class="board"><img alt="Before and after of the review text on Home, Cacao and the Home reviews section" src="__SHOT_review_board__" width="1100" height="1131"><figcaption>Before: live shop.zeotein.com on 12 Nov. After: the rebuilt blocks. Full-size boards for every page are in the repo under reports/zeus-workstream-2026-11-11/shop-visuals/before-after/.</figcaption></figure>
+  </div>
+</section>
+
 <section class="band" id="install">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">About 30 minutes in GoHighLevel</p>
+      <p class="eyebrow">About 45 minutes in GoHighLevel</p>
       <h2>Install</h2>
-      <p class="muted">The eight pages already exist in the website with the right paths. Tick steps off as you go; ticks are saved in this browser only.</p>
+      <p class="muted">Eight pages already exist with the right paths; nine are new. Every block changed, so all 17 are pasted. Tick steps off as you go; ticks are saved in this browser only.</p>
     </div>
     <div class="handoff" id="handoff">
       <div class="row"><h3>Faster: let Claude on your PC do the install</h3><button class="primary" type="button" id="copyPrompt">Copy prompt</button></div>
       <p>This kit was built in a cloud session, which can't reach your browser. On your PC, open the Claude desktop app, start a session that runs on your computer with Claude in Chrome connected, and paste this prompt. Or do the steps below yourself.</p>
-      <textarea readonly spellcheck="false" id="promptText" aria-label="Install prompt for Claude on your PC">Install the Zeotein Google Site in GoHighLevel, using my Chrome (I'm signed in to GoHighLevel there).
+      <textarea readonly spellcheck="false" id="promptText" aria-label="Install prompt for Claude on your PC">Install the 12 Nov rebuild of the Zeotein Google Site in GoHighLevel, using my Chrome (I'm signed in to GoHighLevel there).
 
-Everything is in the install kit: https://claude.ai/artifact/7xHhZwMmCAHnwAEc7dAmmb. It has a Copy block button for each of the 8 pages, plus each page's SEO title and description.
+Everything is in the install kit: https://claude.ai/artifact/7xHhZwMmCAHnwAEc7dAmmb. It has a Copy block button for each of the 17 pages, each page's path, SEO title and description, and the Head snippet.
 
-1. GoHighLevel → Sites → Websites → Zeotein Google Site. For each page that doesn't already show the current design (on 11 Nov: Home, Cacao, Vegan and Our story): open it in the builder, remove the draft sections, add one full-width section with one column (padding 0, no background), add a Custom JS/HTML (Code) element, paste that page's block from the kit, save. Then paste the page's SEO title and description into its page settings and save. Then open the website's Settings → Tracking code → Head, keep what's there, paste the fit snippet from the kit (Install step 3) at the very end, and save.
+1. GoHighLevel → Sites → Websites → Zeotein Google Site. Create these 9 pages with exactly these paths: Single Ingredients /single-ingredients, Collagen /collagen, Bone Broth /bone-broth, Hemp Protein /hemp-protein, Pumpkin Seed Protein /pumpkin-seed-protein, Cacao Powder /cacao-powder, MCT Oil Powder /mct-oil-powder, Sea Moss /sea-moss, Lion's Mane /lions-mane.
 
-2. At GoDaddy (zeotein.com DNS), add a CNAME record: Name shop, Value sites.ludicrous.cloud, TTL 1 hour (stop and ask me if I need to sign in). Then GoHighLevel → Settings → Domains → add shop.zeotein.com and connect it to Zeotein Google Site with Home as the default page.
+2. For all 17 pages: open it in the builder, remove the existing sections, add one full-width section with one column (padding 0, no background), add a Custom JS/HTML (Code) element, paste that page's block from the kit, save. Then paste the page's SEO title and description into its page settings and save. For Home, Cacao and Vegan, use the standard block if I approved the rating line, otherwise the "no-rating" block. Ask me which if you don't know.
 
-3. Publish. Confirm all 8 pages load: https://shop.zeotein.com/home, /cacao, /vegan, /our-story, /faq, /contact, /shipping, /refund-policy. Open https://shop.zeotein.com/cacao?gclid=TEST&amp;utm_source=google, click Claim My 55% Off, and confirm the Shopify page shows $76.99 with gclid=TEST in the address bar.
+3. Website Settings → Tracking code → Head: keep the Google Ads, Meta and Clarity tags; replace the old Zeotein fit snippet with the new one from the kit (Install step 4). It starts with the noindex tag, so a separate noindex line I added can stay or go. Save. Leave the Body tracking code as it is.
 
-4. Run the zeotein-compliance-scrub prescan on all 8 live URLs.
+4. Publish. Confirm all 17 pages load on https://shop.zeotein.com. Open https://shop.zeotein.com/cacao?gclid=TEST&amp;utm_source=google, add the Starter Kit, open /sea-moss, add 1/2 lb, press Checkout, and confirm Shopify checkout shows both items, $76.99 then $99.99 for the kit, and $59.99 for Sea Moss. Stop there: do not enter any details or pay.
 
-Don't change Google Ads, Shopify, or the Ad Setup Guardrails doc. Report what passed and anything that didn't.</textarea>
+Don't change Google Ads, Shopify, zeotein.com, go.zeotein.com or the Starter Kit funnel. Report what passed and anything that didn't.</textarea>
     </div>
     <ol class="steps" id="steps">
-      <li><div class="body"><label><input type="checkbox" id="s1"> Open the website</label><ul><li>Sites → Websites → <b>Zeotein Google Site</b>. You should see Home, Cacao, Vegan, Our story, FAQ, Contact, Shipping and Refund policy.</li></ul></div></li>
-      <li><div class="body"><label><input type="checkbox" id="s2"> Paste each page (repeat for all eight)</label><ul>
-        <li>Open the page in the builder. Remove the draft sections that are there now (clone the page first if you want a copy).</li>
+      <li><div class="body"><label><input type="checkbox" id="s1"> Get Dana's answer on the rating line</label><ul><li>See <a href="#approval">Approval</a>. Yes: use the standard Home, Cacao and Vegan blocks. No: use their no-rating versions. Every other page is the same either way.</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s2"> Create the nine new pages</label><ul><li>Sites → Websites → <b>Zeotein Google Site</b> → add a page for each, with these exact paths: <span class="mono">/single-ingredients</span>, <span class="mono">/collagen</span>, <span class="mono">/bone-broth</span>, <span class="mono">/hemp-protein</span>, <span class="mono">/pumpkin-seed-protein</span>, <span class="mono">/cacao-powder</span>, <span class="mono">/mct-oil-powder</span>, <span class="mono">/sea-moss</span>, <span class="mono">/lions-mane</span>. The blocks link to these paths, so a different path breaks the links.</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s3"> Paste every page (all 17)</label><ul>
+        <li>Open the page in the builder and remove the sections that are there now (clone the page first if you want a copy).</li>
         <li>Add one <b>full-width</b> section with one row and one column. Set section, row and column padding to 0 and background to none.</li>
         <li>Add a <b>Custom JS/HTML</b> element (newer builders call it Code). Paste that page's block from <a href="#pages">Page blocks</a>. Save.</li>
         <li>Page settings → SEO meta data: paste the page's title and description. Save.</li></ul></div></li>
-      <li><div class="body"><label><input type="checkbox" id="s3"> Add the fit snippet to the website's Head tracking code</label><ul><li>Website settings → Tracking code → <b>Head</b>. Keep everything already there (Google Ads tag AW-18130788543, Meta pixel, Clarity) and paste this at the very end. Save. Leave the Body tracking code as it is.</li><li>It removes GoHighLevel's default section padding and 1170px row so every page runs edge to edge, keeps the header pinned while scrolling, and fills each page's title and description wherever the SEO fields are empty.</li></ul><div class="snip"><button class="primary" type="button" id="copyHead">Copy snippet</button><textarea readonly spellcheck="false" id="headText" aria-label="Head tracking code snippet">__HEAD_SNIPPET__</textarea></div></div></li>
-      <li><div class="body"><label><input type="checkbox" id="s4"> Preview on a phone and a desktop</label><ul><li>Use the builder's preview link. Every buy button should open a zeotein.com product page: Cacao Starter Kit at $76.99, Vegan Starter Kit at $96.99.</li></ul></div></li>
-      <li><div class="body"><label><input type="checkbox" id="s5"> Connect the domain</label><ul><li>Done 11 Nov: <span class="mono">shop.zeotein.com</span> is connected and serves over HTTPS.</li><li>At <b>GoDaddy</b>, where zeotein.com's DNS lives: zeotein.com → DNS → Add record → Type <b>CNAME</b>, Name <span class="mono">shop</span>, Value <span class="mono">sites.ludicrous.cloud</span>, TTL 1 hour → Save. It's the same target marketing.zeotein.com uses.</li><li>GoHighLevel: Settings → Domains → Add domain → <span class="mono">shop.zeotein.com</span> → connect it to <b>Zeotein Google Site</b> with Home as the default page → Save.</li></ul></div></li>
-      <li><div class="body"><label><input type="checkbox" id="s6"> Publish, then re-scan the live pages</label><ul><li>Ask Claude to run the compliance prescan on every live URL, as the Guardrails require before any campaign moves.</li><li>Click test: open <span class="mono">https://shop.zeotein.com/cacao?gclid=TEST&amp;utm_source=google</span>, tap Claim My 55% Off, and confirm the Shopify page shows $76.99 with gclid=TEST in the address bar.</li></ul></div></li>
-      <li><div class="body"><label><input type="checkbox" id="s7"> Move Google over</label><ul><li>See <a href="#ads">Google Ads</a> for the final URLs and sitelinks. Then update the Ad Setup Guardrails destination list (Dana edits that doc).</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s4"> Replace the Head snippet</label><ul><li>Website settings → Tracking code → <b>Head</b>. Keep the Google Ads tag AW-18130788543, the Meta pixel and Clarity. Replace the old Zeotein snippet with this one and save. Leave the Body tracking code as it is.</li><li>It starts with <span class="mono">&lt;meta name="robots" content="noindex, follow"&gt;</span>, so the shop stays out of Google Search while ads still run. A noindex line you added by hand can stay (a duplicate is harmless) or go.</li></ul><div class="snip"><button class="primary" type="button" id="copyHead">Copy snippet</button><textarea readonly spellcheck="false" id="headText" aria-label="Head tracking code snippet">__HEAD_SNIPPET__</textarea></div></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s5"> Preview, then test the cart</label><ul><li>On a phone and a desktop: Cacao → Starter Kit, Every 6 weeks → Add to cart; then Single Ingredients → Sea Moss 1/2 lb → Add to cart. The cart should show $76.99 (then $99.99 per delivery) and $59.99, subtotal $136.98.</li><li>Press Checkout. Shopify checkout should list both items and say "First payment $76.99, then $99.99 every 6 weeks". <b>Stop there</b>: no details, no payment.</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s6"> Publish, then ask Claude to re-test the live site</label><ul><li>Claude runs <span class="mono">qa/e2e_cart.js</span>, <span class="mono">qa/link_check.py</span> and the compliance prescan against https://shop.zeotein.com and reports back.</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s7"> Google Ads: on hold</label><ul><li>No final URL moves to shop.zeotein.com until the hold lifts. The table in <a href="#ads">Google Ads</a> is ready for that day.</li></ul></div></li>
     </ol>
   </div>
 </section>
@@ -204,26 +235,29 @@ Don't change Google Ads, Shopify, or the Ad Setup Guardrails doc. Report what pa
 <section class="band" id="preview">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Rendered 10 Nov 2026 from the build</p>
+      <p class="eyebrow">Rendered 12 Nov 2026 from the build</p>
       <h2>Preview</h2>
-      <p class="muted">First phone screen on an iPhone 13: headline, button, price, terms and guarantee all show before any scrolling. Pouch photos are full and uncropped, with ZEOLITE, IMMUNE, DETOX and INFLAMMATION garbled on the label. An OCR check reads none of the four.</p>
+      <p class="muted">First screens on an iPhone 13 and a 1440px desktop. Pouch photos are full and uncropped, with ZEOLITE, IMMUNE, DETOX and INFLAMMATION garbled on every label (an OCR check reads none of the four). On phones, an Add to cart bar appears once the buy button scrolls away.</p>
     </div>
     <div class="shots">
       <figure class="shot"><img alt="Home page, first phone screen" src="__SHOT_home_m__" width="390" height="664"><p>Home</p></figure>
       <figure class="shot"><img alt="Cacao page, first phone screen" src="__SHOT_cacao_m__" width="390" height="664"><p>Cacao</p></figure>
       <figure class="shot"><img alt="Vegan page, first phone screen" src="__SHOT_vegan_m__" width="390" height="664"><p>Vegan</p></figure>
     </div>
-    <figure class="desk"><img alt="Cacao page on desktop" src="__SHOT_cacao_d__" width="960" height="600"><p class="muted">Cacao page, desktop</p></figure>
+    <figure class="desk"><img alt="Home page on desktop" src="__SHOT_home_d__" width="960" height="600"><p class="muted">Home, desktop</p></figure>
+    <figure class="desk"><img alt="Cacao page on desktop" src="__SHOT_cacao_d__" width="960" height="600"><p class="muted">Cacao, desktop: every option adds the matching Shopify variant and plan</p></figure>
+    <figure class="desk"><img alt="Single Ingredients page on desktop" src="__SHOT_singles_d__" width="960" height="600"><p class="muted">Single Ingredients, desktop (Zeolite Powder is not listed: hold)</p></figure>
   </div>
 </section>
 
 <section class="band" id="ads">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">After the site is live and re-scanned</p>
+      <p class="eyebrow">On hold: do not switch yet</p>
       <h2>Google Ads</h2>
       <p class="muted">Keep Final URL expansion OFF on every campaign. The account-level final URL suffix already adds the UTMs, so nothing changes there.</p>
     </div>
+    <p class="note" style="margin-bottom:14px"><b>Hold (12 Nov brief):</b> no Google Ads final URL moves to shop.zeotein.com yet. This table is ready for the day the hold lifts.</p>
     <div class="tablewrap"><table>
       <thead><tr><th>Campaign / asset group</th><th>Final URL today</th><th>Change to</th></tr></thead>
       <tbody>
@@ -237,6 +271,42 @@ Don't change Google Ads, Shopify, or the Ad Setup Guardrails doc. Report what pa
       <thead><tr><th>Sitelink text</th><th>Description 1</th><th>Description 2</th><th>Final URL path</th></tr></thead>
       <tbody id="sitelinks"></tbody>
     </table></div>
+  </div>
+</section>
+
+<section class="band" id="tests">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Run 12 Nov on the built blocks; no order placed, no payment taken</p>
+      <h2>Tests</h2>
+      <p class="muted">Repeatable: <span class="mono">node qa/e2e_cart.js [site] [out] --checkout</span> and <span class="mono">python3 qa/link_check.py</span>. Point them at https://shop.zeotein.com once the blocks are live.</p>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><b id="kE2E"></b><span>cart and button checks pass</span></div>
+      <div class="kpi"><b>2 of 2</b><span>live Shopify checkouts correct (single item; blend + single)</span></div>
+      <div class="kpi"><b id="kRender"></b><span>page renders clean (17 pages, phone + desktop)</span></div>
+      <div class="kpi"><b id="kLinks"></b><span>links and images, 0 problems</span></div>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>What was tested</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Every Cacao and Vegan option and delivery schedule adds the exact Shopify variant and selling plan, at the catalog price, with the right note and photo</td><td><span class="chip ok">pass</span></td></tr>
+        <tr><td>Every size on the 8 single-ingredient pages and the Single Ingredients grid, plus every other Add to cart button on all 17 pages</td><td><span class="chip ok">pass</span></td></tr>
+        <tr><td>Cart: quantities, remove, one Starter Kit per customer, cart follows the shopper across pages and reloads, a stale or tampered cart is repaired, a line on the $89.99-renewal plan is dropped</td><td><span class="chip ok">pass</span></td></tr>
+        <tr><td>Checkout link: clears the zeotein.com cart, adds every item with its plan, saves gclid, UTMs, landing page and source site as cart attributes, then opens checkout</td><td><span class="chip ok">pass</span></td></tr>
+        <tr><td>Checkout, back, add one more, checkout again: nothing doubles (fixed tonight by clearing first; a stale 2 x Collagen cart was wiped in the live run)</td><td><span class="chip ok">fixed + pass</span></td></tr>
+        <tr><td>Live: Collagen 1 lb from the on-site cart to Shopify checkout, $46.99</td><td><span class="chip ok">pass</span></td></tr>
+        <tr><td>Live: Cacao Starter Kit every 6 weeks + Sea Moss 1/2 lb to Shopify checkout: $136.98, "First payment $76.99, then $99.99 every 6 weeks", gclid and UTMs on the cart. Sent as the exact chain the Checkout button builds for that cart; the later button-click run was stopped by the bot check</td><td><span class="chip ok">pass</span></td></tr>
+        <tr><td>Live: Vegan kit + Hemp, and Cacao stick-pack subscription + Lion's Mane. Cart and checkout link pass; the live runs were stopped by Shopify's bot check on this test machine</td><td><span class="chip warn">retest</span></td></tr>
+        <tr><td>Phone Add to cart bar on Cacao and Vegan (bug found tonight: it never appeared after a fast scroll; fixed)</td><td><span class="chip ok">fixed + pass</span></td></tr>
+        <tr><td>No $89.99 on any page, in the cart, in the checkout link or on Shopify checkout</td><td><span class="chip ok">pass</span></td></tr>
+        <tr><td>Links: every internal link and #anchor resolves; the only zeotein.com links are subscriptions login, privacy and terms; nothing sends shoppers to browse zeotein.com</td><td><span class="chip ok">pass</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="pair">
+      <figure class="board"><img alt="On-site cart with the Cacao Starter Kit and Sea Moss" src="__SHOT_cart_b__" width="900" height="632"><figcaption>On-site cart: blend + single in one order</figcaption></figure>
+      <figure class="board"><img alt="Shopify checkout showing the Cacao Starter Kit and Sea Moss" src="__SHOT_co_b__" width="900" height="632"><figcaption>Live Shopify checkout for that cart (stopped before any details)</figcaption></figure>
+    </div>
   </div>
 </section>
 
@@ -271,11 +341,22 @@ Don't change Google Ads, Shopify, or the Ad Setup Guardrails doc. Report what pa
 <script type="application/json" id="blocks">__BLOCKS_JSON__</script>
 <script type="application/json" id="pagesData">__PAGES_JSON__</script>
 <script type="application/json" id="compData">__COMP_JSON__</script>
+<script type="application/json" id="noRating">__NORATING_JSON__</script>
+<script type="application/json" id="testsData">__TESTS_JSON__</script>
 <script>
 (function(){
   var blocks = JSON.parse(document.getElementById('blocks').textContent);
   var pages = JSON.parse(document.getElementById('pagesData').textContent);
   var comp = JSON.parse(document.getElementById('compData').textContent);
+  var noRating = JSON.parse(document.getElementById('noRating').textContent);
+  var T = JSON.parse(document.getElementById('testsData').textContent);
+  function setText(id, t){ var e = document.getElementById(id); if (e) e.textContent = t; }
+  setText('stPages', String(T.pages));
+  setText('stRender', T.renderClean + ' of ' + T.renderTotal);
+  setText('stE2E', T.e2ePassed + ' of ' + (T.e2ePassed + T.e2eFailed));
+  setText('kE2E', T.e2ePassed + ' of ' + (T.e2ePassed + T.e2eFailed));
+  setText('kRender', T.renderClean + ' of ' + T.renderTotal);
+  setText('kLinks', (T.internalLinks + T.externalLinks + T.images) + '');
 
   function flash(btn, msg){ var t = btn.textContent; btn.textContent = msg; setTimeout(function(){ btn.textContent = t; }, 1600); }
   function copy(text, btn, area){
@@ -295,11 +376,13 @@ Don't change Google Ads, Shopify, or the Ad Setup Guardrails doc. Report what pa
   pages.forEach(function(p){
     var card = el('article', {'class':'page'});
     var kb = Math.round(p.bytes/1024);
-    card.innerHTML = '<div class="row"><div class="name"><h3>' + p.order + '. ' + esc(p.name) + '</h3><span class="path">' + esc(p.path) + '</span><span class="muted mono">' + kb + ' KB</span></div><div class="btns"><button class="primary" type="button" data-act="block">Copy block</button></div></div>' +
+    var alt = noRating[p.slug];
+    card.innerHTML = '<div class="row"><div class="name"><h3>' + p.order + '. ' + esc(p.name) + '</h3><span class="path">' + esc(p.path) + '</span>' + (p.isNew ? '<span class="chip warn">New page: create it first</span>' : '') + '<span class="muted mono">' + kb + ' KB</span></div><div class="btns"><button class="primary" type="button" data-act="block">Copy block' + (alt ? ' (with rating)' : '') + '</button>' + (alt ? '<button type="button" data-act="alt">Copy no-rating version</button>' : '') + '</div></div>' +
       '<dl class="seo"><dt>SEO title</dt><dd>' + esc(p.seoTitle) + '</dd><dd><button type="button" data-act="title">Copy</button></dd><dt>Description</dt><dd>' + esc(p.seoDescription) + '</dd><dd><button type="button" data-act="desc">Copy</button></dd></dl>' +
       '<details class="code"><summary>Show the code</summary><textarea readonly spellcheck="false" id="code-' + p.slug + '" aria-label="' + esc(p.name) + ' page block"></textarea></details>';
     var area = card.querySelector('textarea'); area.value = blocks[p.slug];
     card.querySelector('[data-act=block]').addEventListener('click', function(e){ copy(blocks[p.slug], e.currentTarget, area); });
+    if (alt) card.querySelector('[data-act=alt]').addEventListener('click', function(e){ copy(alt, e.currentTarget); });
     card.querySelector('[data-act=title]').addEventListener('click', function(e){ copy(p.seoTitle, e.currentTarget); });
     card.querySelector('[data-act=desc]').addEventListener('click', function(e){ copy(p.seoDescription, e.currentTarget); });
     list.appendChild(card);
@@ -308,6 +391,7 @@ Don't change Google Ads, Shopify, or the Ad Setup Guardrails doc. Report what pa
   var sl = [
     ['Cacao Starter Kit','23g protein, 14g collagen','First order $76.99, ships free','/cacao'],
     ['Zeotein Vegan','20g plant protein per stick','Five ingredients, 0g added sugar','/vegan'],
+    ['Single Ingredients','Collagen, bone broth, sea moss','Add them to any blend order','/single-ingredients'],
     ['Our Story','Protein first, rest built in','Labels you can read in seconds','/our-story'],
     ['Questions Answered','Ingredients, mixing, shipping','Plus how subscriptions work','/faq'],
     ['Shipping Info','Ships in 1 to 2 business days','Free US shipping on Cacao kit','/shipping'],

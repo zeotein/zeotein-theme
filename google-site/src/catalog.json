@@ -6,6 +6,7 @@
    "name": "Zeotein Cacao Starter Kit",
    "detail": "30-day bulk bag, shaker, Save-A-Scoop and 3 guides",
    "img": "{{imgCacaoBagFirstSm}}",
+   "imgLg": "{{imgCacaoBagFirst}}",
    "variant": 67710100308181,
    "price": 76.99,
    "renew": 99.99,
@@ -30,6 +31,7 @@
    "name": "Zeotein Cacao 30-Day Bulk Bag",
    "detail": "Buy once",
    "img": "{{imgCacaoBagFirstSm}}",
+   "imgLg": "{{imgCacaoBagFirst}}",
    "variant": 54506852319445,
    "price": 93.49,
    "freeShip": true
@@ -38,6 +40,7 @@
    "name": "Zeotein Cacao 30 Stick Packs",
    "detail": "Subscribe & save",
    "img": "{{imgCacaoSticksFirstSm}}",
+   "imgLg": "{{imgCacaoSticksFirst}}",
    "variant": 52649698132181,
    "price": 114.99,
    "renew": 114.99,
@@ -60,6 +63,7 @@
    "name": "Zeotein Cacao 30 Stick Packs",
    "detail": "Buy once",
    "img": "{{imgCacaoSticksFirstSm}}",
+   "imgLg": "{{imgCacaoSticksFirst}}",
    "variant": 52649698132181,
    "price": 134.99
   },
@@ -67,6 +71,7 @@
    "name": "Zeotein Cacao 7 Stick Packs",
    "detail": "Buy once",
    "img": "{{imgCacaoSticks7FirstSm}}",
+   "imgLg": "{{imgCacaoSticks7First}}",
    "variant": 52342958031061,
    "price": 39.99
   },
@@ -74,6 +79,7 @@
    "name": "Zeotein Vegan Starter Kit",
    "detail": "30 stick packs, free shaker and 3 digital guides",
    "img": "{{imgVeganSticksFirstSm}}",
+   "imgLg": "{{imgVeganSticksFirst}}",
    "variant": 68049376313557,
    "price": 96.99,
    "renew": 124.99,
@@ -97,6 +103,7 @@
    "name": "Zeotein Vegan 30 Stick Packs",
    "detail": "Buy once",
    "img": "{{imgVeganSticksFirstSm}}",
+   "imgLg": "{{imgVeganSticksFirst}}",
    "variant": 53061513511125,
    "price": 139.99
   },
@@ -104,6 +111,7 @@
    "name": "Zeotein Vegan 7 Stick Packs",
    "detail": "Buy once, with 3 digital guides",
    "img": "{{imgVeganSticks7FirstSm}}",
+   "imgLg": "{{imgVeganSticks7First}}",
    "variant": 53059759112405,
    "price": 44.99
   },

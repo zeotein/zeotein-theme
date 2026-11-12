@@ -1,0 +1,97 @@
+{
+ "ranAt": "2026-11-12T04:54:41.049Z",
+ "base": "http://127.0.0.1:8765",
+ "liveCheckout": true,
+ "passed": 0,
+ "failed": 4,
+ "checks": [
+  {
+   "name": "Flow A, single item: flow ran",
+   "ok": false,
+   "detail": "Error: Shopify bot protection (429 + Cloudflare check) answered this test browser"
+  },
+  {
+   "name": "Flow B + C, blend plus single, then back and checkout again: flow ran",
+   "ok": false,
+   "detail": "Error: Shopify bot protection (429 + Cloudflare check) answered this test browser"
+  },
+  {
+   "name": "Flow D, Vegan kit plus Hemp: flow ran",
+   "ok": false,
+   "detail": "Error: Shopify bot protection (429 + Cloudflare check) answered this test browser"
+  },
+  {
+   "name": "Flow E, Cacao stick-pack subscription plus Lion's Mane: flow ran",
+   "ok": false,
+   "detail": "Error: Shopify bot protection (429 + Cloudflare check) answered this test browser"
+  }
+ ],
+ "flows": [
+  {
+   "name": "a-single",
+   "title": "Flow A, single item",
+   "hops": [
+    [
+     "302 https://zeotein.com/cart/clear?return_to=/cart/add?items%5B0%5D%5Bid%5D=53174839214293&items%5B0%5D%5Bquantity%5D=1&return_to=%2Fcart%2Fupdate%3Fattri",
+     "307 https://zeotein.com/cart/add?items[0][id]=53174839214293&items[0][quantity]=1&return_to=/cart/update?attributes%5Butm_source%5D=google&attributes%5But",
+     "429 https://zeotein.com/cart/clear?return_to=/cart/add?items%5B0%5D%5Bid%5D=53174839214293&items%5B0%5D%5Bquantity%5D=1&return_to=%2Fcart%2Fupdate%3Fattri"
+    ]
+   ],
+   "screenshots": [
+    "A-single-collagen-cart.png",
+    "A-single-collagen-checkout.png"
+   ],
+   "blocked": "Shopify bot protection (429 + Cloudflare check) answered this test browser",
+   "error": "Error: Shopify bot protection (429 + Cloudflare check) answered this test browser"
+  },
+  {
+   "name": "b-blend-plus-single",
+   "title": "Flow B + C, blend plus single, then back and checkout again",
+   "hops": [
+    [
+     "307 https://zeotein.com/cart/clear?return_to=/cart/add?items%5B0%5D%5Bid%5D=67710100308181&items%5B0%5D%5Bquantity%5D=1&items%5B0%5D%5Bselling_plan%5D=662",
+     "429 https://zeotein.com/cart/clear?return_to=/cart/add?items%5B0%5D%5Bid%5D=67710100308181&items%5B0%5D%5Bquantity%5D=1&items%5B0%5D%5Bselling_plan%5D=662"
+    ]
+   ],
+   "screenshots": [
+    "B-blend-plus-single-cart.png",
+    "B-blend-plus-single-checkout.png"
+   ],
+   "blocked": "Shopify bot protection (429 + Cloudflare check) answered this test browser",
+   "error": "Error: Shopify bot protection (429 + Cloudflare check) answered this test browser"
+  },
+  {
+   "name": "d-vegan",
+   "title": "Flow D, Vegan kit plus Hemp",
+   "hops": [
+    [
+     "302 https://zeotein.com/cart/clear?return_to=/cart/add?items%5B0%5D%5Bid%5D=68049376313557&items%5B0%5D%5Bquantity%5D=1&items%5B0%5D%5Bselling_plan%5D=656",
+     "307 https://zeotein.com/cart/add?items[0][id]=68049376313557&items[0][quantity]=1&items[0][selling_plan]=6561169621&items[1][id]=53196989300949&items[1][q",
+     "429 https://zeotein.com/cart/clear?return_to=/cart/add?items%5B0%5D%5Bid%5D=68049376313557&items%5B0%5D%5Bquantity%5D=1&items%5B0%5D%5Bselling_plan%5D=656"
+    ]
+   ],
+   "screenshots": [
+    "D-vegan-kit-plus-hemp-cart.png",
+    "D-vegan-kit-plus-hemp-checkout.png"
+   ],
+   "blocked": "Shopify bot protection (429 + Cloudflare check) answered this test browser",
+   "error": "Error: Shopify bot protection (429 + Cloudflare check) answered this test browser"
+  },
+  {
+   "name": "e-sticks",
+   "title": "Flow E, Cacao stick-pack subscription plus Lion's Mane",
+   "hops": [
+    [
+     "307 https://zeotein.com/cart/clear?return_to=/cart/add?items%5B0%5D%5Bid%5D=52649698132181&items%5B0%5D%5Bquantity%5D=1&items%5B0%5D%5Bselling_plan%5D=667",
+     "429 https://zeotein.com/cart/clear?return_to=/cart/add?items%5B0%5D%5Bid%5D=52649698132181&items%5B0%5D%5Bquantity%5D=1&items%5B0%5D%5Bselling_plan%5D=667"
+    ]
+   ],
+   "screenshots": [
+    "E-cacao-sticks-sub-plus-lions-mane-cart.png",
+    "E-cacao-sticks-sub-plus-lions-mane-checkout.png"
+   ],
+   "blocked": "Shopify bot protection (429 + Cloudflare check) answered this test browser",
+   "error": "Error: Shopify bot protection (429 + Cloudflare check) answered this test browser"
+  }
+ ]
+}

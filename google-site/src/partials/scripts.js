@@ -62,16 +62,20 @@
   if (bar) {
     var setBar = function (show) { bar.classList.toggle('show', show); bar.setAttribute('aria-hidden', show ? 'false' : 'true'); try { bar.inert = !show; } catch (e) {} };
     setBar(false);
-    if (heroCta && 'IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) { setBar(!en.isIntersecting && en.boundingClientRect.top < 0); });
-      }).observe(heroCta);
+    if (heroCta) {
+      /* Scroll position, not IntersectionObserver: a fast fling or an in-page link can jump straight past the
+         button without it ever being on screen, and the observer would then never fire. */
+      var queued = false;
+      var place = function () { queued = false; setBar(heroCta.getBoundingClientRect().bottom < 0); };
+      window.addEventListener('scroll', function () { if (!queued) { queued = true; window.requestAnimationFrame(place); } }, { passive: true });
+      window.addEventListener('resize', place);
+      place();
     }
   }
 
-  /* 4. Star rating. Shows ONLY the live store-wide Judge.me figure, read when the page loads.
-     With no public token set, or if Judge.me does not answer, the rating line stays hidden.
-     Nothing is ever hardcoded. */
+  /* 4. Optional live star rating. The visible rating lines use the approved store-wide figure from config
+     (ratingText). Elements marked data-zt-stars, if any are added later, show the live Judge.me figure
+     instead once a public token is set; with no token, or if Judge.me does not answer, they stay hidden. */
   var TOKEN = '{{judgemePublicToken}}', SHOP = '{{judgemeShopDomain}}';
   var starEls = document.querySelectorAll('.ztg [data-zt-stars]');
   function parseRating(text) {
@@ -113,10 +117,19 @@
     try { var o = JSON.parse(window.localStorage.getItem(CART_KEY) || 'null'); if (o && o.t && (Date.now() - o.t) < CART_TTL && o.lines) return o.lines; } catch (e) {}
     return [];
   }
-  var lines = loadCart().filter(function (l) { return ITEMS[l.id]; });
   function saveCart() { try { window.localStorage.setItem(CART_KEY, JSON.stringify({ t: Date.now(), lines: lines })); } catch (e) {} }
   function money(n) { return '$' + (Math.round(n * 100) / 100).toFixed(2); }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  /* A saved cart is rebuilt from the current catalog on every page load, so prices, names and plans are always
+     today's. A line whose size or delivery plan is no longer offered is dropped rather than sent to checkout. */
+  function refreshLine(l) {
+    var it = l && ITEMS[l.id], idx = 0; if (!it) return null;
+    if (it.sizes) { idx = -1; it.sizes.forEach(function (s, i) { if (String(s[1]) === String(l.vid)) idx = i; }); }
+    else if (it.plans) { idx = -1; it.plans.forEach(function (p, i) { if (String(p[1]) === String(l.sp)) idx = i; }); }
+    if (idx < 0) return null;
+    var n = makeLine(l.id, idx); n.qty = n.max ? 1 : Math.max(1, Math.min(parseInt(l.qty, 10) || 1, 10)); return n;
+  }
+  var lines = loadCart().map(refreshLine).filter(Boolean);
   function makeLine(id, opt) {
     var it = ITEMS[id]; if (!it) return null; opt = parseInt(opt || 0, 10) || 0;
     if (it.sizes) {
@@ -148,8 +161,13 @@
     if (landing) a.push(E('attributes[landing_page]') + '=' + E(landing));
     a.push('return_to=' + E('/checkout'));
     q.push('return_to=' + E('/cart/update?' + a.join('&')));
-    Object.keys(params).forEach(function (k) { q.push(E(k) + '=' + E(params[k])); });
-    return SHOPIFY + '/cart/add?' + q.join('&');
+    /* Clear the zeotein.com cart first, so Checkout always carries exactly this cart: a shopper who
+       goes to checkout, comes back and checks out again would otherwise get every item twice.
+       Chain: /cart/clear -> /cart/add (items + plans) -> /cart/update (UTMs, gclid) -> /checkout.
+       UTMs ride on the first URL too, so Shopify's own session attribution sees them. */
+    var u = ['return_to=' + E('/cart/add?' + q.join('&'))];
+    Object.keys(params).forEach(function (k) { u.push(E(k) + '=' + E(params[k])); });
+    return SHOPIFY + '/cart/clear?' + u.join('&');
   }
   function renderCart() {
     var count = 0, total = 0, anyFree = false, subs = [];
@@ -220,7 +238,7 @@
     }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCart(); });
-  window.addEventListener('storage', function (e) { if (e.key === CART_KEY) { lines = loadCart().filter(function (l) { return ITEMS[l.id]; }); renderCart(); } });
+  window.addEventListener('storage', function (e) { if (e.key === CART_KEY) { lines = loadCart().map(refreshLine).filter(Boolean); renderCart(); } });
   window.__ztgCart = { lines: function () { return lines; }, url: checkoutUrl, add: addLine };
   renderCart();
 
@@ -232,7 +250,8 @@
       var pr = form.querySelector('[data-zt-buy-price]'); if (pr) pr.textContent = money(it.price || 0);
       var nt = form.querySelector('[data-zt-buy-note]');
       if (nt) nt.textContent = it.plans ? ((it.renew && it.renew !== it.price) ? 'First order, then ' + money(it.renew) + ' per delivery. Skip, pause or cancel anytime.' : money(it.renew || it.price) + ' per delivery. Skip, pause or cancel anytime.') : 'One-time purchase.';
-      var img = document.querySelector(form.getAttribute('data-zt-img') || 'x-none'); if (img && it.img) { img.src = it.img; img.removeAttribute('srcset'); }
+      var img = document.querySelector(form.getAttribute('data-zt-img') || 'x-none');
+      if (img && it.img) { if (it.imgLg) { img.srcset = it.img + ' 640w, ' + it.imgLg + ' 1024w'; img.src = it.imgLg; } else { img.removeAttribute('srcset'); img.src = it.img; } }
       form.querySelectorAll('.opt').forEach(function (o) { var r = o.querySelector('input'); o.classList.toggle('on', !!(r && r.checked)); });
     }
     form.addEventListener('change', sync); sync();
