@@ -100,21 +100,23 @@ def size_options(cid, cat):
     return "".join(f'<option value="{i}">{s[0]} &middot; {money(s[2])}</option>' for i, s in enumerate(cat["items"][cid]["sizes"]))
 
 
-def singles_grid_html(cat, facts):
+def singles_grid_html(cat, facts, ids=None, cls=""):
     cards = []
-    for cid in SINGLES_ORDER:
+    for cid in ids or SINGLES_ORDER:
         it = cat["items"][cid]
         cards.append(
             f'<article class="sitem" data-zt-card><a class="ph" href="/{cid}"><img src="{it["img"]}" width="600" height="600" alt="Zeotein {html.escape(it["name"])} pouch" loading="lazy"></a>'
             f'<div class="bd"><h3><a href="/{cid}">{html.escape(it["name"])}</a></h3><p class="fact">{facts[cid]}</p>'
             f'<div class="row"><select id="size-{cid}" data-zt-size="{cid}" aria-label="Size">{size_options(cid, cat)}</select><span class="price" data-zt-price>{money(it["sizes"][0][2])}</span></div>'
             f'<button type="button" class="btn btn-primary" data-zt-add="{cid}" data-zt-opt-from="#size-{cid}">Add to cart</button></div></article>')
-    return '<div class="sgrid">' + "".join(cards) + "</div>"
+    return f'<div class="sgrid{(" " + cls) if cls else ""}">' + "".join(cards) + "</div>"
 
 
 def expand_generated(text, cat, facts):
     text = re.sub(r"\{\{buybox:([a-z]+)\}\}", lambda m: buybox_html(m.group(1), cat), text)
     text = text.replace("{{singlesgrid}}", singles_grid_html(cat, facts))
+    # {{singlesrow:a,b,c,d}}: a short row of chosen single-ingredient cards (cross-sell on the blend pages)
+    text = re.sub(r"\{\{singlesrow:([a-z,-]+)\}\}", lambda m: singles_grid_html(cat, facts, m.group(1).split(","), "four"), text)
     text = re.sub(r"\{\{sizes:([a-z-]+)\}\}", lambda m: size_options(m.group(1), cat), text)
     text = re.sub(r"\{\{sizeprice:([a-z-]+)\}\}", lambda m: money(cat["items"][m.group(1)]["sizes"][0][2]), text)
     return text

@@ -90,14 +90,14 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 702,
+          "line": 829,
           "match": "guarantee",
           "context": "How does the 30-day guarantee work?"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 897,
+          "line": 1024,
           "match": "guarantee",
           "context": "Zeotein home Zeotein Main Open cart Open menu Zeotein Cacao protein powder Per serving      Man holding a Zeotein CleanBlend shaker in a home gym A typical protein routine: separate tubs of protein po"
         }
@@ -165,21 +165,21 @@
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 445,
+          "line": 571,
           "match": "guarantee",
           "context": "What does the 30-day guarantee cover?"
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 450,
+          "line": 576,
           "match": "guarantee",
           "context": "and we'll send return instructions. Opened product is fine. The 7-day pack is not part of the guarantee."
         },
         {
           "tier": "HIGH",
           "rule": "guaranteed_outcome",
-          "line": 630,
+          "line": 756,
           "match": "guarantee",
           "context": "Zeotein home Zeotein Main Open cart Open menu Zeotein Vegan plant protein stick packs Per serving The five Zeotein Vegan ingredients in bowls: organic pumpkin seed protein, organic hemp protein, organ"
         }

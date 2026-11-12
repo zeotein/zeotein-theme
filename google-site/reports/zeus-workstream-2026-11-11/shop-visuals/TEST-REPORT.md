@@ -10,14 +10,14 @@ Install kit (blocks, steps, approval, results): https://claude.ai/artifact/7xHhZ
 
 | Check | Result | Evidence |
 |---|---|---|
-| Every buy option, delivery schedule, size and Add to cart button adds the exact Shopify variant + selling plan at the catalog price | **250 of 250 pass** | `e2e/e2e-results.json` |
+| Every buy option, delivery schedule, size and Add to cart button adds the exact Shopify variant + selling plan at the catalog price | **306 of 306 pass** | `e2e/e2e-results.json` |
 | (a) Single item → live Shopify checkout (Collagen 1 lb, from the on-site Checkout button) | **Pass:** checkout shows 1 × Collagen Peptides 1 lb, $46.99 | `checkout/A-single-item-onsite-cart.png`, `checkout/A-single-item-LIVE-shopify-checkout.png` |
 | (b) Blend + single → live Shopify checkout (Cacao Starter Kit every 6 weeks + Sea Moss ½ lb) | **Pass:** $136.98; "First payment $76.99, then $99.99 every 6 weeks"; gclid, utm_source and landing_page saved on the cart. The live run (04:28 UTC) sent the exact chain the Checkout button builds for this cart (asserted field by field in part C); the later button-click run was stopped by the bot check | `checkout/B-blend-plus-single-onsite-cart.png`, `checkout/B-blend-plus-single-LIVE-shopify-checkout.png` |
 | Checkout → back → add more → checkout again | **Fixed:** checkout now clears the Shopify cart first. Verified live that a stale 2 × Collagen cart was wiped before the new items were added | `checkout/B-blend-plus-single-LIVE-shopify-checkout.png` |
 | Vegan kit + Hemp; Cacao stick-pack subscription + Lion's Mane | Cart and checkout link pass. **The live runs were blocked by Shopify's bot check** on this cloud machine (see below). Retest after paste | `checkout/D-…-onsite-cart.png`, `checkout/E-…-onsite-cart.png`, `checkout/BLOCKED-shopify-bot-check-0450UTC.png` |
 | UTM + gclid passthrough | **Pass:** gclid, utm_source/medium/campaign/term/content, landing_page and source_site are written to the Shopify cart (they become the order's additional details) and also ride on the first zeotein.com request | `e2e/e2e-results.json`, part C |
 | No $89.99 anywhere: pages, cart, checkout link, Shopify checkout | **Pass:** the $89.99-renewal plan (4659019989) is never offered, and an old cart holding it is cleaned on load | tests A–D |
-| Links: 349 internal links and anchors, 3 external, 31 images | **0 problems.** The only zeotein.com links are subscription login, privacy and terms; nothing sends shoppers to browse zeotein.com | `link-check.json` |
+| Links: 367 internal links and anchors, 3 external, 31 images | **0 problems.** The only zeotein.com links are subscription login, privacy and terms; nothing sends shoppers to browse zeotein.com | `link-check.json` |
 | Render: 17 pages × phone + desktop | **34 of 34 clean:** no JavaScript errors, failed requests, broken images or sideways scroll | `qa/render-report.json` |
 | Compliance gate (zeotein-compliance-scrub prescan + house rules) | **0 blocking.** The High hits are the word "guarantee" in the money-back terms; the one Medium is "promotional items" in the refund policy | `qa/compliance-report.json` |
 
@@ -40,6 +40,16 @@ order. Clearing first means the checkout always matches the on-site cart exactly
 4. **The product photo went soft** on retina screens after switching options. It now swaps to the full-size image.
 5. Cart quantity stepper stacked vertically; broken `/cacao#label` link from Home; announcement bar wrapping on phones; rating line wrapping awkwardly; cramped single-ingredient cards on phones.
 6. An internal catalog note containing the word "Zeolite" was shipping in every page's source. It is now stripped from the build.
+
+## Also added tonight
+
+- **"Add a single ingredient" on the Cacao and Vegan pages.** Four powders with size pickers and Add to cart, plus a link
+  to all eight, so shoppers can browse and add single ingredients without leaving the product page (the brief's "a
+  way to browse single ingredients"). Cacao shows Collagen, MCT Oil, Sea Moss and Lion's Mane. Vegan shows only
+  non-animal powders: Pumpkin Seed, Hemp, MCT Oil and Lion's Mane.
+- **The Cacao comparison** ("More of your routine. Less to juggle.") now shows the Cacao bag opposite the shelf of tubs,
+  instead of an empty purple panel. It uses the approved first image, uncropped and garbled.
+- Single-ingredient cards keep their size pickers and buttons aligned when a product name wraps.
 
 ## Holds respected
 
@@ -90,6 +100,6 @@ Details: `NOINDEX.md`, `noindex-check-0500utc.txt`.
 | `before-after/REVIEW-TEXT-before-after.png` | The rating-line approval board |
 | `before-after/before-*.png`, `after-*.png` | Raw first-screen shots, desktop and phone |
 | `checkout/` | On-site carts and live Shopify checkouts, plus the bot-check screenshot |
-| `e2e/e2e-results.json` | All 250 checks, by name |
+| `e2e/e2e-results.json` | All 306 checks, by name |
 | `link-check.json` | Every external link and image status |
 | `NOINDEX.md`, `noindex-check-*.txt` | Noindex paste guide and verification runs |

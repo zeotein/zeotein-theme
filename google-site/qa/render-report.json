@@ -86,6 +86,10 @@
         "/our-story",
         "/faq",
         "/refund-policy",
+        "/collagen",
+        "/mct-oil-powder",
+        "/sea-moss",
+        "/lions-mane",
         "mailto:hello@zeotein.com",
         "#buy",
         "https://zeotein.com/a/subscriptions/login",
@@ -96,7 +100,7 @@
         "#"
       ],
       "h1": "Zeotein Cacao",
-      "height": 11848
+      "height": 13309
     },
     {
       "slug": "cacao",
@@ -118,6 +122,10 @@
         "/our-story",
         "/faq",
         "/refund-policy",
+        "/collagen",
+        "/mct-oil-powder",
+        "/sea-moss",
+        "/lions-mane",
         "mailto:hello@zeotein.com",
         "#buy",
         "https://zeotein.com/a/subscriptions/login",
@@ -128,7 +136,7 @@
         "#"
       ],
       "h1": "Zeotein Cacao",
-      "height": 8494
+      "height": 9317
     },
     {
       "slug": "vegan",
@@ -150,6 +158,10 @@
         "/our-story",
         "/faq",
         "/refund-policy",
+        "/pumpkin-seed-protein",
+        "/hemp-protein",
+        "/mct-oil-powder",
+        "/lions-mane",
         "mailto:hello@zeotein.com",
         "#buy",
         "https://zeotein.com/a/subscriptions/login",
@@ -160,7 +172,7 @@
         "#"
       ],
       "h1": "Zeotein Vegan",
-      "height": 8341
+      "height": 9496
     },
     {
       "slug": "vegan",
@@ -182,6 +194,10 @@
         "/our-story",
         "/faq",
         "/refund-policy",
+        "/pumpkin-seed-protein",
+        "/hemp-protein",
+        "/mct-oil-powder",
+        "/lions-mane",
         "mailto:hello@zeotein.com",
         "#buy",
         "https://zeotein.com/a/subscriptions/login",
@@ -192,7 +208,7 @@
         "#"
       ],
       "h1": "Zeotein Vegan",
-      "height": 6471
+      "height": 7314
     },
     {
       "slug": "our-story",
@@ -543,7 +559,7 @@
         "#"
       ],
       "h1": "Single Ingredients",
-      "height": 4445
+      "height": 4465
     },
     {
       "slug": "single-ingredients",

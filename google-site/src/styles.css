@@ -212,18 +212,20 @@
 .ztg .sitem{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;display:grid;grid-template-rows:auto 1fr;box-shadow:var(--shadow)}
 .ztg .sitem .ph{display:block;aspect-ratio:1/1;background:#fff}
 .ztg .sitem .ph img{width:100%;height:100%;object-fit:contain}
-.ztg .sitem .bd{padding:14px 16px 16px;display:grid;gap:6px;align-content:start;border-top:1px solid var(--line)}
+.ztg .sitem .bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line)}
 .ztg .sitem h3{font-size:1.02rem;font-weight:700;line-height:1.25}
 .ztg .sitem h3 a:hover{color:var(--purple)}
 .ztg .sitem .fact{font-size:.82rem;color:var(--muted)}
-.ztg .sitem .row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
+.ztg .sitem .row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:4px}
+.ztg a.more{color:var(--purple);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .ztg .sitem select{padding:8px 32px 8px 10px;font-size:.88rem;background-position:right 10px center}
 .ztg .sitem .price{font-family:var(--head);font-weight:700;color:var(--plum)}
 .ztg .sitem .btn{min-height:44px;padding:.6em 1em;font-size:.92rem;margin-top:6px}
 @media (max-width:1000px){.ztg .sgrid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:1000px){.ztg .sgrid.four{grid-template-columns:1fr 1fr}}
 @media (max-width:760px){.ztg .sgrid{grid-template-columns:1fr 1fr;gap:12px}.ztg .sitem .bd{padding:12px}.ztg .sitem .row{flex-direction:column;align-items:stretch}.ztg .sitem select{width:100%}}
 @media (max-width:560px){
-  .ztg .sgrid{grid-template-columns:1fr;gap:12px}
+  .ztg .sgrid,.ztg .sgrid.four{grid-template-columns:1fr;gap:12px}
   .ztg .sitem{grid-template-rows:none;grid-template-columns:118px minmax(0,1fr)}
   .ztg .sitem .ph{aspect-ratio:auto;height:100%;padding:8px}
   .ztg .sitem .bd{border-top:0;border-left:1px solid var(--line);padding:12px 14px}
@@ -279,6 +281,7 @@
 
 /* Compare */
 .ztg .col .routine{display:block;width:100%;max-width:340px;height:auto;margin:0 auto 12px}
+.ztg .col.us .kitimg{background:var(--white);border-radius:16px;aspect-ratio:640/584;object-fit:contain;padding:14px;box-sizing:border-box}
 .ztg .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .ztg .col{border-radius:var(--r-lg);padding:24px}
 .ztg .col.them{background:var(--white);border:1px solid var(--line)}
