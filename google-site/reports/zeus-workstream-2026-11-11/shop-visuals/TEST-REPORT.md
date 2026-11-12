@@ -1,5 +1,9 @@
 # shop.zeotein.com rebuild: cart, checkout and UTM test report
 
+> **Update, after install (12 Nov):** all 17 blocks are live. The live re-run passed: cart 306 of 306, links 0
+> problems, noindex on all 18 shop URLs, compliance 0 blocking, and the rendered audit 34 of 34. Zeus ran the pending
+> live checkouts by hand (checks 5 to 8) and all passed. Details: `live-check/LIVE-CHECK.md`.
+
 **12 Nov 2026, overnight.** All 17 blocks are built and tested and ready for Zeus to paste using
 `google-site/INSTALL-PACKET.md`. GoHighLevel's API can't write page code, so the paste is done by hand. The rating line
 is approved (Dana's standing approval of 9 Nov, confirmed by Zeus on 12 Nov). No order was placed and no payment was

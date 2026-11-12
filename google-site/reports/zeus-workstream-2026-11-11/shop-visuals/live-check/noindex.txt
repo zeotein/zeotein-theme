@@ -1,0 +1,31 @@
+URL                                                     HTTP  NOINDEX  FOLLOW  meta robots / X-Robots-Tag
+https://shop.zeotein.com/                               200   yes      yes     noindex, follow  
+https://shop.zeotein.com/home                           200   yes      yes     noindex, follow  
+https://shop.zeotein.com/cacao                          200   yes      yes     noindex, follow  
+https://shop.zeotein.com/vegan                          200   yes      yes     noindex, follow  
+https://shop.zeotein.com/our-story                      200   yes      yes     noindex, follow  
+https://shop.zeotein.com/faq                            200   yes      yes     noindex, follow  
+https://shop.zeotein.com/contact                        200   yes      yes     noindex, follow  
+https://shop.zeotein.com/shipping                       200   yes      yes     noindex, follow  
+https://shop.zeotein.com/refund-policy                  200   yes      yes     noindex, follow  
+https://shop.zeotein.com/single-ingredients             200   yes      yes     noindex, follow  
+https://shop.zeotein.com/collagen                       200   yes      yes     noindex, follow  
+https://shop.zeotein.com/bone-broth                     200   yes      yes     noindex, follow  
+https://shop.zeotein.com/hemp-protein                   200   yes      yes     noindex, follow  
+https://shop.zeotein.com/pumpkin-seed-protein           200   yes      yes     noindex, follow  
+https://shop.zeotein.com/cacao-powder                   200   yes      yes     noindex, follow  
+https://shop.zeotein.com/mct-oil-powder                 200   yes      yes     noindex, follow  
+https://shop.zeotein.com/sea-moss                       200   yes      yes     noindex, follow  
+https://shop.zeotein.com/lions-mane                     200   yes      yes     noindex, follow  
+https://marketing.zeotein.com/starter-kit-google        200   no       yes     index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1    <-- needs noindex
+https://marketing.zeotein.com/starter-kit-page          200   no       yes     index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1    <-- needs noindex
+https://marketing.zeotein.com/starter-kit               200   no       yes     index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1    <-- needs noindex
+https://marketing.zeotein.com/zeotein-cacao             200   yes      yes     noindex, follow  
+https://marketing.zeotein.com/landing-page-cacao        200   yes      yes     noindex, follow  
+https://marketing.zeotein.com/cacao-sales-page          200   yes      yes     noindex, follow  
+https://marketing.zeotein.com/cacao-stick-packs-starter-kit 200   no       yes     -    <-- needs noindex
+https://marketing.zeotein.com/                          200   no       yes     -  
+https://zeotein.com/                                    200   no       yes     -  
+https://shop.zeotein.com/robots.txt                     200   0 bytes  no Googlebot/AdsBot block
+https://marketing.zeotein.com/robots.txt                200   0 bytes  no Googlebot/AdsBot block
+RESULT: 4 item(s) not done yet

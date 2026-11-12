@@ -1,0 +1,24 @@
+{
+ "pages": 17,
+ "internalLinks": 367,
+ "external": {
+  "https://zeotein.com/a/subscriptions/login": 200,
+  "https://zeotein.com/policies/privacy-policy": 200,
+  "https://zeotein.com/policies/terms-of-service": 200
+ },
+ "images": 31,
+ "zeoteinComLinks": [
+  "https://zeotein.com/a/subscriptions/login",
+  "https://zeotein.com/policies/privacy-policy",
+  "https://zeotein.com/policies/terms-of-service"
+ ],
+ "problems": [],
+ "source": "https://shop.zeotein.com",
+ "cloudflareEmailLinks": {
+  "count": 38,
+  "decodedTo": [
+   "mailto:hello@zeotein.com",
+   "mailto:hello@zeotein.com?subject=Order%20question"
+  ]
+ }
+}

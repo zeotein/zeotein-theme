@@ -1,0 +1,54 @@
+home           prescan CRITICAL=0 HIGH=6 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+    HIGH     [guaranteed_outcome] 'guarantee' :: 30-day money-back guarantee on blends
+    HIGH     [guaranteed_outcome] 'Guarantee' :: 30-Day Money-Back Guarantee
+    HIGH     [guaranteed_outcome] 'guarantee' :: See guarantee details
+    HIGH     [guaranteed_outcome] 'guarantee' :: What do shipping and the guarantee cover?
+    HIGH     [guaranteed_outcome] 'guarantee' :: Orders ship from Manitowoc, Wisconsin in 1 to 2 business days, and US orders over $150 ship free. The Cacao Starter Kit and bulk bag always 
+    HIGH     [guaranteed_outcome] 'guarantee' :: Zeotein home Zeotein Main Open cart Open menu A woman holding a Zeotein shaker in a bright kitchen, with a bag of Zeotein Cacao on the count
+cacao          prescan CRITICAL=0 HIGH=4 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+    HIGH     [guaranteed_outcome] 'guarantee' :: 30-day money-back guarantee on your first 30-day supply
+    HIGH     [guaranteed_outcome] 'guarantee' :: If it isn't for you, your first order is covered by our 30-day money-back guarantee.
+    HIGH     [guaranteed_outcome] 'guarantee' :: How does the 30-day guarantee work?
+    HIGH     [guaranteed_outcome] 'guarantee' :: Zeotein home Zeotein Main Open cart Open menu Zeotein Cacao protein powder Per serving      Man holding a Zeotein CleanBlend shaker in a hom
+vegan          prescan CRITICAL=0 HIGH=4 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+    HIGH     [guaranteed_outcome] 'guarantee' :: 30-day money-back guarantee on your first 30-day supply
+    HIGH     [guaranteed_outcome] 'guarantee' :: What does the 30-day guarantee cover?
+    HIGH     [guaranteed_outcome] 'guarantee' :: and we'll send return instructions. Opened product is fine. The 7-day pack is not part of the guarantee.
+    HIGH     [guaranteed_outcome] 'guarantee' :: Zeotein home Zeotein Main Open cart Open menu Zeotein Vegan plant protein stick packs Per serving The five Zeotein Vegan ingredients in bowl
+our-story      prescan CRITICAL=0 HIGH=1 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+    HIGH     [guaranteed_outcome] 'guarantee' :: Zeotein home Zeotein Main Open cart Open menu Zeotein Vegan ingredients laid out in bowls Zeotein Cacao protein powder bulk bag, 30 servings
+faq            prescan CRITICAL=0 HIGH=4 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+    HIGH     [guaranteed_outcome] 'guarantee' :: Straight answers on the formulas, the Starter Kits, shipping and the guarantee. Still stuck? Email
+    HIGH     [guaranteed_outcome] 'guarantee' :: How does the 30-day money-back guarantee work?
+    HIGH     [guaranteed_outcome] 'guarantee' :: What isn't covered by the guarantee?
+    HIGH     [guaranteed_outcome] 'guarantee' :: Ingredients, nutrition, how to mix it, subscriptions, shipping and the 30-day money-back guarantee, answered plainly.
+contact        prescan CRITICAL=0 HIGH=1 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+    HIGH     [guaranteed_outcome] 'guarantee' :: The 30-day guarantee
+shipping       prescan CRITICAL=0 HIGH=4 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+    HIGH     [guaranteed_outcome] 'guarantees' :: estimates, not guarantees
+    HIGH     [guaranteed_outcome] 'guaranteed' :: not guaranteed
+    HIGH     [guaranteed_outcome] 'guaranteed' :: Address changes are not guaranteed once an order enters processing.
+    HIGH     [guaranteed_outcome] 'guaranteed' :: International delivery times vary and are not guaranteed
+refund-policy  prescan CRITICAL=0 HIGH=11 MEDIUM=1 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+    HIGH     [guaranteed_outcome] 'Guarantee' :: 30-Day Money-Back Guarantee
+    HIGH     [guaranteed_outcome] 'guarantee' :: The guarantee covers our
+    HIGH     [guaranteed_outcome] 'guarantee' :: If an order contains more than one bag or box of a protein blend, the guarantee covers one 30-day supply. Additional bags or boxes in the sa
+    HIGH     [guaranteed_outcome] 'guarantee' :: one guarantee claim per customer
+    HIGH     [guaranteed_outcome] 'guarantee' :: Accounts where a prior guarantee claim has already been honored.
+    HIGH     [guaranteed_outcome] 'guarantee' :: Subscriptions can be paused, skipped, or cancelled anytime from your customer portal. Cancelling stops future charges; it does not retroacti
+    HIGH     [guaranteed_outcome] 'Guarantee' :: This section covers damaged and missing items. It is separate from our 30-Day Guarantee, which is described above.
+    HIGH     [guaranteed_outcome] 'guarantee' :: Cancelling stops future deliveries. Orders that have already shipped are handled under the guarantee terms above. If a guarantee refund is i
+    HIGH     [guaranteed_outcome] 'guarantee' :: Cancelling stops future deliveries. Orders that have already shipped are handled under the guarantee terms above. If a guarantee refund is i
+    HIGH     [guaranteed_outcome] 'guarantee' :: International orders are eligible for the 30-day guarantee on the same terms. Return shipping and any customs charges are the customer’s res
+    HIGH     [guaranteed_outcome] 'guarantee' :: Our 30-day money-back guarantee on your first order of a protein blend, and how to start a claim.
+single-ingredients prescan CRITICAL=0 HIGH=0 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+collagen       prescan CRITICAL=0 HIGH=0 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+bone-broth     prescan CRITICAL=0 HIGH=0 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+hemp-protein   prescan CRITICAL=0 HIGH=0 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+pumpkin-seed-protein prescan CRITICAL=0 HIGH=0 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+cacao-powder   prescan CRITICAL=0 HIGH=0 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+mct-oil-powder prescan CRITICAL=0 HIGH=0 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+sea-moss       prescan CRITICAL=0 HIGH=0 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+lions-mane     prescan CRITICAL=0 HIGH=0 MEDIUM=0 | house-rule hits=0 | FDA=True | images ok=True | stray $=[] | blocking=0
+
+TOTAL BLOCKING: 0

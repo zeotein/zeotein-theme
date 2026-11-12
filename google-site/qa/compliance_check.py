@@ -2,7 +2,10 @@
 """
 Compliance gate for the Zeotein Google Site.
 
-  python3 qa/compliance_check.py [path/to/prescan.py]
+  python3 qa/compliance_check.py [path/to/prescan.py] [--live https://shop.zeotein.com] [--out report.json]
+
+With --live, each page's block is read from the live site (qa/live_fetch.py) instead of dist/ghl, and the page's
+live <title> and meta description are screened too.
 
 Layer 1: the zeotein-compliance-scrub prescan (Google Ads healthcare, FDA/DSHEA, FTC
          patterns) run on every built page, including alt text, attributes and JSON-LD.
@@ -13,7 +16,14 @@ Exit code 0 only when nothing blocking is found.
 import sys, re, json, html, pathlib, importlib.util
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-PRESCAN = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else None
+_A = sys.argv[1:]
+def _opt(name):
+    return _A[_A.index(name) + 1] if name in _A else None
+LIVE = (_opt("--live") or "").rstrip("/") or None
+OUT = _opt("--out")
+_POS = [a for i, a in enumerate(_A) if not a.startswith("--") and (i == 0 or _A[i - 1] not in ("--live", "--out"))]
+PRESCAN = pathlib.Path(_POS[0]) if _POS else None
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 cfg = json.loads((ROOT / "src" / "config.json").read_text())
 V = cfg["vars"]
 _cat = json.loads((ROOT / "src" / "catalog.json").read_text())["items"]
@@ -74,11 +84,26 @@ def main():
     report, blocking = [], 0
     for page in cfg["pages"]:
         slug = page["slug"]
-        f = next(x for x in (ROOT / "dist" / "ghl").glob("*.html") if re.fullmatch(rf"\d\d-{re.escape(slug)}\.html", x.name))
-        raw = f.read_text()
-        text = all_text(raw) + "\n" + page["seoTitle"] + "\n" + page["seoDescription"]
-        text_no_reviews = all_text(strip_reviews(raw)) + "\n" + page["seoTitle"] + "\n" + page["seoDescription"]
-        entry = {"page": slug, "file": str(f.relative_to(ROOT)), "prescan": None, "house_rules": [], "checks": {}}
+        if LIVE:
+            from live_fetch import live_block
+            raw, full = live_block(LIVE, {"name": page["name"], "path": page["path"]})
+            # Cloudflare serves the email address obfuscated; screen the decoded form like the built block
+            raw = re.sub(r'<a href="/cdn-cgi/l/email-protection#[0-9a-f]+"', '<a href="mailto:hello@zeotein.com"', raw)
+            raw = re.sub(r'<span class="__cf_email__" data-cfemail="[0-9a-f]+">\[email&#160;protected\]</span>', 'hello@zeotein.com', raw)
+            head_title = re.search(r"<title[^>]*>(.*?)</title>", full, re.S)
+            head_desc = re.search(r'<meta[^>]+name="description"[^>]+content="([^"]*)"', full)
+            live_seo = (html.unescape(head_title.group(1)).strip() if head_title else "", html.unescape(head_desc.group(1)) if head_desc else "")
+            f = pathlib.Path(f"{LIVE}{page['path']}")
+        else:
+            f = next(x for x in (ROOT / "dist" / "ghl").glob("*.html") if re.fullmatch(rf"\d\d-{re.escape(slug)}\.html", x.name))
+            raw = f.read_text()
+        seo_t, seo_d = live_seo if LIVE else (page["seoTitle"], page["seoDescription"])
+        text = all_text(raw) + "\n" + seo_t + "\n" + seo_d
+        text_no_reviews = all_text(strip_reviews(raw)) + "\n" + seo_t + "\n" + seo_d
+        entry = {"page": slug, "file": f"{LIVE}{page['path']}" if LIVE else str(f.relative_to(ROOT)), "prescan": None, "house_rules": [], "checks": {}}
+        if LIVE:
+            entry["checks"]["live_seo"] = {"title": seo_t, "description": seo_d,
+                                           "title_matches_packet": seo_t == page["seoTitle"], "description_matches_packet": seo_d == page["seoDescription"]}
 
         # Layer 1
         if pres:
@@ -136,7 +161,7 @@ def main():
         blocking += blocking_here
         report.append(entry)
 
-    out = ROOT / "qa" / "compliance-report.json"
+    out = pathlib.Path(OUT) if OUT else ROOT / "qa" / "compliance-report.json"
     out.write_text(json.dumps(report, indent=2))
     for e in report:
         c = e["prescan"]["counts"] if e["prescan"] else {}

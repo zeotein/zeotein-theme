@@ -68,9 +68,18 @@ async function emptyCart(p) { // through the real Remove buttons
 }
 const total = async p => ((await p.locator('.ztg [data-zt-cart-total]').textContent()) || '').trim();
 
+// On the live site, keep test traffic out of Zeotein's analytics and ad reporting: block tag and pixel requests.
+// (The page's own code, GoHighLevel and Shopify are untouched.)
+const TRACKERS = /(^|\.)(googletagmanager\.com|google-analytics\.com|googleadservices\.com|doubleclick\.net|facebook\.net|facebook\.com|clarity\.ms|bing\.com|tiktok\.com)$/;
+async function newCtx(browser, opts) {
+  const c = await browser.newContext(opts);
+  if (!PREVIEW) await c.route('**/*', r => { let h = ''; try { h = new URL(r.request().url()).hostname; } catch (e) {} return TRACKERS.test(h) ? r.abort() : r.continue(); });
+  return c;
+}
+
 (async () => {
   const browser = await chromium.launch();
-  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const ctx = await newCtx(browser, { viewport: { width: 1280, height: 900 } });
   const p = await ctx.newPage();
   const consoleErrors = [];
   p.on('pageerror', e => consoleErrors.push(String(e)));
@@ -134,7 +143,7 @@ const total = async p => ((await p.locator('.ztg [data-zt-cart-total]').textCont
   }
 
   /* ---------- A3. Phone: the sticky bar appears after the buy button scrolls away, and its button works ---------- */
-  const mctx = await browser.newContext({ ...devices['iPhone 13'] });
+  const mctx = await newCtx(browser, { ...devices['iPhone 13'] });
   const mp = await mctx.newPage();
   for (const slug of ['cacao', 'vegan']) {
     await open(mp, slug);
@@ -195,7 +204,7 @@ const total = async p => ((await p.locator('.ztg [data-zt-cart-total]').textCont
   await emptyCart(p);
 
   /* ---------- C. The checkout link: UTMs from the ad landing survive to Shopify ---------- */
-  const c2 = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const c2 = await newCtx(browser, { viewport: { width: 1280, height: 900 } });
   const q = await c2.newPage();
   await open(q, 'home', '?gclid=ZTE2E_GCLID&utm_source=google&utm_medium=cpc&utm_campaign=zt_e2e&utm_term=protein%20powder&utm_content=home_hero');
   await open(q, 'cacao'); // no parameters on this address: they must come from the landing visit
@@ -226,7 +235,7 @@ const total = async p => ((await p.locator('.ztg [data-zt-cart-total]').textCont
   /* ---------- D. Real hand-offs to Shopify checkout (no order is placed) ---------- */
   if (LIVE) {
     const flow = async (name, title, run) => {
-      const fx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+      const fx = await newCtx(browser, { viewport: { width: 1280, height: 900 } });
       const fp = await fx.newPage();
       const rec = { name, title, hops: [], screenshots: [] };
       try {

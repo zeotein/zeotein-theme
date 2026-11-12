@@ -1,0 +1,688 @@
+{
+ "ranAt": "2026-11-12T11:29:33.903Z",
+ "base": "https://shop.zeotein.com",
+ "checked": 34,
+ "failed": 0,
+ "rows": [
+  {
+   "viewport": "desktop",
+   "path": "/home",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/cacao",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 3,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/vegan",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 3,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/our-story",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 2,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/faq",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 7,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/contact",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 4,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/shipping",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 3,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/refund-policy",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 6,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/single-ingredients",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/collagen",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/bone-broth",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/hemp-protein",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/pumpkin-seed-protein",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/cacao-powder",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/mct-oil-powder",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/sea-moss",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "desktop",
+   "path": "/lions-mane",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/home",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/cacao",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 3,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/vegan",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 3,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/our-story",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 2,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/faq",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 7,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/contact",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 4,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/shipping",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 3,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/refund-policy",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 6,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/single-ingredients",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/collagen",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/bone-broth",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/hemp-protein",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/pumpkin-seed-protein",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/cacao-powder",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/mct-oil-powder",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/sea-moss",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  },
+  {
+   "viewport": "phone",
+   "path": "/lions-mane",
+   "status": 200,
+   "ok": true,
+   "roots": 1,
+   "outsideText": "",
+   "overflowPx": 0,
+   "brokenImages": [],
+   "mailtoCount": 1,
+   "mailtoOk": true,
+   "cfUndecoded": 0,
+   "holds": {
+    "noZeolite": true,
+    "no8999": true,
+    "threshold150": true,
+    "noOldOffer": true
+   },
+   "jsErrors": []
+  }
+ ]
+}

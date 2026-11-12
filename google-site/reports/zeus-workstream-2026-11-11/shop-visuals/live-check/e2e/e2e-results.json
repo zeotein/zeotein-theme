@@ -1,0 +1,1234 @@
+{
+ "ranAt": "2026-11-12T11:24:08.320Z",
+ "base": "https://shop.zeotein.com",
+ "liveCheckout": false,
+ "passed": 306,
+ "failed": 0,
+ "checks": [
+  {
+   "name": "cacao: buy box shows 5 options",
+   "ok": true
+  },
+  {
+   "name": "cacao: option cacao-kit is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 30 days: delivery picker shown",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 30 days: shows $76.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 30 days: note says \"then $99.99 per delivery\"",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 30 days: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 30 days: Add to cart -> variant 67710100308181 + plan 6596853973 at $76.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 30 days: drawer opens, subtotal $76.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 6 weeks: delivery picker shown",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 6 weeks: shows $76.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 6 weeks: note says \"then $99.99 per delivery\"",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 6 weeks: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 6 weeks: Add to cart -> variant 67710100308181 + plan 6622773461 at $76.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 6 weeks: drawer opens, subtotal $76.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 8 weeks: delivery picker shown",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 8 weeks: shows $76.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 8 weeks: note says \"then $99.99 per delivery\"",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 8 weeks: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 8 weeks: Add to cart -> variant 67710100308181 + plan 6622806229 at $76.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-kit / Every 8 weeks: drawer opens, subtotal $76.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: option cacao-bag is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-bag: delivery picker hidden",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-bag: shows $93.49",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-bag: note says \"One-time purchase\"",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-bag: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-bag: Add to cart -> variant 54506852319445 at $93.49",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-bag: drawer opens, subtotal $93.49",
+   "ok": true
+  },
+  {
+   "name": "cacao: option cacao-sticks-sub is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 30 days: delivery picker shown",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 30 days: shows $114.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 30 days: note says \"$114.99 per delivery\"",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 30 days: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 30 days: Add to cart -> variant 52649698132181 + plan 6671335637 at $114.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 30 days: drawer opens, subtotal $114.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 6 weeks: delivery picker shown",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 6 weeks: shows $114.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 6 weeks: note says \"$114.99 per delivery\"",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 6 weeks: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 6 weeks: Add to cart -> variant 52649698132181 + plan 6671368405 at $114.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 6 weeks: drawer opens, subtotal $114.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 8 weeks: delivery picker shown",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 8 weeks: shows $114.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 8 weeks: note says \"$114.99 per delivery\"",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 8 weeks: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 8 weeks: Add to cart -> variant 52649698132181 + plan 6671401173 at $114.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-sub / Every 8 weeks: drawer opens, subtotal $114.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: option cacao-sticks-30 is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-30: delivery picker hidden",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-30: shows $134.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-30: note says \"One-time purchase\"",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-30: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-30: Add to cart -> variant 52649698132181 at $134.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-30: drawer opens, subtotal $134.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: option cacao-sticks-7 is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-7: delivery picker hidden",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-7: shows $39.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-7: note says \"One-time purchase\"",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-7: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-7: Add to cart -> variant 52342958031061 at $39.99",
+   "ok": true
+  },
+  {
+   "name": "cacao / cacao-sticks-7: drawer opens, subtotal $39.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: buy box shows 3 options",
+   "ok": true
+  },
+  {
+   "name": "vegan: option vegan-kit is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 30 days: delivery picker shown",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 30 days: shows $96.99",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 30 days: note says \"then $124.99 per delivery\"",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 30 days: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 30 days: Add to cart -> variant 68049376313557 + plan 4565729493 at $96.99",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 30 days: drawer opens, subtotal $96.99",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 6 weeks: delivery picker shown",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 6 weeks: shows $96.99",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 6 weeks: note says \"then $124.99 per delivery\"",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 6 weeks: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 6 weeks: Add to cart -> variant 68049376313557 + plan 6561136853 at $96.99",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 6 weeks: drawer opens, subtotal $96.99",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 8 weeks: delivery picker shown",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 8 weeks: shows $96.99",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 8 weeks: note says \"then $124.99 per delivery\"",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 8 weeks: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 8 weeks: Add to cart -> variant 68049376313557 + plan 6561169621 at $96.99",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-kit / Every 8 weeks: drawer opens, subtotal $96.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: option vegan-sticks-30 is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-sticks-30: delivery picker hidden",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-sticks-30: shows $139.99",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-sticks-30: note says \"One-time purchase\"",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-sticks-30: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-sticks-30: Add to cart -> variant 53061513511125 at $139.99",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-sticks-30: drawer opens, subtotal $139.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: option vegan-sticks-7 is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-sticks-7: delivery picker hidden",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-sticks-7: shows $44.99",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-sticks-7: note says \"One-time purchase\"",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-sticks-7: photo swaps to this option, full-size",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-sticks-7: Add to cart -> variant 53059759112405 at $44.99",
+   "ok": true
+  },
+  {
+   "name": "vegan / vegan-sticks-7: drawer opens, subtotal $44.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: button \"Add to cart\" (collagen) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" collagen 1/2 lb: price label shows $27.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" collagen 1/2 lb: adds variant 53174839181525 at $27.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" collagen 1 lb: price label shows $46.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" collagen 1 lb: adds variant 53174839214293 at $46.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" collagen 2 lb: price label shows $74.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" collagen 2 lb: adds variant 53174839247061 at $74.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: button \"Add to cart\" (mct-oil-powder) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" mct-oil-powder 1/2 lb: price label shows $21.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" mct-oil-powder 1/2 lb: adds variant 53176161272021 at $21.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" mct-oil-powder 1 lb: price label shows $36.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" mct-oil-powder 1 lb: adds variant 53176161304789 at $36.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" mct-oil-powder 2 lb: price label shows $58.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" mct-oil-powder 2 lb: adds variant 53176161337557 at $58.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: button \"Add to cart\" (sea-moss) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" sea-moss 1/4 lb: price label shows $34.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" sea-moss 1/4 lb: adds variant 53196544966869 at $34.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" sea-moss 1/2 lb: price label shows $59.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" sea-moss 1/2 lb: adds variant 53196544999637 at $59.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" sea-moss 1 lb: price label shows $109.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" sea-moss 1 lb: adds variant 53196545032405 at $109.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: button \"Add to cart\" (lions-mane) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" lions-mane 1/2 lb: price label shows $39.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" lions-mane 1/2 lb: adds variant 53196571869397 at $39.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" lions-mane 1 lb: price label shows $69.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" lions-mane 1 lb: adds variant 53196571902165 at $69.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" lions-mane 2 lb: price label shows $119.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add to cart\" lions-mane 2 lb: adds variant 53196571934933 at $119.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: button \"Add the Starter Kit to cart →\" (cacao-kit) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "cacao: \"Add the Starter Kit to cart →\" cacao-kit / Every 30 days: adds variant 67710100308181 + plan 6596853973 at $76.99",
+   "ok": true
+  },
+  {
+   "name": "cacao: button \"Add to cart\" (cacao-kit) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "cacao: sticky bar \"Add to cart\" cacao-kit / Every 30 days: adds variant 67710100308181 + plan 6596853973 at $76.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: button \"Add to cart\" (pumpkin-seed-protein) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" pumpkin-seed-protein 1/2 lb: price label shows $19.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" pumpkin-seed-protein 1/2 lb: adds variant 53207147708629 at $19.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" pumpkin-seed-protein 1 lb: price label shows $36.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" pumpkin-seed-protein 1 lb: adds variant 53207147741397 at $36.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" pumpkin-seed-protein 2 lb: price label shows $56.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" pumpkin-seed-protein 2 lb: adds variant 53207147774165 at $56.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: button \"Add to cart\" (hemp-protein) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" hemp-protein 1/2 lb: price label shows $21.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" hemp-protein 1/2 lb: adds variant 53196989235413 at $21.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" hemp-protein 1 lb: price label shows $36.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" hemp-protein 1 lb: adds variant 53196989268181 at $36.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" hemp-protein 2 lb: price label shows $58.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" hemp-protein 2 lb: adds variant 53196989300949 at $58.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: button \"Add to cart\" (mct-oil-powder) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" mct-oil-powder 1/2 lb: price label shows $21.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" mct-oil-powder 1/2 lb: adds variant 53176161272021 at $21.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" mct-oil-powder 1 lb: price label shows $36.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" mct-oil-powder 1 lb: adds variant 53176161304789 at $36.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" mct-oil-powder 2 lb: price label shows $58.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" mct-oil-powder 2 lb: adds variant 53176161337557 at $58.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: button \"Add to cart\" (lions-mane) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" lions-mane 1/2 lb: price label shows $39.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" lions-mane 1/2 lb: adds variant 53196571869397 at $39.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" lions-mane 1 lb: price label shows $69.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" lions-mane 1 lb: adds variant 53196571902165 at $69.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" lions-mane 2 lb: price label shows $119.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add to cart\" lions-mane 2 lb: adds variant 53196571934933 at $119.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: button \"Add the Starter Kit to cart →\" (vegan-kit) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "vegan: \"Add the Starter Kit to cart →\" vegan-kit / Every 30 days: adds variant 68049376313557 + plan 4565729493 at $96.99",
+   "ok": true
+  },
+  {
+   "name": "vegan: button \"Add to cart\" (vegan-kit) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "vegan: sticky bar \"Add to cart\" vegan-kit / Every 30 days: adds variant 68049376313557 + plan 4565729493 at $96.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: button \"Add to cart\" (collagen) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" collagen 1/2 lb: price label shows $27.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" collagen 1/2 lb: adds variant 53174839181525 at $27.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" collagen 1 lb: price label shows $46.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" collagen 1 lb: adds variant 53174839214293 at $46.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" collagen 2 lb: price label shows $74.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" collagen 2 lb: adds variant 53174839247061 at $74.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: button \"Add to cart\" (bone-broth) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" bone-broth 1/2 lb: price label shows $29.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" bone-broth 1/2 lb: adds variant 53107187056853 at $29.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" bone-broth 1 lb: price label shows $49.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" bone-broth 1 lb: adds variant 53107187089621 at $49.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" bone-broth 2 lb: price label shows $79.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" bone-broth 2 lb: adds variant 53107187122389 at $79.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: button \"Add to cart\" (hemp-protein) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" hemp-protein 1/2 lb: price label shows $21.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" hemp-protein 1/2 lb: adds variant 53196989235413 at $21.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" hemp-protein 1 lb: price label shows $36.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" hemp-protein 1 lb: adds variant 53196989268181 at $36.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" hemp-protein 2 lb: price label shows $58.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" hemp-protein 2 lb: adds variant 53196989300949 at $58.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: button \"Add to cart\" (pumpkin-seed-protein) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" pumpkin-seed-protein 1/2 lb: price label shows $19.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" pumpkin-seed-protein 1/2 lb: adds variant 53207147708629 at $19.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" pumpkin-seed-protein 1 lb: price label shows $36.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" pumpkin-seed-protein 1 lb: adds variant 53207147741397 at $36.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" pumpkin-seed-protein 2 lb: price label shows $56.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" pumpkin-seed-protein 2 lb: adds variant 53207147774165 at $56.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: button \"Add to cart\" (cacao-powder) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" cacao-powder 1/2 lb: price label shows $17.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" cacao-powder 1/2 lb: adds variant 53196659327189 at $17.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" cacao-powder 1 lb: price label shows $28.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" cacao-powder 1 lb: adds variant 53196659359957 at $28.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" cacao-powder 2 lb: price label shows $48.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" cacao-powder 2 lb: adds variant 53196659392725 at $48.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: button \"Add to cart\" (mct-oil-powder) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" mct-oil-powder 1/2 lb: price label shows $21.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" mct-oil-powder 1/2 lb: adds variant 53176161272021 at $21.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" mct-oil-powder 1 lb: price label shows $36.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" mct-oil-powder 1 lb: adds variant 53176161304789 at $36.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" mct-oil-powder 2 lb: price label shows $58.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" mct-oil-powder 2 lb: adds variant 53176161337557 at $58.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: button \"Add to cart\" (sea-moss) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" sea-moss 1/4 lb: price label shows $34.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" sea-moss 1/4 lb: adds variant 53196544966869 at $34.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" sea-moss 1/2 lb: price label shows $59.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" sea-moss 1/2 lb: adds variant 53196544999637 at $59.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" sea-moss 1 lb: price label shows $109.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" sea-moss 1 lb: adds variant 53196545032405 at $109.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: button \"Add to cart\" (lions-mane) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" lions-mane 1/2 lb: price label shows $39.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" lions-mane 1/2 lb: adds variant 53196571869397 at $39.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" lions-mane 1 lb: price label shows $69.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" lions-mane 1 lb: adds variant 53196571902165 at $69.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" lions-mane 2 lb: price label shows $119.99",
+   "ok": true
+  },
+  {
+   "name": "single-ingredients: \"Add to cart\" lions-mane 2 lb: adds variant 53196571934933 at $119.99",
+   "ok": true
+  },
+  {
+   "name": "collagen: button \"Add to cart →\" (collagen) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "collagen: \"Add to cart →\" collagen 1/2 lb: price label shows $27.99",
+   "ok": true
+  },
+  {
+   "name": "collagen: \"Add to cart →\" collagen 1/2 lb: adds variant 53174839181525 at $27.99",
+   "ok": true
+  },
+  {
+   "name": "collagen: \"Add to cart →\" collagen 1 lb: price label shows $46.99",
+   "ok": true
+  },
+  {
+   "name": "collagen: \"Add to cart →\" collagen 1 lb: adds variant 53174839214293 at $46.99",
+   "ok": true
+  },
+  {
+   "name": "collagen: \"Add to cart →\" collagen 2 lb: price label shows $74.99",
+   "ok": true
+  },
+  {
+   "name": "collagen: \"Add to cart →\" collagen 2 lb: adds variant 53174839247061 at $74.99",
+   "ok": true
+  },
+  {
+   "name": "bone-broth: button \"Add to cart →\" (bone-broth) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "bone-broth: \"Add to cart →\" bone-broth 1/2 lb: price label shows $29.99",
+   "ok": true
+  },
+  {
+   "name": "bone-broth: \"Add to cart →\" bone-broth 1/2 lb: adds variant 53107187056853 at $29.99",
+   "ok": true
+  },
+  {
+   "name": "bone-broth: \"Add to cart →\" bone-broth 1 lb: price label shows $49.99",
+   "ok": true
+  },
+  {
+   "name": "bone-broth: \"Add to cart →\" bone-broth 1 lb: adds variant 53107187089621 at $49.99",
+   "ok": true
+  },
+  {
+   "name": "bone-broth: \"Add to cart →\" bone-broth 2 lb: price label shows $79.99",
+   "ok": true
+  },
+  {
+   "name": "bone-broth: \"Add to cart →\" bone-broth 2 lb: adds variant 53107187122389 at $79.99",
+   "ok": true
+  },
+  {
+   "name": "hemp-protein: button \"Add to cart →\" (hemp-protein) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "hemp-protein: \"Add to cart →\" hemp-protein 1/2 lb: price label shows $21.99",
+   "ok": true
+  },
+  {
+   "name": "hemp-protein: \"Add to cart →\" hemp-protein 1/2 lb: adds variant 53196989235413 at $21.99",
+   "ok": true
+  },
+  {
+   "name": "hemp-protein: \"Add to cart →\" hemp-protein 1 lb: price label shows $36.99",
+   "ok": true
+  },
+  {
+   "name": "hemp-protein: \"Add to cart →\" hemp-protein 1 lb: adds variant 53196989268181 at $36.99",
+   "ok": true
+  },
+  {
+   "name": "hemp-protein: \"Add to cart →\" hemp-protein 2 lb: price label shows $58.99",
+   "ok": true
+  },
+  {
+   "name": "hemp-protein: \"Add to cart →\" hemp-protein 2 lb: adds variant 53196989300949 at $58.99",
+   "ok": true
+  },
+  {
+   "name": "pumpkin-seed-protein: button \"Add to cart →\" (pumpkin-seed-protein) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "pumpkin-seed-protein: \"Add to cart →\" pumpkin-seed-protein 1/2 lb: price label shows $19.99",
+   "ok": true
+  },
+  {
+   "name": "pumpkin-seed-protein: \"Add to cart →\" pumpkin-seed-protein 1/2 lb: adds variant 53207147708629 at $19.99",
+   "ok": true
+  },
+  {
+   "name": "pumpkin-seed-protein: \"Add to cart →\" pumpkin-seed-protein 1 lb: price label shows $36.99",
+   "ok": true
+  },
+  {
+   "name": "pumpkin-seed-protein: \"Add to cart →\" pumpkin-seed-protein 1 lb: adds variant 53207147741397 at $36.99",
+   "ok": true
+  },
+  {
+   "name": "pumpkin-seed-protein: \"Add to cart →\" pumpkin-seed-protein 2 lb: price label shows $56.99",
+   "ok": true
+  },
+  {
+   "name": "pumpkin-seed-protein: \"Add to cart →\" pumpkin-seed-protein 2 lb: adds variant 53207147774165 at $56.99",
+   "ok": true
+  },
+  {
+   "name": "cacao-powder: button \"Add to cart →\" (cacao-powder) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "cacao-powder: \"Add to cart →\" cacao-powder 1/2 lb: price label shows $17.99",
+   "ok": true
+  },
+  {
+   "name": "cacao-powder: \"Add to cart →\" cacao-powder 1/2 lb: adds variant 53196659327189 at $17.99",
+   "ok": true
+  },
+  {
+   "name": "cacao-powder: \"Add to cart →\" cacao-powder 1 lb: price label shows $28.99",
+   "ok": true
+  },
+  {
+   "name": "cacao-powder: \"Add to cart →\" cacao-powder 1 lb: adds variant 53196659359957 at $28.99",
+   "ok": true
+  },
+  {
+   "name": "cacao-powder: \"Add to cart →\" cacao-powder 2 lb: price label shows $48.99",
+   "ok": true
+  },
+  {
+   "name": "cacao-powder: \"Add to cart →\" cacao-powder 2 lb: adds variant 53196659392725 at $48.99",
+   "ok": true
+  },
+  {
+   "name": "mct-oil-powder: button \"Add to cart →\" (mct-oil-powder) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "mct-oil-powder: \"Add to cart →\" mct-oil-powder 1/2 lb: price label shows $21.99",
+   "ok": true
+  },
+  {
+   "name": "mct-oil-powder: \"Add to cart →\" mct-oil-powder 1/2 lb: adds variant 53176161272021 at $21.99",
+   "ok": true
+  },
+  {
+   "name": "mct-oil-powder: \"Add to cart →\" mct-oil-powder 1 lb: price label shows $36.99",
+   "ok": true
+  },
+  {
+   "name": "mct-oil-powder: \"Add to cart →\" mct-oil-powder 1 lb: adds variant 53176161304789 at $36.99",
+   "ok": true
+  },
+  {
+   "name": "mct-oil-powder: \"Add to cart →\" mct-oil-powder 2 lb: price label shows $58.99",
+   "ok": true
+  },
+  {
+   "name": "mct-oil-powder: \"Add to cart →\" mct-oil-powder 2 lb: adds variant 53176161337557 at $58.99",
+   "ok": true
+  },
+  {
+   "name": "sea-moss: button \"Add to cart →\" (sea-moss) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "sea-moss: \"Add to cart →\" sea-moss 1/4 lb: price label shows $34.99",
+   "ok": true
+  },
+  {
+   "name": "sea-moss: \"Add to cart →\" sea-moss 1/4 lb: adds variant 53196544966869 at $34.99",
+   "ok": true
+  },
+  {
+   "name": "sea-moss: \"Add to cart →\" sea-moss 1/2 lb: price label shows $59.99",
+   "ok": true
+  },
+  {
+   "name": "sea-moss: \"Add to cart →\" sea-moss 1/2 lb: adds variant 53196544999637 at $59.99",
+   "ok": true
+  },
+  {
+   "name": "sea-moss: \"Add to cart →\" sea-moss 1 lb: price label shows $109.99",
+   "ok": true
+  },
+  {
+   "name": "sea-moss: \"Add to cart →\" sea-moss 1 lb: adds variant 53196545032405 at $109.99",
+   "ok": true
+  },
+  {
+   "name": "lions-mane: button \"Add to cart →\" (lions-mane) is in the catalog",
+   "ok": true
+  },
+  {
+   "name": "lions-mane: \"Add to cart →\" lions-mane 1/2 lb: price label shows $39.99",
+   "ok": true
+  },
+  {
+   "name": "lions-mane: \"Add to cart →\" lions-mane 1/2 lb: adds variant 53196571869397 at $39.99",
+   "ok": true
+  },
+  {
+   "name": "lions-mane: \"Add to cart →\" lions-mane 1 lb: price label shows $69.99",
+   "ok": true
+  },
+  {
+   "name": "lions-mane: \"Add to cart →\" lions-mane 1 lb: adds variant 53196571902165 at $69.99",
+   "ok": true
+  },
+  {
+   "name": "lions-mane: \"Add to cart →\" lions-mane 2 lb: price label shows $119.99",
+   "ok": true
+  },
+  {
+   "name": "lions-mane: \"Add to cart →\" lions-mane 2 lb: adds variant 53196571934933 at $119.99",
+   "ok": true
+  },
+  {
+   "name": "cacao (phone): sticky bar hidden at the top",
+   "ok": true
+  },
+  {
+   "name": "cacao (phone): sticky bar shows once the buy button is off screen",
+   "ok": true
+  },
+  {
+   "name": "cacao (phone): sticky Add to cart -> cacao-kit every 30 days",
+   "ok": true
+  },
+  {
+   "name": "vegan (phone): sticky bar hidden at the top",
+   "ok": true
+  },
+  {
+   "name": "vegan (phone): sticky bar shows once the buy button is off screen",
+   "ok": true
+  },
+  {
+   "name": "vegan (phone): sticky Add to cart -> vegan-kit every 30 days",
+   "ok": true
+  },
+  {
+   "name": "home (phone): sticky bar button goes to the product chooser",
+   "ok": true
+  },
+  {
+   "name": "empty cart: Checkout is disabled",
+   "ok": true
+  },
+  {
+   "name": "same item twice -> one line, quantity 2",
+   "ok": true
+  },
+  {
+   "name": "subtotal follows quantity ($55.98)",
+   "ok": true
+  },
+  {
+   "name": "cart badge shows 2",
+   "ok": true
+  },
+  {
+   "name": "+ raises quantity to 3",
+   "ok": true
+  },
+  {
+   "name": "- lowers quantity to 2",
+   "ok": true
+  },
+  {
+   "name": "- to zero removes the line",
+   "ok": true
+  },
+  {
+   "name": "empty drawer offers Cacao, Vegan and Single ingredients",
+   "ok": true
+  },
+  {
+   "name": "Starter Kit added twice -> still one kit, newest schedule (every 8 weeks)",
+   "ok": true
+  },
+  {
+   "name": "Starter Kit line has no + button (one per customer)",
+   "ok": true
+  },
+  {
+   "name": "drawer states first order $76.99 then $99.99",
+   "ok": true
+  },
+  {
+   "name": "cart follows the shopper to other pages",
+   "ok": true
+  },
+  {
+   "name": "cart survives a reload",
+   "ok": true
+  },
+  {
+   "name": "stale price is refreshed from the catalog (Sea Moss 1/2 lb back to $59.99)",
+   "ok": true
+  },
+  {
+   "name": "a line on the $89.99-renewal plan is dropped on load",
+   "ok": true
+  },
+  {
+   "name": "header cart button opens the drawer",
+   "ok": true
+  },
+  {
+   "name": "Escape closes the drawer",
+   "ok": true
+  },
+  {
+   "name": "checkout link first clears the zeotein.com cart",
+   "ok": true
+  },
+  {
+   "name": "gclid and UTMs ride on the first hop",
+   "ok": true
+  },
+  {
+   "name": "then adds the items (/cart/add)",
+   "ok": true
+  },
+  {
+   "name": "item 1 = Cacao Starter Kit, every 6 weeks plan",
+   "ok": true
+  },
+  {
+   "name": "item 2 = Sea Moss 1/2 lb, no plan",
+   "ok": true
+  },
+  {
+   "name": "then saves the ad data on the cart (/cart/update)",
+   "ok": true
+  },
+  {
+   "name": "cart attributes: gclid, utm_source/medium/campaign/term/content",
+   "ok": true
+  },
+  {
+   "name": "cart attributes: landing page and source site",
+   "ok": true
+  },
+  {
+   "name": "then opens /checkout",
+   "ok": true
+  },
+  {
+   "name": "the $89.99-renewal plan is nowhere in the link",
+   "ok": true
+  },
+  {
+   "name": "remaining zeotein.com links (policies, subscriptions) also carry the gclid",
+   "ok": true
+  },
+  {
+   "name": "no JavaScript errors on any page",
+   "ok": true
+  }
+ ],
+ "flows": []
+}

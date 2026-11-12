@@ -1,0 +1,845 @@
+[
+  {
+    "page": "home",
+    "file": "https://shop.zeotein.com/home",
+    "prescan": {
+      "source": "home",
+      "findings": [
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 76,
+          "match": "guarantee",
+          "context": "30-day money-back guarantee on blends"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 331,
+          "match": "Guarantee",
+          "context": "30-Day Money-Back Guarantee"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 335,
+          "match": "guarantee",
+          "context": "See guarantee details"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 394,
+          "match": "guarantee",
+          "context": "What do shipping and the guarantee cover?"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 397,
+          "match": "guarantee",
+          "context": "Orders ship from Manitowoc, Wisconsin in 1 to 2 business days, and US orders over $150 ship free. The Cacao Starter Kit and bulk bag always ship free in the US. The 30-day money-back guarantee covers "
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 544,
+          "match": "guarantee",
+          "context": "Zeotein home Zeotein Main Open cart Open menu A woman holding a Zeotein shaker in a bright kitchen, with a bag of Zeotein Cacao on the counter Why people choose Zeotein Zeotein Cacao protein powder bu"
+        }
+      ],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 6,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Zeotein | Cacao and Vegan Protein Powder, Short Ingredient Lists",
+        "description": "Cacao protein with grass-fed bone broth and collagen, or plant protein from pumpkin seed and hemp. No sweeteners. Cacao Starter Kit $76.99 first order with free US shipping.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "cacao",
+    "file": "https://shop.zeotein.com/cacao",
+    "prescan": {
+      "source": "cacao",
+      "findings": [
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 163,
+          "match": "guarantee",
+          "context": "30-day money-back guarantee on your first 30-day supply"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 424,
+          "match": "guarantee",
+          "context": "If it isn't for you, your first order is covered by our 30-day money-back guarantee."
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 829,
+          "match": "guarantee",
+          "context": "How does the 30-day guarantee work?"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 1023,
+          "match": "guarantee",
+          "context": "Zeotein home Zeotein Main Open cart Open menu Zeotein Cacao protein powder Per serving      Man holding a Zeotein CleanBlend shaker in a home gym A typical protein routine: separate tubs of protein po"
+        }
+      ],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 4,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Zeotein Cacao Starter Kit | 23g Protein, 14g Collagen, Zero Sugar",
+        "description": "23g protein and 14g grass-fed collagen peptides per serving. Six ingredients, no sweeteners. Bag, shaker, Save-A-Scoop and three guides for $76.99 your first order.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "spec_cacao_Calories": [
+        "140",
+        "140"
+      ],
+      "spec_cacao_Total Fat": [
+        "3",
+        "3"
+      ],
+      "spec_cacao_Saturated Fat": [
+        "2.5",
+        "2.5"
+      ],
+      "spec_cacao_Sodium": [
+        "420",
+        "420"
+      ],
+      "spec_cacao_Total Carbohydrate": [
+        "2",
+        "2"
+      ],
+      "spec_cacao_Dietary Fiber": [
+        "1",
+        "1"
+      ],
+      "spec_cacao_Protein": [
+        "23",
+        "23"
+      ],
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "vegan",
+    "file": "https://shop.zeotein.com/vegan",
+    "prescan": {
+      "source": "vegan",
+      "findings": [
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 137,
+          "match": "guarantee",
+          "context": "30-day money-back guarantee on your first 30-day supply"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 571,
+          "match": "guarantee",
+          "context": "What does the 30-day guarantee cover?"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 576,
+          "match": "guarantee",
+          "context": "and we'll send return instructions. Opened product is fine. The 7-day pack is not part of the guarantee."
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 755,
+          "match": "guarantee",
+          "context": "Zeotein home Zeotein Main Open cart Open menu Zeotein Vegan plant protein stick packs Per serving The five Zeotein Vegan ingredients in bowls: organic pumpkin seed protein, organic hemp protein, organ"
+        }
+      ],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 4,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Zeotein Vegan | 20g Plant Protein, Five Ingredients",
+        "description": "20g plant protein from organic pumpkin seed and organic hemp. Five ingredients, zero added sugar, single-serve stick packs. Vegan Starter Kit $96.99 your first order.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "spec_vegan_Calories": [
+        "170",
+        "170"
+      ],
+      "spec_vegan_Total Fat": [
+        "6.5",
+        "6.5"
+      ],
+      "spec_vegan_Saturated Fat": [
+        "2",
+        "2"
+      ],
+      "spec_vegan_Sodium": [
+        "145",
+        "145"
+      ],
+      "spec_vegan_Total Carbohydrate": [
+        "5",
+        "5"
+      ],
+      "spec_vegan_Dietary Fiber": [
+        "2",
+        "2"
+      ],
+      "spec_vegan_Protein": [
+        "20",
+        "20"
+      ],
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "our-story",
+    "file": "https://shop.zeotein.com/our-story",
+    "prescan": {
+      "source": "our-story",
+      "findings": [
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 352,
+          "match": "guarantee",
+          "context": "Zeotein home Zeotein Main Open cart Open menu Zeotein Vegan ingredients laid out in bowls Zeotein Cacao protein powder bulk bag, 30 servings Zeotein Vegan plant protein, 30 stick packs Money-back guar"
+        }
+      ],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 1,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Our Story | Zeotein",
+        "description": "Why Zeotein puts protein and the rest of your shelf into one serving, with an ingredient list short enough to read in seconds. Shipped from Manitowoc, Wisconsin.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "faq",
+    "file": "https://shop.zeotein.com/faq",
+    "prescan": {
+      "source": "faq",
+      "findings": [
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 57,
+          "match": "guarantee",
+          "context": "Straight answers on the formulas, the Starter Kits, shipping and the guarantee. Still stuck? Email"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 258,
+          "match": "guarantee",
+          "context": "How does the 30-day money-back guarantee work?"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 268,
+          "match": "guarantee",
+          "context": "What isn't covered by the guarantee?"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 468,
+          "match": "guarantee",
+          "context": "Ingredients, nutrition, how to mix it, subscriptions, shipping and the 30-day money-back guarantee, answered plainly."
+        }
+      ],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 4,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Questions | Zeotein",
+        "description": "Ingredients, nutrition, how to mix it, subscriptions, shipping and the 30-day money-back guarantee, answered plainly.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "contact",
+    "file": "https://shop.zeotein.com/contact",
+    "prescan": {
+      "source": "contact",
+      "findings": [
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 93,
+          "match": "guarantee",
+          "context": "The 30-day guarantee"
+        }
+      ],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 1,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Contact Zeotein",
+        "description": "Email hello@zeotein.com. Real replies within 1 to 2 business days. Manage or cancel a subscription online anytime.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "shipping",
+    "file": "https://shop.zeotein.com/shipping",
+    "prescan": {
+      "source": "shipping",
+      "findings": [
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 122,
+          "match": "guarantees",
+          "context": "estimates, not guarantees"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 141,
+          "match": "guaranteed",
+          "context": "not guaranteed"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 193,
+          "match": "guaranteed",
+          "context": "Address changes are not guaranteed once an order enters processing."
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 227,
+          "match": "guaranteed",
+          "context": "International delivery times vary and are not guaranteed"
+        }
+      ],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 4,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Shipping | Zeotein",
+        "description": "Orders ship from Manitowoc, Wisconsin in 1 to 2 business days. Free US shipping on Cacao Starter Kit and bag orders from this site.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "refund-policy",
+    "file": "https://shop.zeotein.com/refund-policy",
+    "prescan": {
+      "source": "refund-policy",
+      "findings": [
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 87,
+          "match": "Guarantee",
+          "context": "30-Day Money-Back Guarantee"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 94,
+          "match": "guarantee",
+          "context": "The guarantee covers our"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 100,
+          "match": "guarantee",
+          "context": "If an order contains more than one bag or box of a protein blend, the guarantee covers one 30-day supply. Additional bags or boxes in the same order are not refundable."
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 109,
+          "match": "guarantee",
+          "context": "one guarantee claim per customer"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 164,
+          "match": "guarantee",
+          "context": "Accounts where a prior guarantee claim has already been honored."
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 169,
+          "match": "guarantee",
+          "context": "Subscriptions can be paused, skipped, or cancelled anytime from your customer portal. Cancelling stops future charges; it does not retroactively refund shipped orders. Renewal orders are not covered b"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 182,
+          "match": "Guarantee",
+          "context": "This section covers damaged and missing items. It is separate from our 30-Day Guarantee, which is described above."
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 191,
+          "match": "guarantee",
+          "context": "Cancelling stops future deliveries. Orders that have already shipped are handled under the guarantee terms above. If a guarantee refund is issued on a subscription order, the subscription is cancelled"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 191,
+          "match": "guarantee",
+          "context": "Cancelling stops future deliveries. Orders that have already shipped are handled under the guarantee terms above. If a guarantee refund is issued on a subscription order, the subscription is cancelled"
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 196,
+          "match": "guarantee",
+          "context": "International orders are eligible for the 30-day guarantee on the same terms. Return shipping and any customs charges are the customer\u2019s responsibility. Customs duties, taxes, and VAT are set by your "
+        },
+        {
+          "tier": "HIGH",
+          "rule": "guaranteed_outcome",
+          "line": 344,
+          "match": "guarantee",
+          "context": "Our 30-day money-back guarantee on your first order of a protein blend, and how to start a claim."
+        },
+        {
+          "tier": "MEDIUM",
+          "rule": "structure_function",
+          "line": 144,
+          "match": "promotional",
+          "context": "Free or promotional items included with the order (shaker, Save-A-Scoop, digital guides) are not refunded and do not need to be returned."
+        }
+      ],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 11,
+        "MEDIUM": 1
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Refund Policy | Zeotein",
+        "description": "Our 30-day money-back guarantee on your first order of a protein blend, and how to start a claim.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "single-ingredients",
+    "file": "https://shop.zeotein.com/single-ingredients",
+    "prescan": {
+      "source": "single-ingredients",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Single-Ingredient Powders | Zeotein",
+        "description": "Collagen, bone broth, hemp, pumpkin seed, cacao, MCT, sea moss and lion's mane. Plain, unsweetened powders you can add to any Zeotein order.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "collagen",
+    "file": "https://shop.zeotein.com/collagen",
+    "prescan": {
+      "source": "collagen",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Grass-Fed Collagen Peptides Powder, Unflavored | Zeotein",
+        "description": "Collagen peptides from grass-fed cattle, 11g protein per serving. Dissolves clear in hot or cold drinks. 1/2 lb, 1 lb and 2 lb pouches.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "bone-broth",
+    "file": "https://shop.zeotein.com/bone-broth",
+    "prescan": {
+      "source": "bone-broth",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Grass-Fed Bone Broth Protein Powder, Unflavored | Zeotein",
+        "description": "Grass-fed beef bone broth protein powder, 15g protein per serving. Mild and unflavored for coffee, soup or a smoothie. 1/2 lb to 2 lb pouches.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "hemp-protein",
+    "file": "https://shop.zeotein.com/hemp-protein",
+    "prescan": {
+      "source": "hemp-protein",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Organic Hemp Protein Powder | Zeotein",
+        "description": "Organic hemp protein, 14g protein and 6g fiber per serving. Naturally nutty, and the same hemp protein in Zeotein Vegan. 1/2 lb to 2 lb pouches.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "pumpkin-seed-protein",
+    "file": "https://shop.zeotein.com/pumpkin-seed-protein",
+    "prescan": {
+      "source": "pumpkin-seed-protein",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Organic Styrian Pumpkin Seed Protein Powder | Zeotein",
+        "description": "Organic Styrian pumpkin seed protein, 11g protein per serving. Mild and nutty, and the same pumpkin seed protein in Zeotein Vegan.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "cacao-powder",
+    "file": "https://shop.zeotein.com/cacao-powder",
+    "prescan": {
+      "source": "cacao-powder",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Organic Fermented Cacao Powder, Unsweetened | Zeotein",
+        "description": "Raw, fermented organic cacao with a deep dark chocolate taste, the same cacao in Zeotein Cacao. Swap it 1:1 for cocoa powder.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "mct-oil-powder",
+    "file": "https://shop.zeotein.com/mct-oil-powder",
+    "prescan": {
+      "source": "mct-oil-powder",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Organic MCT Oil Powder, Unflavored | Zeotein",
+        "description": "MCT oil from coconut in an easy powder that mixes into coffee, shakes and smoothies. 1/2 lb, 1 lb and 2 lb pouches.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "sea-moss",
+    "file": "https://shop.zeotein.com/sea-moss",
+    "prescan": {
+      "source": "sea-moss",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Organic Sea Moss Powder, Wildcrafted in St. Lucia | Zeotein",
+        "description": "Wildcrafted organic sea moss from St. Lucia, 75% gold and 25% purple, finely milled. A mild taste that disappears in a fruit smoothie.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  },
+  {
+    "page": "lions-mane",
+    "file": "https://shop.zeotein.com/lions-mane",
+    "prescan": {
+      "source": "lions-mane",
+      "findings": [],
+      "counts": {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0
+      }
+    },
+    "house_rules": [],
+    "checks": {
+      "live_seo": {
+        "title": "Organic Lion's Mane Mushroom Powder, Unflavored | Zeotein",
+        "description": "Organic lion's mane mushroom powder, finely milled, 1,400 mg per serving. Mild and earthy, and it disappears into coffee.",
+        "title_matches_packet": true,
+        "description_matches_packet": true
+      },
+      "fda_disclaimer": true,
+      "product_ctas_consistent": [],
+      "images_all_approved": true,
+      "image_hosts": [
+        "cdn.shopify.com"
+      ],
+      "ghl_assets_referenced": false,
+      "prices_not_in_config": []
+    },
+    "blocking": 0
+  }
+]
