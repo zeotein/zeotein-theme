@@ -17,7 +17,7 @@ Every variant and plan ID is in `src/catalog.json`.
 | Path | What it is |
 |---|---|
 | `dist/ghl/01-home.html` … `17-lions-mane.html` | **The deliverable.** One paste-ready block per GoHighLevel page (17). |
-| `dist/ghl/no-rating/` | Home, Cacao and Vegan without the store-wide rating line, for use if that copy is not approved. |
+| `INSTALL-PACKET.md` | **The install guide for Zeus:** every page, path, where the code goes, the exact file, the order and the checks. |
 | `dist/ghl/00-website-head.html` | Pasted once in the website's Head tracking code: noindex meta first, then the fit CSS (no default padding or 1170px row, pinned header) and empty-SEO fallback. |
 | `dist/install-kit.html` | Install steps, copy buttons for every block and SEO field, compliance results, open items. |
 | `dist/preview/` | The same pages as plain HTML for testing (`python3 -m http.server --directory dist/preview`). |
@@ -52,7 +52,9 @@ Every variant and plan ID is in `src/catalog.json`.
 
 Kit: https://claude.ai/artifact/7xHhZwMmCAHnwAEc7dAmmb
 
-1. Get Dana's answer on the rating line (standard blocks, or `dist/ghl/no-rating/` for Home, Cacao and Vegan).
+Full packet: `INSTALL-PACKET.md` (Zeus installs; nothing for Dana).
+
+1. (Rating line approved, 9 Nov.)
 2. GoHighLevel: Sites, Websites, **Zeotein Google Site**. Create the nine new pages with the paths above.
 3. For all 17 pages: remove what's there, add one full-width section with one column, add a **Custom JS/HTML**
    element, paste the page's block, save. Set its SEO title and description from `dist/manifest.json`.
@@ -88,9 +90,9 @@ Re-paste only the pages whose block changed.
   photographed. Each file passes the OCR gate (3x upscale, contrast, inverted, several page modes) at full size and
   640px. Garbled files live in Shopify Files (uploaded 11 Nov 2026); the job scripts are in `tools/jobs/`.
 - Zeolite hold (12 Nov): Zeotein Zeolite Powder is not sold or shown, and the word appears in no block or page source.
-- Rating line: "4.9 from 155 reviews" (Zeus, 12 Nov brief; product pages add "across Zeotein"), replacing Dana's 11 Nov
-  "4.9/5 · Verified Buyers". **Not to be pasted until Dana approves** the before/after board; `dist/ghl/no-rating/`
-  is the fallback. `ratingText` in `src/config.json`.
+- Rating line: "4.9 from 155 reviews" (Dana's standing approval of 9 Nov, confirmed by Zeus 12 Nov; product pages add
+  "across Zeotein"). Before/after record: `reports/zeus-workstream-2026-11-11/shop-visuals/before-after/REVIEW-TEXT-before-after.png`.
+  `ratingText` in `src/config.json`.
 - Holds (12 Nov): no $89.99 renewal anywhere, no shipping-threshold change ($150, as on zeotein.com), no Google Ads
   final URL switch, no changes to zeotein.com, go.zeotein.com or the Starter Kit funnel.
 - 23g is Cacao only, Vegan is 20g. Cacao says "zero sugar", Vegan says "zero added sugar". "First order", never

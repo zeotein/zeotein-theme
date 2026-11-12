@@ -67,9 +67,9 @@ for slug, raw in blocks.items():
             images.add(htmlmod.unescape(part.strip().split(" ")[0]))
 # images inside the cart catalog (thumbnails, product photos the buy box swaps in)
 for slug, raw in blocks.items():
-    m = re.search(r'<script type="application/json" id="zt-catalog">(.*?)</script>', raw, flags=re.S)
+    m = re.search(r"var CATALOG = (\{.*?\}) \|\| \{\};", raw)
     if m:
-        for it in json.loads(m.group(1))["items"].values():
+        for it in json.loads(m.group(1).replace("<\\/", "</"))["items"].values():
             for k in ("img", "imgLg"):
                 if it.get(k):
                     images.add(it[k])

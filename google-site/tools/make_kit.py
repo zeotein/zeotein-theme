@@ -52,11 +52,11 @@ TESTS = {"e2ePassed": e2e.get("passed", 0), "e2eFailed": e2e.get("failed", 0), "
          "linkProblems": len(links.get("problems", [])), "pages": len(manifest["pages"])}
 
 ITEMS = [
-    {"level": "crit", "tag": "Approve", "title": "Approve the star-rating line: 4.9 from 155 reviews",
-     "why": "The rebuilt Home, Cacao and Vegan pages add a store-wide rating line (Home: <b>4.9 from 155 reviews</b>; product pages: <b>4.9 from 155 reviews across Zeotein</b>, since the 155 reviews cover the whole store). Today's live pages show no overall rating; the 11 Nov choice (<b>4.9/5 &middot; Verified Buyers</b>, no count) was built but never pasted. Review quotes are unchanged. See <a href=\"#approval\">Approval</a> for the before and after.",
-     "closes": "Dana says yes (paste the standard blocks) or no (paste the no-rating versions of Home, Cacao and Vegan; nothing else changes)."},
-    {"level": "crit", "tag": "Do now", "title": "Create 9 pages, then paste all 17 blocks and the Head snippet",
-     "why": "New pages: Single Ingredients and one page per powder (Collagen, Bone Broth, Hemp Protein, Pumpkin Seed Protein, Cacao Powder, MCT Oil Powder, Sea Moss, Lion's Mane). All 8 existing pages changed too (new look, header with cart, footer), so every block is re-pasted. GoHighLevel's API can't write page code, so this is a paste job in the builder: about 45 minutes by hand, or hand it to Claude on your PC with the prompt in <a href=\"#install\">Install</a>.",
+    {"level": "ok", "tag": "Approved", "title": "Rating line: 4.9 from 155 reviews",
+     "why": "Dana's standing approval (9 Nov), confirmed by Zeus on 12 Nov. Home shows <b>4.9 from 155 reviews</b>; product pages say <b>across Zeotein</b> because the reviews cover the whole store. Before and after kept in <a href=\"#approval\">The rating line</a>.",
+     "closes": "done."},
+    {"level": "crit", "tag": "Zeus", "title": "Install: create 9 pages, paste 17 blocks and the Head snippet (INSTALL-PACKET.md)",
+     "why": "New pages: Single Ingredients and one page per powder (Collagen, Bone Broth, Hemp Protein, Pumpkin Seed Protein, Cacao Powder, MCT Oil Powder, Sea Moss, Lion's Mane). All 8 existing pages changed too (new look, header with cart, footer), so every block is re-pasted. GoHighLevel's API can't write page code, so this is a paste job in the builder: about 45 minutes. Zeus installs from google-site/INSTALL-PACKET.md; nothing here is for Dana.",
      "closes": "all 17 pages on shop.zeotein.com match the build and Claude re-runs the cart and link tests on the live site."},
     {"level": "warn", "tag": "On hold", "title": "Google Ads final URLs stay where they are",
      "why": "Per the 12 Nov brief, no campaign moves to shop.zeotein.com yet. The <a href=\"#ads\">Google Ads</a> table is ready for when the hold lifts.",
@@ -64,9 +64,9 @@ ITEMS = [
     {"level": "ok", "tag": "Hold kept", "title": "Zeolite stays off shop.zeotein.com",
      "why": "Zeolite Powder is not sold or shown anywhere on the site, and the word appears in no block or page source. The blends' fifth ingredient is disclosed as \"a naturally occurring volcanic mineral\" in ingredient lists and the FAQ only, and it is garbled on every package photo. zeotein.com and the Shopping feed are untouched.",
      "closes": "the hold is lifted."},
-    {"level": "warn", "tag": "Retest", "title": "Last live checkout runs, once Shopify stops challenging the test machine",
+    {"level": "warn", "tag": "Pending", "title": "Two live checkout runs: Vegan kit and Cacao stick-pack subscription",
      "why": "The single-item flow and the blend-plus-single checkout reached real Shopify checkout with the right items, plans and prices, and UTMs and gclid saved on the cart. After a night of automated tests, Shopify's bot check (429 plus a Cloudflare check) began challenging this cloud machine's cart requests, so the Vegan kit and stick-pack runs were finished on the local cart and the checkout link only. Real shoppers' browsers normally pass that check automatically.",
-     "closes": "Claude re-runs qa/e2e_cart.js --only-checkout and all five live flows pass."},
+     "closes": "Zeus runs both checkouts in a normal browser during the post-install checks (INSTALL-PACKET.md, checks 6 and 7). No automated retry loop."},
     {"level": "warn", "tag": "Recommend", "title": "Finish the funnel noindex (Zeus / Dana side)",
      "why": "Re-checked 12 Nov 05:00 UTC. Solid (noindex in the page HTML): all 9 shop.zeotein.com URLs, plus marketing.zeotein.com/zeotein-cacao, /landing-page-cacao and /cacao-sales-page. Script-only (the page HTML still says index, a script switches it to noindex): /starter-kit-google, /starter-kit-page and /starter-kit. Google usually honors that, but the reliable version is this line in each funnel step's Head code: <span class=\"mono\">&lt;meta name=\"robots\" content=\"noindex, follow\"&gt;</span>. No robots tag at all: /cacao-stick-packs-starter-kit, and the quiz at marketing.zeotein.com/ (Zeus and Dana are handling the quiz). zeotein.com stays indexable and no robots.txt blocks Googlebot or AdsBot. These funnels are outside this workstream, so they are listed, not changed.",
      "closes": "the tag is in those funnel steps' Head code, or Zeus and Dana decide the script is enough."},

@@ -6,7 +6,12 @@ shop/marketing robots.txt must not disallow Googlebot or AdsBot."""
 import re, sys, urllib.request
 NOINDEX = ["https://shop.zeotein.com/", "https://shop.zeotein.com/home", "https://shop.zeotein.com/cacao", "https://shop.zeotein.com/vegan",
            "https://shop.zeotein.com/our-story", "https://shop.zeotein.com/faq", "https://shop.zeotein.com/contact", "https://shop.zeotein.com/shipping",
-           "https://shop.zeotein.com/refund-policy", "https://marketing.zeotein.com/starter-kit-google", "https://marketing.zeotein.com/starter-kit-page",
+           "https://shop.zeotein.com/refund-policy",
+           # 12 Nov rebuild: the nine new shop pages
+           "https://shop.zeotein.com/single-ingredients", "https://shop.zeotein.com/collagen", "https://shop.zeotein.com/bone-broth",
+           "https://shop.zeotein.com/hemp-protein", "https://shop.zeotein.com/pumpkin-seed-protein", "https://shop.zeotein.com/cacao-powder",
+           "https://shop.zeotein.com/mct-oil-powder", "https://shop.zeotein.com/sea-moss", "https://shop.zeotein.com/lions-mane",
+           "https://marketing.zeotein.com/starter-kit-google", "https://marketing.zeotein.com/starter-kit-page",
            "https://marketing.zeotein.com/starter-kit", "https://marketing.zeotein.com/zeotein-cacao", "https://marketing.zeotein.com/landing-page-cacao",
            "https://marketing.zeotein.com/cacao-sales-page", "https://marketing.zeotein.com/cacao-stick-packs-starter-kit"]
 OPTIONAL = ["https://marketing.zeotein.com/"]          # quiz: noindex only if it is ads-only

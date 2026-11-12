@@ -94,7 +94,7 @@ const total = async p => ((await p.locator('.ztg [data-zt-cart-total]').textCont
         const note = ((await p.locator('.ztg [data-zt-buy-note]').textContent()) || '').trim();
         const want = it.plans ? (it.renew && it.renew !== it.price ? `then ${money(it.renew)} per delivery` : `${money(it.renew || it.price)} per delivery`) : 'One-time purchase';
         check(`${tag}: note says "${want}"`, note.includes(want) && !note.includes('89.99'), note);
-        const ph = await p.evaluate(id => { const c = JSON.parse(document.getElementById('zt-catalog').textContent).items[id]; const im = document.getElementById('zt-pdp-img');
+        const ph = await p.evaluate(id => { const c = window.__ztgCart.items[id]; const im = document.getElementById('zt-pdp-img');
           return { want: c.imgLg || c.img, src: im.getAttribute('src'), srcset: im.getAttribute('srcset') || '' }; }, id);
         check(`${tag}: photo swaps to this option, full-size`, ph.src === ph.want && (!ph.srcset || ph.srcset.includes(' 1024w')), ph);
         await p.click('.ztg [data-zt-buy-add]'); await p.waitForTimeout(150);

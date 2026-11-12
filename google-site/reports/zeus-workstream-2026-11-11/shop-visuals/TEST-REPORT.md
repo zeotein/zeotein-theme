@@ -1,7 +1,8 @@
 # shop.zeotein.com rebuild: cart, checkout and UTM test report
 
-**12 Nov 2026, overnight.** All 17 blocks are built and tested. Nothing is pasted into GoHighLevel yet: GoHighLevel's
-API can't write page code, and the rating line needs Dana's approval first. No order was placed and no payment was
+**12 Nov 2026, overnight.** All 17 blocks are built and tested and ready for Zeus to paste using
+`google-site/INSTALL-PACKET.md`. GoHighLevel's API can't write page code, so the paste is done by hand. The rating line
+is approved (Dana's standing approval of 9 Nov, confirmed by Zeus on 12 Nov). No order was placed and no payment was
 taken. No checkout form was filled in.
 
 Install kit (blocks, steps, approval, results): https://claude.ai/artifact/7xHhZwMmCAHnwAEc7dAmmb
@@ -55,18 +56,18 @@ order. Clearing first means the checkout always matches the on-site cart exactly
 
 - **$89.99 renewal:** never offered. Cacao Starter Kit plans are 6596853973 / 6622773461 / 6622806229 only ($76.99, then $99.99).
 - **Shipping threshold:** unchanged. The site states the existing free US shipping over $150, the same as zeotein.com.
-- **Review text:** not published. Before/after board: `before-after/REVIEW-TEXT-before-after.png`. If Dana says no, the no-rating versions of Home, Cacao and Vegan are ready in `dist/ghl/no-rating/`.
+- **Review text:** "4.9 from 155 reviews" is approved (Dana's standing approval, 9 Nov; confirmed by Zeus 12 Nov). The before/after record is `before-after/REVIEW-TEXT-before-after.png`.
 - **Google Ads final URLs:** not touched; marked on hold in the kit.
 - **Zeolite:** Zeolite Powder is not sold or shown, and the word appears in no block. The blends disclose "a naturally occurring volcanic mineral" in ingredient lists and the FAQ only; it is garbled on every package photo.
 - **zeotein.com, go.zeotein.com and the Starter Kit funnel:** not changed. The only contact was read-only page checks and test carts in a separate browser.
 
-## Shopify's bot check (why the last two live flows are pending)
+## Shopify's bot check (two live flows pending)
 
 After a night of automated cart and checkout requests, Shopify began answering this cloud machine's cart requests
 with HTTP 429 and a Cloudflare "Your connection needs to be verified" check (from about 04:40 UTC). A plain cart read
 still worked; every cart change was challenged, with or without the new chain. This affects the test machine, not
-the site: real shoppers' browsers normally pass that check automatically. The check was not bypassed. Retest after
-paste: `node qa/e2e_cart.js https://shop.zeotein.com reports/live --only-checkout --gap=45`.
+the site: real shoppers' browsers normally pass that check automatically. The check was not bypassed and there is no retry loop (Zeus, 12 Nov). Both
+flows are in the post-install checklist (`INSTALL-PACKET.md`, checks 6 and 7), done once by hand in a normal browser.
 
 ## Noindex (Zeus and Dana's item): re-checked 05:00 UTC
 
@@ -83,14 +84,10 @@ Details: `NOINDEX.md`, `noindex-check-0500utc.txt`.
 
 ## What needs a person
 
-1. **Dana:** approve or decline "4.9 from 155 reviews" (`before-after/REVIEW-TEXT-before-after.png`).
-2. **Whoever installs:**
-   - create the 9 new pages (paths are in the kit);
-   - paste all 17 blocks and the new Head snippet;
-   - publish.
-
-   It takes about 45 minutes, or paste the kit's prompt into Claude on a PC with Chrome.
-3. **Then Claude:** re-run the cart, link and compliance tests against the live shop, including the two pending live flows.
+1. **Zeus:** install from `google-site/INSTALL-PACKET.md`. That means creating the 9 new pages, pasting the 17 blocks
+   and the Head snippet, and publishing. It takes about 45 minutes. Nothing is for Dana.
+2. **Zeus:** run the post-install checks in the packet, including the two pending live checkouts. Then tell Claude, so it can
+   re-run the cart, link and compliance tests against the live shop.
 
 ## Files in this folder
 

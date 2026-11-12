@@ -108,8 +108,9 @@
   /* 6. On-site cart. Visitors add protein blends and single ingredients here, on shop.zeotein.com, and check out once.
      Checkout adds every line (with its subscription plan) to the zeotein.com cart in one request, saves the ad
      parameters on the order as cart attributes, then opens Shopify checkout. Nobody is sent to browse the live store. */
-  var CATALOG = {};
-  try { CATALOG = JSON.parse((document.getElementById('zt-catalog') || {}).textContent || '{}'); } catch (e) {}
+  /* The catalog is written straight into this script at build time (src/catalog.json), so the cart does not depend on
+     GoHighLevel keeping a separate data tag intact. */
+  var CATALOG = {{catalogJson}} || {};
   var ITEMS = CATALOG.items || {}, SHOPIFY = CATALOG.store || 'https://zeotein.com';
   var CART_KEY = 'zt_cart_v1', CART_TTL = 14 * 24 * 60 * 60 * 1000;
   var cartEl = document.querySelector('.ztg [data-zt-cart]');
@@ -239,7 +240,7 @@
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCart(); });
   window.addEventListener('storage', function (e) { if (e.key === CART_KEY) { lines = loadCart().map(refreshLine).filter(Boolean); renderCart(); } });
-  window.__ztgCart = { lines: function () { return lines; }, url: checkoutUrl, add: addLine };
+  window.__ztgCart = { lines: function () { return lines; }, url: checkoutUrl, add: addLine, items: ITEMS };
   renderCart();
 
   /* 7. Buy box: show the delivery schedule only for subscriptions, keep price, note and photo in step with the option */

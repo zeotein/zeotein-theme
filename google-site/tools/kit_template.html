@@ -153,8 +153,8 @@ footer.end{padding-block:28px 40px;color:var(--muted);font-size:.84rem;border-to
       <span class="pill ok"><i></i><span>Render: <b id="stRender"></b> clean</span></span>
       <span class="pill ok"><i></i><span>Cart tests: <b id="stE2E"></b> pass</span></span>
       <span class="pill ok"><i></i>Live Shopify checkout reached, no orders placed</span>
-      <span class="pill warn"><i></i>Needs Dana: approve the rating line</span>
-      <span class="pill warn"><i></i>To do: create 9 pages, paste 17 blocks</span>
+      <span class="pill ok"><i></i>Rating line approved (Dana, 9 Nov)</span>
+      <span class="pill warn"><i></i>Zeus: create 9 pages, paste 17 blocks (INSTALL-PACKET.md)</span>
     </div>
   </div>
 </header>
@@ -169,14 +169,11 @@ footer.end{padding-block:28px 40px;color:var(--muted);font-size:.84rem;border-to
 <section class="band" id="approval">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Needs Dana before anything is pasted</p>
-      <h2>Approval: the rating line</h2>
-      <p class="muted">The rebuilt Home, Cacao and Vegan pages add a store-wide rating line using the figure Zeus confirmed: <b>4.9 from 155 reviews</b>. Product pages say <b>across Zeotein</b> because the 155 reviews cover the whole store, not one product. Today's live pages show no overall rating. On 11 Nov Dana chose <b>4.9/5 &middot; Verified Buyers</b> with no review count; that version was built but never pasted. Zeus's 12 Nov brief sets the claim as 4.9 from 155 reviews, the figure zeotein.com shows. The three review quotes are verified Judge.me reviews, quoted as written. Nothing else on the site depends on this choice.</p>
+      <p class="eyebrow">Approved: Dana's standing approval (9 Nov), confirmed by Zeus 12 Nov</p>
+      <h2>The rating line</h2>
+      <p class="muted">The rebuilt Home, Cacao and Vegan pages add a store-wide rating line using the figure Zeus confirmed: <b>4.9 from 155 reviews</b>. Product pages say <b>across Zeotein</b> because the 155 reviews cover the whole store, not one product. Today's live pages show no overall rating. The figure matches zeotein.com. The three review quotes are verified Judge.me reviews, quoted as written.</p>
     </div>
-    <div class="choices">
-      <div class="choice"><span class="chip ok">Yes</span><h3>Use "4.9 from 155 reviews"</h3><p>Paste the standard Home, Cacao and Vegan blocks.</p></div>
-      <div class="choice"><span class="chip warn">No</span><h3>Leave the rating off</h3><p>Paste the <b>no-rating</b> versions of Home, Cacao and Vegan (second button on those cards in Page blocks). The review cards stay. Prefer the 11 Nov wording instead? Ask Claude: it is a one-line change and a rebuild.</p></div>
-    </div>
+    <p class="note" style="margin:0 0 18px"><b>Approved.</b> Use the standard Home, Cacao and Vegan blocks. The before and after below stays on record.</p>
     <figure class="board"><img alt="Before and after of the review text on Home, Cacao and the Home reviews section" src="__SHOT_review_board__" width="1100" height="1131"><figcaption>Before: live shop.zeotein.com on 12 Nov. After: the rebuilt blocks. Full-size boards for every page are in the repo under reports/zeus-workstream-2026-11-11/shop-visuals/before-after/.</figcaption></figure>
   </div>
 </section>
@@ -186,7 +183,7 @@ footer.end{padding-block:28px 40px;color:var(--muted);font-size:.84rem;border-to
     <div class="sec-head">
       <p class="eyebrow">About 45 minutes in GoHighLevel</p>
       <h2>Install</h2>
-      <p class="muted">Eight pages already exist with the right paths; nine are new. Every block changed, so all 17 are pasted. Tick steps off as you go; ticks are saved in this browser only.</p>
+      <p class="muted">Zeus installs; nothing here is for Dana. The full packet is <span class="mono">google-site/INSTALL-PACKET.md</span>. Eight pages already exist with the right paths; nine are new. Every block changed, so all 17 are pasted. Ticks are saved in this browser only.</p>
     </div>
     <div class="handoff" id="handoff">
       <div class="row"><h3>Faster: let Claude on your PC do the install</h3><button class="primary" type="button" id="copyPrompt">Copy prompt</button></div>
@@ -197,7 +194,7 @@ Everything is in the install kit: https://claude.ai/artifact/7xHhZwMmCAHnwAEc7dA
 
 1. GoHighLevel → Sites → Websites → Zeotein Google Site. Create these 9 pages with exactly these paths: Single Ingredients /single-ingredients, Collagen /collagen, Bone Broth /bone-broth, Hemp Protein /hemp-protein, Pumpkin Seed Protein /pumpkin-seed-protein, Cacao Powder /cacao-powder, MCT Oil Powder /mct-oil-powder, Sea Moss /sea-moss, Lion's Mane /lions-mane.
 
-2. For all 17 pages: open it in the builder, remove the existing sections, add one full-width section with one column (padding 0, no background), add a Custom JS/HTML (Code) element, paste that page's block from the kit, save. Then paste the page's SEO title and description into its page settings and save. For Home, Cacao and Vegan, use the standard block if I approved the rating line, otherwise the "no-rating" block. Ask me which if you don't know.
+2. For all 17 pages: open it in the builder, remove the existing sections, add one full-width section with one column (padding 0, no background), add a Custom JS/HTML (Code) element, paste that page's block from the kit, save. Then paste the page's SEO title and description into its page settings and save. The rating line is approved, so use the standard blocks.
 
 3. Website Settings → Tracking code → Head: keep the Google Ads, Meta and Clarity tags; replace the old Zeotein fit snippet with the new one from the kit (Install step 4). It starts with the noindex tag, so a separate noindex line I added can stay or go. Save. Leave the Body tracking code as it is.
 
@@ -206,7 +203,7 @@ Everything is in the install kit: https://claude.ai/artifact/7xHhZwMmCAHnwAEc7dA
 Don't change Google Ads, Shopify, zeotein.com, go.zeotein.com or the Starter Kit funnel. Report what passed and anything that didn't.</textarea>
     </div>
     <ol class="steps" id="steps">
-      <li><div class="body"><label><input type="checkbox" id="s1"> Get Dana's answer on the rating line</label><ul><li>See <a href="#approval">Approval</a>. Yes: use the standard Home, Cacao and Vegan blocks. No: use their no-rating versions. Every other page is the same either way.</li></ul></div></li>
+      <li><div class="body"><label><input type="checkbox" id="s1"> Open INSTALL-PACKET.md</label><ul><li>Zeus installs from <span class="mono">google-site/INSTALL-PACKET.md</span> on the branch: every page, path, where the code goes, the exact file, the order and the checks. The steps below are the short version.</li></ul></div></li></ul></div></li>
       <li><div class="body"><label><input type="checkbox" id="s2"> Create the nine new pages</label><ul><li>Sites → Websites → <b>Zeotein Google Site</b> → add a page for each, with these exact paths: <span class="mono">/single-ingredients</span>, <span class="mono">/collagen</span>, <span class="mono">/bone-broth</span>, <span class="mono">/hemp-protein</span>, <span class="mono">/pumpkin-seed-protein</span>, <span class="mono">/cacao-powder</span>, <span class="mono">/mct-oil-powder</span>, <span class="mono">/sea-moss</span>, <span class="mono">/lions-mane</span>. The blocks link to these paths, so a different path breaks the links.</li></ul></div></li>
       <li><div class="body"><label><input type="checkbox" id="s3"> Paste every page (all 17)</label><ul>
         <li>Open the page in the builder and remove the sections that are there now (clone the page first if you want a copy).</li>

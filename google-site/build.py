@@ -217,7 +217,7 @@ def main():
     v = cfg["vars"]
     cat = json.loads(render((SRC / "catalog.json").read_text(), v, ""))
     # internal notes (keys starting with "_") stay in the repo, not in the page source
-    v = {**v, "catalogJson": json.dumps({k: x for k, x in cat.items() if not k.startswith("_")}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")}
+    v = {**v, "catalogJson": json.dumps({k: x for k, x in cat.items() if not k.startswith("_")}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")}
     css = minify_css((SRC / "styles.css").read_text())
     js_src = (SRC / "partials" / "scripts.js").read_text()
     stamp = datetime.date.today().isoformat()
@@ -249,12 +249,6 @@ def main():
         )
         out = DIST / "ghl" / f"{i:02d}-{slug}.html"
         out.write_text(block)
-        # The same block without the store-wide star-rating line, ready in case that copy is not approved.
-        if '<p class="rating">' in block:
-            alt = re.sub(r'<p class="rating">.*?</p>', '', block, flags=re.S)
-            alt = alt.replace("Paste this whole block", "NO-RATING VARIANT: use only if the star-rating line is not approved. Paste this whole block", 1)
-            (DIST / "ghl" / "no-rating").mkdir(parents=True, exist_ok=True)
-            (DIST / "ghl" / "no-rating" / out.name).write_text(alt)
 
         preview = (
             "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
