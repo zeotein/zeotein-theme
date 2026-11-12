@@ -9,21 +9,23 @@ Answers to Dana's Nov 11 questions. Data pulled Nov 11 (read-only). Full visual 
 4. Retention: free renewal shipping (~$229/month now) pays if ~4 subscribers/month stay (each ~$54/month contribution). Win-back offer before Black Friday.
 5. Store friction: BON launcher on phones (mobile ATC 4.2% vs desktop 6.7%), shipping, publish the script-error fix theme.
 
-## Free shipping
-- Recommendation: lower free US shipping from $150 to $25; keep the 7-day trial at $39.99.
-- $150 line is not raising cart size: 90 days of US store orders, 36 in $99–$150 (paid shipping) vs 8 in $150–$175 (mostly 2-bag deals).
-- Abandoned checkouts Oct 12–Nov 11: 8 of 13 US had shipping added (+10% to +34%), all $29.99 and up. A $99 line covers 1 of 8; $25 covers all 8.
-- Cost (US shipping no longer collected, actual orders Aug 14–Nov 11):
+## Free shipping (revised Nov 12: keep $150 for now)
+- Recommendation changed after reading the Decision Log (S-01, S-04, S-10, O-04, O-14) and re-running the Ground Advantage test at 60+ days.
+- Checkout completion, US website checkouts Aug 15–Nov 11: shipping charged 74% (75 of 101); shipping free and under $150, mostly funnel kits, 74% (25 of 34). No difference.
+- Ground test re-run (log S-01 definition, paid-shipping website orders): before Aug 15–Sep 6, 22 of 29 completed (75.9%), avg shipping $15.84 (matches the log); after Sep 7–Nov 11, 49 of 68 (72.1%), avg $10.24. Cheaper shipping did not raise completion. Oct 7–Nov 11 alone: 14 of 23 (60.9%).
+- Seal charges renewals the cheapest available rate (log S-10), so any line under $99.99 makes renewals ship free automatically.
+- Cost of lowering the line (US shipping no longer collected, actual orders Aug 14–Nov 11):
 
 | Option | Now / month | Aug–Oct volume / month |
 |---|---|---|
 | $99 line | $209 (renewals $182, new $27) | $431 |
 | $25 line, new and one-time | $151 | $292 |
-| $25 line, renewals (if Seal re-rates) | $229 | $303 |
+| $25 line, renewals | $229 | $303 |
 
-- Break-even uses COGS from internal notes (bag $32.78, 30 sticks $52.54), 2.9% + $0.30 fees, ~$10 label: one-time bag $63.72, singles ~$15–$50.
-- Intro offers already ship free (Funnel profile). Exception: Vegan Starter Kit (zeotein-vegan-sticks-30-intro) is in the General profile.
-- Open question: Seal renewal shipping (re-rate vs keep original rate).
+- $150 line is not raising cart size (90 days: 36 US store orders at $99–$150 paid shipping vs 8 at $150–$175), but keeping it costs nothing.
+- Do instead: move the Vegan Starter Kit (zeotein-vegan-sticks-30-intro, General profile) into the "Funnel — free shipping" profile; revisit the line with bundle tiers (S-04 / P-06); use free shipping as a dated promo with a clean baseline (O-14 gift page).
+- 7-day trial: keep $39.99; Master Pricing already rules these are priced high per stick on purpose (no discount, no subscribe option).
+- Retention: top cancel reasons are "I still have product" and "Not the items I want" (Numbers Playbook), not shipping. Turn on the 7 retention workflows in draft since Aug 3 (O-15) before Black Friday.
 
 ## Google-only site (shop.zeotein.com)
 - Good: FDA disclaimer on all pages, first-order guarantee wording, no detox/weight/energy claims, Google Ads tag AW-18130788543, Meta pixel, Clarity, click-ID carryover to store links, 4 store links return 200.
