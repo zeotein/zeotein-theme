@@ -31,6 +31,11 @@ No product data, prices, Seal plans or discounts were changed.
 - Gift lines appear inside both options and the renewal sentence is shortened (bag and 30 sticks); the 7-Day shows the plain gift row.
 - Pending: add-to-cart test for subscribe, 6-week interval and one-time (Shopify's bot check blocked the test browser on Nov 13; retry before publishing).
 
-## Still to do
+## How it goes live
 
-- Publish (Dana's yes) and copy the same four files into the Black Friday theme, which goes live Nov 27.
+Don't publish the preview theme: the live theme has changed since that copy was made. After Dana's yes:
+
+1. Live theme (needs someone with live access, e.g. Orbit): Online Store → Themes → live theme → Edit code. Add `snippets/zt-buybox-tidy.liquid`, then replace the three templates with the versions in `pdp-cleanup/files/`. The live templates haven't changed since Nov 5, so whole-file replacement is safe.
+2. Black Friday theme (unpublished, so Claude can write it): the same four files. Its three templates are identical to live's.
+
+Preview: https://zeotein.com/products/zeotein-cacao-bag-30?preview_theme_id=187923202261

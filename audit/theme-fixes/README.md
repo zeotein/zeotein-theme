@@ -1,5 +1,7 @@
 # Theme script-error fixes, November 10–11, 2026
 
+> **Update, Nov 13:** all five fixes are now on the **live** theme (applied 19:12–19:14 UTC by someone with live access) and in the **Black Friday** theme. Checked on the live product page: no `@theme/section-hydration` import, none of the four missing header scripts, and the menu uses `<zt-header-drawer>`. The Black Friday theme's copies match the fixed files; its cart drawer also skips the scripts on the `stocking-gift` template. **Don't publish "Live + script error fixes (Nov 10)"**: the live theme has changed since (layout, gift-card script, cart footer, a new digital-guides template), so publishing it would undo those. It is now only a preview for the product page cleanup.
+
 Fixed theme (unpublished, ready to publish): **Live + script error fixes (Nov 10)**, ID `187923202261`.
 Preview: https://zeotein.com/?preview_theme_id=187923202261
 
