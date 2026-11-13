@@ -19,19 +19,19 @@ In preview links, Shopify's grey preview bar sits at the bottom of the screen. T
 | Area | Change |
 |---|---|
 | Format picker | Bulk bag / 30 sticks / 7-Day tiles moved right under the title, with photo and price per serving. "Best value" on the bag. |
-| Gifts | The purple box inside Subscribe & Save is now **"Free Starter Kit with your first order"** with photos: shaker, Save-A-Scoop, 3 guides, each with its store price struck through. One-time keeps its own line. |
+| Gifts | One slim purple line inside Subscribe & Save: three small round photos + **"Free Starter Kit · $62.98 value"** / "First order: shaker, scoop + 3 guides" (sticks: $55.99, shaker + 3 guides). One-time keeps one grey line with its own photos. The value adds up the store prices of the items, live. |
 | Add to cart above the fold | A bar with price, plan and Add to cart stays on screen until the main button scrolls into view. On phones it runs full width. On desktop it floats over the photo column, so it never covers the buy box. |
-| Reviews | "★★★★★ 4.9/5 rating · 1,500+ orders" replaces the per-product count ("13 reviews"), plus one real, verified customer quote under the button. |
-| Layout | Quantity and Add to cart on one row. The duplicate price line is hidden when the subscription box shows prices. The desktop photo column narrows from "large" to "medium" so the buy box is wider, with a slightly smaller desktop title. The Rewards button and the second scrolling top bar are hidden on phones on these pages. |
+| Reviews | **"★★★★★ Verified buyers rate Zeotein 4.9/5"** replaces the per-product count ("13 reviews"). It's read live from Judge.me's verified-buyer average (4.93 from 119 verified reviews on Nov 13), so it updates on its own as reviews come in. The stars fill to the exact rating. If Judge.me ever stops providing the verified number, it falls back to "Customers rate Zeotein" with the all-reviews average, so it never claims "verified" without the data. One real, verified customer quote sits under the button. |
+| Layout | Quantity and Add to cart on one row, same height and level (the theme's 25px form margin was pushing the button down). Shop Promise badge centred under the row. The duplicate price line is hidden when the subscription box shows prices. The desktop photo column narrows from "large" to "medium" so the buy box is wider, with a slightly smaller desktop title. The Rewards button and the second scrolling top bar are hidden on phones on these pages. |
 | Trust row | "30-day guarantee on your first order" + "Ships in 1–2 business days" (the 7-Day packs are covered, per Dana's rule). |
 
 ### Single-ingredient pages (cacao powder, zeolite)
 | Area | Change |
 |---|---|
-| Reviews | "No reviews" / "1 review" badge hidden. Shows "★★★★★ 4.9/5 **store** rating · 1,500+ orders". It's labelled "store" because these products have few reviews of their own. |
+| Reviews | "No reviews" / "1 review" badge hidden. Shows the same live "★★★★★ Verified buyers rate Zeotein 4.9/5". It names the brand, so it's clear it isn't this product's own count. |
 | Add to cart above the fold | Same bar, with the chosen size and price ("Organic cacao powder · 1/2 lb · $17.99"). It follows the size picker. |
 | Order | Add to cart now sits right under the size picker. Before, it came after the serving chips, about 1,200px down on a phone. |
-| Shipping | The two text lines became one row: "Free U.S. shipping on orders $150+" + "Ships in 1–2 business days". No guarantee wording: single-ingredient powders are final sale. |
+| Shipping | The two text lines became one row: "Free U.S. shipping on orders $130+" + "Ships in 1–2 business days". The free-shipping rate changed from $150 to $130 on Nov 13, and the row matches it. The amount is set in one place at the top of the snippet. No guarantee wording: single-ingredient powders are final sale. |
 
 ### Things deliberately left alone
 - Prices, Seal plans, discounts, product titles, handles.
@@ -54,6 +54,7 @@ In preview links, Shopify's grey preview bar sits at the bottom of the screen. T
 | `files/templates/product.cacao-7-day.json` | 7-Day template |
 | `files/templates/product.organic-cacao.json` | Cacao powder |
 | `files/templates/product.zeolite.json` | Zeolite |
+| `files/snippets/meta-tags.liquid` | SEO: share image (og:image) uses https instead of http. **Already written to the Black Friday theme.** Live needs the same one-line change. |
 
 The live copies of all five templates are unchanged since Nov 5 (same checksums as the preview copies), so whole-file replacement is safe. Old blocks are kept as disabled blocks, so any of them can be switched back on in the theme editor.
 
@@ -63,6 +64,7 @@ The live copies of all five templates are unchanged since Nov 5 (same checksums 
 - Cart: Subscribe & Save (monthly) from the bar adds "1 bag every 30 days" at $99.99. One-time from the bar adds $109.99 with no plan. The test cart was cleared.
 - The size picker updates the bar ("1 lb · $28.99" cacao powder, "1 lb · $64.99" zeolite).
 - Both featured reviews are verified buyers in Judge.me (Elsie U., bulk bag. Melissa M., 7-Day).
+- Round 3 (Nov 13, evening): rating line reads "Verified buyers rate Zeotein 4.9/5" on all five pages. Quantity box and button are both 46px and level. Gift line is two lines. Cacao powder shipping row reads $130+. The preview and Black Friday themes both serve `og:image` over https.
 - Compliance scrub: no health, detox or disease claims added. The guarantee only appears on blend pages.
 
 ## How it goes live (after Dana's yes)
