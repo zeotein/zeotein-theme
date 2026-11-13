@@ -2,7 +2,7 @@
 :root{
   --bg:#FBFAFD; --surface:#FFFFFF; --ink:#1D1530; --ink-2:#4A425C; --muted:#736C84; --line:#E6E1EE; --grid:#ECE8F2;
   --purple:#5F2D90; --purple-soft:#F2ECF9; --teal-ink:#0E7C82; --teal-soft:#E5F6F7;
-  --s1:#7C48B8; --s2:#00A1A8; --s3:#D2701E; --mk:#A39CB3; --on-dark:#FFFFFF; --on-light:#1D1530;
+  --s1:#7C48B8; --s2:#00A1A8; --s3:#D2701E; --mk:#A39CB3; --band:#DCD5E8; --on-dark:#FFFFFF; --on-light:#1D1530;
   --good:#23784A; --good-soft:#E6F4EC; --warn:#A6620F; --warn-soft:#FBF0DF; --bad:#B53A33; --bad-soft:#FBE9E7;
   --f-display:"Poppins","Segoe UI",system-ui,sans-serif;
   --f-body:"Manrope","Segoe UI",system-ui,sans-serif;
@@ -11,7 +11,7 @@
   :root:not([data-theme="light"]){
     --bg:#120E1A; --surface:#1B1626; --ink:#EEEAF6; --ink-2:#CAC3D9; --muted:#9E96AF; --line:#2E2741; --grid:#2A2338;
     --purple:#BC98EC; --purple-soft:#241B34; --teal-ink:#61D1D6; --teal-soft:#14292C;
-    --s1:#9866D6; --s2:#18A3A9; --s3:#CF7426; --mk:#6E6585;
+    --s1:#9866D6; --s2:#18A3A9; --s3:#CF7426; --mk:#6E6585; --band:#3A3150;
     --good:#62C690; --good-soft:#15291F; --warn:#E3A853; --warn-soft:#2E2312; --bad:#EF8078; --bad-soft:#331816;
     color-scheme:dark;
   }
@@ -19,7 +19,7 @@
 :root[data-theme="dark"]{
   --bg:#120E1A; --surface:#1B1626; --ink:#EEEAF6; --ink-2:#CAC3D9; --muted:#9E96AF; --line:#2E2741; --grid:#2A2338;
   --purple:#BC98EC; --purple-soft:#241B34; --teal-ink:#61D1D6; --teal-soft:#14292C;
-  --s1:#9866D6; --s2:#18A3A9; --s3:#CF7426; --mk:#6E6585;
+  --s1:#9866D6; --s2:#18A3A9; --s3:#CF7426; --mk:#6E6585; --band:#3A3150;
   --good:#62C690; --good-soft:#15291F; --warn:#E3A853; --warn-soft:#2E2312; --bad:#EF8078; --bad-soft:#331816;
   color-scheme:dark;
 }
@@ -209,3 +209,11 @@ td .chip{margin-right:6px}
 .tt{position:fixed;z-index:20;max-width:280px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 11px;box-shadow:0 6px 24px rgba(20,10,40,.16);display:grid;gap:2px;pointer-events:none;font-size:.84rem}
 .tt strong{font-size:.95rem;font-variant-numeric:tabular-nums}
 .tt span{color:var(--ink-2)}
+
+/* Market range chart */
+.hchart.range{--valw:8rem}
+.band{position:absolute;top:50%;height:12px;margin-top:-6px;background:var(--band);border-radius:6px}
+.zt-dot.one{background:var(--surface);box-shadow:inset 0 0 0 2.5px var(--s1),0 0 0 2px var(--surface);z-index:1}
+.zt-dot.sub{background:var(--s1);z-index:1}
+.lg-band{display:inline-block;width:20px;height:10px;border-radius:5px;background:var(--band)}
+.lg-dot.zt-one{background:var(--surface);box-shadow:inset 0 0 0 2px var(--s1)}

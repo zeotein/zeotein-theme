@@ -86,6 +86,7 @@ section.block > .wrap{display:grid;gap:24px}
 .leak .impact{font-size:.8rem;font-weight:700;white-space:nowrap;border-radius:999px;padding:4px 10px;background:var(--bad-soft);color:var(--bad)}
 .leak .impact.w{background:var(--warn-soft);color:var(--warn)}
 .leak .impact.g{background:var(--good-soft);color:var(--good)}
+.leak .impact.i{background:var(--purple-soft);color:var(--purple)}
 .sub-h{font-size:1.1rem;color:var(--purple);margin-top:6px}
 @media (max-width:640px){.leak{grid-template-columns:auto minmax(0,1fr)}.leak .impact{grid-column:2;justify-self:start}}
 
@@ -335,11 +336,41 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
 
 <nav class="index" aria-label="Sections">
   <div class="wrap">
-    <a href="#decide">Decisions Nov 11</a><a href="#leaks">Money leaks</a><a href="#done">Fixed today</a><a href="#dropoff">Drop-off</a><a href="#google">Google</a><a href="#ads">Ads</a><a href="#pricing">Pricing</a><a href="#pages">Page redesigns</a><a href="#compliance">What you can say</a><a href="#ghl">GoHighLevel</a><a href="#catalog">Catalog</a><a href="#tech">Speed &amp; SEO</a><a href="#plan">Action plan</a>
+    <a href="#status">Status Nov 13</a><a href="#decide">Decisions</a><a href="#leaks">Money leaks</a><a href="#done">Fixed today</a><a href="#dropoff">Drop-off</a><a href="#google">Google</a><a href="#ads">Ads</a><a href="#pricing">Pricing</a><a href="#pages">Page redesigns</a><a href="#compliance">What you can say</a><a href="#ghl">GoHighLevel</a><a href="#catalog">Catalog</a><a href="#tech">Speed &amp; SEO</a><a href="#plan">Action plan</a>
   </div>
 </nav>
 
 <main>
+<section class="block" id="status">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Where things stand · checked November 13</p>
+      <h2>What's done, and what's still open</h2>
+      <p class="lede">Each item was re-checked against the live store on Nov 13. Orbit's session isn't reachable from here, so the Orbit items are listed for Dana to pass on. Pricing and shipping details: <a href="https://claude.ai/artifact/UyCZzNGPsgaQoumqUNJTpQ" target="_blank" rel="noopener">Zeotein Pricing Audit</a>.</p>
+    </div>
+    <h3 class="sub-h">Done and checked</h3>
+    <div class="done">
+      <div class="done-item"><h4><span class="chip good">Live</span>Script errors fixed</h4><p>All five fixes are on the live theme and the Black Friday theme. The live product page no longer loads the broken header import or the four missing scripts.</p></div>
+      <div class="done-item"><h4><span class="chip good">Live</span>Dead products and redirects</h4><p>7 dead products archived Nov 10. Old links still land on live pages (4 spot-checked Nov 13).</p></div>
+      <div class="done-item"><h4><span class="chip good">Published</span>Pricing audit</h4><p>Prices, quality and shipping against 13 rivals, a product-by-product price check, and the $75 shipping test math.</p></div>
+      <div class="done-item"><h4><span class="chip info">Built</span>Product page cleanup</h4><p>Gifts inside the purchase options, one trust row, format picker. Waiting for Dana's yes. <a href="https://zeotein.com/products/zeotein-cacao-bag-30?preview_theme_id=187923202261" target="_blank" rel="noopener">Preview</a></p></div>
+    </div>
+    <h3 class="sub-h">Still open</h3>
+    <div class="leaks">
+      <article class="leak"><span class="rank">1</span><div><h3>Product page cleanup</h3><p>On Dana's yes, Orbit pastes four files into the live theme (the files are in the preview theme and the repo) and Claude adds them to the Black Friday theme. Don't publish the preview theme itself: live has changed since it was copied.</p></div><span class="impact w">Dana's call</span></article>
+      <article class="leak"><span class="rank">2</span><div><h3>Holiday free-shipping test at $75</h3><p>Dec 1 to Jan 11, new orders only. $77 to $208 a month before any extra orders; pays for itself at 2 to 4 extra orders a month.</p></div><span class="impact w">Dana's call</span></article>
+      <article class="leak"><span class="rank">3</span><div><h3>8 retired GoHighLevel funnels are still public</h3><p>All 8 still loaded on Nov 13 (the Howie pages, the test site, three old Cacao pages and both Formula Finders). Take them off their domains in GoHighLevel.</p></div><span class="impact i">Orbit</span></article>
+      <article class="leak"><span class="rank">4</span><div><h3>Homepage still says "4.9 from 155 reviews"</h3><p>Judge.me's product reviews add up to about 112, and the agreed wording has no count. Use "4.9/5 average rating"; skip "Verified Buyers", since not every review is marked verified.</p></div><span class="impact i">Orbit</span></article>
+      <article class="leak"><span class="rank">5</span><div><h3>Bulk bag shows only 13 reviews</h3><p>Add the bag to the Cacao stick-pack review group in Judge.me. Same formula, so all three Cacao pages would show 4.98 from 91 reviews.</p></div><span class="impact w">Dana or Orbit</span></article>
+      <article class="leak"><span class="rank">6</span><div><h3>Old A/B lander links now redirect</h3><p>go.zeotein.com/cacao-starter-kit-a and -b show a 404 page that forwards to /clean-protein. Make sure no ad or email still points at them.</p></div><span class="impact i">Media buyer / Orbit</span></article>
+      <article class="leak"><span class="rank">7</span><div><h3>Homepage Google title is "Zeotein LLC"</h3><p>Online Store → Preferences: "Zeotein | Bone Broth &amp; Collagen Protein Shake, No Sweeteners".</p></div><span class="impact g">2 minutes</span></article>
+      <article class="leak"><span class="rank">8</span><div><h3>Theme library is full (20 of 20)</h3><p>Shopify won't make new theme copies. Delete "TEMP control copy for QA (delete me)"; Claude can't delete themes.</p></div><span class="impact g">Dana, 1 minute</span></article>
+      <article class="leak"><span class="rank">9</span><div><h3>Smaller price and shipping items</h3><p>Zeolite 1 lb ($64.99 to $54.99), renewal shipping, the $2 handling fee, showing test results, singles in Shopping. Details in the pricing audit.</p></div><span class="impact w">Mixed</span></article>
+      <article class="leak"><span class="rank">10</span><div><h3>Not re-checked here</h3><p>The two zero-sale Meta ad sets and Meta destinations (Dana and the media buyer), and the Google-only site fixes (GA4 cross-domain, tag ownership) on Orbit's list.</p></div><span class="impact i">Orbit / media buyer</span></article>
+    </div>
+  </div>
+</section>
+
 <section class="block" id="decide">
   <div class="wrap">
     <div class="sec-head">
@@ -354,7 +385,7 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
         <span class="rank">1</span>
         <div><h3>Run the holiday free-shipping test</h3>
           <p>The $150 line isn't lifting carts: 36 web orders landed just under it and 8 just over in 90 days. The checkout data can't see shoppers who leave before typing an email, so the only way to know whether free shipping wins customers is to try it. Full design in the pricing audit.</p>
-          <p class="fix"><b>Do:</b> free US shipping on orders of $35+ (one-time and first subscription orders), Dec 1 to Jan 11, about $175 to $355 for the six weeks. Keep it if new customers per 1,000 sessions run 15% above the Oct 13–Nov 23 baseline.</p></div>
+          <p class="fix"><b>Do:</b> free US shipping on orders of $75+ (one-time and first subscription orders), Dec 1 to Jan 11. Every bag and stick pack qualifies, even with a code. With no extra orders it costs $77 to $208 a month; it pays for itself at 2 to 4 extra orders a month. Keep it if new customers per 1,000 sessions run 15% above the Oct 13–Nov 23 baseline.</p></div>
         <span class="impact g">Answers the shipping question</span>
       </article>
       <article class="leak">
@@ -395,7 +426,7 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
           <li>The $150 line isn't raising cart size: 36 web orders landed just under it and 8 just over in 90 days.</li>
           <li>Shoppers who type an email finish checkout at the same rate with or without a shipping charge (74%), and the cheaper Ground rates didn't lift completion (75.9% before, 72.1% after; Decision Log S-01).</li>
           <li>But most shoppers who leave checkout never type an email. In October 102 store sessions reached checkout and 31 finished, so that data can't rule shipping out.</li>
-          <li>The test: free US shipping on orders of $35+, one-time and first subscription orders, Dec 1 to Jan 11, set up as an automatic discount so renewals aren't touched. About $125 to $260 a month at recent volume.</li>
+          <li>The test (revised Nov 13): free US shipping on orders of $75+, one-time and first subscription orders, Dec 1 to Jan 11, set up as an automatic discount so renewals aren't touched. $77 to $208 a month at recent volume before any extra orders. $99 would miss a bag bought with a 15% code ($93.49), and $100 would miss the $99.99 bag subscription.</li>
           <li>Renewals: the "free shipping on subscriptions over $119.99" discount never reaches renewals. Only renewals of $150+ ship free, because Seal re-prices renewals at the store's rates (S-10). Decide after the test.</li>
         </ul></div>
       <div class="chart-card"><h3>Checkout completion, with and without a shipping charge</h3>
@@ -412,7 +443,8 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
       <div class="tbl-wrap"><table><thead><tr><th>Option</th><th class="r">Last 30 days' volume</th><th class="r">Last 90 days' volume</th><th>Pays for itself if</th></tr></thead><tbody>
         <tr><td>Keep $150</td><td class="r">$0</td><td class="r">$0</td><td>Costs nothing, but isn't raising cart size</td></tr>
         <tr><td>Free shipping, every web order</td><td class="r">$153</td><td class="r">$311</td><td>2 to 4 extra new customers a month</td></tr>
-        <tr><td><b>Free shipping, web orders $35+ (the test)</b></td><td class="r"><b>$124</b></td><td class="r"><b>$257</b></td><td>2 to 3 extra new customers a month</td></tr>
+        <tr><td>Free shipping, web orders $35+</td><td class="r">$124</td><td class="r">$257</td><td>2 to 3 extra new customers a month</td></tr>
+        <tr><td><b>Free shipping, web orders $75+ (the test)</b></td><td class="r"><b>$77</b></td><td class="r"><b>$208</b></td><td>2 to 4 extra orders a month</td></tr>
         <tr><td>Free shipping, web orders $99+</td><td class="r">$27</td><td class="r">$173</td><td>1 to 2 extra new customers a month</td></tr>
         <tr><td>Every renewal ships free (needs a Seal change)</td><td class="r">$232</td><td class="r">$300</td><td>About 4 to 5 more renewals a month</td></tr>
       </tbody></table></div>
@@ -1100,7 +1132,7 @@ footer.end .wrap{padding-block:36px;color:var(--muted);font-size:.85rem;display:
     <div class="plan">
       <div class="col"><h3><span class="chip bad">This week</span></h3>
         <div class="task"><h4>Fix the Rewards button on phones</h4><p>BON Loyalty → launcher: icon only, raise it, or hide it on product pages. Unblocks the price and Add to Cart on every product page.</p><p class="who">Orbit · 15 minutes</p></div>
-        <div class="task"><h4>Shipping: holiday free-shipping test</h4><p>Free US shipping on orders of $35+, Dec 1 to Jan 11, new orders only. About $175 to $355 for the six weeks. Needs Dana's yes on the dates; then it's created already scheduled. Design in the pricing audit.</p><p class="who">Dana · decision, then Claude</p></div>
+        <div class="task"><h4>Shipping: holiday free-shipping test</h4><p>Free US shipping on orders of $75+, Dec 1 to Jan 11, new orders only. About $105 to $290 for the six weeks if it brings no extra orders. Needs Dana's yes on the dates; then it's created already scheduled. Design in the pricing audit.</p><p class="who">Dana · decision, then Claude</p></div>
         <div class="task"><h4>Stop the ad spend that isn't selling</h4><p>Hand the two zero-purchase Meta campaigns to the new media buyer. On Google: move broad "zeotein" to phrase and retest non-brand on shop.zeotein.com with a cap.</p><p class="who">Media buyer (Meta) · Orbit (Google) · with your approval</p></div>
         <div class="task"><h4>Turn off the 8 retired funnels</h4><p>About 10 minutes in GoHighLevel. Then I add redirects and retire the last 3 products.</p><p class="who">Orbit, once Dana says yes</p></div>
         <div class="task"><h4>Homepage Google title</h4><p>Online Store → Preferences: "Zeotein | Bone Broth &amp; Collagen Protein Shake, No Sweeteners."</p><p class="who">Anyone · 2 minutes</p></div>

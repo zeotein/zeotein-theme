@@ -5,6 +5,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 N = json.load(open(os.path.join(HERE, 'numbers.json')))
 Q = json.load(open(os.path.join(HERE, 'quality.json'))) if os.path.exists(os.path.join(HERE, 'quality.json')) else None
 U, L, FS, SHIP = N['U'], N['L'], N['FS'], N['SHIP']
+TH = json.load(open(os.path.join(HERE, 'threshold.json')))
+PC = json.load(open(os.path.join(HERE, 'pricecheck.json')))
 esc = html.escape
 
 def money(v, d=2):
@@ -43,6 +45,21 @@ def dumbbell(rows, maxv, ticks):
         out.append(f'<div class="hrow {cls}" tabindex="0" data-tip="{t}"><div class="hlab">{esc(name)}</div>'
                    f'<div class="htrack">{grid_lines(maxv, ticks)}{seg}{dots}</div><div class="hval num">{val}</div></div>')
     out.append(axis_row(maxv, ticks, lambda t: f"${t:.0f}" if t == int(t) else f"${t:.2f}"))
+    out.append('</div>')
+    return "".join(out)
+
+
+def rangechart(rows, maxv, ticks, fmt):
+    """Market range band (cheapest to priciest comparable) with Zeotein's own price marks on top."""
+    out = ['<div class="hchart range" role="img" aria-label="Zeotein price against the market range">']
+    for r in rows:
+        lo, hi = r['lo'], r['hi']
+        band = f'<i class="band" style="left:{pct(lo, maxv):.2f}%;width:{max(0.6, pct(hi, maxv) - pct(lo, maxv)):.2f}%"></i>'
+        dots = ''.join(f'<i class="db-dot {k} zt-dot" style="left:{pct(v, maxv):.2f}%"></i>' for v, k in r['ours'])
+        t = tip(' · '.join(f"{fmt(v)} {lab}" for v, k, lab in r['ourslab']), r['name'] + f" · market {fmt(lo)} to {fmt(hi)}")
+        out.append(f'<div class="hrow" tabindex="0" data-tip="{t}"><div class="hlab">{esc(r["name"])}</div>'
+                   f'<div class="htrack">{grid_lines(maxv, ticks)}{band}{dots}</div><div class="hval num">{r["label"]}</div></div>')
+    out.append(axis_row(maxv, ticks, lambda t: f"${t:.0f}"))
     out.append('</div>')
     return "".join(out)
 
@@ -191,7 +208,8 @@ answers = "".join([
     card("Do people just want free shipping?", "Unproven, so test it", "info",
          "Cheaper shipping didn't raise checkout completion, and shoppers who type an email finish at the same rate with or without a shipping charge. "
          "But most people who leave checkout never type an email, so that data can't see them. "
-         "Free shipping on every web order would cost $150 to $310 a month at recent volume and pays for itself with 2 to 4 extra new customers a month."),
+         "Test it at $75: every bag and stick pack qualifies, even with a 15% code. With no extra orders it costs $77 to $208 a month. "
+         "It pays for itself at 2 to 4 extra orders a month, and I'd expect 3 to 5."),
     card("Should the 7-Day cost more per serving?", "Yes", "good",
          "Smaller packs should cost more per serving, and yours is set right: 56% above the bag per serving, against a market median of 57% for single-serve formats. "
          "Keep $39.99. What hurts is the $10.23 of shipping on top, which takes it to $7.17 a serving."),
@@ -242,6 +260,46 @@ if Q:
     body = (table(head, qrows) + f'<p class="note">{Q["note"]}</p>' + (f'<div class="split">{Q["panels"]}</div>' if Q.get('panels') else ''))
     parts.append(sec('quality', 'Quality', 'What the price buys', Q['lead'], body))
 
+
+# Every product vs the market
+def chip_for(c):
+    return {'keep': ('good', 'Keep'), 'fix': ('bad', 'Fix'), 'watch': ('warn', 'Watch')}[c]
+crows = []
+for c in PC['core']:
+    lo = min(v for _, v in c['market']); hi = max(v for _, v in c['market'])
+    ours = [(v, 'one' if i == 0 else 'sub') for i, (l, v) in enumerate(c['ours'])]
+    crows.append(dict(name=c['name'], lo=lo, hi=hi, ours=ours, ourslab=[(v, k, l.split(' $')[0].lower()) for (v, k), (l, _) in zip(ours, c['ours'])],
+                      label=' / '.join(money(v) for _, v in c['ours'])))
+srows = []
+for x in PC['singles']:
+    lab, price, oz, cogs = x['sizes'][-1]
+    lo = min(v for _, v in x['market']); hi = max(v for _, v in x['market'])
+    srows.append(dict(name=f"{x['name']} ({lab})", lo=lo, hi=hi, ours=[(price / oz, 'one')], ourslab=[(price / oz, 'one', 'yours')], label=money(price / oz) + '/oz'))
+legend = ('<div class="legend"><span><i class="lg-band"></i>Market range (cheapest to priciest comparable)</span>'
+          '<span><i class="lg-dot zt-one"></i>Yours, one-time</span><span><i class="lg-dot zt"></i>Yours, subscribe</span></div>')
+tbl = []
+for c in PC['core']:
+    lo = min(v for _, v in c['market']); hi = max(v for _, v in c['market'])
+    cl, ct = chip_for(c['call'])
+    tbl.append([f"<b>{esc(c['name'])}</b>", ' / '.join(esc(l) for l, _ in c['ours']), ' / '.join(money(v) for _, v in c['ours']) + '/serving',
+                f"{money(lo)}–{money(hi)}", f"{(c['price'] - c['cogs']) / c['price'] * 100:.0f}%", f'<span class="chip {cl}">{ct}</span> {esc(c["rec"])}<br><span class="muted">{esc(c["why"])}</span>'])
+for x in PC['singles']:
+    lo = min(v for _, v in x['market']); hi = max(v for _, v in x['market'])
+    cl, ct = chip_for(x['call'])
+    tbl.append([f"<b>{esc(x['name'])}</b>", ' / '.join(f"{l} {money(p)}" for l, p, o, c in x['sizes']), ' / '.join(f"{money(p / o)}" for l, p, o, c in x['sizes']) + '/oz',
+                f"{money(lo)}–{money(hi)}/oz", ' / '.join(f"{(p - c) / p * 100:.0f}%" for l, p, o, c in x['sizes']), f'<span class="chip {cl}">{ct}</span> {esc(x["rec"])}<br><span class="muted">{esc(x["why"])}</span>'])
+body = (f'<div class="chart-card"><h3>Shakes and stick packs, price per serving</h3>{legend}{rangechart(crows, 8.0, [0, 2, 4, 6, 8], lambda v: money(v))}'
+        '<p class="note">Comparables: Ka\'Chava, Huel, Ancient Nutrition, Paleovalley and Equip for the bag; single-serve packets from Ka\'Chava, Ancient Nutrition, Orgain and Sprout Living for sticks and the 7-Day; Ritual, Truvani and plant packets for Vegan.</p></div>'
+        f'<div class="chart-card"><h3>Single ingredients, price per ounce (largest size)</h3>{rangechart(srows, 7.0, [0, 1, 2, 3, 4, 5, 6, 7], lambda v: money(v))}'
+        f'<p class="note">{esc(PC["note"])}. Zeotein margins are product margin after product cost, before shipping and card fees.</p></div>'
+        + table(['Product', 'Your prices', 'Per serving or ounce', 'Market', 'Product margin', 'Call'], tbl) +
+        '<div class="split"><div class="panel"><h4>What I\'d change</h4><p>Zeolite 1 lb from $64.99 to $54.99, so a bigger size never costs more per ounce. '
+        'Optional: 30 stick packs one-time from $134.99 to $139.99 (subscribers keep $114.99). Nothing else needs a price move to sell.</p></div>'
+        '<div class="panel"><h4>What I wouldn\'t touch</h4><p>Hemp and sea moss cost more than the mass brands, but your own cost per ounce is close to their shelf price, so cutting would wipe out the margin. '
+        'Sell them as premium, keep them out of Shopping ads, and let Cacao carry the business.</p></div></div>')
+parts.append(sec('prices', 'Every product', 'Every product, priced against the market',
+                 'Your Cacao line is priced right against the brands shoppers compare it with. One price is broken (zeolite 1 lb), Vegan is the most expensive plant shake in the market, and a few singles cost more than mass brands because your ingredients cost more.', body))
+
 # Checkout totals (landed)
 LANDED = json.load(open(os.path.join(HERE, 'landed.json')))
 lrows = []
@@ -274,11 +332,10 @@ facts = "".join([
     '(<a href="https://baymard.com/blog/cart-abandonment-rate" target="_blank" rel="noopener">Baymard Institute</a>).</p></div>',
 ])
 fsrows = [
-    dict(name='Every web order', v=FS['0']['per_month'], label=f"{money(FS['0']['per_month'], 0)}/mo"),
-    dict(name='Orders $35+ (test plan)', v=FS['35']['per_month'], label=f"{money(FS['35']['per_month'], 0)}/mo", cls='zt'),
-    dict(name='Orders $49+', v=FS['49']['per_month'], label=f"{money(FS['49']['per_month'], 0)}/mo"),
-    dict(name='Orders $75+', v=FS['75']['per_month'], label=f"{money(FS['75']['per_month'], 0)}/mo"),
-    dict(name='Orders $99+', v=FS['99']['per_month'], label=f"{money(FS['99']['per_month'], 0)}/mo"),
+    dict(name='Every web order', v=TH['90_0']['cost'] if '90_0' in TH else FS['0']['per_month'], label=f"{money(FS['0']['per_month'], 0)}/mo"),
+    dict(name='Orders $75+ (test plan)', v=TH['90_75']['cost'], label=f"{money(TH['90_75']['cost'], 0)}/mo", cls='zt'),
+    dict(name='Orders $99+', v=TH['90_99']['cost'], label=f"{money(TH['90_99']['cost'], 0)}/mo"),
+    dict(name='Orders $100+', v=TH['90_100']['cost'], label=f"{money(TH['90_100']['cost'], 0)}/mo"),
     dict(name='Every renewal (separate change)', v=FS['renewals_all']['per_month'], label=f"{money(FS['renewals_all']['per_month'], 0)}/mo"),
 ]
 for r in fsrows:
@@ -287,12 +344,12 @@ chart = bars(fsrows, 400, [0, 100, 200, 300, 400])
 SHIPTBL = json.load(open(os.path.join(HERE, 'shiptbl.json')))
 body = (f'<div class="facts">{facts}</div>'
         f'<div class="chart-card"><h3>What free shipping would cost each month</h3>{chart}'
-        '<p class="note">Shipping charged on US orders, monthly average of the last 90 days. At the last 30 days\' slower pace these are about half: $153 for every web order, $124 for $35+. Extra orders that free shipping brings in also need labels, but each one '
+        '<p class="note">Shipping charged on US orders, monthly average of the last 90 days. At the last 30 days\' slower pace: $153 for every web order, $77 for $75+, $27 for $99+, $15 for $100+. Extra orders that free shipping brings in also need labels, but each one '
         'brings its own margin, so this is the cost to compare against the extra customers. For comparison, October\'s marketing line alone was $7,074.</p>'
         + tableview('Table view', ['Option', 'Orders affected (90 days)', 'Per month'],
-                    [['Every web order', str(FS['0']['orders_90d']), money(FS['0']['per_month'])], ['$35+', str(FS['35']['orders_90d']), money(FS['35']['per_month'])],
-                     ['$49+', str(FS['49']['orders_90d']), money(FS['49']['per_month'])], ['$75+', str(FS['75']['orders_90d']), money(FS['75']['per_month'])],
-                     ['$99+', str(FS['99']['orders_90d']), money(FS['99']['per_month'])], ['Every renewal', str(FS['renewals_all']['orders_90d']), money(FS['renewals_all']['per_month'])]],
+                    [['Every web order', str(FS['0']['orders_90d']), money(FS['0']['per_month'])], ['$75+', str(FS['75']['orders_90d']), money(TH['90_75']['cost'])],
+                     ['$99+', str(FS['99']['orders_90d']), money(TH['90_99']['cost'])], ['$100+', '31', money(TH['90_100']['cost'])],
+                     ['Every renewal', str(FS['renewals_all']['orders_90d']), money(FS['renewals_all']['per_month'])]],
                     right=(1, 2)) + '</div>'
         f'<h3 class="sub-h">Rivals\' shipping terms</h3>{table(SHIPTBL["head"], SHIPTBL["rows"])}<p class="note">{SHIPTBL["note"]}</p>')
 parts.append(sec('shipping', 'Shipping', 'Shipping is the weakest part of the offer',
@@ -379,7 +436,7 @@ wrows = [
     ['Store bag subscription from 9% to 15% off ($93.49)', money(L['bag_renewal_15pct_93.49']['delta']) + ' per renewal', f"+{L['bag_renewal_15pct_93.49']['breakeven_volume_pct']:.0f}% more renewals", '<span class="chip bad">No</span> price is behind 3.9% of cancellations'],
     ['30 sticks one-time $134.99 → $139.99', '+' + money(L['sticks_onetime_raise_139.99']['delta']) + ' per order', 'can lose up to 5% of those orders', '<span class="chip warn">Optional</span> small'],
     ['Free shipping on a one-time bag', money(L['bag_onetime_freeship']['delta']) + ' per order', f"+{L['bag_onetime_freeship']['breakeven_volume_pct']:.0f}% more of those orders", '<span class="chip info">Test</span>'],
-    ['Free shipping on every web order $35+', '−$124 to −$257 a month', '2 to 3 more new customers a month (about +5% to +11%)', '<span class="chip info">Test</span>'],
+    ['Free shipping on every web order $75+', '−$77 to −$208 a month', '2 to 4 more orders a month (5% to 8% more web orders)', '<span class="chip info">Test</span>'],
     ['Raise every price 10%', 'about +$800 a month at October volume', 'no volume change assumed', '<span class="chip warn">Too small</span> October lost $12,882'],
 ]
 body = (table(['Change', 'Effect', 'Needed to break even', 'Call'], wrows) +
@@ -388,25 +445,49 @@ body = (table(['Change', 'Effect', 'Needed to break even', 'Call'], wrows) +
 parts.append(sec('whatif', 'What-ifs', 'What a price change would do',
                  'Price cuts need big volume gains to break even, and price rises are too small to matter at today\'s volume. Shipping is the only lever cheap enough to test.', body))
 
+
+# Which free-shipping line, and what it pays out vs brings in
+def net(T, lift, vol='90'):
+    base = TH[f'{vol}_{T}']['base']
+    return base * lift * 60 - TH[f'{vol}_{T}']['cost']
+lines = [
+    ['<b>$75 (recommended)</b>', 'Every bag, stick pack and 4-pack, even after a 15% to 30% code; two 7-Days; single-ingredient orders of $75+', f"{money(TH['30_75']['cost'], 0)} / {money(TH['90_75']['cost'], 0)}", '2 to 4 orders', 'Costs about $35 a month more than $99'],
+    ['$99', 'Full-price bags and stick packs', f"{money(TH['30_99']['cost'], 0)} / {money(TH['90_99']['cost'], 0)}", '1 to 3 orders', 'A $109.99 bag with a 15% welcome code is $93.49, so it misses free shipping'],
+    ['$100', 'Full-price one-time bags and stick packs', f"{money(TH['30_100']['cost'], 0)} / {money(TH['90_100']['cost'], 0)}", '1 to 3 orders', 'Misses the $99.99 bag subscription by one cent'],
+    ['$150 (today)', 'Multi-bag orders and 4-packs', '$0', '–', '36 web orders landed just under it in 90 days and 8 just over, so it isn\'t raising cart size'],
+]
+scen = []
+for lab, lift in [('No extra orders', 0), ('5% more web orders', .05), ('10% more (my estimate)', .10), ('20% more', .20)]:
+    base = TH['90_75']['base']
+    scen.append([lab, f"{base * lift:.1f}", money(base * lift * 60, 0), money(net(75, lift), 0), money(net(99, lift), 0)])
+THRESH = ('<h3 class="sub-h">Which line to test</h3>'
+          + table(['Free shipping from', 'What qualifies', 'Shipping you\'d stop collecting, per month (last 30 / 90 days\' volume)', 'Pays for itself at', 'Catch'], lines) +
+          '<h3 class="sub-h">What it pays out vs what it could bring in, per month</h3>'
+          + table(['If free shipping brings', 'Extra orders', 'Extra margin', 'Net at $75', 'Net at $99'], scen, right=(1, 2, 3, 4)) +
+          '<p class="note">At the last 90 days\' volume (46 web orders a month). Each extra order is counted at $60, what a first order leaves after product, label, box, card fees and free shipping; '
+          'a new subscriber is worth more over time (about $160 over the 3.35 payments the average subscriber makes), so this is the cautious case. '
+          'My 10% estimate: about 78 store sessions a month reach checkout and leave without ordering, and extra costs like shipping are the most common reason shoppers give for leaving. '
+          'Winning back 1 in 17 of them is about 4.6 orders.</p>')
+
 # Holiday test
 spec = [
-    ('What', 'Free US shipping on orders of $35 or more: one-time orders and the first order of a new subscription. Renewals stay as they are.'),
+    ('What', 'Free US shipping on orders of $75 or more: one-time orders and the first order of a new subscription. Renewals stay as they are. Every bag, stick pack and 4-pack qualifies, even after a 15% to 30% code. A 7-Day on its own doesn\'t; two do.'),
     ('When', 'Tuesday Dec 1, 2026, 12:00 am CT to Monday Jan 11, 2027, 11:59 pm CT. It starts the day after Black Friday pricing ends and covers holiday gifting and New Year demand. Your 13 Black Friday discounts are set not to combine with shipping discounts, so running both in the same week would make some shoppers pick one or the other, and the 30% sale would blur the read.'),
-    ('How it\'s set up', 'One automatic free-shipping discount: US only, $35 minimum, one-time orders on, subscriptions on for the first order only, combines with product and order discounts, with a start and end date. The shipping rates themselves don\'t change, so it switches itself off and can\'t leak into renewals.'),
-    ('Tell people', 'Top bar and cart bar ($150 to $35 for the test), the shipping line on product pages, emails, ads, and Merchant Center shipping so Google Shopping shows free shipping.'),
-    ('Cost', 'About $125 to $260 a month of shipping you\'d otherwise collect ($124 at the last 30 days\' volume, $257 at the last 90 days\'), so about $175 to $355 for the six weeks. More if orders rise, which is the point.'),
-    ('Break-even', 'About 2 to 4 extra new customers across the six weeks.'),
+    ('How it\'s set up', 'One automatic free-shipping discount: US only, $75 minimum, one-time orders on, subscriptions on for the first order only, combines with product and order discounts, with a start and end date. The shipping rates themselves don\'t change, so it switches itself off and can\'t leak into renewals.'),
+    ('Tell people', 'Top bar and cart bar ($150 to $75 for the test), the shipping line on product pages, emails, ads, and Merchant Center shipping so Google Shopping shows free shipping.'),
+    ('Cost', 'With no extra orders: $77 to $208 a month in shipping you\'d otherwise collect ($77 at the last 30 days\' volume, $208 at the last 90 days\'), so about $105 to $290 over the six weeks.'),
+    ('Break-even', 'About 2 to 4 extra orders a month, which is 5% to 8% more web orders.'),
     ('Baseline', 'Oct 13 to Nov 23, the six weeks before Black Friday. Internal test sessions on Nov 4–5 and Nov 10–11 are excluded.'),
     ('Watch weekly', 'Sessions, add-to-cart rate, checkout starts, orders per 1,000 sessions, new customers, average order, shipping given up, margin per order.'),
-    ('Keep it if', 'New customers per 1,000 sessions run at least 15% above the baseline and margin per 1,000 sessions holds. Then make $35+ permanent and fix renewal shipping. If not, go back to today\'s setup.'),
+    ('Keep it if', 'New customers per 1,000 sessions run at least 15% above the baseline and margin per 1,000 sessions holds. Then make $75+ permanent and decide on renewal shipping. If not, go back to today\'s setup.'),
     ('Read it carefully', 'Holiday traffic isn\'t October traffic and volume is small. Treat a gap under 15% as noise.'),
 ]
 specs = "".join(f'<div class="spec"><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>' for k, v in spec)
 body = (f'<dl class="specs">{specs}</dl>'
-        '<div class="decision"><span class="chip warn">Your call</span><p><b>Needed from you:</b> a yes on the dates and the $35 minimum. '
+        + THRESH + '<div class="decision"><span class="chip warn">Your call</span><p><b>Needed from you:</b> a yes on the dates and the $75 minimum. '
         'I\'ll then create the discount already scheduled, so nothing changes in the store before Dec 1, and set up the weekly read.</p></div>')
 parts.append(sec('test', 'Holiday test', 'The holiday free-shipping test',
-                 'Six weeks, right after Black Friday, new orders only. Cheap enough to run and big enough to read.', body))
+                 'Six weeks, right after Black Friday, new orders only, at $75. A small, capped bet that answers whether free shipping wins customers.', body))
 
 # Small fixes
 fixes = [
@@ -426,6 +507,23 @@ fixes = [
 fx = "".join(f'<article class="fix"><div class="qa-top"><h3>{esc(t)}</h3><span class="chip {c}">{esc(ch)}</span></div><p>{esc(b)}</p></article>' for t, c, ch, b in fixes)
 parts.append(sec('fixes', 'Smaller fixes', 'Smaller things worth fixing', 'None of these moves the P&L on its own. Each one makes the offer cleaner.', f'<div class="qa-grid">{fx}</div>'))
 
+
+# Still open (Nov 13)
+items = [
+    ('Holiday free-shipping test at $75', 'warn', 'Your call', 'A yes on Dec 1 to Jan 11 and the $75 line. Then I create the discount already scheduled, so nothing changes before Dec 1.'),
+    ('Product page cleanup', 'warn', 'Your call', 'Preview: zeotein.com/products/zeotein-cacao-bag-30?preview_theme_id=187923202261. On your yes, Orbit pastes four files into the live theme and I add them to the Black Friday theme.'),
+    ('Bulk bag shows only 13 reviews', 'info', 'You or Orbit', 'In Judge.me, add the bulk bag to the Cacao stick-pack review group. Same formula, so all three Cacao pages show 4.98 from 91 reviews.'),
+    ('Homepage says "4.9 from 155 reviews"', 'info', 'Orbit', 'Judge.me product reviews add up to about 112, and the agreed wording has no count. Change it to "4.9/5 average rating"; skip "Verified Buyers", since not every review is marked verified.'),
+    ('Zeolite 1 lb costs more per ounce than ½ lb', 'warn', 'Your call', '$64.99 to $54.99. I can change it on your yes.'),
+    ('Renewals pay shipping under $150', 'warn', 'After the test', 'The March "free shipping on subscriptions over $119.99" discount never reaches renewals. Fixing it needs a Seal change; about $300 a month.'),
+    ('$2 handling fee on every shipping charge', 'warn', 'After the test', 'About $60 a month of income, and it makes shipping look higher than rivals\' flat $7.95.'),
+    ('Show testing results', 'info', 'You', 'Rivals show NSF or Informed Sport certificates or lab results; your pages mention none. Keep zeolite wording clear of detox claims.'),
+    ('Singles in Google Shopping', 'info', 'Orbit', 'Hemp, pumpkin seed, sea moss and lion\'s mane are priced above Amazon, so lead the feed with Cacao and the at-market singles.'),
+    ('Script errors', 'good', 'Done Nov 13', 'All five fixes are on the live theme and the Black Friday theme, checked on the live page.'),
+]
+st = "".join(f'<article class="fix"><div class="qa-top"><h3>{esc(t)}</h3><span class="chip {c}">{esc(ch)}</span></div><p>{esc(b)}</p></article>' for t, c, ch, b in items)
+parts.append(sec('open', 'Still open', 'What still needs a decision or a hand', 'Checked against the store on Nov 13. Orbit\'s session isn\'t reachable from here, so the Orbit items are listed for Dana to pass on.', f'<div class="qa-grid">{st}</div>'))
+
 # Sources
 src = """<ul class="src">
 <li><b>Shopify, live, Nov 12, 2026:</b> product and subscription prices, shipping profiles and rates, active and scheduled discounts, sales by product (90 days and 12 months), monthly orders and new vs returning customers, sessions funnel by month and day.</li>
@@ -439,7 +537,7 @@ parts.append(sec('sources', 'Sources', 'Where the numbers come from', 'Every fig
 
 CSS = open(os.path.join(HERE, 'style.css')).read()
 JS = open(os.path.join(HERE, 'tip.js')).read()
-index = "".join(f'<a href="#{i}">{t}</a>' for i, t in [('answers', 'Answers'), ('market', 'Market'), ('quality', 'Quality'), ('checkout', 'Checkout total'), ('shipping', 'Shipping'),
+index = "".join(f'<a href="#{i}">{t}</a>' for i, t in [('answers', 'Answers'), ('open', 'Still open'), ('market', 'Market'), ('quality', 'Quality'), ('prices', 'Every product'), ('checkout', 'Checkout total'), ('shipping', 'Shipping'),
                                                         ('margins', 'Margins'), ('costs', 'Costs'), ('sevenday', '7-Day'), ('whatif', 'What-ifs'), ('test', 'Holiday test'), ('fixes', 'Fixes'), ('sources', 'Sources')] if (i != 'quality' or Q))
 mast = f"""<header class="mast"><div class="wrap">
 <p class="eyebrow">Pricing audit · Nov 12, 2026 · for Dana and Orbit</p>
@@ -449,7 +547,7 @@ mast = f"""<header class="mast"><div class="wrap">
 <div class="kpi"><span class="k-label">Cacao bag, per serving</span><span class="k-val">$3.67</span><span class="k-sub">Ka'Chava: $4.66, so 21% less</span></div>
 <div class="kpi"><span class="k-label">Product margin, bag</span><span class="k-val">74%</span><span class="k-sub">costs $29.04, down from $35.71 in May</span></div>
 <div class="kpi bad"><span class="k-label">October marketing vs revenue</span><span class="k-val">85%</span><span class="k-sub">$7,074 spent on $8,358 of revenue</span></div>
-<div class="kpi"><span class="k-label">Free shipping, every web order</span><span class="k-val">$150–310</span><span class="k-sub">a month at the last 30 to 90 days' volume, renewals not included</span></div>
+<div class="kpi"><span class="k-label">Free shipping test at $75</span><span class="k-val">$77–208</span><span class="k-sub">a month in shipping you'd stop collecting, before any extra orders</span></div>
 </div></div></header>
 <nav class="index" aria-label="Sections"><div class="wrap">{index}</div></nav>"""
 page = f"""<title>Zeotein Pricing Audit</title>
