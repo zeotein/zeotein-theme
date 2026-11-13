@@ -295,10 +295,10 @@ body = (f'<div class="chart-card"><h3>Shakes and stick packs, price per serving<
         + table(['Product', 'Your prices', 'Per serving or ounce', 'Market', 'Product margin', 'Call'], tbl) +
         '<div class="split"><div class="panel"><h4>What I\'d change</h4><p>Zeolite 1 lb from $64.99 to $54.99, so a bigger size never costs more per ounce. '
         'Optional: 30 stick packs one-time from $134.99 to $139.99 (subscribers keep $114.99). Nothing else needs a price move to sell.</p></div>'
-        '<div class="panel"><h4>What I wouldn\'t touch</h4><p>Hemp and sea moss cost more than the mass brands, but your own cost per ounce is close to their shelf price, so cutting would wipe out the margin. '
-        'Sell them as premium, keep them out of Shopping ads, and let Cacao carry the business.</p></div></div>')
+        '<div class="panel"><h4>What I wouldn\'t touch</h4><p>Hemp costs about twice Manitoba Harvest, but your own cost per ounce is close to their shelf price, so a cut would wipe out the margin. '
+        'Sea moss is worse: you pay about $3.42 an ounce, double what other brands charge. Keep both out of Shopping ads, re-source sea moss or let it go, and let Cacao carry the business.</p></div></div>')
 parts.append(sec('prices', 'Every product', 'Every product, priced against the market',
-                 'Your Cacao line is priced right against the brands shoppers compare it with. One price is broken (zeolite 1 lb), Vegan is the most expensive plant shake in the market, and a few singles cost more than mass brands because your ingredients cost more.', body))
+                 'Your Cacao line is priced right against the brands shoppers compare it with. One price is broken (zeolite 1 lb), Vegan is the most expensive plant shake in the market, and sea moss costs you more to buy than other brands charge to sell.', body))
 
 # Checkout totals (landed)
 LANDED = json.load(open(os.path.join(HERE, 'landed.json')))
