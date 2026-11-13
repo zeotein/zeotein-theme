@@ -50,3 +50,5 @@ Everything below is in the preview theme `187923202261` unless it says otherwise
 | 8 | BF banner "30% off everything" vs hero "30% off one-time orders" | Held for Dana | Flag: if subscriptions are excluded, "30% off everything" is inaccurate. Use "30% off one-time orders" in both places. |
 
 **Also noticed:** free U.S. shipping changed from $150 to **$130** today (shipping settings and the top bar). The product-page shipping row now says $130+. The amount sits in one place at the top of `zt-buybox-tidy.liquid` for the next change.
+
+**For Zeus, today (Dana's $130 decision):** 9 single-ingredient product templates still say "Orders of $150 and up ship free." under Add to cart: organic-cacao, zeolite, bone-broth, collagen-peptides, mct, organic-seamoss, lions-mane, hemp, pumpkin-seed-protein. In the theme editor, for each template, click that text block and change 150 → 130. Do it in live `187740487893` and in Black Friday `187825914069` (the templates are identical in both). I checked everything else on the site: no other $150 shipping text. The v2 cacao powder and zeolite pages already drop this line and show "Free U.S. shipping on orders $130+".

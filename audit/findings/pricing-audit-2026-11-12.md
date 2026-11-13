@@ -58,3 +58,20 @@ Inputs: Wennie's COGS V2 October weighted average (bag $29.04, 30 sticks $38.00,
 ## Sources
 
 Shopify Admin (live, Nov 12): products, selling plans, delivery profiles, discounts, ShopifyQL sales and sessions. 90-day order export joined to the label log (153 of 248 orders matched; no customer details used). Wennie's COGS V2, shipping-box/label workbook and Jan–Oct P&L. Seal export figures and Master Pricing v2 via the Decision Log. Competitor data: `pricing-research.md` (Nov 10) and `competitor-quality-2026-11-12.md` (Nov 12). Cart abandonment reasons: [Baymard Institute](https://baymard.com/blog/cart-abandonment-rate).
+
+---
+
+## Decision, November 13, 2026: free U.S. shipping at $130+ (Dana)
+
+Live in Shopify shipping (General profile → United States → "Free Shipping", order total ≥ $130) and in the top announcement bar.
+
+**What it costs vs $150** (last 88 days of orders, Aug 14 – Nov 11):
+- 7 U.S. orders between $130 and $149.99 paid shipping, $92.29 in total → **about $31/month** given up (≈2.4 orders/month). All one-time web orders, mostly 30 stick packs ($134.99) and Vegan 30 sticks ($139.99).
+
+**What it can win:**
+- 13 one-time U.S. orders at $110–$129.99 paid shipping (≈4.4/month), on average **$9.52 short** of $130. Two of them a month adding a small item covers the cost.
+- The one-time bulk bag ($109.99) needs $20.01 more. The shaker alone ($15.99) doesn't get there, but shaker + Save-A-Scoop ($22.98) does. A cart nudge that names that pair is worth testing.
+
+**Unchanged:** bag subscription ($99.99) and 30-stick subscription ($114.99) renewals still pay shipping. The subscription free-shipping discount (≥ $119.99) still doesn't reach renewals.
+
+**Still says $150 (needs a text edit):** the "Orders of $150 and up ship free." line under Add to cart on the 9 single-ingredient product templates, in both the live and Black Friday themes. The v2 product pages replace that line with a shipping row that reads $130 from one setting in `snippets/zt-buybox-tidy.liquid`.
