@@ -1,0 +1,299 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "text_hyPQYJ": {
+          "type": "text",
+          "settings": {
+            "text": "🚚 Ships in 1–2 business days",
+            "text_style": "body"
+          },
+          "disabled": true
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible_tab_jNbWFq": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Ingredients",
+            "icon": "none",
+            "content": "<p>Clinoptilolite zeolite (natural mineral)</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_CGD3BP": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How to Use",
+            "icon": "none",
+            "content": "<p>Mix 1/4 teaspoon (0.9 g) into 8 to 12 oz of whatever you already drink: water, milk, coffee, tea or a smoothie. Hot or cold both work.</p><p>Start with one serving. After a week you can work up to three servings a day if you want to. Drink plenty of water through the day.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_YJbWnM": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Supplement Facts",
+            "icon": "none",
+            "content": "<p><strong>Supplement Facts</strong></p><p>Serving size: 1/4 teaspoon (0.9 g)<br>Servings per container: 1/2 lb about 260, 1 lb about 520, 2 lb about 1,035</p><p><strong>Amount per serving</strong></p><p>Clinoptilolite Zeolite (natural mineral): 900 mg †</p><p>† Daily Value not established.</p><p><em>These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</em></p>",
+            "page": ""
+          }
+        },
+        "judge_me_reviews_preview_badge_zt": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {},
+          "disabled": true
+        },
+        "zt_servings": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'zt-pdp-single', part: 'servings', product: product, section_id: section.id %}"
+          }
+        },
+        "zt_chips": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'zt-pdp-single', part: 'chips', product: product, section_id: section.id %}"
+          }
+        },
+        "zt_ship_free": {
+          "type": "text",
+          "settings": {
+            "text": "Orders of $150 and up ship free.",
+            "text_style": "body"
+          },
+          "disabled": true
+        },
+        "zt_rating": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'zt-buybox-tidy', part: 'rating', rating: '4.9', orders: '1,500+', scope: 'store' %}"
+          }
+        },
+        "zt_trust": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'zt-buybox-tidy', part: 'trust', kind: 'single' %}"
+          }
+        },
+        "zt_sticky": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'zt-buybox-tidy', part: 'sticky', label: 'Zeolite powder', product: product %}"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "zt_rating",
+        "judge_me_reviews_preview_badge_zt",
+        "price",
+        "zt_servings",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "zt_trust",
+        "zt_chips",
+        "text_hyPQYJ",
+        "zt_ship_free",
+        "description",
+        "collapsible_tab_jNbWFq",
+        "collapsible_tab_CGD3BP",
+        "collapsible_tab_YJbWnM",
+        "zt_sticky"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "1768838317647a13f3": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_cPkXxp": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_cPkXxp"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "zt_also_inside": {
+      "type": "zt-pdp-also-inside",
+      "blocks": {
+        "card_cacao": {
+          "type": "card",
+          "settings": {
+            "product": "zeotein-cacao-sticks-7",
+            "badge": "23g Protein · Zero Sugar",
+            "text": "A naturally occurring volcanic mineral, the same one in this bag, is in Zeotein Cacao, with grass-fed bone broth protein, grass-fed collagen peptides, organic fermented cacao, organic MCT oil powder and organic sea moss in one serving.",
+            "button_label": "See Zeotein Cacao",
+            "button_url": "/collections/zeotein"
+          }
+        },
+        "card_vegan": {
+          "type": "card",
+          "settings": {
+            "product": "zeotein-vegan-sticks-7",
+            "badge": "20g Plant Protein · Zero Added Sugar",
+            "text": "A naturally occurring volcanic mineral, the same one in this bag, is in Zeotein Vegan, with organic pumpkin seed protein, organic hemp protein, organic MCT oil powder and organic sea moss in one serving.",
+            "button_label": "See Zeotein Vegan",
+            "button_url": "/collections/zeotein-vegan-1"
+          }
+        }
+      },
+      "block_order": [
+        "card_cacao",
+        "card_vegan"
+      ],
+      "settings": {
+        "heading": "Also Inside Zeotein"
+      }
+    },
+    "zt_pdp_faq": {
+      "type": "zt-pdp-faq",
+      "blocks": {
+        "zt_q1": {
+          "type": "item",
+          "settings": {
+            "question": "How Much Is One Serving?",
+            "answer": "<p>1/4 teaspoon (0.9 g), 900 mg zeolite (clinoptilolite).</p>",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "zt_q2": {
+          "type": "item",
+          "settings": {
+            "question": "How Many Servings Are In Each Bag?",
+            "answer": "<p>About 260 in the 1/2 lb, 520 in the 1 lb and 1,035 in the 2 lb.</p>",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "zt_q3": {
+          "type": "item",
+          "settings": {
+            "question": "What Does It Taste Like?",
+            "answer": "<p>Unflavored.</p>",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "zt_q4": {
+          "type": "item",
+          "settings": {
+            "question": "How Do I Mix It?",
+            "answer": "<p>Mix 1/4 teaspoon (0.9 g) into 8 to 12 oz of whatever you already drink: water, milk, coffee, tea or a smoothie. Hot or cold both work. Start with one serving. After a week you can work up to three servings a day if you want to. Drink plenty of water through the day.</p>",
+            "link_label": "",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "zt_q1",
+        "zt_q2",
+        "zt_q3",
+        "zt_q4"
+      ],
+      "settings": {
+        "eyebrow": "QUESTIONS, ANSWERED",
+        "heading": "FAQs",
+        "intro": "Everything you need to know before you order.",
+        "bottom_text": "Still have a question?",
+        "bottom_link_text": "Contact Zeotein"
+      }
+    },
+    "zt_jm_carousel": {
+      "type": "apps",
+      "blocks": {
+        "jm_carousel": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "jm_carousel"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "zt_also_inside",
+    "related-products",
+    "zt_pdp_faq",
+    "zt_jm_carousel",
+    "1768838317647a13f3"
+  ]
+}

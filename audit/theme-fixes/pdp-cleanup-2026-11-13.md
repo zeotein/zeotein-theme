@@ -1,5 +1,7 @@
 # Product page buy box cleanup, November 13, 2026
 
+> **Superseded by v2** (same day, after Dana's review): `pdp-v2-2026-11-13/README.md`. v2 moves the format picker to the top, adds gift photos, an always-visible Add to cart bar and the store rating line, and covers the cacao powder and zeolite pages too. The v1 files below are kept for reference only. Don't paste them.
+
 Dana's request: the Cacao product page says too much under the price. Put the first-order gifts in the subscription option instead of a list of check marks, and make it cleaner.
 
 Built in the unpublished theme **Live + script error fixes (Nov 10)** (ID `187923202261`), so the live store is unchanged until that theme is published. Screenshots: `pdp-cleanup/`.

@@ -1,0 +1,445 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "text_zt_quick": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>23g protein. Zero sugar. 6 ingredients.</strong>",
+            "text_style": "body"
+          }
+        },
+        "judge_me_reviews_preview_badge_jfXkaH": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {},
+          "disabled": true
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "seal_subscriptions_subscription_widget_XhxCaM": {
+          "type": "shopify://apps/seal-subscriptions/blocks/subscription-widget/13b25004-a140-4ab7-b5fe-29918f759699",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "icon_with_text_aRigQD": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "vertical",
+            "icon_1": "check_mark",
+            "heading_1": "Creamy chocolate flavor",
+            "icon_2": "return",
+            "heading_2": "30-Day Money-Back Guarantee",
+            "icon_3": "truck",
+            "heading_3": "Ships in 1 to 2 business days"
+          },
+          "disabled": true
+        },
+        "icon_with_text_zt2": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "vertical",
+            "icon_1": "check_mark",
+            "heading_1": "Subscribe: free shaker, first order",
+            "icon_2": "check_mark",
+            "heading_2": "Starter Guide + 2 recipe guides in your inbox",
+            "icon_3": "truck",
+            "heading_3": ""
+          },
+          "disabled": true
+        },
+        "text_PJyiQ4": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Same 30 servings, lower cost per serving. </strong><a href=\"/products/zeotein-cacao-bag-30\" target=\"_blank\" title=\"Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth\">Zeotein Cacao Bulk Bag →</a>",
+            "text_style": "body"
+          },
+          "disabled": true
+        },
+        "text_i7VNN7": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>New to Zeotein? </strong><a href=\"/products/zeotein-cacao-sticks-7\" target=\"_blank\" title=\"Zeotein Cacao Protein Powder - 7 Stick Packs, Collagen & Bone Broth\">Try the 7-Day Pack →</a>",
+            "text_style": "body"
+          },
+          "disabled": true
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible_tab_jNbWFq": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Ingredients",
+            "icon": "none",
+            "content": "<p>Grass-Fed Collagen Peptides, Grass-Fed Bone Broth Protein, Organic Fermented Cacao, Organic MCT Oil Powder, Organic Sea Moss, and a naturally occurring volcanic mineral.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_M4C4HP": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What Comes With It",
+            "icon": "none",
+            "content": "<p>In the box: 30 stick packs in three 10-pack pouches. Subscribe and your first subscription order also gets a free CleanBlend shaker. In your inbox: The Starter Guide and 2 recipe guides.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_CGD3BP": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How to Use",
+            "icon": "none",
+            "content": "<ul><li>Mix one serving <strong>(1 stick pack)</strong> with <strong>10–12 oz</strong> of water, milk, or your favorite milk alternative.</li><li>Shake well or blend into a smoothie</li></ul><p><strong>Tip:</strong> For a creamier taste, blend with a banana or frozen berries.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_YJbWnM": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Supplement Facts",
+            "icon": "none",
+            "content": "<p><strong>Zeotein Cacao – Supplement Facts</strong></p><p>Serving Size: 1 Stick Pack (38.7 g)</p><p><strong>Amount Per Serving</strong></p><p>Calories: 140<br/>Total Fat: 3 g (4%)<br/>Saturated Fat: 2.5 g (13%)<br/>Sodium: 420 mg (18%)<br/>Total Carbohydrate: 2 g (1%)<br/>Dietary Fiber: 1 g (4%)<br/>Total Sugars: 0 g<br/>Protein: 23 g</p><p>Zeotein Cacao Protein Blend – 38.7 g †</p><p>† Daily Value not established.<br/>* Percent Daily Values are based on a 2,000 calorie diet.</p>",
+            "page": ""
+          }
+        },
+        "zt_rating": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'zt-buybox-tidy', part: 'rating', rating: '4.9', orders: '1,500+' %}"
+          }
+        },
+        "zt_formats": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'zt-buybox-tidy', part: 'formats', current: 'sticks' %}"
+          }
+        },
+        "zt_perks": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'zt-buybox-tidy', part: 'perks', sub_gifts: 'shaker,guides', once_text: '<b>Free with your first order:</b> 3 digital guides' %}"
+          }
+        },
+        "zt_trust": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'zt-buybox-tidy', part: 'trust' %}"
+          }
+        },
+        "zt_review": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'zt-buybox-tidy', part: 'review', quote: \"It tastes great and I love how clean the ingredients are. I'm definitely going to keep this as a staple in my house!\", name: 'Melissa M.' %}"
+          }
+        },
+        "zt_sticky": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'zt-buybox-tidy', part: 'sticky', label: 'Cacao 30 stick packs' %}"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "zt_rating",
+        "text_zt_quick",
+        "zt_formats",
+        "price",
+        "seal_subscriptions_subscription_widget_XhxCaM",
+        "zt_perks",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "zt_trust",
+        "zt_review",
+        "zt_sticky",
+        "icon_with_text_aRigQD",
+        "icon_with_text_zt2",
+        "text_PJyiQ4",
+        "text_i7VNN7",
+        "judge_me_reviews_preview_badge_jfXkaH",
+        "description",
+        "collapsible_tab_jNbWFq",
+        "collapsible_tab_M4C4HP",
+        "collapsible_tab_CGD3BP",
+        "collapsible_tab_YJbWnM"
+      ],
+      "custom_css": [
+        ".product__tax, .sls-purchase-options-label, .sls-more-info-container, form.installment {display: none !important;}",
+        ".product__info-container > * {margin: 0 0 5px !important;}",
+        "h1 {font-size: 30px !important;}",
+        "@media (max-width: 749px) {.product-media-container.constrain-height {--constrained-height: 215px !important;} .slider-buttons {display: none !important;} h1 {font-size: 17px !important; margin: 0;} .sls-option-container {padding: 7px 10px !important;}}"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "image_with_text_cp9ar3": {
+      "type": "image-with-text",
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "eyebrow": "What you're actually getting.",
+        "title_white": "THE LABEL.",
+        "title_teal": "All six ingredients...",
+        "subhead": "Whole-food shoppers read every panel. So here's ours, up front.",
+        "stat_1_number": "23g",
+        "stat_1_text": "Protein",
+        "stat_2_number": "SINGLE-SERVE",
+        "stat_2_text": "Packets",
+        "stat_3_number": "140",
+        "stat_3_text": "Calories",
+        "stat_4_number": "6",
+        "stat_4_text": "Ingredients",
+        "badge_1": "Single-Serve Stick Packs",
+        "badge_2": "Travel-Friendly",
+        "badge_3": "Single-Serve Format",
+        "badge_4": "Ingredient Transparency",
+        "image": "shopify://shop_images/supplement_facts.png",
+        "ingredients_text": "Grass-Fed Collagen Peptides, Grass-Fed Bone Broth Protein, Organic Fermented Cacao, Organic MCT Oil Powder, Organic Sea Moss, and a naturally occurring volcanic mineral."
+      }
+    },
+    "multicolumn_3fd3PL": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_3FpGjm": {
+          "type": "column",
+          "settings": {
+            "title": "23g Protein Per Serving",
+            "text": "<p>From grass-fed bone broth and grass-fed collagen.</p>"
+          }
+        },
+        "column_yYmx6G": {
+          "type": "column",
+          "settings": {
+            "title": "Six Ingredients",
+            "text": "<p>Every ingredient is named on the label.</p>"
+          }
+        },
+        "column_4Jp6yD": {
+          "type": "column",
+          "settings": {
+            "title": "Zero Sugar",
+            "text": "<p>A creamy chocolate shake with a lightly cacao-forward taste.</p>"
+          }
+        },
+        "column_zUX9yQ": {
+          "type": "column",
+          "settings": {
+            "title": "Simple And Convenient",
+            "text": "<p>Mix one stick into 10 to 12 oz and shake it or blend it.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_3FpGjm",
+        "column_yYmx6G",
+        "column_4Jp6yD",
+        "column_zUX9yQ"
+      ],
+      "custom_css": [],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title_white": "Real Nutrition",
+        "title_teal": "Made Simple.",
+        "subhead": "Protein from grass-fed bone broth and grass-fed collagen, with every ingredient named on the label.",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "1768838317647a13f3": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_cPkXxp": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_cPkXxp"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "zt_pdp_faq": {
+      "type": "zt-pdp-faq",
+      "blocks": {
+        "zt_q1": {
+          "type": "item",
+          "settings": {
+            "question": "What is Zeotein?",
+            "answer": "<p>A protein shake with every ingredient named on the label. Zeotein Cacao has 23g of protein from grass-fed bone broth and grass-fed collagen. Zeotein Vegan has 20g of plant protein from organic pumpkin seed and hemp.</p>",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "zt_q2": {
+          "type": "item",
+          "settings": {
+            "question": "What's the difference between Cacao and Vegan?",
+            "answer": "<p>Cacao provides 23g of protein from collagen peptides + grass-fed beef bone broth, with a rich cacao flavor. Vegan provides 20g of plant-based protein from organic hemp + pumpkin seed protein.</p>",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "zt_q3": {
+          "type": "item",
+          "settings": {
+            "question": "What does Zeotein taste like?",
+            "answer": "<p>This is what clean tastes like. Cacao is a creamy chocolate with a lightly cacao-forward taste. Vegan is naturally nutty. Most people mix it with milk, oat milk or coffee, and your recipe guides have more ways to make it yours.</p>",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "zt_q4": {
+          "type": "item",
+          "settings": {
+            "question": "How do I use Zeotein?",
+            "answer": "<p>Cacao: two scoops from the bag or one stick. Vegan: one stick. Mix into 10 to 12 oz of water, milk or a milk alternative, then shake it or blend it.</p>",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "zt_q5": {
+          "type": "item",
+          "settings": {
+            "question": "Is It Gluten Free And Dairy Free?",
+            "answer": "<p>Yes. Both blends are gluten free and dairy free. Cacao is made with grass-fed beef bone broth and grass-fed collagen. Vegan is fully plant-based.</p>",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "zt_q6": {
+          "type": "item",
+          "settings": {
+            "question": "Can I change or cancel my subscription?",
+            "answer": "<p>Yes. You can manage, skip, pause, swap, or cancel your subscription through the customer portal.</p>",
+            "link_label": "Manage My Subscription",
+            "link_url": "https://zeotein.com/a/subscriptions/login"
+          }
+        },
+        "zt_q7": {
+          "type": "item",
+          "settings": {
+            "question": "What is your shipping and guarantee policy?",
+            "answer": "<p>Orders are generally processed within 1–2 business days, with standard U.S. shipping taking 2–5 business days after processing. Zeotein also offers a 30-day money-back guarantee on eligible first orders. The guarantee applies to one supply and starts from the date of delivery.</p>",
+            "link_label": "View Full FAQ & Guarantee Details",
+            "link_url": "/pages/shipping-guarantee"
+          }
+        }
+      },
+      "block_order": [
+        "zt_q1",
+        "zt_q2",
+        "zt_q3",
+        "zt_q4",
+        "zt_q5",
+        "zt_q6",
+        "zt_q7"
+      ],
+      "settings": {
+        "eyebrow": "QUESTIONS, ANSWERED",
+        "heading": "FAQs",
+        "intro": "Everything you need to know before you order.",
+        "bottom_text": "Still have a question?",
+        "bottom_link_text": "Contact Zeotein"
+      }
+    },
+    "zt_jm_carousel": {
+      "type": "apps",
+      "blocks": {
+        "jm_carousel": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "jm_carousel"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "image_with_text_cp9ar3",
+    "multicolumn_3fd3PL",
+    "zt_pdp_faq",
+    "zt_jm_carousel",
+    "1768838317647a13f3"
+  ]
+}
