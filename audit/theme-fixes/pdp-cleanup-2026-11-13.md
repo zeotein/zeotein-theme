@@ -29,7 +29,7 @@ No product data, prices, Seal plans or discounts were changed.
 
 - Phone (390 px) and desktop renders of all three pages; no new console errors.
 - Gift lines appear inside both options and the renewal sentence is shortened (bag and 30 sticks); the 7-Day shows the plain gift row.
-- Pending: add-to-cart test for subscribe, 6-week interval and one-time (Shopify's bot check blocked the test browser on Nov 13; retry before publishing).
+- Add to cart on the preview: a 6-week subscription adds with the right plan ("1 bag every 6 weeks", $99.99), and the renewal line and gift lines update when the interval changes. Still to confirm: the default monthly add and a one-time add. Shopify's bot check kept interrupting the test browser on Nov 13.
 
 ## How it goes live
 

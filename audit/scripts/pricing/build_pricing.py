@@ -425,7 +425,7 @@ body = (f'<div class="chart-card"><h3>Price per serving by pack</h3>{legend}{"".
         '<div class="split"><div class="panel"><h4>Keep it as it is</h4><p>$39.99, one-time only, no subscribe option. The high per-serving price is what makes the 30-day options read as the deal. '
         'It also makes a good win-back gift, which is how you\'re already using it.</p></div>'
         '<div class="panel"><h4>Watch the shipping on it</h4><p>A $39.99 trial with $10.23 of shipping is $50.22 for a week, $7.17 a serving, the most expensive serving in the whole comparison. '
-        'The holiday test\'s $35 minimum includes the 7-Day, so you\'ll see whether free shipping changes how it sells.</p></div></div>')
+        'At the $75 test line a single 7-Day still pays shipping and two ship free, which suits a trial whose job is to point people to the 30-day.</p></div></div>')
 parts.append(sec('sevenday', 'The 7-Day pack', 'The 7-Day is priced right',
                  'Yes, the smaller pack should cost more per serving. That\'s what makes the 30-day look like the deal, and your step-up matches the market.', body))
 
