@@ -1,0 +1,1200 @@
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','2030642037869344');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2030642037869344&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style id="zeotein-pink-cta">
+html body a.zb-cta,html body .zb-cta{
+  background:linear-gradient(180deg,#ff4fb8 0%,#e0157e 100%)!important;
+  border:2px solid #ffc6e6!important;
+  box-shadow:0 0 10px rgba(255,255,255,.7),0 0 26px rgba(255,47,160,.8)!important;
+}
+html body a.cbutton-wBlig-iIXGxJZq,html body .cbutton-wBlig-iIXGxJZq{
+  background:linear-gradient(180deg,#ff4fb8 0%,#e0157e 100%)!important;
+  border:1px solid #ffc6e6!important;
+  box-shadow:0 0 10px rgba(255,255,255,.7),0 0 26px rgba(255,47,160,.8)!important;
+}
+</style>
+
+<style id="zeotein-holiday-popup-fix-css">[data-zeotein-hidden="old-survey"]{display:none!important;}</style>
+<script id="zeotein-holiday-popup-fix">
+(function(){
+if(window.__ztPopupFix)return;window.__ztPopupFix=1;
+var GOOD='o3QWZcl3jVOeRWjVR9Qi',OLD='Nr94AuqhnwPGS1Npa3zH',PID='hl_main_popup-k47rXJwWBv';
+function clean(){
+  var ps=document.querySelectorAll('[id="'+PID+'"]');
+  for(var i=0;i<ps.length;i++){
+    var p=ps[i];
+    if(p.querySelector('[name="terms_and_conditions"]')||p.innerHTML.indexOf(GOOD)>-1)continue;
+    if(p.innerHTML.indexOf(OLD)>-1||/Want the link texted/i.test(p.textContent||'')){
+      var o=p.closest('[id="overlay"]')||p;
+      o.setAttribute('data-zeotein-hidden','old-survey');
+      o.style.setProperty('display','none','important');
+      o.removeAttribute('id');p.removeAttribute('id');
+    }
+  }
+}
+var fired=false;
+function lead(){
+  if(fired)return;
+  try{if(sessionStorage.getItem('zt_lead_'+GOOD))return;}catch(e){}
+  fired=true;
+  try{sessionStorage.setItem('zt_lead_'+GOOD,'1');}catch(e){}
+  try{if(window.fbq)window.fbq('track','Lead');}catch(e){}
+}
+function match(u){u=String(u||'');return u.indexOf('/forms/submit')>-1&&u.indexOf(GOOD)>-1;}
+var of=window.fetch;
+if(of&&!of.__zt){
+  var nf=function(input){
+    var u=typeof input==='string'?input:(input&&input.url)||'';
+    var pr=of.apply(this,arguments);
+    if(match(u)){pr.then(function(r){if(r&&r.ok)lead();},function(){});}
+    return pr;
+  };
+  nf.__zt=1;window.fetch=nf;
+}
+var XP=XMLHttpRequest.prototype,xo=XP.open,xs=XP.send;
+XP.open=function(m,u){this.__ztu=u;return xo.apply(this,arguments);};
+XP.send=function(){
+  var x=this;
+  if(match(x.__ztu)){x.addEventListener('load',function(){if(x.status>=200&&x.status<300)lead();});}
+  return xs.apply(this,arguments);
+};
+if(window.PerformanceObserver){
+  try{new PerformanceObserver(function(l){l.getEntries().forEach(function(e){if(match(e.name)&&e.responseStatus>=200&&e.responseStatus<300)lead();});}).observe({type:'resource',buffered:true});}catch(e){}
+}
+function start(){
+  clean();
+  var t=0;try{new MutationObserver(function(){if(t)return;t=setTimeout(function(){t=0;clean();},250);}).observe(document.body,{childList:true,subtree:true});}catch(e){}
+  setTimeout(clean,1000);setTimeout(clean,4000);
+}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',start);}else{start();}
+window.addEventListener('load',clean);
+})();
+</script>
+<!-- FROM ORBIT (v4 fix): append AFTER existing #zeotein-holiday-popup-fix. Do not delete Meta pixel, pink CTA CSS, or the hide-old-survey + Lead script. Save funnel settings only. Do not open or publish the page builder. An unsaved inject is not enough — after saving, hard-refresh a fresh tab and verify the live pop-up. Do not use v1, v2, or v3. -->
+<style id="zeotein-holiday-popup-skin-css">
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap');
+#overlay:has([data-zt-holiday="1"]),
+#overlay.zt-holiday-overlay{
+  background-color:rgba(10,20,16,.5)!important;
+  z-index:2147483000!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"],
+.hl_main_popup-k47rXJwWBv[data-zt-holiday="1"]{
+  --zt-pine:#0f3b2e;--zt-red:#b5232f;--zt-red2:#8f1622;--zt-cream:#fbf5ea;
+  box-sizing:border-box!important;
+  width:640px!important;
+  max-width:calc(100% - 80px)!important;
+  max-height:calc(100vh - 40px)!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:22px!important;
+  overflow:hidden!important;
+  background:var(--zt-cream)!important;
+  box-shadow:0 30px 80px rgba(0,0,0,.5)!important;
+  display:grid!important;
+  grid-template-columns:240px minmax(0,1fr)!important;
+  grid-template-rows:auto minmax(0,1fr)!important;
+  grid-template-areas:"art copy" "art body"!important;
+  align-items:stretch!important;
+  z-index:2147483001!important;
+  font-family:Poppins,sans-serif!important;
+  color:#1d1d1f!important;
+  position:fixed!important;
+  left:50%!important;
+  top:50%!important;
+  right:auto!important;
+  bottom:auto!important;
+  transform:translate(-50%,-50%)!important;
+}
+/* Keep non-art/non-form children out of the two-column grid (GHL often injects div.bg). */
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > *{
+  grid-area:body;
+  min-width:0;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .bg,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > span{
+  position:absolute!important;
+  inset:0!important;
+  width:auto!important;
+  height:auto!important;
+  grid-area:1 / 1 / -1 / -1!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  background:transparent!important;
+  display:block!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art{
+  grid-area:art!important;
+  position:relative;
+  z-index:1;
+  background:radial-gradient(ellipse at 50% 45%,#1c5a45,#0a2a20);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:26px 22px;
+  overflow:hidden;
+  min-height:100%;
+  min-width:0;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art:before{
+  content:"";
+  position:absolute;inset:0;
+  opacity:.18;
+  background-image:radial-gradient(2px 2px at 20px 30px,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 90px 80px,#fff 50%,transparent 51%),radial-gradient(2.5px 2.5px at 160px 20px,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 210px 120px,#fff 50%,transparent 51%),radial-gradient(2px 2px at 60px 150px,#fff 50%,transparent 51%);
+  background-size:240px 180px;
+  pointer-events:none;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art img{
+  position:relative;
+  z-index:1;
+  width:88%;
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 18px 30px rgba(0,0,0,.45));
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal{
+  position:absolute!important;
+  right:16px!important;
+  top:12px!important;
+  left:auto!important;
+  z-index:5!important;
+  width:28px!important;
+  height:28px!important;
+  cursor:pointer;
+  grid-area:body!important;
+  pointer-events:auto!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal img{
+  width:18px!important;
+  height:18px!important;
+  opacity:.55;
+  filter:none;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .zt-copy{
+  grid-area:copy!important;
+  z-index:1;
+  margin:0;
+  padding:30px 28px 4px!important;
+  position:relative;
+  background:var(--zt-cream)!important;
+  min-width:0;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .zt-copy:before{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:8px;
+  background:repeating-linear-gradient(135deg,#b5232f 0 14px,#8f1622 14px 28px);
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .drop-zone-draggable{
+  grid-area:body!important;
+  z-index:1;
+  padding:8px 28px 22px!important;
+  position:relative;
+  background:var(--zt-cream)!important;
+  min-width:0;
+  overflow:auto;
+  max-height:calc(100vh - 40px);
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-copy{margin:8px 0 4px;padding-right:18px;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-k{
+  color:#b5232f;
+  font-family:Poppins,sans-serif;
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:1.8px;
+  line-height:1.3;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-h{
+  font-family:'Bebas Neue',sans-serif;
+  font-weight:400;
+  font-size:46px;
+  line-height:.95;
+  color:#0f3b2e;
+  margin:6px 0 8px;
+  letter-spacing:.5px;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-h span{color:#b5232f;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-p{
+  font-family:Poppins,sans-serif;
+  font-size:15px;
+  line-height:1.5;
+  color:#4a443b;
+  margin:0 0 14px;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zk-nothanks,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #custom-code-NOkKyWAbNj{display:none!important;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_0{display:none!important;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .form-builder--wrap,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .ghl-form-wrap,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #_builder-form,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .hl_form-builder--main{
+  background:transparent!important;
+  background-color:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+  max-width:none!important;
+  width:100%!important;
+  margin:0!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .fields-container{
+  display:flex!important;
+  flex-direction:column!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_first_name_1{order:1;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_email_3{order:2;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_phone_2{order:3;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_terms_and_conditions_4{order:4;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_button_5{order:5;margin-bottom:0!important;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-later{order:6;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6{order:7;margin-bottom:0!important;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 .text-element,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 .form-builder--item,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 .form-field-container{
+  background:transparent!important;
+  background-color:transparent!important;
+  padding:0!important;
+  margin:0!important;
+  box-shadow:none!important;
+  border:0!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 p{
+  margin:8px 0 0!important;
+  text-align:center!important;
+  font-family:Poppins,sans-serif!important;
+  font-size:11px!important;
+  color:#8a8273!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 a{
+  color:#8a8273!important;
+  font:400 11px/1.4 Poppins,sans-serif!important;
+  text-decoration:underline!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .form-field-wrapper{margin-bottom:10px!important;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .field-label,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] label.label-alignment{display:none!important;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_terms_and_conditions_4 label{display:block!important;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .form-control,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] input.form-control{
+  height:52px!important;
+  border:1.5px solid #d8cfc0!important;
+  border-radius:10px!important;
+  padding:0 16px!important;
+  font:400 16px Poppins,sans-serif!important;
+  color:#1d1d1f!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  width:100%!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .email-input-wrapper svg{display:none!important;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] input[name="email"]{padding-left:16px!important;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .phone-input,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .email-input,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .email-input-wrapper{width:100%!important;}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-and-conditions,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-text-container,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-text-container p{
+  font-size:10.5px!important;
+  line-height:1.45!important;
+  color:#7a7266!important;
+  font-family:Poppins,sans-serif!important;
+  text-align:left!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button[type="submit"]{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  min-height:58px!important;
+  height:auto!important;
+  border:0!important;
+  border-radius:12px!important;
+  background:linear-gradient(180deg,#c92a37,#8f1622)!important;
+  background-color:#8f1622!important;
+  box-shadow:0 6px 0 #6d0f18,0 10px 24px rgba(0,0,0,.25)!important;
+  padding:8px 14px!important;
+  text-transform:uppercase!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element .button-text,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element .button-text div,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element p{
+  color:#fff!important;
+  font:700 17px/1.2 Poppins,sans-serif!important;
+  letter-spacing:.3px!important;
+  text-align:center!important;
+  text-transform:uppercase!important;
+  margin:0!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-later{
+  display:block;
+  text-align:center;
+  font-size:13px;
+  color:#8a8273;
+  margin-top:12px;
+  text-decoration:underline;
+  cursor:pointer;
+  font-family:Poppins,sans-serif;
+}
+@media (max-width:767px){
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"],
+  .hl_main_popup-k47rXJwWBv[data-zt-holiday="1"]{
+    width:100%!important;
+    max-width:none!important;
+    max-height:min(92vh, 820px)!important;
+    top:auto!important;
+    bottom:0!important;
+    left:0!important;
+    right:0!important;
+    transform:none!important;
+    grid-template-columns:1fr!important;
+    grid-template-areas:"art" "copy" "body"!important;
+    border-radius:22px 22px 0 0!important;
+    overflow:auto!important;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art{
+    padding:22px 0 0;
+    height:190px;
+    min-height:190px;
+    max-height:190px;
+    align-items:flex-start;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art img{width:132px;margin:0 auto;}
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-handle{
+    position:absolute;top:8px;left:50%;width:44px;height:5px;margin-left:-22px;border-radius:9px;background:rgba(255,255,255,.5);z-index:3;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .zt-copy{
+    padding:18px 20px 0!important;
+    text-align:center;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .drop-zone-draggable{
+    padding:8px 20px 22px!important;
+    text-align:center;
+    max-height:none;
+    overflow:visible;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-h{font-size:42px;}
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-p{font-size:14.5px;margin-bottom:12px;}
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-copy{padding-right:0;text-align:center;}
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal{
+    top:12px!important;
+    right:14px!important;
+    grid-area:art!important;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal img{
+    filter:brightness(10);
+    opacity:.9;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-and-conditions,
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-text-container p{font-size:10px!important;text-align:left!important;}
+}
+
+/* v3: beat later GHL rule #hl_main_popup-k47rXJwWBv.popup-body
+   { position:absolute; left:50%; bottom:auto; transform:translate(-50%,0) } and
+   mobile width 380px. Same specificity was losing; these selectors must win. */
+html body #overlay #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"],
+html body #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"]{
+  position:fixed!important;
+  left:50%!important;
+  top:50%!important;
+  right:auto!important;
+  bottom:auto!important;
+  transform:translate(-50%,-50%)!important;
+  width:640px!important;
+  max-width:calc(100% - 80px)!important;
+  max-height:calc(100vh - 40px)!important;
+  margin:0!important;
+  margin-top:0!important;
+}
+@media (max-width:767px){
+  html body #overlay #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"],
+  html body #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"],
+  html body .--mobile #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"]{
+    width:100%!important;
+    max-width:none!important;
+    max-height:min(92vh,820px)!important;
+    top:auto!important;
+    bottom:0!important;
+    left:0!important;
+    right:0!important;
+    transform:none!important;
+    border-radius:22px 22px 0 0!important;
+    overflow:auto!important;
+  }
+}
+</style>
+<script id="zeotein-holiday-popup-skin">
+(function(){
+if(window.__ztHolidaySkinV4)return;window.__ztHolidaySkinV4=1;
+var GOOD='o3QWZcl3jVOeRWjVR9Qi', PID='hl_main_popup-k47rXJwWBv';
+var COVER='https://files.leadconnectorhq.com/file/6af633e3febc0d282b17b67d/holiday-cover-v3.webp';
+var TITLE_HTML='<div class="zt-copy"><div class="zt-k">FREE HOLIDAY RECIPE GUIDE</div><div class="zt-h">Treats Can Be<br><span>Smarter</span></div><p class="zt-p">14 cozy drinks and festive treats with protein folded right in. For you, and for sharing all season. Yours free.</p></div>';
+function goodPopup(){
+  var ps=document.querySelectorAll('[id="'+PID+'"]');
+  for(var i=0;i<ps.length;i++){
+    var p=ps[i];
+    if(p.getAttribute('data-zeotein-hidden')==='old-survey')continue;
+    if(p.querySelector('[name="terms_and_conditions"]')||(p.innerHTML&&p.innerHTML.indexOf(GOOD)>-1))return p;
+  }
+  return document.getElementById(PID);
+}
+function safe(fn){try{fn();}catch(e){}}
+function isShown(el){
+  if(!el)return false;
+  var s=window.getComputedStyle(el);
+  if(s.display==='none'||s.visibility==='hidden'||Number(s.opacity)===0)return false;
+  var r=el.getBoundingClientRect();
+  return r.width>2&&r.height>2;
+}
+function popupReady(p){
+  if(!p)return false;
+  var ov=p.closest('#overlay')||p.closest('[id="overlay"]');
+  if(ov&&!isShown(ov))return false;
+  if(!isShown(p))return false;
+  return !!(p.querySelector('input[name="email"]')&&p.querySelector('button[type="submit"], button.button-element')&&p.querySelector('.drop-zone-draggable'));
+}
+function structureOk(p){
+  if(!p||p.getAttribute('data-zt-holiday')!=='1')return false;
+  var art=p.querySelector(':scope > .zt-art');
+  var copy=p.querySelector(':scope > .zt-copy');
+  var col=p.querySelector(':scope > .drop-zone-draggable');
+  if(!art||!copy||!col)return false;
+  if(!art.querySelector('img'))return false;
+  if(art.querySelector('input, form, button, .c-form, .hl-app, .drop-zone-draggable'))return false;
+  if(col.contains(copy)||art.contains(col)||art.contains(copy))return false;
+  return true;
+}
+function repair(p){
+  var art=p.querySelector('.zt-art');
+  var copy=p.querySelector('.zt-copy');
+  var col=p.querySelector('.drop-zone-draggable');
+  if(art&&col&&art.contains(col)){
+    p.insertBefore(col, art.nextSibling);
+  }
+  if(art){
+    [].slice.call(art.children).forEach(function(k){
+      if(k.classList&&k.classList.contains('zt-handle'))return;
+      if(k.tagName==='IMG')return;
+      if(col)col.appendChild(k);
+    });
+    if(!art.querySelector('img')){
+      var img=document.createElement('img');
+      img.alt='Zeotein Holiday Recipe Guide';
+      img.src=COVER;
+      art.appendChild(img);
+    }
+  }
+  if(copy&&copy.parentNode!==p){
+    if(col)p.insertBefore(copy,col);
+    else p.appendChild(copy);
+  }
+}
+function skin(p){
+  if(!p)return;
+  p.setAttribute('data-zt-holiday','1');
+  var ov=p.closest('#overlay')||p.closest('[id="overlay"]');
+  if(ov)ov.classList.add('zt-holiday-overlay');
+  safe(function(){repair(p);});
+  safe(function(){
+    var col=p.querySelector(':scope > .drop-zone-draggable')||p.querySelector('.drop-zone-draggable');
+    var art=p.querySelector(':scope > .zt-art')||p.querySelector('.zt-art');
+    if(!art){
+      art=document.createElement('div');
+      art.className='zt-art';
+      art.innerHTML='<div class="zt-handle"></div><img alt="Zeotein Holiday Recipe Guide" src="'+COVER+'">';
+      if(col)p.insertBefore(art,col);
+      else p.appendChild(art);
+    }else if(art.parentNode!==p){
+      if(col)p.insertBefore(art,col);
+      else p.appendChild(art);
+    }
+    if(art&&!art.querySelector('img')){
+      var img=document.createElement('img');
+      img.alt='Zeotein Holiday Recipe Guide';
+      img.src=COVER;
+      art.appendChild(img);
+    }
+  });
+  safe(function(){
+    var col=p.querySelector(':scope > .drop-zone-draggable')||p.querySelector('.drop-zone-draggable');
+    var copy=p.querySelector('.zt-copy');
+    if(!copy){
+      var wrap=document.createElement('div');
+      wrap.innerHTML=TITLE_HTML;
+      copy=wrap.firstElementChild||wrap.firstChild;
+    }
+    // v4: copy is a direct child of the popup, not inside Vue-managed .drop-zone-draggable
+    if(copy&&copy.parentNode!==p){
+      if(col)p.insertBefore(copy,col);
+      else p.appendChild(copy);
+    }
+  });
+  safe(function(){
+    var btn=p.querySelector('button[type="submit"], button.button-element');
+    if(!btn||btn.getAttribute('data-zt-cta'))return;
+    btn.setAttribute('data-zt-cta','1');
+    var label=btn.querySelector('.button-text div, .button-text p, .button-text')||btn;
+    if(label)label.textContent='Send My Free Guide 🎄';
+  });
+  safe(function(){
+    var name=p.querySelector('input[name="first_name"]');
+    var email=p.querySelector('input[name="email"]');
+    var phone=p.querySelector('input[name="phone"]');
+    if(name&&!name.getAttribute('data-zt-ph')){name.setAttribute('data-zt-ph','1');name.setAttribute('placeholder','First name');}
+    if(email&&!email.getAttribute('data-zt-ph')){email.setAttribute('data-zt-ph','1');email.setAttribute('placeholder','Email address');}
+    if(phone&&!phone.getAttribute('data-zt-ph')){phone.setAttribute('data-zt-ph','1');phone.setAttribute('placeholder','Mobile number');}
+  });
+  safe(function(){
+    if(p.querySelector('.zt-later'))return;
+    var later=document.createElement('div');
+    later.className='zt-later';
+    later.textContent='Maybe later';
+    later.addEventListener('click',function(e){
+      e.preventDefault();
+      var c=p.querySelector('.closeLPModal');
+      if(c)c.click();
+    });
+    var btnWrap=p.querySelector('#el_'+GOOD+'_button_5');
+    var col=p.querySelector('.drop-zone-draggable')||p;
+    if(btnWrap&&btnWrap.parentNode)btnWrap.parentNode.appendChild(later);
+    else col.appendChild(later);
+  });
+}
+function start(){
+  var debounce=0, settle=0;
+  function kick(){
+    if(debounce)return;
+    debounce=setTimeout(function(){debounce=0;queueSkin();},50);
+  }
+  function queueSkin(){
+    var p=goodPopup();
+    if(!popupReady(p))return;
+    if(structureOk(p))return;
+    clearTimeout(settle);
+    // Wait for Vue to finish hydrating/rendering before inserting nodes.
+    // An unsaved inject works because Vue is already done; a head script must wait.
+    settle=setTimeout(function(){
+      var p2=goodPopup();
+      if(!popupReady(p2))return;
+      if(structureOk(p2))return;
+      skin(p2);
+    },300);
+  }
+  try{
+    new MutationObserver(kick).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['style','class']});
+  }catch(e){}
+  setInterval(function(){
+    var p=goodPopup();
+    if(popupReady(p)&&!structureOk(p))kick();
+  },500);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);
+else start();
+})();
+</script>
+<!-- FROM ORBIT (v4.1 patch): append AFTER the existing v4 skin. Do not remove the Meta pixel, pink CTA CSS, #zeotein-holiday-popup-fix, or the v4 skin. Do not append a second copy of v4. Save funnel settings only. Do not open or publish the page builder. -->
+<style id="zeotein-holiday-popup-skin-v41-css">
+/* Mobile: v4 left grid-template-rows as "auto minmax(0,1fr)" (two tracks) on a three-row
+   art/copy/body layout, so the copy row could shrink and the "14 cozy drinks…" line
+   sat under the form. Give each row its content height; the sheet already scrolls. */
+@media (max-width:767px){
+  html body #overlay #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"],
+  html body #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"],
+  html body .--mobile #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"],
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"],
+  .hl_main_popup-k47rXJwWBv[data-zt-holiday="1"]{
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto auto auto!important;
+    grid-template-areas:"art" "copy" "body"!important;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .zt-copy{
+    overflow:visible!important;
+    height:auto!important;
+    max-height:none!important;
+    min-height:0!important;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-p{
+    display:block!important;
+    margin:0 0 14px!important;
+  }
+}
+/* Desktop close ×: v4 put it in the form (body) area, so it sat beside First name.
+   Place it in the headline (copy) area at the top-right of the card. Keep it on
+   the cover on mobile. */
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal{
+  grid-area:copy!important;
+  position:absolute!important;
+  top:12px!important;
+  right:16px!important;
+  left:auto!important;
+  z-index:6!important;
+}
+@media (max-width:767px){
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal{
+    grid-area:art!important;
+    top:12px!important;
+    right:14px!important;
+  }
+}
+</style>
+<!-- FROM ORBIT (v4.7 patch): append AFTER v4 and v4.1. Do not save v4.2, v4.3, v4.4, v4.5, or v4.6. If those blocks are already present, replace them with this file. Do not remove the Meta pixel, pink CTA CSS, #zeotein-holiday-popup-fix, v4, or v4.1. Do not change the two-column desktop layout or the green cover panel. Save funnel settings only. Do not open or publish the page builder. -->
+<style id="zeotein-holiday-popup-skin-v47-css">
+/* Real × instead of GHL’s blank white circle. Hide the native graphic and draw a ×. */
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal{
+  background:transparent!important;
+  background-image:none!important;
+  background-color:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  width:36px!important;
+  height:36px!important;
+  overflow:visible!important;
+  opacity:1!important;
+  color:transparent!important;
+  font-size:0!important;
+  line-height:0!important;
+  text-indent:0!important;
+  padding:0!important;
+  margin:0!important;
+  pointer-events:auto!important;
+  z-index:2147483646!important;
+  cursor:pointer!important;
+  -webkit-tap-highlight-color:transparent;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal *,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal img,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal svg,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal i,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal span{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  background:none!important;
+  width:0!important;
+  height:0!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal::before,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal::after{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  background:none!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal::after{
+  content:"\00d7";
+  position:absolute;
+  inset:0;
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  font-size:32px!important;
+  font-weight:400!important;
+  line-height:36px!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+  color:#3a3328!important;
+  text-shadow:none;
+  pointer-events:none;
+  text-indent:0!important;
+}
+@media (max-width:767px){
+  /* Smaller bottom sheet so the lander stays visible above it. Beat v4’s 92vh rule. */
+  html body #overlay #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"],
+  html body #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"],
+  html body .--mobile #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"],
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"],
+  .hl_main_popup-k47rXJwWBv[data-zt-holiday="1"]{
+    width:100%!important;
+    max-width:none!important;
+    max-height:75vh!important;
+    height:auto!important;
+    top:auto!important;
+    bottom:0!important;
+    left:0!important;
+    right:0!important;
+    transform:none!important;
+    border-radius:22px 22px 0 0!important;
+    overflow:hidden!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto auto minmax(0,1fr)!important;
+    grid-template-areas:"art" "copy" "body"!important;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art{
+    padding:16px 0 0!important;
+    height:128px!important;
+    min-height:128px!important;
+    max-height:128px!important;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art img{width:108px!important;margin:0 auto;}
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-h{font-size:34px!important;}
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .zt-copy{
+    overflow:visible!important;
+    height:auto!important;
+    max-height:none!important;
+    min-height:0!important;
+    padding:14px 20px 0!important;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-p{
+    display:block!important;
+    margin:0 0 10px!important;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .drop-zone-draggable{
+    overflow:auto!important;
+    max-height:none!important;
+    min-height:0!important;
+    padding:6px 20px 16px!important;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal{
+    grid-area:art!important;
+    top:10px!important;
+    right:12px!important;
+  }
+  #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .closeLPModal::after{
+    color:#fff!important;
+    font-size:34px!important;
+    text-shadow:0 1px 3px rgba(0,0,0,.55);
+  }
+}
+@supports (height:1dvh){
+  @media (max-width:767px){
+    html body #overlay #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"],
+    html body #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"],
+    html body .--mobile #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"],
+    #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"],
+    .hl_main_popup-k47rXJwWBv[data-zt-holiday="1"]{
+      max-height:75dvh!important;
+    }
+  }
+}
+/* Email wrapper cleanup. The input indent is fixed in the script below. */
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .email-input-wrapper,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .email-input,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .email-input-wrapper > div{
+  padding-left:0!important;
+  margin-left:0!important;
+  background-image:none!important;
+  width:100%!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .email-input-wrapper svg,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .email-input-wrapper i,
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .email-input-wrapper [class*="icon"],
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .email-input-wrapper .absolute{
+  display:none!important;
+  width:0!important;
+  height:0!important;
+  padding:0!important;
+  margin:0!important;
+}
+#hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-later{
+  pointer-events:auto!important;
+  cursor:pointer!important;
+  z-index:6!important;
+  position:relative;
+}
+</style>
+<script id="zeotein-holiday-popup-skin-v47">
+(function(){
+if(window.__ztHolidaySkinV47)return;window.__ztHolidaySkinV47=1;
+window.__ztHolidaySkinV42=1;
+window.__ztHolidaySkinV43=1;
+window.__ztHolidaySkinV44=1;
+window.__ztHolidaySkinV45=1;
+window.__ztHolidaySkinV46=1;
+var PID='hl_main_popup-k47rXJwWBv';
+function goodPopup(){
+  var ps=document.querySelectorAll('[id="'+PID+'"]');
+  for(var i=0;i<ps.length;i++){
+    var p=ps[i];
+    if(p.getAttribute('data-zeotein-hidden')==='old-survey')continue;
+    if(p.getAttribute('data-zt-holiday')==='1')return p;
+  }
+  return document.getElementById(PID);
+}
+function isShown(el){
+  if(!el)return false;
+  var s=window.getComputedStyle(el);
+  if(s.display==='none'||s.visibility==='hidden'||Number(s.opacity)===0)return false;
+  var r=el.getBoundingClientRect();
+  return r.width>2&&r.height>2;
+}
+function setImp(el,prop,val){
+  if(!el||!el.style)return;
+  if(el.style.getPropertyValue(prop)===val&&el.style.getPropertyPriority(prop)==='important')return;
+  el.style.setProperty(prop,val,'important');
+}
+function textX(el){
+  if(!el)return 0;
+  var pad=parseFloat(window.getComputedStyle(el).paddingLeft)||0;
+  return el.getBoundingClientRect().left+pad;
+}
+function needsAlign(p){
+  if(!p)return false;
+  var email=p.querySelector('input[name="email"],input[type="email"]');
+  if(!email)return false;
+  var first=p.querySelector('input[name="first_name"]');
+  if(!first){
+    var pl=email.style.getPropertyValue('padding-left');
+    return !(pl==='16px'&&email.style.getPropertyPriority('padding-left')==='important');
+  }
+  return Math.abs(Math.round(textX(email)-textX(first)))>1;
+}
+function applyPadding(p){
+  var wraps=p.querySelectorAll('.email-input-wrapper,.email-input,.email-input-wrapper > div');
+  for(var j=0;j<wraps.length;j++){
+    setImp(wraps[j],'padding-left','0px');
+    setImp(wraps[j],'background-image','none');
+  }
+  var emails=p.querySelectorAll('input[name="email"],input[type="email"]');
+  var first=p.querySelector('input[name="first_name"]');
+  var i,el;
+  if(!first){
+    for(i=0;i<emails.length;i++){
+      setImp(emails[i],'padding-left','16px');
+      setImp(emails[i],'text-indent','0');
+      setImp(emails[i],'background-image','none');
+    }
+    return;
+  }
+  var firstPad=parseFloat(window.getComputedStyle(first).paddingLeft)||16;
+  for(i=0;i<emails.length;i++){
+    el=emails[i];
+    setImp(el,'text-indent','0');
+    setImp(el,'background-image','none');
+    setImp(el,'padding-left',firstPad+'px');
+  }
+}
+function resetWrapMargin(p){
+  var wraps=p.querySelectorAll('.email-input-wrapper,.email-input,.email-input-wrapper > div');
+  for(var j=0;j<wraps.length;j++){
+    setImp(wraps[j],'margin-left','0px');
+  }
+}
+function nudgeMargin(p){
+  var first=p.querySelector('input[name="first_name"]');
+  if(!first)return;
+  var firstTextX=textX(first);
+  var emails=p.querySelectorAll('input[name="email"],input[type="email"]');
+  for(var i=0;i<emails.length;i++){
+    var el=emails[i];
+    var still=Math.round(textX(el)-firstTextX);
+    if(Math.abs(still)<=1)continue;
+    var wrap=el.closest('.email-input-wrapper')||el.parentElement;
+    if(!wrap)continue;
+    setImp(wrap,'margin-left','0px');
+    still=Math.round(textX(el)-textX(first));
+    if(Math.abs(still)>1)setImp(wrap,'margin-left',(-still)+'px');
+  }
+}
+function alignEmail(p,phase){
+  if(!p||p.__ztAligning)return;
+  p.__ztAligning=1;
+  try{
+    if(phase!=='nudge')resetWrapMargin(p);
+    applyPadding(p);
+    if(phase==='nudge')nudgeMargin(p);
+  }finally{
+    p.__ztAligning=0;
+  }
+}
+function scheduleSettle(p){
+  if(!p||p.__ztSettleQueued)return;
+  p.__ztSettleQueued=1;
+  function later(ms){
+    setTimeout(function(){
+      if(!isShown(p))return;
+      if(needsAlign(p))alignEmail(p,'nudge');
+    },ms);
+  }
+  requestAnimationFrame(function(){
+    if(!isShown(p))return;
+    alignEmail(p,'pad');
+  });
+  later(150);
+  later(400);
+  later(800);
+}
+function hookEmail(p,mo){
+  mo.observe(p,{childList:true,subtree:true});
+  var emails=p.querySelectorAll('input[name="email"],input[type="email"]');
+  for(var i=0;i<emails.length;i++){
+    mo.observe(emails[i],{attributes:true,attributeFilter:['style']});
+  }
+}
+function watchEmail(p){
+  if(!p||p.__ztEmailWatchV47)return;
+  p.__ztEmailWatchV47=1;
+  alignEmail(p,'pad');
+  scheduleSettle(p);
+  var mo=new MutationObserver(function(){
+    if(p.__ztAligning)return;
+    mo.disconnect();
+    try{
+      if(needsAlign(p)){
+        p.__ztSettleQueued=0;
+        alignEmail(p,'pad');
+        scheduleSettle(p);
+      }
+    }finally{
+      requestAnimationFrame(function(){
+        if(p.isConnected)hookEmail(p,mo);
+      });
+    }
+  });
+  hookEmail(p,mo);
+}
+function tick(){
+  var p=goodPopup();
+  if(p&&isShown(p)){watchEmail(p);return true;}
+  return false;
+}
+function start(){
+  tick();
+  setInterval(tick,500);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);
+else start();
+function forceHide(p){
+  var ov=p&&(p.closest('#overlay')||p.closest('[id="overlay"]'));
+  if(p){
+    p.style.removeProperty('display');
+    p.style.display='none';
+  }
+  if(ov){
+    ov.style.removeProperty('display');
+    ov.style.display='none';
+    ov.classList.remove('zt-holiday-overlay');
+  }
+}
+function closeHoliday(p){
+  if(!p)p=goodPopup();
+  if(!p)return;
+  var c=p.querySelector('.closeLPModal');
+  if(c){
+    try{c.click();}catch(e){}
+  }
+  setTimeout(function(){
+    if(isShown(p))forceHide(p);
+  },80);
+}
+document.addEventListener('click',function(e){
+  var t=e.target;
+  if(!t||!t.closest)return;
+  var later=t.closest('.zt-later');
+  var closer=t.closest('.closeLPModal');
+  if(!later&&!closer)return;
+  var p=t.closest('#'+PID)||t.closest('[id="'+PID+'"]')||goodPopup();
+  if(!p||p.getAttribute('data-zt-holiday')!=='1')return;
+  if(later){
+    e.preventDefault();
+    e.stopPropagation();
+    closeHoliday(p);
+  }else{
+    setTimeout(function(){if(isShown(p))forceHide(p);},80);
+  }
+},true);
+})();
+</script>
+<!-- v4.9 (REPLACES v4.8, mobile clipping fix): paste AFTER v4, v4.1 and v4.7 IN PLACE OF the whole v4.8 block (style + script). Desktop identical to v4.8. Mobile: art panel back to the v4.7 height (128px; the taller v4.8 panel squeezed the form inside the 75dvh sheet) and the sheet may grow to 92dvh, so name, email, phone, consent and the button all show on 390x664 and 360x640 phones. v4.7 inner scroll stays as a safety net. Visual tightening only: full cover with green gap, soft lights in the green panel, smaller subtext and Privacy line, shorter fields/button so a 390x844 phone can submit without scrolling the sheet. Close behaviour and email alignment stay with v4.7. No DOM writes, no observers. Do not remove the Meta pixel, #zeotein-pink-cta, #zeotein-holiday-popup-fix, v4, v4.1 or v4.7. -->
+<style id="zeotein-holiday-popup-skin-v49-css">
+/* ---------- Green panel: pine gradient + soft lights + full cover (desktop) ---------- */
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art{
+  background:radial-gradient(ellipse at 50% 40%,#1c5a45 0%,#0f3b2e 55%,#0a2a20 100%)!important;
+  box-sizing:border-box!important;
+  padding:22px 18px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+  isolation:isolate;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:url("https://files.leadconnectorhq.com/file/6af651318af1a750f4344152/bg.jpg") center 40%/cover no-repeat!important;
+  opacity:.32!important;
+  mix-blend-mode:screen!important;
+  pointer-events:none!important;
+  z-index:0!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art img{
+  position:relative!important;
+  z-index:2!important;
+  width:86%!important;
+  height:auto!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  margin:0 auto!important;
+  filter:drop-shadow(0 14px 22px rgba(0,0,0,.45))!important;
+}
+/* ---------- Copy (desktop) ---------- */
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .zt-copy{
+  padding:24px 26px 0!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-k{
+  font-size:12px!important;
+  letter-spacing:1.6px!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-h{
+  font-size:42px!important;
+  margin:5px 0 6px!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-p{
+  font-size:13px!important;
+  line-height:1.4!important;
+  margin:0 0 12px!important;
+}
+/* GHL's form column adds ~15px inner inset; 10px here puts the fields flush with the headline, as in the mockup. */
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .drop-zone-draggable{
+  padding:2px 10px 16px!important;
+}
+/* ---------- Form (desktop) ---------- */
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .form-control,
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] input.form-control{
+  height:44px!important;
+  font-size:15px!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .form-field-wrapper{
+  margin-bottom:8px!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-and-conditions,
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-text-container,
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-text-container p{
+  font-size:10.5px!important;
+  line-height:1.35!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element,
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button[type="submit"]{
+  min-height:50px!important;
+  height:50px!important;
+  padding:6px 14px!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element .button-text,
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element .button-text div,
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element p{
+  font-size:16px!important;
+}
+/* GHL puts a 15px top margin on the submit block; the mockup keeps the button close to the SMS text. */
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_button_5 .form-builder--btn-submit{
+  margin-top:4px!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-later{
+  font-size:12px!important;
+  margin-top:10px!important;
+}
+/* Privacy Policy | Terms of Service: smaller only. Wording and links unchanged. */
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 p{
+  font-size:9px!important;
+  line-height:1.4!important;
+  margin:7px 0 0!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 a{
+  font-size:9px!important;
+  line-height:1.4!important;
+}
+/* ---------- Mobile bottom sheet ---------- */
+@media (max-width:767px){
+  /* v4.9: let the sheet grow to 92% of the screen (the v4 value) so the form is not squeezed. */
+  html body #overlay #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"][data-zt-holiday],
+  html body .--mobile #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"][data-zt-holiday],
+  html body #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"][data-zt-holiday],
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"][data-zt-holiday]{
+    max-height:92vh!important;
+    max-height:92dvh!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art{
+    height:128px!important;
+    min-height:128px!important;
+    max-height:128px!important;
+    padding:10px 0!important;
+    align-items:center!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art img{
+    width:82px!important;
+    height:auto!important;
+    max-height:108px!important;
+    object-fit:contain!important;
+    margin:0 auto!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .zt-copy{
+    padding:10px 18px 0!important;
+    margin:0!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-k{
+    font-size:11px!important;
+    letter-spacing:1.4px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-h{
+    font-size:34px!important;
+    margin:2px 0 3px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-p{
+    font-size:12px!important;
+    line-height:1.35!important;
+    margin:0 0 6px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .drop-zone-draggable{
+    padding:2px 7px 8px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_button_5 .form-builder--btn-submit{
+    margin-top:2px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .form-control,
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] input.form-control{
+    height:40px!important;
+    font-size:14px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .form-field-wrapper{
+    margin-bottom:6px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-and-conditions,
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-text-container,
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-text-container p{
+    font-size:8.5px!important;
+    line-height:1.32!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element,
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button[type="submit"]{
+    min-height:44px!important;
+    height:44px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element .button-text,
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element .button-text div,
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element p{
+    font-size:15px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-later{
+    font-size:11px!important;
+    margin-top:6px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 p{
+    font-size:8px!important;
+    margin:4px 0 0!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 a{
+    font-size:8px!important;
+  }
+}
+</style>
+<script id="zeotein-holiday-popup-skin-v49">
+(function(){
+if(window.__ztHolidaySkinV49)return;window.__ztHolidaySkinV49=1;window.__ztHolidaySkinV48=1;
+/* Guards only, so an old unsaved v4.2-v4.7 preview cannot run on top. v4.7 (saved, earlier in head) keeps doing close + email alignment. */
+window.__ztHolidaySkinV42=1;window.__ztHolidaySkinV43=1;window.__ztHolidaySkinV44=1;
+window.__ztHolidaySkinV45=1;window.__ztHolidaySkinV46=1;window.__ztHolidaySkinV47=1;
+})();
+</script>

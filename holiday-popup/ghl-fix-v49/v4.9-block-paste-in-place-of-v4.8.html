@@ -1,0 +1,190 @@
+<!-- v4.9 (REPLACES v4.8, mobile clipping fix): paste AFTER v4, v4.1 and v4.7 IN PLACE OF the whole v4.8 block (style + script). Desktop identical to v4.8. Mobile: art panel back to the v4.7 height (128px; the taller v4.8 panel squeezed the form inside the 75dvh sheet) and the sheet may grow to 92dvh, so name, email, phone, consent and the button all show on 390x664 and 360x640 phones. v4.7 inner scroll stays as a safety net. Visual tightening only: full cover with green gap, soft lights in the green panel, smaller subtext and Privacy line, shorter fields/button so a 390x844 phone can submit without scrolling the sheet. Close behaviour and email alignment stay with v4.7. No DOM writes, no observers. Do not remove the Meta pixel, #zeotein-pink-cta, #zeotein-holiday-popup-fix, v4, v4.1 or v4.7. -->
+<style id="zeotein-holiday-popup-skin-v49-css">
+/* ---------- Green panel: pine gradient + soft lights + full cover (desktop) ---------- */
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art{
+  background:radial-gradient(ellipse at 50% 40%,#1c5a45 0%,#0f3b2e 55%,#0a2a20 100%)!important;
+  box-sizing:border-box!important;
+  padding:22px 18px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+  isolation:isolate;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:url("https://files.leadconnectorhq.com/file/6af651318af1a750f4344152/bg.jpg") center 40%/cover no-repeat!important;
+  opacity:.32!important;
+  mix-blend-mode:screen!important;
+  pointer-events:none!important;
+  z-index:0!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art img{
+  position:relative!important;
+  z-index:2!important;
+  width:86%!important;
+  height:auto!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  margin:0 auto!important;
+  filter:drop-shadow(0 14px 22px rgba(0,0,0,.45))!important;
+}
+/* ---------- Copy (desktop) ---------- */
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .zt-copy{
+  padding:24px 26px 0!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-k{
+  font-size:12px!important;
+  letter-spacing:1.6px!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-h{
+  font-size:42px!important;
+  margin:5px 0 6px!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-p{
+  font-size:13px!important;
+  line-height:1.4!important;
+  margin:0 0 12px!important;
+}
+/* GHL's form column adds ~15px inner inset; 10px here puts the fields flush with the headline, as in the mockup. */
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .drop-zone-draggable{
+  padding:2px 10px 16px!important;
+}
+/* ---------- Form (desktop) ---------- */
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .form-control,
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] input.form-control{
+  height:44px!important;
+  font-size:15px!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .form-field-wrapper{
+  margin-bottom:8px!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-and-conditions,
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-text-container,
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-text-container p{
+  font-size:10.5px!important;
+  line-height:1.35!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element,
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button[type="submit"]{
+  min-height:50px!important;
+  height:50px!important;
+  padding:6px 14px!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element .button-text,
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element .button-text div,
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element p{
+  font-size:16px!important;
+}
+/* GHL puts a 15px top margin on the submit block; the mockup keeps the button close to the SMS text. */
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_button_5 .form-builder--btn-submit{
+  margin-top:4px!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-later{
+  font-size:12px!important;
+  margin-top:10px!important;
+}
+/* Privacy Policy | Terms of Service: smaller only. Wording and links unchanged. */
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 p{
+  font-size:9px!important;
+  line-height:1.4!important;
+  margin:7px 0 0!important;
+}
+html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 a{
+  font-size:9px!important;
+  line-height:1.4!important;
+}
+/* ---------- Mobile bottom sheet ---------- */
+@media (max-width:767px){
+  /* v4.9: let the sheet grow to 92% of the screen (the v4 value) so the form is not squeezed. */
+  html body #overlay #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"][data-zt-holiday],
+  html body .--mobile #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"][data-zt-holiday],
+  html body #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"][data-zt-holiday],
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"][data-zt-holiday]{
+    max-height:92vh!important;
+    max-height:92dvh!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art{
+    height:128px!important;
+    min-height:128px!important;
+    max-height:128px!important;
+    padding:10px 0!important;
+    align-items:center!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art img{
+    width:82px!important;
+    height:auto!important;
+    max-height:108px!important;
+    object-fit:contain!important;
+    margin:0 auto!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .zt-copy{
+    padding:10px 18px 0!important;
+    margin:0!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-k{
+    font-size:11px!important;
+    letter-spacing:1.4px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-h{
+    font-size:34px!important;
+    margin:2px 0 3px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-p{
+    font-size:12px!important;
+    line-height:1.35!important;
+    margin:0 0 6px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] > .drop-zone-draggable{
+    padding:2px 7px 8px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_button_5 .form-builder--btn-submit{
+    margin-top:2px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .form-control,
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] input.form-control{
+    height:40px!important;
+    font-size:14px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .form-field-wrapper{
+    margin-bottom:6px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-and-conditions,
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-text-container,
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .terms-text-container p{
+    font-size:8.5px!important;
+    line-height:1.32!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element,
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button[type="submit"]{
+    min-height:44px!important;
+    height:44px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element .button-text,
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element .button-text div,
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] button.button-element p{
+    font-size:15px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-later{
+    font-size:11px!important;
+    margin-top:6px!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 p{
+    font-size:8px!important;
+    margin:4px 0 0!important;
+  }
+  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] #el_o3QWZcl3jVOeRWjVR9Qi_header_6 a{
+    font-size:8px!important;
+  }
+}
+</style>
+<script id="zeotein-holiday-popup-skin-v49">
+(function(){
+if(window.__ztHolidaySkinV49)return;window.__ztHolidaySkinV49=1;window.__ztHolidaySkinV48=1;
+/* Guards only, so an old unsaved v4.2-v4.7 preview cannot run on top. v4.7 (saved, earlier in head) keeps doing close + email alignment. */
+window.__ztHolidaySkinV42=1;window.__ztHolidaySkinV43=1;window.__ztHolidaySkinV44=1;
+window.__ztHolidaySkinV45=1;window.__ztHolidaySkinV46=1;window.__ztHolidaySkinV47=1;
+})();
+</script>

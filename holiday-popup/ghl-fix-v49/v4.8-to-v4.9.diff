@@ -1,0 +1,57 @@
+--- /tmp/claude-0/-home-user-zeotein-theme/11e9856a-6bcc-56a4-8348-d59af95ddd83/scratchpad/head.html	2026-11-13 00:25:39.153410874 +0000
++++ /tmp/claude-0/-home-user-zeotein-theme/11e9856a-6bcc-56a4-8348-d59af95ddd83/scratchpad/head_v49_full.html	2026-11-13 00:31:07.460825642 +0000
+@@ -1008,8 +1008,8 @@
+ },true);
+ })();
+ </script>
+-<!-- v4.8 (approved tighten mockups): append AFTER v4, v4.1 and v4.7. Visual tightening only: full cover with green gap, soft lights in the green panel, smaller subtext and Privacy line, shorter fields/button so a 390x844 phone can submit without scrolling the sheet. Close behaviour and email alignment stay with v4.7. No DOM writes, no observers. Do not remove the Meta pixel, #zeotein-pink-cta, #zeotein-holiday-popup-fix, v4, v4.1 or v4.7. -->
+-<style id="zeotein-holiday-popup-skin-v48-css">
++<!-- v4.9 (REPLACES v4.8, mobile clipping fix): paste AFTER v4, v4.1 and v4.7 IN PLACE OF the whole v4.8 block (style + script). Desktop identical to v4.8. Mobile: art panel back to the v4.7 height (128px; the taller v4.8 panel squeezed the form inside the 75dvh sheet) and the sheet may grow to 92dvh, so name, email, phone, consent and the button all show on 390x664 and 360x640 phones. v4.7 inner scroll stays as a safety net. Visual tightening only: full cover with green gap, soft lights in the green panel, smaller subtext and Privacy line, shorter fields/button so a 390x844 phone can submit without scrolling the sheet. Close behaviour and email alignment stay with v4.7. No DOM writes, no observers. Do not remove the Meta pixel, #zeotein-pink-cta, #zeotein-holiday-popup-fix, v4, v4.1 or v4.7. -->
++<style id="zeotein-holiday-popup-skin-v49-css">
+ /* ---------- Green panel: pine gradient + soft lights + full cover (desktop) ---------- */
+ html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art{
+   background:radial-gradient(ellipse at 50% 40%,#1c5a45 0%,#0f3b2e 55%,#0a2a20 100%)!important;
+@@ -1108,17 +1108,25 @@
+ }
+ /* ---------- Mobile bottom sheet ---------- */
+ @media (max-width:767px){
++  /* v4.9: let the sheet grow to 92% of the screen (the v4 value) so the form is not squeezed. */
++  html body #overlay #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"][data-zt-holiday],
++  html body .--mobile #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"][data-zt-holiday],
++  html body #hl_main_popup-k47rXJwWBv.popup-body[data-zt-holiday="1"][data-zt-holiday],
++  html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"][data-zt-holiday]{
++    max-height:92vh!important;
++    max-height:92dvh!important;
++  }
+   html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art{
+-    height:184px!important;
+-    min-height:184px!important;
+-    max-height:184px!important;
+-    padding:12px 0!important;
++    height:128px!important;
++    min-height:128px!important;
++    max-height:128px!important;
++    padding:10px 0!important;
+     align-items:center!important;
+   }
+   html body #hl_main_popup-k47rXJwWBv[data-zt-holiday="1"] .zt-art img{
+-    width:118px!important;
++    width:82px!important;
+     height:auto!important;
+-    max-height:160px!important;
++    max-height:108px!important;
+     object-fit:contain!important;
+     margin:0 auto!important;
+   }
+@@ -1182,9 +1190,9 @@
+   }
+ }
+ </style>
+-<script id="zeotein-holiday-popup-skin-v48">
++<script id="zeotein-holiday-popup-skin-v49">
+ (function(){
+-if(window.__ztHolidaySkinV48)return;window.__ztHolidaySkinV48=1;
++if(window.__ztHolidaySkinV49)return;window.__ztHolidaySkinV49=1;window.__ztHolidaySkinV48=1;
+ /* Guards only, so an old unsaved v4.2-v4.7 preview cannot run on top. v4.7 (saved, earlier in head) keeps doing close + email alignment. */
+ window.__ztHolidaySkinV42=1;window.__ztHolidaySkinV43=1;window.__ztHolidaySkinV44=1;
+ window.__ztHolidaySkinV45=1;window.__ztHolidaySkinV46=1;window.__ztHolidaySkinV47=1;
