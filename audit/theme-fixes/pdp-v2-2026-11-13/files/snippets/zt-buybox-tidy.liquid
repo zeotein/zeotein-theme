@@ -1,6 +1,6 @@
 {%- comment -%}
   Product page buy box (v2, Nov 13, 2026).
-  part: 'rating'   "Verified buyers rate Zeotein 4.9/5", live from Judge.me (updates as reviews come in), links to the reviews.
+  part: 'rating'   "★★★★★ 4.9 from verified buyers", live from Judge.me (updates as reviews come in), links to the reviews.
   part: 'formats'  Bulk bag / 30 sticks / 7-Day picker with photos and price per serving (current: 'bag' | 'sticks' | 'trial').
   part: 'perks'    First-order gifts as one slim line with small photos. With the Seal widget on the page they move inside the Subscribe & Save
                    and One-time options and Seal's renewal sentence is shortened; otherwise (no subscription) a plain row.
@@ -41,22 +41,22 @@
       assign jm = shop.metafields.judgeme
       assign v_avg = jm['trust_badge.verified_average_rating'].value
       assign a_avg = jm.all_reviews_rating.value | default: jm.all_reviews_rating
-      assign who = 'Verified buyers'
+      assign who = 'verified buyers'
       if v_avg != blank
         assign avg = v_avg | times: 1.0
       elsif a_avg != blank
         assign avg = a_avg | times: 1.0
-        assign who = 'Customers'
+        assign who = 'customer reviews'
       else
         assign avg = rating | default: '4.9' | times: 1.0
-        assign who = 'Customers'
+        assign who = 'customer reviews'
       endif
       assign shown = avg | round: 1
       assign pct = avg | divided_by: 5.0 | times: 100 | round: 1
     -%}
-    <a class="zt-rating" href="#zt-reviews" data-zt-reviews-link aria-label="{{ who }} rate Zeotein {{ shown }} out of 5. Read reviews.">
+    <a class="zt-rating" href="#zt-reviews" data-zt-reviews-link aria-label="Rated {{ shown }} out of 5 from {{ who }}. Read reviews.">
       <span class="zt-stars" aria-hidden="true"><span class="zt-stars__fill" style="width:{{ pct }}%">★★★★★</span>★★★★★</span>
-      <span>{{ who }} rate Zeotein <b>{{ shown }}/5</b></span>
+      <span><b>{{ shown }}</b> from {{ who }}</span>
     </a>
     <style>
       #MainContent .product__info-container > .zt-rating{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;margin:2px 0 6px !important;font-size:13.5px;line-height:1.3;color:#3A3546;text-decoration:none;width:fit-content}
@@ -101,7 +101,8 @@
           endfor
           assign per = low | times: 1.0 | divided_by: servings | round
         -%}
-        <a class="zt-format{% if current == key %} is-current{% endif %}" href="{{ p.url | default: '/products/' | append: h }}"{% if current == key %} aria-current="page"{% endif %}>
+        {%- if p.url != blank -%}{%- assign fmt_url = p.url -%}{%- else -%}{%- assign fmt_url = '/products/' | append: h -%}{%- endif -%}
+        <a class="zt-format{% if current == key %} is-current{% endif %}" href="{{ fmt_url }}" data-zt-format{% if current == key %} aria-current="page"{% endif %}>
           {%- if key == 'bag' -%}<span class="zt-format__badge">Best value</span>{%- endif -%}
           {%- if p.featured_image -%}
             <img class="zt-format__img" src="{{ p.featured_image | image_url: width: 140 }}" alt="" width="56" height="56" loading="lazy">
@@ -111,6 +112,34 @@
         </a>
       {%- endfor -%}
     </div>
+    <script>
+      (function () {
+        var row = document.querySelector('.zt-formats');
+        if (!row) return;
+        var KEY = 'zt-fmt-top';
+        // Arriving from another format tile: put the tiles back where they were on screen.
+        try {
+          var saved = sessionStorage.getItem(KEY);
+          if (saved !== null) {
+            sessionStorage.removeItem(KEY);
+            var want = parseFloat(saved);
+            var place = function () { var y = row.getBoundingClientRect().top + window.scrollY - want; if (y > 0) window.scrollTo(0, y); return y; };
+            var first = place();
+            window.addEventListener('load', function () { if (Math.abs(window.scrollY - first) < 60) place(); }, { once: true });
+          }
+        } catch (e) {}
+        row.querySelectorAll('[data-zt-format]').forEach(function (a) {
+          if (a.getAttribute('aria-current') === 'page') {
+            a.addEventListener('click', function (e) { e.preventDefault(); });
+            return;
+          }
+          var l = document.createElement('link'); l.rel = 'prefetch'; l.href = a.href; document.head.appendChild(l);
+          a.addEventListener('click', function () {
+            try { sessionStorage.setItem(KEY, String(row.getBoundingClientRect().top)); } catch (e) {}
+          });
+        });
+      })();
+    </script>
     {%- endif -%}
     <style>
       #MainContent .product__info-container > .zt-formats{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:8px 0 12px !important}
@@ -136,6 +165,7 @@
       assign once_list = once_csv | split: ','
       assign sub_value = 0
       assign sub_names = ''
+      assign guide_handles = 'cacao-recipe-guide,vegan-recipe-guide,zeotein-starter-guide' | split: ','
     -%}
     {%- capture sub_thumbs -%}
       {%- for g in sub_list -%}
@@ -163,7 +193,7 @@
             assign sub_names = sub_names | append: ', ' | append: gl
           endif
         -%}
-        {%- if gp.featured_image -%}<img src="{{ gp.featured_image | image_url: width: 96 }}" alt="" width="32" height="32" loading="lazy">{%- endif -%}
+        {%- if g == 'guides' -%}<span class="zt-perk__fan">{%- for gh in guide_handles -%}{%- assign gg = all_products[gh] -%}{%- if gg.featured_image -%}<img src="{{ gg.featured_image | image_url: width: 72, height: 96, crop: 'center' }}" alt="" width="22" height="30" loading="lazy">{%- endif -%}{%- endfor -%}</span>{%- elsif gp.featured_image -%}<img src="{{ gp.featured_image | image_url: width: 96 }}" alt="" width="32" height="32" loading="lazy">{%- endif -%}
       {%- endfor -%}
     {%- endcapture -%}
     {%- capture once_thumbs -%}
@@ -178,7 +208,7 @@
               assign gp = nil
           endcase
         -%}
-        {%- if gp.featured_image -%}<img src="{{ gp.featured_image | image_url: width: 96 }}" alt="" width="32" height="32" loading="lazy">{%- endif -%}
+        {%- if g == 'guides' -%}<span class="zt-perk__fan">{%- for gh in guide_handles -%}{%- assign gg = all_products[gh] -%}{%- if gg.featured_image -%}<img src="{{ gg.featured_image | image_url: width: 72, height: 96, crop: 'center' }}" alt="" width="22" height="30" loading="lazy">{%- endif -%}{%- endfor -%}</span>{%- elsif gp.featured_image -%}<img src="{{ gp.featured_image | image_url: width: 96 }}" alt="" width="32" height="32" loading="lazy">{%- endif -%}
       {%- endfor -%}
     {%- endcapture -%}
     <div class="zt-perks-src{% if sub_gifts == blank %} is-static{% endif %}" data-zt-perks>
@@ -195,14 +225,21 @@
     <style>
       .zt-perks-src{display:none}
       .zt-perks-src.is-static,.zt-perks-src.is-fallback{display:block}
-      .zt-perk{display:flex;align-items:center;gap:10px;margin:8px 0 0;padding:7px 10px;border-radius:10px;font-size:13px;line-height:1.3;letter-spacing:0;color:#2E1748}
+      .zt-perk{display:flex;align-items:center;gap:8px;margin:8px 0 0;padding:7px 9px;border-radius:10px;font-size:13px;line-height:1.3;letter-spacing:0;color:#2E1748}
       .zt-perk--sub{background:#F3EEFA;border:1px solid #E4D9F3}
       .zt-perk--once{background:#F5F4F7;color:#3A3546}
       .zt-perk__thumbs{display:flex;flex:none}
-      .zt-perk__thumbs img{width:32px;height:32px;object-fit:contain;border-radius:50%;background:#fff;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(29,21,48,.2)}
-      .zt-perk__thumbs img + img{margin-left:-9px}
+      .zt-perk__thumbs > img{width:30px;height:30px;object-fit:contain;border-radius:50%;background:#fff;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(29,21,48,.2)}
+      .zt-perk__thumbs > img + img{margin-left:-10px}
+      .zt-perk__fan{position:relative;display:inline-block;flex:none;width:42px;height:32px;margin-left:-4px}
+      .zt-perk__thumbs > .zt-perk__fan:first-child{margin-left:0}
+      .zt-perk__fan img{position:absolute;bottom:0;width:20px;height:28px;object-fit:cover;border-radius:3px;border:1px solid #fff;background:#fff;box-shadow:0 1px 3px rgba(29,21,48,.28)}
+      .zt-perk__fan img:nth-child(1){left:2px;transform:rotate(-11deg);z-index:1}
+      .zt-perk__fan img:nth-child(2){left:20px;transform:rotate(11deg);z-index:2}
+      .zt-perk__fan img:nth-child(3){left:11px;z-index:3}
       .zt-perk__txt{min-width:0}
       .zt-perk__txt b{font-weight:700;color:#4B2380}
+      .zt-perk--sub .zt-perk__txt{font-size:12.5px}
       .zt-perk--once .zt-perk__txt b{color:#2E2A38}
       .zt-perk__txt small{display:block;margin-top:1px;font-size:11.5px;line-height:1.3;color:#6B6478}
       .zt-perks-src.is-static .zt-perk{margin:2px 0 8px}
@@ -321,7 +358,7 @@
       #MainContent .product-form__quantity .quantity{width:112px;min-height:46px}
       #MainContent .product__info-container > .product-form__quantity + * product-form{margin:0 !important}
       #MainContent .product__info-container > .product-form__quantity + * .product-form__submit{min-height:46px;margin-bottom:0}
-      #MainContent .product__info-container > .product-form__quantity + * delivery-promise-wc{margin:-8px 0 -10px -122px;display:flex !important;justify-content:center}
+      #MainContent delivery-promise-wc{display:none !important}
       @media (min-width: 750px){
         #MainContent .product__info-container .product__title h1{font-size:26px !important;line-height:1.25}
       }

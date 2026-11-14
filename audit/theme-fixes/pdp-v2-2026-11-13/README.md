@@ -82,3 +82,11 @@ The live copies of all five templates are unchanged since Nov 5 (same checksums 
 - **Gift line:** "Free Starter Kit · $62.98 value" / "With your first subscription: shaker, Save-A-Scoop + 3 guides" (sticks: "shaker + 3 guides", $55.99). One-time keeps "Free with your first bag: Save-A-Scoop and 3 digital guides".
 - **Guarantee row:** "30-Day Money-Back Guarantee", word for word as live. It's now in the preview too, since the Shopify connector was re-authorized.
 - Preview snippet = repo snippet, md5 `aa88b8d6ce92467f3efea4358fd9a1d5`. Checked on bag, 30 sticks, 7-Day, the Starter Kit funnel bag and cacao powder: no script errors. The funnel product's own Seal text ("Your first order comes with a free Starter Kit…") isn't touched.
+
+## Nov 14 (round 5, Dana)
+- **Fixed: format tiles went to a 404.** The tile link added the product handle twice ("/products/zeotein-cacao-sticks-30zeotein-cacao-sticks-30"). Links are correct now. Click-tested bag → 30 sticks → 7-Day → bag: the right page each time, no errors.
+- **Format switching feels like a tab:** the next page opens with the tiles at the same spot on screen (within about 40px), and the other two pages are pre-loaded. Each format is still its own product page with its own photos, description, reviews and subscription plans.
+- **All three guide covers** (Starter Guide, Cacao Recipe Guide, Vegan Recipe Guide) now show as a small fan in the gift lines: Subscribe & Save, One-time and the 7-Day "Included" line.
+- **Rating line shortened:** "★★★★★ 4.9 from verified buyers". Still live from Judge.me. If Judge.me ever stops providing the verified number, it falls back to "from customer reviews".
+- **Shop Promise badge hidden** on these pages. It's Shopify's own badge, its text ("Returns accepted") can't be edited, and it doesn't say 30-day money-back. Our "30-Day Money-Back Guarantee" row covers it.
+- Snippet md5 `9ae488a6bcb0749d5c6cdfe3041f07a6` (preview = repo).
