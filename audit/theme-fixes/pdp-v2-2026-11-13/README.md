@@ -23,7 +23,7 @@ In preview links, Shopify's grey preview bar sits at the bottom of the screen. T
 | Add to cart above the fold | A bar with price, plan and Add to cart stays on screen until the main button scrolls into view. On phones it runs full width. On desktop it floats over the photo column, so it never covers the buy box. |
 | Reviews | **"★★★★★ Verified buyers rate Zeotein 4.9/5"** replaces the per-product count ("13 reviews"). It's read live from Judge.me's verified-buyer average (4.93 from 119 verified reviews on Nov 13), so it updates on its own as reviews come in. The stars fill to the exact rating. If Judge.me ever stops providing the verified number, it falls back to "Customers rate Zeotein" with the all-reviews average, so it never claims "verified" without the data. One real, verified customer quote sits under the button. |
 | Layout | Quantity and Add to cart on one row, same height and level (the theme's 25px form margin was pushing the button down). Shop Promise badge centred under the row. The duplicate price line is hidden when the subscription box shows prices. The desktop photo column narrows from "large" to "medium" so the buy box is wider, with a slightly smaller desktop title. The Rewards button and the second scrolling top bar are hidden on phones on these pages. |
-| Trust row | "30-day guarantee on your first order" + "Ships in 1–2 business days" (the 7-Day packs are covered, per Dana's rule). |
+| Trust row | **"30-Day Money-Back Guarantee"** (word for word the live wording) + "Ships in 1–2 business days". The 7-Day packs are covered, per Dana's rule. |
 
 ### Single-ingredient pages (cacao powder, zeolite)
 | Area | Change |
@@ -71,3 +71,8 @@ The live copies of all five templates are unchanged since Nov 5 (same checksums 
 1. Live theme (needs someone with live access): Edit code → add `snippets/zt-buybox-tidy.liquid`, replace the five templates with the files here. Check one page on a phone.
 2. Same day, Black Friday theme `187825914069` (Claude can write it): same six files. Its five templates are identical to live's.
 3. Starter Kit image: on Dana's yes, Claude uploads it to the bag and sticks products and reorders the gallery.
+
+## Nov 14: guarantee wording and prices confirmed
+- **Guarantee wording:** the trust row now uses the live wording exactly: "30-Day Money-Back Guarantee". It's in the repo snippet (md5 `6d68d815e698234d68ad22e2105dc8b6`), which is the file to paste live. The preview theme still shows the earlier "30-day guarantee on your first order" until the Shopify connector is re-authorized and the snippet is re-uploaded. Everything else on the pages, including the "The guarantee covers your first order, one supply per customer" line, the FAQ answer and the refund policy link, is untouched. Single-ingredient pages carry no guarantee wording, live or preview.
+- **Prices:** checked against the public storefront on Nov 14. Every variant price and subscription price matches the pre-work values: bag $109.99 / $99.99, 30 sticks $134.99 / $114.99, 7-Day $39.99, cacao powder $17.99 / $28.99 / $48.99, zeolite $29.99 / $64.99 / $79.99, Starter Kit funnel $93.49 / $76.99, shaker $15.99, Save-A-Scoop $6.99, guides $12 / $14 / $14. No product, price, Seal plan or discount was edited in this work.
+- **"$150" lines on the 9 single-ingredient templates:** Zeus is changing these in the theme editor (live + BF). Not touched here. When the v2 cacao powder and zeolite templates go live, they hide that line and show the $130 row from the snippet instead.

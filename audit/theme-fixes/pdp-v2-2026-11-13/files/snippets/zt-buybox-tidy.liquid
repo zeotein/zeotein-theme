@@ -5,7 +5,8 @@
   part: 'perks'    First-order gifts as one slim line with small photos. With the Seal widget on the page they move inside the Subscribe & Save
                    and One-time options and Seal's renewal sentence is shortened; otherwise (no subscription) a plain row.
                    sub_gifts / once_gifts: comma lists of shaker, scoop, guides.
-  part: 'trust'    Guarantee + shipping row. kind: 'single' = shipping-only row (single-ingredient powders are final sale).
+  part: 'trust'    Guarantee + shipping row. Guarantee text is word-for-word the live wording ("30-Day Money-Back Guarantee");
+                   don't reword it without Dana. kind: 'single' = shipping-only row (single-ingredient powders are final sale).
   part: 'review'   One real customer review (quote, name).
   part: 'sticky'   Add to cart bar (phones: full width; desktop: floating) shown while the main button is off screen (moved to <body> so
                    it is fixed to the screen; sits above Shopify's preview bar when previewing).
@@ -271,7 +272,7 @@
       {%- else -%}
       <li>
         <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a6 6 0 1 0 1.8-4.3"/><path d="M4 3.8v3.4h3.4"/></svg>
-        <span><b>30-day guarantee</b> on your first order</span>
+        <span><b>30-Day Money-Back Guarantee</b></span>
       </li>
       {%- endif -%}
       <li>

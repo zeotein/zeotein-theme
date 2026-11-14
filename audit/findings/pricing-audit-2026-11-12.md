@@ -75,3 +75,5 @@ Live in Shopify shipping (General profile → United States → "Free Shipping",
 **Unchanged:** bag subscription ($99.99) and 30-stick subscription ($114.99) renewals still pay shipping. The subscription free-shipping discount (≥ $119.99) still doesn't reach renewals.
 
 **Still says $150 (needs a text edit):** the "Orders of $150 and up ship free." line under Add to cart on the 9 single-ingredient product templates, in both the live and Black Friday themes. The v2 product pages replace that line with a shipping row that reads $130 from one setting in `snippets/zt-buybox-tidy.liquid`.
+
+**Nov 14 (Dana):** keep free shipping at $130+ through the holidays. **The $75 holiday free-shipping test is cancelled**, so no discount gets created for it.
