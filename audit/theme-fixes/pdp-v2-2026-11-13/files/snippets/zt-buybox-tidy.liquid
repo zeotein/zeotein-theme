@@ -147,7 +147,7 @@
               assign gv = p_shaker.price
             when 'scoop'
               assign gp = p_scoop
-              assign gl = 'scoop'
+              assign gl = 'Save-A-Scoop'
               assign gv = p_scoop.price
             when 'guides'
               assign gp = p_g1
@@ -185,7 +185,7 @@
       {%- if sub_gifts != blank -%}
         <div class="zt-perk zt-perk--sub" data-zt-perk="subscription">
           <span class="zt-perk__thumbs" aria-hidden="true">{{ sub_thumbs }}</span>
-          <span class="zt-perk__txt"><b>Free Starter Kit</b>{% if sub_value > 0 %} · {{ sub_value | money_without_trailing_zeros }} value{% endif %}<small>First order: {{ sub_names }}</small></span>
+          <span class="zt-perk__txt"><b>Free Starter Kit</b>{% if sub_value > 0 %} · {{ sub_value | money_without_trailing_zeros }} value{% endif %}<small>With your first subscription: {{ sub_names }}</small></span>
         </div>
       {%- endif -%}
       {%- if once_text != blank -%}
@@ -238,7 +238,7 @@
           var d = box.querySelector('.sls-selling-plan-description-content');
           if (d) {
             var m = d.textContent.trim().match(RATE);
-            if (m) d.textContent = 'Renews at ' + m[1] + ' every ' + m[2] + ' until you cancel. Skip, pause or cancel anytime.';
+            if (m) d.textContent = 'Renews at ' + m[1] + ' every ' + m[2] + '. Skip, pause or cancel anytime.';
           }
           return true;
         }
