@@ -1,0 +1,12 @@
+{
+ "what": "Starter Kit image added as gallery image 2; old text-only 'Try it for 30 days' image moved to the last position. Nothing deleted. Done Nov 15 ~04:12 UTC before Orbit's stop instruction; no further product-data changes after that.",
+ "products": {
+  "zeotein-cacao-bag-30 (9342459674837)": {"added": "gid://shopify/MediaImage/46993971314901", "moved_to_last": "gid://shopify/MediaImage/46739572588757",
+    "original_order": ["46512530718933","46739603456213","46739241861333","46739241894101","46739572588757","46470967361749","46471041974485","46471058817237"]},
+  "zeotein-cacao-sticks-30 (9202824380629)": {"added": "gid://shopify/MediaImage/46993971347669", "moved_to_last": "gid://shopify/MediaImage/46739572621525",
+    "original_order": ["46512530751701","46739603488981","46739241992405","46739242025173","46739572621525","41318484148437","42647055827157","42647183458517"]},
+  "zeotein-vegan-sticks-30 (9254632653013)": {"added": "gid://shopify/MediaImage/46993971380437", "moved_to_last": "gid://shopify/MediaImage/46739572687061",
+    "original_order": ["46512531112149","46739603587285","46739242320085","46739242352853","46739572687061","46473297297621"]}
+ },
+ "undo": "Delete the added MediaImage on each product and move the old offer image back to position 5 (index 4)."
+}

@@ -1,0 +1,62 @@
+[
+ {
+  "file": "snippets/zt-buybox-tidy.liquid",
+  "md5": "0524ca06fbc5e8f354a95eb2ca871b7c",
+  "bytes": 29939,
+  "live_now_md5": "(new file)"
+ },
+ {
+  "file": "snippets/zt-desc-cacao.liquid",
+  "md5": "b4a4a18eea58f2b4ec0c9df98ee670c8",
+  "bytes": 6953,
+  "live_now_md5": "(new file)"
+ },
+ {
+  "file": "snippets/meta-tags.liquid",
+  "md5": "36238a69e92570e2927a714a270c3dfa",
+  "bytes": 2072,
+  "live_now_md5": "15a37af660bd6c24e0f39f0018e8a7f3"
+ },
+ {
+  "file": "templates/product.zeotein-cacao-30-day-bag.json",
+  "md5": "2d188453fe8922b3869ce47faecc73af",
+  "bytes": 16044,
+  "live_now_md5": "8b516aeb3dcb4bcde9b837204cd6dc0d"
+ },
+ {
+  "file": "templates/product.cacao-30-day.json",
+  "md5": "0d246dded95177b9d2b987cd68ec52d7",
+  "bytes": 16882,
+  "live_now_md5": "e17ec6fa3fd9eafc26c9368464291fe7"
+ },
+ {
+  "file": "templates/product.cacao-7-day.json",
+  "md5": "57104c45e663eed6a8d563eee1a874c0",
+  "bytes": 16879,
+  "live_now_md5": "98469d1a2919b969cf1d051ef0b036d0"
+ },
+ {
+  "file": "templates/product.vegan-30-day.json",
+  "md5": "32e7b5b913a8afb9c8e6745b5dba9a59",
+  "bytes": 15116,
+  "live_now_md5": "604254f773fead89a03fc3beb8f00891"
+ },
+ {
+  "file": "templates/product.vegan-7-day.json",
+  "md5": "984a147cfb50b855f058e0c08cf7bfc5",
+  "bytes": 14928,
+  "live_now_md5": "a4106b5d9ca380fb1cfa6b6514e27173"
+ },
+ {
+  "file": "templates/product.organic-cacao.json",
+  "md5": "cbb0b8319a4142961c1b0afdefab8f29",
+  "bytes": 9221,
+  "live_now_md5": "b7340ed36d07b9c15e93d2a1d22510cc"
+ },
+ {
+  "file": "templates/product.zeolite.json",
+  "md5": "74b95c93654c97f97bf1cd18ebf0a04b",
+  "bytes": 9778,
+  "live_now_md5": "216a1298c72b72b0c453193425a644dd"
+ }
+]
