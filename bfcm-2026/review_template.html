@@ -1,0 +1,149 @@
+<title>Black Friday Email Review</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one review column. Left rail of meta beside each email on wide screens, stacked on phones. */
+:root{
+  --bg:#F3F1F6; --surface:#FFFFFF; --ink:#17131D; --muted:#625C6E; --line:#E2DDE9;
+  --purple:#5F2D90; --teal:#1E9AA0; --bfblack:#0A0A0C; --warn:#B4531A; --warnbg:#FFF2E8; --ok:#1C7A55; --okbg:#E7F6EF;
+  --head:Poppins,'Segoe UI',Helvetica,Arial,sans-serif; --body:Inter,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#110E16; --surface:#1B1722; --ink:#F1EEF6; --muted:#A79FB5; --line:#2E2838;
+  --purple:#B48AE6; --teal:#4CC9CF; --warn:#F2A06B; --warnbg:#2E1E14; --ok:#6FD3A6; --okbg:#13261E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#110E16; --surface:#1B1722; --ink:#F1EEF6; --muted:#A79FB5; --line:#2E2838;
+  --purple:#B48AE6; --teal:#4CC9CF; --warn:#F2A06B; --warnbg:#2E1E14; --ok:#6FD3A6; --okbg:#13261E; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mast{background:var(--bfblack);color:#fff;border-radius:18px;padding:28px 28px 24px;display:grid;gap:10px}
+.mast .eb{font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#32BAC0}
+.mast h1{font-family:var(--head);font-size:clamp(26px,4vw,40px);line-height:1.1;margin:0;text-wrap:balance}
+.mast p{margin:0;color:#CFC9DA;max-width:70ch}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.stat{background:#1C1724;border:1px solid #2C2538;border-radius:10px;padding:8px 12px;font-size:13px;color:#E6E1EE}
+.stat b{font-family:var(--head);font-size:17px;color:#fff;margin-right:4px}
+h2{font-family:var(--head);font-size:22px;margin:40px 0 14px;text-wrap:balance}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.find{display:grid;gap:10px}
+.fi{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:6px;padding:3px 8px;white-space:nowrap}
+.t-fix{background:var(--warnbg);color:var(--warn)}
+.t-ok{background:var(--okbg);color:var(--ok)}
+.t-dec{background:color-mix(in srgb,var(--purple) 16%,transparent);color:var(--purple)}
+.fi p{margin:0}.fi p+p{margin-top:4px;color:var(--muted);font-size:14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 18px}
+.bar button{font:600 14px var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+.bar button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bar button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.bar .sp{flex:1}
+.card{display:grid;grid-template-columns:300px minmax(0,1fr);gap:22px;align-items:start;border-top:1px solid var(--line);padding:26px 0}
+.meta{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);display:grid;gap:10px;min-width:0}
+.meta .id{font-family:var(--head);font-weight:800;font-size:28px;line-height:1}
+.meta .flow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.kv{display:grid;gap:2px}.kv span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.kv div{font-weight:600}
+.note{font-size:14px;color:var(--muted);border-left:3px solid var(--teal);padding-left:10px}
+.frame{min-width:0;display:flex;justify-content:center;background:#000;border-radius:14px;padding:0;overflow:hidden}
+.frame iframe{border:0;width:600px;max-width:100%;display:block;background:#000}
+.phone .frame iframe{width:375px}
+.sms{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.bub{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;min-width:0}
+.bub .who{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+.bub .msg{background:#E9E9EB;color:#111;border-radius:18px 18px 18px 4px;padding:10px 14px;font-size:15px;overflow-wrap:anywhere}
+.bub .cnt{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.todo{counter-reset:t;display:grid;gap:8px;padding:0;margin:0;list-style:none}
+.todo li{counter-increment:t;display:grid;grid-template-columns:28px 1fr;gap:8px}
+.todo li::before{content:counter(t);font:700 13px var(--head);background:var(--ink);color:var(--bg);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+@media (max-width:860px){.card{grid-template-columns:minmax(0,1fr)}.meta{position:static}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="eb">Draft for Dana's review &middot; nothing saved in GoHighLevel yet</div>
+    <h1>Black Friday, subscriber and holiday guide emails</h1>
+    <p>Every email and text from your feedback, redesigned. Black Friday emails are black with the Starter Kit front and center, and say "60% off your Zeotein Cacao Starter Kit" everywhere. No regular price, no "new customers only", no people photos. Every Starter Kit link goes to the Black Friday landing page.</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <h2>What I found before redesigning</h2>
+  <div class="find">
+    <div class="fi"><span class="tag t-fix">Fix before Nov 24</span><div><p><b>The Black Friday landing page is not live yet.</b> It exists only in the unpublished theme "Black Friday Store 2026 (draft, publish Nov 27)". Early access starts Nov 24, so for three days the email links open a plain product page at $109.99 with "No reviews". That is the "product page that doesn't look like Black Friday" you saw.</p><p>Fix: either publish the Black Friday theme on Nov 24 instead of Nov 27, or copy the Black Friday landing page template into the live theme before Nov 24. The product is unlisted, so nobody else lands on it.</p></div></div>
+    <div class="fi"><span class="tag t-ok">Verified</span><div><p><b>$68.99 is right.</b> In Shopify the Black Friday bag is $109.99. The subscription plan takes $41 off the first box, which makes it $68.99. After that it renews at $99.99 every 30 days. The landing page in the Black Friday theme shows $68.99, "60% off your Starter Kit" and a countdown that ends Nov 30 at 11:59 PM CT.</p><p>The one-time option on that page showed $79.99 in today's preview. With the Nov 24 to 30 discounts, a one-time bag would ring up at $76.99. Have Raf confirm what the one-time line should say.</p></div></div>
+    <div class="fi"><span class="tag t-fix">Fix before Nov 24</span><div><p><b>The 30% sale page returns a 404.</b> zeotein.com/collections/bfcm-storewide-sale exists in Shopify (26 products) but is not on the Online Store, so every "Shop 30% off" link would break. Fix: in Shopify, open Collections &rarr; BFCM Storewide Sale &rarr; Publishing &rarr; add Online Store.</p></div></div>
+    <div class="fi"><span class="tag t-fix">Fixed in drafts</span><div><p><b>The photo of you and Minor</b> is in the subscriber emails (SBF01 note, SBF03 "Black Friday is on", SBF05, SBF06 and SBFG01). It is gone from every draft here. SBFG01 (the thank-you after the free 7-Day is added) still needs the same swap when we build.</p></div></div>
+    <div class="fi"><span class="tag t-fix">Fixed in drafts</span><div><p><b>Old copy problems:</b> BF01 said "$68.99 first order (normally $76.99)" and "Free shipping". Free shipping starts at $130, so a $68.99 kit does not ship free. BF03, BF05 and BF06 showed a $172.97 crossed-out price, and BF04 said "30% off everything", but the 30% skips gift cards, Starter Kits and the Black Friday bundles. All of that is fixed.</p></div></div>
+    <div class="fi"><span class="tag t-fix">Fixed in drafts</span><div><p><b>The holiday guide had Black Friday in it.</b> HG03 ("You're on the Black Friday early list") is replaced with a seasonal email that works any day in November or December. HG01 is now guide-only like the website pop-up version. Its $76.99 offer and its offer.zeotein.com link are gone.</p></div></div>
+    <div class="fi"><span class="tag t-dec">Your call</span><div><p><b>Subscriber free 7-Day: Vegan, or the opposite blend?</b> Five subscriber templates say "free Vegan 7-Day". One ("Black Friday is on, 30% and free 7-Day") says "the opposite blend: Cacao if you subscribe to Vegan". These drafts say Vegan. Tell me if it should be the opposite blend.</p></div></div>
+    <div class="fi"><span class="tag t-dec">Your call</span><div><p><b>The 60% claim compares $68.99 with the kit's bought-separately value ($172.97).</b> We don't print that number in the emails anymore, but the landing page does. That's fine as long as the shaker, scoop and guides really sell at those prices on the site.</p></div></div>
+  </div>
+
+  <h2>Emails</h2>
+  <div class="bar" role="group" aria-label="Filter emails">
+    <button type="button" data-f="all" aria-pressed="true">All</button>
+    <button type="button" data-f="BF ·" aria-pressed="false">Black Friday, one-time buyers</button>
+    <button type="button" data-f="SBF ·" aria-pressed="false">Subscribers</button>
+    <button type="button" data-f="HG ·" aria-pressed="false">Holiday guide</button>
+    <span class="sp"></span>
+    <button type="button" id="view" aria-pressed="false">Phone width</button>
+  </div>
+  <div id="list"></div>
+
+  <h2>Texts</h2>
+  <p style="margin:-6px 0 14px;color:var(--muted)">Only for contacts with SMS consent. The Starter Kit texts link to the Black Friday landing page on try.zeotein.com, not offer.zeotein.com, which has a different price. GoHighLevel's trigger links shorten the URL when we build.</p>
+  <div class="sms" id="sms"></div>
+
+  <h2>After you approve</h2>
+  <div class="panel">
+    <ol class="todo">
+      <li><span>Fix the two landing-page items above (Black Friday page live by Nov 24, 30% sale collection on the Online Store).</span></li>
+      <li><span>Upload the final HTML into the existing GoHighLevel templates, so workflow links stay attached. Send a test of each to you first.</span></li>
+      <li><span>In the subscriber workflow, add emails 2 to 4 and the three texts. In the Black Friday workflow, add the three texts. In the holiday guide workflow, swap HG03 and rename the workflow so it no longer says "Black Friday list". These are builder steps, done in the browser.</span></li>
+      <li><span>Swap the people photo in SBFG01 too, then test-send every email to you.</span></li>
+    </ol>
+  </div>
+</div>
+
+<script>
+/*__DATA__*/
+(function(){
+  var list=document.getElementById('list'), smsEl=document.getElementById('sms');
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  document.getElementById('stats').innerHTML=
+    '<span class="stat"><b>'+EMAILS.filter(function(e){return e.flow.indexOf('BF ·')===0}).length+'</b>Black Friday emails</span>'+
+    '<span class="stat"><b>'+EMAILS.filter(function(e){return e.flow.indexOf('SBF')===0}).length+'</b>subscriber emails (was 1)</span>'+
+    '<span class="stat"><b>'+EMAILS.filter(function(e){return e.flow.indexOf('HG')===0}).length+'</b>holiday guide emails</span>'+
+    '<span class="stat"><b>'+SMS.length+'</b>texts (subscribers had none)</span>';
+  EMAILS.forEach(function(e,i){
+    var c=document.createElement('article'); c.className='card'; c.dataset.flow=e.flow;
+    c.innerHTML='<div class="meta"><div class="flow">'+esc(e.flow)+'</div><div class="id">'+esc(e.id)+'</div>'+
+      '<div class="kv"><span>Sends</span><div>'+esc(e.send)+'</div></div>'+
+      '<div class="kv"><span>Subject</span><div>'+esc(e.subject)+'</div></div>'+
+      '<div class="kv"><span>Preview text</span><div style="font-weight:500">'+esc(e.preheader)+'</div></div>'+
+      (e.replaces?'<div class="kv"><span>Replaces</span><div style="font-weight:500">'+esc(e.replaces)+'</div></div>':'')+
+      (e.note?'<div class="note">'+esc(e.note)+'</div>':'')+'</div>'+
+      '<div class="frame"><iframe title="'+esc(e.id+' '+e.subject)+'" loading="'+(i<2?'eager':'lazy')+'" scrolling="no"></iframe></div>';
+    list.appendChild(c);
+    var f=c.querySelector('iframe'); f.srcdoc=e.html;
+    f.addEventListener('load',function(){fit(f)});
+  });
+  function fit(f){try{var d=f.contentDocument;f.style.height=Math.max(d.documentElement.scrollHeight,d.body.scrollHeight)+'px'}catch(err){f.style.height='2400px'}}
+  function refit(){document.querySelectorAll('iframe').forEach(function(f){f.style.height='10px';fit(f)})}
+  window.addEventListener('resize',function(){clearTimeout(window.__r);window.__r=setTimeout(refit,150)});
+  document.querySelectorAll('[data-f]').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('[data-f]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    var f=b.dataset.f; document.querySelectorAll('.card').forEach(function(c){c.hidden=!(f==='all'||c.dataset.flow.indexOf(f)===0)});
+    setTimeout(refit,50);
+  })});
+  var v=document.getElementById('view');
+  v.addEventListener('click',function(){var on=v.getAttribute('aria-pressed')!=='true';v.setAttribute('aria-pressed',on);document.body.classList.toggle('phone',on);setTimeout(refit,50)});
+  SMS.forEach(function(s){
+    var d=document.createElement('div'); d.className='bub';
+    d.innerHTML='<div class="who">'+esc(s.flow)+'</div><div style="font-weight:600">'+esc(s.send)+'</div><div class="msg">'+esc(s.text)+'</div>'+
+      '<div class="cnt">'+s.chars+' characters &middot; '+s.segs+' SMS segment'+(s.segs>1?'s':'')+' before link shortening</div>';
+    smsEl.appendChild(d);
+  });
+})();
+</script>

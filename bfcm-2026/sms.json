@@ -1,0 +1,32 @@
+[
+  {
+    "flow": "BF \u00b7 New and past one-time buyers",
+    "send": "Tue Nov 24, 11:00 AM CT",
+    "text": "Zeotein: Black Friday early access is open for you. 60% off the Zeotein Cacao Starter Kit: $68.99 for the bag, shaker, scoop + guides. Ends Mon 11/30. https://try.zeotein.com/products/30-day-cacao-bulk-bag-black-friday Reply STOP to opt out"
+  },
+  {
+    "flow": "BF \u00b7 New and past one-time buyers",
+    "send": "Fri Nov 27, 11:00 AM CT",
+    "text": "Zeotein: Black Friday is live. 60% off the Zeotein Cacao Starter Kit, just $68.99. Ends Mon 11/30 at 11:59pm CT. https://try.zeotein.com/products/30-day-cacao-bulk-bag-black-friday Reply STOP to opt out"
+  },
+  {
+    "flow": "BF \u00b7 New and past one-time buyers",
+    "send": "Mon Nov 30, 11:00 AM CT",
+    "text": "Zeotein: Last day. 60% off the Zeotein Cacao Starter Kit ($68.99) ends tonight at 11:59pm CT. https://try.zeotein.com/products/30-day-cacao-bulk-bag-black-friday Reply STOP to opt out"
+  },
+  {
+    "flow": "SBF \u00b7 Subscribers",
+    "send": "Tue Nov 24, 11:00 AM CT",
+    "text": "Zeotein: Thanks for subscribing. Black Friday starts early for you: 30% off one-time orders + a free Vegan 7-Day when you spend $75. Through Mon 11/30. https://zeotein.com/collections/bfcm-storewide-sale Reply STOP to opt out"
+  },
+  {
+    "flow": "SBF \u00b7 Subscribers",
+    "send": "Fri Nov 27, 11:00 AM CT",
+    "text": "Zeotein: Black Friday is here. Your 30% off one-time orders and free Vegan 7-Day at $75 run through Monday. https://zeotein.com/collections/bfcm-storewide-sale Reply STOP to opt out"
+  },
+  {
+    "flow": "SBF \u00b7 Subscribers",
+    "send": "Mon Nov 30, 11:00 AM CT",
+    "text": "Zeotein: Last day for your 30% off one-time orders + free Vegan 7-Day at $75. Ends 11:59pm CT tonight. https://zeotein.com/collections/bfcm-storewide-sale Reply STOP to opt out"
+  }
+]
