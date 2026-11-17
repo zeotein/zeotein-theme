@@ -1,0 +1,3342 @@
+{
+ "run": "2026-11-17T02:12Z",
+ "note": "Live zeotein.com, desktop 1440px + iPhone 13. Analytics/ad beacons blocked. Judge.me images and some third-party hosts were blocked by the test machine network, not by the site.",
+ "pages": [
+  {
+   "url": "https://zeotein.com/blogs/news",
+   "profile": "desktop",
+   "status": 200,
+   "title": "News \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "News"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 449,
+    "dcl": 4111,
+    "load": 6435,
+    "transferKB": 1722,
+    "resources": 216,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/23-grams-of-protein-what-that-actually-looks-like",
+   "profile": "desktop",
+   "status": 200,
+   "title": "23 Grams of Protein: What It Looks Like \u2013 Zeotein LLC",
+   "metaDescription": "What 23 grams of protein in a Zeotein serving looks like next to everyday foods, and how that 140-calorie serving compares in everyday terms.",
+   "h1s": [
+    "23 Grams of Protein: What That Actually Looks Like"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 658,
+    "dcl": 4970,
+    "load": 6630,
+    "transferKB": 1540,
+    "resources": 210,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein LLC",
+   "metaDescription": "Zeotein is a first-of-its-kind single-serve protein blend with sea moss, bone broth protein, collagen, MCT & cacao. Clean nutrition for busy lifestyles.",
+   "h1s": [
+    "Zeotein LLC",
+    "Real Nutrition. Made for Real Life."
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 411,
+    "dcl": 4023,
+    "load": 6452,
+    "transferKB": 2602,
+    "resources": 229,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/bone-broth-protein-vs-whey-how-the-two-compare",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Bone Broth Protein vs. Whey Compared \u2013 Zeotein LLC",
+   "metaDescription": "How bone broth protein compares with whey, covering source, amino acids, digestion, and taste, in plain language without the usual supplement pitch.",
+   "h1s": [
+    "Bone Broth Protein vs. Whey: How the Two Compare"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 454,
+    "dcl": 4132,
+    "load": 6912,
+    "transferKB": 1484,
+    "resources": 209,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/animal-based-vs-plant-based-protein-what-s-the-difference",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Animal-Based vs Plant-Based Protein: What's the Difference? \u2013 Zeotein LLC",
+   "metaDescription": "Discover the difference between animal-based and plant-based protein and how Zeotein offers both clean protein options.",
+   "h1s": [
+    "Animal-Based vs Plant-Based Protein: What's the Difference?"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 658,
+    "dcl": 5883,
+    "load": 7243,
+    "transferKB": 1479,
+    "resources": 209,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/can-you-bake-with-protein-powder-what-heat-does-to-it",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Can You Bake With Protein Powder? What Heat Actually Does to It \u2013 Zeotein LLC",
+   "metaDescription": "Can you bake with protein powder, and does heating it wreck the protein? The protein survives. Texture is the part you have to manage.What heat does to proteinHeat denatures protein. Denaturing means a folded protein strand unravels. It does not cut the strand into useless pieces and it does not remove amino acids.A fr",
+   "h1s": [
+    "Can You Bake With Protein Powder? What Heat Actually Does to It"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 249,
+    "dcl": 3594,
+    "load": 5965,
+    "transferKB": 1481,
+    "resources": 205,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/collagen-and-protein-in-one-serving-why-zeotein-combines-them",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Collagen and Protein in One Serving \u2013 Zeotein LLC",
+   "metaDescription": "Why Zeotein puts collagen peptides and bone broth protein in the same serving, instead of asking you to keep two separate tubs on the counter.",
+   "h1s": [
+    "Collagen and Protein in One Serving: Why Zeotein Combines Them"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 200,
+    "dcl": 3628,
+    "load": 5987,
+    "transferKB": 1418,
+    "resources": 205,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/does-protein-powder-go-bad-how-to-store-it",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Does Protein Powder Go Bad? How to Store It \u2013 Zeotein LLC",
+   "metaDescription": "How to store protein powder, what moisture, heat, and air actually do to a bag over time, and the four checks that tell you a bag is past its best.",
+   "h1s": [
+    "Does Protein Powder Go Bad? How to Store It and What Changes Over Time"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 351,
+    "dcl": 3989,
+    "load": 5800,
+    "transferKB": 1421,
+    "resources": 205,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/fermented-never-alkalized-what-that-means-for-chocolate-protein",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Fermented, Never Alkalized Cacao Explained \u2013 Zeotein LLC",
+   "metaDescription": "Most cocoa powder is alkalized. Zeotein's cacao is fermented and never alkalized. Here is what that means for taste in a chocolate protein powder.",
+   "h1s": [
+    "Fermented, Never Alkalized: What That Means for Chocolate Protein"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 215,
+    "dcl": 4564,
+    "load": 5678,
+    "transferKB": 1497,
+    "resources": 204,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/five-ways-to-use-a-bag-of-zeotein-that-are-not-a-shake",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Five Ways to Use Zeotein That Are Not a Shake \u2013 Zeotein LLC",
+   "metaDescription": "Five ways to use Zeotein Cacao besides a shake, including coffee, oats, bites, pancakes, and yogurt bowls, so a bag does not sit half-finished.",
+   "h1s": [
+    "Five Ways to Use a Bag of Zeotein That Are Not a Shake"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 306,
+    "dcl": 4900,
+    "load": 5611,
+    "transferKB": 1490,
+    "resources": 199,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/how-to-use-zeotein-smoothies-coffee-and-simple-daily-recipes",
+   "profile": "desktop",
+   "status": 200,
+   "title": "How to Use Zeotein: Smoothies, Coffee & Easy Recipes \u2013 Zeotein LLC",
+   "metaDescription": "Learn simple ways to use Zeotein including smoothies, coffee recipes, and easy daily routines with clean protein.",
+   "h1s": [
+    "How to Use Zeotein: Smoothies, Coffee & Easy Recipes"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 230,
+    "dcl": 3568,
+    "load": 5642,
+    "transferKB": 1446,
+    "resources": 208,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/introducing-zeotein-vegan-a-clean-plant-based-protein-blend",
+   "profile": "desktop",
+   "status": 200,
+   "title": "What Is Zeotein Vegan? A Plant-Based Protein Blend \u2013 Zeotein LLC",
+   "metaDescription": "Learn about Zeotein Vegan, our plant-based protein blend made with hemp and pumpkin seed protein and free from artificial sweeteners and fillers.",
+   "h1s": [
+    "What Is Zeotein Vegan? A Plant-Based Protein Blend"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 209,
+    "dcl": 3421,
+    "load": 5547,
+    "transferKB": 1483,
+    "resources": 211,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/introducing-the-zeotein-30-day-bulk-bag-more-servings-less-packaging-better-value",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein 30-Day Bulk Bag: More Servings, Less Packaging \u2013 Zeotein LLC",
+   "metaDescription": "Learn about the new Zeotein 30-Day Bulk Bag: more servings per order of the same clean cacao formula, in a larger format with less packaging.",
+   "h1s": [
+    "Introducing the Zeotein 30-Day Bulk Bag: More Servings, Less Packaging, Better Value"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 250,
+    "dcl": 4007,
+    "load": 5737,
+    "transferKB": 1417,
+    "resources": 209,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/mct-oil-powder-what-it-is-and-why-it-is-in-a-protein-blend",
+   "profile": "desktop",
+   "status": 200,
+   "title": "MCT Oil Powder: What It Is and Why We Use It \u2013 Zeotein LLC",
+   "metaDescription": "What MCT oil powder is, how it is made from coconut, and why it is in Zeotein as a powder that mixes into coffee, shakes, and everyday drinks.",
+   "h1s": [
+    "MCT Oil Powder: What It Is and Why It Is in a Protein Blend"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 278,
+    "dcl": 4507,
+    "load": 5832,
+    "transferKB": 1448,
+    "resources": 209,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/no-whey-why-zeotein-costs-more-than-a-45-tub",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Why Zeotein Costs More Than a Typical Tub \u2013 Zeotein LLC",
+   "metaDescription": "What goes into a 30-day bag of Zeotein, and where the difference from a typical protein tub goes when the formula uses named, sourced ingredients.",
+   "h1s": [
+    "No Whey: Why Zeotein Costs More Than a $45 Tub"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 330,
+    "dcl": 4695,
+    "load": 5446,
+    "transferKB": 1389,
+    "resources": 206,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/the-power-of-single-serve-convenience",
+   "profile": "desktop",
+   "status": 200,
+   "title": "The Power of Single-Serve Convenience \u2013 Zeotein LLC",
+   "metaDescription": "Why Zeotein ships in single-serve stick packs, and how that format makes it easier to keep a daily protein routine at home, at work, or while traveling.",
+   "h1s": [
+    "The Power of Single-Serve Convenience"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 230,
+    "dcl": 3564,
+    "load": 5554,
+    "transferKB": 1513,
+    "resources": 206,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/seamoss-and-mineral-support-why-we-source-ours-from-st-lucia",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Sea Moss in Zeotein: Why We Source It from St. Lucia \u2013 Zeotein LLC",
+   "metaDescription": "Learn about seamoss, its mineral content, traditional use, and why Zeotein sources a premium gold and purple blend from St. Lucia.",
+   "h1s": [
+    "Sea Moss in Zeotein: Why We Source It from St. Lucia"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 279,
+    "dcl": 3661,
+    "load": 5563,
+    "transferKB": 1452,
+    "resources": 208,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/understanding-the-5-core-nutrients-inside-zeotein",
+   "profile": "desktop",
+   "status": 200,
+   "title": "What's Inside Zeotein? 5 Key Ingredient Categories \u2013 Zeotein LLC",
+   "metaDescription": "Discover the 5 core nutrients inside Zeotein including protein, healthy fats, vitamins, minerals, and functional ingredients.",
+   "h1s": [
+    "What's Inside Zeotein? 5 Key Ingredient Categories"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 209,
+    "dcl": 4035,
+    "load": 5438,
+    "transferKB": 1456,
+    "resources": 206,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/what-are-mcts-clean-energy-and-why-we-include-organic-mct-powder-in-zeotein",
+   "profile": "desktop",
+   "status": 200,
+   "title": "What Are MCTs? Understanding MCT Powder \u2013 Zeotein LLC",
+   "metaDescription": "Discover what MCTs are, how they provide sustained energy, and why Zeotein includes organic MCT powder in its premium protein blend.",
+   "h1s": [
+    "What Are MCTs? Understanding MCT Powder"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 306,
+    "dcl": 4632,
+    "load": 5786,
+    "transferKB": 1411,
+    "resources": 202,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/what-is-sea-moss-a-plain-explanation",
+   "profile": "desktop",
+   "status": 200,
+   "title": "What Is Sea Moss? A Plain Explanation \u2013 Zeotein LLC",
+   "metaDescription": "What sea moss is, where Zeotein's gold and purple blend is sourced, and why a small amount is included in the formula, explained in plain language.",
+   "h1s": [
+    "What Is Sea Moss? A Plain Explanation"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 372,
+    "dcl": 5237,
+    "load": 6181,
+    "transferKB": 1618,
+    "resources": 203,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/whats-actually-in-zeotein-all-six-ingredients-named",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Ingredients: All Six, Named and Sourced \u2013 Zeotein LLC",
+   "metaDescription": "The six ingredients in Zeotein Cacao, all named and sourced, and why the list stops there instead of running twenty to thirty ingredients long.",
+   "h1s": [
+    "What's Actually in Zeotein: All Six Ingredients, Named"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 262,
+    "dcl": 3896,
+    "load": 5819,
+    "transferKB": 1477,
+    "resources": 208,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/what-is-zeolite-its-origin-structure-and-why-we-include-it-in-zeotein",
+   "profile": "desktop",
+   "status": 200,
+   "title": "What Is Zeolite? Its Structure and Origin \u2013 Zeotein LLC",
+   "metaDescription": "A naturally occurring volcanic mineral in the Zeotein formula: what it is, how it forms, and why a small amount is included, explained in plain language.",
+   "h1s": [
+    "What Is Zeolite? Understanding Its Structure and Uses"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 243,
+    "dcl": 3881,
+    "load": 5785,
+    "transferKB": 1399,
+    "resources": 208,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/why-most-protein-powders-are-failing-you-and-what-to-look-for-instead",
+   "profile": "desktop",
+   "status": 200,
+   "title": "How to Compare Protein Powders by the Label \u2013 Zeotein LLC",
+   "metaDescription": "What to look for on a protein label: how long the ingredient list is, whether sweeteners and fillers are included, and how Zeotein keeps the list short.",
+   "h1s": [
+    "How to Compare Protein Powders: What to Look for on the Label"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 323,
+    "dcl": 4233,
+    "load": 5404,
+    "transferKB": 1418,
+    "resources": 206,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/why-we-combine-organic-collagen-peptides-and-bone-broth-protein",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Why Zeotein Combines Collagen Peptides and Bone Broth Protein \u2013 Zeotein LLC",
+   "metaDescription": "Learn the difference between organic collagen peptides and bone broth protein \u2014 and why Zeotein combines both in one serving.",
+   "h1s": [
+    "Why Zeotein Combines Collagen Peptides and Bone Broth Protein"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 226,
+    "dcl": 4690,
+    "load": 5456,
+    "transferKB": 1475,
+    "resources": 205,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/why-fillers-gums-and-flavor-systems-are-used-in-supplements",
+   "profile": "desktop",
+   "status": 200,
+   "title": "This Is What Clean Tastes Like \u2013 Zeotein LLC",
+   "metaDescription": "Discover why fillers, gums, and flavor systems are used in supplements and how Zeotein focuses on clean, simple ingredients.",
+   "h1s": [
+    "This Is What Clean Tastes Like"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 222,
+    "dcl": 4186,
+    "load": 6415,
+    "transferKB": 1438,
+    "resources": 206,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/frontpage",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Featured Zeotein Products | Cacao, Vegan, and More \u2013 Zeotein LLC",
+   "metaDescription": "A featured set of Zeotein products used on the store's home page, including protein blends and everyday items. Browse Shop All to see the full catalog.",
+   "h1s": [
+    "Collection:\nHome page"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 535,
+    "dcl": 5046,
+    "load": 6003,
+    "transferKB": 1393,
+    "resources": 221,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/final-sale-no-returns",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Final Sale | Zeotein Items Not Eligible for Return \u2013 Zeotein LLC",
+   "metaDescription": "Final-sale Zeotein items, including digital guides and selected goods, are not eligible for returns or refunds. Review the policy before you buy.",
+   "h1s": [
+    "Collection:\nFinal Sale - No Returns"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 608,
+    "dcl": 4578,
+    "load": 6200,
+    "transferKB": 1571,
+    "resources": 237,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/zeotein-cacao-vs-zeotein-vegan-which-blend-fits-you",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Cacao vs. Vegan: Which Blend Fits You \u2013 Zeotein LLC",
+   "metaDescription": "A straight comparison of Zeotein Cacao and Zeotein Vegan at a glance: where the protein comes from, what is in each blend, and who each one is for.",
+   "h1s": [
+    "Zeotein Cacao vs. Zeotein Vegan: Which Blend Fits You"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 242,
+    "dcl": 4279,
+    "load": 6626,
+    "transferKB": 1544,
+    "resources": 213,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/why-we-use-organic-fermented-cacao-and-why-zeotein-isn-t-sweetened",
+   "profile": "desktop",
+   "status": 200,
+   "title": "What Does Zeotein Cacao Taste Like? Understanding Fermented Cacao \u2013 Zeotein LLC",
+   "metaDescription": "Discover why Zeotein uses organic fermented cacao for natural flavor and why we avoid artificial sweeteners and flavor systems in our clean protein blend.",
+   "h1s": [
+    "What Does Zeotein Cacao Taste Like? Understanding Fermented Cacao"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 207,
+    "dcl": 4070,
+    "load": 6863,
+    "transferKB": 1527,
+    "resources": 214,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/why-zeotein-uses-no-fillers-gums-or-natural-flavors",
+   "profile": "desktop",
+   "status": 200,
+   "title": "What Do Fillers, Gums, and Natural Flavors Do in Protein Powders? \u2013 Zeotein LLC",
+   "metaDescription": "Learn why Zeotein avoids fillers, gums, and artificial flavor systems and how clean formulation supports a simpler supplement routine.",
+   "h1s": [
+    "What Do Fillers, Gums, and Natural Flavors Do in Protein Powders?"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 209,
+    "dcl": 4101,
+    "load": 6754,
+    "transferKB": 1446,
+    "resources": 214,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/guides",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Guides | Starter, Cacao, and Vegan Recipes \u2013 Zeotein LLC",
+   "metaDescription": "Digital guides for getting started with Zeotein, plus simple Cacao and Vegan recipes for shakes, coffee, smoothies, and everyday use at home.",
+   "h1s": [
+    "Collection:\nGuides"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 232,
+    "dcl": 4128,
+    "load": 7121,
+    "transferKB": 1409,
+    "resources": 224,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/protein",
+   "profile": "desktop",
+   "status": 200,
+   "title": "The Zeotein Protein Powder | Cacao and Vegan Blends \u2013 Zeotein LLC",
+   "metaDescription": "Shop Zeotein protein powder in Cacao and Vegan blends. Available in stick packs and 30-day bags, with short ingredient lists and no added sweeteners.",
+   "h1s": [
+    "Collection:\nProtein"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 283,
+    "dcl": 4684,
+    "load": 7111,
+    "transferKB": 1407,
+    "resources": 222,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/protein-blends",
+   "profile": "desktop",
+   "status": 200,
+   "title": "The Zeotein Protein Blends | Cacao and Vegan Options \u2013 Zeotein LLC",
+   "metaDescription": "Zeotein all-in-one protein blends: Cacao with grass-fed bone broth and collagen, or Vegan with pumpkin seed and hemp. Short lists, no added sugar.",
+   "h1s": [
+    "Collection:\nProtein Blends"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 284,
+    "dcl": 6045,
+    "load": 7071,
+    "transferKB": 1468,
+    "resources": 224,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/shop-all",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Shop All Zeotein | Protein, Ingredients, and Accessories \u2013 Zeotein LLC",
+   "metaDescription": "Browse Zeotein Cacao and Vegan protein, single-ingredient powders, guides, and accessories. Short ingredient lists, with no added sugar or sweeteners.",
+   "h1s": [
+    "Collection:\nShop All"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 216,
+    "dcl": 5377,
+    "load": 6991,
+    "transferKB": 1624,
+    "resources": 236,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/single-ingredient-supplements",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Shop Single-Ingredient Powders | Collagen and Cacao \u2013 Zeotein LLC",
+   "metaDescription": "Shop Zeotein's single-ingredient powders, including collagen, bone broth, cacao, hemp, pumpkin seed, MCT, sea moss, and lion's mane, sold on their own.",
+   "h1s": [
+    "Collection:\nSingle Ingredient Supplements"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 330,
+    "dcl": 6509,
+    "load": 7011,
+    "transferKB": 1496,
+    "resources": 227,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/zeotein-merchandise",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Shop Zeotein Merchandise | Shaker, Scoop, and Gear \u2013 Zeotein LLC",
+   "metaDescription": "Shop the 27 oz Zeotein shaker bottle, the Save-A-Scoop, and brand gear made for everyday mixing, travel, and keeping a simple protein routine.",
+   "h1s": [
+    "Collection:\nZeotein Merchandise"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 254,
+    "dcl": 4235,
+    "load": 6845,
+    "transferKB": 1402,
+    "resources": 221,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/contact",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Contact \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 268,
+    "dcl": 4601,
+    "load": 6640,
+    "transferKB": 1348,
+    "resources": 201,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/zeotein",
+   "profile": "desktop",
+   "status": 200,
+   "title": "The Zeotein Cacao | 23g Protein and Six Ingredients \u2013 Zeotein LLC",
+   "metaDescription": "Zeotein Cacao protein powder: 23g protein, six ingredients, and no added sugar. Shop 7-day stick packs, 30-day sticks, and the 30-day bulk bag.",
+   "h1s": [
+    "Collection:\nZeotein Cacao"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 270,
+    "dcl": 3783,
+    "load": 6830,
+    "transferKB": 1427,
+    "resources": 221,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/zeotein-vegan-1",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Vegan Protein | Plant-Based Stick Pack Sizes \u2013 Zeotein LLC",
+   "metaDescription": "Zeotein Vegan plant protein from organic pumpkin seed and hemp, with organic MCT and sea moss. Five ingredients, no sweeteners, in single-serve packs.",
+   "h1s": [
+    "Collection:\nZeotein Vegan"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 361,
+    "dcl": 5719,
+    "load": 6919,
+    "transferKB": 1412,
+    "resources": 220,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/about-zeotein",
+   "profile": "desktop",
+   "status": 200,
+   "title": "About Zeotein \u2014 Why the Ingredient List Stops at Six \u2013 Zeotein LLC",
+   "metaDescription": "There's a volcanic mineral in our protein shake, and we'll tell you how much. No padding, no sweeteners, no promises we can't back.",
+   "h1s": [
+    "Real Nutrition. Made Simple."
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 343,
+    "dcl": 5771,
+    "load": 6932,
+    "transferKB": 1495,
+    "resources": 202,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/faqs",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein FAQs \u2014 Ingredients, Taste, Shipping & Guarantee \u2013 Zeotein LLC",
+   "metaDescription": "How to mix it, what's in it, how it ships, and how our 30-day guarantee works. Straight answers to what people actually ask.",
+   "h1s": [],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 212,
+    "dcl": 3735,
+    "load": 5728,
+    "transferKB": 1354,
+    "resources": 207,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/data-sharing-opt-out",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Your Privacy Choices \u2013 Zeotein LLC",
+   "metaDescription": "As described in our Privacy Policy, we collect personal information from your interactions with us and our website, including through cookies and similar technologies. We may also share this personal information with third parties, including advertising partners. We do this in order to show you ads on other websites th",
+   "h1s": [],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 291,
+    "dcl": 4025,
+    "load": 5930,
+    "transferKB": 1350,
+    "resources": 204,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/labor-day-sale",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Labor Day Sale \u2013 Zeotein LLC",
+   "metaDescription": "Buy one 30-Day, get a second 50% off. Mix any two Zeotein 30-day supplies. Free shipping. Ends Monday, September 7 at 11:59 PM CT.",
+   "h1s": [],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 213,
+    "dcl": 3750,
+    "load": 5801,
+    "transferKB": 1353,
+    "resources": 206,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/protein-blends",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Protein Blends \u2013 Zeotein LLC",
+   "metaDescription": "Pick your blend and format: Zeotein Cacao 30-Day Bulk Bag Zeotein Cacao 30 Stick Packs Zeotein Cacao 7 Stick Packs Zeotein Vegan 30 Stick Packs Zeotein Vegan 7 Stick Packs",
+   "h1s": [
+    "Protein Blends"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 245,
+    "dcl": 4282,
+    "load": 5925,
+    "transferKB": 1964,
+    "resources": 216,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/shipping-guarantee",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Shipping & Guarantee \u2013 Zeotein LLC",
+   "metaDescription": "30-Day Money-Back Guarantee Try Zeotein With Confidence. Give Zeotein a place in your daily routine. If it isn't right for you, you're covered by our 30-day guarantee. Guarantee details: Love it or your money back. Email hello@zeotein.com within 30 days of delivery to start a claim. We'll send return instructions, so p",
+   "h1s": [],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 435,
+    "dcl": 5140,
+    "load": 6114,
+    "transferKB": 1349,
+    "resources": 202,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/sms-terms",
+   "profile": "desktop",
+   "status": 200,
+   "title": "SMS Terms \u2013 Zeotein LLC",
+   "metaDescription": "Last updated: November 14, 2026 Program Zeotein SMS Program. By opting in, you agree to receive recurring automated marketing texts from Zeotein (offers, cart reminders, product news) at the number you provided. Opting in Consent is not a condition of purchase. Frequency Message frequency varies. Costs Msg &amp; data r",
+   "h1s": [],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 283,
+    "dcl": 3409,
+    "load": 5566,
+    "transferKB": 1391,
+    "resources": 207,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/shop-cacao",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Cacao \u2013 Zeotein LLC",
+   "metaDescription": "Pick your format: Zeotein Cacao 30-Day Bulk Bag Zeotein Cacao 30 Stick Packs Zeotein Cacao 7 Stick Packs",
+   "h1s": [
+    "Zeotein Cacao"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 202,
+    "dcl": 3513,
+    "load": 5805,
+    "transferKB": 1836,
+    "resources": 212,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/shop-vegan",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Vegan \u2013 Zeotein LLC",
+   "metaDescription": "Pick your format: Zeotein Vegan 30 Stick Packs Zeotein Vegan 7 Stick Packs",
+   "h1s": [
+    "Zeotein Vegan"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 351,
+    "dcl": 3444,
+    "load": 6100,
+    "transferKB": 1769,
+    "resources": 212,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/the-zeotein-difference",
+   "profile": "desktop",
+   "status": 200,
+   "title": "The Zeotein Difference \u2014 Six Ingredients, Not Sixty \u2013 Zeotein LLC",
+   "metaDescription": "Why our labels are short, what we leave out, and why we sell the ingredients separately too.",
+   "h1s": [],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 175,
+    "dcl": 4249,
+    "load": 6102,
+    "transferKB": 1349,
+    "resources": 201,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/zeotein-cacao-lp",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Cacao \u2014 Landing Page \u2013 Zeotein LLC",
+   "metaDescription": "\ud83c\udf3f Clean ingredients. Honest nutrition. \u2014 Shop the Zeotein Cacao Line \u2192 Organic Cacao Flavor \u2014 Single-Serve &amp; Bulk Bag Options Protein for people who actually care what goes in their body No artificial sweeteners. No junk. Just bone broth, sea moss, collagen, zeolite, MCT, and real organic cacao. 23g of protein per ",
+   "h1s": [],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 343,
+    "dcl": 4526,
+    "load": 5955,
+    "transferKB": 1348,
+    "resources": 198,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/cacao-recipe-guide",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Cacao Recipe Guide | Shakes, Coffee, and Daily Uses \u2013 Zeotein LLC",
+   "metaDescription": "A digital recipe guide for Zeotein Cacao, with simple ideas for shakes, smoothies, coffee drinks, and everyday ways to use the powder at home.",
+   "h1s": [
+    "Cacao Recipe Guide"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 242,
+    "dcl": 4482,
+    "load": 10158,
+    "transferKB": 1752,
+    "resources": 248,
+    "scripts": 111
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/organic-fermented-cacao-powder-premium-unsweetened",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Organic Fermented Cacao Powder \u2014 Raw, Unsweetened \u2013 Zeotein LLC",
+   "metaDescription": "Raw fermented organic cacao. Real antioxidants and real flavor with zero sugar. Unsweetened, single-ingredient.",
+   "h1s": [
+    "Zeotein Organic Cacao Powder \u2013 Fermented"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 269,
+    "dcl": 4854,
+    "load": 10059,
+    "transferKB": 2682,
+    "resources": 342,
+    "scripts": 160
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/organic-hemp-protein-powder-premium-plant-based-protein",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Organic Hemp Protein Powder \u2014 Plant-Based, Unflavored \u2013 Zeotein LLC",
+   "metaDescription": "Organic hemp protein. Whole-food plant protein, unflavored, no isolates, fillers, or sweeteners.",
+   "h1s": [
+    "Zeotein Organic Hemp Protein Powder \u2013 Plant-Based, Naturally Nutty"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 300,
+    "dcl": 5296,
+    "load": 9612,
+    "transferKB": 2799,
+    "resources": 340,
+    "scripts": 159
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/organic-lion-s-mane-mushroom-powder",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Organic Lion's Mane Mushroom Powder \u2013 Zeotein LLC",
+   "metaDescription": "Organic lion's mane mushroom powder. Single-ingredient, unflavored, no fillers or carriers. Mixes into coffee or smoothies.",
+   "h1s": [
+    "Zeotein Organic Lion's Mane Mushroom Powder \u2013 Unflavored"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 333,
+    "dcl": 6150,
+    "load": 9508,
+    "transferKB": 2742,
+    "resources": 343,
+    "scripts": 160
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/organic-mct-oil-powder",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Organic MCT Oil Powder \u2014 From Coconut \u2013 Zeotein LLC",
+   "metaDescription": "Spray-dried organic medium-chain triglycerides from coconut. Clean fuel with no caffeine and no stimulants. Mixes into anything.",
+   "h1s": [
+    "Zeotein Organic MCT Oil Powder - Unflavored"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 261,
+    "dcl": 6489,
+    "load": 9531,
+    "transferKB": 2741,
+    "resources": 339,
+    "scripts": 159
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/organic-pumpkin-seed-protein-powder",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Organic Pumpkin Seed Protein Powder \u2014 Unflavored \u2013 Zeotein LLC",
+   "metaDescription": "Organic pumpkin seed protein. Whole-food plant protein, unflavored, single-ingredient, nothing added.",
+   "h1s": [
+    "Zeotein Organic Pumpkin Seed Protein Powder \u2013 Styrian, Vegan"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 306,
+    "dcl": 5291,
+    "load": 11368,
+    "transferKB": 2761,
+    "resources": 345,
+    "scripts": 160
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/vegan-recipe-guide",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Vegan Recipe Guide | Plant Protein Recipes at Home \u2013 Zeotein LLC",
+   "metaDescription": "A digital recipe guide for Zeotein Vegan, with simple ideas for shakes, smoothies, and everyday ways to use the plant protein blend in your routine.",
+   "h1s": [
+    "Vegan Recipe Guide"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 232,
+    "dcl": 6869,
+    "load": 11151,
+    "transferKB": 1771,
+    "resources": 251,
+    "scripts": 111
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/save-a-scoop",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Save A Scoop \u2014 Clips to the Bag, Never Gets Lost \u2013 Zeotein LLC",
+   "metaDescription": "A real scoop that clips to your bag so it never disappears into the powder. Included free with every Zeotein bulk pouch.",
+   "h1s": [
+    "Zeotein Save-A-Scoop - Protein Powder Scoop Holder for Bags & Tubs"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [
+    "https://review-images.judgeme.com/zeotein-llc/1790485197__1790485174513-1000056019__original.jpg?quality=80&width=160",
+    "https://public-images.judge.me/judgeme/verified-badge-v2/verified-by-shop_light.svg"
+   ],
+   "perf": {
+    "ttfb": 306,
+    "dcl": 6091,
+    "load": 11167,
+    "transferKB": 2535,
+    "resources": 349,
+    "scripts": 167
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/organic-sea-moss-powder",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Organic Sea Moss Powder \u2014 Wildcrafted, 8oz \u2013 Zeotein LLC",
+   "metaDescription": "Wildcrafted sea moss, gold and purple blend. A whole-food source of iodine and trace minerals. Single-ingredient, nothing added.",
+   "h1s": [
+    "Zeotein Organic Sea Moss Powder - Wildcrafted St. Lucia Gold & Purple"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 281,
+    "dcl": 5262,
+    "load": 11306,
+    "transferKB": 2777,
+    "resources": 344,
+    "scripts": 159
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeolite",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeolite Powder (Clinoptilolite) \u2014 Finely Milled \u2013 Zeotein LLC",
+   "metaDescription": "Naturally occurring volcanic mineral with a porous crystalline structure. Finely milled clinoptilolite, unflavored, easy to add to water or smoothies.",
+   "h1s": [
+    "Zeotein Zeolite Powder - Natural Volcanic Mineral, Unflavored"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 369,
+    "dcl": 9647,
+    "load": 11046,
+    "transferKB": 2608,
+    "resources": 342,
+    "scripts": 160
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-bone-broth-protein-powder",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Beef Bone Broth Protein Powder \u2014 Grass-Fed \u2013 Zeotein LLC",
+   "metaDescription": "Grass-fed beef bone broth protein. Beef, not chicken. Unflavored, single-ingredient, no fillers.",
+   "h1s": [
+    "Zeotein Grass-Fed Bone Broth Powder \u2013 Unflavored"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 316,
+    "dcl": 5272,
+    "load": 11877,
+    "transferKB": 2775,
+    "resources": 334,
+    "scripts": 159
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-cacao-bag-30",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Cacao Bulk Powder \u2014 30 Servings + Save A Scoop \u2013 Zeotein LLC",
+   "metaDescription": "Same six-ingredient Cacao formula at a lower cost per serving. 30 servings in a resealable pouch, with our Save A Scoop included.",
+   "h1s": [
+    "Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [
+    "https://review-images.judgeme.com/zeotein-llc/1789707241__1789707231982-img_5957__original.jpeg?quality=80&width=160",
+    "https://public-images.judge.me/judgeme/verified-badge-v2/verified-by-shop_light.svg",
+    "https://public-images.judge.me/judgeme/verified-badge-v2/verified-by-shop_light.svg"
+   ],
+   "perf": {
+    "ttfb": 252,
+    "dcl": 4719,
+    "load": 11791,
+    "transferKB": 3456,
+    "resources": 370,
+    "scripts": 170
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-cacao-sticks-30",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Cacao \u2014 All-In-One Protein | 30-Day Supply \u2013 Zeotein LLC",
+   "metaDescription": "23g protein from grass-fed bone broth and collagen, plus MCT, sea moss, cacao, and zeolite. Six ingredients, zero added sugar. 30 single-serve packs.",
+   "h1s": [
+    "Zeotein Cacao Protein Powder - 30 Stick Packs, Collagen & Bone Broth"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [
+    "https://review-images.judgeme.com/zeotein-llc/1777401161__1777401158228-6143__original.jpg?quality=80&width=160",
+    "https://review-images.judgeme.com/zeotein-llc/1775618034__1775618010549-img_0028__original.png?quality=80&width=160",
+    "https://review-images.judgeme.com/zeotein-llc/1771285253__img_6380__original.jpeg?quality=80&width=160",
+    "https://review-images.judgeme.com/zeotein-llc/1770072575__1770072348052-thumbnail_img_6973__original.jpg?quality=80&width=160",
+    "https://review-images.judgeme.com/zeotein-llc/1768842086__1768842067233-857fedfc-c2ee-4f63-863f-85__original.jpg?quality=80&width=160"
+   ],
+   "perf": {
+    "ttfb": 324,
+    "dcl": 6809,
+    "load": 11782,
+    "transferKB": 3354,
+    "resources": 370,
+    "scripts": 167
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-cleanblend-shaker-27oz-usa-made",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Shaker \u2014 27oz CleanBlend, USA Made \u2013 Zeotein LLC",
+   "metaDescription": "27oz USA-made shaker bottle. Free with every new Zeotein subscription.",
+   "h1s": [
+    "Zeotein CleanBlend Shaker Bottle \u2013 27 oz"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [
+    "https://review-images.judgeme.com/zeotein-llc/1787623528__1787623526686-img_0673__original.jpeg?quality=80&width=160"
+   ],
+   "perf": {
+    "ttfb": 459,
+    "dcl": 12086,
+    "load": 12680,
+    "transferKB": 2409,
+    "resources": 341,
+    "scripts": 167
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-cacao-sticks-7",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Cacao \u2014 7-Day Starter | Single-Serve Protein \u2013 Zeotein LLC",
+   "metaDescription": "A week of Zeotein Cacao. 23g protein, six real ingredients, no sugar or sweeteners. The easiest way to find out if it fits your routine.",
+   "h1s": [
+    "Zeotein Cacao Protein Powder - 7 Stick Packs, Collagen & Bone Broth"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [
+    "https://review-images.judgeme.com/zeotein-llc/1777401161__1777401158228-6143__original.jpg?quality=80&width=160",
+    "https://review-images.judgeme.com/zeotein-llc/1775618034__1775618010549-img_0028__original.png?quality=80&width=160",
+    "https://review-images.judgeme.com/zeotein-llc/1771285253__img_6380__original.jpeg?quality=80&width=160",
+    "https://review-images.judgeme.com/zeotein-llc/1770072575__1770072348052-thumbnail_img_6973__original.jpg?quality=80&width=160",
+    "https://review-images.judgeme.com/zeotein-llc/1768842086__1768842067233-857fedfc-c2ee-4f63-863f-85__original.jpg?quality=80&width=160"
+   ],
+   "perf": {
+    "ttfb": 304,
+    "dcl": 5982,
+    "load": 12625,
+    "transferKB": 3235,
+    "resources": 360,
+    "scripts": 168
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-gift-card",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Gift Card \u2014 Give Clean Protein | $10\u2013$100 \u2013 Zeotein LLC",
+   "metaDescription": "A Zeotein gift card in $10, $25, $50 or $100. Delivered by email, redeemable on anything in the store \u2014 protein blends, single ingredients, or merch.",
+   "h1s": [
+    "Zeotein Gift Card"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 323,
+    "dcl": 5543,
+    "load": 10750,
+    "transferKB": 1671,
+    "resources": 246,
+    "scripts": 108
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-starter-guide",
+   "profile": "desktop",
+   "status": 200,
+   "title": "The Zeotein Starter Guide | How to Use It Each Day \u2013 Zeotein LLC",
+   "metaDescription": "A short digital guide to getting started with Zeotein: how to mix it, when to use it, and simple ways to keep it in a daily routine at home or on the go.",
+   "h1s": [
+    "Zeotein Starter Guide"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 218,
+    "dcl": 6272,
+    "load": 10206,
+    "transferKB": 1749,
+    "resources": 249,
+    "scripts": 111
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-collagen-peptides",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Grass-Fed Collagen Peptides \u2014 Unflavored, Hydrolyzed \u2013 Zeotein LLC",
+   "metaDescription": "Hydrolyzed bovine collagen peptides from grass-fed cattle. 11g protein per serving. Unflavored, dissolves clear, no fillers or sweeteners.",
+   "h1s": [
+    "Zeotein Grass-Fed Collagen Peptides Powder - Unflavored"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 257,
+    "dcl": 4958,
+    "load": 10919,
+    "transferKB": 2713,
+    "resources": 339,
+    "scripts": 160
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-vegan-sticks-30",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Vegan \u2014 Plant Protein Stick Packs | 30-Day Supply \u2013 Zeotein LLC",
+   "metaDescription": "20g plant protein from organic pumpkin seed and organic hemp, with organic MCT, organic sea moss, and zeolite. Five ingredients, no sweeteners. Ships worldwide.",
+   "h1s": [
+    "Zeotein Vegan Protein Powder - 30 Stick Packs, Pumpkin Seed & Hemp"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [
+    "https://public-images.judge.me/judgeme/verified-badge-v2/verified-by-shop_light.svg"
+   ],
+   "perf": {
+    "ttfb": 364,
+    "dcl": 6851,
+    "load": 9832,
+    "transferKB": 3148,
+    "resources": 367,
+    "scripts": 163
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-vegan-sticks-7",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Zeotein Vegan \u2014 7-Day Starter | Plant-Based Protein \u2013 Zeotein LLC",
+   "metaDescription": "A week of Zeotein Vegan. 20g plant protein, five real ingredients, zero added sugar. Fully plant-based and ships worldwide.",
+   "h1s": [
+    "Zeotein Vegan Protein Powder - 7 Stick Packs, Pumpkin Seed & Hemp"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [
+    "https://public-images.judge.me/judgeme/verified-badge-v2/verified-by-shop_light.svg"
+   ],
+   "perf": {
+    "ttfb": 324,
+    "dcl": 7328,
+    "load": 9740,
+    "transferKB": 3034,
+    "resources": 349,
+    "scripts": 162
+   }
+  },
+  {
+   "url": "https://zeotein.com/cart",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Your Shopping Cart \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Your cart",
+    "Your cart is empty"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 226,
+    "dcl": 3942,
+    "load": 6437,
+    "transferKB": 1436,
+    "resources": 209,
+    "scripts": 103
+   }
+  },
+  {
+   "url": "https://zeotein.com/policies/refund-policy",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Refund policy \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Refund policy"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 220,
+    "dcl": 3810,
+    "load": 6282,
+    "transferKB": 1349,
+    "resources": 202,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/search?q=protein",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Search: 19 results found for \"protein\" \u2013 Zeotein LLC",
+   "metaDescription": "Zeotein is a first-of-its-kind single-serve protein blend with sea moss, bone broth protein, collagen, MCT & cacao. Clean nutrition for busy lifestyles.",
+   "h1s": [
+    "Search results"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 552,
+    "dcl": 4336,
+    "load": 6436,
+    "transferKB": 1697,
+    "resources": 234,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/policies/shipping-policy",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Shipping policy \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Shipping policy"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 209,
+    "dcl": 4520,
+    "load": 6224,
+    "transferKB": 1348,
+    "resources": 200,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/policies/privacy-policy",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Privacy policy \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Privacy policy"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 335,
+    "dcl": 4914,
+    "load": 6164,
+    "transferKB": 1354,
+    "resources": 203,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/account/login",
+   "profile": "desktop",
+   "status": null,
+   "title": "",
+   "metaDescription": null,
+   "h1s": [],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 220,
+    "dcl": 319,
+    "load": 319,
+    "transferKB": 0,
+    "resources": 0,
+    "scripts": 0
+   }
+  },
+  {
+   "url": "https://zeotein.com/policies/terms-of-service",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Terms of service \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Terms of service"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 228,
+    "dcl": 2467,
+    "load": 3869,
+    "transferKB": 1359,
+    "resources": 207,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/all",
+   "profile": "desktop",
+   "status": 200,
+   "title": "Products \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Collection:\nProducts"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 298,
+    "dcl": 2804,
+    "load": 3987,
+    "transferKB": 1608,
+    "resources": 241,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/this-page-does-not-exist",
+   "profile": "desktop",
+   "status": 404,
+   "title": "404 Not Found \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Page not found"
+   ],
+   "scrollW": 1440,
+   "clientW": 1440,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 229,
+    "dcl": 2911,
+    "load": 4092,
+    "transferKB": 1381,
+    "resources": 210,
+    "scripts": 99
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/bone-broth-protein-vs-whey-how-the-two-compare",
+   "profile": "phone",
+   "status": 200,
+   "title": "Bone Broth Protein vs. Whey Compared \u2013 Zeotein LLC",
+   "metaDescription": "How bone broth protein compares with whey, covering source, amino acids, digestion, and taste, in plain language without the usual supplement pitch.",
+   "h1s": [
+    "Bone Broth Protein vs. Whey: How the Two Compare"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 197,
+    "dcl": 3654,
+    "load": 6286,
+    "transferKB": 1553,
+    "resources": 206,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/23-grams-of-protein-what-that-actually-looks-like",
+   "profile": "phone",
+   "status": 200,
+   "title": "23 Grams of Protein: What It Looks Like \u2013 Zeotein LLC",
+   "metaDescription": "What 23 grams of protein in a Zeotein serving looks like next to everyday foods, and how that 140-calorie serving compares in everyday terms.",
+   "h1s": [
+    "23 Grams of Protein: What That Actually Looks Like"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 223,
+    "dcl": 3851,
+    "load": 6352,
+    "transferKB": 1696,
+    "resources": 206,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/animal-based-vs-plant-based-protein-what-s-the-difference",
+   "profile": "phone",
+   "status": 200,
+   "title": "Animal-Based vs Plant-Based Protein: What's the Difference? \u2013 Zeotein LLC",
+   "metaDescription": "Discover the difference between animal-based and plant-based protein and how Zeotein offers both clean protein options.",
+   "h1s": [
+    "Animal-Based vs Plant-Based Protein: What's the Difference?"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 187,
+    "dcl": 3531,
+    "load": 6208,
+    "transferKB": 1546,
+    "resources": 205,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news",
+   "profile": "phone",
+   "status": 200,
+   "title": "News \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "News"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 290,
+    "dcl": 5258,
+    "load": 6391,
+    "transferKB": 1591,
+    "resources": 214,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein LLC",
+   "metaDescription": "Zeotein is a first-of-its-kind single-serve protein blend with sea moss, bone broth protein, collagen, MCT & cacao. Clean nutrition for busy lifestyles.",
+   "h1s": [
+    "Zeotein LLC",
+    "Real Nutrition. Made for Real Life."
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 281,
+    "dcl": 4449,
+    "load": 6671,
+    "transferKB": 2901,
+    "resources": 217,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/can-you-bake-with-protein-powder-what-heat-does-to-it",
+   "profile": "phone",
+   "status": 200,
+   "title": "Can You Bake With Protein Powder? What Heat Actually Does to It \u2013 Zeotein LLC",
+   "metaDescription": "Can you bake with protein powder, and does heating it wreck the protein? The protein survives. Texture is the part you have to manage.What heat does to proteinHeat denatures protein. Denaturing means a folded protein strand unravels. It does not cut the strand into useless pieces and it does not remove amino acids.A fr",
+   "h1s": [
+    "Can You Bake With Protein Powder? What Heat Actually Does to It"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 192,
+    "dcl": 3747,
+    "load": 5642,
+    "transferKB": 1554,
+    "resources": 206,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/does-protein-powder-go-bad-how-to-store-it",
+   "profile": "phone",
+   "status": 200,
+   "title": "Does Protein Powder Go Bad? How to Store It \u2013 Zeotein LLC",
+   "metaDescription": "How to store protein powder, what moisture, heat, and air actually do to a bag over time, and the four checks that tell you a bag is past its best.",
+   "h1s": [
+    "Does Protein Powder Go Bad? How to Store It and What Changes Over Time"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 198,
+    "dcl": 3972,
+    "load": 5414,
+    "transferKB": 1449,
+    "resources": 203,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/fermented-never-alkalized-what-that-means-for-chocolate-protein",
+   "profile": "phone",
+   "status": 200,
+   "title": "Fermented, Never Alkalized Cacao Explained \u2013 Zeotein LLC",
+   "metaDescription": "Most cocoa powder is alkalized. Zeotein's cacao is fermented and never alkalized. Here is what that means for taste in a chocolate protein powder.",
+   "h1s": [
+    "Fermented, Never Alkalized: What That Means for Chocolate Protein"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 240,
+    "dcl": 4640,
+    "load": 5781,
+    "transferKB": 1560,
+    "resources": 203,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/collagen-and-protein-in-one-serving-why-zeotein-combines-them",
+   "profile": "phone",
+   "status": 200,
+   "title": "Collagen and Protein in One Serving \u2013 Zeotein LLC",
+   "metaDescription": "Why Zeotein puts collagen peptides and bone broth protein in the same serving, instead of asking you to keep two separate tubs on the counter.",
+   "h1s": [
+    "Collagen and Protein in One Serving: Why Zeotein Combines Them"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 172,
+    "dcl": 3867,
+    "load": 6178,
+    "transferKB": 1446,
+    "resources": 204,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/five-ways-to-use-a-bag-of-zeotein-that-are-not-a-shake",
+   "profile": "phone",
+   "status": 200,
+   "title": "Five Ways to Use Zeotein That Are Not a Shake \u2013 Zeotein LLC",
+   "metaDescription": "Five ways to use Zeotein Cacao besides a shake, including coffee, oats, bites, pancakes, and yogurt bowls, so a bag does not sit half-finished.",
+   "h1s": [
+    "Five Ways to Use a Bag of Zeotein That Are Not a Shake"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 218,
+    "dcl": 4223,
+    "load": 5323,
+    "transferKB": 1569,
+    "resources": 200,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/introducing-the-zeotein-30-day-bulk-bag-more-servings-less-packaging-better-value",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein 30-Day Bulk Bag: More Servings, Less Packaging \u2013 Zeotein LLC",
+   "metaDescription": "Learn about the new Zeotein 30-Day Bulk Bag: more servings per order of the same clean cacao formula, in a larger format with less packaging.",
+   "h1s": [
+    "Introducing the Zeotein 30-Day Bulk Bag: More Servings, Less Packaging, Better Value"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 208,
+    "dcl": 3522,
+    "load": 5206,
+    "transferKB": 1417,
+    "resources": 203,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/mct-oil-powder-what-it-is-and-why-it-is-in-a-protein-blend",
+   "profile": "phone",
+   "status": 200,
+   "title": "MCT Oil Powder: What It Is and Why We Use It \u2013 Zeotein LLC",
+   "metaDescription": "What MCT oil powder is, how it is made from coconut, and why it is in Zeotein as a powder that mixes into coffee, shakes, and everyday drinks.",
+   "h1s": [
+    "MCT Oil Powder: What It Is and Why It Is in a Protein Blend"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 300,
+    "dcl": 3994,
+    "load": 4753,
+    "transferKB": 1487,
+    "resources": 205,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/how-to-use-zeotein-smoothies-coffee-and-simple-daily-recipes",
+   "profile": "phone",
+   "status": 200,
+   "title": "How to Use Zeotein: Smoothies, Coffee & Easy Recipes \u2013 Zeotein LLC",
+   "metaDescription": "Learn simple ways to use Zeotein including smoothies, coffee recipes, and easy daily routines with clean protein.",
+   "h1s": [
+    "How to Use Zeotein: Smoothies, Coffee & Easy Recipes"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 272,
+    "dcl": 3638,
+    "load": 5469,
+    "transferKB": 1481,
+    "resources": 205,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/introducing-zeotein-vegan-a-clean-plant-based-protein-blend",
+   "profile": "phone",
+   "status": 200,
+   "title": "What Is Zeotein Vegan? A Plant-Based Protein Blend \u2013 Zeotein LLC",
+   "metaDescription": "Learn about Zeotein Vegan, our plant-based protein blend made with hemp and pumpkin seed protein and free from artificial sweeteners and fillers.",
+   "h1s": [
+    "What Is Zeotein Vegan? A Plant-Based Protein Blend"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 227,
+    "dcl": 3757,
+    "load": 5586,
+    "transferKB": 1498,
+    "resources": 203,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/no-whey-why-zeotein-costs-more-than-a-45-tub",
+   "profile": "phone",
+   "status": 200,
+   "title": "Why Zeotein Costs More Than a Typical Tub \u2013 Zeotein LLC",
+   "metaDescription": "What goes into a 30-day bag of Zeotein, and where the difference from a typical protein tub goes when the formula uses named, sourced ingredients.",
+   "h1s": [
+    "No Whey: Why Zeotein Costs More Than a $45 Tub"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 325,
+    "dcl": 4355,
+    "load": 5458,
+    "transferKB": 1406,
+    "resources": 201,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/seamoss-and-mineral-support-why-we-source-ours-from-st-lucia",
+   "profile": "phone",
+   "status": 200,
+   "title": "Sea Moss in Zeotein: Why We Source It from St. Lucia \u2013 Zeotein LLC",
+   "metaDescription": "Learn about seamoss, its mineral content, traditional use, and why Zeotein sources a premium gold and purple blend from St. Lucia.",
+   "h1s": [
+    "Sea Moss in Zeotein: Why We Source It from St. Lucia"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 226,
+    "dcl": 3658,
+    "load": 5523,
+    "transferKB": 1490,
+    "resources": 206,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/the-power-of-single-serve-convenience",
+   "profile": "phone",
+   "status": 200,
+   "title": "The Power of Single-Serve Convenience \u2013 Zeotein LLC",
+   "metaDescription": "Why Zeotein ships in single-serve stick packs, and how that format makes it easier to keep a daily protein routine at home, at work, or while traveling.",
+   "h1s": [
+    "The Power of Single-Serve Convenience"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 200,
+    "dcl": 3624,
+    "load": 5603,
+    "transferKB": 1611,
+    "resources": 203,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/understanding-the-5-core-nutrients-inside-zeotein",
+   "profile": "phone",
+   "status": 200,
+   "title": "What's Inside Zeotein? 5 Key Ingredient Categories \u2013 Zeotein LLC",
+   "metaDescription": "Discover the 5 core nutrients inside Zeotein including protein, healthy fats, vitamins, minerals, and functional ingredients.",
+   "h1s": [
+    "What's Inside Zeotein? 5 Key Ingredient Categories"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 230,
+    "dcl": 3559,
+    "load": 5562,
+    "transferKB": 1460,
+    "resources": 205,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/what-is-sea-moss-a-plain-explanation",
+   "profile": "phone",
+   "status": 200,
+   "title": "What Is Sea Moss? A Plain Explanation \u2013 Zeotein LLC",
+   "metaDescription": "What sea moss is, where Zeotein's gold and purple blend is sourced, and why a small amount is included in the formula, explained in plain language.",
+   "h1s": [
+    "What Is Sea Moss? A Plain Explanation"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 200,
+    "dcl": 4088,
+    "load": 5138,
+    "transferKB": 1731,
+    "resources": 202,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/what-are-mcts-clean-energy-and-why-we-include-organic-mct-powder-in-zeotein",
+   "profile": "phone",
+   "status": 200,
+   "title": "What Are MCTs? Understanding MCT Powder \u2013 Zeotein LLC",
+   "metaDescription": "Discover what MCTs are, how they provide sustained energy, and why Zeotein includes organic MCT powder in its premium protein blend.",
+   "h1s": [
+    "What Are MCTs? Understanding MCT Powder"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 269,
+    "dcl": 4098,
+    "load": 5406,
+    "transferKB": 1440,
+    "resources": 201,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/whats-actually-in-zeotein-all-six-ingredients-named",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Ingredients: All Six, Named and Sourced \u2013 Zeotein LLC",
+   "metaDescription": "The six ingredients in Zeotein Cacao, all named and sourced, and why the list stops there instead of running twenty to thirty ingredients long.",
+   "h1s": [
+    "What's Actually in Zeotein: All Six Ingredients, Named"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 184,
+    "dcl": 3777,
+    "load": 5877,
+    "transferKB": 1522,
+    "resources": 197,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/what-is-zeolite-its-origin-structure-and-why-we-include-it-in-zeotein",
+   "profile": "phone",
+   "status": 200,
+   "title": "What Is Zeolite? Its Structure and Origin \u2013 Zeotein LLC",
+   "metaDescription": "A naturally occurring volcanic mineral in the Zeotein formula: what it is, how it forms, and why a small amount is included, explained in plain language.",
+   "h1s": [
+    "What Is Zeolite? Understanding Its Structure and Uses"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 199,
+    "dcl": 3815,
+    "load": 5945,
+    "transferKB": 1414,
+    "resources": 200,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/why-fillers-gums-and-flavor-systems-are-used-in-supplements",
+   "profile": "phone",
+   "status": 200,
+   "title": "This Is What Clean Tastes Like \u2013 Zeotein LLC",
+   "metaDescription": "Discover why fillers, gums, and flavor systems are used in supplements and how Zeotein focuses on clean, simple ingredients.",
+   "h1s": [
+    "This Is What Clean Tastes Like"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 243,
+    "dcl": 4089,
+    "load": 5826,
+    "transferKB": 1438,
+    "resources": 199,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/why-most-protein-powders-are-failing-you-and-what-to-look-for-instead",
+   "profile": "phone",
+   "status": 200,
+   "title": "How to Compare Protein Powders by the Label \u2013 Zeotein LLC",
+   "metaDescription": "What to look for on a protein label: how long the ingredient list is, whether sweeteners and fillers are included, and how Zeotein keeps the list short.",
+   "h1s": [
+    "How to Compare Protein Powders: What to Look for on the Label"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 169,
+    "dcl": 4334,
+    "load": 5610,
+    "transferKB": 1545,
+    "resources": 197,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/why-we-combine-organic-collagen-peptides-and-bone-broth-protein",
+   "profile": "phone",
+   "status": 200,
+   "title": "Why Zeotein Combines Collagen Peptides and Bone Broth Protein \u2013 Zeotein LLC",
+   "metaDescription": "Learn the difference between organic collagen peptides and bone broth protein \u2014 and why Zeotein combines both in one serving.",
+   "h1s": [
+    "Why Zeotein Combines Collagen Peptides and Bone Broth Protein"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 157,
+    "dcl": 5110,
+    "load": 5764,
+    "transferKB": 1523,
+    "resources": 196,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/final-sale-no-returns",
+   "profile": "phone",
+   "status": 200,
+   "title": "Final Sale | Zeotein Items Not Eligible for Return \u2013 Zeotein LLC",
+   "metaDescription": "Final-sale Zeotein items, including digital guides and selected goods, are not eligible for returns or refunds. Review the policy before you buy.",
+   "h1s": [
+    "Collection:\nFinal Sale - No Returns"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 273,
+    "dcl": 4248,
+    "load": 6418,
+    "transferKB": 1652,
+    "resources": 235,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/frontpage",
+   "profile": "phone",
+   "status": 200,
+   "title": "Featured Zeotein Products | Cacao, Vegan, and More \u2013 Zeotein LLC",
+   "metaDescription": "A featured set of Zeotein products used on the store's home page, including protein blends and everyday items. Browse Shop All to see the full catalog.",
+   "h1s": [
+    "Collection:\nHome page"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 265,
+    "dcl": 5194,
+    "load": 6251,
+    "transferKB": 1414,
+    "resources": 221,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/zeotein-cacao-vs-zeotein-vegan-which-blend-fits-you",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Cacao vs. Vegan: Which Blend Fits You \u2013 Zeotein LLC",
+   "metaDescription": "A straight comparison of Zeotein Cacao and Zeotein Vegan at a glance: where the protein comes from, what is in each blend, and who each one is for.",
+   "h1s": [
+    "Zeotein Cacao vs. Zeotein Vegan: Which Blend Fits You"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 301,
+    "dcl": 4776,
+    "load": 6460,
+    "transferKB": 1644,
+    "resources": 209,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/why-we-use-organic-fermented-cacao-and-why-zeotein-isn-t-sweetened",
+   "profile": "phone",
+   "status": 200,
+   "title": "What Does Zeotein Cacao Taste Like? Understanding Fermented Cacao \u2013 Zeotein LLC",
+   "metaDescription": "Discover why Zeotein uses organic fermented cacao for natural flavor and why we avoid artificial sweeteners and flavor systems in our clean protein blend.",
+   "h1s": [
+    "What Does Zeotein Cacao Taste Like? Understanding Fermented Cacao"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 169,
+    "dcl": 3454,
+    "load": 6904,
+    "transferKB": 1572,
+    "resources": 213,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/blogs/news/why-zeotein-uses-no-fillers-gums-or-natural-flavors",
+   "profile": "phone",
+   "status": 200,
+   "title": "What Do Fillers, Gums, and Natural Flavors Do in Protein Powders? \u2013 Zeotein LLC",
+   "metaDescription": "Learn why Zeotein avoids fillers, gums, and artificial flavor systems and how clean formulation supports a simpler supplement routine.",
+   "h1s": [
+    "What Do Fillers, Gums, and Natural Flavors Do in Protein Powders?"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 187,
+    "dcl": 3942,
+    "load": 6788,
+    "transferKB": 1448,
+    "resources": 208,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/protein",
+   "profile": "phone",
+   "status": 200,
+   "title": "The Zeotein Protein Powder | Cacao and Vegan Blends \u2013 Zeotein LLC",
+   "metaDescription": "Shop Zeotein protein powder in Cacao and Vegan blends. Available in stick packs and 30-day bags, with short ingredient lists and no added sweeteners.",
+   "h1s": [
+    "Collection:\nProtein"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 231,
+    "dcl": 4527,
+    "load": 7099,
+    "transferKB": 1434,
+    "resources": 221,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/guides",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Guides | Starter, Cacao, and Vegan Recipes \u2013 Zeotein LLC",
+   "metaDescription": "Digital guides for getting started with Zeotein, plus simple Cacao and Vegan recipes for shakes, coffee, smoothies, and everyday use at home.",
+   "h1s": [
+    "Collection:\nGuides"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 278,
+    "dcl": 3818,
+    "load": 7114,
+    "transferKB": 1428,
+    "resources": 219,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/protein-blends",
+   "profile": "phone",
+   "status": 200,
+   "title": "The Zeotein Protein Blends | Cacao and Vegan Options \u2013 Zeotein LLC",
+   "metaDescription": "Zeotein all-in-one protein blends: Cacao with grass-fed bone broth and collagen, or Vegan with pumpkin seed and hemp. Short lists, no added sugar.",
+   "h1s": [
+    "Collection:\nProtein Blends"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 236,
+    "dcl": 5268,
+    "load": 7068,
+    "transferKB": 1532,
+    "resources": 221,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/single-ingredient-supplements",
+   "profile": "phone",
+   "status": 200,
+   "title": "Shop Single-Ingredient Powders | Collagen and Cacao \u2013 Zeotein LLC",
+   "metaDescription": "Shop Zeotein's single-ingredient powders, including collagen, bone broth, cacao, hemp, pumpkin seed, MCT, sea moss, and lion's mane, sold on their own.",
+   "h1s": [
+    "Collection:\nSingle Ingredient Supplements"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 179,
+    "dcl": 6329,
+    "load": 7029,
+    "transferKB": 1569,
+    "resources": 225,
+    "scripts": 103
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/shop-all",
+   "profile": "phone",
+   "status": 200,
+   "title": "Shop All Zeotein | Protein, Ingredients, and Accessories \u2013 Zeotein LLC",
+   "metaDescription": "Browse Zeotein Cacao and Vegan protein, single-ingredient powders, guides, and accessories. Short ingredient lists, with no added sugar or sweeteners.",
+   "h1s": [
+    "Collection:\nShop All"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 262,
+    "dcl": 6003,
+    "load": 7117,
+    "transferKB": 1780,
+    "resources": 235,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/zeotein",
+   "profile": "phone",
+   "status": 200,
+   "title": "The Zeotein Cacao | 23g Protein and Six Ingredients \u2013 Zeotein LLC",
+   "metaDescription": "Zeotein Cacao protein powder: 23g protein, six ingredients, and no added sugar. Shop 7-day stick packs, 30-day sticks, and the 30-day bulk bag.",
+   "h1s": [
+    "Collection:\nZeotein Cacao"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 252,
+    "dcl": 3792,
+    "load": 6524,
+    "transferKB": 1470,
+    "resources": 223,
+    "scripts": 103
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/zeotein-merchandise",
+   "profile": "phone",
+   "status": 200,
+   "title": "Shop Zeotein Merchandise | Shaker, Scoop, and Gear \u2013 Zeotein LLC",
+   "metaDescription": "Shop the 27 oz Zeotein shaker bottle, the Save-A-Scoop, and brand gear made for everyday mixing, travel, and keeping a simple protein routine.",
+   "h1s": [
+    "Collection:\nZeotein Merchandise"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 245,
+    "dcl": 3855,
+    "load": 6510,
+    "transferKB": 1430,
+    "resources": 220,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/zeotein-vegan-1",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Vegan Protein | Plant-Based Stick Pack Sizes \u2013 Zeotein LLC",
+   "metaDescription": "Zeotein Vegan plant protein from organic pumpkin seed and hemp, with organic MCT and sea moss. Five ingredients, no sweeteners, in single-serve packs.",
+   "h1s": [
+    "Collection:\nZeotein Vegan"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 239,
+    "dcl": 4372,
+    "load": 6461,
+    "transferKB": 1443,
+    "resources": 221,
+    "scripts": 103
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/about-zeotein",
+   "profile": "phone",
+   "status": 200,
+   "title": "About Zeotein \u2014 Why the Ingredient List Stops at Six \u2013 Zeotein LLC",
+   "metaDescription": "There's a volcanic mineral in our protein shake, and we'll tell you how much. No padding, no sweeteners, no promises we can't back.",
+   "h1s": [
+    "Real Nutrition. Made Simple."
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 222,
+    "dcl": 4992,
+    "load": 6405,
+    "transferKB": 1563,
+    "resources": 205,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/contact",
+   "profile": "phone",
+   "status": 200,
+   "title": "Contact \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 390,
+    "dcl": 5782,
+    "load": 6430,
+    "transferKB": 1353,
+    "resources": 201,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/data-sharing-opt-out",
+   "profile": "phone",
+   "status": 200,
+   "title": "Your Privacy Choices \u2013 Zeotein LLC",
+   "metaDescription": "As described in our Privacy Policy, we collect personal information from your interactions with us and our website, including through cookies and similar technologies. We may also share this personal information with third parties, including advertising partners. We do this in order to show you ads on other websites th",
+   "h1s": [],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 199,
+    "dcl": 3398,
+    "load": 5450,
+    "transferKB": 1353,
+    "resources": 200,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/labor-day-sale",
+   "profile": "phone",
+   "status": 200,
+   "title": "Labor Day Sale \u2013 Zeotein LLC",
+   "metaDescription": "Buy one 30-Day, get a second 50% off. Mix any two Zeotein 30-day supplies. Free shipping. Ends Monday, September 7 at 11:59 PM CT.",
+   "h1s": [],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 287,
+    "dcl": 3305,
+    "load": 5429,
+    "transferKB": 1356,
+    "resources": 202,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/protein-blends",
+   "profile": "phone",
+   "status": 200,
+   "title": "Protein Blends \u2013 Zeotein LLC",
+   "metaDescription": "Pick your blend and format: Zeotein Cacao 30-Day Bulk Bag Zeotein Cacao 30 Stick Packs Zeotein Cacao 7 Stick Packs Zeotein Vegan 30 Stick Packs Zeotein Vegan 7 Stick Packs",
+   "h1s": [
+    "Protein Blends"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 288,
+    "dcl": 4563,
+    "load": 5249,
+    "transferKB": 2334,
+    "resources": 214,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/shipping-guarantee",
+   "profile": "phone",
+   "status": 200,
+   "title": "Shipping & Guarantee \u2013 Zeotein LLC",
+   "metaDescription": "30-Day Money-Back Guarantee Try Zeotein With Confidence. Give Zeotein a place in your daily routine. If it isn't right for you, you're covered by our 30-day guarantee. Guarantee details: Love it or your money back. Email hello@zeotein.com within 30 days of delivery to start a claim. We'll send return instructions, so p",
+   "h1s": [],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 241,
+    "dcl": 3959,
+    "load": 5399,
+    "transferKB": 1354,
+    "resources": 201,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/faqs",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein FAQs \u2014 Ingredients, Taste, Shipping & Guarantee \u2013 Zeotein LLC",
+   "metaDescription": "How to mix it, what's in it, how it ships, and how our 30-day guarantee works. Straight answers to what people actually ask.",
+   "h1s": [],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 339,
+    "dcl": 3660,
+    "load": 5872,
+    "transferKB": 1355,
+    "resources": 200,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/shop-vegan",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Vegan \u2013 Zeotein LLC",
+   "metaDescription": "Pick your format: Zeotein Vegan 30 Stick Packs Zeotein Vegan 7 Stick Packs",
+   "h1s": [
+    "Zeotein Vegan"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 347,
+    "dcl": 3357,
+    "load": 5100,
+    "transferKB": 2069,
+    "resources": 207,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/shop-cacao",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Cacao \u2013 Zeotein LLC",
+   "metaDescription": "Pick your format: Zeotein Cacao 30-Day Bulk Bag Zeotein Cacao 30 Stick Packs Zeotein Cacao 7 Stick Packs",
+   "h1s": [
+    "Zeotein Cacao"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 255,
+    "dcl": 3620,
+    "load": 5372,
+    "transferKB": 2184,
+    "resources": 212,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/the-zeotein-difference",
+   "profile": "phone",
+   "status": 200,
+   "title": "The Zeotein Difference \u2014 Six Ingredients, Not Sixty \u2013 Zeotein LLC",
+   "metaDescription": "Why our labels are short, what we leave out, and why we sell the ingredients separately too.",
+   "h1s": [],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 231,
+    "dcl": 4115,
+    "load": 5379,
+    "transferKB": 1353,
+    "resources": 198,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/sms-terms",
+   "profile": "phone",
+   "status": 200,
+   "title": "SMS Terms \u2013 Zeotein LLC",
+   "metaDescription": "Last updated: November 14, 2026 Program Zeotein SMS Program. By opting in, you agree to receive recurring automated marketing texts from Zeotein (offers, cart reminders, product news) at the number you provided. Opting in Consent is not a condition of purchase. Frequency Message frequency varies. Costs Msg &amp; data r",
+   "h1s": [],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 238,
+    "dcl": 3534,
+    "load": 5732,
+    "transferKB": 1396,
+    "resources": 208,
+    "scripts": 101
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/zeotein-cacao-lp",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Cacao \u2014 Landing Page \u2013 Zeotein LLC",
+   "metaDescription": "\ud83c\udf3f Clean ingredients. Honest nutrition. \u2014 Shop the Zeotein Cacao Line \u2192 Organic Cacao Flavor \u2014 Single-Serve &amp; Bulk Bag Options Protein for people who actually care what goes in their body No artificial sweeteners. No junk. Just bone broth, sea moss, collagen, zeolite, MCT, and real organic cacao. 23g of protein per ",
+   "h1s": [],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 307,
+    "dcl": 4641,
+    "load": 5512,
+    "transferKB": 1351,
+    "resources": 196,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/cacao-recipe-guide",
+   "profile": "phone",
+   "status": 200,
+   "title": "Cacao Recipe Guide | Shakes, Coffee, and Daily Uses \u2013 Zeotein LLC",
+   "metaDescription": "A digital recipe guide for Zeotein Cacao, with simple ideas for shakes, smoothies, coffee drinks, and everyday ways to use the powder at home.",
+   "h1s": [
+    "Cacao Recipe Guide"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 245,
+    "dcl": 4003,
+    "load": 10267,
+    "transferKB": 1740,
+    "resources": 256,
+    "scripts": 113
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/organic-fermented-cacao-powder-premium-unsweetened",
+   "profile": "phone",
+   "status": 200,
+   "title": "Organic Fermented Cacao Powder \u2014 Raw, Unsweetened \u2013 Zeotein LLC",
+   "metaDescription": "Raw fermented organic cacao. Real antioxidants and real flavor with zero sugar. Unsweetened, single-ingredient.",
+   "h1s": [
+    "Zeotein Organic Cacao Powder \u2013 Fermented"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 275,
+    "dcl": 4820,
+    "load": 10213,
+    "transferKB": 2592,
+    "resources": 344,
+    "scripts": 160
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/organic-hemp-protein-powder-premium-plant-based-protein",
+   "profile": "phone",
+   "status": 200,
+   "title": "Organic Hemp Protein Powder \u2014 Plant-Based, Unflavored \u2013 Zeotein LLC",
+   "metaDescription": "Organic hemp protein. Whole-food plant protein, unflavored, no isolates, fillers, or sweeteners.",
+   "h1s": [
+    "Zeotein Organic Hemp Protein Powder \u2013 Plant-Based, Naturally Nutty"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 393,
+    "dcl": 5653,
+    "load": 9868,
+    "transferKB": 2625,
+    "resources": 339,
+    "scripts": 160
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/organic-lion-s-mane-mushroom-powder",
+   "profile": "phone",
+   "status": 200,
+   "title": "Organic Lion's Mane Mushroom Powder \u2013 Zeotein LLC",
+   "metaDescription": "Organic lion's mane mushroom powder. Single-ingredient, unflavored, no fillers or carriers. Mixes into coffee or smoothies.",
+   "h1s": [
+    "Zeotein Organic Lion's Mane Mushroom Powder \u2013 Unflavored"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 302,
+    "dcl": 6228,
+    "load": 9524,
+    "transferKB": 2538,
+    "resources": 343,
+    "scripts": 161
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/organic-mct-oil-powder",
+   "profile": "phone",
+   "status": 200,
+   "title": "Organic MCT Oil Powder \u2014 From Coconut \u2013 Zeotein LLC",
+   "metaDescription": "Spray-dried organic medium-chain triglycerides from coconut. Clean fuel with no caffeine and no stimulants. Mixes into anything.",
+   "h1s": [
+    "Zeotein Organic MCT Oil Powder - Unflavored"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 235,
+    "dcl": 6994,
+    "load": 9451,
+    "transferKB": 2621,
+    "resources": 340,
+    "scripts": 160
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/organic-sea-moss-powder",
+   "profile": "phone",
+   "status": 200,
+   "title": "Organic Sea Moss Powder \u2014 Wildcrafted, 8oz \u2013 Zeotein LLC",
+   "metaDescription": "Wildcrafted sea moss, gold and purple blend. A whole-food source of iodine and trace minerals. Single-ingredient, nothing added.",
+   "h1s": [
+    "Zeotein Organic Sea Moss Powder - Wildcrafted St. Lucia Gold & Purple"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 288,
+    "dcl": 4308,
+    "load": 8343,
+    "transferKB": 2648,
+    "resources": 331,
+    "scripts": 161
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/save-a-scoop",
+   "profile": "phone",
+   "status": 200,
+   "title": "Save A Scoop \u2014 Clips to the Bag, Never Gets Lost \u2013 Zeotein LLC",
+   "metaDescription": "A real scoop that clips to your bag so it never disappears into the powder. Included free with every Zeotein bulk pouch.",
+   "h1s": [
+    "Zeotein Save-A-Scoop - Protein Powder Scoop Holder for Bags & Tubs"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [
+    "https://review-images.judgeme.com/zeotein-llc/1790485197__1790485174513-1000056019__original.jpg?quality=80&width=240",
+    "https://public-images.judge.me/judgeme/verified-badge-v2/verified-by-shop_light.svg"
+   ],
+   "perf": {
+    "ttfb": 282,
+    "dcl": 4887,
+    "load": 8315,
+    "transferKB": 2270,
+    "resources": 336,
+    "scripts": 168
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/organic-pumpkin-seed-protein-powder",
+   "profile": "phone",
+   "status": 200,
+   "title": "Organic Pumpkin Seed Protein Powder \u2014 Unflavored \u2013 Zeotein LLC",
+   "metaDescription": "Organic pumpkin seed protein. Whole-food plant protein, unflavored, single-ingredient, nothing added.",
+   "h1s": [
+    "Zeotein Organic Pumpkin Seed Protein Powder \u2013 Styrian, Vegan"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 240,
+    "dcl": 4419,
+    "load": 8845,
+    "transferKB": 2597,
+    "resources": 329,
+    "scripts": 161
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/vegan-recipe-guide",
+   "profile": "phone",
+   "status": 200,
+   "title": "Vegan Recipe Guide | Plant Protein Recipes at Home \u2013 Zeotein LLC",
+   "metaDescription": "A digital recipe guide for Zeotein Vegan, with simple ideas for shakes, smoothies, and everyday ways to use the plant protein blend in your routine.",
+   "h1s": [
+    "Vegan Recipe Guide"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 297,
+    "dcl": 5660,
+    "load": 8742,
+    "transferKB": 1740,
+    "resources": 248,
+    "scripts": 113
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeolite",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeolite Powder (Clinoptilolite) \u2014 Finely Milled \u2013 Zeotein LLC",
+   "metaDescription": "Naturally occurring volcanic mineral with a porous crystalline structure. Finely milled clinoptilolite, unflavored, easy to add to water or smoothies.",
+   "h1s": [
+    "Zeotein Zeolite Powder - Natural Volcanic Mineral, Unflavored"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 396,
+    "dcl": 8298,
+    "load": 8764,
+    "transferKB": 2560,
+    "resources": 332,
+    "scripts": 161
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-bone-broth-protein-powder",
+   "profile": "phone",
+   "status": 200,
+   "title": "Beef Bone Broth Protein Powder \u2014 Grass-Fed \u2013 Zeotein LLC",
+   "metaDescription": "Grass-fed beef bone broth protein. Beef, not chicken. Unflavored, single-ingredient, no fillers.",
+   "h1s": [
+    "Zeotein Grass-Fed Bone Broth Powder \u2013 Unflavored"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 250,
+    "dcl": 4542,
+    "load": 9681,
+    "transferKB": 2597,
+    "resources": 324,
+    "scripts": 160
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-cacao-bag-30",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Cacao Bulk Powder \u2014 30 Servings + Save A Scoop \u2013 Zeotein LLC",
+   "metaDescription": "Same six-ingredient Cacao formula at a lower cost per serving. 30 servings in a resealable pouch, with our Save A Scoop included.",
+   "h1s": [
+    "Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [
+    "https://review-images.judgeme.com/zeotein-llc/1789707241__1789707231982-img_5957__original.jpeg?quality=80&width=240",
+    "https://public-images.judge.me/judgeme/verified-badge-v2/verified-by-shop_light.svg",
+    "https://public-images.judge.me/judgeme/verified-badge-v2/verified-by-shop_light.svg"
+   ],
+   "perf": {
+    "ttfb": 237,
+    "dcl": 4646,
+    "load": 9640,
+    "transferKB": 2938,
+    "resources": 360,
+    "scripts": 171
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-cacao-sticks-30",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Cacao \u2014 All-In-One Protein | 30-Day Supply \u2013 Zeotein LLC",
+   "metaDescription": "23g protein from grass-fed bone broth and collagen, plus MCT, sea moss, cacao, and zeolite. Six ingredients, zero added sugar. 30 single-serve packs.",
+   "h1s": [
+    "Zeotein Cacao Protein Powder - 30 Stick Packs, Collagen & Bone Broth"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [
+    "https://review-images.judgeme.com/zeotein-llc/1777401161__1777401158228-6143__original.jpg?quality=80&width=240",
+    "https://review-images.judgeme.com/zeotein-llc/1775618034__1775618010549-img_0028__original.png?quality=80&width=240",
+    "https://review-images.judgeme.com/zeotein-llc/1771285253__img_6380__original.jpeg?quality=80&width=240",
+    "https://review-images.judgeme.com/zeotein-llc/1770072575__1770072348052-thumbnail_img_6973__original.jpg?quality=80&width=240",
+    "https://review-images.judgeme.com/zeotein-llc/1768842086__1768842067233-857fedfc-c2ee-4f63-863f-85__original.jpg?quality=80&width=240"
+   ],
+   "perf": {
+    "ttfb": 341,
+    "dcl": 5594,
+    "load": 9709,
+    "transferKB": 2960,
+    "resources": 360,
+    "scripts": 167
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-cleanblend-shaker-27oz-usa-made",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Shaker \u2014 27oz CleanBlend, USA Made \u2013 Zeotein LLC",
+   "metaDescription": "27oz USA-made shaker bottle. Free with every new Zeotein subscription.",
+   "h1s": [
+    "Zeotein CleanBlend Shaker Bottle \u2013 27 oz"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [
+    "https://review-images.judgeme.com/zeotein-llc/1787623528__1787623526686-img_0673__original.jpeg?quality=80&width=240"
+   ],
+   "perf": {
+    "ttfb": 292,
+    "dcl": 10663,
+    "load": 11221,
+    "transferKB": 2173,
+    "resources": 328,
+    "scripts": 168
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-cacao-sticks-7",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Cacao \u2014 7-Day Starter | Single-Serve Protein \u2013 Zeotein LLC",
+   "metaDescription": "A week of Zeotein Cacao. 23g protein, six real ingredients, no sugar or sweeteners. The easiest way to find out if it fits your routine.",
+   "h1s": [
+    "Zeotein Cacao Protein Powder - 7 Stick Packs, Collagen & Bone Broth"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [
+    "https://review-images.judgeme.com/zeotein-llc/1777401161__1777401158228-6143__original.jpg?quality=80&width=240",
+    "https://review-images.judgeme.com/zeotein-llc/1775618034__1775618010549-img_0028__original.png?quality=80&width=240",
+    "https://review-images.judgeme.com/zeotein-llc/1771285253__img_6380__original.jpeg?quality=80&width=240",
+    "https://review-images.judgeme.com/zeotein-llc/1770072575__1770072348052-thumbnail_img_6973__original.jpg?quality=80&width=240",
+    "https://review-images.judgeme.com/zeotein-llc/1768842086__1768842067233-857fedfc-c2ee-4f63-863f-85__original.jpg?quality=80&width=240"
+   ],
+   "perf": {
+    "ttfb": 345,
+    "dcl": 11002,
+    "load": 11516,
+    "transferKB": 2951,
+    "resources": 345,
+    "scripts": 169
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-gift-card",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Gift Card \u2014 Give Clean Protein | $10\u2013$100 \u2013 Zeotein LLC",
+   "metaDescription": "A Zeotein gift card in $10, $25, $50 or $100. Delivered by email, redeemable on anything in the store \u2014 protein blends, single ingredients, or merch.",
+   "h1s": [
+    "Zeotein Gift Card"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 298,
+    "dcl": 5232,
+    "load": 9126,
+    "transferKB": 1668,
+    "resources": 246,
+    "scripts": 109
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-collagen-peptides",
+   "profile": "phone",
+   "status": 200,
+   "title": "Grass-Fed Collagen Peptides \u2014 Unflavored, Hydrolyzed \u2013 Zeotein LLC",
+   "metaDescription": "Hydrolyzed bovine collagen peptides from grass-fed cattle. 11g protein per serving. Unflavored, dissolves clear, no fillers or sweeteners.",
+   "h1s": [
+    "Zeotein Grass-Fed Collagen Peptides Powder - Unflavored"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 259,
+    "dcl": 5260,
+    "load": 9372,
+    "transferKB": 2559,
+    "resources": 336,
+    "scripts": 160
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-starter-guide",
+   "profile": "phone",
+   "status": 200,
+   "title": "The Zeotein Starter Guide | How to Use It Each Day \u2013 Zeotein LLC",
+   "metaDescription": "A short digital guide to getting started with Zeotein: how to mix it, when to use it, and simple ways to keep it in a daily routine at home or on the go.",
+   "h1s": [
+    "Zeotein Starter Guide"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 317,
+    "dcl": 5543,
+    "load": 8877,
+    "transferKB": 1733,
+    "resources": 250,
+    "scripts": 112
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-vegan-sticks-30",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Vegan \u2014 Plant Protein Stick Packs | 30-Day Supply \u2013 Zeotein LLC",
+   "metaDescription": "20g plant protein from organic pumpkin seed and organic hemp, with organic MCT, organic sea moss, and zeolite. Five ingredients, no sweeteners. Ships worldwide.",
+   "h1s": [
+    "Zeotein Vegan Protein Powder - 30 Stick Packs, Pumpkin Seed & Hemp"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [
+    "https://public-images.judge.me/judgeme/verified-badge-v2/verified-by-shop_light.svg"
+   ],
+   "perf": {
+    "ttfb": 310,
+    "dcl": 4881,
+    "load": 7161,
+    "transferKB": 3009,
+    "resources": 364,
+    "scripts": 164
+   }
+  },
+  {
+   "url": "https://zeotein.com/products/zeotein-vegan-sticks-7",
+   "profile": "phone",
+   "status": 200,
+   "title": "Zeotein Vegan \u2014 7-Day Starter | Plant-Based Protein \u2013 Zeotein LLC",
+   "metaDescription": "A week of Zeotein Vegan. 20g plant protein, five real ingredients, zero added sugar. Fully plant-based and ships worldwide.",
+   "h1s": [
+    "Zeotein Vegan Protein Powder - 7 Stick Packs, Pumpkin Seed & Hemp"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [
+    "https://public-images.judge.me/judgeme/verified-badge-v2/verified-by-shop_light.svg"
+   ],
+   "perf": {
+    "ttfb": 264,
+    "dcl": 5378,
+    "load": 6953,
+    "transferKB": 2733,
+    "resources": 342,
+    "scripts": 163
+   }
+  },
+  {
+   "url": "https://zeotein.com/cart",
+   "profile": "phone",
+   "status": 200,
+   "title": "Your Shopping Cart \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Your cart",
+    "Your cart is empty"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 160,
+    "dcl": 2816,
+    "load": 5841,
+    "transferKB": 1452,
+    "resources": 219,
+    "scripts": 103
+   }
+  },
+  {
+   "url": "https://zeotein.com/policies/refund-policy",
+   "profile": "phone",
+   "status": 200,
+   "title": "Refund policy \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Refund policy"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 219,
+    "dcl": 3391,
+    "load": 5622,
+    "transferKB": 1362,
+    "resources": 205,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/search?q=protein",
+   "profile": "phone",
+   "status": 200,
+   "title": "Search: 19 results found for \"protein\" \u2013 Zeotein LLC",
+   "metaDescription": "Zeotein is a first-of-its-kind single-serve protein blend with sea moss, bone broth protein, collagen, MCT & cacao. Clean nutrition for busy lifestyles.",
+   "h1s": [
+    "Search results"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 377,
+    "dcl": 4015,
+    "load": 5744,
+    "transferKB": 1833,
+    "resources": 238,
+    "scripts": 103
+   }
+  },
+  {
+   "url": "https://zeotein.com/policies/shipping-policy",
+   "profile": "phone",
+   "status": 200,
+   "title": "Shipping policy \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Shipping policy"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 289,
+    "dcl": 4121,
+    "load": 5358,
+    "transferKB": 1362,
+    "resources": 206,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/policies/privacy-policy",
+   "profile": "phone",
+   "status": 200,
+   "title": "Privacy policy \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Privacy policy"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 250,
+    "dcl": 4687,
+    "load": 5393,
+    "transferKB": 1365,
+    "resources": 205,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/account/login",
+   "profile": "phone",
+   "status": null,
+   "title": "",
+   "metaDescription": null,
+   "h1s": [],
+   "scrollW": 980,
+   "clientW": 980,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 201,
+    "dcl": 351,
+    "load": 352,
+    "transferKB": 0,
+    "resources": 0,
+    "scripts": 0
+   }
+  },
+  {
+   "url": "https://zeotein.com/collections/all",
+   "profile": "phone",
+   "status": 200,
+   "title": "Products \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Collection:\nProducts"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 282,
+    "dcl": 2172,
+    "load": 3287,
+    "transferKB": 1747,
+    "resources": 238,
+    "scripts": 102
+   }
+  },
+  {
+   "url": "https://zeotein.com/policies/terms-of-service",
+   "profile": "phone",
+   "status": 200,
+   "title": "Terms of service \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Terms of service"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 219,
+    "dcl": 2398,
+    "load": 3784,
+    "transferKB": 1365,
+    "resources": 210,
+    "scripts": 100
+   }
+  },
+  {
+   "url": "https://zeotein.com/pages/this-page-does-not-exist",
+   "profile": "phone",
+   "status": 404,
+   "title": "404 Not Found \u2013 Zeotein LLC",
+   "metaDescription": null,
+   "h1s": [
+    "Page not found"
+   ],
+   "scrollW": 390,
+   "clientW": 390,
+   "brokenImgs": [],
+   "perf": {
+    "ttfb": 359,
+    "dcl": 2743,
+    "load": 3671,
+    "transferKB": 1358,
+    "resources": 205,
+    "scripts": 100
+   }
+  }
+ ]
+}

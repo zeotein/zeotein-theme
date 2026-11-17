@@ -1,0 +1,53 @@
+{%- comment -%} Zeotein, 17 Nov 2026: footer menu row (Shop / Learn / Help). Menus are "Menu" blocks on this section, editable in the theme editor. {%- endcomment -%}
+{%- style -%}
+  #shopify-section-{{ section.id }} .z-footer__menus {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 48px;
+    max-width: 860px;
+    margin: 0 0 28px;
+    padding: 0 0 30px;
+    border-bottom: 1px solid rgba(50, 18, 79, 0.09);
+  }
+  #shopify-section-{{ section.id }} .z-footer__menu-heading {
+    margin: 0 0 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: #32124f;
+  }
+  #shopify-section-{{ section.id }} .z-footer__menu-list {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  #shopify-section-{{ section.id }} .z-footer__menu-link {
+    display: inline-block;
+    padding: 4px 0;
+    color: rgba(50, 18, 79, 0.8);
+    font-size: 14px;
+    line-height: 1.4;
+    text-decoration: none;
+  }
+  #shopify-section-{{ section.id }} .z-footer__menu-link:hover,
+  #shopify-section-{{ section.id }} .z-footer__menu-link:focus-visible {
+    color: #6f4aa8;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .z-footer__menus {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 26px 20px;
+      margin: 0 0 24px;
+      padding: 0 0 26px;
+    }
+    #shopify-section-{{ section.id }} .z-footer__menu-link {
+      padding: 6px 0;
+    }
+  }
+{%- endstyle -%}

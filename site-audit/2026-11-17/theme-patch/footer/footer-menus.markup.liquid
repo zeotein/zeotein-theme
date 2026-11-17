@@ -1,0 +1,23 @@
+      {%- assign zt_menu_blocks = section.blocks | where: 'type', 'link_list' -%}
+      {%- if zt_menu_blocks.size > 0 -%}
+        <nav class="z-footer__menus" aria-label="Footer">
+          {%- for block in zt_menu_blocks -%}
+            {%- if block.settings.menu != blank -%}
+              <div class="z-footer__menu" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}
+                  <h2 class="z-footer__menu-heading">{{ block.settings.heading | escape }}</h2>
+                {%- endif -%}
+                <ul class="z-footer__menu-list" role="list">
+                  {%- for link in block.settings.menu.links -%}
+                    <li>
+                      <a href="{{ link.url }}" class="z-footer__menu-link"{% if link.current %} aria-current="page"{% endif %}>
+                        {{- link.title | escape -}}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}

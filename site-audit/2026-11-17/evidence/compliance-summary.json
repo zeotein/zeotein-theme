@@ -1,0 +1,221 @@
+{
+ "run": "2026-11-17",
+ "scanner": "zeotein-compliance-scrub prescan.py on 79 live pages",
+ "pages_with_critical_flags": [
+  {
+   "page": "blogs__news",
+   "counts": {
+    "CRITICAL": 2,
+    "HIGH": 0,
+    "MEDIUM": 1
+   },
+   "critical": [
+    {
+     "tier": "CRITICAL",
+     "rule": "treatment_verb",
+     "line": 1259,
+     "match": "destroy",
+     "context": "Heat denatures protein, but it does not destroy it. Here is what actually changes when you bake with protein powder or stir it into hot coffee, and how to handle..."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "treatment_verb",
+     "line": 1288,
+     "match": "destroy",
+     "context": "Heat denatures protein, but it does not destroy it. Here is what actually changes when you bake with protein powder or stir it into hot coffee, and how to handle..."
+    }
+   ]
+  },
+  {
+   "page": "blogs__news__what-is-zeolite-its-origin-structure-and-why-we-include-it-in-zeotein",
+   "counts": {
+    "CRITICAL": 3,
+    "HIGH": 0,
+    "MEDIUM": 1
+   },
+   "critical": [
+    {
+     "tier": "CRITICAL",
+     "rule": "treatment_verb",
+     "line": 1396,
+     "match": "treatment",
+     "context": "Water treatment"
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "treatment_verb",
+     "line": 1426,
+     "match": "treatment",
+     "context": "Water treatment"
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "treatment_verb",
+     "line": 1611,
+     "match": "treatment",
+     "context": "Zeolites have applications in areas such as water treatment, agriculture, and industrial processing."
+    }
+   ]
+  },
+  {
+   "page": "policies__privacy-policy",
+   "counts": {
+    "CRITICAL": 1,
+    "HIGH": 2,
+    "MEDIUM": 21
+   },
+   "critical": [
+    {
+     "tier": "CRITICAL",
+     "rule": "treatment_verb",
+     "line": 1450,
+     "match": "treat",
+     "context": ". Please note that if you visit our website with the Global Privacy Control opt-out preference signal enabled, depending on where you are, we will automatically treat this as a request to opt-out for "
+    }
+   ]
+  },
+  {
+   "page": "products__organic-sea-moss-powder",
+   "counts": {
+    "CRITICAL": 2,
+    "HIGH": 0,
+    "MEDIUM": 1
+   },
+   "critical": [
+    {
+     "tier": "CRITICAL",
+     "rule": "disease_or_condition",
+     "line": 1925,
+     "match": "thyroid",
+     "context": "Store in a cool, dry place. Keep sealed. If you are pregnant or nursing, have a thyroid condition, or take thyroid medication, talk to your healthcare provider before using a sea moss product."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "disease_or_condition",
+     "line": 1925,
+     "match": "thyroid",
+     "context": "Store in a cool, dry place. Keep sealed. If you are pregnant or nursing, have a thyroid condition, or take thyroid medication, talk to your healthcare provider before using a sea moss product."
+    }
+   ]
+  },
+  {
+   "page": "products__zeotein-vegan-sticks-30",
+   "counts": {
+    "CRITICAL": 7,
+    "HIGH": 8,
+    "MEDIUM": 1
+   },
+   "critical": [
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Calories: 170 (spec: 140)",
+     "context": "Page shows Calories=170, locked cacao spec says 140."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Total Fat: 6 (spec: 3)",
+     "context": "Page shows Total Fat=6, locked cacao spec says 3."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Saturated Fat: 2 (spec: 2.5)",
+     "context": "Page shows Saturated Fat=2, locked cacao spec says 2.5."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Sodium: 145 (spec: 420)",
+     "context": "Page shows Sodium=145, locked cacao spec says 420."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Total Carbohydrate: 5 (spec: 2)",
+     "context": "Page shows Total Carbohydrate=5, locked cacao spec says 2."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Dietary Fiber: 2 (spec: 1)",
+     "context": "Page shows Dietary Fiber=2, locked cacao spec says 1."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Protein: 20 (spec: 23)",
+     "context": "Page shows Protein=20, locked cacao spec says 23."
+    }
+   ]
+  },
+  {
+   "page": "products__zeotein-vegan-sticks-7",
+   "counts": {
+    "CRITICAL": 7,
+    "HIGH": 8,
+    "MEDIUM": 1
+   },
+   "critical": [
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Calories: 170 (spec: 140)",
+     "context": "Page shows Calories=170, locked cacao spec says 140."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Total Fat: 6 (spec: 3)",
+     "context": "Page shows Total Fat=6, locked cacao spec says 3."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Saturated Fat: 2 (spec: 2.5)",
+     "context": "Page shows Saturated Fat=2, locked cacao spec says 2.5."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Sodium: 145 (spec: 420)",
+     "context": "Page shows Sodium=145, locked cacao spec says 420."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Total Carbohydrate: 5 (spec: 2)",
+     "context": "Page shows Total Carbohydrate=5, locked cacao spec says 2."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Dietary Fiber: 2 (spec: 1)",
+     "context": "Page shows Dietary Fiber=2, locked cacao spec says 1."
+    },
+    {
+     "tier": "CRITICAL",
+     "rule": "supplement_facts_mismatch",
+     "line": 0,
+     "match": "Protein: 20 (spec: 23)",
+     "context": "Page shows Protein=20, locked cacao spec says 23."
+    }
+   ]
+  }
+ ],
+ "verdict": "No disease, detox or weight-loss claims. HIGH flags are the money-back guarantee only. Real finding: Vegan PDP Supplement Facts Total Fat 6 g vs locked label spec 6.5 g. Other CRITICAL flags are false positives (Vegan pages compared to the Cacao spec; \"destroy\"/\"treatment\" in non-health context; sea moss thyroid caution is a safety warning)."
+}

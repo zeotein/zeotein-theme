@@ -1,0 +1,9 @@
+{
+  "add_to": "sections/footer-group.json > sections.footer.blocks (and append the keys to block_order)",
+  "blocks": {
+    "zt_menu_shop": { "type": "link_list", "settings": { "heading": "Shop", "menu": "footer-shop" } },
+    "zt_menu_learn": { "type": "link_list", "settings": { "heading": "Learn", "menu": "footer-learn" } },
+    "zt_menu_help": { "type": "link_list", "settings": { "heading": "Help", "menu": "footer-help" } }
+  },
+  "block_order_append": ["zt_menu_shop", "zt_menu_learn", "zt_menu_help"]
+}
