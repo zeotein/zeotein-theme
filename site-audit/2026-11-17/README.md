@@ -353,14 +353,35 @@ Theme Register artifact must be updated the same day (it still lists "+ gift loc
   `28a927ba`: homepage main content byte-for-byte identical before and after (123,091 bytes normalized), 0 Liquid errors.
 - Live: add the same two files in the code editor (the API cannot write to the live theme).
 
+## Black Friday look: one black banner (17 Nov, about 9 AM CT, Dana's feedback)
+Dana: "one banner on top ... in black. I don't think we need to put a bunch of products and say that they're 30% off and
+how much they are ... like everything, store-wide." Black Friday theme commits `64829527` and `6df70b95`:
+- `sections/zt-bf-countdown-sitewide.liquid` is now "BF banner (sitewide)": black bar, "BLACK FRIDAY 30% OFF STOREWIDE"
+  (offer in teal), fine print "One-time orders, no code needed. Gift cards excluded.", countdown to Nov 30 11:59 PM CT and a
+  teal "Shop the sale" button to Shop All. It shows from Nov 27 12:00 AM CT (start of the scheduled "BFCM Storewide: 30% off
+  everything (one-time only)" automatic discount) to Nov 30 11:59 PM CT, and always on the unpublished preview. Every word
+  is editable in the theme editor (Header > BF banner).
+- `sections/header-group.json`: the purple ticker, the purple hero ("30% off everything.") and the 5-product price band are
+  turned off (`disabled`), not deleted, so each can be switched back on in the theme editor.
+- While the banner shows, the free-shipping app bar above it turns black too (CSS in the banner section), so the top reads
+  as one banner. The app's own settings are unchanged.
+- The small "Black Friday" price tags on product cards and product pages are black instead of purple to match. Kept on
+  purpose: each product card still shows its Black Friday price (all 19 sale products; the gift card correctly shows none).
+- Checked in the preview (desktop 1440, laptop 1024, tablet 820, iPhone 13; home, Shop All, Cacao bag): banner black and
+  visible, headline on one line at every size, no ticker, hero or price band, 0 Liquid errors, no sideways scroll, no
+  script errors; iPhone banner 106 px tall (was 137). Screenshots and `report.json`: `evidence/screenshots/2026-11-17-bf-banner/`.
+- Undo: `backups/bf-187825914069/*.before-bf-banner` (header-group `5f595e63`, banner section `ed0fd0b6`). New files:
+  `theme-patch/bf-black-banner/` (`43fade6c`, `8f8a49ea`).
+
 ## Needs a person (not available by API on this plan)
 
 1. **Checkout logo.** Checkout header shows the text "Zeotein LLC". Settings → Checkout → Customize → Branding → Logo.
    (Checkout Branding API is Shopify Plus only.)
-2. **Homepage title and description.** The homepage `<title>` is "Zeotein LLC". Online Store → Preferences.
+2. **Homepage title and description.** Done by Dana 17 Nov: the homepage title now reads "Zeotein: Protein Powder With
+   Ingredients You Can Name".
 3. **Store name.** "Zeotein LLC" is appended to every page title and shown in checkout and the footer copyright. Consider
    "Zeotein", keeping the LLC as the legal business name.
-4. **Free-shipping bar typo.** "(U.S only)" → "(U.S. only)" in the shipping bar app's message settings.
+4. **Free-shipping bar typo.** Done: the bar reads "(U.S. only)" (seen 17 Nov). The "unlocked" message still says "(U.S. Only)".
 
 ## Files here
 
