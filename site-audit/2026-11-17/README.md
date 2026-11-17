@@ -7,8 +7,8 @@ plus fixes. Report for Dana: https://claude.ai/artifact/5td2VJohqYXkEWyggC2a6b (
 
 The site is technically healthy: 79 pages on desktop and iPhone, 119 internal links, 0 broken links, 0 real script errors,
 no sideways scrolling, and 0 disease, detox or weight-loss claims. Seven live fixes are done (redirects for dead links that
-real shoppers used, two retired pages, blog name and search descriptions). Four theme fixes are built and verified in an
-unpublished copy of the live theme and wait for Dana's OK to publish. Four small admin tasks need a person because Shopify
+real shoppers used, two retired pages, blog name and search descriptions). Five theme fixes are built and verified in an
+unpublished copy of the live theme; Dana approved them and they go live with one Publish click in admin. Four small admin tasks need a person because Shopify
 does not allow them by API.
 
 ## Changed on the live store (all reversible)
@@ -50,7 +50,14 @@ Shop All 20 products, no pagination; 30 more pages (home, all blog posts, collec
 countdown shows in theme previews by design (`zt-bf-countdown-sitewide`: previews always show it) and stays hidden on the
 live theme until 24 Nov.
 
-### Publishing it (needs Dana's yes in the session)
+### Publishing it (approved by Dana 17 Nov; the click is hers)
+
+Dana approved publishing. Shopify's tool refused ("Only agent-created themes can be published here": a theme made with
+`themeDuplicate` doesn't count), so the switch is one click in admin: Online Store → Themes → "Live + fixes 2026-11-17
+(Claude hotfix)" → … → Publish. Also added to the hotfix after approval: the compact Rewards icon and chat bubble on every
+phone page except cart (`layout/theme.liquid`, same change as step 6 below). Drift check at 02:56 UTC: live theme last
+changed 01:27 UTC, before the 02:34 copy, so nothing to merge.
+
 
 Before publishing, compare every file's `checksumMd5` between the live theme and the hotfix (GraphQL `theme.files`).
 Any file that changed on live after 02:34 UTC 17 Nov, other than the eight below, must be copied into the hotfix first, or
@@ -59,12 +66,13 @@ that change is lost. Files the hotfix changes: `sections/main-page-content.liqui
 `templates/collection.json`, `templates/product.vegan-30-day.json`, `templates/product.vegan-7-day.json`.
 Rollback: publish "Cacao LP updates 2026-11-05" again (Online Store > Themes).
 
-## Black Friday theme: same bugs, patch not applied yet
+## Black Friday theme: patched 17 Nov (Dana approved)
 
-"Black Friday Store 2026 (draft, publish Nov 27)" `#187825914069` has the same `page.json`, footer and collection files as
-live (identical checksums) and shows the same 6 g Vegan fat. If it is published without this patch, the fixes above roll
-back on 27 Nov. Another agent committed to that theme as recently as 00:08 UTC 17 Nov and its theme_bash workspace is
-shared, so the patch was not applied without coordination. To apply (about 2 minutes, in this order):
+"Black Friday Store 2026 (draft, publish Nov 27)" `#187825914069` had the same `page.json`, footer and collection files as
+live and the same 6 g Vegan fat. Dana approved patching it; applied 17 Nov around 03:05 UTC (theme commits `1b19866`, `364b77b`)
+after confirming no unsaved edits in its workspace and that every edited file matched the server. Verified through its preview:
+privacy page opt-out form, footer menus, Vegan 30 and 7 at 6.5 g, Shop All 20 products on one page, compact Rewards icon.
+The steps below are the record of what was applied (and how to re-apply to any future copy of live):
 
 1. Add `theme-patch/sections/main-page-content.liquid` as `sections/main-page-content.liquid`.
 2. Copy `templates/page.json` to `templates/page.the-zeotein-difference.json`, then replace `templates/page.json` with
@@ -75,6 +83,9 @@ shared, so the patch was not applied without coordination. To apply (about 2 min
    `sections/footer-group.json`.
 4. `templates/collection.json`: `product-grid` → `products_per_page: 24`.
 5. Both Vegan product templates: `Total Fat: 6 g` → `Total Fat: 6.5 g`.
+6. `layout/theme.liquid` (Rewards/chat on phones, Dana approved 17 Nov): the `zt-pdp-floating-buttons` block condition
+   `{%- if template.name == 'product' -%}` → `{%- if template.name != 'cart' -%}`, and add `form button[type="submit"]` to the
+   script's `AVOID` list so the icon fades over form buttons.
 
 Do not edit the theme's JSON in a stale workspace: check `theme.files` `updatedAt` first (theme_bash snapshots were up to
 3 days old on 17 Nov).
