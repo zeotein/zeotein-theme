@@ -39,9 +39,28 @@ if you have that tool; if not, give Dana the one-line result to paste into that 
    and iPhone (Hemp facts, home, Cacao 30, Vegan 30, bulk bag, Organic Cacao, cart).
 
 ## Step 2. Delete outdated themes (CONFIRM the list once)
-Wait for the cloud session's message with the verified list. Delete only themes on that list: ... menu > Delete
-(or Remove). Screenshot the library before and after. Keep the live theme, #187825914069 and anything the message says
-to keep.
+Only after step 1 is verified: Dana relays "verified" from the cloud session, or check yourself that
+zeotein.com/products/organic-hemp-protein-powder-premium-plant-based-protein shows Nutrition Facts of 1/4 cup (28 g),
+120 calories and the ingredient "Organic hemp protein powder". Then delete exactly these four (... menu > Delete or Remove),
+with a screenshot of the theme library before and after:
+- Cacao LP updates 2026-11-05 (#187740487893): the theme that was live before the hotfix. Dana asked to delete it once the
+  hotfix is live and verified.
+- Live + script error fixes (Nov 10) (#187923202261): every change it made is already in live and the Black Friday theme.
+- Homepage CRO and Compliance + gift lock (#187734720725): older copy of the Nov 5 live site, nothing unshipped in it.
+- Copy of Zeotein-Custom (Raf) (#186382254293): never edited, an older copy of #186335789269, which stays.
+Keep all of these:
+- Live + fixes 2026-11-17 (Claude hotfix) (#188199928021): the new live theme.
+- Black Friday Store 2026 (draft, publish Nov 27) (#187825914069): goes live Nov 27.
+- Holiday Popup DRAFT (Nov 11) - do not publish (#187982840021): unique popup draft, edited Nov 14.
+- Jewels checkout trust staging 2026-11-13 (#188057845973): unshipped work for an open item (cart gift line, trust links).
+- Zeotein LLC - Custom (Raf) (#186296926421): 87 files found nowhere else (Rafael's Black Friday page, Cacao stick page).
+- Zeotein-Custom (Raf) (#186335789269): only copy of the Horizon move, on hold.
+- Homepage CRO and Compliance (Raf-Copy) (#186848575701): unique Vegan 30 stick page layout.
+- Homepage CRO and Compliance (11-4-26) (#187649786069): only copy of the Cacao landing page before Rafael's version,
+  set aside by Dana for after Black Friday.
+- Dawn Original Version (#153876201685): Dana's keepsake.
+The Theme Register (https://claude.ai/artifact/NxAU5unCQihSesgbejSWoB) must be updated the same day: it still lists
+"+ gift lock" as live. If you cannot edit it, tell Dana, and the cloud session will update it.
 
 ## Step 3. Flow "Save-A-Scoop" (ID starts 019fe59c) (CONFIRM before saving)
 Goal: the first order that contains a Cacao bulk bag gets the free Save-A-Scoop, INCLUDING the Black Friday bag, but NOT

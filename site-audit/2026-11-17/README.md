@@ -262,6 +262,27 @@ Editing that scheduled task's prompt was not permitted in this session, so these
   handle exclusion must be in place before the Black Friday theme is published on Nov 27**, or the guides go live with
   unfixed Flows. Gift SKU `ZEO-CAC-STICK-07-SBF-GIFT` belongs to a Draft product (15535933325525), left as is.
 
+### Theme delete and keep list (checked 17 Nov, read-only, GraphQL file checksums plus Gmail and Drive references)
+| Theme | Verdict | Why |
+|---|---|---|
+| Cacao LP updates 2026-11-05 `#187740487893` | Delete after the hotfix is live and verified | Previous live theme; Dana's instruction |
+| Live + script error fixes (Nov 10) `#187923202261` | Delete | 0 of its 19 edited files hold anything not already in live and BF |
+| Homepage CRO and Compliance + gift lock `#187734720725` | Delete | Older copy of the Nov 5 live site; no unshipped file |
+| Copy of Zeotein-Custom (Raf) `#186382254293` | Delete | Never edited; older copy of `#186335789269` |
+| Live + fixes 2026-11-17 (Claude hotfix) `#188199928021` | Keep | New live theme |
+| Black Friday Store 2026 `#187825914069` | Keep | Goes live Nov 27 |
+| Holiday Popup DRAFT (Nov 11) `#187982840021` | Keep | 3 unique popup files, edited Nov 14 (the site popup went live through OptiMonk Nov 15, so this may become deletable: Dana's call) |
+| Jewels checkout trust staging 2026-11-13 `#188057845973` | Keep | 4 unshipped files for an open item |
+| Zeotein LLC - Custom (Raf) `#186296926421` | Keep | 87 files found nowhere else (Rafael's BF page, Cacao stick page) |
+| Zeotein-Custom (Raf) `#186335789269` | Keep | Only copy of the Horizon move (on hold) |
+| Homepage CRO and Compliance (Raf-Copy) `#186848575701` | Keep | Unique Vegan 30 stick layout |
+| Homepage CRO and Compliance (11-4-26) `#187649786069` | Keep | Only copy of the pre-Rafael Cacao LP; Dana's after-Black-Friday item |
+| Dawn Original Version `#153876201685` | Keep | Dana's keepsake |
+
+No preview link, schedule or email points at any theme on the delete list (Gmail: no hits; Drive's only preview link points
+to a theme that no longer exists). App settings and preview traffic cannot be read with these tools. After deleting, the
+Theme Register artifact must be updated the same day (it still lists "+ gift lock" as live).
+
 ### Done via the API (verified)
 - Black Friday hero fine print now ends "...on their own. Gift cards excluded." (`sections/header-group.json`, BF commit
   `d6d65192`). The sandbox copy of that file was older than Shopify's (Shopify had the Nov 15 "30% off one-time orders"
