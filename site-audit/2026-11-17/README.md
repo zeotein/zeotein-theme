@@ -238,6 +238,51 @@ Editing that scheduled task's prompt was not permitted in this session, so these
 - If the hotfix is live by then, re-time the LP with `tools/lpperf.js` on the live URL (not a preview: previews add Shopify's
   preview bar and cookie banner scripts) against the baseline above, and note the publish date for ClickUp `86bd48yhm`.
 
+## Round 4, morning 17 Nov CT (Dana 6:29 / 6:31 / 6:32 AM: "fix everything", publish, delete old themes, two Flows, guides script)
+
+### Blocked in this cloud session (needs Shopify admin in a browser)
+- Publish the hotfix: `theme_publish` refused again ("Only agent-created themes can be published here"); the GraphQL
+  publish and `themeDelete` are blocked for this app. No Admin API exists for Shopify Flow workflows (checked shopify.dev).
+- No Claude in Chrome tools in this session. LenovoPro's folders are not offered to cloud sessions, starting a session in the
+  LenovoPro bridge environment was refused until the owner trusts this session, and Dana declined that trust card, so it
+  was not asked again.
+- Ready to run instead: `handoff-laptop-runbook.md` (paste into a Claude session on the laptop with Claude in Chrome).
+  It covers: publish the hotfix, delete outdated themes, Save-A-Scoop and win-back Flow edits, the F2 check, and the
+  admin-only fixes (checkout logo, homepage title and description, store name, "(U.S. only)" typo, hide the Home page and
+  Protein collections, the review reply). Copy in it passed the compliance prescan with 0 findings and has no em dashes.
+- Facts for the Save-A-Scoop Flow: the Black Friday bag (product 15501241352405) and the landing-page bag (15398808027349)
+  share SKU `ZEO-CAC-BULK-30-LP`, so only a product ID or handle rule can include one and exclude the other.
+- The Black Friday theme already loads the guides-cart script (`snippets/meta-tags.liquid` renders
+  `snippets/zt-guides-cart-data.liquid`, which loads `assets/zt-guides-cart.js`). **The Save-A-Scoop Flow fix and the F2
+  handle exclusion must be in place before the Black Friday theme is published on Nov 27**, or the guides go live with
+  unfixed Flows. Gift SKU `ZEO-CAC-STICK-07-SBF-GIFT` belongs to a Draft product (15535933325525), left as is.
+
+### Done via the API (verified)
+- Black Friday hero fine print now ends "...on their own. Gift cards excluded." (`sections/header-group.json`, BF commit
+  `d6d65192`). The sandbox copy of that file was older than Shopify's (Shopify had the Nov 15 "30% off one-time orders"
+  announcement), so the edit was built on Shopify's copy, checked byte for byte (md5 `466c18e4` before, `5f595e63` after)
+  and read back from Shopify and the BF preview. Backup: `backups/bf-187825914069/sections__header-group.json.server-2026-11-15T153013Z`.
+- Prices without the "USD" code, one consistent style (`config/settings_data.json` `current.currency_code_enabled` false;
+  hotfix commit `5262e7bc`, BF commit `90ca9883`; one-line canonical diff each). Previews: Shop All 40 to 0 prices with
+  "USD", Zeolite page 2 to 0. The cart's estimated total keeps "USD", as Dawn always does. Undo: Theme settings, Currency
+  format, show currency codes.
+- Blog SEO titles shortened on 8 posts (metafield `global.title_tag`), live now; live page titles read back at 49 to 62
+  characters. Backup of the old values: `backups/blog-seo-titles-before-2026-11-17.tsv`.
+- Redirects `/collections/frontpage` and `/collections/protein` to `/collections/shop-all` (IDs 776120434901, 776120467669).
+  They stay dormant (both collections still return 200) until the collections are hidden from the Online Store.
+- "Before" screenshots of the live store (desktop: home, Hemp, Cacao 30, Vegan 30, bulk bag, Organic Cacao, cart; phone:
+  home, Hemp, Cacao 30, Organic Cacao): the Hemp facts pair is in `evidence/screenshots/2026-11-17-morning/`. Two phone
+  pages hit Shopify's Cloudflare check for the test machine and need a retake after publishing (`tools/verify-live.js`).
+
+### Not done on purpose
+- Old Facebook link `/products/zeotein-cacao-30-day-supply`: still goes to the legacy $91.99 then $114.99 offer. Changing it
+  changes the offer people get from an old post, and plan prices are on the never-touch list. Dana's call.
+- Which Clarity project to keep: Dana's call (only `v65ogd4cbw` is in the page code; the app's project records separately).
+- Black Friday bag $68.99 first order reachable by direct link today: pricing, not allowed in this pass.
+- Polish left for a follow-up: H1 headings on FAQs, Contact, Shipping & Guarantee and The Zeotein Difference (their first
+  sections are shared custom sections that need a heading-tag setting); best sellers on the 404 and empty-cart pages;
+  shorter homepage with prices; footer social links (need the URLs).
+
 ## Needs a person (not available by API on this plan)
 
 1. **Checkout logo.** Checkout header shows the text "Zeotein LLC". Settings → Checkout → Customize → Branding → Logo.
