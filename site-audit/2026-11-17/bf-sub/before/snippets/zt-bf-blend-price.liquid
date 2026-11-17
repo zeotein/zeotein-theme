@@ -1,0 +1,144 @@
+{%- comment -%}
+  zt-bf-blend-price (Orbit, Nov 15 2026). Shows the real Black Friday price for one product,
+  matching the scheduled Shopify automatic discounts read on Nov 15 2026:
+  - BFCM Storewide: 30% off one-time, collection bfcm-storewide-sale, Nov 27 12:00 AM to Nov 30 11:59 PM CT.
+  - BF Vegan Sticks 1/2/3/4 packs: fixed amount off the order, zeotein-vegan-sticks-30 only, Nov 24 12:00 AM to Nov 30 11:59 PM CT.
+  Subscriptions are never discounted. Gift cards are never discounted.
+  Window: rendered hidden outside the sale; the script in zt-bf-countdown-sitewide shows it on time
+  (and always on an unpublished theme preview, or with ?zt_bf_preview=1).
+  Nov 16 2026 6:35 PM CT per Dana: the panel table no longer has a "You save" percent column (regular and Black Friday prices only).
+  Params: product (required), mode: 'strip' | 'panel' | 'card' | 'band' | 'price', pdp (true on the product page).
+  Nov 17 2026 per Dana: product cards and product pages use mode 'price' (regular price struck through, Black Friday price next to it);
+  the black 'Black Friday' card tag (mode 'card') is no longer rendered. Display only, prices and discounts unchanged.
+{%- endcomment -%}
+{%- liquid
+  assign p = product
+  assign mode = mode | default: 'strip'
+  assign kind = ''
+  assign ztbf_start = 1795759200
+  assign ztbf_end = 1796104740
+  if p.handle == 'zeotein-vegan-sticks-30'
+    assign kind = 'vegan'
+    assign ztbf_start = 1795500000
+  else
+    comment
+      Listed products in collection bfcm-storewide-sale (read Nov 15 2026). That collection is not published
+      to the Online Store, so product.collections cannot see it; keep this list in sync with the collection.
+    endcomment
+    assign pct_list = ',zeotein-cacao-bag-30,zeotein-cacao-sticks-30,zeotein-cacao-sticks-7,zeotein-vegan-sticks-7,zeotein-cleanblend-shaker-27oz-usa-made,save-a-scoop,zeolite,zeotein-collagen-peptides,zeotein-bone-broth-protein-powder,organic-fermented-cacao-powder-premium-unsweetened,organic-sea-moss-powder,organic-lion-s-mane-mushroom-powder,organic-pumpkin-seed-protein-powder,organic-mct-oil-powder,organic-hemp-protein-powder-premium-plant-based-protein,cacao-recipe-guide,zeotein-starter-guide,vegan-recipe-guide,'
+    assign hkey = ',' | append: p.handle | append: ','
+    if pct_list contains hkey
+      assign kind = 'pct'
+    endif
+  endif
+  if p.gift_card?
+    assign kind = ''
+  endif
+  assign now_s = 'now' | date: '%s' | plus: 0
+  assign ztbf_hidden = true
+  if now_s >= ztbf_start and now_s < ztbf_end
+    assign ztbf_hidden = false
+  endif
+  assign v = p.selected_or_first_available_variant
+  assign reg = v.price
+  assign unit = 'pack'
+  assign units = 'packs'
+  if p.handle contains 'bag'
+    assign unit = 'bag'
+    assign units = 'bags'
+  endif
+  assign vegan_off = '4200,8999,14398,20397' | split: ','
+  if kind == 'vegan'
+    assign off1 = vegan_off[0] | plus: 0
+  else
+    assign off1 = reg | times: 30 | divided_by: 100.0 | round
+  endif
+  assign sale1 = reg | minus: off1
+-%}
+{%- if kind != '' -%}
+{%- capture ztbf_attrs -%}data-ztbf-start="{{ ztbf_start }}" data-ztbf-end="{{ ztbf_end }}"{% if ztbf_hidden %} hidden{% endif %}{%- endcapture -%}
+{%- case mode -%}
+{%- when 'strip' -%}
+<div class="ztbf-strip" {{ ztbf_attrs }}>
+  <span class="ztbf-strip__tag">Black Friday</span>
+  {%- if kind == 'vegan' -%}
+  <span>One-time price: <s>{{ reg | money }}</s> <b>{{ sale1 | money }}</b>, and up to 36% off when you buy 2 to 4 packs. Savings show at checkout, no code.</span>
+  {%- elsif p.variants.size > 1 -%}
+  <span>30% off every size on one-time orders. Savings show at checkout, no code.</span>
+  {%- else -%}
+  <span>30% off one-time orders: <s>{{ reg | money }}</s> <b>{{ sale1 | money }}</b>. Savings show at checkout, no code.</span>
+  {%- endif -%}
+</div>
+{%- when 'card' -%}
+<p class="ztbf-card" {{ ztbf_attrs }}>
+  <span class="ztbf-card__tag">Black Friday</span>
+  {%- if p.variants.size > 1 and kind == 'pct' -%}
+  <span>30% off one-time</span>
+  {%- else -%}
+  <span><b>{{ sale1 | money }}</b> one-time{% if kind == 'vegan' %}, up to 36% off 2 to 4 packs{% endif %}</span>
+  {%- endif -%}
+</p>
+{%- when 'band' -%}
+<div class="ztbf-band__price" {{ ztbf_attrs }}>
+  <span class="ztbf-band__was"><s>{{ reg | money }}</s></span>
+  <span class="ztbf-band__now">{{ sale1 | money }}</span>
+  <span class="ztbf-band__pill">{% if kind == 'vegan' %}Up to 36% off{% else %}30% off{% endif %}</span>
+  <span class="ztbf-band__note">{% if kind == 'vegan' %}2 packs {{ reg | times: 2 | minus: 8999 | money }} &middot; 3 packs {{ reg | times: 3 | minus: 14398 | money }}{% else %}30% off every {{ unit }} you add{% endif %}</span>
+</div>
+{%- when 'panel' -%}
+<div class="ztbf-panel" {{ ztbf_attrs }}>
+  <p class="ztbf-panel__head"><span class="ztbf-strip__tag">Black Friday</span> One-time prices, through Nov 30 at 11:59 PM CT</p>
+  <table class="ztbf-panel__table">
+    <thead><tr><th scope="col">Buy</th><th scope="col">Regular</th><th scope="col">Black Friday</th></tr></thead>
+    <tbody>
+    {%- for n in (1..4) -%}
+      {%- liquid
+        assign tot = reg | times: n
+        if kind == 'vegan'
+          assign i = n | minus: 1
+          assign off = vegan_off[i] | plus: 0
+        else
+          assign off = tot | times: 30 | divided_by: 100.0 | round
+        endif
+        assign bf = tot | minus: off
+      -%}
+      <tr><td>{{ n }} {% if n == 1 %}{{ unit }}{% else %}{{ units }}{% endif %}</td><td><s>{{ tot | money }}</s></td><td><b>{{ bf | money }}</b></td></tr>
+    {%- endfor -%}
+    </tbody>
+  </table>
+  <p class="ztbf-panel__fine">Choose One-time purchase and set the quantity. The Black Friday price drops in automatically at checkout, no code needed. Subscription prices stay the same and are not part of the sale.</p>
+</div>
+{%- when 'price' -%}
+{%- liquid
+  assign pfrom = false
+  if pdp
+    assign preg = reg
+    assign psale = sale1
+  else
+    assign preg = p.price_min
+    if kind == 'vegan'
+      assign poff = vegan_off[0] | plus: 0
+    else
+      assign poff = preg | times: 30 | divided_by: 100.0 | round
+    endif
+    assign psale = preg | minus: poff
+    if p.price_varies
+      assign pfrom = true
+    endif
+  endif
+  assign pmap = false
+  if pdp and kind == 'pct' and p.variants.size > 1
+    assign pmap = true
+  endif
+-%}
+<div class="ztbf-price{% if pdp %} ztbf-price--pdp{% endif %}" {{ ztbf_attrs }}{% if pmap %} data-ztbf-vmap='{ {%- for vv in p.variants -%}{%- assign vo = vv.price | times: 30 | divided_by: 100.0 | round -%}"{{ vv.id }}":["{{ vv.price | money }}","{{ vv.price | minus: vo | money }}"]{% unless forloop.last %},{% endunless %}{%- endfor -%} }'{% endif %}>
+  {%- if pfrom %}<span class="ztbf-price__from">From</span>{% endif %}
+  <span class="visually-hidden">Regular price</span><s class="ztbf-price__was" data-ztbf-was>{{ preg | money }}</s>
+  <span class="visually-hidden">Black Friday price</span><b class="ztbf-price__now" data-ztbf-now>{{ psale | money }}</b>
+  <span class="ztbf-price__lbl" aria-hidden="true">Black Friday price</span>
+</div>
+{%- if pmap -%}
+<script>(function(){var el=document.currentScript&&document.currentScript.previousElementSibling;if(!el)return;var m;try{m=JSON.parse(el.getAttribute('data-ztbf-vmap'))}catch(e){return}function up(){var i=document.querySelector('#MainContent form[data-type="add-to-cart-form"] input[name="id"]');var r=i&&m[i.value];if(r){el.querySelector('[data-ztbf-was]').textContent=r[0];el.querySelector('[data-ztbf-now]').textContent=r[1];}}document.addEventListener('change',function(){setTimeout(up,80)});var pr=document.querySelector('#MainContent [id^="price-template"]');if(pr&&window.MutationObserver)new MutationObserver(up).observe(pr,{childList:true,subtree:true,characterData:true});})();</script>
+{%- endif -%}
+{%- endcase -%}
+{%- endif -%}
