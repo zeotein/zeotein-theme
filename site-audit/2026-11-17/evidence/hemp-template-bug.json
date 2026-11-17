@@ -1,0 +1,20 @@
+{
+ "page": "/products/organic-hemp-protein-powder-premium-plant-based-protein",
+ "checked_utc": "2026-11-17T03:55Z",
+ "live_theme_187740487893": {
+  "serving": "2 tablespoons (12.5 g)",
+  "calories": 45,
+  "total_fat": "0 g",
+  "ingredient": "Grass-fed bovine collagen peptides",
+  "cross_sell": "This is the same grass-fed collagen peptides in Zeotein Cacao"
+ },
+ "hotfix_theme_188199928021": {
+  "serving": "1/4 cup (28 g)",
+  "calories": 120,
+  "total_fat": "3.5 g",
+  "ingredient": "Organic hemp protein powder",
+  "cross_sell": "This is the same organic hemp protein in Zeotein Vegan",
+  "collagen_mentions": 0
+ },
+ "cause": "live templates/product.hemp.json == templates/product.collagen-peptides.json (md5 6c09150cd6a58763e39c2be61fb57135), hemp written 2026-11-16T13:59:38Z"
+}

@@ -60,10 +60,14 @@ changed 01:27 UTC, before the 02:34 copy, so nothing to merge.
 
 
 Before publishing, compare every file's `checksumMd5` between the live theme and the hotfix (GraphQL `theme.files`).
-Any file that changed on live after 02:34 UTC 17 Nov, other than the eight below, must be copied into the hotfix first, or
+Any file that changed on live after 02:34 UTC 17 Nov, other than the files below, must be copied into the hotfix first, or
 that change is lost. Files the hotfix changes: `sections/main-page-content.liquid` (new), `templates/page.json`,
 `templates/page.the-zeotein-difference.json` (new), `sections/footer.liquid`, `sections/footer-group.json`,
-`templates/collection.json`, `templates/product.vegan-30-day.json`, `templates/product.vegan-7-day.json`.
+`templates/collection.json`, `templates/product.vegan-30-day.json`, `templates/product.vegan-7-day.json`,
+`layout/theme.liquid`, `blocks/zt-home-choose.liquid`, `sections/zt-home-hero.liquid`, `templates/product.cacao-lp.json`,
+`sections/daily-routine-cacao-lp.liquid`, `sections/start-strong-cacao-lp.liquid`, `sections/whats-inside-cacao-lp.liquid`,
+`templates/product.hemp.json`. Simplest check: in Online Store > Themes, the live theme's "last saved" time must still be
+before 8:34 PM CT on 16 Nov (it was at 03:50 UTC 17 Nov: last live change 01:27 UTC).
 Rollback: publish "Cacao LP updates 2026-11-05" again (Online Store > Themes).
 
 ## Black Friday theme: patched 17 Nov (Dana approved)
@@ -89,6 +93,86 @@ The steps below are the record of what was applied (and how to re-apply to any f
 
 Do not edit the theme's JSON in a stale workspace: check `theme.files` `updatedAt` first (theme_bash snapshots were up to
 3 days old on 17 Nov).
+
+## Round 2, overnight 17 Nov (Dana: "fix everything, no need to ask")
+
+### Clarity
+- Read the weekly Clarity digests in Gmail (project "Zeotein LLC", `v65yhyq9ay`, Nov 8 to 14): rage clicks 0% of sessions,
+  dead clicks 3.92% (down 33.8%), quick backs 4.9% (up 65.4%), JavaScript errors 18.6% of sessions.
+- JavaScript errors: on the top six pages the only errors are Shopify's own analytics/agent scripts throwing "Failed to fetch"
+  when their tracking calls are blocked (ad blockers do this for real shoppers) and Shopify's experiment fetch. Not theme code,
+  harmless to shoppers; most likely what drives the 18.6%. The theme's own fetch wrappers handle failures correctly.
+- Two Clarity projects record zeotein.com: `v65yhyq9ay` (Clarity Shopify app pixel, the one that emails Dana) and `v65ogd4cbw`
+  (hard-coded in `layout/theme.liquid`, not one of Dana's digest projects). The internal-traffic tag (`?zt_internal=1`) only
+  reaches `v65ogd4cbw`. Decision for Dana: keep one. Not changed.
+- Page-level Clarity data (which elements get dead clicks, error messages) needs a Clarity Data Export API token
+  (Clarity, project settings, Data Export). `www.clarity.ms` is reachable from the session.
+
+### Live store (data, live now)
+- Search & Discovery related products (metafield `shopify--discovery--product_recommendation.related_products`) on Vegan 30,
+  Vegan 7, Organic Pumpkin Seed Protein and Organic Hemp Protein: plant-based items only (Vegan packs, pumpkin seed, hemp, MCT,
+  shaker) instead of collagen and bone broth. Verified with `/recommendations/products.json`. Undo: delete those 4 metafields.
+- Uploaded 3 PNG copies of the Cacao landing page cutouts (`zeotein-cacao-bag-cutout.png`, `zeotein-cacao-routine-cutout.png`,
+  `zeotein-beef-bone-broth-cutout.png`), same pixels. Shopify's CDN sends iPhones a lossless PNG for transparent WebP sources
+  (bag at 1000px: 821 KB) but a WebP for PNG sources (61 KB). Old files kept.
+
+### Added to the hotfix theme `#188199928021` (and the Black Friday theme)
+- Homepage dead clicks: the product photos in "Choose Your Zeotein" and the hero photo now link like their buttons
+  (`blocks/zt-home-choose.liquid`, `sections/zt-home-hero.liquid`). Verified: tapping the Cacao photo opens the Cacao bag page.
+- LeadConnector chat loads after the page `load` event (idle, or first tap/scroll) instead of a blocking script at the end of
+  `body` (`layout/theme.liquid`). Verified the same three widget files load as on live.
+- Cacao landing page (`templates/product.cacao-lp.json`, and BF `product.cacao-lp-bf.json`): the three cutouts point at the PNG
+  copies. iPhone image weight on `/products/cacao-protein-starter-kit` at 1x: 1,271 KB on live, 667 KB on the hotfix; more at
+  retina sizes. Visually identical (side-by-side checked).
+- "Transform your daily routine." → "Simplify your daily routine." on the Cacao landing pages (compliance prescan HIGH flag on
+  "transform"; landing page used by Meta ads).
+- Not done, blocked by the Shopify tool: unpublishing the default "Home page" collection and the outdated "Protein" collection
+  from the Online Store (`publishableUnpublish` refused). Optional admin task.
+
+### Black Friday theme audit
+- 10 key pages in preview (home, protein-blends collection and page, regular and BF Cacao bag, BF and regular stick packs,
+  Vegan 30, Stocking Stuffers, Cacao landing page): HTTP 200, no script errors, no broken images, no sideways scroll.
+- Prices match the scheduled discounts and selling plans: bag $76.99 (30% off), sticks $94.49, Vegan 30 $97.99 with 2 packs
+  $189.99, 3 packs $275.99, 4 packs $355.99 (36.4% = "up to 36%"), 7-day $27.99 and $31.49; BF landing page $68.99, $133.98,
+  $195.99 for 1/2/3 bags (subscription, first order), renews $99.99.
+- The storewide "30% off everything (one-time only)" discount starts Nov 27 12:00 AM CT. The live theme correctly shows Black
+  Friday prices only for Vegan 30 during Nov 24 to 26 (matching the Vegan discounts that start Nov 24). **Publish the BF theme at
+  Nov 27 12:00 AM CT, not earlier**, or its "30% off everything" copy shows before that discount is active.
+- "30% off everything" collection holds every active product except the gift card (Shopify never discounts gift cards) and
+  Vegan 30 (own tiers). Optional: add "Gift cards excluded." to the fine print.
+- BF bag and Stocking Stuffers gift have inventory tracking off, so they can't sell out by accident.
+- Compliance prescan on BF pages: no disease, detox or weight-loss language; Vegan facts now match the label.
+
+### Live bug found and fixed in the hotfix: Organic Hemp Protein page showed the collagen page
+- Since Nov 16 ~8 AM CT, `templates/product.hemp.json` on the live theme has been an exact copy of
+  `product.collagen-peptides.json` (same checksum, `6c09150c…`). Live `/products/organic-hemp-protein-powder-premium-plant-based-protein`
+  shows the collagen Nutrition Facts (2 tbsp / 12.5 g, 45 calories, 0 g fat), lists the ingredient as
+  "Grass-fed bovine collagen peptides", and the cross-sell says "the same grass-fed collagen peptides in Zeotein Cacao".
+  A vegan shopper is told the product is bovine collagen.
+- Fixed in the hotfix theme (commit `f1f044db`): restored the hemp template (1/4 cup / 28 g, 120 calories, 3.5 g fat,
+  "Organic hemp protein powder", Vegan cross-sell). The Black Friday theme already had the correct hemp page.
+  Verified in the hotfix preview: hemp facts shown, zero "collagen" mentions. Goes live when the hotfix is published.
+- Checked every other single-ingredient template (bone broth, collagen, lion's mane, MCT, sea moss, pumpkin seed, zeolite,
+  organic cacao): serving sizes and calories match their own products.
+
+### Black Friday theme brought up to date with live (commit `23c04116`)
+- Compared all 448 BF files with live (checksums, then content diffs with JSON normalised). 44 files had been edited on
+  both themes since Nov 8; 38 of those differ only in a trailing newline, line endings or indentation, or on purpose
+  (BF-only prices, BF header, BF homepage buttons, BF stocking-gift cart rule).
+- Live changes the BF theme was missing, now ported:
+  - The Nov 16 buy-box redesign Dana approved (rating line, format switcher, subscription perks, trust row, review quote,
+    sticky add-to-cart, Vegan 30 Black Friday price table, "14g grass-fed collagen peptides" lead) on 7 product
+    templates: Vegan 30, Vegan 7, Cacao 30 sticks, Cacao 7, Cacao bag, Organic Cacao, Zeolite. Without this, publishing
+    the BF theme on Nov 27 would have put the old buy box back on every blend page.
+  - The checkout SMS consent text (`shopify.checkout.marketing.sms.disclaimer` in `locales/en.default.json`, live since
+    Nov 14). Without it, checkout would fall back to Shopify's default SMS wording on Nov 27.
+- Verified in the BF preview on iPhone: all 7 pages 200, no script errors, no sideways scroll, every buy-box part visible,
+  Black Friday strip on every product, Vegan 30 table $97.99 / $189.99 / $275.99 / $355.99 for 1 to 4 packs.
+- Left alone on purpose: homepage copy (renders the same on both), homepage hero (same photo, BF copy has alt text),
+  `zt-guides-cart.js` (comment-only difference), `zt-clarity-internal` (BF copy is the cleanly indented one).
+- Note for whoever edits live before Nov 27: the BF theme does not pick up live edits. Re-run the comparison before
+  publishing (`tools/theme-sync-check.sh` for theme_bash, `tools/portcheck.js` for the preview). A scheduled re-check runs in
+  this Claude session on Thu Nov 26 at 2:13 PM CT (scheduled task `trig_01Qs4TUWYcWbq5RhYNq7uv7X`; delete it to cancel).
 
 ## Needs a person (not available by API on this plan)
 
