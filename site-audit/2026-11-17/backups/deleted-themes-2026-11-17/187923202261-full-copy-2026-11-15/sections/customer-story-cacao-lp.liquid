@@ -1,0 +1,741 @@
+{%- liquid
+  assign sid = 'zt-cs-' | append: section.id
+  assign cta_href = section.settings.cta_link | default: '#purchase'
+  assign quote = section.settings.quote
+  if quote != blank and section.settings.auto_quotes
+    assign first = quote | slice: 0
+    unless first == '“' or first == '"' or first == "'"
+      assign quote = '“' | append: quote | append: '”'
+    endunless
+  endif
+  assign image_ratio = section.settings.image_ratio | default: 'landscape'
+-%}
+
+{% render 'cacao-lp-fonts',
+  id: sid,
+  font_family: section.settings.font_family,
+  settings: section.settings,
+  prefixes: 'quote,body,name,meta,cta,disclaimer'
+%}
+
+{{ 'customer-story-cacao-lp.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="{{ sid }}"
+  class="zt-cs"
+  {{ section.shopify_attributes }}
+  style="
+    --zt-cs-bg: {{ section.settings.bg_color }};
+    --zt-cs-ink: {{ section.settings.ink_color }};
+    --zt-cs-body: {{ section.settings.body_color }};
+    --zt-cs-muted: {{ section.settings.muted_color }};
+    --zt-cs-cta-bg: {{ section.settings.cta_bg_color }};
+    --zt-cs-cta-text: {{ section.settings.cta_text_color }};
+    --zt-cs-shadow: {{ section.settings.shadow_color }};
+    --zt-cs-shadow-x: 8px;
+    --zt-cs-shadow-y: 8px;
+    --zt-cs-radius: {{ section.settings.image_radius }}px;
+    --zt-cs-max-width: {{ section.settings.content_width | default: 1120 }}px;
+    --zt-cs-pad-top: {{ section.settings.padding_top }}px;
+    --zt-cs-pad-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="zt-cs__inner">
+    <div class="zt-cs__media">
+      <div class="zt-cs__frame zt-cs__frame--{{ image_ratio }}">
+        {%- if section.settings.image != blank -%}
+          {%- assign img_alt = section.settings.image.alt | default: section.settings.name -%}
+          {{
+            section.settings.image
+            | image_url: width: 1400
+            | image_tag:
+              class: 'zt-cs__img',
+              loading: 'lazy',
+              widths: '400, 700, 1000, 1400',
+              sizes: '(max-width: 989px) 100vw, 50vw',
+              alt: img_alt
+          }}
+        {%- else -%}
+          <div class="zt-cs__placeholder">
+            {{ 'image' | placeholder_svg_tag: 'zt-cs__placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="zt-cs__copy">
+      {%- if quote != blank -%}
+        <h2 class="zt-cs__quote">{{ quote | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <p class="zt-cs__body">{{ section.settings.body | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.name != blank or section.settings.meta != blank -%}
+        <div class="zt-cs__person">
+          {%- if section.settings.name != blank -%}
+            <p class="zt-cs__name">{{ section.settings.name | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.meta != blank -%}
+            <p class="zt-cs__meta">{{ section.settings.meta | escape }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.cta_label != blank -%}
+        <div class="zt-cs__cta-wrap">
+          <a class="zt-cs__cta" href="{{ cta_href }}">
+            <span>{{ section.settings.cta_label | escape }}</span>
+            <svg class="zt-cs__cta-arrow" viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.disclaimer != blank -%}
+        <p class="zt-cs__disclaimer">{{ section.settings.disclaimer | escape }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    if (window.ztCsCtaScroll) return;
+    window.ztCsCtaScroll = true;
+
+    document.addEventListener('click', function (event) {
+      var link = event.target.closest('.zt-cs__cta');
+      if (!link) return;
+
+      var href = link.getAttribute('href') || '';
+      if (href.charAt(0) !== '#') return;
+
+      var target = document.getElementById(href.slice(1));
+      if (!target) return;
+
+      event.preventDefault();
+
+      if (href === '#purchase' && typeof window.ztScrollToCacaoOffer === 'function') {
+        window.ztScrollToCacaoOffer({ frameKey: 'ztCsCtaFrame' });
+        return;
+      }
+
+      var start = window.scrollY || window.pageYOffset;
+      var margin = parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+      var end = target.getBoundingClientRect().top + start - margin;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (window.ztCsCtaFrame) {
+        window.cancelAnimationFrame(window.ztCsCtaFrame);
+        window.ztCsCtaFrame = 0;
+      }
+
+      if (reduce || Math.abs(end - start) < 2) {
+        window.scrollTo(0, end);
+        if (window.history.replaceState) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        return;
+      }
+
+      var duration = 1300;
+      var startTime = null;
+
+      function ease(t) {
+        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      }
+
+      function finish(cancelled) {
+        window.removeEventListener('wheel', cancel);
+        window.removeEventListener('touchstart', cancel);
+        window.ztCsCtaFrame = 0;
+        if (!cancelled && window.history.replaceState) {
+          window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+      }
+
+      function cancel() {
+        if (window.ztCsCtaFrame) window.cancelAnimationFrame(window.ztCsCtaFrame);
+        finish(true);
+      }
+
+      function step(now) {
+        if (startTime === null) startTime = now;
+        var progress = Math.min(1, (now - startTime) / duration);
+        window.scrollTo(0, start + (end - start) * ease(progress));
+        if (progress < 1) {
+          window.ztCsCtaFrame = window.requestAnimationFrame(step);
+        } else {
+          finish(false);
+        }
+      }
+
+      window.addEventListener('wheel', cancel, { passive: true });
+      window.addEventListener('touchstart', cancel, { passive: true });
+      window.ztCsCtaFrame = window.requestAnimationFrame(step);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Customer Story Cacao LP",
+  "tag": "section",
+  "class": "section-customer-story-cacao-lp",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "ink_color",
+      "label": "Heading / name",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text",
+      "default": "#5b5b71"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Disclaimer",
+      "default": "#9a9aab"
+    },
+    {
+      "type": "color",
+      "id": "cta_bg_color",
+      "label": "CTA background",
+      "default": "#00c9b8"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "CTA text",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Hard shadow / border",
+      "default": "#1e1734"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Story image"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Image corner radius",
+      "min": 0,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image shape",
+      "options": [
+        {
+          "value": "original",
+          "label": "Original"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape"
+        }
+      ],
+      "default": "square"
+    },
+    {
+      "type": "header",
+      "content": "Copy"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "I love that it makes better nutrition easier to work into my day."
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_quotes",
+      "label": "Add curly quotation marks",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "As someone who trains hard and travels often, I’m always looking for ways to stay sharp and fuel my body without overcomplicating it. Zeotein uses clean ingredients that actually deliver, and I love that it makes better nutrition easier to work into my day, whether you’re training at the highest level or just trying to make good choices every day."
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name",
+      "default": "Andrea K."
+    },
+    {
+      "type": "text",
+      "id": "meta",
+      "label": "Meta line",
+      "default": "Verified Zeotein customer · 3x marathon finisher"
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "Andrea is a paid Zeotein partner and still takes her daily serving on every long run."
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Claim My 55% Off"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link",
+      "info": "Leave empty to scroll to the buy box. Add a link to send people somewhere else."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 960,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 1120
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "manrope",
+          "label": "Manrope (Figma)"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "custom_font",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+      "visible_if": "{{ section.settings.font_family == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "quote_weight",
+      "label": "Quote weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "quote_size_desktop",
+      "label": "Quote size - desktop",
+      "min": 22,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "quote_size_mobile",
+      "label": "Quote size - mobile",
+      "min": 18,
+      "max": 34,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "body_weight",
+      "label": "Body weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "body_size_desktop",
+      "label": "Body size - desktop",
+      "min": 13,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "body_size_mobile",
+      "label": "Body size - mobile",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "name_weight",
+      "label": "Name weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "800"
+    },
+    {
+      "type": "range",
+      "id": "name_size_desktop",
+      "label": "Name size - desktop",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "name_size_mobile",
+      "label": "Name size - mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "cta_weight",
+      "label": "CTA weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "800"
+    },
+    {
+      "type": "range",
+      "id": "cta_size_desktop",
+      "label": "CTA size - desktop",
+      "min": 13,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "cta_size_mobile",
+      "label": "CTA size - mobile",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Meta"
+    },
+    {
+      "type": "select",
+      "id": "meta_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "meta_size_desktop",
+      "label": "Size - desktop",
+      "min": 8,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "meta_size_mobile",
+      "label": "Size - mobile",
+      "min": 8,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Disclaimer"
+    },
+    {
+      "type": "select",
+      "id": "disclaimer_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "disclaimer_size_desktop",
+      "label": "Size - desktop",
+      "min": 8,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Story Cacao LP",
+      "category": "Cacao LP",
+      "settings": {
+        "bg_color": "#ffffff",
+        "ink_color": "#1e1734",
+        "body_color": "#5b5b71",
+        "muted_color": "#9a9aab",
+        "cta_bg_color": "#00c9b8",
+        "cta_text_color": "#1e1734",
+        "shadow_color": "#1e1734",
+        "image": "shopify://shop_images/Andrea_K..webp",
+        "image_radius": 14,
+        "image_ratio": "square",
+        "quote": "I love that it makes better nutrition easier to work into my day.",
+        "auto_quotes": true,
+        "body": "As someone who trains hard and travels often, I’m always looking for ways to stay sharp and fuel my body without overcomplicating it. Zeotein uses clean ingredients that actually deliver, and I love that it makes better nutrition easier to work into my day, whether you’re training at the highest level or just trying to make good choices every day.",
+        "name": "Andrea K.",
+        "meta": "Verified Zeotein customer · 3x marathon finisher",
+        "disclaimer": "Andrea is a paid Zeotein partner and still takes her daily serving on every long run.",
+        "cta_label": "Claim My 55% Off",
+        "cta_link": "",
+        "content_width": 1120,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "font_family": "manrope",
+        "custom_font": "",
+        "quote_weight": "700",
+        "quote_size_desktop": 32,
+        "quote_size_mobile": 24,
+        "body_weight": "400",
+        "body_size_desktop": 16,
+        "body_size_mobile": 14,
+        "name_weight": "800",
+        "name_size_desktop": 18,
+        "name_size_mobile": 16,
+        "cta_weight": "800",
+        "cta_size_desktop": 18,
+        "cta_size_mobile": 16,
+        "meta_weight": "400",
+        "meta_size_desktop": 14,
+        "meta_size_mobile": 14,
+        "disclaimer_weight": "400",
+        "disclaimer_size_desktop": 12
+      }
+    }
+  ]
+}
+{% endschema %}

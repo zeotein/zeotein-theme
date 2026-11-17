@@ -1,0 +1,211 @@
+/**
+ * Cacao LP — Dawn cart drawer shell only.
+ * Pricing stays in Dawn cart-drawer.liquid (final_line_price + discounts).
+ */
+
+/*
+  Shell: use 100% (not 100vw) so the panel does not sit past the right
+  edge of the layout viewport. Keep the panel on the RIGHT via flex-end.
+*/
+cart-drawer.drawer,
+cart-drawer {
+  z-index: 2147483000;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Full-bleed host — flex-end parks .drawer__inner on the right */
+cart-drawer .cart-drawer,
+#CartDrawer {
+  z-index: 2147483000;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+cart-drawer .drawer__inner {
+  --zt-drawer-pad-x: 1.5rem;
+  width: 40rem;
+  max-width: min(40rem, calc(100% - 2rem));
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  padding-left: var(--zt-drawer-pad-x) !important;
+  padding-right: var(--zt-drawer-pad-x) !important;
+}
+
+/* Close control hangs at right: -10px in Dawn — keep it inside the pad */
+cart-drawer .drawer__close {
+  right: 0 !important;
+}
+
+/*
+  Flex min-width: auto lets line prices / totals grow past the padded box.
+*/
+cart-drawer .drawer__inner > *,
+cart-drawer .drawer__header,
+cart-drawer .drawer__footer,
+cart-drawer .cart-drawer__footer,
+cart-drawer .cart__ctas,
+cart-drawer .totals,
+cart-drawer .tax-note,
+cart-drawer cart-drawer-items,
+cart-drawer .cart-items,
+cart-drawer .cart-item,
+cart-drawer .cart-item__totals,
+cart-drawer .cart-item__details,
+cart-drawer .cart-item__price-wrapper {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+cart-drawer .drawer__footer {
+  width: auto;
+  align-self: stretch;
+  margin-inline: 0;
+  padding-inline: 0;
+  overflow-x: hidden;
+}
+
+cart-drawer .cart-drawer__footer,
+cart-drawer .cart__ctas {
+  width: 100%;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+cart-drawer .totals {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  width: 100%;
+  margin-inline: 0;
+}
+
+/* component-totals.css adds margin-left: 2rem — overflows the drawer */
+cart-drawer .totals > * + * {
+  margin-left: 0 !important;
+  margin-inline-start: 0 !important;
+}
+
+cart-drawer .totals__total {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+cart-drawer .totals__total-value {
+  flex: 0 1 auto;
+  min-width: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+cart-drawer .cart-drawer .tax-note {
+  display: block;
+  width: 100%;
+  margin-inline: 0 !important;
+  margin-right: 0 !important;
+  max-width: 100%;
+}
+
+cart-drawer .cart__ctas {
+  display: block;
+  text-align: center;
+}
+
+cart-drawer .cart__ctas .cart__checkout-button,
+cart-drawer .cart__ctas .button {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Line-item price column was clipping with the panel */
+cart-drawer .cart-item__totals,
+cart-drawer .cart-item__price-wrapper {
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+/* Dynamic checkout row can use negative margins in Dawn — contain it */
+cart-drawer .drawer__footer .cart__dynamic-checkout-buttons,
+cart-drawer .drawer__footer #dynamic-checkout-cart ul {
+  max-width: 100%;
+  margin-right: 0 !important;
+  box-sizing: border-box;
+}
+
+/* Loading overlay while ATC is in flight (empty or existing cart) */
+cart-drawer.zt-bb-adding .drawer__inner {
+  position: relative !important;
+  min-height: 100%;
+}
+
+cart-drawer.zt-bb-adding .drawer__inner > *,
+cart-drawer.zt-bb-adding .drawer__inner-empty,
+cart-drawer.zt-bb-adding .cart-drawer__warnings,
+cart-drawer.zt-bb-adding .cart__empty-text,
+cart-drawer.zt-bb-adding .drawer__header,
+cart-drawer.zt-bb-adding .drawer__footer,
+cart-drawer.zt-bb-adding cart-drawer-items {
+  visibility: hidden !important;
+}
+
+cart-drawer.zt-bb-adding .drawer__inner::after {
+  content: 'Adding to cart…';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: #1e1734;
+  font-family: Manrope, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  pointer-events: none;
+  visibility: visible !important;
+}
+
+/* Hide chat / floating review widgets while Dawn drawer is open */
+body:has(cart-drawer.active) iframe[src*='leadconnector'],
+body:has(cart-drawer.active) iframe[src*='LeadConnector'],
+body:has(cart-drawer.active) [class*='lc_text-widget'],
+body:has(cart-drawer.active) [id*='lc_text-widget'],
+body:has(cart-drawer.active) [class*='chat-widget'],
+body:has(cart-drawer.active) [id*='chat-widget'],
+body:has(cart-drawer.active) .jdgm-revs-tab,
+body:has(cart-drawer.active) [class*='jdgm-'],
+html.zt-lp-cart-drawer-open iframe[src*='leadconnector'],
+html.zt-lp-cart-drawer-open iframe[src*='LeadConnector'],
+html.zt-lp-cart-drawer-open [class*='lc_text-widget'],
+html.zt-lp-cart-drawer-open [id*='lc_text-widget'],
+html.zt-lp-cart-drawer-open [class*='chat-widget'],
+html.zt-lp-cart-drawer-open [id*='chat-widget'],
+html.zt-lp-cart-drawer-open .jdgm-revs-tab,
+html.zt-lp-cart-drawer-open [class*='jdgm-'] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}

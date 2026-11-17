@@ -1,0 +1,38 @@
+{% doc %}
+  Us vs Them cell value — text, check, or cross.
+  @param {string} type - text | check | cross | none
+  @param {string} [text] - Text when type is text
+  @param {boolean} [accent] - Use accent styling for text
+{% enddoc %}
+{%- liquid
+  assign cell_type = type | default: 'text'
+-%}
+{%- case cell_type -%}
+  {%- when 'check' -%}
+    <span class="zt-uvt__mark zt-uvt__mark--check" aria-label="Yes">
+      <svg viewBox="0 0 20 20" width="14" height="14" focusable="false" aria-hidden="true">
+        <path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5l3.4 3.3 7.6-7.6"/>
+      </svg>
+    </span>
+  {%- when 'cross' -%}
+    <span class="zt-uvt__mark zt-uvt__mark--cross" aria-label="No">
+      <svg viewBox="0 0 20 20" width="12" height="12" focusable="false" aria-hidden="true">
+        <path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" d="M5 5l10 10M15 5L5 15"/>
+      </svg>
+    </span>
+  {%- when 'check_plain' -%}
+    <span class="zt-uvt__mark zt-uvt__mark--plain" aria-label="Yes">
+      <svg viewBox="0 0 20 20" width="16" height="16" focusable="false" aria-hidden="true">
+        <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M4 10.5l4 4 8-8"/>
+      </svg>
+    </span>
+  {%- when 'text' -%}
+    {%- if text != blank -%}
+      <span class="zt-uvt__value{% if accent %} zt-uvt__value--accent{% endif %}">{{ text | escape }}</span>
+    {%- endif -%}
+  {%- when 'none' -%}
+  {%- else -%}
+    {%- if text != blank -%}
+      <span class="zt-uvt__value">{{ text | escape }}</span>
+    {%- endif -%}
+{%- endcase -%}

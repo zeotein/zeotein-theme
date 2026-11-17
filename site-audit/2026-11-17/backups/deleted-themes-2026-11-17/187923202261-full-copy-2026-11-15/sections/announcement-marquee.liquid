@@ -1,0 +1,439 @@
+{% comment %}
+  Slim header marquee. Each phrase is followed by a centered icon, and the row repeats with no empty gap.
+{% endcomment %}
+
+{%- liquid
+  assign sid = 'zt-am-' | append: section.id
+  assign speed = section.settings.speed | default: 36
+  assign gap = section.settings.gap | default: 28
+-%}
+
+<div
+  id="{{ sid }}"
+  class="zt-am"
+  data-zt-am
+  role="region"
+  aria-label="{{ section.settings.heading | default: 'Announcement' | escape }}"
+  {{ section.shopify_attributes }}
+  style="
+    --zt-am-bg: {{ section.settings.bg_color }};
+    --zt-am-text: {{ section.settings.text_color }};
+    --zt-am-icon: {{ section.settings.icon_color }};
+    --zt-am-border: {{ section.settings.border_color }};
+    --zt-am-gap: {{ gap }}px;
+    --zt-am-pad-y: {{ section.settings.padding_y }}px;
+    --zt-am-speed: {{ speed }}s;
+    --zt-am-size: {{ section.settings.text_size }}px;
+    --zt-am-size-m: {{ section.settings.text_size_mobile }}px;
+    --zt-am-icon-size: {{ section.settings.icon_size }}px;
+  "
+>
+  <div class="zt-am__viewport"{% if section.settings.pause_on_hover %} data-zt-am-pause{% endif %}>
+    <div class="zt-am__track">
+      {%- for copy in (1..2) -%}
+        <div class="zt-am__group"{% if copy > 1 %} aria-hidden="true"{% endif %}>
+          {%- for block in section.blocks -%}
+            {%- if block.settings.text == blank -%}{% continue %}{%- endif -%}
+            {%- if block.settings.link != blank and copy == 1 -%}
+              <a class="zt-am__text" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</a>
+            {%- elsif copy == 1 -%}
+              <span class="zt-am__text" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</span>
+            {%- elsif block.settings.link != blank -%}
+              <a class="zt-am__text" href="{{ block.settings.link }}" tabindex="-1">{{ block.settings.text | escape }}</a>
+            {%- else -%}
+              <span class="zt-am__text">{{ block.settings.text | escape }}</span>
+            {%- endif -%}
+            <span class="zt-am__icon" aria-hidden="true">
+              {%- if block.settings.icon != blank -%}
+                {{
+                  block.settings.icon
+                  | image_url: width: 64
+                  | image_tag: class: 'zt-am__icon-img', widths: '32, 64', sizes: '16px', alt: ''
+                }}
+              {%- elsif section.settings.default_icon != blank -%}
+                {{
+                  section.settings.default_icon
+                  | image_url: width: 64
+                  | image_tag: class: 'zt-am__icon-img', widths: '32, 64', sizes: '16px', alt: ''
+                }}
+              {%- else -%}
+                {%- case section.settings.icon_style -%}
+                  {%- when 'check' -%}
+                    <svg viewBox="0 0 16 16" focusable="false"><path d="M3.2 8.2l3 3.1 6.6-6.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {%- when 'dot' -%}
+                    <svg viewBox="0 0 16 16" focusable="false"><circle cx="8" cy="8" r="2.4" fill="currentColor"/></svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 16 16" focusable="false"><path fill="currentColor" d="M8 1.2l1.15 4.05h4.25l-3.44 2.5 1.31 4.05L8 9.3l-3.27 2.5 1.31-4.05-3.44-2.5h4.25L8 1.2z"/></svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </span>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .zt-am {
+    display: block;
+    width: 100%;
+    background: var(--zt-am-bg, #ffffff);
+    color: var(--zt-am-text, #1e1734);
+    border-bottom: 1px solid var(--zt-am-border, #e4e0ea);
+    font-family: inherit;
+  }
+
+  .zt-am *,
+  .zt-am *::before,
+  .zt-am *::after {
+    box-sizing: border-box;
+  }
+
+  .zt-am__viewport {
+    width: 100%;
+    overflow: hidden;
+    padding: var(--zt-am-pad-y, 8px) 0;
+  }
+
+  .zt-am__track {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    align-items: center;
+    animation: zt-am-scroll var(--zt-am-speed, 36s) linear infinite;
+    will-change: transform;
+  }
+
+  .zt-am__viewport[data-zt-am-pause]:hover .zt-am__track {
+    animation-play-state: paused;
+  }
+
+  .zt-am__group {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: var(--zt-am-gap, 28px);
+    padding-right: var(--zt-am-gap, 28px);
+  }
+
+  .zt-am__text {
+    flex: 0 0 auto;
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: var(--zt-am-size, 13px);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+  }
+
+  a.zt-am__text:hover {
+    text-decoration: underline;
+  }
+
+  a.zt-am__text:focus-visible {
+    outline: 2px solid var(--zt-am-icon, #580d93);
+    outline-offset: 3px;
+  }
+
+  .zt-am__icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: var(--zt-am-icon-size, 14px);
+    height: var(--zt-am-icon-size, 14px);
+    color: var(--zt-am-icon, #580d93);
+  }
+
+  .zt-am__icon svg,
+  .zt-am__icon-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  @keyframes zt-am-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .zt-am__track {
+      animation: none;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .zt-am__group[aria-hidden='true'] {
+      display: none;
+    }
+
+    .zt-am__group {
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      padding-right: 16px;
+      padding-left: 16px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .zt-am__text {
+      font-size: var(--zt-am-size-m, 12px);
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function fillMarquee(root) {
+      if (!root || root.dataset.ztAmFilling === '1') return;
+      var viewport = root.querySelector('.zt-am__viewport');
+      var track = root.querySelector('.zt-am__track');
+      if (!viewport || !track) return;
+      var groups = track.querySelectorAll('.zt-am__group');
+      var base = groups[0];
+      if (!base) return;
+
+      root.dataset.ztAmFilling = '1';
+      var groupWidth = base.getBoundingClientRect().width;
+      var viewWidth = viewport.getBoundingClientRect().width;
+      if (!groupWidth || !viewWidth) {
+        root.dataset.ztAmFilling = '0';
+        return;
+      }
+
+      var copies = Math.max(2, Math.ceil(viewWidth / groupWidth) * 2);
+      if (copies % 2) copies += 1;
+
+      if (root.dataset.ztAmCopies === String(copies) && groups.length === copies) {
+        root.dataset.ztAmFilling = '0';
+        return;
+      }
+
+      for (var i = 1; i < groups.length; i++) groups[i].remove();
+      for (var n = 1; n < copies; n++) {
+        var clone = base.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        var editable = clone.querySelectorAll('[data-shopify-editor-block], [data-shopify-editor-section]');
+        for (var e = 0; e < editable.length; e++) {
+          editable[e].removeAttribute('data-shopify-editor-block');
+          editable[e].removeAttribute('data-shopify-editor-section');
+        }
+        var links = clone.querySelectorAll('a');
+        for (var l = 0; l < links.length; l++) links[l].setAttribute('tabindex', '-1');
+        track.appendChild(clone);
+      }
+
+      root.dataset.ztAmCopies = String(copies);
+      root.dataset.ztAmFilling = '0';
+    }
+
+    function fillAll() {
+      var roots = document.querySelectorAll('[data-zt-am]');
+      for (var i = 0; i < roots.length; i++) fillMarquee(roots[i]);
+    }
+
+    fillAll();
+    window.addEventListener('load', fillAll);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fillAll);
+    window.addEventListener('resize', fillAll);
+
+    if (!window.ztAmSectionLoad) {
+      window.ztAmSectionLoad = true;
+      document.addEventListener('shopify:section:load', function (event) {
+        var root = event.target.querySelector('[data-zt-am]');
+        if (root) {
+          delete root.dataset.ztAmCopies;
+          fillMarquee(root);
+        }
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Marquee announcement",
+  "tag": "section",
+  "class": "section-announcement-marquee",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Accessible label",
+      "default": "Announcement"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon",
+      "default": "#580d93"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Bottom border",
+      "default": "#e4e0ea"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "select",
+      "id": "icon_style",
+      "label": "Icon",
+      "options": [
+        { "value": "star", "label": "Star" },
+        { "value": "check", "label": "Check" },
+        { "value": "dot", "label": "Dot" }
+      ],
+      "default": "star",
+      "info": "Sits centered between each phrase. A message icon replaces this for that phrase."
+    },
+    {
+      "type": "image_picker",
+      "id": "default_icon",
+      "label": "Custom icon",
+      "info": "Optional. Used for every phrase that does not have its own icon."
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size — desktop",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Text size — mobile",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space around icons",
+      "min": 12,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Loop speed",
+      "min": 8,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "default": 36,
+      "info": "Seconds for one full loop. Lower is faster."
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Vertical padding",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Simple on purpose."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon",
+          "info": "Optional. Overrides the section icon for this phrase."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee announcement",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Simple on purpose." } },
+        { "type": "message", "settings": { "text": "Zero sugar." } },
+        { "type": "message", "settings": { "text": "Zero artificial sweeteners." } },
+        { "type": "message", "settings": { "text": "Gluten free. Dairy free." } },
+        { "type": "message", "settings": { "text": "Every ingredient earns its place.", "link": "/pages/the-zeotein-difference" } },
+        { "type": "message", "settings": { "text": "Ships in 1 to 2 business days." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

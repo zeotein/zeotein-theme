@@ -1,0 +1,34 @@
+{% doc %}
+  Benefit row for Hero Banner Cacao LP.
+{% enddoc %}
+
+{%- if block.settings.text != blank -%}
+  <li class="hbclp__benefit" {{ block.shopify_attributes }}>
+    <span class="hbclp__check" aria-hidden="true">
+      <svg viewBox="0 0 20 20" width="12" height="12" focusable="false">
+        <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5l3.2 3.2 7.8-7.8"/>
+      </svg>
+    </span>
+    <span>{{ block.settings.text | escape }}</span>
+  </li>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Benefit",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Benefit text",
+      "default": "23g complete protein in every serving."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefit"
+    }
+  ]
+}
+{% endschema %}

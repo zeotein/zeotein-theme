@@ -1,0 +1,107 @@
+{% comment %}
+  ZEOTEIN HOMEPAGE: THE ZEOTEIN DIFFERENCE (Nov 2026)
+  Replaces the-zeotein-difference on the homepage. Same card look, composition facts only.
+{% endcomment %}
+
+{% assign uid = 'zt-home-diff-' | append: block.id %}
+
+<section id="{{ uid }}" class="zt-home-diff" {{ block.shopify_attributes }}>
+  <div class="zt-home-diff__inner">
+    <p class="zt-home-diff__eyebrow">{{ block.settings.eyebrow }}</p>
+    <h2 class="zt-home-diff__heading">{{ block.settings.heading }}</h2>
+    <p class="zt-home-diff__intro">{{ block.settings.intro }}</p>
+
+    <div class="zt-home-diff__grid">
+      {% for i in (1..5) %}
+        {% liquid
+          assign t_key = 'card_' | append: i | append: '_title'
+          assign x_key = 'card_' | append: i | append: '_text'
+          assign title = block.settings[t_key]
+          assign text = block.settings[x_key]
+        %}
+        {% if title != blank %}
+          <div class="zt-home-diff__card">
+            <span class="zt-home-diff__tab" aria-hidden="true"></span>
+            <span class="zt-home-diff__ico" aria-hidden="true">
+              {% case i %}
+                {% when 1 %}<svg width="24" height="24" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="2.2"/><path d="M13 21l5 5 9-11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {% when 2 %}<svg width="24" height="24" viewBox="0 0 40 40" fill="none"><path d="M20 6c6 8 10 13 10 19a10 10 0 0 1-20 0c0-6 4-11 10-19z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
+                {% when 3 %}<svg width="24" height="24" viewBox="0 0 40 40" fill="none"><path d="M7 25c5-8 9 6 14-2s7-6 12-4M7 16c5-8 9 6 14-2s7-6 12-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                {% when 4 %}<svg width="24" height="24" viewBox="0 0 40 40" fill="none"><path d="M6 32L16 12l5 9 4-6 9 17z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
+                {% else %}<svg width="24" height="24" viewBox="0 0 40 40" fill="none"><path d="M31 8C20 8 10 14 10 24c0 5 3 8 8 8 10 0 13-12 13-24z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M9 33c5-7 10-12 15-16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+              {% endcase %}
+            </span>
+            <h3 class="zt-home-diff__title">{{ title }}</h3>
+            <p class="zt-home-diff__text">{{ text }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <div class="zt-home-diff__card zt-home-diff__card--feature">
+        <span class="zt-home-diff__ring" aria-hidden="true"></span>
+        <p class="zt-home-diff__feature-eyebrow">{{ block.settings.feature_eyebrow }}</p>
+        <p class="zt-home-diff__feature-title">{{ block.settings.feature_title }}</p>
+        <a class="zt-home-diff__feature-link" href="{{ block.settings.feature_url | default: '#ingredients' }}">{{ block.settings.feature_link }} <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #{{ uid }} { background: #f8f9fd; padding: 64px 24px; }
+  #{{ uid }} .zt-home-diff__inner { max-width: 1080px; margin: 0 auto; }
+  #{{ uid }} .zt-home-diff__eyebrow { margin: 0; text-align: center; color: #6f51c5; font-size: 11px; font-weight: 700; letter-spacing: .18em; }
+  #{{ uid }} .zt-home-diff__heading { margin: 10px 0 0; text-align: center; color: #141b34; font-size: clamp(34px, 5vw, 56px); line-height: 1.04; font-weight: 800; letter-spacing: -0.04em; }
+  #{{ uid }} .zt-home-diff__intro { max-width: 580px; margin: 12px auto 0; text-align: center; color: #6b6f80; font-size: 17px; line-height: 1.5; }
+  #{{ uid }} .zt-home-diff__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 38px; }
+  #{{ uid }} .zt-home-diff__card { position: relative; box-sizing: border-box; padding: 28px 26px 26px; border: 1px solid #e4e0ee; border-radius: 22px; background: #ffffff; }
+  #{{ uid }} .zt-home-diff__tab { position: absolute; left: 26px; top: -1px; width: 50px; height: 4px; border-radius: 0 0 4px 4px; background: #c9b8ef; }
+  #{{ uid }} .zt-home-diff__ico { float: right; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: #f1ecfb; color: #6f51c5; }
+  #{{ uid }} .zt-home-diff__title { margin: 40px 0 0; color: #141b34; font-size: 21px; line-height: 1.2; font-weight: 700; }
+  #{{ uid }} .zt-home-diff__text { margin: 8px 0 0; color: #6b6f80; font-size: 15px; line-height: 1.5; }
+  #{{ uid }} .zt-home-diff__card--feature { overflow: hidden; border: 0; background: linear-gradient(135deg, #5b3a9e 0%, #35164f 100%); color: #ffffff; }
+  #{{ uid }} .zt-home-diff__ring { position: absolute; right: -60px; bottom: -60px; width: 220px; height: 220px; border: 26px solid rgba(255, 255, 255, .07); border-radius: 50%; }
+  #{{ uid }} .zt-home-diff__feature-eyebrow { position: relative; margin: 0; color: #d9cdf5; font-size: 11px; font-weight: 700; letter-spacing: .16em; }
+  #{{ uid }} .zt-home-diff__feature-title { position: relative; margin: 12px 0 0; font-size: 28px; line-height: 1.1; font-weight: 800; }
+  #{{ uid }} .zt-home-diff__feature-link { position: relative; display: inline-block; margin-top: 18px; color: #ffffff; font-size: 14px; font-weight: 700; }
+  @media screen and (max-width: 989px) {
+    #{{ uid }} .zt-home-diff__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media screen and (max-width: 749px) {
+    #{{ uid }} { padding: 40px 16px; }
+    #{{ uid }} .zt-home-diff__grid { grid-template-columns: 1fr; gap: 12px; margin-top: 24px; }
+    #{{ uid }} .zt-home-diff__card { padding: 20px 18px; border-radius: 18px; }
+    #{{ uid }} .zt-home-diff__ico { width: 44px; height: 44px; }
+    #{{ uid }} .zt-home-diff__title { margin-top: 22px; font-size: 18px; }
+    #{{ uid }} .zt-home-diff__text { font-size: 14px; }
+    #{{ uid }} .zt-home-diff__feature-title { font-size: 24px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Zeotein Home Difference",
+  "tag": "section",
+  "class": "section-zt-home-difference",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE ZEOTEIN DIFFERENCE" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "More Than a Protein Shake." },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Protein, plus the ingredients you would otherwise buy one tub at a time." },
+    { "type": "text", "id": "card_1_title", "label": "Card 1 title", "default": "Real Protein" },
+    { "type": "textarea", "id": "card_1_text", "label": "Card 1 text", "default": "23g from grass-fed bone broth and grass-fed collagen in Cacao. 20g of plant protein from organic pumpkin seed and hemp in Vegan." },
+    { "type": "text", "id": "card_2_title", "label": "Card 2 title", "default": "Organic MCT Oil Powder" },
+    { "type": "textarea", "id": "card_2_text", "label": "Card 2 text", "default": "MCT oil from coconut, in both blends." },
+    { "type": "text", "id": "card_3_title", "label": "Card 3 title", "default": "Wildcrafted Sea Moss" },
+    { "type": "textarea", "id": "card_3_text", "label": "Card 3 text", "default": "Organic sea moss from St. Lucia, in both blends." },
+    { "type": "text", "id": "card_4_title", "label": "Card 4 title", "default": "A Naturally Occurring Volcanic Mineral" },
+    { "type": "textarea", "id": "card_4_text", "label": "Card 4 text", "default": "The ingredient Zeotein is named for, in both blends." },
+    { "type": "text", "id": "card_5_title", "label": "Card 5 title", "default": "Gluten Free and Dairy Free" },
+    { "type": "textarea", "id": "card_5_text", "label": "Card 5 text", "default": "Zero added sugar in both blends." },
+    { "type": "text", "id": "feature_eyebrow", "label": "Feature card eyebrow", "default": "NOTHING HIDDEN" },
+    { "type": "text", "id": "feature_title", "label": "Feature card title", "default": "Every Ingredient Named on the Label." },
+    { "type": "text", "id": "feature_link", "label": "Feature card link text", "default": "See What's Inside" },
+    { "type": "url", "id": "feature_url", "label": "Feature card link" }
+  ],
+  "presets": [{ "name": "Zeotein Home Difference" }]
+}
+{% endschema %}

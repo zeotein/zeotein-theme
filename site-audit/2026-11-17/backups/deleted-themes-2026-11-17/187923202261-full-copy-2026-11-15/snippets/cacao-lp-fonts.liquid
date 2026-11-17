@@ -1,0 +1,139 @@
+{% doc %}
+  Loads Manrope and writes section plus per-element typography variables.
+
+  @param {string} id - Section or block root id (without #)
+  @param {string} [font_family] - manrope | theme_heading | theme_body | poppins | system | inter | custom | inherit
+  @param {string} [font_custom] - CSS font-family used when font_family is custom
+  @param {boolean} [emit_root] - set false to write only the per-element variables
+  @param {boolean} [inline] - output custom properties only, for a theme block style attribute
+  @param {object} [settings] - section.settings or block.settings
+  @param {string} [prefixes] - comma-separated prefixes, e.g. "eyebrow,heading,body"
+
+  Per prefix, settings may include {prefix}_font, {prefix}_font_custom,
+  {prefix}_weight, {prefix}_size_desktop, and {prefix}_size_mobile.
+  When font_family or {prefix}_font is custom, the matching text setting is
+  custom_font or {prefix}_font_custom.
+{% enddoc %}
+
+{%- liquid
+  assign ff = font_family | default: 'manrope'
+  assign zt_font_custom = font_custom | default: ''
+  if zt_font_custom == blank and settings != blank
+    assign zt_font_custom = settings.custom_font | default: ''
+  endif
+  assign zt_font_custom = zt_font_custom | strip | replace: '</', '' | replace: '<', '' | replace: '{', '' | replace: '}', '' | replace: ';', '' | replace: '@', '' | replace: '/*', '' | replace: '*/', ''
+
+  case ff
+    when 'inherit', 'blank'
+      assign zt_font_stack = 'Manrope, Arial, sans-serif'
+    when 'custom'
+      if zt_font_custom != blank
+        assign zt_font_stack = zt_font_custom
+      else
+        assign zt_font_stack = 'Manrope, Arial, sans-serif'
+      endif
+    when 'theme_heading'
+      assign zt_font_stack = 'var(--font-heading--family)'
+    when 'theme_body', 'poppins'
+      assign zt_font_stack = 'var(--font-body--family)'
+    when 'system'
+      assign zt_font_stack = "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    when 'inter'
+      assign zt_font_stack = 'Inter, system-ui, sans-serif'
+    else
+      assign zt_font_stack = 'Manrope, Arial, sans-serif'
+  endcase
+-%}
+
+{%- capture zt_font_rules -%}
+    {%- if emit_root != false and zt_font_stack != blank -%}
+      --zt-font: {{ zt_font_stack }};
+      font-family: var(--zt-font);
+    {%- endif -%}
+    {%- if prefixes != blank and settings != blank -%}
+      {%- assign prefix_list = prefixes | split: ',' -%}
+      {%- for raw_prefix in prefix_list -%}
+        {%- assign prefix = raw_prefix | strip -%}
+        {%- assign w_key = prefix | append: '_weight' -%}
+        {%- assign d_key = prefix | append: '_size_desktop' -%}
+        {%- assign m_key = prefix | append: '_size_mobile' -%}
+        {%- assign f_key = prefix | append: '_font' -%}
+        {%- assign c_key = prefix | append: '_font_custom' -%}
+        {%- assign prefix_ff = ff -%}
+        {%- if settings[f_key] != blank and settings[f_key] != 'inherit' -%}
+          {%- assign prefix_ff = settings[f_key] -%}
+        {%- endif -%}
+        {%- assign prefix_custom = settings[c_key] | default: '' | strip | replace: '</', '' | replace: '<', '' | replace: '{', '' | replace: '}', '' | replace: ';', '' | replace: '@', '' | replace: '/*', '' | replace: '*/', '' -%}
+        {%- case prefix_ff -%}
+          {%- when 'inherit', 'blank' -%}
+            {%- assign prefix_stack = 'var(--zt-font)' -%}
+          {%- when 'custom' -%}
+            {%- if prefix_custom != blank -%}
+              {%- assign prefix_stack = prefix_custom -%}
+            {%- else -%}
+              {%- assign prefix_stack = 'var(--zt-font)' -%}
+            {%- endif -%}
+          {%- when 'theme_heading' -%}
+            {%- assign prefix_stack = 'var(--font-heading--family)' -%}
+          {%- when 'theme_body', 'poppins' -%}
+            {%- assign prefix_stack = 'var(--font-body--family)' -%}
+          {%- when 'system' -%}
+            {%- assign prefix_stack = "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" -%}
+          {%- when 'inter' -%}
+            {%- assign prefix_stack = 'Inter, system-ui, sans-serif' -%}
+          {%- else -%}
+            {%- assign prefix_stack = 'Manrope, Arial, sans-serif' -%}
+        {%- endcase -%}
+        --zt-{{ prefix }}-font: {{ prefix_stack }};
+        --zt-{{ prefix }}-weight: {{ settings[w_key] | default: 700 }};
+        --zt-{{ prefix }}-size: {{ settings[d_key] | default: 16 }}px;
+        --zt-{{ prefix }}-size-m: {{ settings[m_key] | default: 14 }}px;
+      {%- endfor -%}
+    {%- endif -%}
+{%- endcapture -%}
+
+{%- if inline -%}
+  {{- zt_font_rules -}}
+{%- else -%}
+{% style %}
+  @font-face {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('{{ 'manrope-400.woff2' | asset_url }}') format('woff2');
+  }
+  @font-face {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('{{ 'manrope-500.woff2' | asset_url }}') format('woff2');
+  }
+  @font-face {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('{{ 'manrope-600.woff2' | asset_url }}') format('woff2');
+  }
+  @font-face {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('{{ 'manrope-700.woff2' | asset_url }}') format('woff2');
+  }
+  @font-face {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('{{ 'manrope-800.woff2' | asset_url }}') format('woff2');
+  }
+
+  #{{ id }} {
+    {{ zt_font_rules }}
+  }
+{% endstyle %}
+{%- endif -%}

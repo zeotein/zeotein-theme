@@ -1,0 +1,661 @@
+{% doc %}
+  @prompt
+    {% style %}
+    .z-refund{
+      padding:40px 20px;
+      background:#ffffff;
+    }
+    
+    .z-refund__wrap{
+      max-width:1200px;
+      margin:0 auto;
+      background:linear-gradient(135deg,#35285f 0%,#2b1248 100%);
+      border:1px solid rgba(46,201,201,.25);
+      border-radius:28px;
+      padding:40px 48px;
+      display:flex;
+      align-items:center;
+      gap:36px;
+    }
+    
+    .z-refund__icon{
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      background:rgba(255,255,255,.04);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+    }
+    
+    .z-refund__icon svg{
+      width:58px;
+      height:58px;
+      color:#2EC9C9;
+    }
+    
+    .z-refund__content{
+      flex:1;
+    }
+    
+    .z-refund__title{
+      margin:0 0 16px;
+      font-size:52px;
+      line-height:1;
+      font-family:'Bebas Neue',sans-serif;
+      color:#2EC9C9;
+      letter-spacing:1px;
+    }
+    
+    .z-refund__text{
+      margin:0;
+      color:#E8E0F2;
+      font-family:'Poppins',sans-serif;
+      font-size:22px;
+      line-height:1.6;
+    }
+    
+    .z-refund__note{
+      margin-top:18px;
+      color:#9E90B4;
+      font-size:16px;
+      font-family:'Poppins',sans-serif;
+    }
+    
+    @media(max-width:768px){
+    
+    .z-refund__wrap{
+      padding:28px 24px;
+      flex-direction:column;
+      text-align:center;
+    }
+    
+    .z-refund__title{
+      font-size:38px;
+    }
+    
+    .z-refund__text{
+      font-size:18px;
+    }
+    
+    .z-refund__icon{
+      width:90px;
+      height:90px;
+    }
+    
+    }
+    {% endstyle %}
+    
+    <section class="z-refund">
+    
+    <div class="z-refund__wrap">
+    
+    <div class="z-refund__icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round"
+    d="M12 2l7 3v6c0 5-3.4 9.5-7 11-3.6-1.5-7-6-7-11V5l7-3z"/>
+    <path stroke-linecap="round" stroke-linejoin="round"
+    d="M9.5 12.5l2 2 3.5-4"/>
+    </svg>
+    
+    </div>
+    
+    <div class="z-refund__content">
+    
+    <h2 class="z-refund__title">
+    TRY ZEOTEIN RISK-FREE FOR 30 DAYS
+    </h2>
+    
+    <p class="z-refund__text">
+    Don't love it, even the taste? Email us within 30 days for a full refund, even if the box is empty. No forms and no runaround.
+    </p>
+    
+    <div class="z-refund__note">
+    First order only • one per customer • refund excludes shipping
+    </div>
+    
+    </div>
+    
+    </div>
+    
+    </section>
+    
+    {% schema %}
+    {
+      "name": "Refund Guarantee",
+      "tag": "section",
+      "class": "refund-guarantee",
+      "presets": [
+        {
+          "name": "Refund Guarantee"
+        }
+      ]
+    }
+    {% endschema %}
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-refund-guarantee-{{ ai_gen_id }} {
+    display: block;
+    padding: {{ block.settings.section_padding_top }}px {{ block.settings.section_padding_horizontal }}px {{ block.settings.section_padding_bottom }}px;
+    background: {{ block.settings.section_background }};
+    width: 100%;
+  }
+
+  .ai-refund-guarantee__wrap-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+    background: {{ block.settings.card_background }};
+    border: {{ block.settings.border_thickness }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: {{ block.settings.card_padding_vertical }}px {{ block.settings.card_padding_horizontal }}px;
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.content_gap }}px;
+  }
+
+  .ai-refund-guarantee__icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    border-radius: 50%;
+    background: {{ block.settings.icon_background }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .ai-refund-guarantee__icon-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.icon_size }}px * 0.48);
+    height: calc({{ block.settings.icon_size }}px * 0.48);
+    color: {{ block.settings.icon_color }};
+  }
+
+  .ai-refund-guarantee__content-{{ ai_gen_id }} {
+    flex: 1;
+  }
+
+  .ai-refund-guarantee__title-{{ ai_gen_id }} {
+    margin: 0 0 {{ block.settings.title_margin_bottom }}px;
+    font-size: {{ block.settings.title_size }}px;
+    line-height: 1;
+    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+    font-weight: {{ block.settings.title_font.weight }};
+    color: {{ block.settings.title_color }};
+    letter-spacing: {{ block.settings.title_letter_spacing }}px;
+  }
+
+  .ai-refund-guarantee__text-{{ ai_gen_id }} {
+    margin: 0;
+    color: {{ block.settings.text_color }};
+    font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
+    font-weight: {{ block.settings.text_font.weight }};
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.6;
+  }
+
+  .ai-refund-guarantee__note-{{ ai_gen_id }} {
+    margin-top: {{ block.settings.note_margin_top }}px;
+    color: {{ block.settings.note_color }};
+    font-size: {{ block.settings.note_size }}px;
+    font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
+    font-weight: {{ block.settings.text_font.weight }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-refund-guarantee-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top_mobile }}px {{ block.settings.section_padding_horizontal_mobile }}px {{ block.settings.section_padding_bottom_mobile }}px;
+    }
+
+    .ai-refund-guarantee__wrap-{{ ai_gen_id }} {
+      padding: {{ block.settings.card_padding_vertical_mobile }}px {{ block.settings.card_padding_horizontal_mobile }}px;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .ai-refund-guarantee__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size_mobile }}px;
+    }
+
+    .ai-refund-guarantee__text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size_mobile }}px;
+    }
+
+    .ai-refund-guarantee__icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size_mobile }}px;
+      height: {{ block.settings.icon_size_mobile }}px;
+    }
+
+    .ai-refund-guarantee__icon-{{ ai_gen_id }} svg {
+      width: calc({{ block.settings.icon_size_mobile }}px * 0.48);
+      height: calc({{ block.settings.icon_size_mobile }}px * 0.48);
+    }
+  }
+{% endstyle %}
+
+<refund-guarantee-{{ ai_gen_id }} class="ai-refund-guarantee-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-refund-guarantee__wrap-{{ ai_gen_id }}">
+    <div class="ai-refund-guarantee__icon-{{ ai_gen_id }}">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l7 3v6c0 5-3.4 9.5-7 11-3.6-1.5-7-6-7-11V5l7-3z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12.5l2 2 3.5-4"/>
+      </svg>
+    </div>
+
+    <div class="ai-refund-guarantee__content-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="ai-refund-guarantee__title-{{ ai_gen_id }}">
+          {{ block.settings.title }}
+        </h2>
+      {% endif %}
+
+      {% if block.settings.text != blank %}
+        <div class="ai-refund-guarantee__text-{{ ai_gen_id }}">
+          {{ block.settings.text }}
+        </div>
+      {% endif %}
+
+      {% if block.settings.note != blank %}
+        <div class="ai-refund-guarantee__note-{{ ai_gen_id }}">
+          {{ block.settings.note }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</refund-guarantee-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class RefundGuarantee{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+    }
+    customElements.define('refund-guarantee-{{ ai_gen_id }}', RefundGuarantee{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Refund guarantee",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "TRY ZEOTEIN RISK-FREE FOR 30 DAYS"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Don't love it, even the taste? Email us within 30 days for a full refund, even if the box is empty. No forms and no runaround.</p>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Note",
+      "default": "First order only • one per customer • refund excludes shipping"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 600,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Content gap",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "section_padding_horizontal_mobile",
+      "label": "Horizontal padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Card padding"
+    },
+    {
+      "type": "range",
+      "id": "card_padding_vertical",
+      "label": "Vertical padding",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "card_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "card_padding_vertical_mobile",
+      "label": "Vertical padding (mobile)",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "card_padding_horizontal_mobile",
+      "label": "Horizontal padding (mobile)",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 60,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "label": "Icon size (mobile)",
+      "min": 50,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "default": 90
+    },
+    {
+      "type": "color",
+      "id": "icon_background",
+      "label": "Icon background",
+      "default": "rgba(255, 255, 255, 0.04)"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#2EC9C9"
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Size (mobile)",
+      "min": 18,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "title_letter_spacing",
+      "label": "Letter spacing",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "title_margin_bottom",
+      "label": "Bottom margin",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#2EC9C9"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "font_picker",
+      "id": "text_font",
+      "label": "Font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Size (mobile)",
+      "min": 12,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color",
+      "default": "#E8E0F2"
+    },
+    {
+      "type": "header",
+      "content": "Note"
+    },
+    {
+      "type": "range",
+      "id": "note_size",
+      "label": "Size",
+      "min": 10,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "note_margin_top",
+      "label": "Top margin",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "note_color",
+      "label": "Color",
+      "default": "#9E90B4"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#35285f"
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "label": "Thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Color",
+      "default": "rgba(46, 201, 201, 0.25)"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    }
+  ],
+  "presets": [
+    {
+      "name": "Refund guarantee"
+    }
+  ]
+}
+{% endschema %}

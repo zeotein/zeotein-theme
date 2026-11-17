@@ -1,0 +1,1481 @@
+{% comment %}
+  ZEOTEIN — STEP 13
+  COMPARISON / VALUE
+
+  Purpose:
+  - Answer: "Why should I pay for this?"
+  - Compare routine simplicity rather than making unsupported competitor claims
+  - Keep nutritional claims limited to verified Zeotein Cacao facts
+  - Use a premium editorial comparison graphic
+{% endcomment %}
+
+<section
+  id="zeotein-comparison-{{ section.id }}"
+  class="zt-comparison"
+>
+  <div class="zt-comparison__container">
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <div class="zt-comparison__header">
+
+      {% if section.settings.eyebrow != blank %}
+        <div class="zt-comparison__eyebrow">
+          {{ section.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="zt-comparison__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.intro != blank %}
+        <p class="zt-comparison__intro">
+          {{ section.settings.intro }}
+        </p>
+      {% endif %}
+
+    </div>
+
+
+    <!-- =========================================
+         COMPARISON CARD
+    ========================================== -->
+
+    <div class="zt-comparison__card">
+
+      <div class="zt-comparison__table">
+
+        <!-- TABLE HEADER -->
+
+        <div class="zt-comparison__row zt-comparison__row--header">
+
+          <div class="zt-comparison__cell zt-comparison__cell--label">
+            <span>THE ROUTINE</span>
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--typical">
+            <span>{{ section.settings.typical_label }}</span>
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--zeotein">
+
+            <div class="zt-comparison__zeotein-label">
+
+              <span class="zt-comparison__zeotein-dot"></span>
+
+              {{ section.settings.zeotein_label }}
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================
+             ROW 01
+        ====================================== -->
+
+        <div class="zt-comparison__row">
+
+          <div class="zt-comparison__cell zt-comparison__cell--label">
+            <span>{{ section.settings.row_1_label }}</span>
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--typical">
+
+            <span class="zt-comparison__x">×</span>
+
+            <span>
+              {{ section.settings.row_1_typical }}
+            </span>
+
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--zeotein">
+
+            <span class="zt-comparison__check">✓</span>
+
+            <strong>
+              {{ section.settings.row_1_zeotein }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================
+             ROW 02
+        ====================================== -->
+
+        <div class="zt-comparison__row">
+
+          <div class="zt-comparison__cell zt-comparison__cell--label">
+            <span>{{ section.settings.row_2_label }}</span>
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--typical">
+
+            <span class="zt-comparison__x">×</span>
+
+            <span>
+              {{ section.settings.row_2_typical }}
+            </span>
+
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--zeotein">
+
+            <span class="zt-comparison__check">✓</span>
+
+            <strong>
+              {{ section.settings.row_2_zeotein }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================
+             ROW 03
+        ====================================== -->
+
+        <div class="zt-comparison__row">
+
+          <div class="zt-comparison__cell zt-comparison__cell--label">
+            <span>{{ section.settings.row_3_label }}</span>
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--typical">
+
+            <span class="zt-comparison__x">×</span>
+
+            <span>
+              {{ section.settings.row_3_typical }}
+            </span>
+
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--zeotein">
+
+            <span class="zt-comparison__check">✓</span>
+
+            <strong>
+              {{ section.settings.row_3_zeotein }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================
+             ROW 04
+        ====================================== -->
+
+        <div class="zt-comparison__row">
+
+          <div class="zt-comparison__cell zt-comparison__cell--label">
+            <span>{{ section.settings.row_4_label }}</span>
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--typical">
+
+            <span class="zt-comparison__x">×</span>
+
+            <span>
+              {{ section.settings.row_4_typical }}
+            </span>
+
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--zeotein">
+
+            <span class="zt-comparison__check">✓</span>
+
+            <strong>
+              {{ section.settings.row_4_zeotein }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================
+             ROW 05
+        ====================================== -->
+
+        <div class="zt-comparison__row zt-comparison__row--verified">
+
+          <div class="zt-comparison__cell zt-comparison__cell--label">
+            <span>{{ section.settings.row_5_label }}</span>
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--typical">
+
+            <span class="zt-comparison__dash">—</span>
+
+            <span>
+              {{ section.settings.row_5_typical }}
+            </span>
+
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--zeotein">
+
+            <span class="zt-comparison__check">✓</span>
+
+            <strong>
+              {{ section.settings.row_5_zeotein }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================
+             ROW 06
+        ====================================== -->
+
+        <div class="zt-comparison__row zt-comparison__row--verified">
+
+          <div class="zt-comparison__cell zt-comparison__cell--label">
+            <span>{{ section.settings.row_6_label }}</span>
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--typical">
+
+            <span class="zt-comparison__dash">—</span>
+
+            <span>
+              {{ section.settings.row_6_typical }}
+            </span>
+
+          </div>
+
+          <div class="zt-comparison__cell zt-comparison__cell--zeotein">
+
+            <span class="zt-comparison__check">✓</span>
+
+            <strong>
+              {{ section.settings.row_6_zeotein }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- MOBILE NOTE -->
+
+      <div class="zt-comparison__mobile-note">
+        {{ section.settings.mobile_note }}
+      </div>
+
+    </div>
+
+
+    <!-- =========================================
+         CTA
+         DESTINATION REMAINS UNCHANGED
+    ========================================== -->
+
+    {% if section.settings.cta_text != blank %}
+
+      <div class="zt-comparison__cta-wrap">
+
+        <a
+          href="{{ section.settings.cta_url | default: '/collections/shop-all' }}"
+          class="zt-comparison__cta"
+          data-zeotein-shop-cta
+        >
+
+          <span>
+            {{ section.settings.cta_text }}
+          </span>
+
+          <span class="zt-comparison__cta-arrow">
+            →
+          </span>
+
+        </a>
+
+      </div>
+
+    {% endif %}
+
+  </div>
+</section>
+
+
+<style>
+
+  /* ==========================================================
+     ZEOTEIN — COMPARISON / VALUE
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }} {
+
+    --zt-cream: #F8F6F2;
+    --zt-purple: #6F4AA8;
+    --zt-purple-dark: #51357D;
+    --zt-navy: #202033;
+    --zt-ink: #242228;
+    --zt-muted: #706D76;
+    --zt-line: rgba(45, 38, 57, 0.11);
+    --zt-soft: #F7F5F9;
+
+    background: var(--zt-cream);
+
+    padding: 58px 24px 56px;
+  }
+
+
+  #zeotein-comparison-{{ section.id }} * {
+    box-sizing: border-box;
+  }
+
+
+  /* ==========================================================
+     CONTAINER
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__container {
+
+    width: 100%;
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+  }
+
+
+  /* ==========================================================
+     HEADER
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__header {
+
+    max-width: 760px;
+
+    margin: 0 auto 52px;
+
+    text-align: center;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__eyebrow {
+
+    margin-bottom: 14px;
+
+    color: var(--zt-purple);
+
+    font-size: 11px;
+
+    line-height: 1.4;
+
+    font-weight: 700;
+
+    letter-spacing: 0.18em;
+
+    text-transform: uppercase;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__heading {
+
+    margin: 0;
+
+    color: var(--zt-ink);
+
+    font-size: clamp(40px, 5.5vw, 66px);
+
+    line-height: 0.98;
+
+    font-weight: 600;
+
+    letter-spacing: -0.05em;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__intro {
+
+    max-width: 610px;
+
+    margin: 22px auto 0;
+
+    color: var(--zt-muted);
+
+    font-size: 16px;
+
+    line-height: 1.65;
+  }
+
+
+  /* ==========================================================
+     COMPARISON CARD
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__card {
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid rgba(81, 53, 125, 0.13);
+
+    border-radius: 28px;
+
+    box-shadow:
+      0 20px 60px rgba(45, 34, 65, 0.06);
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__table {
+
+    width: 100%;
+  }
+
+
+  /* ==========================================================
+     ROWS
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__row {
+
+    display: grid;
+
+    grid-template-columns:
+      1.1fr 0.9fr 0.9fr;
+
+    border-bottom: 1px solid var(--zt-line);
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__row:last-child {
+
+    border-bottom: 0;
+  }
+
+
+  /* ==========================================================
+     HEADER ROW
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__row--header {
+
+    min-height: 84px;
+
+    border-bottom: 0;
+
+    background: var(--zt-navy);
+
+    color: #ffffff;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__row--header
+  .zt-comparison__cell {
+
+    border-right:
+      1px solid rgba(255,255,255,0.09);
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__row--header
+  .zt-comparison__cell:last-child {
+
+    border-right: 0;
+  }
+
+
+  /* ==========================================================
+     CELLS
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__cell {
+
+    display: flex;
+
+    align-items: center;
+
+    min-width: 0;
+
+    padding: 25px 30px;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__cell--label {
+
+    color: var(--zt-ink);
+
+    font-size: 15px;
+
+    line-height: 1.4;
+
+    font-weight: 600;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__cell--typical {
+
+    gap: 10px;
+
+    color: #85818A;
+
+    font-size: 14px;
+
+    line-height: 1.45;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__cell--zeotein {
+
+    gap: 10px;
+
+    background: #ffffff;
+
+    color: var(--zt-purple-dark);
+
+    font-size: 14px;
+
+    line-height: 1.45;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__row:not(.zt-comparison__row--header)
+  .zt-comparison__cell--zeotein {
+
+    background: #ffffff;
+  }
+
+
+  /* ==========================================================
+     HEADER LABELS
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__row--header
+  .zt-comparison__cell--label {
+
+    color: rgba(255,255,255,0.58);
+
+    font-size: 10px;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__row--header
+  .zt-comparison__cell--typical {
+
+    color: rgba(255,255,255,0.62);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__row--header
+  .zt-comparison__cell--zeotein {
+
+    background:
+      rgba(111, 74, 168, 0.45);
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__zeotein-label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__zeotein-dot {
+
+    display: inline-block;
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #A98AD5;
+
+    box-shadow:
+      0 0 0 4px rgba(169, 138, 213, 0.12);
+  }
+
+
+  /* ==========================================================
+     ICONS
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__x {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 20px;
+
+    height: 20px;
+
+    flex: 0 0 20px;
+
+    border-radius: 50%;
+
+    background: #F1EFF2;
+
+    color: #99949D;
+
+    font-size: 12px;
+
+    font-weight: 500;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__check {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 21px;
+
+    height: 21px;
+
+    flex: 0 0 21px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(111, 74, 168, 0.11);
+
+    color: var(--zt-purple);
+
+    font-size: 12px;
+
+    font-weight: 800;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__dash {
+
+    color: #B0ACB4;
+  }
+
+
+  /* ==========================================================
+     VERIFIED ROWS
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__row--verified {
+
+    background: #ffffff;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__row--verified
+  .zt-comparison__cell--label {
+
+    color: var(--zt-purple-dark);
+  }
+
+
+  /* ==========================================================
+     MOBILE NOTE
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__mobile-note {
+
+    display: none;
+  }
+
+
+  /* ==========================================================
+     CTA
+     NORMAL = PURPLE
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__cta-wrap {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 24px;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__cta {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    min-height: 54px;
+
+    padding: 0 27px;
+
+    border: 1px solid #6F4AA8;
+
+    border-radius: 999px;
+
+    background: #6F4AA8;
+
+    color: #FFFFFF !important;
+
+    font-size: 11px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+
+    text-decoration: none !important;
+
+    text-transform: uppercase;
+
+    box-shadow:
+      0 10px 24px rgba(111, 74, 168, 0.18);
+
+    transition:
+      transform 180ms ease,
+      background-color 180ms ease,
+      color 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+
+  /* ==========================================================
+     CTA HOVER = WHITE
+  ========================================================== */
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__cta:hover {
+
+    transform: translateY(-2px);
+
+    background: #FFFFFF;
+
+    color: #6F4AA8 !important;
+
+    border-color: #FFFFFF;
+
+    box-shadow:
+      0 14px 30px rgba(111, 74, 168, 0.18);
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__cta-arrow {
+
+    font-size: 18px;
+
+    line-height: 0;
+
+    color: inherit;
+
+    transition:
+      transform 180ms ease;
+  }
+
+
+  #zeotein-comparison-{{ section.id }}
+  .zt-comparison__cta:hover
+  .zt-comparison__cta-arrow {
+
+    transform: translateX(3px);
+  }
+
+
+  /* ==========================================================
+     TABLET
+  ========================================================== */
+
+  @media screen and (max-width: 989px) {
+
+    #zeotein-comparison-{{ section.id }} {
+
+      padding: 64px 20px 46px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__header {
+
+      margin-bottom: 40px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__row {
+
+      grid-template-columns:
+        1fr 1fr 1fr;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__cell {
+
+      padding: 22px 20px;
+    }
+
+  }
+
+
+  /* ==========================================================
+     MOBILE
+  ========================================================== */
+
+  @media screen and (max-width: 700px) {
+
+    #zeotein-comparison-{{ section.id }} {
+
+      padding: 34px 16px 34px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__header {
+
+      margin-bottom: 24px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__heading {
+
+      font-size: 39px;
+
+      line-height: 1;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__intro {
+
+      margin-top: 14px;
+
+      font-size: 14px;
+
+      line-height: 1.55;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__card {
+
+      border-radius: 22px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__row {
+
+      grid-template-columns:
+        0.95fr 1fr 1fr;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__cell {
+
+      padding: 21px 12px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__cell--label {
+
+      font-size: 12px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__cell--typical,
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__cell--zeotein {
+
+      font-size: 11px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__row--header {
+
+      min-height: 70px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__row--header
+    .zt-comparison__cell--label {
+
+      font-size: 8px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__row--header
+    .zt-comparison__cell--typical,
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__row--header
+    .zt-comparison__cell--zeotein {
+
+      font-size: 8px;
+
+      letter-spacing: 0.08em;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__zeotein-dot {
+
+      width: 5px;
+
+      height: 5px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__x,
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__check {
+
+      width: 17px;
+
+      height: 17px;
+
+      flex-basis: 17px;
+
+      font-size: 9px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__cta-wrap {
+
+      margin-top: 18px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__cta {
+
+      min-height: 50px;
+
+      padding: 0 23px;
+
+      font-size: 10px;
+    }
+
+  }
+
+
+  /* ==========================================================
+     SMALL PHONES
+  ========================================================== */
+
+  @media screen and (max-width: 420px) {
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__cell {
+
+      padding-left: 8px;
+
+      padding-right: 8px;
+
+      padding-top: 20px;
+
+      padding-bottom: 20px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__cell--label {
+
+      font-size: 11px;
+    }
+
+
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__cell--typical,
+    #zeotein-comparison-{{ section.id }}
+    .zt-comparison__cell--zeotein {
+
+      font-size: 10px;
+    }
+
+  }
+
+</style>
+
+
+<script>
+(function () {
+
+  /* ==========================================================
+     FIND FINAL PRODUCT CHOICE
+  ========================================================== */
+
+  function findZeoteinProductChoice() {
+
+    var target = document.querySelector(
+      '[id^="zeotein-final-product-cta-"]'
+    );
+
+    if (target) return target;
+
+
+    target = document.getElementById(
+      'zeotein-final-product-cta'
+    );
+
+    if (target) return target;
+
+
+    target = document.querySelector(
+      '.z-upgrade'
+    );
+
+    if (target) return target;
+
+
+    var headings = document.querySelectorAll(
+      'h1, h2, h3, h4'
+    );
+
+
+    for (
+      var i = 0;
+      i < headings.length;
+      i++
+    ) {
+
+      var text =
+        (headings[i].textContent || '')
+        .trim()
+        .toLowerCase();
+
+
+      if (
+        text.indexOf('find your zeotein') !== -1
+      ) {
+
+        return (
+          headings[i].closest('section') ||
+          headings[i]
+        );
+
+      }
+
+    }
+
+
+    return null;
+
+  }
+
+
+  /* ==========================================================
+     SCROLL TO FINAL PRODUCT CHOICE
+  ========================================================== */
+
+  function scrollToProductChoice(event) {
+
+    var target =
+      findZeoteinProductChoice();
+
+
+    if (!target) return;
+
+
+    event.preventDefault();
+
+
+    var header =
+      document.querySelector(
+        'header, .shopify-section-header'
+      );
+
+
+    var headerOffset =
+      header
+        ? Math.min(
+            header.getBoundingClientRect().height,
+            110
+          )
+        : 0;
+
+
+    var top =
+      target.getBoundingClientRect().top +
+      window.pageYOffset -
+      headerOffset -
+      16;
+
+
+    window.scrollTo({
+
+      top: Math.max(0, top),
+
+      behavior: 'smooth'
+
+    });
+
+  }
+
+
+  /* ==========================================================
+     BIND CTA
+  ========================================================== */
+
+  function bindButtons(root) {
+
+    var scope =
+      root || document;
+
+
+    scope
+      .querySelectorAll(
+        '[data-zt-scroll-disabled]'
+      )
+      .forEach(function (button) {
+
+
+        if (
+          button.dataset.zeoteinBound === 'true'
+        ) {
+
+          return;
+
+        }
+
+
+        button.dataset.zeoteinBound = 'true';
+
+
+        button.addEventListener(
+          'click',
+          scrollToProductChoice
+        );
+
+      });
+
+  }
+
+
+  bindButtons(document);
+
+
+  /* Shopify Theme Editor */
+
+  document.addEventListener(
+    'shopify:section:load',
+    function (event) {
+
+      bindButtons(event.target);
+
+    }
+  );
+
+})();
+</script>
+
+
+{% schema %}
+{
+  "name": "Comparison / Value",
+  "tag": "section",
+  "class": "section",
+
+  "settings": [
+
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE VALUE"
+    },
+
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "One Simple Routine. Less to Manage."
+    },
+
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro",
+      "default": "The value isn't about adding more to your shelf. It's about simplifying what you already manage."
+    },
+
+
+    {
+      "type": "text",
+      "id": "typical_label",
+      "label": "Typical Routine Label",
+      "default": "TYPICAL ROUTINE"
+    },
+
+    {
+      "type": "text",
+      "id": "zeotein_label",
+      "label": "Zeotein Label",
+      "default": "ZEOTEIN"
+    },
+
+
+    {
+      "type": "text",
+      "id": "row_1_label",
+      "label": "Row 1 Label",
+      "default": "Products"
+    },
+
+    {
+      "type": "text",
+      "id": "row_1_typical",
+      "label": "Row 1 Typical",
+      "default": "Multiple products"
+    },
+
+    {
+      "type": "text",
+      "id": "row_1_zeotein",
+      "label": "Row 1 Zeotein",
+      "default": "One simple daily option"
+    },
+
+
+    {
+      "type": "text",
+      "id": "row_2_label",
+      "label": "Row 2 Label",
+      "default": "Measuring"
+    },
+
+    {
+      "type": "text",
+      "id": "row_2_typical",
+      "label": "Row 2 Typical",
+      "default": "Multiple scoops"
+    },
+
+    {
+      "type": "text",
+      "id": "row_2_zeotein",
+      "label": "Row 2 Zeotein",
+      "default": "Pre-measured stick pack"
+    },
+
+
+    {
+      "type": "text",
+      "id": "row_3_label",
+      "label": "Row 3 Label",
+      "default": "Storage"
+    },
+
+    {
+      "type": "text",
+      "id": "row_3_typical",
+      "label": "Row 3 Typical",
+      "default": "Multiple tubs"
+    },
+
+    {
+      "type": "text",
+      "id": "row_3_zeotein",
+      "label": "Row 3 Zeotein",
+      "default": "One streamlined routine"
+    },
+
+
+    {
+      "type": "text",
+      "id": "row_4_label",
+      "label": "Row 4 Label",
+      "default": "Daily routine"
+    },
+
+    {
+      "type": "text",
+      "id": "row_4_typical",
+      "label": "Row 4 Typical",
+      "default": "Complicated to manage"
+    },
+
+    {
+      "type": "text",
+      "id": "row_4_zeotein",
+      "label": "Row 4 Zeotein",
+      "default": "Simple routine"
+    },
+
+
+    {
+      "type": "text",
+      "id": "row_5_label",
+      "label": "Row 5 Label",
+      "default": "Portability"
+    },
+
+    {
+      "type": "text",
+      "id": "row_5_typical",
+      "label": "Row 5 Typical",
+      "default": "Depends on the products"
+    },
+
+    {
+      "type": "text",
+      "id": "row_5_zeotein",
+      "label": "Row 5 Zeotein",
+      "default": "Single-serve & travel-ready"
+    },
+
+
+    {
+      "type": "text",
+      "id": "row_6_label",
+      "label": "Row 6 Label",
+      "default": "Ingredient transparency"
+    },
+
+    {
+      "type": "text",
+      "id": "row_6_typical",
+      "label": "Row 6 Typical",
+      "default": "Varies by product"
+    },
+
+    {
+      "type": "text",
+      "id": "row_6_zeotein",
+      "label": "Row 6 Zeotein",
+      "default": "6 ingredients on the Cacao label"
+    },
+
+
+    {
+      "type": "text",
+      "id": "mobile_note",
+      "label": "Mobile Note",
+      "default": "Comparison focuses on routine simplicity. Nutritional figures below are for Zeotein Cacao 30-Day Stick Packs."
+    },
+
+
+    {
+      "type": "text",
+      "id": "value_eyebrow",
+      "label": "Value Eyebrow",
+      "default": "VERIFIED CACAO VALUE"
+    },
+
+    {
+      "type": "text",
+      "id": "value_note",
+      "label": "Value Note",
+      "default": "Per serving · 30-Day Cacao Stick Packs"
+    },
+
+
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "SHOP ZEOTEIN"
+    },
+
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+
+  ],
+
+  "presets": [
+    {
+      "name": "Comparison / Value"
+    }
+  ]
+}
+{% endschema %}

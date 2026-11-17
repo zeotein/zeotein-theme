@@ -1,0 +1,592 @@
+{% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;700&display=swap');
+
+  #shopify-section-{{ section.id }} .z-ing {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 12%, rgba(41, 110, 160, 0.28) 0%, transparent 34%),
+      radial-gradient(circle at 50% 52%, rgba(36, 201, 201, 0.10) 0%, transparent 42%),
+      linear-gradient(180deg, #160824 0%, #1B0B30 45%, #170724 100%);
+    padding: 72px 24px 86px;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,0.32) 1px, transparent 1.5px),
+      radial-gradient(circle, rgba(46,201,201,0.20) 1px, transparent 1.5px);
+    background-size: 130px 130px, 210px 210px;
+    background-position: 20px 30px, 90px 80px;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__head {
+    text-align: center;
+    margin: 0 auto 28px;
+    max-width: 900px;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__eyebrow {
+    margin: 0 0 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #2EC9C9;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__title {
+    margin: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: 68px;
+    line-height: 0.95;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__title span {
+    display: block;
+    margin-top: 20px;
+    color: #4ED9E0;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__sub {
+    margin: 28px auto 0;
+    max-width: 920px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #D9C9F0;
+  }
+
+  #shopify-section-{{ section.id }} .zeolite-card {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 0 28px;
+    padding: 34px 42px;
+    border: 1px solid rgba(78, 209, 220, 0.35);
+    border-radius: 18px;
+    background:
+      radial-gradient(circle at 95% 45%, rgba(77, 91, 207, 0.50) 0%, rgba(68, 47, 156, 0.32) 24%, transparent 52%),
+      linear-gradient(110deg, #39206C 0%, #40277E 52%, #4A3A9D 100%);
+    box-shadow:
+      inset 0 0 25px rgba(76, 203, 214, 0.05),
+      0 0 28px rgba(46, 201, 201, 0.12);
+  }
+
+  #shopify-section-{{ section.id }} .zeolite-card-inner {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+  }
+
+  #shopify-section-{{ section.id }} .zeolite-orb-wrap {
+    flex: 0 0 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .zeolite-orb {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 30%, #79fff4 0%, #39ded6 32%, #159ca1 68%, #0b6870 100%);
+    box-shadow:
+      0 0 22px rgba(51, 230, 221, 0.38),
+      inset -12px -14px 22px rgba(8, 72, 83, 0.32);
+  }
+
+  #shopify-section-{{ section.id }} .zeolite-image {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 0 22px rgba(51, 230, 221, 0.38);
+  }
+
+  #shopify-section-{{ section.id }} .zeolite-content {
+    flex: 1;
+  }
+
+  #shopify-section-{{ section.id }} .zeolite-label {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 7px 18px 6px;
+    border-radius: 50px;
+    background: rgba(38, 148, 180, 0.34);
+    color: #32d6dd;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .zeolite-title {
+    margin: 0 0 8px;
+    color: #ffffff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .zeolite-description {
+    margin: 0;
+    max-width: 780px;
+    color: rgba(255, 255, 255, 0.90);
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    line-height: 1.45;
+    font-weight: 400;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__card {
+    min-height: 260px;
+    background: rgba(50, 19, 83, 0.94);
+    border: 1px solid rgba(46, 201, 201, 0.38);
+    border-radius: 14px;
+    padding: 32px 28px;
+    box-shadow: 0 0 20px rgba(46, 201, 201, 0.06);
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__icon {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 18px;
+    border-radius: 16px;
+    background: rgba(62, 64, 130, 0.45);
+    color: #2EC9C9;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__icon svg {
+    width: 30px;
+    height: 30px;
+    stroke: currentColor;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 116px;
+    min-height: 28px;
+    margin: 0 0 10px;
+    padding: 4px 18px;
+    border: 1px solid rgba(46, 201, 201, 0.65);
+    border-radius: 999px;
+    color: #2EC9C9;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__name {
+    margin: 0 0 12px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__desc {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.45;
+    color: #D4C4EA;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__card--final {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(77, 91, 207, 0.32) 0%, transparent 42%),
+      #33206F;
+  }
+
+  #shopify-section-{{ section.id }} .z-ing__card--final .z-ing__name {
+    margin-bottom: 36px;
+  }
+
+  @media (max-width: 989px) {
+    #shopify-section-{{ section.id }} .z-ing__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    #shopify-section-{{ section.id }} .z-ing__title {
+      font-size: 56px;
+    }
+  }
+
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .z-ing {
+      padding: 54px 18px 64px;
+    }
+
+    #shopify-section-{{ section.id }} .z-ing__head {
+      margin-bottom: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .z-ing__title {
+      font-size: 44px;
+    }
+
+    #shopify-section-{{ section.id }} .z-ing__title span {
+      margin-top: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .z-ing__sub {
+      font-size: 15px;
+      margin-top: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .zeolite-card {
+      padding: 28px 22px;
+      border-radius: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .zeolite-card-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .zeolite-orb-wrap {
+      flex: none;
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    #shopify-section-{{ section.id }} .zeolite-orb,
+    #shopify-section-{{ section.id }} .zeolite-image {
+      width: 90px;
+      height: 90px;
+    }
+
+    #shopify-section-{{ section.id }} .zeolite-title {
+      font-size: 30px;
+    }
+
+    #shopify-section-{{ section.id }} .zeolite-description {
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    #shopify-section-{{ section.id }} .z-ing__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .z-ing__card {
+      min-height: auto;
+      padding: 28px 24px;
+    }
+  }
+{% endstyle %}
+
+<div class="z-ing">
+  <div class="z-ing__inner">
+
+    <div class="z-ing__head">
+      <p class="z-ing__eyebrow">{{ section.settings.eyebrow }}</p>
+
+      <h2 class="z-ing__title">
+        {{ section.settings.title_line_1 }}
+        <span>{{ section.settings.title_line_2 }}</span>
+      </h2>
+
+      <p class="z-ing__sub">{{ section.settings.subhead }}</p>
+    </div>
+
+    <div class="zeolite-card">
+      <div class="zeolite-card-inner">
+
+        <div class="zeolite-orb-wrap">
+          {% if section.settings.zeolite_image != blank %}
+            <img
+              class="zeolite-image"
+              src="{{ section.settings.zeolite_image | image_url: width: 400 }}"
+              alt="{{ section.settings.zeolite_image_alt | escape }}"
+              loading="lazy"
+            >
+          {% else %}
+            <div class="zeolite-orb"></div>
+          {% endif %}
+        </div>
+
+        <div class="zeolite-content">
+          <div class="zeolite-label">
+            {{ section.settings.zeolite_label }}
+          </div>
+
+          <h3 class="zeolite-title">
+            {{ section.settings.zeolite_title }}
+          </h3>
+
+          <p class="zeolite-description">
+            {{ section.settings.zeolite_desc }}
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="z-ing__grid">
+      {% for i in (1..6) %}
+        {% assign badge = 'badge_' | append: i %}
+        {% assign name = 'name_' | append: i %}
+        {% assign desc = 'desc_' | append: i %}
+
+        <div class="z-ing__card {% if i == 6 %}z-ing__card--final{% endif %}">
+
+          {% unless i == 6 %}
+            <div class="z-ing__icon">
+              {% case i %}
+                {% when 1 %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 14h12"></path>
+                    <path d="M8 14c0 3 2 5 4 5s4-2 4-5"></path>
+                    <path d="M9 10v2"></path>
+                    <path d="M12 7v5"></path>
+                    <path d="M15 10v2"></path>
+                  </svg>
+                {% when 2 %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"></path>
+                  </svg>
+                {% when 3 %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20V10"></path>
+                    <path d="M12 10c-4 0-6-2.5-6-5 4 0 6 2.5 6 5z"></path>
+                    <path d="M12 10c4 0 6-2.5 6-5-4 0-6 2.5-6 5z"></path>
+                  </svg>
+                {% when 4 %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M13 2L5 14h7l-1 8 8-12h-7l1-8z"></path>
+                  </svg>
+                {% when 5 %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 5c-8 0-12 4-12 12 8 0 12-4 12-12z"></path>
+                    <path d="M7 17l8-8"></path>
+                  </svg>
+              {% endcase %}
+            </div>
+
+            <div class="z-ing__badge">{{ section.settings[badge] }}</div>
+          {% endunless %}
+
+          <h3 class="z-ing__name">{{ section.settings[name] }}</h3>
+          <p class="z-ing__desc">{{ section.settings[desc] }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Zeotein Ingredients",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small top label",
+      "default": "WHAT'S INSIDE"
+    },
+    {
+      "type": "text",
+      "id": "title_line_1",
+      "label": "Title line 1",
+      "default": "SIX INGREDIENTS."
+    },
+    {
+      "type": "text",
+      "id": "title_line_2",
+      "label": "Title line 2",
+      "default": "ZERO JUNK..."
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subhead",
+      "default": "Everything your body needs. Nothing it doesn't. If a clean freak wouldn't approve it, it's not in here."
+    },
+    {
+      "type": "image_picker",
+      "id": "zeolite_image",
+      "label": "Zeolite image"
+    },
+    {
+      "type": "text",
+      "id": "zeolite_image_alt",
+      "label": "Zeolite image alt text",
+      "default": "Zeolite mineral"
+    },
+    {
+      "type": "text",
+      "id": "zeolite_label",
+      "label": "Zeolite label",
+      "default": "THE ONE YOU WON'T FIND ANYWHERE ELSE"
+    },
+    {
+      "type": "text",
+      "id": "zeolite_title",
+      "label": "Zeolite title",
+      "default": "ZEOLITE"
+    },
+    {
+      "type": "textarea",
+      "id": "zeolite_desc",
+      "label": "Zeolite description",
+      "default": "A rare volcanic mineral, clinoptilolite, with a naturally negative charge and a microscopic honeycomb structure. It's the reason we're called Zeotein, and the reason this isn't just another protein."
+    },
+    {
+      "type": "text",
+      "id": "badge_1",
+      "label": "1 badge",
+      "default": "GRASS-FED"
+    },
+    {
+      "type": "text",
+      "id": "name_1",
+      "label": "1 name",
+      "default": "BEEF BONE BROTH"
+    },
+    {
+      "type": "textarea",
+      "id": "desc_1",
+      "label": "1 desc",
+      "default": "23g of clean, grass-fed protein plus collagen to support muscle recovery and joint health."
+    },
+    {
+      "type": "text",
+      "id": "badge_2",
+      "label": "2 badge",
+      "default": "ORGANIC"
+    },
+    {
+      "type": "text",
+      "id": "name_2",
+      "label": "2 name",
+      "default": "COLLAGEN PEPTIDES"
+    },
+    {
+      "type": "textarea",
+      "id": "desc_2",
+      "label": "2 desc",
+      "default": "Premium organic peptides for skin, hair, nails, and connective tissue, bundled in, not bought separately."
+    },
+    {
+      "type": "text",
+      "id": "badge_3",
+      "label": "3 badge",
+      "default": "ORGANIC"
+    },
+    {
+      "type": "text",
+      "id": "name_3",
+      "label": "3 name",
+      "default": "FERMENTED CACAO"
+    },
+    {
+      "type": "textarea",
+      "id": "desc_3",
+      "label": "3 desc",
+      "default": "Organic, fermented, and unsweetened. Real antioxidants and flavor with zero sugar. Clean, not sweet."
+    },
+    {
+      "type": "text",
+      "id": "badge_4",
+      "label": "4 badge",
+      "default": "ORGANIC"
+    },
+    {
+      "type": "text",
+      "id": "name_4",
+      "label": "4 name",
+      "default": "MCT"
+    },
+    {
+      "type": "textarea",
+      "id": "desc_4",
+      "label": "4 desc",
+      "default": "Organic medium-chain triglycerides for clean, sustained energy your brain and body can actually use."
+    },
+    {
+      "type": "text",
+      "id": "badge_5",
+      "label": "5 badge",
+      "default": "ORGANIC"
+    },
+    {
+      "type": "text",
+      "id": "name_5",
+      "label": "5 name",
+      "default": "SEA MOSS"
+    },
+    {
+      "type": "textarea",
+      "id": "desc_5",
+      "label": "5 desc",
+      "default": "Organic, nutrient-dense sea vegetable with trace minerals and iodine from one whole-food source."
+    },
+    {
+      "type": "text",
+      "id": "name_6",
+      "label": "6 name",
+      "default": "THAT'S THE WHOLE LIST."
+    },
+    {
+      "type": "textarea",
+      "id": "desc_6",
+      "label": "6 desc",
+      "default": "Six things you can pronounce. Nothing hiding behind a proprietary blend."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zeotein Ingredients"
+    }
+  ]
+}
+{% endschema %}

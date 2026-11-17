@@ -1,0 +1,457 @@
+<style>
+  .z-difference {
+    background: #f7f5f1;
+    padding: 82px 24px 86px;
+  }
+
+  .z-difference__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.42fr 0.58fr;
+    gap: 54px;
+    align-items: center;
+  }
+
+  .z-difference__left {
+    max-width: 360px;
+  }
+
+  .z-difference__eyebrow {
+    margin: 0 0 20px;
+    font-family: "Poppins", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #5b3294;
+  }
+
+  .z-difference__headline {
+    margin: 0;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(56px, 5.5vw, 76px);
+    line-height: 0.91;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: #24143d;
+  }
+
+  .z-difference__headline span {
+    color: #5b3294;
+  }
+
+  .z-difference__subhead {
+    margin: 34px 0 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #6c6874;
+  }
+
+  .z-difference__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .z-difference__card {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 20px;
+    align-items: center;
+    min-height: 126px;
+    padding: 26px 30px;
+    background: #32185a;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(36, 20, 61, 0.08);
+  }
+
+  .z-difference__number {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 44px;
+    line-height: 1;
+    color: #ffffff;
+  }
+
+  .z-difference__card-title {
+    margin: 0 0 8px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 21px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  .z-difference__card-title strong {
+    color: #45d4d0;
+    font-weight: inherit;
+  }
+
+  .z-difference__card-description {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  /* Zeotein Approach */
+
+  .z-difference__bottom {
+    max-width: 1100px;
+    margin: 52px auto 0;
+    padding: 42px 48px;
+    background: #ffffff;
+    border: 1px solid #ddd8e8;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(36, 20, 61, 0.05);
+  }
+
+  .z-difference__bottom-label {
+    margin: 0 0 12px;
+    font-family: "Poppins", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: #5b3294;
+  }
+
+  .z-difference__bottom-title {
+    margin: 0 0 18px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 32px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #24143d;
+  }
+
+  .z-difference__bottom-lead {
+    max-width: 760px;
+    margin: 0 0 16px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    font-weight: 600;
+    color: #24143d;
+  }
+
+  .z-difference__bottom-text {
+    max-width: 820px;
+    margin: 0 0 12px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #6c6874;
+  }
+
+  .z-difference__bottom-close {
+    margin-top: 18px;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #5b3294;
+  }
+
+  /* Tablet */
+
+  @media screen and (max-width: 989px) {
+    .z-difference {
+      padding: 70px 24px 72px;
+    }
+
+    .z-difference__inner {
+      grid-template-columns: 1fr;
+      gap: 42px;
+    }
+
+    .z-difference__left {
+      max-width: 650px;
+    }
+
+    .z-difference__headline {
+      font-size: clamp(54px, 9vw, 72px);
+    }
+
+    .z-difference__subhead {
+      max-width: 620px;
+      margin-top: 28px;
+    }
+
+    .z-difference__bottom {
+      margin-top: 44px;
+    }
+  }
+
+  /* Mobile */
+
+  @media screen and (max-width: 749px) {
+    .z-difference {
+      padding: 58px 18px 62px;
+    }
+
+    .z-difference__inner {
+      gap: 34px;
+    }
+
+    .z-difference__eyebrow {
+      margin-bottom: 16px;
+      font-size: 9px;
+      letter-spacing: 0.24em;
+    }
+
+    .z-difference__headline {
+      font-size: clamp(50px, 15vw, 64px);
+      line-height: 0.92;
+    }
+
+    .z-difference__subhead {
+      margin-top: 24px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .z-difference__cards {
+      gap: 14px;
+    }
+
+    .z-difference__card {
+      grid-template-columns: 52px 1fr;
+      gap: 16px;
+      min-height: auto;
+      padding: 22px 20px;
+      border-radius: 10px;
+    }
+
+    .z-difference__number {
+      font-size: 38px;
+    }
+
+    .z-difference__card-title {
+      font-size: 19px;
+      line-height: 1.05;
+      margin-bottom: 7px;
+    }
+
+    .z-difference__card-description {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .z-difference__bottom {
+      margin-top: 34px;
+      padding: 30px 24px;
+      border-radius: 10px;
+    }
+
+    .z-difference__bottom-label {
+      font-size: 9px;
+      letter-spacing: 0.23em;
+    }
+
+    .z-difference__bottom-title {
+      font-size: 29px;
+      line-height: 1.02;
+      margin-bottom: 16px;
+    }
+
+    .z-difference__bottom-lead {
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .z-difference__bottom-text {
+      font-size: 13px;
+      line-height: 1.6;
+    }
+  }
+</style>
+
+<section class="z-difference">
+  <div class="z-difference__inner">
+
+    <div class="z-difference__left">
+      <p class="z-difference__eyebrow">
+        {{ section.settings.eyebrow }}
+      </p>
+
+      <h2 class="z-difference__headline">
+        {{ section.settings.headline }}
+      </h2>
+
+      <p class="z-difference__subhead">
+        {{ section.settings.subhead }}
+      </p>
+    </div>
+
+    <div class="z-difference__cards">
+
+      <div class="z-difference__card">
+        <div class="z-difference__number">
+          {{ section.settings.card_1_number }}
+        </div>
+
+        <div>
+          <h3 class="z-difference__card-title">
+            {{ section.settings.card_1_title }}
+          </h3>
+
+          <p class="z-difference__card-description">
+            {{ section.settings.card_1_description }}
+          </p>
+        </div>
+      </div>
+
+      <div class="z-difference__card">
+        <div class="z-difference__number">
+          {{ section.settings.card_2_number }}
+        </div>
+
+        <div>
+          <h3 class="z-difference__card-title">
+            {{ section.settings.card_2_title }}
+          </h3>
+
+          <p class="z-difference__card-description">
+            {{ section.settings.card_2_description }}
+          </p>
+        </div>
+      </div>
+
+      <div class="z-difference__card">
+        <div class="z-difference__number">
+          {{ section.settings.card_3_number }}
+        </div>
+
+        <div>
+          <h3 class="z-difference__card-title">
+            {{ section.settings.card_3_title }}
+          </h3>
+
+          <p class="z-difference__card-description">
+            {{ section.settings.card_3_description }}
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Zeotein Approach -->
+  <div class="z-difference__bottom">
+
+    <p class="z-difference__bottom-label">
+      The Zeotein Approach
+    </p>
+
+    <h3 class="z-difference__bottom-title">
+      What Makes Zeotein Different?
+    </h3>
+
+    <p class="z-difference__bottom-lead">
+      Clear ingredient information. Convenient single-serve formats. Two formula options.
+    </p>
+
+    <p class="z-difference__bottom-text">
+      Rather than asking you to figure out what each formula contains, Zeotein makes the ingredient list easy to explore.
+    </p>
+
+    <p class="z-difference__bottom-text">
+      You can compare the two formulas, look at the protein sources, review the Supplement Facts, and choose the format that fits your preferences.
+    </p>
+
+    <p class="z-difference__bottom-text z-difference__bottom-close">
+      Know what's in the formula. Understand what you're choosing.
+    </p>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "The Zeotein Difference",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE ZEOTEIN DIFFERENCE"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "MORE THAN PROTEIN. MADE SIMPLE."
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subheading",
+      "default": "Zeotein brings protein and thoughtfully selected ingredients together in convenient single-serve formats. Each formula is presented clearly so you can understand what’s in your daily serving and choose the option that fits your preferences."
+    },
+
+    {
+      "type": "text",
+      "id": "card_1_number",
+      "label": "Card 1 number",
+      "default": "01"
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Card 1 title",
+      "default": "PROTEIN + MORE"
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_description",
+      "label": "Card 1 description",
+      "default": "Protein is at the center of every Zeotein formula, combined with additional ingredients in one convenient format."
+    },
+
+    {
+      "type": "text",
+      "id": "card_2_number",
+      "label": "Card 2 number",
+      "default": "02"
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Card 2 title",
+      "default": "TWO FORMULA OPTIONS"
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_description",
+      "label": "Card 2 description",
+      "default": "Choose Cacao with animal-based protein or Vegan with plant-based protein."
+    },
+
+    {
+      "type": "text",
+      "id": "card_3_number",
+      "label": "Card 3 number",
+      "default": "03"
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Card 3 title",
+      "default": "MADE FOR REAL LIFE"
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_description",
+      "label": "Card 3 description",
+      "default": "Single-serve packets make Zeotein easy to mix at home, take on the go, or fit into your everyday routine."
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Zeotein Difference"
+    }
+  ]
+}
+{% endschema %}

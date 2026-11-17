@@ -1,0 +1,309 @@
+{%- liquid
+  assign image = section.settings.image
+  assign image_alt = section.settings.image_alt
+
+  if image_alt == blank and image != blank
+    assign image_alt = image.alt | default: 'Zeotein Cacao protein powder'
+  endif
+
+  assign fetch_priority = 'auto'
+  if section.index == 1
+    assign fetch_priority = 'high'
+  endif
+-%}
+
+<section
+  id="AboutHero-{{ section.id }}"
+  class="zeotein-about-hero"
+  aria-labelledby="AboutHeroHeading-{{ section.id }}"
+>
+  <div class="zeotein-about-hero__media">
+    {%- if image != blank -%}
+      {{
+        image
+        | image_url: width: 2400
+        | image_tag:
+          class: 'zeotein-about-hero__image',
+          widths: '750, 1100, 1500, 1800, 2200, 2400',
+          sizes: '100vw',
+          alt: image_alt,
+          loading: 'eager',
+          fetchpriority: fetch_priority
+      }}
+    {%- else -%}
+      <div class="zeotein-about-hero__placeholder"></div>
+    {%- endif -%}
+
+    <div class="zeotein-about-hero__overlay"></div>
+  </div>
+
+  <div class="zeotein-about-hero__inner page-width">
+    <div class="zeotein-about-hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="zeotein-about-hero__eyebrow">
+          {{ section.settings.eyebrow }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h1 id="AboutHeroHeading-{{ section.id }}" class="zeotein-about-hero__heading">
+          {{ section.settings.heading }}
+        </h1>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="zeotein-about-hero__text">
+          {{ section.settings.text }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  #AboutHero-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    min-height: {{ section.settings.desktop_height }}px;
+    display: flex;
+    align-items: center;
+    background: #f4f0ea;
+  }
+
+  #AboutHero-{{ section.id }} .zeotein-about-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  #AboutHero-{{ section.id }} .zeotein-about-hero__image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: {{ section.settings.image_position }};
+  }
+
+  #AboutHero-{{ section.id }} .zeotein-about-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(248, 245, 239, 0.96) 0%,
+        rgba(248, 245, 239, 0.88) 28%,
+        rgba(248, 245, 239, 0.35) 52%,
+        rgba(248, 245, 239, 0.02) 78%
+      );
+  }
+
+  #AboutHero-{{ section.id }} .zeotein-about-hero__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  #AboutHero-{{ section.id }} .zeotein-about-hero__content {
+    width: min(100%, 560px);
+  }
+
+  #AboutHero-{{ section.id }} .zeotein-about-hero__eyebrow {
+    margin-bottom: 14px;
+    font-size: 12px;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #5d2b91;
+  }
+
+  #AboutHero-{{ section.id }} .zeotein-about-hero__heading {
+    margin: 0;
+    font-size: clamp(38px, 5vw, 68px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    font-weight: 700;
+    color: #20152f;
+    max-width: 520px;
+  }
+
+  #AboutHero-{{ section.id }} .zeotein-about-hero__text {
+    margin-top: 22px;
+    max-width: 500px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: #40394a;
+  }
+
+  #AboutHero-{{ section.id }} .zeotein-about-hero__placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    background: #eee9e1;
+  }
+
+  @media screen and (max-width: 749px) {
+    #AboutHero-{{ section.id }} {
+      min-height: auto;
+      display: block;
+      background: #f4f0ea;
+    }
+
+    #AboutHero-{{ section.id }} .zeotein-about-hero__media {
+      position: relative;
+      height: {{ section.settings.mobile_image_height }}px;
+    }
+
+    #AboutHero-{{ section.id }} .zeotein-about-hero__image {
+      object-position: {{ section.settings.mobile_image_position }};
+    }
+
+    #AboutHero-{{ section.id }} .zeotein-about-hero__overlay {
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0) 55%,
+          rgba(0, 0, 0, 0.08) 100%
+        );
+    }
+
+    #AboutHero-{{ section.id }} .zeotein-about-hero__inner {
+      padding-top: 30px;
+      padding-bottom: 38px;
+    }
+
+    #AboutHero-{{ section.id }} .zeotein-about-hero__content {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    #AboutHero-{{ section.id }} .zeotein-about-hero__eyebrow {
+      margin-bottom: 9px;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+    }
+
+    #AboutHero-{{ section.id }} .zeotein-about-hero__heading {
+      font-size: clamp(34px, 10vw, 48px);
+      line-height: 1;
+      max-width: 420px;
+    }
+
+    #AboutHero-{{ section.id }} .zeotein-about-hero__text {
+      margin-top: 15px;
+      font-size: 15px;
+      line-height: 1.5;
+      max-width: 420px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "About Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Zeotein Cacao protein powder"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "ABOUT ZEOTEIN"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Real Nutrition. Made Simple."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Supporting text",
+      "default": "Zeotein was created to make everyday nutrition feel simpler — with intentional ingredients, meaningful protein, and a daily format that fits real life."
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 350,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop hero height",
+      "default": 560
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "min": 220,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile image height",
+      "default": 330
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Desktop image position",
+      "options": [
+        {
+          "value": "center center",
+          "label": "Center"
+        },
+        {
+          "value": "right center",
+          "label": "Right"
+        },
+        {
+          "value": "center right",
+          "label": "Center right"
+        },
+        {
+          "value": "70% center",
+          "label": "70% center"
+        }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_position",
+      "label": "Mobile image position",
+      "options": [
+        {
+          "value": "center center",
+          "label": "Center"
+        },
+        {
+          "value": "right center",
+          "label": "Right"
+        },
+        {
+          "value": "70% center",
+          "label": "70% center"
+        }
+      ],
+      "default": "center center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Hero"
+    }
+  ]
+}
+{% endschema %}

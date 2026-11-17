@@ -1,0 +1,58 @@
+{%- comment -%}
+  Zeotein gift cart lock (Nov 5 2026).
+  Keeps each landing-page/funnel gift at quantity 1, and removes the gifts
+  when no qualifying bag or stick-pack product is in the cart.
+  Gift variants: Save-A-Scoop, Starter Guide, Cacao Recipe Guide, Vegan Recipe Guide, CleanBlend Shaker (gift copies).
+  Qualifying products: LP bags (ZEO-CAC-BULK-30-LP, ZEO-CAC-BULK-30-CACAO-LP) and the four funnel offers.
+{%- endcomment -%}
+<script>
+(function () {
+  var GIFTS = [67706369507541, 67706369540309, 67706369605845, 67706369638613, 67706369704149];
+  var BAGS = [67596435783893, 67796346863829, 54944151634133, 67775397986517, 67710100308181, 67758454669525];
+  var origFetch = window.fetch.bind(window);
+  var timer = null, running = false;
+  function check() {
+    if (running) return;
+    running = true;
+    origFetch('/cart.js', { credentials: 'same-origin' })
+      .then(function (r) { return r.json(); })
+      .then(function (cart) {
+        var hasBag = cart.items.some(function (i) { return BAGS.indexOf(i.variant_id) > -1; });
+        var updates = {}, seen = {}, changed = false;
+        cart.items.forEach(function (i) {
+          if (GIFTS.indexOf(i.variant_id) === -1) return;
+          var want = (hasBag && !seen[i.variant_id]) ? 1 : 0;
+          seen[i.variant_id] = true;
+          if (i.quantity !== want) { updates[i.key] = want; changed = true; }
+        });
+        if (!changed) { running = false; return; }
+        return origFetch('/cart/update.js', {
+          method: 'POST', credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ updates: updates })
+        }).then(function () { window.location.reload(); });
+      })
+      .catch(function () { running = false; });
+  }
+  function schedule() { clearTimeout(timer); timer = setTimeout(check, 1500); }
+  window.fetch = function (input, init) {
+    var url = typeof input === 'string' ? input : (input && input.url) || '';
+    var p = origFetch(input, init);
+    if (/\/cart\/(add|change|update|clear)/.test(url)) { p.then(schedule, schedule); }
+    return p;
+  };
+  var origOpen = XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open = function (method, url) {
+    if (/\/cart\/(add|change|update)/.test(String(url))) { this.addEventListener('loadend', schedule); }
+    return origOpen.apply(this, arguments);
+  };
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', check); } else { check(); }
+})();
+</script>
+{% schema %}
+{
+  "name": "Gift cart lock",
+  "settings": [],
+  "enabled_on": { "groups": ["footer"] }
+}
+{% endschema %}

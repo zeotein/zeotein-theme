@@ -1,0 +1,422 @@
+{% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;700;800&display=swap');
+
+  #shopify-section-{{ section.id }} {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 82% 52%, rgba(69, 83, 179, 0.30) 0%, transparent 34%),
+      radial-gradient(circle at 34% 48%, rgba(46, 201, 201, 0.10) 0%, transparent 38%),
+      radial-gradient(circle at 50% 100%, rgba(72, 40, 130, 0.34) 0%, transparent 45%),
+      linear-gradient(180deg, #13071f 0%, #1b0b30 44%, #170724 100%);
+    padding: 82px 0 96px;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,0.30) 1px, transparent 1.6px),
+      radial-gradient(circle, rgba(46,201,201,0.18) 1px, transparent 1.6px);
+    background-size: 145px 145px, 230px 230px;
+    background-position: 25px 40px, 110px 85px;
+    opacity: 0.42;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 26px;
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__head {
+    text-align: center;
+    max-width: 980px;
+    margin: 0 auto 56px;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__eyebrow {
+    margin: 0 0 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #2EC9C9;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__title {
+    margin: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 0.95;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__title span {
+    display: inline-block;
+    margin-left: 10px;
+    color: #2EC9C9;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__sub {
+    margin: 24px auto 0;
+    max-width: 760px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #CDBFE0;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 34px;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__card {
+    grid-column: span 2;
+    min-height: 265px;
+    padding: 42px 34px 34px;
+    border: 1px solid rgba(46, 201, 201, 0.38);
+    border-radius: 14px;
+    background:
+      radial-gradient(circle at 72% 25%, rgba(72, 40, 130, 0.38) 0%, transparent 48%),
+      rgba(48, 17, 79, 0.92);
+    box-shadow:
+      0 0 22px rgba(46, 201, 201, 0.07),
+      inset 0 0 22px rgba(78, 92, 207, 0.08);
+    box-sizing: border-box;
+  }
+
+  /* Center the 4th and 5th cards nicely on the second row */
+  #shopify-section-{{ section.id }} .z-ben__card:nth-child(4) {
+    grid-column: 2 / span 2;
+  }
+  #shopify-section-{{ section.id }} .z-ben__card:nth-child(5) {
+    grid-column: 4 / span 2;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__icon {
+    width: 54px;
+    height: 54px;
+    margin: 0 0 48px;
+    border: 1px solid rgba(46, 201, 201, 0.70);
+    border-radius: 13px;
+    background: rgba(25, 44, 83, 0.55);
+    color: #2EC9C9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 0 16px rgba(46, 201, 201, 0.28),
+      inset 0 0 12px rgba(46, 201, 201, 0.08);
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: currentColor;
+    fill: none;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__card-title {
+    margin: 0 0 22px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__card-text {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.45;
+    color: #D3C5EA;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__cta-wrap {
+    text-align: center;
+    margin-top: 52px;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__cta {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #061F29;
+    background: #2EC9C9;
+    text-decoration: none;
+    padding: 17px 38px;
+    border-radius: 10px;
+    box-shadow: 0 0 24px rgba(46, 201, 201, 0.28);
+    transition: all 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .z-ben__cta:hover {
+    background: #23A3A3;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 989px) {
+    #shopify-section-{{ section.id }} .z-ben__title {
+      font-size: 58px;
+    }
+
+    #shopify-section-{{ section.id }} .z-ben__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    #shopify-section-{{ section.id }} .z-ben__card,
+    #shopify-section-{{ section.id }} .z-ben__card:nth-child(4),
+    #shopify-section-{{ section.id }} .z-ben__card:nth-child(5) {
+      grid-column: span 1 !important;
+    }
+  }
+
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .z-ben {
+      padding: 58px 0 68px;
+    }
+
+    #shopify-section-{{ section.id }} .z-ben__inner {
+      padding: 0 18px;
+    }
+
+    #shopify-section-{{ section.id }} .z-ben__head {
+      margin-bottom: 38px;
+    }
+
+    #shopify-section-{{ section.id }} .z-ben__eyebrow {
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 2px;
+    }
+
+    #shopify-section-{{ section.id }} .z-ben__title {
+      font-size: 44px;
+      line-height: 1;
+    }
+
+    #shopify-section-{{ section.id }} .z-ben__title span {
+      margin-top: 6px;
+      display: block;
+      margin-left: 0;
+    }
+
+    #shopify-section-{{ section.id }} .z-ben__sub {
+      font-size: 15px;
+      margin-top: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .z-ben__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+{% endstyle %}
+
+<div class="z-ben">
+  <div class="z-ben__inner">
+
+    <div class="z-ben__head">
+      <p class="z-ben__eyebrow">{{ section.settings.eyebrow }}</p>
+
+      <h2 class="z-ben__title">
+        {{ section.settings.title_line_1 }}
+        <span>{{ section.settings.title_line_2 }}</span>
+      </h2>
+
+      {% if section.settings.subhead != blank %}
+        <p class="z-ben__sub">{{ section.settings.subhead }}</p>
+      {% endif %}
+    </div>
+
+    <div class="z-ben__grid">
+      {% for block in section.blocks limit: 5 %}
+        <div class="z-ben__card" {{ block.shopify_attributes }}>
+
+          <div class="z-ben__icon">
+            {% case forloop.index %}
+              {% when 1 %}
+                <!-- Lightning Bolt (Energy) -->
+                <svg viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              {% when 2 %}
+                <!-- Wave Line (Digestion) -->
+                <svg viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2c0 4-4 4-4 8s4 4 4 8-4 4-4 4"></path>
+                </svg>
+              {% when 3 %}
+                <!-- Glass/Tumbler (Full, Not Stuffed) -->
+                <svg viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 2h14l-2 18H7L5 2z"></path>
+                  <line x1="6" y1="8" x2="18" y2="8"></line>
+                </svg>
+              {% when 4 %}
+                <!-- Hand Icon (Skin, Hair & Nails) -->
+                <svg viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5"></path>
+                  <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path>
+                  <path d="M10 11V5a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6"></path>
+                  <path d="M6 14V9a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v9a6 6 0 0 0 6 6h3a8 8 0 0 0 8-8v-3"></path>
+                </svg>
+              {% when 5 %}
+                <!-- Bone Icon (Muscle & Joint) -->
+                <svg viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.5 14.5c.7-.7 1.8-.7 2.5 0 .7.7.7 1.8 0 2.5s-1.8.7-2.5 0c-.8.8-2 .8-2.8 0l-5.4-5.4c-.8-.8-.8-2 0-2.8-.7-.7-.7-1.8 0-2.5s1.8-.7 2.5 0c.7-.7 1.8-.7 2.5 0s.7 1.8 0 2.5c.8.8.8 2 0 2.8l-5.4 5.4c-.8.8-.8 2 0 2.8z"></path>
+                </svg>
+            {% endcase %}
+          </div>
+
+          <h3 class="z-ben__card-title">{{ block.settings.title }}</h3>
+          <p class="z-ben__card-text">{{ block.settings.text }}</p>
+
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.cta_text != blank %}
+      <div class="z-ben__cta-wrap">
+        <a class="z-ben__cta" href="{{ section.settings.cta_link }}">
+          {{ section.settings.cta_text }}
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Zeotein Benefits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "FUNCTIONAL WELLNESS YOU ACTUALLY NOTICE"
+    },
+    {
+      "type": "text",
+      "id": "title_line_1",
+      "label": "Title line 1",
+      "default": "ONE STICK."
+    },
+    {
+      "type": "text",
+      "id": "title_line_2",
+      "label": "Title line 2",
+      "default": "FIVE JOBS..."
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subhead",
+      "default": "Six ingredients, each one earning its place"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Shop 30-Day Supply"
+    },
+    {
+      "type": "text",
+      "id": "cta_link",
+      "label": "Button link",
+      "default": "/discount/HOWIE15?redirect=/products/zeotein-30-day-supply"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Benefit title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Benefit description goes here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zeotein Benefits",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "ENERGY THAT HOLDS",
+            "text": "Organic MCTs for clean, steady energy — no sugar, no crash."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "DIGESTION & GUT",
+            "text": "Bone broth and sea moss for easy, comfortable digestion."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "FULL, NOT STUFFED",
+            "text": "23g of protein holds you to your next meal — full, not stuffed."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "SKIN, HAIR & NAILS",
+            "text": "Organic collagen peptides for the way you look, every day."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "MUSCLE & JOINT SUPPORT",
+            "text": "Grass-fed protein and collagen for recovery & healthy joints."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

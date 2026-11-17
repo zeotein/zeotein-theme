@@ -1,0 +1,70 @@
+{% style %}
+  #shopify-section-{{ section.id }} .z-phil {
+    background: #2A1142;
+    padding: 72px 24px;
+  }
+  #shopify-section-{{ section.id }} .z-phil__inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+  }
+  #shopify-section-{{ section.id }} .z-phil__eyebrow {
+    font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase; color: #2EC9C9; margin: 0 0 14px;
+  }
+  #shopify-section-{{ section.id }} .z-phil__title {
+    font-family: 'Bebas Neue', sans-serif; font-weight: 400;
+    font-size: 44px; line-height: 1; letter-spacing: 0.5px;
+    color: #FFFFFF; margin: 0 0 16px;
+  }
+  #shopify-section-{{ section.id }} .z-phil__title span { color: #2EC9C9; }
+  #shopify-section-{{ section.id }} .z-phil__body {
+    font-family: 'Poppins', sans-serif; font-weight: 400;
+    font-size: 15px; line-height: 1.7; color: #CDBFE0; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .z-phil__media img {
+    width: 100%; height: auto; border-radius: 14px; display: block;
+  }
+  #shopify-section-{{ section.id }} .z-phil__placeholder {
+    width: 100%; aspect-ratio: 4 / 3; border-radius: 14px;
+    background: #3A2056; display: flex; align-items: center; justify-content: center;
+    font-family: 'Poppins', sans-serif; font-size: 13px; color: #9C7FC0;
+  }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .z-phil { padding: 52px 18px; }
+    #shopify-section-{{ section.id }} .z-phil__inner { grid-template-columns: 1fr; gap: 28px; }
+    #shopify-section-{{ section.id }} .z-phil__title { font-size: 32px; }
+  }
+{% endstyle %}
+
+<div class="z-phil">
+  <div class="z-phil__inner">
+    <div class="z-phil__text">
+      <p class="z-phil__eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="z-phil__title">{{ section.settings.title | replace: 'protein shake', '<span>protein shake</span>' }}</h2>
+      <p class="z-phil__body">{{ section.settings.body }}</p>
+    </div>
+    <div class="z-phil__media">
+      {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="{{ section.settings.title | strip_html }}" loading="lazy">
+      {% else %}
+        <div class="z-phil__placeholder">Add image in section settings</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Zeotein Philosophy",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Zeotein philosophy" },
+    { "type": "text", "id": "title", "label": "Title", "default": "More than a protein shake" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Most protein shakes do one thing: dump cheap, hard-to-digest whey into your system. Zeotein is built differently — engineered from the ground up to replace your entire supplement cabinet with one clean daily habit. Zero fillers, zero artificial sweeteners, zero proprietary blends hiding underdosed ingredients. Just real nutrition made simple." },
+    { "type": "image_picker", "id": "image", "label": "Image (the pour shot)" }
+  ],
+  "presets": [
+    { "name": "Zeotein Philosophy" }
+  ]
+}
+{% endschema %}
+    

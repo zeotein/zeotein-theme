@@ -1,0 +1,35 @@
+{% doc %}
+  Sharp header glyphs. Replaces the raster zt-icon PNGs.
+
+  @param {string} name - account, search, cart, menu, or close
+
+  @example
+  {% render 'zt-header-icon', name: 'search' %}
+{% enddoc %}
+
+{%- case name -%}
+  {%- when 'account' -%}
+    <svg class="zt-header-icon account-button__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/>
+    </svg>
+  {%- when 'search' -%}
+    <svg class="zt-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <circle cx="11" cy="11" r="7"/>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+  {%- when 'cart' -%}
+    <svg class="zt-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 0 1-8 0"/>
+    </svg>
+  {%- when 'menu' -%}
+    <svg class="zt-header-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+      <path d="M4.5 7h15M4.5 12h15M4.5 17h15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  {%- when 'close' -%}
+    <svg class="zt-header-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+      <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+{%- endcase -%}

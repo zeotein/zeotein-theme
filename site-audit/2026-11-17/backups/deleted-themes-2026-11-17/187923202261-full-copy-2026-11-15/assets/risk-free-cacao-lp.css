@@ -1,0 +1,239 @@
+/* Risk Free Cacao LP */
+.zt-rf {
+  --zt-rf-bg: #7a2cb8;
+  --zt-rf-text: #ffffff;
+  --zt-rf-accent: #00c9b8;
+  --zt-rf-badge-text: #3b0a6b;
+  --zt-rf-cta-bg: #00c9b8;
+  --zt-rf-cta-text: #1e1734;
+  --zt-rf-overlay: rgba(90, 20, 140, 0.55);
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--zt-rf-bg);
+  color: var(--zt-rf-text);
+  padding: var(--zt-rf-pad-top, 80px) 24px var(--zt-rf-pad-bottom, 80px);
+  font-family: var(--zt-font, Manrope, Arial, sans-serif);
+  text-align: center;
+}
+
+.zt-rf *,
+.zt-rf *::before,
+.zt-rf *::after {
+  box-sizing: border-box;
+}
+
+.zt-rf__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.zt-rf__bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.zt-rf__bg-img--mobile {
+  display: none;
+}
+
+.zt-rf__shade {
+  position: absolute;
+  inset: 0;
+  background: var(--zt-rf-overlay);
+}
+
+.zt-rf__inner {
+  position: relative;
+  z-index: 1;
+  width: min(var(--zt-rf-max-width, 720px), 100%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zt-rf__badge {
+  width: var(--zt-rf-badge-size, 88px);
+  height: var(--zt-rf-badge-size, 88px);
+  margin: 0 0 18px;
+  flex: 0 0 auto;
+  background: transparent;
+  overflow: visible;
+}
+
+.zt-rf__badge--image {
+  /* Custom badge art — no fallback circle/box */
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.zt-rf__badge-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: transparent;
+}
+
+/*
+  Knock out baked-in white on badge uploads.
+  Uses a local purple fill + background-blend-mode so it works even when
+  the section stacking context would break mix-blend-mode.
+*/
+.zt-rf__badge--knockout {
+  isolation: isolate;
+  background:
+    linear-gradient(var(--zt-rf-overlay), var(--zt-rf-overlay)),
+    var(--zt-rf-bg);
+}
+
+.zt-rf__badge-img--knockout {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--zt-rf-bg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-blend-mode: multiply;
+}
+
+.zt-rf__badge-fallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--zt-rf-accent);
+  color: var(--zt-rf-badge-text);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.zt-rf__badge-text {
+  margin: 0;
+  font-size: var(--zt-seal-size, 16px);
+  font-family: var(--zt-seal-font, inherit);
+  font-weight: var(--zt-seal-weight, 800);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  white-space: pre-line;
+}
+
+.zt-rf__eyebrow {
+  margin: 0 0 10px;
+  font-size: var(--zt-eyebrow-size, 12px);
+  font-family: var(--zt-eyebrow-font, inherit);
+  font-weight: var(--zt-eyebrow-weight, 800);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--zt-rf-text);
+}
+
+.zt-rf__heading {
+  margin: 0 0 14px;
+  font-size: var(--zt-heading-size, 44px);
+  font-family: var(--zt-heading-font, inherit);
+  font-weight: var(--zt-heading-weight, 800);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--zt-rf-text);
+}
+
+.zt-rf__body {
+  margin: 0 0 28px;
+  font-size: var(--zt-body-size, 16px);
+  font-family: var(--zt-body-font, inherit);
+  font-weight: var(--zt-body-weight, 400);
+  line-height: 1.5;
+  color: var(--zt-rf-text);
+  max-width: 40ch;
+}
+
+.zt-rf__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: var(--zt-rf-cta-bg);
+  color: var(--zt-rf-cta-text);
+  font-size: var(--zt-cta-size, 16px);
+  font-family: var(--zt-cta-font, inherit);
+  font-weight: var(--zt-cta-weight, 700);
+  line-height: 1.2;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.zt-rf__cta:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.zt-rf__cta:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.zt-rf__cta-arrow {
+  flex: 0 0 auto;
+}
+
+@media screen and (max-width: 989px) {
+  .zt-rf {
+    padding: var(--zt-rf-pad-top, 56px) 20px var(--zt-rf-pad-bottom, 56px);
+  }
+
+  .zt-rf__bg-img--desktop {
+    display: none;
+  }
+
+  .zt-rf__bg-img--mobile {
+    display: block;
+  }
+
+  .zt-rf__badge {
+    width: var(--zt-rf-badge-size-m, 76px);
+    height: var(--zt-rf-badge-size-m, 76px);
+    margin-bottom: 14px;
+  }
+
+  .zt-rf__badge-text {
+    font-size: var(--zt-seal-size-m, var(--zt-seal-size, 14px));
+  }
+
+  .zt-rf__eyebrow {
+    font-size: var(--zt-eyebrow-size-m, var(--zt-eyebrow-size, 11px));
+  }
+
+  .zt-rf__heading {
+    font-size: var(--zt-heading-size-m, var(--zt-heading-size, 30px));
+    margin-bottom: 12px;
+  }
+
+  .zt-rf__body {
+    font-size: var(--zt-body-size-m, var(--zt-body-size, 14px));
+    margin-bottom: 22px;
+    max-width: 34ch;
+  }
+
+  .zt-rf__cta {
+    min-height: 48px;
+    font-size: var(--zt-cta-size-m, var(--zt-cta-size, 15px));
+    padding: 12px 24px;
+  }
+}

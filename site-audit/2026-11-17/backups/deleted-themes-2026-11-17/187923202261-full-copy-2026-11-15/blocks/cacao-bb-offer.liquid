@@ -1,0 +1,436 @@
+{% doc %}
+  Bag tiers UI, subscribe/OTP plans, and welcome kit for Buy Box Cacao LP.
+  Pricing numbers live in the Pricing tiers static block.
+{% enddoc %}
+
+{%- liquid
+  assign offer = block.settings
+  assign tiers = nil
+  for b in section.blocks
+    if b.type == 'cacao-bb-tiers' or b.type == 'pricing_tiers'
+      assign tiers = b.settings
+    endif
+  endfor
+
+  assign tier1_label = tiers.tier1_label | default: '1 bag'
+  assign tier2_label = tiers.tier2_label | default: '2 bags'
+  assign tier3_label = tiers.tier3_label | default: '3 bags'
+  assign tier4_label = tiers.tier4_label | default: '4 bags'
+  assign show_tier_4 = false
+  if tiers.show_tier_4
+    assign show_tier_4 = true
+  endif
+  assign sub_title = offer.sub_title | default: 'Subscribe & Save'
+  assign once_title = offer.once_title | default: 'One-Time Purchase'
+  assign once_meta = offer.once_meta | default: '1 bag, delivered once'
+  assign once_includes = offer.once_includes | default: 'Save-A-Scoop + 3 guides (first Bulk Bag order)'
+  assign once_excludes = offer.once_excludes | default: 'Black shaker is first subscription order only'
+  assign sub_perk_1 = offer.sub_perk_1_text | default: 'Save-A-Scoop (first Bulk Bag order)'
+  assign sub_perk_2 = offer.sub_perk_2_text | default: '3 digital guides included'
+  assign sub_perk_3 = offer.sub_perk_3_text | default: 'Free black shaker (first sub order)'
+  assign sub_perk_4 = offer.sub_perk_4_text | default: 'Pause or cancel'
+  assign perk_icon_size = offer.perk_icon_size | default: 16
+  assign kit_heading = offer.kit_heading | default: 'Free Welcome Kit'
+  if kit_heading == 'FREE WELCOME KIT'
+    assign kit_heading = 'Free Welcome Kit'
+  endif
+  assign kit_scoop_label = offer.kit_scoop_label | default: 'Save-A-Scoop'
+  assign kit_shaker_label = offer.kit_shaker_label | default: 'CleanBlend Shaker'
+  assign kit_guides_label = offer.kit_guides_label | default: '3 Digital Guides'
+  assign kit_scoop_h = offer.kit_scoop_height | default: 118
+  assign kit_scoop_h_m = offer.kit_scoop_height_mobile | default: 92
+  assign kit_guides_h = offer.kit_guides_height | default: 118
+  assign kit_guides_h_m = offer.kit_guides_height_mobile | default: 92
+  assign kit_shaker_h = offer.kit_shaker_height | default: 118
+  assign kit_shaker_h_m = offer.kit_shaker_height_mobile | default: 92
+-%}
+
+<div class="zt-bb__buy-box" {{ block.shopify_attributes }}>
+  <div
+    class="zt-bb__bags"
+    role="group"
+    aria-label="Bag quantity"
+    style="--zt-bb-bag-cols: {% if show_tier_4 %}4{% else %}3{% endif %};"
+  >
+    <button type="button" class="zt-bb__bag is-active" data-zt-bb-bag aria-pressed="true">{{ tier1_label | escape }}</button>
+    <button type="button" class="zt-bb__bag" data-zt-bb-bag aria-pressed="false">{{ tier2_label | escape }}</button>
+    <button type="button" class="zt-bb__bag" data-zt-bb-bag aria-pressed="false">{{ tier3_label | escape }}</button>
+    {%- if show_tier_4 -%}
+      <button type="button" class="zt-bb__bag" data-zt-bb-bag aria-pressed="false">{{ tier4_label | escape }}</button>
+    {%- endif -%}
+  </div>
+
+  <div class="zt-bb__plans">
+    <button type="button" class="zt-bb__plan is-active" data-zt-bb-plan="sub" aria-pressed="true">
+      <div class="zt-bb__plan-banner">
+        <span data-zt-bb-sub-banner>Most Popular - Save 30%</span>
+        <span aria-hidden="true"></span>
+      </div>
+      <div class="zt-bb__plan-body">
+        <div class="zt-bb__plan-top">
+          <span class="zt-bb__radio" aria-hidden="true"></span>
+          <div class="zt-bb__plan-copy">
+            <p class="zt-bb__plan-title">{{ sub_title | escape }}</p>
+            <p class="zt-bb__plan-meta" data-zt-bb-sub-meta>1 bag every 30 days - $2.57 per serving</p>
+          </div>
+          <div class="zt-bb__plan-price-wrap">
+            <p class="zt-bb__plan-price" data-zt-bb-sub-price>$76.99</p>
+            <p class="zt-bb__plan-renew" data-zt-bb-sub-renew>then $99.99/month</p>
+          </div>
+        </div>
+        <ul class="zt-bb__plan-perks" style="--zt-bb-perk-icon: {{ perk_icon_size }}px;">
+          <li>
+            {% render 'zt-bb-perk-icon', image: offer.sub_perk_1_icon, size: perk_icon_size %}
+            {{ sub_perk_1 | escape }}
+          </li>
+          <li>
+            {% render 'zt-bb-perk-icon', image: offer.sub_perk_2_icon, size: perk_icon_size %}
+            {{ sub_perk_2 | escape }}
+          </li>
+          <li>
+            {% render 'zt-bb-perk-icon',
+              image: offer.sub_perk_3_icon,
+              fallback_image: offer.kit_shaker_image,
+              fallback_asset: 'zt-bb-shaker-sm.png',
+              size: perk_icon_size
+            %}
+            {{ sub_perk_3 | escape }}
+          </li>
+          <li>
+            {% render 'zt-bb-perk-icon', image: offer.sub_perk_4_icon, size: perk_icon_size %}
+            {{ sub_perk_4 | escape }}
+          </li>
+        </ul>
+      </div>
+    </button>
+
+    <button type="button" class="zt-bb__plan" data-zt-bb-plan="once" aria-pressed="false">
+      <div class="zt-bb__plan-body">
+        <div class="zt-bb__plan-top">
+          <span class="zt-bb__radio" aria-hidden="true"></span>
+          <div class="zt-bb__plan-copy">
+            <p class="zt-bb__plan-title">{{ once_title | escape }}</p>
+            <p class="zt-bb__plan-meta" data-zt-bb-once-meta>{{ once_meta | escape }}</p>
+          </div>
+          <div class="zt-bb__plan-price-wrap">
+            <p class="zt-bb__plan-price" data-zt-bb-once-price>$109.99</p>
+            <p class="zt-bb__plan-renew" data-zt-bb-once-save></p>
+          </div>
+        </div>
+        <div class="zt-bb__once-note" style="--zt-bb-perk-icon: {{ perk_icon_size }}px;">
+          <span class="zt-bb__once-include">
+            {% render 'zt-bb-perk-icon', image: offer.once_includes_icon, size: perk_icon_size %}
+            {{ once_includes | escape }}
+          </span>
+          <span class="zt-bb__once-exclude">
+            {% render 'zt-bb-perk-icon',
+              image: offer.once_excludes_icon,
+              fallback_image: offer.kit_shaker_image,
+              fallback_asset: 'zt-bb-shaker-sm.png',
+              size: perk_icon_size
+            %}
+            {{ once_excludes | escape }}
+          </span>
+        </div>
+      </div>
+    </button>
+  </div>
+
+  <div class="zt-bb__kit" data-zt-bb-kit>
+    <p class="zt-bb__kit-badge">
+      <svg class="zt-bb__kit-badge-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+        <path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M2 7h20v5H2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M12 22V7" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 7H7.5C5.6 7 4 5.5 4 3.8 4 2.8 4.8 2 5.8 2c2.2 0 4.2 2.2 6.2 5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M12 7h4.5C18.4 7 20 5.5 20 3.8 20 2.8 19.2 2 18.2 2c-2.2 0-4.2 2.2-6.2 5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+      <span>{{ kit_heading | escape }}</span>
+    </p>
+    <div class="zt-bb__kit-row">
+      <div class="zt-bb__kit-item">
+        <div class="zt-bb__kit-img" style="--zt-kit-img-h: {{ kit_scoop_h }}px; --zt-kit-img-h-m: {{ kit_scoop_h_m }}px;">
+          {%- if offer.kit_scoop_image != blank -%}
+            {{
+              offer.kit_scoop_image
+              | image_url: width: 400
+              | image_tag: loading: 'lazy', widths: '200, 400', sizes: '140px', alt: kit_scoop_label
+            }}
+          {%- else -%}
+            <img src="{{ 'zt-bb-thumb-2.png' | asset_url }}" alt="{{ kit_scoop_label | escape }}" width="200" height="200" loading="lazy">
+          {%- endif -%}
+        </div>
+        <p class="zt-bb__kit-label">{{ kit_scoop_label | escape }}</p>
+      </div>
+      <span class="zt-bb__kit-plus" style="--zt-kit-img-h: {{ kit_scoop_h }}px; --zt-kit-img-h-m: {{ kit_scoop_h_m }}px;" aria-hidden="true">+</span>
+      <div class="zt-bb__kit-item zt-bb__kit-item--guides">
+        <div class="zt-bb__kit-img" style="--zt-kit-img-h: {{ kit_guides_h }}px; --zt-kit-img-h-m: {{ kit_guides_h_m }}px;">
+          {%- if offer.kit_guides_image != blank -%}
+            {{
+              offer.kit_guides_image
+              | image_url: width: 480
+              | image_tag: loading: 'lazy', widths: '240, 480', sizes: '180px', alt: kit_guides_label
+            }}
+          {%- else -%}
+            <img src="{{ 'zt-bb-guides.png' | asset_url }}" alt="{{ kit_guides_label | escape }}" width="240" height="160" loading="lazy">
+          {%- endif -%}
+        </div>
+        <p class="zt-bb__kit-label">{{ kit_guides_label | escape }}</p>
+      </div>
+      <span class="zt-bb__kit-plus" style="--zt-kit-img-h: {{ kit_guides_h }}px; --zt-kit-img-h-m: {{ kit_guides_h_m }}px;" aria-hidden="true">+</span>
+      <div class="zt-bb__kit-item zt-bb__kit-item--sub-only">
+        <div class="zt-bb__kit-img" style="--zt-kit-img-h: {{ kit_shaker_h }}px; --zt-kit-img-h-m: {{ kit_shaker_h_m }}px;">
+          {%- if offer.kit_shaker_image != blank -%}
+            {{
+              offer.kit_shaker_image
+              | image_url: width: 400
+              | image_tag: loading: 'lazy', widths: '200, 400', sizes: '140px', alt: kit_shaker_label
+            }}
+          {%- else -%}
+            <img src="{{ 'zt-bb-shaker.png' | asset_url }}" alt="{{ kit_shaker_label | escape }}" width="200" height="200" loading="lazy">
+          {%- endif -%}
+          <span class="zt-bb__kit-lock" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="16" r="1.5" fill="currentColor"/>
+            </svg>
+          </span>
+        </div>
+        <p class="zt-bb__kit-label">{{ kit_shaker_label | escape }}</p>
+        <span class="zt-bb__kit-tag-locked">Subscribe to unlock</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Buy box & kit",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Plan titles"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Subscribe title",
+      "default": "Subscribe & Save"
+    },
+    {
+      "type": "text",
+      "id": "once_title",
+      "label": "One-time title",
+      "default": "One-Time Purchase"
+    },
+    {
+      "type": "text",
+      "id": "once_meta",
+      "label": "One-time meta (1 bag default)",
+      "default": "1 bag, delivered once"
+    },
+    {
+      "type": "header",
+      "content": "Subscribe perks"
+    },
+    {
+      "type": "range",
+      "id": "perk_icon_size",
+      "label": "Perk icon size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "text",
+      "id": "sub_perk_1_text",
+      "label": "Perk 1 text",
+      "default": "Save-A-Scoop (first Bulk Bag order)"
+    },
+    {
+      "type": "image_picker",
+      "id": "sub_perk_1_icon",
+      "label": "Perk 1 icon",
+      "info": "Optional. Falls back to a checkmark."
+    },
+    {
+      "type": "text",
+      "id": "sub_perk_2_text",
+      "label": "Perk 2 text",
+      "default": "3 digital guides included"
+    },
+    {
+      "type": "image_picker",
+      "id": "sub_perk_2_icon",
+      "label": "Perk 2 icon",
+      "info": "Optional. Falls back to a checkmark."
+    },
+    {
+      "type": "text",
+      "id": "sub_perk_3_text",
+      "label": "Perk 3 text",
+      "default": "Free black shaker (first sub order)"
+    },
+    {
+      "type": "image_picker",
+      "id": "sub_perk_3_icon",
+      "label": "Perk 3 icon",
+      "info": "Optional. Falls back to CleanBlend Shaker image, then the theme shaker asset."
+    },
+    {
+      "type": "text",
+      "id": "sub_perk_4_text",
+      "label": "Perk 4 text",
+      "default": "Pause or cancel"
+    },
+    {
+      "type": "image_picker",
+      "id": "sub_perk_4_icon",
+      "label": "Perk 4 icon",
+      "info": "Optional. Falls back to a checkmark."
+    },
+    {
+      "type": "header",
+      "content": "One-time lines"
+    },
+    {
+      "type": "text",
+      "id": "once_includes",
+      "label": "One-time includes line",
+      "default": "Save-A-Scoop + 3 guides (first Bulk Bag order)"
+    },
+    {
+      "type": "image_picker",
+      "id": "once_includes_icon",
+      "label": "One-time includes icon",
+      "info": "Optional. Falls back to a checkmark."
+    },
+    {
+      "type": "text",
+      "id": "once_excludes",
+      "label": "One-time excludes line",
+      "default": "Black shaker is first subscription order only"
+    },
+    {
+      "type": "image_picker",
+      "id": "once_excludes_icon",
+      "label": "One-time excludes icon",
+      "info": "Optional. Falls back to CleanBlend Shaker image, then the theme shaker asset."
+    },
+    {
+      "type": "header",
+      "content": "Welcome kit"
+    },
+    {
+      "type": "text",
+      "id": "kit_heading",
+      "label": "Welcome kit heading",
+      "default": "FREE WELCOME KIT"
+    },
+    {
+      "type": "text",
+      "id": "kit_value",
+      "label": "Welcome kit value",
+      "default": "$62.98 VALUE"
+    },
+    {
+      "type": "image_picker",
+      "id": "kit_scoop_image",
+      "label": "Save-A-Scoop image"
+    },
+    {
+      "type": "range",
+      "id": "kit_scoop_height",
+      "label": "Save-A-Scoop height - desktop",
+      "min": 48,
+      "max": 220,
+      "step": 2,
+      "unit": "px",
+      "default": 118
+    },
+    {
+      "type": "range",
+      "id": "kit_scoop_height_mobile",
+      "label": "Save-A-Scoop height - mobile",
+      "min": 40,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "default": 92
+    },
+    {
+      "type": "text",
+      "id": "kit_scoop_label",
+      "label": "Save-A-Scoop label",
+      "default": "Save-A-Scoop"
+    },
+    {
+      "type": "image_picker",
+      "id": "kit_guides_image",
+      "label": "Digital guides image"
+    },
+    {
+      "type": "range",
+      "id": "kit_guides_height",
+      "label": "Digital guides height - desktop",
+      "min": 48,
+      "max": 220,
+      "step": 2,
+      "unit": "px",
+      "default": 118
+    },
+    {
+      "type": "range",
+      "id": "kit_guides_height_mobile",
+      "label": "Digital guides height - mobile",
+      "min": 40,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "default": 92
+    },
+    {
+      "type": "text",
+      "id": "kit_guides_label",
+      "label": "Digital guides label",
+      "default": "3 Digital Guides"
+    },
+    {
+      "type": "image_picker",
+      "id": "kit_shaker_image",
+      "label": "CleanBlend Shaker image"
+    },
+    {
+      "type": "range",
+      "id": "kit_shaker_height",
+      "label": "CleanBlend Shaker height - desktop",
+      "min": 48,
+      "max": 220,
+      "step": 2,
+      "unit": "px",
+      "default": 118
+    },
+    {
+      "type": "range",
+      "id": "kit_shaker_height_mobile",
+      "label": "CleanBlend Shaker height - mobile",
+      "min": 40,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "default": 92
+    },
+    {
+      "type": "text",
+      "id": "kit_shaker_label",
+      "label": "CleanBlend Shaker label",
+      "default": "CleanBlend Shaker"
+    }
+  ],
+  "presets": [{ "name": "Buy box & kit" }]
+}
+{% endschema %}

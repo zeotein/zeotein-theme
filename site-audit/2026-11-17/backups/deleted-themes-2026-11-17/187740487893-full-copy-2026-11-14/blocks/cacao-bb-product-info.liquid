@@ -1,0 +1,264 @@
+{% doc %}
+  Urgency, ratings, title, and benefit chips for Buy Box Cacao LP.
+{% enddoc %}
+
+<div class="zt-bb__product-info" {{ block.shopify_attributes }}>
+  {%- if block.settings.urgency_text != blank -%}
+    <div
+      class="zt-bb__urgency"
+      style="--zt-bb-urgency-icon: {{ block.settings.urgency_icon_size | default: 22 }}px;"
+    >
+      {%- if block.settings.urgency_icon != blank -%}
+        {%- assign urgency_icon_sizes = block.settings.urgency_icon_size | default: 22 | append: 'px' -%}
+        {{
+          block.settings.urgency_icon
+          | image_url: width: 96
+          | image_tag:
+            class: 'zt-bb__urgency-icon',
+            loading: 'lazy',
+            widths: '22, 32, 48, 64, 96',
+            sizes: urgency_icon_sizes,
+            alt: ''
+        }}
+      {%- endif -%}
+      <span class="zt-bb__urgency-text">
+        {%- if block.settings.urgency_accent != blank and block.settings.urgency_text contains block.settings.urgency_accent -%}
+          {%- assign urgency_parts = block.settings.urgency_text | split: block.settings.urgency_accent -%}
+          {{ urgency_parts[0] | escape }}<span class="zt-bb__urgency-accent">{{ block.settings.urgency_accent | escape }}</span>{{ urgency_parts[1] | escape }}
+        {%- else -%}
+          {{ block.settings.urgency_text | escape }}
+        {%- endif -%}
+      </span>
+    </div>
+  {%- endif -%}
+
+  <div class="zt-bb__social">
+    <span class="zt-bb__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    <span>
+      {{ block.settings.rating_score | default: '4.8/5.0' | escape }}
+      <span class="zt-bb__rating-count">({{ block.settings.rating_count | default: '100,000' | escape }})</span>
+    </span>
+    {%- if block.settings.customers_label != blank -%}
+      <span class="zt-bb__customers">{{ block.settings.customers_label | escape }}</span>
+    {%- endif -%}
+  </div>
+
+  <h3 class="zt-bb__title">{{ block.settings.product_title | default: '30-Day Cacao Bulk Bag' | escape }}</h3>
+
+  {%- assign chip_icon_size = block.settings.chip_icon_size | default: 20 -%}
+  <div class="zt-bb__chips" style="--zt-bb-chip-icon: {{ chip_icon_size }}px;">
+    {%- if block.settings.chip_1 != blank -%}
+      <div class="zt-bb__chip">
+        <span class="zt-bb__chip-icon{% if block.settings.chip_1_icon != blank %} is-image{% endif %}" aria-hidden="true">
+          {%- if block.settings.chip_1_icon != blank -%}
+            {%- assign chip_1_sizes = chip_icon_size | append: 'px' -%}
+            {{
+              block.settings.chip_1_icon
+              | image_url: width: 96
+              | image_tag:
+                class: 'zt-bb__chip-icon-img',
+                loading: 'lazy',
+                widths: '20, 32, 48, 64, 96',
+                sizes: chip_1_sizes,
+                alt: ''
+            }}
+          {%- else -%}
+            &#10003;
+          {%- endif -%}
+        </span>
+        <span>{{ block.settings.chip_1 | escape }}</span>
+      </div>
+    {%- endif -%}
+    {%- if block.settings.chip_2 != blank -%}
+      <div class="zt-bb__chip">
+        <span class="zt-bb__chip-icon{% if block.settings.chip_2_icon != blank %} is-image{% endif %}" aria-hidden="true">
+          {%- if block.settings.chip_2_icon != blank -%}
+            {%- assign chip_2_sizes = chip_icon_size | append: 'px' -%}
+            {{
+              block.settings.chip_2_icon
+              | image_url: width: 96
+              | image_tag:
+                class: 'zt-bb__chip-icon-img',
+                loading: 'lazy',
+                widths: '20, 32, 48, 64, 96',
+                sizes: chip_2_sizes,
+                alt: ''
+            }}
+          {%- else -%}
+            &#10003;
+          {%- endif -%}
+        </span>
+        <span>{{ block.settings.chip_2 | escape }}</span>
+      </div>
+    {%- endif -%}
+    {%- if block.settings.chip_3 != blank -%}
+      <div class="zt-bb__chip">
+        <span class="zt-bb__chip-icon{% if block.settings.chip_3_icon != blank %} is-image{% endif %}" aria-hidden="true">
+          {%- if block.settings.chip_3_icon != blank -%}
+            {%- assign chip_3_sizes = chip_icon_size | append: 'px' -%}
+            {{
+              block.settings.chip_3_icon
+              | image_url: width: 96
+              | image_tag:
+                class: 'zt-bb__chip-icon-img',
+                loading: 'lazy',
+                widths: '20, 32, 48, 64, 96',
+                sizes: chip_3_sizes,
+                alt: ''
+            }}
+          {%- else -%}
+            &#10003;
+          {%- endif -%}
+        </span>
+        <span>{{ block.settings.chip_3 | escape }}</span>
+      </div>
+    {%- endif -%}
+    {%- if block.settings.chip_4 != blank -%}
+      <div class="zt-bb__chip">
+        <span class="zt-bb__chip-icon{% if block.settings.chip_4_icon != blank %} is-image{% endif %}" aria-hidden="true">
+          {%- if block.settings.chip_4_icon != blank -%}
+            {%- assign chip_4_sizes = chip_icon_size | append: 'px' -%}
+            {{
+              block.settings.chip_4_icon
+              | image_url: width: 96
+              | image_tag:
+                class: 'zt-bb__chip-icon-img',
+                loading: 'lazy',
+                widths: '20, 32, 48, 64, 96',
+                sizes: chip_4_sizes,
+                alt: ''
+            }}
+          {%- else -%}
+            &#10003;
+          {%- endif -%}
+        </span>
+        <span>{{ block.settings.chip_4 | escape }}</span>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product info",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "urgency_icon",
+      "label": "Urgency icon",
+      "info": "Gift icon or image shown before the urgency text."
+    },
+    {
+      "type": "range",
+      "id": "urgency_icon_size",
+      "label": "Urgency icon size",
+      "min": 14,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "text",
+      "id": "urgency_text",
+      "label": "Urgency banner",
+      "default": "Order by September 20th for 61% off with free gifts!"
+    },
+    {
+      "type": "text",
+      "id": "urgency_accent",
+      "label": "Urgency accent phrase",
+      "default": "September 20th",
+      "info": "This phrase is highlighted in purple inside the urgency banner."
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating score",
+      "default": "4.8/5.0"
+    },
+    {
+      "type": "text",
+      "id": "rating_count",
+      "label": "Rating count",
+      "default": "100,000"
+    },
+    {
+      "type": "text",
+      "id": "customers_label",
+      "label": "Customers label",
+      "default": "1M+ Customers"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Product title",
+      "default": "30-Day Cacao Bulk Bag"
+    },
+    {
+      "type": "header",
+      "content": "Benefit chips"
+    },
+    {
+      "type": "range",
+      "id": "chip_icon_size",
+      "label": "Chip icon size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "text",
+      "id": "chip_1",
+      "label": "Chip 1 text",
+      "default": "23g protein"
+    },
+    {
+      "type": "image_picker",
+      "id": "chip_1_icon",
+      "label": "Chip 1 icon",
+      "info": "Optional. Falls back to a checkmark."
+    },
+    {
+      "type": "text",
+      "id": "chip_2",
+      "label": "Chip 2 text",
+      "default": "6 functional ingredients"
+    },
+    {
+      "type": "image_picker",
+      "id": "chip_2_icon",
+      "label": "Chip 2 icon",
+      "info": "Optional. Falls back to a checkmark."
+    },
+    {
+      "type": "text",
+      "id": "chip_3",
+      "label": "Chip 3 text",
+      "default": "Zero added sugar"
+    },
+    {
+      "type": "image_picker",
+      "id": "chip_3_icon",
+      "label": "Chip 3 icon",
+      "info": "Optional. Falls back to a checkmark."
+    },
+    {
+      "type": "text",
+      "id": "chip_4",
+      "label": "Chip 4 text",
+      "default": "30 servings"
+    },
+    {
+      "type": "image_picker",
+      "id": "chip_4_icon",
+      "label": "Chip 4 icon",
+      "info": "Optional. Falls back to a checkmark."
+    }
+  ],
+  "presets": [{ "name": "Product info" }]
+}
+{% endschema %}

@@ -1,0 +1,110 @@
+{% doc %}
+  Image card for a Real Customers video row.
+{% enddoc %}
+
+{%- liquid
+  assign card_label = block.settings.label
+  assign card_image = block.settings.image
+  assign card_link = block.settings.link
+  assign card_ratio = block.settings.aspect_ratio | default: 'current'
+-%}
+
+{%- capture card_media -%}
+  {%- if card_label != blank -%}
+    <span class="zt-rc__video-badge">{{ card_label | escape }}</span>
+  {%- endif -%}
+  {%- if card_image != blank -%}
+    {{
+      card_image
+      | image_url: width: 800
+      | image_tag:
+        class: 'zt-rc__video-poster',
+        loading: 'lazy',
+        widths: '240, 360, 480, 640, 800',
+        sizes: '(max-width: 989px) 45vw, 12vw',
+        alt: card_label
+    }}
+  {%- else -%}
+    <span class="zt-rc__video-placeholder" aria-hidden="true"></span>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture card_ratio_style -%}
+  {%- if card_ratio == 'original' and card_image != blank -%}
+    --zt-rc-image-ratio: {{ card_image.aspect_ratio }};
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if card_link != blank -%}
+  <a
+    class="zt-rc__video zt-rc__video--image zt-rc__video--ratio-{{ card_ratio }}"
+    href="{{ card_link }}"
+    style="{{ card_ratio_style | strip }}"
+    {{ block.shopify_attributes }}
+  >
+    {{ card_media }}
+  </a>
+{%- else -%}
+  <div
+    class="zt-rc__video zt-rc__video--image zt-rc__video--ratio-{{ card_ratio }}"
+    style="{{ card_ratio_style | strip }}"
+    {{ block.shopify_attributes }}
+  >
+    {{ card_media }}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Image card",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Badge"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "current",
+          "label": "Current size"
+        },
+        {
+          "value": "original",
+          "label": "Original"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        }
+      ],
+      "default": "current",
+      "info": "Current size keeps the 3:4 cards already on the page. Original follows the uploaded photo. Square is 1:1. Portrait is 3:4."
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link",
+      "info": "Optional. Leave empty to show the image only."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image card"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1133 @@
+{% comment %}
+ZEOTEIN — WHAT'S INSIDE
+FINAL VERSION
+
+Updates based on Dana's feedback:
+
+Removed all ingredient lists from homepage
+
+Removed Zeolite completely from this section
+
+Cacao + Vegan toggle is clickable
+
+Both formulas use parallel messaging
+
+Vegan has short formula-specific content
+
+No ingredient-count list
+
+CTA sends to respective PDP ingredient/details area
+
+Mobile spacing tightened
+{% endcomment %}
+
+<section
+  id="{{ block.settings.section_id | default: 'ingredients' }}"
+  class="zt-inside"
+>
+  <div class="zt-inside__container">
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<div class="zt-inside__header">
+
+  {% if block.settings.eyebrow != blank %}
+    <span class="zt-inside__eyebrow">
+      {{ block.settings.eyebrow }}
+    </span>
+  {% endif %}
+
+  <h2>
+    {{ block.settings.heading | default: "What's Inside Matters." }}
+  </h2>
+
+  <p>
+    {{ block.settings.subheading | default: 'Simple formulas. Intentional ingredients. Nothing unnecessary.' }}
+  </p>
+
+</div>
+
+
+<!-- =====================================================
+     CLICKABLE FORMULA SWITCHER
+====================================================== -->
+
+<div
+  class="zt-inside__switcher"
+  role="tablist"
+  aria-label="Choose a Zeotein formula"
+>
+
+  <button
+    type="button"
+    class="zt-inside__tab is-active"
+    data-formula-tab="cacao"
+    role="tab"
+    aria-selected="true"
+    aria-controls="zt-cacao-panel-{{ block.id }}"
+  >
+    <span>CACAO</span>
+    <small>Animal-based protein</small>
+  </button>
+
+  <button
+    type="button"
+    class="zt-inside__tab"
+    data-formula-tab="vegan"
+    role="tab"
+    aria-selected="false"
+    aria-controls="zt-vegan-panel-{{ block.id }}"
+  >
+    <span>VEGAN</span>
+    <small>Plant-based protein</small>
+  </button>
+
+</div>
+
+
+<!-- =====================================================
+     CACAO FORMULA
+====================================================== -->
+
+<div
+  id="zt-cacao-panel-{{ block.id }}"
+  class="zt-inside__formula is-active"
+  data-formula-panel="cacao"
+  role="tabpanel"
+>
+
+  <!-- VISUAL -->
+
+  <div class="zt-inside__visual">
+
+    <div class="zt-inside__ring zt-inside__ring--outer"></div>
+    <div class="zt-inside__ring zt-inside__ring--inner"></div>
+
+    <div class="zt-inside__circle">
+
+      {% assign cacao_product = all_products['zeotein-30-day-supply'] %}
+
+      {% if block.settings.cacao_image != blank %}
+
+        {{
+          block.settings.cacao_image
+          | image_url: width: 1000
+          | image_tag:
+            loading: 'lazy',
+            class: 'zt-inside__image zt-inside__image--cacao',
+            alt: block.settings.cacao_image.alt | default: 'Zeotein Cacao'
+        }}
+
+      {% elsif cacao_product.featured_image != blank %}
+
+        {{
+          cacao_product.featured_image
+          | image_url: width: 1000
+          | image_tag:
+            loading: 'lazy',
+            class: 'zt-inside__image zt-inside__image--cacao',
+            alt: cacao_product.title
+        }}
+
+      {% else %}
+
+        {{ 'product-1' | placeholder_svg_tag: 'zt-inside__placeholder-image' }}
+
+      {% endif %}
+
+    </div>
+
+    <div class="zt-inside__visual-label">
+      <strong>{{ block.settings.cacao_badge | default: '23g' }}</strong>
+      <span>PROTEIN</span>
+    </div>
+
+  </div>
+
+
+  <!-- CONTENT -->
+
+  <div class="zt-inside__content">
+
+    <div class="zt-inside__content-top">
+
+      <span class="zt-inside__formula-label">
+        THE CACAO FORMULA
+      </span>
+
+      <h3>
+        {{ block.settings.cacao_heading | default: 'Animal-based. Intentionally simple.' }}
+      </h3>
+
+      
+
+    </div>
+
+
+    <!-- HIGH-LEVEL FORMULA SUMMARY -->
+
+    <div class="zt-inside__tiles">
+      <div class="zt-inside__tile"><span>PROTEIN FROM</span><strong>{{ block.settings.cacao_protein }}</strong></div>
+      <div class="zt-inside__tile"><span>FLAVOR</span><strong>{{ block.settings.cacao_flavor }}</strong></div>
+      <div class="zt-inside__tile"><span>COMES IN</span><strong>{{ block.settings.cacao_format }}</strong></div>
+      {% if block.settings.cacao_quote != blank %}
+        <div class="zt-inside__quote">
+          <span>IN OUR CUSTOMERS' WORDS</span>
+          <q>{{ block.settings.cacao_quote }}</q>
+          <em>{{ block.settings.cacao_quote_name }}</em>
+        </div>
+      {% endif %}
+    </div>
+
+
+    <!-- PDP CTA -->
+
+    <a
+      class="zt-inside__link"
+      href="/products/zeotein-cacao-sticks-30"
+    >
+      <span>
+        {{ block.settings.cacao_cta | default: 'VIEW FULL INGREDIENT DETAILS' }}
+      </span>
+
+      <span class="zt-inside__arrow">
+        →
+      </span>
+    </a>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     VEGAN FORMULA
+====================================================== -->
+
+<div
+  id="zt-vegan-panel-{{ block.id }}"
+  class="zt-inside__formula"
+  data-formula-panel="vegan"
+  role="tabpanel"
+  hidden
+>
+
+  <!-- VISUAL -->
+
+  <div class="zt-inside__visual">
+
+    <div class="zt-inside__ring zt-inside__ring--outer"></div>
+    <div class="zt-inside__ring zt-inside__ring--inner"></div>
+
+    <div class="zt-inside__circle">
+
+      {% assign vegan_product = all_products['zeotein-vegan-30-day-supply'] %}
+
+      {% if block.settings.vegan_image != blank %}
+
+        {{
+          block.settings.vegan_image
+          | image_url: width: 1000
+          | image_tag:
+            loading: 'lazy',
+            class: 'zt-inside__image',
+            alt: block.settings.vegan_image.alt | default: 'Zeotein Vegan'
+        }}
+
+      {% elsif vegan_product.featured_image != blank %}
+
+        {{
+          vegan_product.featured_image
+          | image_url: width: 1000
+          | image_tag:
+            loading: 'lazy',
+            class: 'zt-inside__image',
+            alt: vegan_product.title
+        }}
+
+      {% else %}
+
+        {{ 'product-1' | placeholder_svg_tag: 'zt-inside__placeholder-image' }}
+
+      {% endif %}
+
+    </div>
+
+    <div class="zt-inside__visual-label">
+      <strong>{{ block.settings.vegan_badge | default: '20g' }}</strong>
+      <span>PROTEIN</span>
+    </div>
+
+  </div>
+
+
+  <!-- CONTENT -->
+
+  <div class="zt-inside__content">
+
+    <div class="zt-inside__content-top">
+
+      <span class="zt-inside__formula-label">
+        THE VEGAN FORMULA
+      </span>
+
+      <h3>
+        {{ block.settings.vegan_heading | default: 'Plant-based. Intentionally simple.' }}
+      </h3>
+
+      
+
+    </div>
+
+
+    <!-- HIGH-LEVEL FORMULA SUMMARY -->
+
+    <div class="zt-inside__tiles">
+      <div class="zt-inside__tile"><span>PROTEIN FROM</span><strong>{{ block.settings.vegan_protein }}</strong></div>
+      <div class="zt-inside__tile"><span>FLAVOR</span><strong>{{ block.settings.vegan_flavor }}</strong></div>
+      <div class="zt-inside__tile"><span>COMES IN</span><strong>{{ block.settings.vegan_format }}</strong></div>
+      {% if block.settings.vegan_quote != blank %}
+        <div class="zt-inside__quote">
+          <span>IN OUR CUSTOMERS' WORDS</span>
+          <q>{{ block.settings.vegan_quote }}</q>
+          <em>{{ block.settings.vegan_quote_name }}</em>
+        </div>
+      {% endif %}
+    </div>
+
+
+    <!-- PDP CTA -->
+
+    <a
+      class="zt-inside__link"
+      href="/products/zeotein-vegan-sticks-30"
+    >
+      <span>
+        {{ block.settings.vegan_cta | default: 'VIEW FULL INGREDIENT DETAILS' }}
+      </span>
+
+      <span class="zt-inside__arrow">
+        →
+      </span>
+    </a>
+
+  </div>
+
+</div>
+
+  </div>
+</section>
+
+<style>
+
+  /* =========================================================
+     BASE
+  ========================================================= */
+
+  .zt-inside {
+    position: relative;
+    width: 100%;
+    padding: 58px 24px 62px;
+    background: #f7f3ed;
+    color: #191722;
+    overflow: hidden;
+  }
+
+  .zt-inside__container {
+    width: min(1180px, 100%);
+    margin: 0 auto;
+  }
+
+  .zt-inside__placeholder-image {
+    width: 100%;
+    height: 100%;
+    opacity: .25;
+  }
+
+
+  /* =========================================================
+     HEADER
+  ========================================================= */
+
+  .zt-inside__header {
+    max-width: 720px;
+    margin: 0 auto 28px;
+    text-align: center;
+  }
+
+  .zt-inside__eyebrow {
+    display: inline-block;
+    margin-bottom: 9px;
+    color: #7055c7;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .zt-inside__header h2 {
+    margin: 0;
+    color: #191722;
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+    font-weight: 700;
+  }
+
+  .zt-inside__header p {
+    max-width: 600px;
+    margin: 11px auto 0;
+    color: #696671;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+
+  /* =========================================================
+     CLICKABLE SWITCHER
+  ========================================================= */
+
+  .zt-inside__switcher {
+    display: flex;
+    width: fit-content;
+    margin: 0 auto 34px;
+    padding: 4px;
+    border: 1px solid #d9d2c9;
+    border-radius: 100px;
+    background: rgba(255,255,255,.78);
+  }
+
+  .zt-inside__tab {
+    position: relative;
+    min-width: 165px;
+    padding: 11px 20px;
+    border: 0;
+    border-radius: 100px;
+    background: transparent;
+    color: #77727d;
+    cursor: pointer;
+    font-family: inherit;
+    transition:
+      background .25s ease,
+      color .25s ease,
+      transform .2s ease,
+      box-shadow .25s ease;
+  }
+
+  .zt-inside__tab:hover {
+    color: #5f438d;
+  }
+
+  .zt-inside__tab:focus-visible {
+    outline: 2px solid #6f51c5;
+    outline-offset: 2px;
+  }
+
+  .zt-inside__tab span {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+
+  .zt-inside__tab small {
+    display: block;
+    margin-top: 2px;
+    font-size: 9px;
+    line-height: 1.2;
+    opacity: .72;
+  }
+
+  .zt-inside__tab.is-active {
+    background: #6f51c5;
+    color: #ffffff;
+    box-shadow: 0 7px 20px rgba(111,81,197,.18);
+  }
+
+
+  /* =========================================================
+     FORMULA LAYOUT
+  ========================================================= */
+
+  .zt-inside__formula {
+    display: none;
+    grid-template-columns: .95fr 1.05fr;
+    align-items: center;
+    gap: clamp(42px, 7vw, 70px);
+    max-width: 1060px;
+    margin: 0 auto;
+  }
+
+  .zt-inside__formula.is-active {
+    display: grid;
+  }
+
+
+  /* =========================================================
+     VISUAL
+  ========================================================= */
+
+  .zt-inside__visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+  }
+
+  .zt-inside__circle {
+    position: relative;
+    z-index: 2;
+    width: min(420px, 82vw);
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #eee8df;
+    box-shadow:
+      0 25px 65px rgba(35,28,48,.13),
+      0 3px 10px rgba(35,28,48,.08);
+  }
+
+  .zt-inside__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform .6s ease;
+  }
+
+  .zt-inside__circle:hover .zt-inside__image {
+    transform: scale(1.035);
+  }
+
+  .zt-inside__image--cacao {
+    transform: scale(1.12);
+  }
+
+  .zt-inside__circle:hover .zt-inside__image--cacao {
+    transform: scale(1.15);
+  }
+
+
+  /* =========================================================
+     RINGS
+  ========================================================= */
+
+  .zt-inside__ring {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .zt-inside__ring--outer {
+    width: min(480px, 93vw);
+    aspect-ratio: 1;
+    border: 1px solid rgba(111,81,197,.20);
+  }
+
+  .zt-inside__ring--inner {
+    width: min(448px, 87vw);
+    aspect-ratio: 1;
+    border: 1px solid rgba(111,81,197,.09);
+  }
+
+
+  /* =========================================================
+     VISUAL LABEL
+  ========================================================= */
+
+  .zt-inside__visual-label {
+    position: absolute;
+    z-index: 4;
+    right: 3%;
+    bottom: 7%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 96px;
+    height: 96px;
+
+    border: 1px solid #ded8d0;
+    border-radius: 50%;
+    background: #ffffff;
+
+    box-shadow: 0 12px 35px rgba(30,24,40,.12);
+
+    transform: rotate(-5deg);
+  }
+
+  .zt-inside__visual-label span {
+    color: #7b7481;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .16em;
+  }
+
+  .zt-inside__visual-label strong {
+    margin-top: 4px;
+    color: #6f51c5;
+    font-size: 14px;
+    letter-spacing: .1em;
+  }
+
+
+  /* =========================================================
+     CONTENT
+  ========================================================= */
+
+  .zt-inside__content {
+    max-width: 520px;
+  }
+
+  .zt-inside__formula-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #6f51c5;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .18em;
+  }
+
+  .zt-inside__content h3 {
+    margin: 0;
+    color: #191722;
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.06;
+    letter-spacing: -.035em;
+    font-weight: 700;
+  }
+
+  .zt-inside__content-top p {
+    max-width: 500px;
+    margin: 12px 0 22px;
+    color: #6d6872;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+
+  /* =========================================================
+     HIGH-LEVEL SUMMARY
+  ========================================================= */
+
+  .zt-inside__formula-summary {
+    border-top: 1px solid #d8d1c9;
+  }
+
+  .zt-inside__summary-item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    align-items: center;
+    min-height: 52px;
+    border-bottom: 1px solid #d8d1c9;
+    color: #27242d;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .zt-inside__summary-number {
+    color: #8b8490;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+  }
+
+
+  /* =========================================================
+     CTA
+  ========================================================= */
+
+  .zt-inside__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+
+    margin-top: 22px;
+    padding-bottom: 6px;
+
+    border-bottom: 1px solid #6f51c5;
+
+    color: #6f51c5;
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .14em;
+
+    transition: gap .25s ease;
+  }
+
+  .zt-inside__link:hover {
+    gap: 19px;
+  }
+
+  .zt-inside__link:focus-visible {
+    outline: 2px solid #6f51c5;
+    outline-offset: 4px;
+  }
+
+  .zt-inside__arrow {
+    font-size: 18px;
+    line-height: 10px;
+    font-weight: 400;
+  }
+
+
+  /* =========================================================
+     TABLET
+  ========================================================= */
+
+  @media screen and (max-width: 900px) {
+
+    .zt-inside {
+      padding: 50px 20px 54px;
+    }
+
+    .zt-inside__formula {
+      gap: 38px;
+    }
+
+  }
+
+
+  /* =========================================================
+     MOBILE
+  ========================================================= */
+
+  @media screen and (max-width: 749px) {
+
+    .zt-inside {
+      padding: 40px 15px 44px;
+    }
+
+    .zt-inside__header {
+      margin-bottom: 21px;
+    }
+
+    .zt-inside__eyebrow {
+      margin-bottom: 7px;
+      font-size: 9px;
+    }
+
+    .zt-inside__header h2 {
+      font-size: 34px;
+      line-height: 1.04;
+    }
+
+    .zt-inside__header p {
+      margin-top: 9px;
+      font-size: 13px;
+      line-height: 1.42;
+    }
+
+
+    /* SWITCHER */
+
+    .zt-inside__switcher {
+      margin-bottom: 27px;
+      padding: 3px;
+    }
+
+    .zt-inside__tab {
+      min-width: 132px;
+      padding: 9px 12px;
+    }
+
+    .zt-inside__tab span {
+      font-size: 10px;
+    }
+
+    .zt-inside__tab small {
+      font-size: 8px;
+    }
+
+
+    /* FORMULA */
+
+    .zt-inside__formula,
+    .zt-inside__formula.is-active {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+
+    /* VISUAL */
+
+    .zt-inside__visual {
+      min-height: 278px;
+    }
+
+    .zt-inside__circle {
+      width: min(300px, 78vw);
+    }
+
+    .zt-inside__ring--outer {
+      width: min(340px, 88vw);
+    }
+
+    .zt-inside__ring--inner {
+      width: min(320px, 83vw);
+    }
+
+    .zt-inside__visual-label {
+      right: 4%;
+      bottom: 1%;
+      width: 74px;
+      height: 74px;
+    }
+
+    .zt-inside__visual-label span {
+      font-size: 6.5px;
+    }
+
+    .zt-inside__visual-label strong {
+      font-size: 10px;
+    }
+
+
+    /* CONTENT */
+
+    .zt-inside__content {
+      max-width: none;
+    }
+
+    .zt-inside__formula-label {
+      margin-bottom: 7px;
+      font-size: 8px;
+    }
+
+    .zt-inside__content h3 {
+      font-size: 29px;
+      line-height: 1.07;
+    }
+
+    .zt-inside__content-top p {
+      margin: 9px 0 17px;
+      font-size: 13px;
+      line-height: 1.47;
+    }
+
+
+    /* SUMMARY */
+
+    .zt-inside__summary-item {
+      min-height: 47px;
+      grid-template-columns: 32px 1fr;
+      font-size: 11.5px;
+    }
+
+
+    /* CTA */
+
+    .zt-inside__link {
+      margin-top: 18px;
+      font-size: 8.5px;
+      gap: 10px;
+    }
+
+    .zt-inside__arrow {
+      font-size: 15px;
+    }
+
+  }
+
+
+  /* =========================================================
+     SMALL MOBILE
+  ========================================================= */
+
+  @media screen and (max-width: 380px) {
+
+    .zt-inside {
+      padding: 36px 12px 40px;
+    }
+
+    .zt-inside__header {
+      margin-bottom: 19px;
+    }
+
+    .zt-inside__header h2 {
+      font-size: 31px;
+    }
+
+    .zt-inside__header p {
+      font-size: 12px;
+    }
+
+    .zt-inside__tab {
+      min-width: 119px;
+      padding: 8px 9px;
+    }
+
+    .zt-inside__visual {
+      min-height: 260px;
+    }
+
+    .zt-inside__circle {
+      width: 280px;
+    }
+
+    .zt-inside__ring--outer {
+      width: 315px;
+    }
+
+    .zt-inside__ring--inner {
+      width: 295px;
+    }
+
+    .zt-inside__content h3 {
+      font-size: 27px;
+    }
+
+    .zt-inside__summary-item {
+      min-height: 45px;
+      font-size: 11px;
+    }
+
+  }
+
+
+  /* NOV 2026: TILES, QUOTE, PROTEIN BADGE */
+  .zt-inside__visual-label strong { margin: 0 0 2px; font-size: 24px; letter-spacing: -0.02em; }
+  .zt-inside__visual-label span { letter-spacing: .14em; }
+  .zt-inside__content-top h3 { margin-bottom: 18px; }
+  .zt-inside__tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .zt-inside__tile { padding: 14px 16px; border-radius: 14px; background: #ffffff; }
+  .zt-inside__tile span, .zt-inside__quote span { display: block; color: #6b6470; font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+  .zt-inside__tile strong { display: block; margin-top: 4px; color: #191722; font-size: 15px; line-height: 1.3; font-weight: 600; }
+  .zt-inside__quote { grid-column: 1 / -1; padding: 16px 18px; border-radius: 14px; background: #efe8fb; }
+  .zt-inside__quote span { color: #5a3a86; }
+  .zt-inside__quote q { display: block; margin-top: 6px; color: #2a1140; font-size: 18px; line-height: 1.4; font-weight: 600; }
+  .zt-inside__quote em { display: block; margin-top: 6px; color: #5a3a86; font-size: 13px; font-style: normal; font-weight: 600; }
+  @media screen and (max-width: 749px) {
+    .zt-inside__tiles { grid-template-columns: 1fr; gap: 8px; }
+    .zt-inside__visual-label strong { font-size: 18px; }
+    .zt-inside__quote q { font-size: 16px; }
+  }
+
+</style>
+
+<script>
+  (function() {
+
+    function initZeoteinInside(section) {
+
+      if (!section || section.dataset.zeoteinInsideReady === 'true') {
+        return;
+      }
+
+      section.dataset.zeoteinInsideReady = 'true';
+
+      var tabs = section.querySelectorAll('[data-formula-tab]');
+      var panels = section.querySelectorAll('[data-formula-panel]');
+
+      tabs.forEach(function(tab) {
+
+        tab.addEventListener('click', function() {
+
+          var formula = tab.getAttribute('data-formula-tab');
+
+          /* Reset tabs */
+          tabs.forEach(function(item) {
+
+            item.classList.remove('is-active');
+
+            item.setAttribute(
+              'aria-selected',
+              'false'
+            );
+
+          });
+
+          /* Reset panels */
+          panels.forEach(function(panel) {
+
+            panel.classList.remove('is-active');
+
+            panel.hidden = true;
+
+          });
+
+          /* Activate selected tab */
+          tab.classList.add('is-active');
+
+          tab.setAttribute(
+            'aria-selected',
+            'true'
+          );
+
+          /* Activate selected panel */
+          var activePanel = section.querySelector(
+            '[data-formula-panel="' + formula + '"]'
+          );
+
+          if (activePanel) {
+
+            activePanel.classList.add('is-active');
+
+            activePanel.hidden = false;
+
+          }
+
+        });
+
+      });
+
+    }
+
+
+    /* Initial load */
+    document.addEventListener('DOMContentLoaded', function() {
+
+      var sections = document.querySelectorAll('.zt-inside');
+
+      sections.forEach(function(section) {
+        initZeoteinInside(section);
+      });
+
+    });
+
+
+    /* Shopify Theme Editor support */
+    document.addEventListener('shopify:section:load', function(event) {
+
+      var section = event.target.querySelector('.zt-inside');
+
+      if (section) {
+        initZeoteinInside(section);
+      }
+
+    });
+
+  })();
+</script>
+
+{% schema %}
+{
+"name": "What's Inside",
+"tag": "section",
+"class": "section-zeotein-inside",
+"settings": [
+
+{
+  "type": "text",
+  "id": "section_id",
+  "label": "Section ID",
+  "default": "ingredients"
+},
+
+{
+  "type": "text",
+  "id": "eyebrow",
+  "label": "Eyebrow",
+  "default": "WHAT'S INSIDE"
+},
+
+{
+  "type": "text",
+  "id": "heading",
+  "label": "Heading",
+  "default": "What's Inside Matters."
+},
+
+{
+  "type": "textarea",
+  "id": "subheading",
+  "label": "Subheading",
+  "default": "Simple formulas. Intentional ingredients. Clearly explained."
+},
+
+
+{
+  "type": "header",
+  "content": "Cacao Formula"
+},
+
+{
+  "type": "image_picker",
+  "id": "cacao_image",
+  "label": "Cacao Image"
+},
+
+{
+  "type": "text",
+  "id": "cacao_heading",
+  "label": "Cacao Heading",
+  "default": "Animal-based. Intentionally simple."
+},
+
+{
+  "type": "textarea",
+  "id": "cacao_intro",
+  "label": "Cacao Description",
+  "default": "Organic collagen peptides + grass-fed beef bone broth, made for simple, everyday nutrition."
+},
+
+{
+  "type": "text",
+  "id": "cacao_cta",
+  "label": "Cacao CTA",
+  "default": "VIEW FULL INGREDIENT DETAILS"
+},
+{ "type": "text", "id": "cacao_badge", "label": "cacao badge number", "default": "23g" },
+{ "type": "text", "id": "cacao_protein", "label": "cacao protein from", "default": "Grass-fed collagen and grass-fed bone broth" },
+{ "type": "text", "id": "cacao_flavor", "label": "cacao flavor", "default": "Rich fermented cacao" },
+{ "type": "text", "id": "cacao_format", "label": "cacao comes in", "default": "Stick packs or a bulk bag" },
+{ "type": "textarea", "id": "cacao_quote", "label": "cacao customer quote", "default": "It's so smooth that it makes me think of the old fudgsicles of years ago." },
+{ "type": "text", "id": "cacao_quote_name", "label": "cacao quote name", "default": "Clara George, Zeotein Cacao" },
+
+
+{
+  "type": "header",
+  "content": "Vegan Formula"
+},
+
+{
+  "type": "image_picker",
+  "id": "vegan_image",
+  "label": "Vegan Image"
+},
+
+{
+  "type": "text",
+  "id": "vegan_heading",
+  "label": "Vegan Heading",
+  "default": "Plant-based. Intentionally simple."
+},
+
+{
+  "type": "textarea",
+  "id": "vegan_intro",
+  "label": "Vegan Description",
+  "default": "Plant-based protein with organic hemp + pumpkin seed protein, made for simple, everyday nutrition."
+},
+
+{
+  "type": "text",
+  "id": "vegan_cta",
+  "label": "Vegan CTA",
+  "default": "VIEW FULL INGREDIENT DETAILS"
+},
+{ "type": "text", "id": "vegan_badge", "label": "vegan badge number", "default": "20g" },
+{ "type": "text", "id": "vegan_protein", "label": "vegan protein from", "default": "Organic hemp and pumpkin seed" },
+{ "type": "text", "id": "vegan_flavor", "label": "vegan flavor", "default": "Natural and nutty" },
+{ "type": "text", "id": "vegan_format", "label": "vegan comes in", "default": "Stick packs" },
+{ "type": "textarea", "id": "vegan_quote", "label": "vegan customer quote", "default": "Love the nutty flavor and texture." },
+{ "type": "text", "id": "vegan_quote_name", "label": "vegan quote name", "default": "K.W., Zeotein Vegan" }
+
+],
+
+"presets": [
+{
+"name": "What's Inside"
+}
+]
+}
+{% endschema %}

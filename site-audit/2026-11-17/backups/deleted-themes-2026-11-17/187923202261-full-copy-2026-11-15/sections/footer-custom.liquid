@@ -1,0 +1,536 @@
+<section class="zt-footer" style="--zt-footer-bg: {{ section.settings.background }}; --zt-footer-word: {{ section.settings.wordmark_color }}; --zt-footer-text: {{ section.settings.text_color }}; --zt-footer-logo-desktop: {{ section.settings.logo_width_desktop }}px; --zt-footer-logo-mobile: {{ section.settings.logo_width_mobile }}px;">
+  <div class="zt-footer__inner">
+    <div class="zt-footer__top">
+      <div class="zt-footer__brand">
+        <p class="zt-footer__name">{{ section.settings.brand_name }}</p>
+        <p class="zt-footer__tagline">{{ section.settings.tagline }}</p>
+      </div>
+
+      <div class="zt-footer__col">
+        <p class="zt-footer__label">{{ section.settings.explore_heading }}</p>
+        <nav class="zt-footer__links" aria-label="{{ section.settings.explore_heading | escape }}">
+          {% if section.settings.link_1_label != blank %}
+            <a href="{{ section.settings.link_1_url | default: '#' }}">{{ section.settings.link_1_label }}</a>
+          {% endif %}
+          {% if section.settings.link_2_label != blank %}
+            <a href="{{ section.settings.link_2_url | default: '#' }}">{{ section.settings.link_2_label }}</a>
+          {% endif %}
+        </nav>
+      </div>
+
+      <div class="zt-footer__col">
+        <p class="zt-footer__label">{{ section.settings.offer_heading }}</p>
+        <p class="zt-footer__offer">{{ section.settings.offer_text }}</p>
+      </div>
+    </div>
+
+    {%- if section.settings.logo != blank -%}
+      {%- liquid
+        assign logo_sizes = '(min-width: 750px) ' | append: section.settings.logo_width_desktop | append: 'px, ' | append: section.settings.logo_width_mobile | append: 'px'
+      -%}
+      <div class="zt-footer__logo">
+        {{
+          section.settings.logo
+          | image_url: width: 2000
+          | image_tag:
+            class: 'zt-footer__logo-image',
+            widths: '400, 800, 1200, 1600, 2000',
+            sizes: logo_sizes,
+            alt: ''
+        }}
+      </div>
+    {%- elsif section.settings.wordmark != blank -%}
+      <p class="zt-footer__giant" aria-hidden="true">{{ section.settings.wordmark }}</p>
+    {%- endif -%}
+
+    <div class="zt-footer__rule"></div>
+    <p class="zt-footer__copy">{{ section.settings.copyright }}</p>
+
+    {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+      <div class="zt-footer__payment">
+        <span class="zt-footer__payment-label">Payment methods</span>
+        <ul class="zt-footer__payment-list" role="list">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>
+              {{ type | payment_type_svg_tag: class: 'zt-footer__payment-icon' }}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if shop.policies != blank -%}
+      <ul class="zt-footer__policies">
+        {%- if shop.privacy_policy != blank -%}
+          <li><a href="{{ shop.privacy_policy.url }}">{{ shop.privacy_policy.title | escape }}</a></li>
+        {%- endif -%}
+        {%- if shop.refund_policy != blank -%}
+          <li><a href="{{ shop.refund_policy.url }}">{{ shop.refund_policy.title | escape }}</a></li>
+        {%- endif -%}
+        {%- if shop.shipping_policy != blank -%}
+          <li><a href="{{ shop.shipping_policy.url }}">{{ shop.shipping_policy.title | escape }}</a></li>
+        {%- endif -%}
+        {%- if shop.terms_of_service != blank -%}
+          <li><a href="{{ shop.terms_of_service.url }}">{{ shop.terms_of_service.title | escape }}</a></li>
+        {%- endif -%}
+        {%- for policy in shop.policies -%}
+          {%- liquid
+            assign policy_url = policy.url
+            assign already_listed = false
+            if shop.privacy_policy != blank and policy_url == shop.privacy_policy.url
+              assign already_listed = true
+            endif
+            if shop.refund_policy != blank and policy_url == shop.refund_policy.url
+              assign already_listed = true
+            endif
+            if shop.shipping_policy != blank and policy_url == shop.shipping_policy.url
+              assign already_listed = true
+            endif
+            if shop.terms_of_service != blank and policy_url == shop.terms_of_service.url
+              assign already_listed = true
+            endif
+            if shop.subscription_policy != blank and policy_url == shop.subscription_policy.url
+              assign already_listed = true
+            endif
+          -%}
+          {%- unless already_listed -%}
+            <li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
+          {%- endunless -%}
+        {%- endfor -%}
+        {%- if shop.subscription_policy != blank -%}
+          <li><a href="{{ shop.subscription_policy.url }}">{{ shop.subscription_policy.title | escape }}</a></li>
+        {%- endif -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="zt-footer__disclaimer">{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .zt-footer {
+    background: var(--zt-footer-bg, #1b1430);
+    color: var(--zt-footer-text, #fff);
+    overflow: hidden;
+  }
+
+  .zt-footer__inner {
+    width: min(1240px, calc(100% - 48px));
+    margin-inline: auto;
+    padding: 72px 0 28px;
+  }
+
+  .zt-footer__top {
+    display: grid;
+    grid-template-columns: minmax(240px, 1.15fr) minmax(180px, 0.75fr) minmax(220px, 1fr);
+    column-gap: 48px;
+    align-items: start;
+  }
+
+  .zt-footer__name,
+  .zt-footer__tagline,
+  .zt-footer__label,
+  .zt-footer__offer,
+  .zt-footer__giant,
+  .zt-footer__copy {
+    margin: 0;
+  }
+
+  .zt-footer__name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .zt-footer__tagline {
+    margin-top: 10px;
+    max-width: 280px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+    color: rgb(255 255 255 / 78%);
+  }
+
+  .zt-footer__label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 55%);
+  }
+
+  .zt-footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .zt-footer__links a {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-decoration: none;
+  }
+
+  .zt-footer__links a:hover {
+    text-decoration: underline;
+  }
+
+  .zt-footer__offer {
+    margin-top: 14px;
+    max-width: 280px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+    color: rgb(255 255 255 / 78%);
+  }
+
+  .zt-footer__logo {
+    display: flex;
+    justify-content: center;
+    margin-top: 56px;
+  }
+
+  .zt-footer__logo-image {
+    display: block;
+    width: min(var(--zt-footer-logo-mobile), calc(100vw - 40px));
+    max-width: none;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .zt-footer__giant {
+    margin-top: 56px;
+    max-width: 100%;
+    overflow: hidden;
+    font-family: "Arial Black", Arial, Helvetica, sans-serif;
+    font-weight: 900;
+    font-size: clamp(72px, 15.6vw, 188px);
+    letter-spacing: -0.045em;
+    line-height: 0.8;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--zt-footer-word, #7a2fbe);
+    white-space: nowrap;
+  }
+
+  .zt-footer__rule {
+    height: 1px;
+    margin-top: 28px;
+    background: rgb(255 255 255 / 22%);
+  }
+
+  .zt-footer__copy {
+    margin-top: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+    color: rgb(255 255 255 / 62%);
+  }
+
+  .zt-footer__payment {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .zt-footer__payment-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .zt-footer__payment-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .zt-footer__payment-icon {
+    display: block;
+    width: 38px;
+    height: 24px;
+  }
+
+  .zt-footer__policies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .zt-footer__policies li {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .zt-footer__policies li:not(:first-child)::before {
+    content: "•";
+    margin: 0 8px;
+    color: #d5d0de;
+  }
+
+  .zt-footer__policies a {
+    color: #f4f1f8;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .zt-footer__policies a:hover {
+    text-decoration: underline;
+  }
+
+  .zt-footer__disclaimer {
+    max-width: 760px;
+    margin: 10px auto 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    line-height: 1.45;
+    text-align: center;
+    color: #e4e0ea;
+  }
+
+  @media screen and (max-width: 749px) {
+    .zt-footer__inner {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 100%;
+      margin-inline: 0;
+      padding: 40px 20px 24px;
+    }
+
+    .zt-footer__top {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .zt-footer__name {
+      font-size: 26px;
+    }
+
+    .zt-footer__tagline,
+    .zt-footer__offer {
+      max-width: 280px;
+      font-size: 15px;
+    }
+
+    .zt-footer__logo {
+      justify-content: flex-start;
+      margin-top: 36px;
+    }
+
+    .zt-footer__giant {
+      margin-top: 36px;
+      max-width: 100%;
+      font-size: clamp(48px, 16vw, 96px);
+      text-align: left;
+    }
+
+    .zt-footer__copy,
+    .zt-footer__disclaimer {
+      text-align: left;
+    }
+
+    .zt-footer__payment,
+    .zt-footer__payment-list,
+    .zt-footer__policies {
+      justify-content: flex-start;
+    }
+
+    .zt-footer__disclaimer {
+      margin-inline: 0;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .zt-footer__logo-image {
+      width: min(var(--zt-footer-logo-desktop), calc(100vw - 48px));
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Footer custom",
+  "tag": "section",
+  "class": "zt-footer-section",
+  "enabled_on": {
+    "groups": [
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "ZEOTEIN"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Functional protein blends for a simpler daily routine."
+    },
+    {
+      "type": "text",
+      "id": "explore_heading",
+      "label": "Explore heading",
+      "default": "Explore"
+    },
+    {
+      "type": "text",
+      "id": "link_1_label",
+      "label": "Link 1 label",
+      "default": "Protein Blends"
+    },
+    {
+      "type": "url",
+      "id": "link_1_url",
+      "label": "Link 1"
+    },
+    {
+      "type": "text",
+      "id": "link_2_label",
+      "label": "Link 2 label",
+      "default": "Cacao Offer"
+    },
+    {
+      "type": "url",
+      "id": "link_2_url",
+      "label": "Link 2"
+    },
+    {
+      "type": "text",
+      "id": "offer_heading",
+      "label": "Offer heading",
+      "default": "Offer details"
+    },
+    {
+      "type": "textarea",
+      "id": "offer_text",
+      "label": "Offer text",
+      "default": "Subscription renews every 30 days until paused or canceled."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Replaces the large wordmark. Leave empty to keep the text."
+    },
+    {
+      "type": "range",
+      "id": "logo_width_desktop",
+      "label": "Logo width on desktop",
+      "min": 240,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "label": "Logo width on mobile",
+      "min": 140,
+      "max": 420,
+      "step": 10,
+      "unit": "px",
+      "default": 340
+    },
+    {
+      "type": "text",
+      "id": "wordmark",
+      "label": "Large wordmark",
+      "default": "ZEOTEIN"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright",
+      "default": "© 2026 Zeotein. All rights reserved."
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "info": "Uses the payment methods enabled in Shopify admin.",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#1b1430"
+    },
+    {
+      "type": "color",
+      "id": "wordmark_color",
+      "label": "Wordmark color",
+      "default": "#7a2fbe"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer custom",
+      "settings": {
+        "brand_name": "ZEOTEIN",
+        "tagline": "Functional protein blends for a simpler daily routine.",
+        "explore_heading": "Explore",
+        "link_1_label": "Protein Blends",
+        "link_1_url": "/collections/all",
+        "link_2_label": "Cacao Offer",
+        "link_2_url": "/products/zeotein-cacao-bulk-bag-cacao-lp",
+        "offer_heading": "Offer details",
+        "offer_text": "Subscription renews every 30 days until paused or canceled.",
+        "wordmark": "ZEOTEIN",
+        "copyright": "© 2026 Zeotein. All rights reserved.",
+        "disclaimer": "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.",
+        "show_payment_icons": true,
+        "background": "#1b1430",
+        "wordmark_color": "#7a2fbe",
+        "text_color": "#ffffff"
+      }
+    }
+  ]
+}
+{% endschema %}

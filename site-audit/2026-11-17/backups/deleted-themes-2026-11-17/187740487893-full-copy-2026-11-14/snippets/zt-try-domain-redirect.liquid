@@ -1,0 +1,25 @@
+{% comment %}
+  try.zeotein.com must leave the try host and land on zeotein.com (address bar change).
+  Root → cacao LP; every other path → same path on zeotein.com.
+  Query string / hash are appended in JS so utm_* and fbclid always survive.
+{% endcomment %}
+{%- if request.host == 'try.zeotein.com' -%}
+  {%- liquid
+    if request.page_type == 'index' or request.path == '/' or request.path == blank
+      assign zt_try_path = '/products/cacao-protein-starter-kit'
+    else
+      assign zt_try_path = request.path
+    endif
+  -%}
+  <script>
+    (function () {
+      var path = {{ zt_try_path | json }};
+      var dest = 'https://zeotein.com' + path + window.location.search + window.location.hash;
+      window.location.replace(dest);
+    })();
+  </script>
+  <meta
+    http-equiv="refresh"
+    content="0;url=https://zeotein.com{{ zt_try_path | escape }}"
+  >
+{%- endif -%}

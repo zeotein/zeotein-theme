@@ -1,0 +1,293 @@
+{% liquid
+  assign eyebrow = block.settings.eyebrow
+
+  if eyebrow == blank
+    assign eyebrow = 'TRY IT WITH CONFIDENCE'
+  endif
+
+  assign heading = block.settings.heading
+
+  if heading == blank
+    assign heading = '30-Day Money-Back Guarantee'
+  endif
+
+  assign copy = block.settings.copy
+
+  if copy == blank
+    assign copy = "Give Zeotein a real try. If it's not the right fit for you, we've got you covered."
+  endif
+
+  assign cta_text = block.settings.cta_text
+
+  if cta_text == blank
+    assign cta_text = 'See Guarantee Details'
+  endif
+
+  assign cta_url = block.settings.cta_url
+
+  if cta_url == blank
+    assign cta_url = routes.root_url | append: 'pages/shipping-guarantee'
+  endif
+
+  assign section_id = 'zt-guarantee-' | append: block.id
+%}
+
+<section id="{{ section_id }}" class="zt-guarantee">
+  <div class="zt-guarantee__panel">
+
+    <svg
+      class="zt-guarantee__seal"
+      viewBox="0 0 200 200"
+      role="img"
+      aria-label="30-day money-back guarantee seal"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <path
+          id="{{ section_id }}-arc"
+          d="M100 100m-69 0a69 69 0 1 1 138 0a69 69 0 1 1 -138 0"
+        />
+      </defs>
+
+      <!-- Scalloped edge -->
+      <path d="M194.00 100.00 A12.87 12.87 0 0 1 190.80 124.33 A12.87 12.87 0 0 1 181.41 147.00 A12.87 12.87 0 0 1 166.47 166.47 A12.87 12.87 0 0 1 147.00 181.41 A12.87 12.87 0 0 1 124.33 190.80 A12.87 12.87 0 0 1 100.00 194.00 A12.87 12.87 0 0 1 75.67 190.80 A12.87 12.87 0 0 1 53.00 181.41 A12.87 12.87 0 0 1 33.53 166.47 A12.87 12.87 0 0 1 18.59 147.00 A12.87 12.87 0 0 1 9.20 124.33 A12.87 12.87 0 0 1 6.00 100.00 A12.87 12.87 0 0 1 9.20 75.67 A12.87 12.87 0 0 1 18.59 53.00 A12.87 12.87 0 0 1 33.53 33.53 A12.87 12.87 0 0 1 53.00 18.59 A12.87 12.87 0 0 1 75.67 9.20 A12.87 12.87 0 0 1 100.00 6.00 A12.87 12.87 0 0 1 124.33 9.20 A12.87 12.87 0 0 1 147.00 18.59 A12.87 12.87 0 0 1 166.47 33.53 A12.87 12.87 0 0 1 181.41 53.00 A12.87 12.87 0 0 1 190.80 75.67 A12.87 12.87 0 0 1 194.00 100.00 Z" fill="#2ec9c9" />
+
+      <!-- Face -->
+      <circle cx="100" cy="100" r="84" fill="#ffffff" />
+      <circle cx="100" cy="100" r="80" fill="none" stroke="#47206b" stroke-width="1.5" />
+      <circle cx="100" cy="100" r="56" fill="#47206b" />
+
+      <!-- Ring text -->
+      <text
+        fill="#47206b"
+        font-size="12.5"
+        font-weight="700"
+        letter-spacing="1"
+      >
+        <textPath href="#{{ section_id }}-arc" textLength="430" lengthAdjust="spacing">
+          MONEY-BACK GUARANTEE &#8226; MONEY-BACK GUARANTEE &#8226;
+        </textPath>
+      </text>
+
+      <!-- Center -->
+      <text
+        x="100"
+        y="108"
+        text-anchor="middle"
+        fill="#ffffff"
+        font-size="52"
+        font-weight="700"
+        letter-spacing="-2"
+      >30</text>
+
+      <text
+        x="100"
+        y="128"
+        text-anchor="middle"
+        fill="#2ec9c9"
+        font-size="14"
+        font-weight="700"
+        letter-spacing="4"
+      >DAY</text>
+    </svg>
+
+    <div class="zt-guarantee__eyebrow">
+      {{ eyebrow }}
+    </div>
+
+    <h2 class="zt-guarantee__heading">
+      {{ heading }}
+    </h2>
+
+    <div class="zt-guarantee__copy">
+      {{ copy }}
+    </div>
+
+    <a
+      href="{{ cta_url }}"
+      class="zt-guarantee__cta"
+    >
+      {{ cta_text }}
+      <span>→</span>
+    </a>
+
+  </div>
+</section>
+
+<style>
+  #{{ section_id }} {
+    background: #f8f7f4;
+    padding: 124px 24px 72px;
+  }
+
+  #{{ section_id }} *,
+  #{{ section_id }} *::before,
+  #{{ section_id }} *::after {
+    box-sizing: border-box;
+  }
+
+  /* PANEL */
+
+  #{{ section_id }} .zt-guarantee__panel {
+    position: relative;
+    width: min(860px, 100%);
+    margin: 0 auto;
+    padding: 136px 48px 54px;
+    background: linear-gradient(150deg, #47206b 0%, #35164f 100%);
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(53, 22, 79, .18);
+  }
+
+  /* SEAL */
+
+  #{{ section_id }} .zt-guarantee__seal {
+    position: absolute;
+    top: -94px;
+    left: 50%;
+    width: 212px;
+    height: 212px;
+    transform: translateX(-50%) rotate(-7deg);
+    filter: drop-shadow(0 12px 22px rgba(30, 12, 48, .3));
+  }
+
+  /* TEXT */
+
+  #{{ section_id }} .zt-guarantee__eyebrow {
+    margin-bottom: 13px;
+    color: #7fe3e3;
+    font-size: 11px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  #{{ section_id }} .zt-guarantee__heading {
+    margin: 0 auto;
+    max-width: 680px;
+    color: #ffffff;
+    font-size: clamp(36px, 4.6vw, 54px);
+    line-height: 1.04;
+    font-weight: 400;
+    letter-spacing: -.035em;
+  }
+
+  #{{ section_id }} .zt-guarantee__copy {
+    max-width: 520px;
+    margin: 18px auto 0;
+    color: #e8e0f2;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  /* CTA */
+
+  #{{ section_id }} .zt-guarantee__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 26px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, .55);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: .025em;
+    transition: opacity .2s ease, gap .2s ease;
+  }
+
+  #{{ section_id }} .zt-guarantee__cta:hover {
+    opacity: .78;
+    gap: 16px;
+  }
+
+  #{{ section_id }} .zt-guarantee__cta span {
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  /* MOBILE */
+
+  @media screen and (max-width: 749px) {
+    #{{ section_id }} {
+      padding: 96px 16px 52px;
+    }
+
+    #{{ section_id }} .zt-guarantee__panel {
+      padding: 100px 22px 40px;
+      border-radius: 20px;
+    }
+
+    #{{ section_id }} .zt-guarantee__seal {
+      top: -74px;
+      width: 160px;
+      height: 160px;
+    }
+
+    #{{ section_id }} .zt-guarantee__eyebrow {
+      margin-bottom: 11px;
+      font-size: 10px;
+    }
+
+    #{{ section_id }} .zt-guarantee__heading {
+      font-size: clamp(31px, 8.8vw, 40px);
+    }
+
+    #{{ section_id }} .zt-guarantee__copy {
+      margin-top: 14px;
+      font-size: 15px;
+    }
+
+    #{{ section_id }} .zt-guarantee__cta {
+      margin-top: 22px;
+      font-size: 12px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Zeotein Guarantee",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "TRY IT WITH CONFIDENCE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "30-Day Money-Back Guarantee"
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "Give Zeotein a real try. If it's not the right fit for you, we've got you covered."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "See Guarantee Details"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zeotein Guarantee"
+    }
+  ]
+}
+{% endschema %}

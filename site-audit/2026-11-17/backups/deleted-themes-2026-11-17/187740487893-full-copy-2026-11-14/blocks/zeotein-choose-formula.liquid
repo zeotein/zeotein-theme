@@ -1,0 +1,436 @@
+<section
+  id="choose-your-zeotein"
+  class="z-formulas"
+>
+  <div class="z-formulas__inner">
+
+    <div class="z-formulas__header">
+      <p class="z-formulas__eyebrow">FIND YOUR FIT</p>
+
+      <h2>{{ section.settings.heading }}</h2>
+
+      <p class="z-formulas__subheading">
+        {{ section.settings.subheading }}
+      </p>
+    </div>
+
+    <div class="z-formulas__grid">
+
+      {% assign cacao = section.settings.cacao_product %}
+
+      {% if cacao != blank %}
+        <article class="z-formula-card">
+
+          <div class="z-formula-card__media">
+            {% if section.settings.cacao_image != blank %}
+              {{
+                section.settings.cacao_image
+                | image_url: width: 1000
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'z-formula-card__image',
+                  alt: cacao.title
+              }}
+            {% elsif cacao.featured_image != blank %}
+              {{
+                cacao.featured_image
+                | image_url: width: 1000
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'z-formula-card__image',
+                  alt: cacao.title
+              }}
+            {% endif %}
+          </div>
+
+          <div class="z-formula-card__content">
+
+            {% if section.settings.cacao_tag != blank %}
+              <span class="z-formula-card__tag">
+                {{ section.settings.cacao_tag }}
+              </span>
+            {% endif %}
+
+            <h3>{{ section.settings.cacao_heading }}</h3>
+
+            <p class="z-formula-card__copy">
+              {{ section.settings.cacao_copy }}
+            </p>
+
+            {% if section.settings.cacao_proof != blank %}
+              <div class="z-formula-card__proof">
+                {{ section.settings.cacao_proof }}
+              </div>
+            {% endif %}
+
+            <a
+              href="{{ cacao.url }}"
+              class="z-formula-card__button"
+            >
+              {{ section.settings.cacao_button }}
+              <span aria-hidden="true">→</span>
+            </a>
+
+          </div>
+        </article>
+      {% endif %}
+
+
+      {% assign vegan = section.settings.vegan_product %}
+
+      {% if vegan != blank %}
+        <article class="z-formula-card">
+
+          <div class="z-formula-card__media">
+            {% if section.settings.vegan_image != blank %}
+              {{
+                section.settings.vegan_image
+                | image_url: width: 1000
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'z-formula-card__image',
+                  alt: vegan.title
+              }}
+            {% elsif vegan.featured_image != blank %}
+              {{
+                vegan.featured_image
+                | image_url: width: 1000
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'z-formula-card__image',
+                  alt: vegan.title
+              }}
+            {% endif %}
+          </div>
+
+          <div class="z-formula-card__content">
+
+            {% if section.settings.vegan_tag != blank %}
+              <span class="z-formula-card__tag">
+                {{ section.settings.vegan_tag }}
+              </span>
+            {% endif %}
+
+            <h3>{{ section.settings.vegan_heading }}</h3>
+
+            <p class="z-formula-card__copy">
+              {{ section.settings.vegan_copy }}
+            </p>
+
+            {% if section.settings.vegan_proof != blank %}
+              <div class="z-formula-card__proof">
+                {{ section.settings.vegan_proof }}
+              </div>
+            {% endif %}
+
+            <a
+              href="{{ vegan.url }}"
+              class="z-formula-card__button"
+            >
+              {{ section.settings.vegan_button }}
+              <span aria-hidden="true">→</span>
+            </a>
+
+          </div>
+        </article>
+      {% endif %}
+
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+  .z-formulas {
+    background: #f8f6f2 !important;
+    padding: 80px 20px;
+  }
+
+  .z-formulas__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .z-formulas__header {
+    max-width: 680px;
+    margin: 0 auto 44px;
+    text-align: center;
+  }
+
+  .z-formulas__eyebrow {
+    margin: 0 0 10px;
+    color: #6b548d;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+  }
+
+.z-formulas__header h2 {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin: 0 0 14px;
+  color: #30283f !important;
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+ .z-formulas__subheading {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin: 0;
+  color: #68636d !important;
+  font-size: 17px;
+  line-height: 1.55;
+}
+  .z-formulas__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .z-formula-card {
+    overflow: hidden;
+    background: #ffffff;
+    border-radius: 22px;
+    box-shadow: 0 10px 35px rgba(48, 40, 63, 0.07);
+  }
+
+  .z-formula-card__media {
+    overflow: hidden;
+    background: #f1eee9;
+  }
+
+  .z-formula-card__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 0.78;
+    object-fit: cover;
+  }
+
+  .z-formula-card__content {
+    padding: 30px;
+  }
+
+  .z-formula-card__tag {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #6b548d;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 1.2;
+  }
+
+  .z-formula-card h3 {
+    margin: 0 0 10px;
+    color: #30283f;
+    font-size: 29px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .z-formula-card__copy {
+    margin: 0 0 18px;
+    color: #68636d;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .z-formula-card__proof {
+    margin-bottom: 22px;
+    color: #30283f;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .z-formula-card__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 50px;
+    padding: 14px 24px;
+    background: #6fc9a8;
+    color: #ffffff;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .z-formula-card__button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .z-formula-card__button span {
+    font-size: 17px;
+    line-height: 1;
+  }
+
+  @media screen and (max-width: 749px) {
+
+    .z-formulas {
+      padding: 60px 16px;
+    }
+
+    .z-formulas__header {
+      margin-bottom: 30px;
+    }
+
+    .z-formulas__header h2 {
+      font-size: 36px;
+    }
+
+    .z-formulas__subheading {
+      font-size: 15px;
+    }
+
+    .z-formulas__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .z-formula-card {
+      border-radius: 18px;
+    }
+
+    .z-formula-card__image {
+      aspect-ratio: 1 / 0.78;
+    }
+
+    .z-formula-card__content {
+      padding: 24px 22px 26px;
+    }
+
+    .z-formula-card h3 {
+      font-size: 26px;
+    }
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "Choose Your Zeotein",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose Your Zeotein"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Two simple formulas. One easier daily routine."
+    },
+
+    {
+      "type": "header",
+      "content": "Cacao"
+    },
+    {
+      "type": "product",
+      "id": "cacao_product",
+      "label": "Cacao product"
+    },
+    {
+      "type": "image_picker",
+      "id": "cacao_image",
+      "label": "Cacao image"
+    },
+    {
+      "type": "text",
+      "id": "cacao_tag",
+      "label": "Cacao tag",
+      "default": "COLLAGEN + BONE BROTH"
+    },
+    {
+      "type": "text",
+      "id": "cacao_heading",
+      "label": "Cacao heading",
+      "default": "Zeotein Cacao"
+    },
+    {
+      "type": "textarea",
+      "id": "cacao_copy",
+      "label": "Cacao copy",
+      "default": "Collagen + bone broth protein with a rich cacao flavor."
+    },
+    {
+      "type": "text",
+      "id": "cacao_proof",
+      "label": "Cacao proof",
+      "default": "23g Protein"
+    },
+    {
+      "type": "text",
+      "id": "cacao_button",
+      "label": "Cacao button",
+      "default": "SHOP CACAO"
+    },
+
+    {
+      "type": "header",
+      "content": "Vegan"
+    },
+    {
+      "type": "product",
+      "id": "vegan_product",
+      "label": "Vegan product"
+    },
+    {
+      "type": "image_picker",
+      "id": "vegan_image",
+      "label": "Vegan image"
+    },
+    {
+      "type": "text",
+      "id": "vegan_tag",
+      "label": "Vegan tag",
+      "default": "PLANT-BASED"
+    },
+    {
+      "type": "text",
+      "id": "vegan_heading",
+      "label": "Vegan heading",
+      "default": "Zeotein Vegan"
+    },
+    {
+      "type": "textarea",
+      "id": "vegan_copy",
+      "label": "Vegan copy",
+      "default": "Plant-based protein for simple, everyday nutrition."
+    },
+    {
+      "type": "text",
+      "id": "vegan_proof",
+      "label": "Vegan proof",
+      "default": "Plant-based protein"
+    },
+    {
+      "type": "text",
+      "id": "vegan_button",
+      "label": "Vegan button",
+      "default": "SHOP VEGAN"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Choose Your Zeotein"
+    }
+  ]
+}
+{% endschema %}

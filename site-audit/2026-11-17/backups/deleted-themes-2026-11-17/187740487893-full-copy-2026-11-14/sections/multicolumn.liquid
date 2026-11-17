@@ -1,0 +1,489 @@
+{% style %}
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;700;800&display=swap');
+
+  #shopify-section-{{ section.id }} {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    position: relative;
+    overflow: hidden;
+
+    /* Warm neutral background to separate this section from the lavender Label section */
+    background:
+      radial-gradient(
+        circle at 88% 34%,
+        rgba(111, 75, 179, 0.045) 0%,
+        transparent 36%
+      ),
+      radial-gradient(
+        circle at 42% 60%,
+        rgba(111, 75, 179, 0.025) 0%,
+        transparent 38%
+      ),
+      #F8F6F2;
+
+    padding: 70px 0 86px;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image:
+      radial-gradient(
+        circle,
+        rgba(111, 75, 179, 0.045) 1px,
+        transparent 1.5px
+      ),
+      radial-gradient(
+        circle,
+        rgba(111, 75, 179, 0.025) 1px,
+        transparent 1.5px
+      );
+
+    background-size: 160px 160px, 260px 260px;
+    background-position: 40px 30px, 120px 90px;
+    opacity: 0.22;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__head {
+    max-width: 1120px;
+    margin: 0 0 78px;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__title {
+    margin: 0 0 34px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 78px;
+    line-height: 0.92;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #20202B !important;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__title span {
+    color: #6F4BB3 !important;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__sub {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    line-height: 1.55;
+    font-weight: 600;
+    color: #686575 !important;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__card {
+    min-height: 350px;
+    padding: 36px 28px 34px;
+
+    border: 1px solid #D9D1EA;
+    border-radius: 16px;
+
+    background:
+      radial-gradient(
+        circle at 70% 20%,
+        rgba(111, 75, 179, 0.045) 0%,
+        transparent 48%
+      ),
+      #FFFFFF;
+
+    box-shadow:
+      0 8px 24px rgba(45, 34, 67, 0.06),
+      inset 0 0 18px rgba(111, 75, 179, 0.02);
+
+    box-sizing: border-box;
+    color: #20202B !important;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 42px;
+    color: #6F4BB3 !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__icon svg {
+    width: 58px;
+    height: 58px;
+    stroke: currentColor !important;
+    color: #6F4BB3 !important;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__card-title {
+    margin: 0 0 22px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    line-height: 1.18;
+    font-weight: 400;
+    letter-spacing: 0.7px;
+    color: #20202B !important;
+    text-transform: uppercase;
+    opacity: 1 !important;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__card-text {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    line-height: 1.45;
+    font-weight: 400;
+    color: #686575 !important;
+    opacity: 1 !important;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__card p,
+  #shopify-section-{{ section.id }} .z-simple__card h3,
+  #shopify-section-{{ section.id }} .z-simple__card span,
+  #shopify-section-{{ section.id }} .z-simple__card div:not(.z-simple__icon) {
+    color: #20202B !important;
+    opacity: 1 !important;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__card p {
+    color: #686575 !important;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__button-wrap {
+    text-align: center;
+    margin-top: 54px;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__button {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #FFFFFF !important;
+    background: #6F4BB3;
+    text-decoration: none;
+    padding: 17px 38px;
+    border-radius: 10px;
+    box-shadow: 0 8px 22px rgba(111, 75, 179, 0.20);
+    transition: all 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__button:hover {
+    background: #5B3B95;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 1100px) {
+
+    #shopify-section-{{ section.id }} .z-simple__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__title {
+      font-size: 64px;
+    }
+
+  }
+
+  @media (max-width: 749px) {
+
+    #shopify-section-{{ section.id }} .z-simple {
+      padding: 58px 0 68px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__inner {
+      padding: 0 18px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__head {
+      margin-bottom: 42px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__title {
+      font-size: 46px;
+      line-height: 1;
+      margin-bottom: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__sub {
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__card {
+      min-height: auto;
+      padding: 32px 26px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__icon {
+      margin-bottom: 34px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__card-title {
+      font-size: 30px;
+      margin-bottom: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__card-text {
+      font-size: 15px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__button {
+      width: 100%;
+      max-width: 320px;
+      box-sizing: border-box;
+    }
+
+  }
+
+{% endstyle %}
+
+
+<section class="z-simple">
+  <div class="z-simple__inner">
+
+    <div class="z-simple__head">
+
+      <h2 class="z-simple__title">
+        {{ section.settings.title_white }}
+        <span>{{ section.settings.title_teal }}</span>
+      </h2>
+
+      <p class="z-simple__sub">
+        {{ section.settings.subhead }}
+      </p>
+
+    </div>
+
+
+    <div class="z-simple__grid">
+
+      {% for block in section.blocks limit: 4 %}
+
+        <div class="z-simple__card" {{ block.shopify_attributes }}>
+
+          <div class="z-simple__icon">
+
+            {% case forloop.index %}
+
+              {% when 1 %}
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M13 2L5 14h7l-1 8 8-12h-7l1-8z"></path>
+                </svg>
+
+              {% when 2 %}
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 3v3"></path>
+                  <path d="M12 18v3"></path>
+                  <path d="M3 12h3"></path>
+                  <path d="M18 12h3"></path>
+                  <path d="M5.6 5.6l2.1 2.1"></path>
+                  <path d="M16.3 16.3l2.1 2.1"></path>
+                  <path d="M18.4 5.6l-2.1 2.1"></path>
+                  <path d="M7.7 16.3l-2.1 2.1"></path>
+                  <circle cx="12" cy="12" r="3.5"></circle>
+                </svg>
+
+              {% when 3 %}
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 3l8 4-8 4-8-4 8-4z"></path>
+                  <path d="M4 12l8 4 8-4"></path>
+                  <path d="M4 17l8 4 8-4"></path>
+                </svg>
+
+              {% when 4 %}
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 5c-9 0-14 5-14 14 9 0 14-5 14-14z"></path>
+                  <path d="M6 19c2.5-5.5 6.5-8.5 12-10"></path>
+                </svg>
+
+            {% endcase %}
+
+          </div>
+
+          <h3 class="z-simple__card-title">
+            {{ block.settings.title }}
+          </h3>
+
+          <p class="z-simple__card-text">
+            {{ block.settings.text }}
+          </p>
+
+        </div>
+
+      {% endfor %}
+
+    </div>
+
+
+    {% if section.settings.button_label != blank %}
+
+      <div class="z-simple__button-wrap">
+
+        <a
+          class="z-simple__button"
+          href="{{ section.settings.button_link }}"
+        >
+          {{ section.settings.button_label }}
+        </a>
+
+      </div>
+
+    {% endif %}
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Real Nutrition Simple",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_white",
+      "label": "White title text",
+      "default": "REAL NUTRITION"
+    },
+    {
+      "type": "text",
+      "id": "title_teal",
+      "label": "Teal title text",
+      "default": "MADE SIMPLE."
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subheading",
+      "default": "Get protein, collagen, minerals, and energy from a single stick pack."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop 30-Day Supply"
+    },
+    {
+      "type": "text",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "/discount/HOWIE15?redirect=/products/zeotein-30-day-supply"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card title",
+          "default": "RECOVER FASTER, FEEL IT SOONER."
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Card text",
+          "default": "23g of clean protein plus collagen help muscles bounce back and joints stay strong."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Real Nutrition Simple",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "title": "RECOVER FASTER, FEEL IT SOONER.",
+            "text": "23g of clean protein plus collagen help muscles bounce back and joints stay strong."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "ENERGY THAT LASTS, NO CRASH.",
+            "text": "MCT fuel that carries you past the 3pm slump with no jitters."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "ONE HABIT, NOT TEN.",
+            "text": "Six real ingredients replace a counter full of separate scoops and blends. One stick pack, ten seconds, done."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "NOTHING TO FEEL GUILTY ABOUT.",
+            "text": "Zero fillers, zero artificial sweeteners, zero junk. If a clean freak wouldn't approve it, it's not in here."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

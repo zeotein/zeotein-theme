@@ -1,0 +1,36 @@
+{% doc %}
+  Customer avatar for Hero Banner Cacao LP social proof row.
+{% enddoc %}
+
+{%- if block.settings.image != blank -%}
+  <span class="hbclp__avatar" {{ block.shopify_attributes }}>
+    {{
+      block.settings.image
+      | image_url: width: 96
+      | image_tag:
+        loading: 'lazy',
+        widths: '48, 96',
+        sizes: '32px',
+        alt: ''
+    }}
+  </span>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Customer avatar",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Avatar image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer avatar"
+    }
+  ]
+}
+{% endschema %}

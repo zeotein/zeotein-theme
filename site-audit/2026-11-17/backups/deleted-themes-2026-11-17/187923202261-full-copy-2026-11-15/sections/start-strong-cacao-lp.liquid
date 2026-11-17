@@ -1,0 +1,737 @@
+{%- liquid
+  assign sid = 'zt-ss-' | append: section.id
+  assign cta_href = section.settings.cta_link | default: '#purchase'
+  assign heading = section.settings.heading
+  assign accent = section.settings.accent_text
+-%}
+
+{% render 'cacao-lp-fonts',
+  id: sid,
+  font_family: section.settings.font_family,
+  settings: section.settings,
+  prefixes: 'heading,body,cta'
+%}
+
+{{ 'start-strong-cacao-lp.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="{{ sid }}"
+  class="zt-ss"
+  {{ section.shopify_attributes }}
+  style="
+    --zt-ss-bg: {{ section.settings.bg_color }};
+    --zt-ss-text: {{ section.settings.text_color }};
+    --zt-ss-accent: {{ section.settings.accent_color }};
+    --zt-ss-cta-bg: {{ section.settings.cta_bg_color }};
+    --zt-ss-cta-text: {{ section.settings.cta_text_color }};
+    --zt-ss-confetti-1: {{ section.settings.confetti_color_1 }};
+    --zt-ss-confetti-2: {{ section.settings.confetti_color_2 }};
+    --zt-ss-confetti-3: {{ section.settings.confetti_color_3 }};
+    --zt-ss-max-width: {{ section.settings.content_width | default: 1180 }}px;
+    --zt-ss-pad-top: {{ section.settings.padding_top }}px;
+    --zt-ss-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --zt-ss-badge-top: {{ section.settings.badge_top }}%;
+    --zt-ss-badge-left: {{ section.settings.badge_left }}%;
+    --zt-ss-badge-top-m: {{ section.settings.badge_top_mobile }}%;
+    --zt-ss-badge-left-m: {{ section.settings.badge_left_mobile }}%;
+    --zt-ss-badge-rotate: {{ section.settings.badge_rotate }}deg;
+  "
+>
+  {%- if section.settings.show_confetti -%}
+    <div class="zt-ss__confetti" aria-hidden="true">
+      <span class="zt-ss__dot"></span>
+      <span class="zt-ss__dot"></span>
+      <span class="zt-ss__dot"></span>
+      <span class="zt-ss__dot"></span>
+      <span class="zt-ss__dot"></span>
+      <span class="zt-ss__dot"></span>
+      <span class="zt-ss__dot"></span>
+      <span class="zt-ss__dot"></span>
+    </div>
+  {%- endif -%}
+
+  <div class="zt-ss__inner">
+    <div class="zt-ss__copy">
+      {%- if heading != blank -%}
+        <h2 class="zt-ss__heading">
+          {%- liquid
+            assign heading_safe = heading | escape
+            if accent != blank
+              assign accent_safe = accent | escape
+              assign accent_html = '<span class="zt-ss__accent">' | append: accent_safe | append: '</span>'
+              assign heading_safe = heading_safe | replace: accent_safe, accent_html
+            endif
+          -%}
+          {{ heading_safe }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <p class="zt-ss__body">{{ section.settings.body | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.cta_label != blank -%}
+        <a class="zt-ss__cta" href="{{ cta_href }}">
+          <span>{{ section.settings.cta_label | escape }}</span>
+          <svg class="zt-ss__cta-arrow" viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="zt-ss__media">
+      {%- if section.settings.show_badge -%}
+        <div class="zt-ss__badge">
+          {%- if section.settings.badge_image != blank -%}
+            {{
+              section.settings.badge_image
+              | image_url: width: 400
+              | image_tag:
+                class: 'zt-ss__badge-img',
+                loading: 'lazy',
+                widths: '120, 200, 300, 400',
+                sizes: '(max-width: 989px) 42vw, 150px',
+                alt: section.settings.badge_label
+            }}
+          {%- else -%}
+            <div class="zt-ss__badge-fallback">
+              {%- if section.settings.badge_label != blank -%}
+                <p class="zt-ss__badge-ring">{{ section.settings.badge_label | escape }}</p>
+              {%- endif -%}
+              {%- if section.settings.badge_center != blank -%}
+                <p class="zt-ss__badge-center">{{ section.settings.badge_center | escape }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.product_image != blank -%}
+        {%- assign product_alt = section.settings.product_image.alt | default: section.settings.heading -%}
+        {{
+          section.settings.product_image
+          | image_url: width: 900
+          | image_tag:
+            class: 'zt-ss__product',
+            loading: 'lazy',
+            widths: '280, 400, 600, 900',
+            sizes: '(max-width: 989px) 82vw, min(420px, 40vw)',
+            alt: product_alt
+        }}
+      {%- else -%}
+        <div class="zt-ss__placeholder">
+          {{ 'product-1' | placeholder_svg_tag: 'zt-ss__placeholder-svg' }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    if (window.ztSsCtaScroll) return;
+    window.ztSsCtaScroll = true;
+
+    document.addEventListener('click', function (event) {
+      var link = event.target.closest('.zt-ss__cta');
+      if (!link) return;
+
+      var href = link.getAttribute('href') || '';
+      if (href.charAt(0) !== '#') return;
+
+      var target = document.getElementById(href.slice(1));
+      if (!target) return;
+
+      event.preventDefault();
+
+      if (href === '#purchase' && typeof window.ztScrollToCacaoOffer === 'function') {
+        window.ztScrollToCacaoOffer({ frameKey: 'ztSsCtaFrame' });
+        return;
+      }
+
+      var start = window.scrollY || window.pageYOffset;
+      var margin = parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+      var end = target.getBoundingClientRect().top + start - margin;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (window.ztSsCtaFrame) {
+        window.cancelAnimationFrame(window.ztSsCtaFrame);
+        window.ztSsCtaFrame = 0;
+      }
+
+      if (reduce || Math.abs(end - start) < 2) {
+        window.scrollTo(0, end);
+        if (window.history.replaceState) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        return;
+      }
+
+      var duration = 1300;
+      var startTime = null;
+
+      function ease(t) {
+        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      }
+
+      function finish(cancelled) {
+        window.removeEventListener('wheel', cancel);
+        window.removeEventListener('touchstart', cancel);
+        window.ztSsCtaFrame = 0;
+        if (!cancelled && window.history.replaceState) {
+          window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+      }
+
+      function cancel() {
+        if (window.ztSsCtaFrame) window.cancelAnimationFrame(window.ztSsCtaFrame);
+        finish(true);
+      }
+
+      function step(now) {
+        if (startTime === null) startTime = now;
+        var progress = Math.min(1, (now - startTime) / duration);
+        window.scrollTo(0, start + (end - start) * ease(progress));
+        if (progress < 1) {
+          window.ztSsCtaFrame = window.requestAnimationFrame(step);
+        } else {
+          finish(false);
+        }
+      }
+
+      window.addEventListener('wheel', cancel, { passive: true });
+      window.addEventListener('touchstart', cancel, { passive: true });
+      window.ztSsCtaFrame = window.requestAnimationFrame(step);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Start Strong Cacao LP",
+  "tag": "section",
+  "class": "section-start-strong-cacao-lp",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#580d93"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (price highlight)",
+      "default": "#00c9b8"
+    },
+    {
+      "type": "color",
+      "id": "cta_bg_color",
+      "label": "CTA background",
+      "default": "#f6e7a8"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "CTA text",
+      "default": "#1e1734"
+    },
+    {
+      "type": "header",
+      "content": "Copy"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Start strong. \nStay consistent.\nSave $33.00 per bag.",
+      "info": "Use line breaks for multiple lines. Include the accent phrase below so it can be colored."
+    },
+    {
+      "type": "text",
+      "id": "accent_text",
+      "label": "Accent phrase in heading",
+      "default": "$33.00",
+      "info": "Exact text inside the heading to highlight (e.g. $33.00)."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "It’s our biggest offer of the year – and we’re keeping it simple. Not just for a week, but while this batch lasts. Happy scooping."
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link",
+      "info": "Leave empty to scroll to the buy box. Add a link to send people somewhere else."
+    },
+    {
+      "type": "header",
+      "content": "Product & badge"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_image",
+      "label": "Badge image",
+      "info": "Optional. If empty, a scalloped CSS badge is used."
+    },
+    {
+      "type": "text",
+      "id": "badge_label",
+      "label": "Badge label (fallback)"
+    },
+    {
+      "type": "text",
+      "id": "badge_center",
+      "label": "Badge center (fallback)"
+    },
+    {
+      "type": "range",
+      "id": "badge_top",
+      "label": "Badge top — desktop",
+      "min": -10,
+      "max": 40,
+      "step": 1,
+      "unit": "%",
+      "default": -10
+    },
+    {
+      "type": "range",
+      "id": "badge_left",
+      "label": "Badge left — desktop",
+      "min": -10,
+      "max": 40,
+      "step": 1,
+      "unit": "%",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "badge_top_mobile",
+      "label": "Badge top — mobile",
+      "min": -10,
+      "max": 40,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "badge_left_mobile",
+      "label": "Badge left — mobile",
+      "min": -10,
+      "max": 40,
+      "step": 1,
+      "unit": "%",
+      "default": -3
+    },
+    {
+      "type": "range",
+      "id": "badge_rotate",
+      "label": "Badge rotation",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "unit": "deg",
+      "default": -12
+    },
+    {
+      "type": "header",
+      "content": "Confetti"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_confetti",
+      "label": "Show confetti",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "confetti_color_1",
+      "label": "Confetti color 1",
+      "default": "#00c9b8"
+    },
+    {
+      "type": "color",
+      "id": "confetti_color_2",
+      "label": "Confetti color 2",
+      "default": "#f6e7a8"
+    },
+    {
+      "type": "color",
+      "id": "confetti_color_3",
+      "label": "Confetti color 3",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 960,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 1180
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "manrope",
+          "label": "Manrope (Figma)"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size — desktop",
+      "min": 28,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size — mobile",
+      "min": 22,
+      "max": 42,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "body_font",
+      "label": "Body font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "select",
+      "id": "body_weight",
+      "label": "Body weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "body_size_desktop",
+      "label": "Body size — desktop",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "body_size_mobile",
+      "label": "Body size — mobile",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "cta_font",
+      "label": "CTA font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "select",
+      "id": "cta_weight",
+      "label": "CTA weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "cta_size_desktop",
+      "label": "CTA size — desktop",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "cta_size_mobile",
+      "label": "CTA size — mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Start Strong Cacao LP",
+      "category": "Cacao LP",
+      "settings": {
+        "bg_color": "#580d93",
+        "text_color": "#ffffff",
+        "accent_color": "#00c9b8",
+        "cta_bg_color": "#f6e7a8",
+        "cta_text_color": "#1e1734",
+        "heading": "Start strong. \nStay consistent.\nSave $33.00 per bag.",
+        "accent_text": "$33.00",
+        "body": "It’s our biggest offer of the year – and we’re keeping it simple. Not just for a week, but while this batch lasts. Happy scooping.",
+        "cta_label": "Shop Now",
+        "cta_link": "",
+        "product_image": "shopify://shop_images/Bag_Wbp_93kb.webp",
+        "show_badge": true,
+        "badge_image": "shopify://shop_images/BUY_MORE_WBP.webp",
+        "badge_label": "",
+        "badge_center": "",
+        "badge_top": -10,
+        "badge_left": 3,
+        "badge_top_mobile": 0,
+        "badge_left_mobile": -3,
+        "badge_rotate": -12,
+        "show_confetti": true,
+        "confetti_color_1": "#00c9b8",
+        "confetti_color_2": "#f6e7a8",
+        "confetti_color_3": "#ffffff",
+        "content_width": 1180,
+        "padding_top": 72,
+        "padding_bottom": 56,
+        "font_family": "manrope",
+        "heading_font": "manrope",
+        "heading_weight": "600",
+        "heading_size_desktop": 52,
+        "heading_size_mobile": 32,
+        "body_font": "manrope",
+        "body_weight": "400",
+        "body_size_desktop": 16,
+        "body_size_mobile": 14,
+        "cta_font": "manrope",
+        "cta_weight": "600",
+        "cta_size_desktop": 16,
+        "cta_size_mobile": 16
+      }
+    }
+  ]
+}
+{% endschema %}

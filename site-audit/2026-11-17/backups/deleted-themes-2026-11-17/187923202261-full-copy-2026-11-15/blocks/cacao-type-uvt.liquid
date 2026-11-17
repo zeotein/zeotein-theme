@@ -1,0 +1,603 @@
+{% doc %}
+  Heading, body, cells, and row labels for Us vs Them Cacao LP.
+  Static typography block. Keeps each schema within Theme Check's 40-setting limit.
+{% enddoc %}
+
+{%- liquid
+  assign sid = 'zt-uvt-' | append: section.id
+  assign ff = block.settings.font_family | default: 'manrope'
+  assign font_custom = block.settings.custom_font
+-%}
+{% render 'cacao-lp-fonts',
+  id: sid,
+  font_family: ff,
+  font_custom: font_custom,
+  settings: block.settings,
+  prefixes: 'heading,body,cell,label,feat_title,feat_sub'
+%}
+
+{% schema %}
+{
+  "name": "Typography",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "manrope",
+          "label": "Manrope (Figma)"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "custom_font",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+      "visible_if": "{{ block.settings.font_family == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "heading_font_custom",
+      "label": "Heading custom font",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.heading_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "800"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size - desktop",
+      "min": 28,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size - mobile",
+      "min": 24,
+      "max": 44,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "body_font",
+      "label": "Body font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "body_font_custom",
+      "label": "Body custom font",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.body_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "body_weight",
+      "label": "Body weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "body_size_desktop",
+      "label": "Body size - desktop",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "body_size_mobile",
+      "label": "Body size - mobile",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Cell"
+    },
+    {
+      "type": "select",
+      "id": "cell_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "cell_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.cell_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "cell_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "cell_size_desktop",
+      "label": "Size - desktop",
+      "min": 8,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "cell_size_mobile",
+      "label": "Size - mobile",
+      "min": 8,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Label"
+    },
+    {
+      "type": "select",
+      "id": "label_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "label_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.label_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "label_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "label_size_desktop",
+      "label": "Size - desktop",
+      "min": 8,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "label_size_mobile",
+      "label": "Size - mobile",
+      "min": 8,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Feat Title"
+    },
+    {
+      "type": "select",
+      "id": "feat_title_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "feat_title_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.feat_title_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "feat_title_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "feat_title_size_desktop",
+      "label": "Size - desktop",
+      "min": 8,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "feat_title_size_mobile",
+      "label": "Size - mobile",
+      "min": 8,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Feat Sub"
+    },
+    {
+      "type": "select",
+      "id": "feat_sub_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "feat_sub_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.feat_sub_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "feat_sub_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "feat_sub_size_desktop",
+      "label": "Size - desktop",
+      "min": 8,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "feat_sub_size_mobile",
+      "label": "Size - mobile",
+      "min": 8,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    }
+  ]
+}
+{% endschema %}

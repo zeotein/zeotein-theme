@@ -1,0 +1,507 @@
+{% doc %}
+  @prompt
+    Zeotein free bonus offer with an editable product image and CTA button.
+{% enddoc %}
+
+{% assign ai_gen_id = block.id | default: section.id | replace: '_', '' | downcase %}
+
+{% assign bonus_image = block.settings.bonus_image %}
+{% if bonus_image == blank %}
+  {% assign bonus_image = section.settings.bonus_image %}
+{% endif %}
+
+{% assign bonus_button_text = block.settings.button_label %}
+{% if bonus_button_text == blank %}
+  {% assign bonus_button_text = section.settings.button_label %}
+{% endif %}
+{% if bonus_button_text == blank %}
+  {% assign bonus_button_text = 'CLAIM MY HOWIE DISCOUNT + FREE BONUSES' %}
+{% endif %}
+
+{% assign bonus_button_link = block.settings.button_link %}
+{% if bonus_button_link == blank %}
+  {% assign bonus_button_link = section.settings.button_link %}
+{% endif %}
+{% if bonus_button_link == blank %}
+  {% assign bonus_button_link = '/collections/all' %}
+{% endif %}
+
+{% style %}
+  .ai-bonus-offer-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 40px 20px;
+    background: #1b0b30;
+    box-sizing: border-box;
+  }
+
+  .ai-bonus-offer__inner-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 60px 50px;
+    border: 2px solid #2ec9c9;
+    border-radius: 18px;
+    overflow: hidden;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .ai-bonus-offer__badge-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    padding: 11px 28px;
+    border-radius: 100px;
+    background: #2ec9c9;
+    color: #173246;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .ai-bonus-offer__title-{{ ai_gen_id }} {
+    margin: 0;
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .ai-bonus-offer__title-white-{{ ai_gen_id }} {
+    display: block;
+    color: #ffffff;
+  }
+
+  .ai-bonus-offer__title-teal-{{ ai_gen_id }} {
+    display: block;
+    margin-top: 10px;
+    color: #2ec9c9;
+  }
+
+  .ai-bonus-offer__subtitle-{{ ai_gen_id }} {
+    max-width: 900px;
+    margin: 28px auto 0;
+    color: #cdbfe0;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .ai-bonus-offer__subtitle-highlight-{{ ai_gen_id }} {
+    color: #2ec9c9;
+  }
+
+  .ai-bonus-offer__image-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 480px;
+    margin: 24px auto 10px;
+  }
+
+  .ai-bonus-offer__image-{{ ai_gen_id }} {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 350px;
+    margin: 0 auto;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .ai-bonus-offer__image-placeholder-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 180px;
+    padding: 20px;
+    border: 1px dashed rgba(46, 201, 201, 0.55);
+    border-radius: 14px;
+    color: #cdbfe0;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .ai-bonus-offer__included-{{ ai_gen_id }} {
+    max-width: 750px;
+    margin: 12px auto 30px;
+    color: #ffffff;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .ai-bonus-offer__card-title-{{ ai_gen_id }} {
+    margin: 0 0 18px;
+    color: #ffffff;
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .ai-bonus-offer__card-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 16px 28px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 18px;
+    background: #2a1047;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  .ai-bonus-offer__row-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 20px;
+    padding: 17px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    color: #d8caea;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .ai-bonus-offer__price-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+
+  .ai-bonus-offer__price-{{ ai_gen_id }} s {
+    color: #ffffff;
+  }
+
+  .ai-bonus-offer__price-{{ ai_gen_id }} strong {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .ai-bonus-offer__total-{{ ai_gen_id }} {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 0;
+    color: #ffffff;
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .ai-bonus-offer__total-price-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+  }
+
+  .ai-bonus-offer__total-price-{{ ai_gen_id }} s {
+    color: #2ec9c9;
+  }
+
+  .ai-bonus-offer__total-price-{{ ai_gen_id }} strong {
+    color: #ffffff;
+  }
+
+  .ai-bonus-offer__button-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 880px;
+    min-height: 72px;
+    margin: 28px auto 0;
+    padding: 16px 24px;
+    border: 0;
+    border-radius: 14px;
+    background: #2ec9c9;
+    color: #073444;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.3;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      filter 0.2s ease;
+  }
+
+  .ai-bonus-offer__button-{{ ai_gen_id }}:visited {
+    color: #073444;
+  }
+
+  .ai-bonus-offer__button-{{ ai_gen_id }}:hover {
+    color: #073444;
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-bonus-offer-{{ ai_gen_id }} {
+      padding: 20px 10px;
+    }
+
+    .ai-bonus-offer__inner-{{ ai_gen_id }} {
+      padding: 38px 16px;
+      border-radius: 14px;
+    }
+
+    .ai-bonus-offer__badge-{{ ai_gen_id }} {
+      margin-bottom: 20px;
+      padding: 9px 18px;
+      font-size: 12px;
+    }
+
+    .ai-bonus-offer__title-{{ ai_gen_id }} {
+      font-size: 42px;
+      line-height: 1;
+    }
+
+    .ai-bonus-offer__title-teal-{{ ai_gen_id }} {
+      margin-top: 8px;
+    }
+
+    .ai-bonus-offer__subtitle-{{ ai_gen_id }} {
+      margin-top: 20px;
+      font-size: 17px;
+    }
+
+    .ai-bonus-offer__image-wrapper-{{ ai_gen_id }} {
+      max-width: 320px;
+      margin-top: 18px;
+    }
+
+    .ai-bonus-offer__image-{{ ai_gen_id }} {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 260px;
+      object-fit: contain;
+    }
+
+    .ai-bonus-offer__image-placeholder-{{ ai_gen_id }} {
+      min-height: 140px;
+      font-size: 12px;
+    }
+
+    .ai-bonus-offer__included-{{ ai_gen_id }} {
+      margin-top: 8px;
+      margin-bottom: 26px;
+      font-size: 14px;
+    }
+
+    .ai-bonus-offer__card-title-{{ ai_gen_id }} {
+      font-size: 29px;
+      line-height: 1.1;
+    }
+
+    .ai-bonus-offer__card-{{ ai_gen_id }} {
+      padding: 10px 16px;
+      border-radius: 14px;
+    }
+
+    .ai-bonus-offer__row-{{ ai_gen_id }} {
+      gap: 10px;
+      padding: 14px 0;
+      font-size: 13px;
+    }
+
+    .ai-bonus-offer__price-{{ ai_gen_id }} {
+      gap: 6px;
+    }
+
+    .ai-bonus-offer__total-{{ ai_gen_id }} {
+      font-size: 24px;
+    }
+
+    .ai-bonus-offer__total-price-{{ ai_gen_id }} {
+      gap: 6px;
+    }
+
+    .ai-bonus-offer__button-{{ ai_gen_id }} {
+      min-height: 62px;
+      padding: 15px 14px;
+      font-size: 15px;
+    }
+  }
+
+  @media screen and (max-width: 390px) {
+    .ai-bonus-offer__title-{{ ai_gen_id }} {
+      font-size: 38px;
+    }
+
+    .ai-bonus-offer__row-{{ ai_gen_id }} {
+      font-size: 11px;
+    }
+
+    .ai-bonus-offer__total-{{ ai_gen_id }} {
+      font-size: 21px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-bonus-offer-{{ ai_gen_id }}">
+  <div class="ai-bonus-offer__inner-{{ ai_gen_id }}">
+
+    <div class="ai-bonus-offer__badge-{{ ai_gen_id }}">
+      Free bonuses included
+    </div>
+
+    <h2 class="ai-bonus-offer__title-{{ ai_gen_id }}">
+      <span class="ai-bonus-offer__title-white-{{ ai_gen_id }}">
+        Order now &amp; get
+      </span>
+
+      <span class="ai-bonus-offer__title-teal-{{ ai_gen_id }}">
+        $55 in free bonuses
+      </span>
+    </h2>
+
+    <p class="ai-bonus-offer__subtitle-{{ ai_gen_id }}">
+      On top of your
+      <span class="ai-bonus-offer__subtitle-highlight-{{ ai_gen_id }}">
+        15% off
+      </span>
+      – added automatically at checkout
+    </p>
+
+    <div class="ai-bonus-offer__image-wrapper-{{ ai_gen_id }}">
+      {% if bonus_image != blank %}
+        <img
+          class="ai-bonus-offer__image-{{ ai_gen_id }}"
+          src="{{ bonus_image | image_url: width: 900 }}"
+          width="{{ bonus_image.width }}"
+          height="{{ bonus_image.height }}"
+          alt="{{ bonus_image.alt | default: 'Zeotein shaker and three digital guides' | escape }}"
+          loading="lazy"
+        >
+      {% else %}
+        <div class="ai-bonus-offer__image-placeholder-{{ ai_gen_id }}">
+          Select the shaker and guides image in the Theme Editor.
+        </div>
+      {% endif %}
+    </div>
+
+    <p class="ai-bonus-offer__included-{{ ai_gen_id }}">
+      Included with your first 30-day subscription order only.
+    </p>
+
+    <h3 class="ai-bonus-offer__card-title-{{ ai_gen_id }}">
+      Shaker + 3 digital guides – yours free
+    </h3>
+
+    <div class="ai-bonus-offer__card-{{ ai_gen_id }}">
+
+      <div class="ai-bonus-offer__row-{{ ai_gen_id }}">
+        <span>Branded Zeotein shaker</span>
+
+        <span class="ai-bonus-offer__price-{{ ai_gen_id }}">
+          <s>$15.00</s>
+          <strong>FREE</strong>
+        </span>
+      </div>
+
+      <div class="ai-bonus-offer__row-{{ ai_gen_id }}">
+        <span>Cacao recipe guide</span>
+
+        <span class="ai-bonus-offer__price-{{ ai_gen_id }}">
+          <s>$14.00</s>
+          <strong>FREE</strong>
+        </span>
+      </div>
+
+      <div class="ai-bonus-offer__row-{{ ai_gen_id }}">
+        <span>Vegan recipe guide</span>
+
+        <span class="ai-bonus-offer__price-{{ ai_gen_id }}">
+          <s>$14.00</s>
+          <strong>FREE</strong>
+        </span>
+      </div>
+
+      <div class="ai-bonus-offer__row-{{ ai_gen_id }}">
+        <span>Zeotein starter guide</span>
+
+        <span class="ai-bonus-offer__price-{{ ai_gen_id }}">
+          <s>$12.00</s>
+          <strong>FREE</strong>
+        </span>
+      </div>
+
+      <div class="ai-bonus-offer__row-{{ ai_gen_id }} ai-bonus-offer__total-{{ ai_gen_id }}">
+        <span>Total bonus value</span>
+
+        <span class="ai-bonus-offer__total-price-{{ ai_gen_id }}">
+          <s>$55.00</s>
+          <strong>FREE</strong>
+        </span>
+      </div>
+
+    </div>
+
+    <a
+      class="ai-bonus-offer__button-{{ ai_gen_id }}"
+      href="{{ bonus_button_link }}"
+    >
+      {{ bonus_button_text }}
+    </a>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Zeotein bonus offer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bonus_image",
+      "label": "Shaker and guides image"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button text",
+      "default": "CLAIM MY HOWIE DISCOUNT + FREE BONUSES"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zeotein bonus offer"
+    }
+  ]
+}
+{% endschema %}

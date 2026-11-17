@@ -1,0 +1,270 @@
+/* Seal customer portal — Zeotein brand overlay (login + management pages)
+   Use px (not rem): Dawn html is 62.5%, so rem shrinks Seal copy. */
+
+.seal-subscription-page {
+  --zt-portal-purple: #580d93;
+  --zt-portal-purple-deep: #3d0a66;
+  --zt-portal-teal: #1aa6a0;
+  --zt-portal-ink: #14121f;
+  --zt-portal-muted: #5a5568;
+  --zt-portal-line: rgba(88, 13, 147, 0.14);
+  --zt-portal-card: #ffffff;
+  --zt-portal-soft: #f3eef9;
+  --zt-portal-mint: #e8f6f3;
+  font-family: Poppins, system-ui, sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 28px 20px 40px !important;
+  display: flex !important;
+  align-items: flex-start;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse 80% 60% at 12% 18%, rgba(26, 166, 160, 0.16), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 88% 12%, rgba(88, 13, 147, 0.14), transparent 50%),
+    linear-gradient(165deg, var(--zt-portal-mint) 0%, var(--zt-portal-soft) 48%, #faf8fc 100%) !important;
+  color: var(--zt-portal-ink) !important;
+}
+
+.seal-subscription-page *,
+.seal-subscription-page *::before,
+.seal-subscription-page *::after {
+  box-sizing: border-box;
+}
+
+.seal-subscription-page .seal-auto-min {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.seal-subscription-page .seal-container,
+.seal-subscription-page .seal-container.seal-sectioned {
+  width: 100% !important;
+  max-width: 520px !important;
+  margin: 0 auto !important;
+  padding: 32px 28px 28px !important;
+  background: var(--zt-portal-card) !important;
+  border: 1px solid var(--zt-portal-line) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 18px 48px rgba(40, 16, 72, 0.1) !important;
+  position: relative;
+  overflow: hidden;
+  text-align: left !important;
+}
+
+.seal-subscription-page.seal-login-form .seal-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--zt-portal-teal), var(--zt-portal-purple));
+}
+
+.seal-subscription-page h1,
+.seal-subscription-page h2,
+.seal-subscription-page h3,
+.seal-subscription-page [data-seal-t='customrportalloginform_title'] {
+  margin: 0 0 14px !important;
+  color: var(--zt-portal-ink) !important;
+  font-family: Poppins, system-ui, sans-serif !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.02em;
+  text-align: left !important;
+}
+
+.seal-subscription-page.seal-login-form h2::before {
+  content: 'MANAGE YOUR PLAN';
+  display: block;
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  color: var(--zt-portal-purple);
+}
+
+.seal-subscription-page .seal-mb-1[data-seal-t='customrportalloginform_description'],
+.seal-subscription-page .seal-container > .seal-mb-1:not(.seal-floating-label) {
+  margin: 0 0 22px !important;
+  color: var(--zt-portal-muted) !important;
+  font-size: 16px !important;
+  line-height: 1.55 !important;
+  text-align: left !important;
+}
+
+.seal-subscription-page .seal-floating-label {
+  position: relative;
+  margin: 0 0 18px !important;
+  text-align: left !important;
+}
+
+.seal-subscription-page .seal-label {
+  display: block !important;
+  margin: 0 0 8px !important;
+  color: var(--zt-portal-ink) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+  line-height: 1.35 !important;
+}
+
+.seal-subscription-page .seal-input,
+.seal-subscription-page .seal-input-form,
+.seal-subscription-page input[type='text'],
+.seal-subscription-page input[type='email'],
+.seal-subscription-page input[type='password'],
+.seal-subscription-page select,
+.seal-subscription-page textarea {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 52px;
+  margin: 0 !important;
+  padding: 14px 16px !important;
+  color: var(--zt-portal-ink) !important;
+  font-family: Poppins, system-ui, sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.4 !important;
+  background: #faf9fc !important;
+  border: 1.5px solid #d9d2e6 !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.seal-subscription-page .seal-input:focus,
+.seal-subscription-page .seal-input-form:focus,
+.seal-subscription-page input:focus,
+.seal-subscription-page select:focus,
+.seal-subscription-page textarea:focus {
+  outline: none !important;
+  background: #fff !important;
+  border-color: var(--zt-portal-purple) !important;
+  box-shadow: 0 0 0 3px rgba(88, 13, 147, 0.16) !important;
+}
+
+.seal-subscription-page .seal-button,
+.seal-subscription-page [data-action='send_customer_portal_login_link'],
+.seal-subscription-page button.seal-button,
+.seal-subscription-page a.seal-button {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 54px;
+  margin: 8px 0 0 !important;
+  padding: 15px 22px !important;
+  color: #fff !important;
+  font-family: Poppins, system-ui, sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 650 !important;
+  letter-spacing: 0.01em;
+  line-height: 1.3 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  background: linear-gradient(135deg, var(--zt-portal-purple) 0%, var(--zt-portal-purple-deep) 100%) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  box-shadow: 0 10px 24px rgba(88, 13, 147, 0.28) !important;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.seal-subscription-page .seal-button:hover,
+.seal-subscription-page [data-action='send_customer_portal_login_link']:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 12px 28px rgba(88, 13, 147, 0.34) !important;
+  transform: translateY(-1px);
+}
+
+.seal-subscription-page .seal-button:active,
+.seal-subscription-page [data-action='send_customer_portal_login_link']:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
+}
+
+.seal-subscription-page [data-seal-customer-portal-error]:not(:empty),
+.seal-subscription-page [data-seal-customer-portal-success]:not(:empty) {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.seal-subscription-page [data-seal-customer-portal-error]:not(:empty) {
+  color: #7a1f2b;
+  background: #fdecee;
+  border: 1px solid #f3c4cb;
+}
+
+.seal-subscription-page [data-seal-customer-portal-success]:not(:empty) {
+  color: #0f5c4c;
+  background: #e6f7f2;
+  border: 1px solid #b7e4d8;
+}
+
+/* Broader portal management surfaces */
+.seal-subscription-page:not(.seal-login-form) {
+  padding-top: 28px !important;
+}
+
+.seal-subscription-page:not(.seal-login-form) .seal-auto-min {
+  max-width: 920px;
+}
+
+.seal-subscription-page:not(.seal-login-form) .seal-container {
+  max-width: 920px !important;
+}
+
+.seal-subscription-page a:not(.seal-button) {
+  color: var(--zt-portal-purple);
+  text-underline-offset: 2px;
+}
+
+.seal-subscription-page a:not(.seal-button):hover {
+  color: var(--zt-portal-purple-deep);
+}
+
+@media screen and (max-width: 749px) {
+  .seal-subscription-page {
+    padding: 20px 16px 32px !important;
+  }
+
+  .seal-subscription-page h1,
+  .seal-subscription-page h2,
+  .seal-subscription-page h3,
+  .seal-subscription-page [data-seal-t='customrportalloginform_title'] {
+    font-size: 24px !important;
+  }
+
+  .seal-subscription-page .seal-container,
+  .seal-subscription-page .seal-container.seal-sectioned {
+    padding: 26px 20px 22px !important;
+    border-radius: 14px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seal-subscription-page .seal-button,
+  .seal-subscription-page [data-action='send_customer_portal_login_link'],
+  .seal-subscription-page .seal-input {
+    transition: none;
+  }
+
+  .seal-subscription-page .seal-button:hover,
+  .seal-subscription-page [data-action='send_customer_portal_login_link']:hover {
+    transform: none;
+  }
+}

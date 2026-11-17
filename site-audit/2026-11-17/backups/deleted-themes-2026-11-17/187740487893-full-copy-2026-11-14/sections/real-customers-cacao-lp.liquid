@@ -1,0 +1,525 @@
+{%- liquid
+  assign sid = 'zt-rc-' | append: section.id
+  assign text_cols = section.settings.text_columns_desktop | default: 3
+  assign video_cols = section.settings.video_columns_desktop | default: 5
+  assign video_cols_m = section.settings.video_columns_mobile | default: 2
+-%}
+
+{% content_for 'block', type: 'cacao-type-rc', id: 'type-rc' %}
+{% content_for 'block', type: 'cacao-type-rc-2', id: 'type-rc-2' %}
+
+{{ 'real-customers-cacao-lp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'real-customers-cacao-lp.js' | asset_url }}" defer></script>
+
+<section
+  id="{{ sid }}"
+  class="zt-rc{% if request.design_mode %} zt-rc--editor{% endif %}"
+  data-zt-rc
+  {{ section.shopify_attributes }}
+  style="
+    --zt-rc-bg: {{ section.settings.bg_color }};
+    --zt-rc-heading: {{ section.settings.heading_color }};
+    --zt-rc-text: {{ section.settings.text_color }};
+    --zt-rc-muted: {{ section.settings.muted_color }};
+    --zt-rc-star: {{ section.settings.star_color }};
+    --zt-rc-tab: {{ section.settings.tab_active_color }};
+    --zt-rc-tab-border: {{ section.settings.tab_border_color }};
+    --zt-rc-badge: {{ section.settings.badge_color }};
+    --zt-rc-play: {{ section.settings.play_color }};
+    --zt-rc-max-width: {{ section.settings.content_width | default: 1120 }}px;
+    --zt-rc-pad-top: {{ section.settings.padding_top }}px;
+    --zt-rc-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --zt-rc-text-cols: {{ text_cols }};
+    --zt-rc-video-cols: {{ video_cols }};
+    --zt-rc-video-cols-m: {{ video_cols_m }};
+  "
+>
+  <div class="zt-rc__inner">
+    <header class="zt-rc__header">
+      {%- if section.settings.rating_label != blank -%}
+        <div class="zt-rc__rating">
+          <span class="zt-rc__stars" aria-hidden="true">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 20 20" width="14" height="14" focusable="false">
+                <path fill="currentColor" d="M10 1.5l2.47 5.01 5.53.8-4 3.9.94 5.52L10 14.27 5.06 16.73 6 11.21l-4-3.9 5.53-.8L10 1.5z"/>
+              </svg>
+            {%- endfor -%}
+          </span>
+          <span>{% render 'cacao-lp-review-score', format: 'hero', fallback: section.settings.rating_label %}</span>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="zt-rc__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+    </header>
+
+    <div class="zt-rc__switcher" role="tablist" aria-label="{{ section.settings.heading | default: 'Customer reviews' | escape }}">
+      {% content_for 'blocks' %}
+    </div>
+
+    {% content_for 'block', type: 'cacao-rc-videos', id: 'video-row' %}
+
+
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="zt-rc__disclaimer">{{ section.settings.disclaimer | escape }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="zt-rc__modal" data-zt-rc-modal hidden>
+    <div class="zt-rc__modal-backdrop" data-zt-rc-modal-backdrop></div>
+    <div class="zt-rc__modal-dialog" role="dialog" aria-modal="true" aria-label="Video review">
+      <button type="button" class="zt-rc__modal-close" data-zt-rc-modal-close aria-label="Close video">×</button>
+      <div class="zt-rc__modal-frame" data-zt-rc-modal-frame></div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Real Customers Cacao LP",
+  "tag": "section",
+  "class": "section-real-customers-cacao-lp",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#d5fbf6"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#580d93"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body text",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Disclaimer",
+      "default": "#6b6b80"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Stars",
+      "default": "#008159"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_color",
+      "label": "Active tab",
+      "default": "#580d93"
+    },
+    {
+      "type": "color",
+      "id": "tab_border_color",
+      "label": "Tab border",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Video badge",
+      "default": "#00c9b8"
+    },
+    {
+      "type": "color",
+      "id": "play_color",
+      "label": "Play button",
+      "default": "#580d93"
+    },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "rating_label",
+      "label": "Rating label (fallback)",
+      "default": "5.0 stars",
+      "info": "Leave blank to hide the rating row. Live score pulls Judge.me store-wide; this is fallback only."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Real Customers. Real Cacao Routines."
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "Customer experiences are personal and individual results may vary."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "text_columns_desktop",
+      "label": "Text review columns - desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "video_columns_desktop",
+      "label": "Video columns - desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "video_columns_mobile",
+      "label": "Visible video cards - mobile slider",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2,
+      "info": "How many cards peek in the mobile horizontal slider."
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 960,
+      "max": 1440,
+      "step": 20,
+      "unit": "px",
+      "default": 1280
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cacao-type-rc"
+    },
+    {
+      "type": "cacao-type-rc-2"
+    },
+    {
+      "type": "tab"
+    },
+    {
+      "type": "cacao-rc-videos"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Real Customers Cacao LP",
+      "category": "Cacao LP",
+      "settings": {
+        "bg_color": "#d5fbf6",
+        "heading_color": "#580d93",
+        "text_color": "#1e1734",
+        "muted_color": "#6b6b80",
+        "star_color": "#008159",
+        "tab_active_color": "#580d93",
+        "tab_border_color": "#1e1734",
+        "badge_color": "#00c9b8",
+        "play_color": "#580d93",
+        "rating_label": "4.98 stars",
+        "heading": "Real Customers. Real Cacao Routines.",
+        "disclaimer": "Customer experiences are personal and individual results may vary.",
+        "text_columns_desktop": 3,
+        "video_columns_desktop": 5,
+        "video_columns_mobile": 2,
+        "content_width": 1280,
+        "padding_top": 72,
+        "padding_bottom": 56
+      },
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Taste",
+            "text_count": 3,
+            "text_1_stars": 5,
+            "text_1_title": "Just what I wanted",
+            "text_1_body": "I was looking for a clean protein that didn’t taste chalky. Zeotein Cacao is smooth, filling, and easy to stick with every morning.",
+            "text_1_name": "Traci P.",
+            "text_2_stars": 5,
+            "text_2_title": "Smooth Cacao without the sugar rush",
+            "text_2_body": "It tastes great and the ingredients are clean. It has genuinely become part of my morning routine, the Cacao flavor is rich without being too sweet and mixes smoothly with oat milk.",
+            "text_2_name": "Melissa M.",
+            "text_3_stars": 5,
+            "text_3_title": "Simple to start",
+            "text_3_body": "Instead of stacking powders, collagen, and MCT, now it is all in one serving.",
+            "text_3_name": "Jordan R.",
+            "text_4_stars": 5,
+            "text_4_title": "",
+            "text_4_body": "",
+            "text_4_name": "",
+            "text_5_stars": 5,
+            "text_5_title": "",
+            "text_5_body": "",
+            "text_5_name": "",
+            "text_6_stars": 5,
+            "text_6_title": "",
+            "text_6_body": "",
+            "text_6_name": ""
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Value",
+            "text_count": 3,
+            "text_1_stars": 5,
+            "text_1_title": "Worth every scoop",
+            "text_1_body": "I stopped buying separate collagen and protein. One bag covers my morning and the price per serving feels fair for how clean it is.",
+            "text_1_name": "Alicia K.",
+            "text_2_stars": 5,
+            "text_2_title": "Better value than stacking tubs",
+            "text_2_body": "I used to spend more piecing together powders. Zeotein simplified my cart and my routine without cutting corners on quality.",
+            "text_2_name": "Chris D.",
+            "text_3_stars": 5,
+            "text_3_title": "Gift kit sealed the deal",
+            "text_3_body": "Between the first-order savings and the welcome kit, trying Cacao felt low-risk, and I kept the subscription.",
+            "text_3_name": "Priya S.",
+            "text_4_stars": 5,
+            "text_4_title": "",
+            "text_4_body": "",
+            "text_4_name": "",
+            "text_5_stars": 5,
+            "text_5_title": "",
+            "text_5_body": "",
+            "text_5_name": "",
+            "text_6_stars": 5,
+            "text_6_title": "",
+            "text_6_body": "",
+            "text_6_name": ""
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Vs Powders",
+            "text_count": 3,
+            "text_1_stars": 5,
+            "text_1_title": "The easiest protein routine I’ve ever kept up with.",
+            "text_1_body": "I’ve tried a few protein powders, but most felt complicated or had long ingredient lists. Zeotein keeps it simple with 23g of protein and six intentional ingredients in one daily serving. I mix it with almond milk, and the creamy cacao flavor makes it easy to enjoy every morning.",
+            "text_1_name": "Rebecca D.",
+            "text_2_stars": 5,
+            "text_2_title": "Finally, a simple daily nutrition option.",
+            "text_2_body": "I wanted something practical that I could add to my routine without mixing several different products. Two scoops of Zeotein with water takes less than a minute, and I like knowing I’m getting protein and collagen in the same serving.",
+            "text_2_name": "Lauren P.",
+            "text_3_stars": 5,
+            "text_3_title": "Great for a quick shake at home.",
+            "text_3_body": "I like that Zeotein can be mixed with water or blended into a smoothie, depending on what I feel like that day. The cacao flavor is rich without being overwhelming, and the powder blends especially well with frozen berries and almond milk.",
+            "text_3_name": "Marcus W.",
+            "text_4_stars": 5,
+            "text_4_title": "",
+            "text_4_body": "",
+            "text_4_name": "",
+            "text_5_stars": 5,
+            "text_5_title": "",
+            "text_5_body": "",
+            "text_5_name": "",
+            "text_6_stars": 5,
+            "text_6_title": "",
+            "text_6_body": "",
+            "text_6_name": ""
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Benefits",
+            "text_count": 3,
+            "text_1_stars": 5,
+            "text_1_title": "A simple way to add more to my day",
+            "text_1_body": "I like that Zeotein brings protein and collagen together in one easy serving. It makes my daily shake feel simple and intentional, without adding a lot of steps to my routine.”",
+            "text_1_name": "Casey M.",
+            "text_2_stars": 5,
+            "text_2_title": "Convenient nutrition, without the fuss",
+            "text_2_body": "Having 23g of protein in a cacao shake makes it easy to fit into my day. I can mix it with milk or blend it into a smoothie, depending on what I’m in the mood for.",
+            "text_2_name": "Alexa S.",
+            "text_3_stars": 5,
+            "text_3_title": "A routine I can keep up with",
+            "text_3_body": "I wanted a straightforward protein option with a short ingredient list. Zeotein is easy to prepare and the creamy chocolate flavor makes it enjoyable as part of my everyday routine.",
+            "text_3_name": "Riley S.",
+            "text_4_stars": 5,
+            "text_4_title": "",
+            "text_4_body": "",
+            "text_4_name": "",
+            "text_5_stars": 5,
+            "text_5_title": "",
+            "text_5_body": "",
+            "text_5_name": "",
+            "text_6_stars": 5,
+            "text_6_title": "",
+            "text_6_body": "",
+            "text_6_name": ""
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Ingredients",
+            "text_count": 3,
+            "text_1_stars": 5,
+            "text_1_title": "A convenient shake with a thoughtful formula.",
+            "text_1_body": "I was looking for a protein powder with a more intentional ingredient list, and Zeotein stood out to me. The cacao flavor is creamy and easy to enjoy, whether I mix it with water or turn it into a smoothie.",
+            "text_1_name": "Kylie J.",
+            "text_2_stars": 5,
+            "text_2_title": "Simple ingredients and a seriously smooth chocolate flavor.",
+            "text_2_body": "I love that Zeotein gives me protein and collagen in one convenient serving without making my routine complicated. It blends beautifully with oat milk, and the cacao taste is rich without being overwhelming.",
+            "text_2_name": "Nicole R.",
+            "text_3_stars": 5,
+            "text_3_title": "Rich cacao flavor, zero complicated prep.",
+            "text_3_body": "I appreciate how easy Zeotein is to work into my day. One scoop, my favorite milk alternative, and a quick shake is all it takes. The 23g of protein makes it a convenient option when I need something fast between meetings.",
+            "text_3_name": "Hannah P.",
+            "text_4_stars": 5,
+            "text_4_title": "",
+            "text_4_body": "",
+            "text_4_name": "",
+            "text_5_stars": 5,
+            "text_5_title": "",
+            "text_5_body": "",
+            "text_5_name": "",
+            "text_6_stars": 5,
+            "text_6_title": "",
+            "text_6_body": "",
+            "text_6_name": ""
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Convenience",
+            "text_count": 1,
+            "text_1_stars": 5,
+            "text_1_title": "So easy to fit into my busy mornings.",
+            "text_1_body": "I mix Zeotein Cacao with milk, give it a quick shake, and I’m ready to go. It’s a simple way to add 23g of protein to my morning without making breakfast complicated.",
+            "text_1_name": "Ava A.",
+            "text_2_stars": 5,
+            "text_2_title": "My go-to grab-and-blend option on hectic days.",
+            "text_2_body": "",
+            "text_2_name": "",
+            "text_3_stars": 5,
+            "text_3_title": "",
+            "text_3_body": "",
+            "text_3_name": "",
+            "text_4_stars": 5,
+            "text_4_title": "",
+            "text_4_body": "",
+            "text_4_name": "",
+            "text_5_stars": 5,
+            "text_5_title": "",
+            "text_5_body": "",
+            "text_5_name": "",
+            "text_6_stars": 5,
+            "text_6_title": "",
+            "text_6_body": "",
+            "text_6_name": ""
+          }
+        },
+        {
+          "type": "cacao-type-rc",
+          "id": "type-rc",
+          "static": true,
+          "settings": {
+            "font_family": "manrope",
+            "custom_font": "",
+            "heading_font": "manrope",
+            "heading_font_custom": "",
+            "heading_weight": "700",
+            "heading_size_desktop": 40,
+            "heading_size_mobile": 30,
+            "rating_font": "manrope",
+            "rating_font_custom": "",
+            "rating_weight": "600",
+            "rating_size_desktop": 15,
+            "rating_size_mobile": 14,
+            "tab_font": "manrope",
+            "tab_font_custom": "",
+            "tab_weight": "700",
+            "tab_size_desktop": 15,
+            "tab_size_mobile": 14,
+            "review_title_font": "manrope",
+            "review_title_font_custom": "",
+            "review_title_weight": "800",
+            "review_title_size_desktop": 18,
+            "review_title_size_mobile": 16,
+            "review_body_font": "manrope",
+            "review_body_font_custom": "",
+            "review_body_weight": "400",
+            "review_body_size_desktop": 15,
+            "review_body_size_mobile": 14,
+            "author_font": "manrope",
+            "author_font_custom": "",
+            "author_weight": "800",
+            "author_size_desktop": 15,
+            "author_size_mobile": 14
+          }
+        },
+        {
+          "type": "cacao-type-rc-2",
+          "id": "type-rc-2",
+          "static": true,
+          "settings": {
+            "disclaimer_font": "manrope",
+            "disclaimer_font_custom": "",
+            "disclaimer_weight": "400",
+            "disclaimer_size_desktop": 12,
+            "disclaimer_size_mobile": 12,
+            "video_badge_font": "manrope",
+            "video_badge_font_custom": "",
+            "video_badge_weight": "800",
+            "video_badge_size_desktop": 10,
+            "video_badge_size_mobile": 10
+          }
+        },
+        {
+          "type": "cacao-rc-videos",
+          "id": "video-row",
+          "static": true,
+          "settings": {
+            "columns_desktop": 5,
+            "columns_mobile": 2,
+            "gap": 12
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

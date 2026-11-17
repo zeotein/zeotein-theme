@@ -1,0 +1,177 @@
+{% doc %}
+  Add-to-cart CTA, after-add redirect, discount note, and trust for Buy Box Cacao LP.
+{% enddoc %}
+
+<div class="zt-bb__cta-wrap" {{ block.shopify_attributes }}>
+  <button type="button" class="zt-bb__cta" data-zt-bb-cta>
+    <span data-zt-bb-cta-label>{{ block.settings.cta_prefix | default: 'Start Now' | escape }} - $76.99</span>
+    <span aria-hidden="true">&rsaquo;</span>
+  </button>
+  <p class="zt-bb__status" data-zt-bb-status role="status" aria-live="polite"></p>
+
+  {%- if block.settings.discount_note != blank -%}
+    {%- assign discount_icon_size = block.settings.discount_icon_size | default: 16 -%}
+    <div
+      class="zt-bb__discount-note"
+      style="--zt-bb-discount-icon: {{ discount_icon_size }}px;"
+    >
+      {%- if block.settings.discount_icon != blank -%}
+        {%- assign discount_icon_sizes = discount_icon_size | append: 'px' -%}
+        {{
+          block.settings.discount_icon
+          | image_url: width: 96
+          | image_tag:
+            class: 'zt-bb__discount-icon',
+            loading: 'lazy',
+            widths: '16, 24, 32, 48, 64, 96',
+            sizes: discount_icon_sizes,
+            alt: ''
+        }}
+      {%- endif -%}
+      <span>{{ block.settings.discount_note | escape }}</span>
+    </div>
+  {%- endif -%}
+
+  {%- if block.settings.guarantee_pill != blank -%}
+    <div class="zt-bb__guarantee-pill">{{ block.settings.guarantee_pill }}</div>
+  {%- endif -%}
+
+  {%- assign trust_icon_size = block.settings.trust_icon_size | default: 28 -%}
+  <div class="zt-bb__trust" style="--zt-bb-trust-icon: {{ trust_icon_size }}px;">
+    {%- if block.settings.trust_1 != blank -%}
+      <div class="zt-bb__trust-item">
+        {%- if block.settings.trust_1_icon != blank -%}
+          {%- assign trust_1_sizes = trust_icon_size | append: 'px' -%}
+          {{
+            block.settings.trust_1_icon
+            | image_url: width: 120
+            | image_tag:
+              class: 'zt-bb__trust-icon',
+              loading: 'lazy',
+              widths: '28, 40, 56, 80, 120',
+              sizes: trust_1_sizes,
+              alt: ''
+          }}
+        {%- endif -%}
+        <span>{{ block.settings.trust_1 | escape }}</span>
+      </div>
+    {%- endif -%}
+    {%- if block.settings.trust_2 != blank -%}
+      <div class="zt-bb__trust-item">
+        {%- if block.settings.trust_2_icon != blank -%}
+          {%- assign trust_2_sizes = trust_icon_size | append: 'px' -%}
+          {{
+            block.settings.trust_2_icon
+            | image_url: width: 120
+            | image_tag:
+              class: 'zt-bb__trust-icon',
+              loading: 'lazy',
+              widths: '28, 40, 56, 80, 120',
+              sizes: trust_2_sizes,
+              alt: ''
+          }}
+        {%- endif -%}
+        <span>{{ block.settings.trust_2 | escape }}</span>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Add to cart",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "cta_prefix",
+      "label": "CTA prefix",
+      "default": "Start Now"
+    },
+    {
+      "type": "select",
+      "id": "after_add_action",
+      "label": "After add to cart",
+      "info": "What happens when Start Now succeeds. Cart drawer uses the Horizon theme drawer; falls back to the cart page if missing.",
+      "options": [
+        { "value": "none", "label": "Stay on page (green message)" },
+        { "value": "drawer", "label": "Open cart drawer" },
+        { "value": "cart", "label": "Go to cart page" },
+        { "value": "checkout", "label": "Go to checkout" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Discount note"
+    },
+    {
+      "type": "image_picker",
+      "id": "discount_icon",
+      "label": "Discount icon",
+      "info": "Shown in front of the discount note text."
+    },
+    {
+      "type": "range",
+      "id": "discount_icon_size",
+      "label": "Discount icon size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "text",
+      "id": "discount_note",
+      "label": "Discount note",
+      "default": "Discount auto-applied"
+    },
+    {
+      "type": "html",
+      "id": "guarantee_pill",
+      "label": "Guarantee pill HTML",
+      "default": "<span>Less than 1%</span> of customers use our Money-Back Guarantee"
+    },
+    {
+      "type": "header",
+      "content": "Trust row"
+    },
+    {
+      "type": "range",
+      "id": "trust_icon_size",
+      "label": "Trust icon size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_1_icon",
+      "label": "Trust 1 icon",
+      "info": "Shown above the Trust 1 text."
+    },
+    {
+      "type": "text",
+      "id": "trust_1",
+      "label": "Trust 1",
+      "default": "30-Day Money-Back Guarantee"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_2_icon",
+      "label": "Trust 2 icon",
+      "info": "Shown above the Trust 2 text."
+    },
+    {
+      "type": "text",
+      "id": "trust_2",
+      "label": "Trust 2",
+      "default": "Ships in 1-2 Business Days"
+    }
+  ],
+  "presets": [{ "name": "Add to cart" }]
+}
+{% endschema %}

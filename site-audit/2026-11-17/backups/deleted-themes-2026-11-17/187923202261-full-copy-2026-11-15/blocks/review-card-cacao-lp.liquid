@@ -1,0 +1,94 @@
+{% doc %}
+  Review card for Hero Banner Cacao LP reviews carousel.
+  Nested under blocks/reviews-carousel-cacao-lp.liquid
+{% enddoc %}
+
+<article
+  class="hbclp-card"
+  data-hbclp-card
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.quote != blank -%}
+    <h3 class="hbclp-card__quote">“{{ block.settings.quote | escape }}”</h3>
+  {%- endif -%}
+
+  {%- if block.settings.body != blank -%}
+    <p class="hbclp-card__body">{{ block.settings.body | escape }}</p>
+  {%- endif -%}
+
+  <div class="hbclp-card__footer">
+    {%- if block.settings.avatar != blank -%}
+      <span class="hbclp-card__avatar">
+        {{
+          block.settings.avatar
+          | image_url: width: 96
+          | image_tag:
+            loading: 'lazy',
+            widths: '48, 96',
+            sizes: '36px',
+            alt: block.settings.author
+        }}
+      </span>
+    {%- endif -%}
+
+    <div class="hbclp-card__meta">
+      <span class="hbclp-card__stars" aria-hidden="true">
+        {%- assign star_count = block.settings.stars | default: 5 -%}
+        {%- for i in (1..star_count) -%}
+          <svg viewBox="0 0 20 20" width="12" height="12" focusable="false">
+            <path fill="currentColor" d="M10 1.5l2.47 5.01 5.53.8-4 3.9.94 5.52L10 14.27 5.06 16.73 6 11.21l-4-3.9 5.53-.8L10 1.5z"/>
+          </svg>
+        {%- endfor -%}
+      </span>
+      {%- if block.settings.author != blank -%}
+        <span class="hbclp-card__author">{{ block.settings.author | escape }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Review card",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "quote",
+      "label": "Quote title",
+      "default": "A staple in my house"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Review text",
+      "default": "It tastes great and the ingredients are clean. It has genuinely become part of my morning routine – the Cacao flavor is rich without being too sweet and mixes smoothly with oat milk."
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar",
+      "label": "Reviewer photo"
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Reviewer name",
+      "default": "Melissa M."
+    },
+    {
+      "type": "range",
+      "id": "stars",
+      "label": "Stars",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review card"
+    }
+  ]
+}
+{% endschema %}

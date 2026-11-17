@@ -1,0 +1,212 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_jfXkaH": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "seal_subscriptions_subscription_widget_XhxCaM": {
+          "type": "shopify://apps/seal-subscriptions/blocks/subscription-widget/13b25004-a140-4ab7-b5fe-29918f759699",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "text_denenW": {
+          "type": "text",
+          "settings": {
+            "text": "Digital download — delivered to your inbox immediately after purchase.",
+            "text_style": "body"
+          }
+        },
+        "text_ULgrKF": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Lightly cacao. Unsweetened by design — no stevia, no monk fruit,  no \"natural flavors.",
+            "text_style": "body"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "icon_with_text_aRigQD": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "vertical",
+            "icon_1": "lock",
+            "image_1": "shopify://shop_images/zeotein-leaf-teal.png",
+            "heading_1": "Instant Digital Download",
+            "icon_2": "plant",
+            "image_2": "shopify://shop_images/zeotein-truck-teal.png",
+            "heading_2": "Delivered by Email",
+            "icon_3": "truck",
+            "image_3": "shopify://shop_images/zeotein-shield-check-teal.png",
+            "heading_3": "Access Anytime"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "text_PJyiQ4": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<strong>Same 30 servings, $25 less. </strong><a href=\"/products/zeotein-cacao-30-day-bulk-powder\" target=\"_blank\" title=\"Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth\">Zeotein Cacao Bulk Bag →</a>",
+            "text_style": "body"
+          }
+        },
+        "text_i7VNN7": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<strong>New to Zeotein? </strong><a href=\"/products/zeotein-protein-cacao\" target=\"_blank\" title=\"Zeotein Cacao Protein Powder - 7 Stick Packs, Collagen & Bone Broth\">Try the 7-Day Pack →</a>",
+            "text_style": "body"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible_tab_M4C4HP": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Benefits",
+            "icon": "none",
+            "content": "<ul><li><strong>All-In-One Protein Convenience</strong><br/>Combines protein, functional fats, and whole-food ingredients in a single packet.</li><li><strong>Supports Sustained Energy</strong><br/>Protein and organic MCTs help fuel your day without added sugar or stimulants.</li><li><strong>Nutrient-Dense Formula</strong><br/>Includes sea moss and cacao for added micronutrients and antioxidants.</li><li><strong>Clean & Travel-Friendly</strong><br/>Single-serve packets with no artificial ingredients—easy to take anywhere.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_CGD3BP": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "How to Use",
+            "icon": "none",
+            "content": "<h2><strong>How to Use</strong></h2><ul><li>Mix <strong>1 single-serve packet</strong> with <strong>8–12 oz</strong> of water, milk, or your favorite milk alternatives</li><li>Shake well or blend into a smoothie</li><li>Enjoy <strong>once daily</strong>, or as directed by your wellness routine<br/></li></ul><p><strong>Tip:</strong> For a creamier, naturally sweeter taste, blend with a banana or frozen berries.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_YJbWnM": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Supplement Facts",
+            "icon": "none",
+            "content": "<p><strong>SUPPLEMENT FACTS</strong><br/>Zeotein Cacao – Supplement Facts </p><p><br/>Serving Size: 1 Stick Pack (38.7 g)<br/><br/><strong>Amount Per Serving</strong><br/>Calories: 140<br/>Total Fat: 3 g<br/>Saturated Fat: 2.5 g<br/>Sodium: 420 mg<br/>Total Carbohydrate: 2 g<br/>Dietary Fiber: 1 g<br/>Total Sugars: 0 g<br/>Includes 0 g Added Sugars<br/>Protein: 23 g †<br/>† Daily Value (DV) not established.</p><p>Sodium naturally sourced from Beef Bone Broth — no added salt, ever.<br/><br/><strong>Allergen Statement</strong><br/>Contains coconut (tree nut).Manufactured in a facility that may process: Tree Nuts, Sesame, Mustard, Celery. </p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "judge_me_reviews_preview_badge_jfXkaH",
+        "price",
+        "seal_subscriptions_subscription_widget_XhxCaM",
+        "text_denenW",
+        "text_ULgrKF",
+        "variant_picker",
+        "quantity_selector",
+        "icon_with_text_aRigQD",
+        "buy_buttons",
+        "text_PJyiQ4",
+        "text_i7VNN7",
+        "description",
+        "collapsible_tab_M4C4HP",
+        "collapsible_tab_CGD3BP",
+        "collapsible_tab_YJbWnM"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "1768838317647a13f3": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_cPkXxp": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_cPkXxp"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "1768838317647a13f3"
+  ]
+}

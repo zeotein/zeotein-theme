@@ -1,0 +1,497 @@
+{% comment %}
+  Section contract.
+  Mobile sticky offer bar for the Cacao LP. Pinned to the bottom of the viewport,
+  appears once the hero has scrolled out of view, hides while the buy box is on
+  screen, and can dock below the footer so the disclaimer stays readable.
+  Row 1: price line. Row 2: full-width CTA styled like the hero CTA.
+  The CTA uses the same href as the hero CTA (read at runtime from .hbclp__cta,
+  fallback #purchase) and the same scroll routine (window.ztScrollToCacaoOffer).
+{% endcomment %}
+
+{%- liquid
+  assign sid = 'zt-sticky-' | append: section.id
+  assign label = section.settings.button_label | default: 'Claim My 55% Off'
+  assign max_w = section.settings.mobile_max_width | default: 750
+  assign buybox_sel = section.settings.buybox_selector | default: '.zt-bb2'
+  assign hero_sel = section.settings.hero_selector | default: '[id*="__hero_banner_cacao_lp"]'
+  assign target_id = section.settings.scroll_target_id | default: 'zt-bb2-offer'
+  assign fallback_id = section.settings.scroll_fallback_id | default: 'purchase'
+  assign price_now = section.settings.price_now | default: '$76.99'
+  assign price_then = section.settings.price_then | default: 'then $99.99 per delivery'
+-%}
+
+{%- if section.settings.enable -%}
+
+<div
+  id="{{ sid }}"
+  class="zt-sticky-offer"
+  data-zt-sticky-offer
+  data-section-id="{{ section.id }}"
+  style="--zt-so-z: {{ section.settings.z_index | default: 40 }}; --zt-so-fade-ms: {% if section.settings.enable_fade %}{{ section.settings.fade_ms }}ms{% else %}0ms{% endif %};"
+  {{ section.shopify_attributes }}
+>
+  <div class="zt-sticky-offer__bar" data-zt-sticky-offer-bar aria-hidden="true">
+    <p class="zt-sticky-offer__price">
+      <span class="zt-sticky-offer__now">{{ price_now | escape }}</span>
+      <span class="zt-sticky-offer__then">{{ price_then | escape }}</span>
+    </p>
+    <a
+      href="#purchase"
+      class="zt-sticky-offer__btn"
+      data-zt-sticky-offer-btn
+      tabindex="-1"
+    >
+      <span class="zt-sticky-offer__btn-label">{{ label | escape }}</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById({{ sid | json }});
+    if (!root || root.dataset.ztStickyBound === '1') return;
+    root.dataset.ztStickyBound = '1';
+
+    var bar = root.querySelector('[data-zt-sticky-offer-bar]');
+    var btn = root.querySelector('[data-zt-sticky-offer-btn]');
+    if (!bar || !btn) return;
+
+    var cfg = {
+      maxWidth: {{ max_w | json }},
+      mobileOnly: {{ section.settings.mobile_only | json }},
+      hideOverBuybox: {{ section.settings.hide_over_buybox | json }},
+      dockFooter: {{ section.settings.dock_below_footer | json }},
+      buyboxSelector: {{ buybox_sel | json }},
+      heroSelector: {{ hero_sel | json }},
+      targetId: {{ target_id | json }},
+      fallbackId: {{ fallback_id | json }},
+      bodyPad: {{ section.settings.body_padding | default: true | json }}
+    };
+
+    var mq = window.matchMedia('(max-width: ' + cfg.maxWidth + 'px)');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var htmlPadClass = 'zt-sticky-offer-on';
+    var heroInView = true;
+    var buyboxInView = false;
+    var footerInView = false;
+    var hero = null;
+    var footer = null;
+    var endBar = null;
+    var footerIo = null;
+    var heroIo = null;
+
+    function safeQuery(sel) {
+      try { return document.querySelector(sel); } catch (e) { return null; }
+    }
+
+    function heroCta() {
+      return document.querySelector('.hbclp__cta');
+    }
+
+    // Same destination as the hero CTA: copy its href at runtime.
+    function ctaHref() {
+      var h = heroCta();
+      var href = h && h.getAttribute('href');
+      return href || '#purchase';
+    }
+
+    function findTarget(href) {
+      if (href && href.charAt(0) === '#' && href.length > 1) {
+        var el = document.getElementById(href.slice(1));
+        if (el) return el;
+      }
+      return (
+        document.getElementById(cfg.targetId) ||
+        document.getElementById(cfg.fallbackId) ||
+        document.getElementById('purchase')
+      );
+    }
+
+    function findFooter() {
+      return (
+        document.querySelector('.zt-footer') ||
+        document.querySelector('footer.footer') ||
+        document.querySelector('[id^="shopify-section-"][id*="footer"]')
+      );
+    }
+
+    function setVisible(el, show) {
+      if (!el) return;
+      el.classList.toggle('is-visible', show);
+      el.setAttribute('aria-hidden', show ? 'false' : 'true');
+      var link = el.querySelector('[data-zt-sticky-offer-btn]');
+      if (link) {
+        if (show) link.removeAttribute('tabindex');
+        else link.setAttribute('tabindex', '-1');
+      }
+    }
+
+    function matchesViewport() {
+      if (!cfg.mobileOnly) return true;
+      return mq.matches;
+    }
+
+    // Mirrors the hero CTA click handler so both buttons go to the same place.
+    function onCtaClick(event) {
+      var href = this.getAttribute('href') || '';
+      if (href.charAt(0) !== '#') return; // real URL: let the browser follow it, same as the hero
+      var target = findTarget(href);
+      if (!target) return;
+      event.preventDefault();
+
+      setVisible(bar, false);
+      if (cfg.bodyPad) document.documentElement.classList.remove(htmlPadClass);
+
+      if (href === '#purchase' && typeof window.ztScrollToCacaoOffer === 'function') {
+        window.ztScrollToCacaoOffer({ frameKey: 'ztStickyOfferFrame' });
+        return;
+      }
+      target.scrollIntoView({
+        behavior: reduceMotion.matches ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    }
+
+    function syncHref() {
+      var href = ctaHref();
+      btn.setAttribute('href', href);
+      if (endBar) {
+        var endBtn = endBar.querySelector('[data-zt-sticky-offer-btn]');
+        if (endBtn) endBtn.setAttribute('href', href);
+      }
+    }
+
+    function updatePad() {
+      if (bar.offsetHeight) {
+        document.documentElement.style.setProperty('--zt-so-h-root', bar.offsetHeight + 'px');
+      }
+    }
+
+    function ensureEndBar() {
+      if (!cfg.dockFooter) return null;
+      footer = footer || findFooter();
+      if (!footer || endBar) return endBar;
+      endBar = bar.cloneNode(true);
+      endBar.classList.add('zt-sticky-offer__bar--end');
+      endBar.classList.remove('is-visible');
+      endBar.removeAttribute('data-zt-sticky-offer-bar');
+      endBar.setAttribute('data-zt-sticky-offer-end', '');
+      endBar.setAttribute('aria-hidden', 'true');
+      if (root.getAttribute('style')) endBar.setAttribute('style', root.getAttribute('style'));
+      var endBtn = endBar.querySelector('[data-zt-sticky-offer-btn]');
+      if (endBtn) endBtn.addEventListener('click', onCtaClick);
+      footer.insertAdjacentElement('afterend', endBar);
+      syncHref();
+      return endBar;
+    }
+
+    function syncBars() {
+      var on = matchesViewport();
+      var hideBuy = cfg.hideOverBuybox && buyboxInView;
+      var pastHero = !heroInView;
+      var wantSticky = on && pastHero && !hideBuy && !(cfg.dockFooter && footerInView);
+      var wantEnd = on && cfg.dockFooter && footerInView;
+
+      setVisible(bar, wantSticky);
+      if (wantSticky) updatePad();
+      if (cfg.bodyPad) document.documentElement.classList.toggle(htmlPadClass, wantSticky);
+
+      if (cfg.dockFooter && (footer || wantEnd)) {
+        ensureEndBar();
+        setVisible(endBar, wantEnd);
+      } else if (endBar) {
+        setVisible(endBar, false);
+      }
+    }
+
+    function bindHero() {
+      if (heroIo) return true;
+      hero = safeQuery(cfg.heroSelector) || (heroCta() && heroCta().closest('[id^="shopify-section-"]'));
+      if (!hero || !('IntersectionObserver' in window)) return false;
+      heroIo = new IntersectionObserver(
+        function (entries) {
+          heroInView = entries.some(function (entry) { return entry.isIntersecting; });
+          syncBars();
+        },
+        { root: null, threshold: 0 }
+      );
+      heroIo.observe(hero);
+      return true;
+    }
+
+    function scrollFallback() {
+      // Used only when the hero cannot be found or IntersectionObserver is missing.
+      if (heroIo) return;
+      if (hero) {
+        heroInView = hero.getBoundingClientRect().bottom > 0;
+      } else {
+        heroInView = (window.scrollY || window.pageYOffset) < window.innerHeight;
+      }
+      syncBars();
+    }
+
+    function bindFooterObserver() {
+      if (!cfg.dockFooter) return true;
+      footer = findFooter();
+      if (!footer || footerIo || !('IntersectionObserver' in window)) return false;
+      footerIo = new IntersectionObserver(
+        function (entries) {
+          footerInView = entries.some(function (entry) { return entry.isIntersecting; });
+          syncBars();
+        },
+        { root: null, threshold: 0, rootMargin: '0px' }
+      );
+      footerIo.observe(footer);
+      ensureEndBar();
+      syncBars();
+      return true;
+    }
+
+    var buybox = safeQuery(cfg.buyboxSelector);
+    if (cfg.hideOverBuybox && buybox && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          buyboxInView = entries.some(function (entry) { return entry.isIntersecting; });
+          syncBars();
+        },
+        { root: null, threshold: 0.08, rootMargin: '0px 0px -12% 0px' }
+      );
+      io.observe(buybox);
+    }
+
+    syncHref();
+
+    if (!bindHero()) {
+      window.addEventListener('scroll', scrollFallback, { passive: true });
+      scrollFallback();
+    }
+
+    if (!bindFooterObserver()) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bindFooterObserver);
+      } else {
+        window.setTimeout(bindFooterObserver, 0);
+      }
+      window.addEventListener('load', bindFooterObserver);
+    }
+
+    window.addEventListener('load', function () {
+      syncHref();
+      if (!heroIo) bindHero();
+    });
+    window.addEventListener('resize', function () {
+      if (bar.classList.contains('is-visible')) updatePad();
+    });
+
+    syncBars();
+
+    if (mq.addEventListener) mq.addEventListener('change', syncBars);
+    else if (mq.addListener) mq.addListener(syncBars);
+
+    btn.addEventListener('click', onCtaClick);
+  })();
+</script>
+
+<style>
+  {%- if section.settings.mobile_only -%}
+  @media screen and (max-width: {{ max_w }}px) {
+    #{{ sid }} .zt-sticky-offer__bar,
+    .zt-sticky-offer__bar--end[data-zt-sticky-offer-end] {
+      display: block;
+    }
+  }
+  @media screen and (min-width: {{ max_w | plus: 1 }}px) {
+    #{{ sid }} .zt-sticky-offer__bar,
+    .zt-sticky-offer__bar--end[data-zt-sticky-offer-end] {
+      display: none !important;
+    }
+    html.zt-sticky-offer-on {
+      padding-bottom: 0;
+    }
+  }
+  {%- else -%}
+  #{{ sid }} .zt-sticky-offer__bar,
+  .zt-sticky-offer__bar--end[data-zt-sticky-offer-end] {
+    display: block;
+  }
+  {%- endif -%}
+</style>
+
+{%- endif -%}
+
+{% stylesheet %}
+  .zt-sticky-offer__bar {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--zt-so-z, 40);
+    box-sizing: border-box;
+    padding: 10px 14px calc(13px + env(safe-area-inset-bottom, 0px));
+    background: rgba(255, 255, 255, 0.97);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid #e6e0f0;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px);
+    transition:
+      opacity var(--zt-so-fade-ms, 280ms) ease,
+      transform var(--zt-so-fade-ms, 280ms) ease,
+      visibility var(--zt-so-fade-ms, 280ms) ease;
+  }
+
+  .zt-sticky-offer__bar.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .zt-sticky-offer__bar--end {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    z-index: 1;
+    transform: none;
+  }
+
+  .zt-sticky-offer__price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+    margin: 0 0 8px;
+    line-height: 1.2;
+    font-family: Manrope, Arial, sans-serif;
+  }
+
+  .zt-sticky-offer__now {
+    font-size: 16px;
+    font-weight: 800;
+    color: #1e1734;
+  }
+
+  .zt-sticky-offer__then {
+    font-size: 11px;
+    color: #4a4458;
+  }
+
+  /* Matches the hero CTA (.hbclp__cta): purple fill, ink border, hard offset shadow, pill shape. */
+  .zt-sticky-offer__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 58px;
+    margin: 0;
+    padding: 16px 28px;
+    border: 2px solid #1e1734;
+    border-radius: 999px;
+    background: #580d93;
+    color: #fcfcfc;
+    font-family: Manrope, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 5px 5px 0 #1e1734;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .zt-sticky-offer__btn:hover,
+  .zt-sticky-offer__btn:focus {
+    color: #fcfcfc;
+  }
+
+  .zt-sticky-offer__btn:hover {
+    transform: translateY(1px);
+    box-shadow: 4px 4px 0 #1e1734;
+  }
+
+  .zt-sticky-offer__btn:focus-visible {
+    outline: 3px solid #1aa6a0;
+    outline-offset: 2px;
+  }
+
+  html.zt-sticky-offer-on {
+    padding-bottom: var(--zt-so-h-root, 124px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .zt-sticky-offer__bar,
+    .zt-sticky-offer__btn {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Sticky Offer CTA",
+  "tag": "section",
+  "class": "section-sticky-offer-cacao-lp",
+  "settings": [
+    { "type": "header", "content": "Enable" },
+    { "type": "checkbox", "id": "enable", "label": "Show sticky offer bar", "default": true },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "price_now", "label": "Price", "default": "$76.99" },
+    { "type": "text", "id": "price_then", "label": "Price note", "default": "then $99.99 per delivery" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Claim My 55% Off", "info": "Button links to the same place as the hero CTA" },
+    { "type": "header", "content": "Behavior" },
+    { "type": "checkbox", "id": "mobile_only", "label": "Mobile only", "default": true, "info": "Hide on viewports wider than Mobile max width" },
+    { "type": "range", "id": "mobile_max_width", "label": "Mobile max width", "min": 480, "max": 990, "step": 10, "unit": "px", "default": 750 },
+    { "type": "text", "id": "hero_selector", "label": "Hero CSS selector", "default": "[id*=\"__hero_banner_cacao_lp\"]", "info": "Bar appears once this element has scrolled out of view" },
+    { "type": "checkbox", "id": "hide_over_buybox", "label": "Hide when buy box is in view", "default": true },
+    { "type": "text", "id": "buybox_selector", "label": "Buy box CSS selector", "default": ".zt-bb2" },
+    { "type": "checkbox", "id": "dock_below_footer", "label": "Dock below footer at page end", "default": true, "info": "Keeps disclaimer readable; places a copy of the bar under the footer" },
+    { "type": "text", "id": "scroll_target_id", "label": "Scroll target element ID", "default": "zt-bb2-offer" },
+    { "type": "text", "id": "scroll_fallback_id", "label": "Fallback scroll target ID", "default": "purchase" },
+    { "type": "checkbox", "id": "body_padding", "label": "Add bottom page padding when bar is visible", "default": true },
+    { "type": "checkbox", "id": "enable_fade", "label": "Fade in / out", "default": true },
+    { "type": "range", "id": "fade_ms", "label": "Fade duration", "min": 0, "max": 800, "step": 20, "unit": "ms", "default": 280 },
+    { "type": "range", "id": "z_index", "label": "Z-index", "min": 10, "max": 100, "step": 1, "default": 40 },
+    { "type": "header", "content": "Legacy (not used by the current bar design)" },
+    { "type": "checkbox", "id": "show_bar_gradient", "label": "Show fade gradient above bar", "default": true },
+    { "type": "color", "id": "bar_background", "label": "Bar background", "default": "#FCFBFD" },
+    { "type": "color", "id": "bar_fade_color", "label": "Bar fade color", "default": "#FCFBFD" },
+    { "type": "color", "id": "end_bar_background", "label": "Footer-docked bar background", "default": "#FCFBFD" },
+    { "type": "range", "id": "bar_padding_x", "label": "Bar horizontal padding", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 16 },
+    { "type": "range", "id": "bar_padding_y", "label": "Bar vertical padding", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 12 },
+    { "type": "color", "id": "button_background", "label": "Button background (start)", "default": "#580D93" },
+    { "type": "color", "id": "button_background_end", "label": "Button background (end)", "default": "#3D0A66" },
+    { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#FFFFFF" },
+    { "type": "range", "id": "button_radius", "label": "Corner radius", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "button_font_size", "label": "Font size", "min": 12, "max": 28, "step": 1, "unit": "px", "default": 17 },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra bold" }
+      ],
+      "default": "700"
+    },
+    { "type": "range", "id": "button_min_height", "label": "Min height", "min": 40, "max": 72, "step": 2, "unit": "px", "default": 52 },
+    { "type": "range", "id": "button_padding_x", "label": "Button horizontal padding", "min": 8, "max": 40, "step": 2, "unit": "px", "default": 18 },
+    { "type": "range", "id": "button_padding_y", "label": "Button vertical padding", "min": 6, "max": 28, "step": 2, "unit": "px", "default": 14 },
+    { "type": "checkbox", "id": "button_shadow", "label": "Show button shadow", "default": true },
+    { "type": "color", "id": "button_shadow_color", "label": "Shadow color", "default": "#580D93" },
+    { "type": "color", "id": "focus_ring_color", "label": "Focus ring color", "default": "#1AA6A0" }
+  ],
+  "presets": [
+    { "name": "Sticky Offer CTA" }
+  ]
+}
+{% endschema %}

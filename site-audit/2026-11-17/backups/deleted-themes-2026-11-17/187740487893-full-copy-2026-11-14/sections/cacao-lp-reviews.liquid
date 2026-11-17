@@ -1,0 +1,348 @@
+{% comment %}
+  Section contract.
+  Last section on the Cacao landing page. Mounts Judge.me store-wide
+  (Happy Customers / All Reviews) so the count matches hero + buy box.
+  Hero and buy box ratings link to #zt-cacao-reviews.
+  @example
+  <!-- Add Cacao LP Reviews as the last section on the cacao-lp product template -->
+{% endcomment %}
+
+{%- liquid
+  assign rating_mf = shop.metafields.judgeme.all_reviews_rating
+  assign count_mf = shop.metafields.judgeme.all_reviews_count
+  if rating_mf.value != blank
+    assign store_rating = rating_mf.value
+  else
+    assign store_rating = rating_mf
+  endif
+  if count_mf.value != blank
+    assign store_count = count_mf.value
+  else
+    assign store_count = count_mf
+  endif
+
+  assign store_rating = store_rating | append: '' | strip
+  assign store_count = store_count | append: '' | strip
+  assign average_parts = store_rating | split: '.'
+  assign average_text = average_parts | first
+  if average_parts.size > 1
+    assign average_decimal = average_parts[1] | slice: 0, 1
+    assign average_text = average_text | append: '.' | append: average_decimal
+  endif
+
+  assign has_legacy = false
+  if shop.metafields.judgeme.all_reviews_header.size > 20
+    assign has_legacy = true
+  endif
+
+-%}
+
+<div id="zt-cacao-reviews" class="zt-cacao-reviews">
+  {%- comment -%} Judge.me Happy Customers / All Reviews (store-wide) {%- endcomment -%}
+  <div
+    id="judgeme_all_reviews"
+    class="jdgm-widget jdgm-all-reviews-widget-v2025"
+    data-widget="all-reviews-v2025"
+    data-auto-install="false"
+    data-entry-point="all_reviews_widget_v2025.js"
+    data-entry-key="all-reviews-widget-v2025/main.js"
+    data-show-all-reviews-in-same-tab="true"
+    style="max-width: 1200px; margin: 0 auto;"
+  >
+    {%- if has_legacy -%}
+      <div class="jdgm-legacy-widget-content" style="display: none;">
+        <article class="jdgm-widget jdgm-all-reviews-widget">
+          <style class="jdgm-temp-hiding-style">.jdgm-all-reviews-widget{ display: none }</style>
+          {{ shop.metafields.judgeme.all_reviews_header }}
+          <div class="jdgm-all-reviews__body">
+            {%- assign prefix = 'all_reviews_' -%}
+            {%- for count in (0..65535) -%}
+              {%- assign metafield_key = prefix | append: count -%}
+              {%- assign current_metafield = shop.metafields.judgeme[metafield_key] -%}
+              {%- unless current_metafield -%}
+                {%- break -%}
+              {%- endunless -%}
+              {{ current_metafield }}
+            {%- endfor -%}
+          </div>
+        </article>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <script>
+    /**
+     * Judge.me still stores funnel / renamed handles on some reviews.
+     * Shopify redirects work; rewrite to current public URLs before the widget boots.
+     */
+    (function () {
+      var HANDLE_MAP = {
+        'zeotein-cacao-bulk-bag-starter-kit-try-99-99-renewal': '/products/cacao-protein-starter-kit',
+        'zeotein-cacao-starter-kit': '/products/cacao-protein-starter-kit',
+        'zeotein-cacao-bag-30-intro': '/products/cacao-protein-starter-kit',
+        'zeotein-cacao-bag-30-try': '/products/cacao-protein-starter-kit',
+        'zeotein-cacao-bag-30-lp': '/products/cacao-protein-starter-kit',
+        'cacao': '/products/cacao-protein-starter-kit',
+        'zeotein-cacao-30-day-bulk-bag-one-time-starter-kit-93-49': '/products/zeotein-cacao-bag-30-onetime',
+        'zeotein-cacao-30-day-bulk-powder': '/products/zeotein-cacao-bag-30',
+        'zeotein-cacao-sticks-30-sub-go': '/products/zeotein-cacao-sticks-30',
+        'zeotein-30-day-supply': '/products/zeotein-cacao-sticks-30',
+        'zeotein-protein-cacao': '/products/zeotein-cacao-sticks-7'
+      };
+
+      function mappedPath(pathname) {
+        var m = String(pathname || '').match(/\/products\/([a-z0-9\-]+)/i);
+        if (!m) return null;
+        return HANDLE_MAP[m[1].toLowerCase()] || null;
+      }
+
+      function rewriteUrl(url) {
+        if (!url || typeof url !== 'string') return url;
+        try {
+          var abs = /^https?:\/\//i.test(url);
+          var u = new URL(url, window.location.origin);
+          var nextPath = mappedPath(u.pathname);
+          if (!nextPath) return url;
+          u.pathname = nextPath;
+          if (abs) return u.toString();
+          return u.pathname + u.search + u.hash;
+        } catch (e) {
+          return url;
+        }
+      }
+
+      function rewriteTree(node) {
+        if (!node || typeof node !== 'object') return;
+        if (Array.isArray(node)) {
+          node.forEach(rewriteTree);
+          return;
+        }
+        Object.keys(node).forEach(function (key) {
+          var val = node[key];
+          if (typeof val === 'string' && /product_url/i.test(key)) {
+            node[key] = rewriteUrl(val);
+          } else if (val && typeof val === 'object') {
+            rewriteTree(val);
+          }
+        });
+      }
+
+      window.ztJdgmRewriteProductUrls = rewriteTree;
+      window.ztJdgmRewriteUrl = rewriteUrl;
+    })();
+  </script>
+
+  {%- if shop.metafields.judgeme.all_reviews_widget_v2025_data -%}
+    <script>
+      window.jdgm = window.jdgm || {};
+      jdgm.data = jdgm.data || {};
+      jdgm.data.allReviewsWidgetV2025 = {{ shop.metafields.judgeme.all_reviews_widget_v2025_data }};
+      if (window.ztJdgmRewriteProductUrls) window.ztJdgmRewriteProductUrls(jdgm.data.allReviewsWidgetV2025);
+    </script>
+  {%- endif -%}
+
+  {%- if store_count != blank and store_count != 'nil' -%}
+    <div id="zt-cacao-reviews-fallback" class="zt-cacao-reviews__fallback" hidden>
+      <div class="zt-cacao-reviews__inner">
+        <div class="zt-cacao-reviews__head">
+          <h2 class="zt-cacao-reviews__title">{{ section.settings.heading | default: 'Customer Reviews' | escape }}</h2>
+          <p class="zt-cacao-reviews__summary">
+            <span class="zt-cacao-reviews__score">{{ average_text | default: '5.0' | escape }}</span>
+            <span>{{ store_count | escape }} reviews</span>
+          </p>
+        </div>
+        <p class="zt-cacao-reviews__note">Loading store reviews…</p>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+  (function () {
+    var rewriteUrl = window.ztJdgmRewriteUrl || function (u) { return u; };
+    var root = document.getElementById('zt-cacao-reviews');
+    var widget = document.getElementById('judgeme_all_reviews');
+    var fallback = document.getElementById('zt-cacao-reviews-fallback');
+    if (!widget || !root) return;
+
+    function hideOneStarReviews() {
+      // Individual review cards
+      root.querySelectorAll('.jm-review-item').forEach(function (item) {
+        var rating = item.querySelector('.jm-star-rating[aria-label]');
+        var label = rating && rating.getAttribute('aria-label');
+        if (label && /^1(\.0)?\s+out of 5/i.test(label)) {
+          item.hidden = true;
+          item.setAttribute('data-zt-hidden-rating', '1');
+        }
+      });
+      // Histogram "1 star" row
+      root.querySelectorAll('.jm-histogram-row').forEach(function (row) {
+        var label = row.getAttribute('aria-label') || '';
+        if (/1 star/i.test(label)) {
+          row.hidden = true;
+          row.setAttribute('data-zt-hidden-rating', '1');
+        }
+      });
+    }
+
+    function patchDomLinks() {
+      root.querySelectorAll('a[href*="/products/"]').forEach(function (a) {
+        var next = rewriteUrl(a.getAttribute('href') || a.href);
+        if (next && next !== a.getAttribute('href')) a.setAttribute('href', next);
+      });
+    }
+
+    root.addEventListener(
+      'click',
+      function (e) {
+        var t = e.target;
+        if (!t || !t.closest) return;
+        var a = t.closest('a[href*="/products/"]');
+        if (a) {
+          var next = rewriteUrl(a.href);
+          if (next && next !== a.href) a.href = next;
+          return;
+        }
+        // Judge.me v2025 product cards are role=button, not anchors
+        var card = t.closest(
+          '.jm-product-variant-card__product-link, .jm-product-variant-card__thumbnail, [aria-label*="product page"]'
+        );
+        if (!card) return;
+        var label = card.getAttribute('aria-label') || '';
+        // Prefer URL from rewritten jdgm data when available; fall back to known titles
+        if (/Starter Kit/i.test(label)) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = '/products/cacao-protein-starter-kit';
+          return;
+        }
+        if (/15% Off|Stick Packs \u2014 Subscription|sub-go/i.test(label)) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = '/products/zeotein-cacao-sticks-30';
+        }
+      },
+      true
+    );
+
+    function officialReady() {
+      return (
+        (widget.classList.contains('jdgm--done-setup-widget') ||
+          widget.querySelector('.jdgm-rev-widg, .jdgm-all-reviews-widget, .jm-review-item, [class*="jdgm-rev"]')) &&
+        widget.offsetHeight > 80
+      );
+    }
+
+    var tries = 0;
+    var timer = setInterval(function () {
+      tries += 1;
+      hideOneStarReviews();
+      patchDomLinks();
+      if (officialReady()) {
+        if (fallback) fallback.hidden = true;
+        hideOneStarReviews();
+        patchDomLinks();
+        if (tries >= 8) clearInterval(timer);
+        return;
+      }
+      if (tries === 6) {
+        var base = window.jdgm && jdgm.CDN_BASE_URL;
+        var src = base ? base + 'all_reviews_widget_v2025.js' : '';
+        if (src && !document.querySelector('script[src*="all_reviews_widget_v2025"]')) {
+          var script = document.createElement('script');
+          script.type = 'module';
+          script.src = src;
+          document.head.appendChild(script);
+        }
+      }
+      if (tries >= 16) {
+        if (fallback) fallback.hidden = false;
+        clearInterval(timer);
+      }
+    }, 150);
+
+    // Re-run when Judge.me paginates / re-renders
+    if ('MutationObserver' in window) {
+      var mo = new MutationObserver(function () {
+        hideOneStarReviews();
+        patchDomLinks();
+      });
+      mo.observe(root, { childList: true, subtree: true });
+    }
+  })();
+</script>
+
+<style>
+  .zt-cacao-reviews {
+    background: #fff;
+    scroll-margin-top: 96px;
+    padding: 24px 0 48px;
+  }
+
+  #judgeme_all_reviews {
+    width: min(1200px, calc(100% - 40px));
+  }
+
+  .zt-cacao-reviews__inner {
+    width: min(1200px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 24px 0 32px;
+  }
+
+  .zt-cacao-reviews__title {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .zt-cacao-reviews__summary {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    margin: 8px 0 0;
+    color: #1a1a1a;
+    font-size: 16px;
+  }
+
+  .zt-cacao-reviews__score {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .zt-cacao-reviews__note {
+    margin: 16px 0 0;
+    color: #3d3d3d;
+    font-size: 15px;
+  }
+
+  /* Hide 1-star reviews + histogram row on this LP */
+  #zt-cacao-reviews .jm-review-item[data-zt-hidden-rating='1'],
+  #zt-cacao-reviews .jm-histogram-row[data-zt-hidden-rating='1'] {
+    display: none !important;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Cacao LP Reviews",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shows Judge.me store-wide reviews (all products + store). Matches the live score used in the hero and buy box."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Fallback heading",
+      "default": "Customer Reviews"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cacao LP Reviews"
+    }
+  ]
+}
+{% endschema %}

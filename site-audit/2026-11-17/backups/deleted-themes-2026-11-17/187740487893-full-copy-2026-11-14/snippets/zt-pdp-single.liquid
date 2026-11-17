@@ -1,0 +1,122 @@
+{%- comment -%}
+  Single-ingredient product page helpers (built 3 Nov 2026).
+  render 'zt-pdp-single', part: 'servings' | 'chips', section_id: section.id
+  Servings are keyed on product handle + variant position, from the Single Ingredient Label Panels.
+  Variant titles are never read or changed.
+{%- endcomment -%}
+{%- liquid
+  assign zt_srv = ''
+  case product.handle
+    when 'zeolite'
+      assign zt_srv = '260|520|1035'
+      assign zt_srv_fmt = '260|520|1,035'
+      assign zt_serving = '1/4 teaspoon (0.9 g)'
+      assign zt_taste = 'Unflavored'
+      assign zt_chip3 = '900 mg Per Serving'
+    when 'organic-fermented-cacao-powder-premium-unsweetened'
+      assign zt_srv = '38|76|151'
+      assign zt_srv_fmt = '38|76|151'
+      assign zt_serving = '1 tablespoon (6 g)'
+      assign zt_taste = 'Deep, bittersweet dark chocolate'
+      assign zt_chip3 = '2 g Fiber'
+    when 'organic-pumpkin-seed-protein-powder'
+      assign zt_srv = '13|27|53'
+      assign zt_srv_fmt = '13|27|53'
+      assign zt_serving = '2 tablespoons (17 g)'
+      assign zt_taste = 'Mild and nutty, lighter than hemp'
+      assign zt_chip3 = '11 g Protein'
+    when 'zeotein-bone-broth-protein-powder'
+      assign zt_srv = '14|28|57'
+      assign zt_srv_fmt = '14|28|57'
+      assign zt_serving = '3 tablespoons (16 g)'
+      assign zt_taste = 'Unflavored and mild, so it takes on what you mix it into'
+      assign zt_chip3 = '15 g Protein'
+    when 'organic-hemp-protein-powder-premium-plant-based-protein'
+      assign zt_srv = '8|16|32'
+      assign zt_srv_fmt = '8|16|32'
+      assign zt_serving = '1/4 cup (28 g)'
+      assign zt_taste = 'Naturally nutty and earthy'
+      assign zt_chip3 = '14 g Protein · 6 g Fiber'
+    when 'organic-mct-oil-powder'
+      assign zt_srv = '23|45|91'
+      assign zt_srv_fmt = '23|45|91'
+      assign zt_serving = '1 1/2 tablespoons (10 g)'
+      assign zt_taste = 'Unflavored'
+      assign zt_chip3 = '6 g Fat'
+    when 'organic-lion-s-mane-mushroom-powder'
+      assign zt_srv = '162|324|648'
+      assign zt_srv_fmt = '162|324|648'
+      assign zt_serving = '1/2 teaspoon (1.4 g)'
+      assign zt_taste = 'Mild and earthy'
+      assign zt_chip3 = '1,400 mg Per Serving'
+    when 'zeotein-collagen-peptides'
+      assign zt_srv = '18|36|73'
+      assign zt_srv_fmt = '18|36|73'
+      assign zt_serving = '2 tablespoons (12.5 g)'
+      assign zt_taste = 'Unflavored'
+      assign zt_chip3 = '11 g Protein'
+    when 'organic-sea-moss-powder'
+      assign zt_srv = '33|67|133'
+      assign zt_srv_fmt = '33|67|133'
+      assign zt_serving = '1 teaspoon (3.4 g)'
+      assign zt_taste = 'Mild ocean taste that disappears in a fruit smoothie'
+      assign zt_chip3 = '54 mcg Iodine (36% DV)'
+  endcase
+-%}
+{%- if zt_srv != blank -%}
+  {%- assign zt_list = zt_srv | split: '|' -%}
+  {%- assign zt_list_fmt = zt_srv_fmt | split: '|' -%}
+  {%- if part == 'servings' -%}
+    {%- assign v = product.selected_or_first_available_variant -%}
+    {%- assign idx = 0 -%}
+    {%- for vv in product.variants -%}{%- if vv.id == v.id -%}{%- assign idx = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+    {%- assign n = zt_list[idx] | plus: 0 -%}
+    {%- assign pc = v.price | times: 1.0 | divided_by: n | round -%}
+    <p class="zt-srv" id="zt-srv-{{ section_id }}">
+      <span class="zt-srv__n">{{ zt_list_fmt[idx] }}</span> servings in this bag &middot; $<span class="zt-srv__p">{{ pc | money_without_currency }}</span> per serving
+    </p>
+    <script type="application/json" id="zt-srv-data-{{ section_id }}">
+      {"servings":[{{ zt_list | join: ',' }}],"fmt":{{ zt_list_fmt | json }},"variants":[{%- for vv in product.variants -%}{"id":{{ vv.id }},"position":{{ forloop.index }},"price":{{ vv.price }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}
+    </script>
+    <script>
+      (function () {
+        var el = document.getElementById('zt-srv-{{ section_id }}');
+        var d = JSON.parse(document.getElementById('zt-srv-data-{{ section_id }}').textContent);
+        function upd(id) {
+          var v = null;
+          for (var i = 0; i < d.variants.length; i++) if (String(d.variants[i].id) === String(id)) v = d.variants[i];
+          if (!v || !el) return;
+          var n = d.servings[v.position - 1];
+          el.querySelector('.zt-srv__n').textContent = d.fmt[v.position - 1];
+          el.querySelector('.zt-srv__p').textContent = (Math.round(v.price / n) / 100).toFixed(2);
+        }
+        function sub() { if (typeof subscribe === 'function' && window.PUB_SUB_EVENTS) subscribe(PUB_SUB_EVENTS.variantChange, function (e) { if (e && e.data && e.data.variant) upd(e.data.variant.id); }); }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', sub); else sub();
+        document.addEventListener('change', function (e) {
+          var t = e.target;
+          if (t && t.name === 'id' && t.form && /^product-form-/.test(t.form.getAttribute('id') || '')) upd(t.value);
+        });
+        var q = new URLSearchParams(window.location.search).get('variant');
+        if (q) upd(q);
+      })();
+    </script>
+    <style>
+      .zt-srv { margin: 2px 0 10px; color: #47206b; font-size: 1.5rem; line-height: 1.4; font-weight: 600; }
+      #MainProduct-{{ section_id }} variant-selects .product-form__input--pill input[type='radio'] + label { display: inline-flex; flex-direction: column; align-items: center; line-height: 1.2; }
+      #MainProduct-{{ section_id }} variant-selects .product-form__input--pill input[type='radio'] + label::after { display: block; margin-top: 3px; font-size: 1.15rem; font-weight: 400; opacity: .8; }
+      {%- for s in zt_list_fmt -%}
+      #MainProduct-{{ section_id }} variant-selects .product-form__input--pill input[type='radio']:nth-of-type({{ forloop.index }}) + label::after { content: "{{ s }} servings"; }
+      {%- endfor -%}
+    </style>
+  {%- elsif part == 'chips' -%}
+    <div class="zt-chips">
+      <span class="zt-chip">Serving: {{ zt_serving }}</span>
+      <span class="zt-chip">Taste: {{ zt_taste }}</span>
+      <span class="zt-chip">{{ zt_chip3 }}</span>
+    </div>
+    <style>
+      .zt-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 14px; }
+      .zt-chip { display: inline-block; padding: 6px 12px; border: 1px solid #ddd5eb; border-radius: 999px; background: #f6f2fb; color: #47206b; font-size: 1.3rem; line-height: 1.35; }
+    </style>
+  {%- endif -%}
+{%- endif -%}

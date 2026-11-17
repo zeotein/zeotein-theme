@@ -1,0 +1,228 @@
+{% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap');
+
+  #shopify-section-{{ section.id }} .z-quote {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 92px 24px 78px;
+    background:
+      radial-gradient(circle at 50% 52%, rgba(108, 57, 175, 0.55) 0%, rgba(108, 57, 175, 0.20) 26%, rgba(108, 57, 175, 0) 56%),
+      radial-gradient(circle at 52% 78%, rgba(46, 201, 201, 0.10) 0%, rgba(46, 201, 201, 0) 20%),
+      linear-gradient(135deg, #160824 0%, #2A0E4E 52%, #160824 100%);
+  }
+
+  #shopify-section-{{ section.id }} .z-quote::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,0.16) 1px, transparent 1.5px),
+      radial-gradient(circle, rgba(46,201,201,0.08) 1px, transparent 1.5px);
+    background-size: 170px 170px, 260px 260px;
+    background-position: 40px 35px, 110px 80px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .z-quote__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1220px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .z-quote__main {
+    margin: 0 0 30px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: clamp(64px, 8vw, 138px);
+    line-height: 0.92;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-quote__main span {
+    color: #2EC9C9;
+  }
+
+  #shopify-section-{{ section.id }} .z-quote__sub {
+    margin: 0 0 28px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: clamp(30px, 3.2vw, 62px);
+    line-height: 1.05;
+    letter-spacing: 0.6px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-quote__sub span {
+    color: #2EC9C9;
+  }
+
+  #shopify-section-{{ section.id }} .z-quote__attr {
+    margin: 0 0 46px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.4;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2EC9C9;
+  }
+
+  #shopify-section-{{ section.id }} .z-quote__cta-wrap {
+    margin-top: 0;
+  }
+
+  #shopify-section-{{ section.id }} .z-quote__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 330px;
+    padding: 22px 34px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #47D3D8 0%, #35B7C0 100%);
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 24px rgba(46, 201, 201, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .z-quote__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(46, 201, 201, 0.40);
+  }
+
+  #shopify-section-{{ section.id }} .z-quote__stars {
+    margin-top: 28px;
+    font-size: 28px;
+    line-height: 1;
+    color: #F6BC2F;
+    letter-spacing: 6px;
+  }
+
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .z-quote {
+      padding: 62px 18px 56px;
+    }
+
+    #shopify-section-{{ section.id }} .z-quote__main {
+      font-size: 54px;
+      line-height: 0.95;
+      margin-bottom: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .z-quote__sub {
+      font-size: 24px;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .z-quote__attr {
+      font-size: 15px;
+      margin-bottom: 28px;
+      letter-spacing: 1.5px;
+    }
+
+    #shopify-section-{{ section.id }} .z-quote__cta {
+      min-width: 0;
+      width: 100%;
+      max-width: 320px;
+      padding: 18px 24px;
+      font-size: 16px;
+      border-radius: 14px;
+    }
+
+    #shopify-section-{{ section.id }} .z-quote__stars {
+      font-size: 22px;
+      letter-spacing: 4px;
+      margin-top: 22px;
+    }
+  }
+{% endstyle %}
+
+<div class="z-quote">
+  <div class="z-quote__inner">
+
+    <h2 class="z-quote__main">
+      &ldquo;{{ section.settings.main_headline | newline_to_br | replace: 'MADE SIMPLE.', '<span>MADE SIMPLE.</span>' | replace: 'Made Simple.', '<span>Made Simple.</span>' | replace: 'made simple.', '<span>made simple.</span>' }}&rdquo;
+    </h2>
+
+    <p class="z-quote__sub">
+      &ldquo;{{ section.settings.quote | replace: 'NOISE.', '<span>NOISE.</span>' | replace: 'Noise.', '<span>Noise.</span>' | replace: 'noise.', '<span>noise.</span>' }}&rdquo;
+    </p>
+
+    <p class="z-quote__attr">— {{ section.settings.attribution }}</p>
+
+    {% if section.settings.button_text != blank %}
+      <div class="z-quote__cta-wrap">
+        <a href="{{ section.settings.button_link }}" class="z-quote__cta">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {% endif %}
+
+    {% if section.settings.stars_text != blank %}
+      <div class="z-quote__stars">{{ section.settings.stars_text }}</div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Zeotein Howie Quote",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "main_headline",
+      "label": "Main headline",
+      "default": "IT'S REAL NUTRITION\nMADE SIMPLE."
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote line",
+      "default": "ZEOTEIN CUTS THROUGH ALL THE NOISE."
+    },
+    {
+      "type": "text",
+      "id": "attribution",
+      "label": "Attribution",
+      "default": "HOWIE MANDEL"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "CLAIM MY 15% OFF"
+    },
+    {
+      "type": "text",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "/discount/HOWIE15?redirect=/products/zeotein-30-day-supply"
+    },
+    {
+      "type": "text",
+      "id": "stars_text",
+      "label": "Stars text",
+      "default": "★★★★★"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zeotein Howie Quote"
+    }
+  ]
+}
+{% endschema %}

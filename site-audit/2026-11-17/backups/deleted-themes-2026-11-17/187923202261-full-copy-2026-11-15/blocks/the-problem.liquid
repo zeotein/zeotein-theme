@@ -1,0 +1,669 @@
+{% style %}
+  .z-problem {
+    position: relative;
+    overflow: hidden;
+    padding: 52px 24px 54px;
+    background: #f8f8fb;
+    color: #141a2b;
+  }
+
+  .z-problem__container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+
+  .z-problem__header {
+    max-width: 1000px;
+    margin: 0 auto 34px;
+    text-align: center;
+  }
+
+  .z-problem__eyebrow {
+    margin: 0 0 10px;
+    color: #5f3091;
+    font-family: Poppins, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .z-problem__heading {
+    max-width: 900px;
+    margin: 0 auto 14px;
+    color: #141a2b;
+    font-family: Poppins, sans-serif;
+    font-size: clamp(38px, 5vw, 58px);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -2.3px;
+  }
+
+  .z-problem__intro {
+    max-width: 680px;
+    margin: 0 auto;
+    color: #555c6d;
+    font-family: Poppins, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .z-problem__intro p {
+    margin: 0 0 6px;
+  }
+
+  .z-problem__intro p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* CARDS */
+
+  .z-problem__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 0 auto;
+  }
+
+  .z-problem__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: auto;
+    min-height: 0;
+    border: 1px solid #dedee7;
+    border-radius: 20px;
+    background: #ffffff;
+    box-sizing: border-box;
+    transition:
+      transform 0.28s ease,
+      box-shadow 0.28s ease,
+      border-color 0.28s ease;
+  }
+
+  .z-problem__card:hover {
+    transform: translateY(-4px);
+    border-color: #c8bfd5;
+    box-shadow: 0 16px 36px rgba(36, 16, 61, 0.08);
+  }
+
+  .z-problem__card--solution {
+    border-color: #6b3ca0;
+    background: #f0ebf8;
+  }
+
+  .z-problem__card--solution:hover {
+    border-color: #5f3091;
+    box-shadow: 0 18px 40px rgba(95, 48, 145, 0.13);
+  }
+
+  /* IMAGE */
+
+  .z-problem__image {
+    position: relative;
+    width: 100%;
+    height: 205px;
+    overflow: hidden;
+    background: #f3f3f6;
+  }
+
+  .z-problem__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .z-problem__card:hover .z-problem__image img {
+    transform: scale(1.035);
+  }
+
+  .z-problem__card--solution .z-problem__image {
+    background: #e9e1f4;
+  }
+
+  /* PLACEHOLDER */
+
+  .z-problem__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #9993a5;
+    font-family: Poppins, sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* CARD CONTENT */
+
+  .z-problem__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 21px 22px 23px;
+  }
+
+  .z-problem__card-title {
+    margin: 0 0 7px;
+    color: #141a2b;
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .z-problem__card-text {
+    max-width: 340px;
+    margin: 0;
+    color: #626878;
+    font-family: Poppins, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+
+  .z-problem__card--solution .z-problem__card-title {
+    color: #5f3091;
+  }
+
+  .z-problem__card--solution .z-problem__card-text {
+    color: #59536a;
+  }
+
+  /* CTA */
+
+  .z-problem__cta-wrap {
+    margin-top: 28px;
+    text-align: center;
+  }
+
+  .z-problem__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 12px 27px;
+    border: 1px solid #6F4AA8;
+    border-radius: 999px;
+    background: #6F4AA8;
+    color: #FFFFFF !important;
+    font-family: Poppins, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .z-problem__cta:hover {
+    background: #FFFFFF;
+    color: #6F4AA8 !important;
+    border-color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(111, 74, 168, 0.18);
+  }
+
+  /* TABLET */
+
+  @media screen and (max-width: 900px) {
+    .z-problem {
+      padding: 48px 20px 54px;
+    }
+
+    .z-problem__header {
+      margin-bottom: 28px;
+    }
+
+    .z-problem__heading {
+      font-size: clamp(36px, 8vw, 50px);
+      letter-spacing: -1.7px;
+    }
+
+    .z-problem__intro {
+      font-size: 14px;
+    }
+
+    .z-problem__cards {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .z-problem__card {
+      min-height: 0;
+    }
+
+    .z-problem__image {
+      height: 190px;
+    }
+
+    .z-problem__content {
+      padding: 19px 21px 21px;
+    }
+  }
+
+  /* MOBILE */
+
+  @media screen and (max-width: 480px) {
+    .z-problem {
+      padding: 36px 14px 42px;
+    }
+
+    .z-problem__header {
+      margin-bottom: 20px;
+    }
+
+    .z-problem__eyebrow {
+      margin-bottom: 8px;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+    }
+
+    .z-problem__heading {
+      max-width: 350px;
+      margin-bottom: 11px;
+      font-size: 31px;
+      line-height: 1.05;
+      letter-spacing: -1.2px;
+    }
+
+    .z-problem__intro {
+      max-width: 350px;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .z-problem__intro p {
+      margin-bottom: 5px;
+    }
+
+    .z-problem__cards {
+      gap: 10px;
+    }
+
+    .z-problem__card {
+      border-radius: 17px;
+    }
+
+    .z-problem__image {
+      height: 145px;
+    }
+
+    .z-problem__content {
+      flex: 0 0 auto;
+      padding: 15px 17px 16px;
+    }
+
+    .z-problem__card-title {
+      margin-bottom: 5px;
+      font-size: 12px;
+      line-height: 1.3;
+      letter-spacing: 0.35px;
+    }
+
+    .z-problem__card-text {
+      max-width: none;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .z-problem__cta-wrap {
+      margin-top: 20px;
+    }
+
+    .z-problem__cta {
+      width: 100%;
+      max-width: 300px;
+      min-height: 44px;
+      padding: 11px 20px;
+      font-size: 10px;
+    }
+  }
+
+  /* SMALL MOBILE */
+
+  @media screen and (max-width: 360px) {
+    .z-problem {
+      padding: 32px 12px 38px;
+    }
+
+    .z-problem__header {
+      margin-bottom: 18px;
+    }
+
+    .z-problem__heading {
+      max-width: 330px;
+      font-size: 29px;
+      letter-spacing: -1.1px;
+    }
+
+    .z-problem__intro {
+      font-size: 11.5px;
+    }
+
+    .z-problem__cards {
+      gap: 9px;
+    }
+
+    .z-problem__image {
+      height: 138px;
+    }
+
+    .z-problem__content {
+      padding: 14px 15px 15px;
+    }
+
+    .z-problem__card-title {
+      font-size: 11.5px;
+    }
+
+    .z-problem__card-text {
+      font-size: 10.5px;
+      line-height: 1.4;
+    }
+
+    .z-problem__cta-wrap {
+      margin-top: 18px;
+    }
+  }
+{% endstyle %}
+
+
+<section
+  class="z-problem"
+  id="{{ block.settings.section_id | default: 'zeotein-problem' | escape }}"
+>
+
+  <div class="z-problem__container">
+
+    <!-- HEADER -->
+
+    <div class="z-problem__header">
+
+      {% if block.settings.eyebrow != blank %}
+        <p class="z-problem__eyebrow">
+          {{ block.settings.eyebrow }}
+        </p>
+      {% endif %}
+
+      {% if block.settings.heading != blank %}
+        <h2 class="z-problem__heading">
+          {{ block.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if block.settings.intro != blank %}
+        <div class="z-problem__intro">
+          {{ block.settings.intro }}
+        </div>
+      {% endif %}
+
+    </div>
+
+
+    <!-- CARDS -->
+
+    <div class="z-problem__cards">
+
+      <!-- CARD 1 -->
+
+      <div class="z-problem__card">
+
+        <div class="z-problem__image">
+
+          {% if block.settings.card_1_image != blank %}
+
+            <img
+              src="{{ block.settings.card_1_image | image_url: width: 900 }}"
+              alt="{{ block.settings.card_1_image.alt | default: 'Multiple supplement containers' | escape }}"
+              loading="lazy"
+              width="{{ block.settings.card_1_image.width }}"
+              height="{{ block.settings.card_1_image.height }}"
+            >
+
+          {% else %}
+
+            <div class="z-problem__placeholder">
+              Upload image
+            </div>
+
+          {% endif %}
+
+        </div>
+
+        <div class="z-problem__content">
+
+          <h3 class="z-problem__card-title">
+            {{ block.settings.card_1_title }}
+          </h3>
+
+          <p class="z-problem__card-text">
+            {{ block.settings.card_1_text }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- CARD 2 -->
+
+      <div class="z-problem__card">
+
+        <div class="z-problem__image">
+
+          {% if block.settings.card_2_image != blank %}
+
+            <img
+              src="{{ block.settings.card_2_image | image_url: width: 900 }}"
+              alt="{{ block.settings.card_2_image.alt | default: 'Multiple supplement powders and scoops' | escape }}"
+              loading="lazy"
+              width="{{ block.settings.card_2_image.width }}"
+              height="{{ block.settings.card_2_image.height }}"
+            >
+
+          {% else %}
+
+            <div class="z-problem__placeholder">
+              Upload image
+            </div>
+
+          {% endif %}
+
+        </div>
+
+        <div class="z-problem__content">
+
+          <h3 class="z-problem__card-title">
+            {{ block.settings.card_2_title }}
+          </h3>
+
+          <p class="z-problem__card-text">
+            {{ block.settings.card_2_text }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- CARD 3 / SOLUTION -->
+
+      <div class="z-problem__card z-problem__card--solution">
+
+        <div class="z-problem__image">
+
+          {% if block.settings.card_3_image != blank %}
+
+            <img
+              src="{{ block.settings.card_3_image | image_url: width: 900 }}"
+              alt="{{ block.settings.card_3_image.alt | default: 'Zeotein Cacao product' | escape }}"
+              loading="lazy"
+              width="{{ block.settings.card_3_image.width }}"
+              height="{{ block.settings.card_3_image.height }}"
+            >
+
+          {% else %}
+
+            <div class="z-problem__placeholder">
+              Upload Zeotein image
+            </div>
+
+          {% endif %}
+
+        </div>
+
+        <div class="z-problem__content">
+
+          <h3 class="z-problem__card-title">
+            {{ block.settings.card_3_title }}
+          </h3>
+
+          <p class="z-problem__card-text">
+            {{ block.settings.card_3_text }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- CTA -->
+
+    {% if block.settings.cta_text != blank %}
+
+      <div class="z-problem__cta-wrap">
+
+        <a
+          href="{% if block.settings.cta_url != blank %}{{ block.settings.cta_url }}{% else %}#ingredients{% endif %}"
+          class="z-problem__cta"
+        >
+          {{ block.settings.cta_text }}
+        </a>
+
+      </div>
+
+    {% endif %}
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Zeotein Problem",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "zeotein-problem"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE PROBLEM"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your supplement shelf shouldn't be this complicated."
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro copy",
+      "default": "<p>Different tubs. Different scoops. Different routines.</p><p>Zeotein brings meaningful nutrition together in one simple daily format.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_1_image",
+      "label": "Card 1 image",
+      "info": "Use an image showing multiple generic supplement containers."
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Card 1 title",
+      "default": "TOO MANY TUBS"
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_text",
+      "label": "Card 1 description",
+      "default": "Protein, greens, collagen, and more — each with its own container."
+    },
+    {
+      "type": "image_picker",
+      "id": "card_2_image",
+      "label": "Card 2 image",
+      "info": "Use an image showing multiple powders, scoops, or a complicated supplement routine."
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Card 2 title",
+      "default": "TOO MANY ROUTINES"
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_text",
+      "label": "Card 2 description",
+      "default": "Different scoops, schedules, and steps to keep track of."
+    },
+    {
+      "type": "image_picker",
+      "id": "card_3_image",
+      "label": "Card 3 image",
+      "info": "Use the actual Zeotein Cacao product image."
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Card 3 title",
+      "default": "ONE SIMPLE DAILY ROUTINE"
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_text",
+      "label": "Card 3 description",
+      "default": "Zeotein brings meaningful nutrition together in one easy daily routine."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "SEE WHAT'S INSIDE"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL",
+      "info": "Leave blank to link to the homepage What's Inside / ingredients section (#ingredients)."
+    }
+  ]
+}
+{% endschema %}

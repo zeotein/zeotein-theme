@@ -1,0 +1,562 @@
+{%- liquid
+  assign sid = 'zt-mq-' | append: section.id
+  assign speed = section.settings.speed | default: 72
+  assign gap = section.settings.gap | default: 48
+  assign pad_y = section.settings.padding_y | default: 24
+-%}
+
+{% render 'cacao-lp-fonts', id: sid, font_family: section.settings.font_family, settings: section.settings, prefixes: 'label' %}
+
+<section
+  id="{{ sid }}"
+  class="zt-mq"
+  {{ section.shopify_attributes }}
+  style="
+    --zt-mq-bg: {{ section.settings.bg_color }};
+    --zt-mq-text: {{ section.settings.text_color }};
+    --zt-mq-icon: {{ section.settings.icon_color }};
+    --zt-mq-gap: {{ gap }}px;
+    --zt-mq-pad-y: {{ pad_y }}px;
+    --zt-mq-speed: {{ speed }}s;
+    --zt-mq-icon-size: {{ section.settings.icon_size }}px;
+  "
+>
+  <div class="zt-mq__viewport"{% if section.settings.pause_on_hover %} data-zt-mq-pause{% endif %}>
+    <div class="zt-mq__track" data-zt-mq-track>
+      {%- for loop_i in (1..2) -%}
+        <div class="zt-mq__group" aria-hidden="{% if loop_i == 2 %}true{% else %}false{% endif %}">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.text == blank -%}{% continue %}{%- endif -%}
+            <div class="zt-mq__item" {{ block.shopify_attributes }}>
+              {%- if section.settings.show_icons -%}
+                <span class="zt-mq__icon" aria-hidden="true">
+                  {%- if block.settings.icon != blank -%}
+                    {{
+                      block.settings.icon
+                      | image_url: width: 80
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '40, 80',
+                        sizes: '20px',
+                        class: 'zt-mq__icon-img',
+                        alt: ''
+                    }}
+                  {%- elsif section.settings.default_icon != blank -%}
+                    {{
+                      section.settings.default_icon
+                      | image_url: width: 80
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '40, 80',
+                        sizes: '20px',
+                        class: 'zt-mq__icon-img',
+                        alt: ''
+                    }}
+                  {%- else -%}
+                    <svg class="zt-mq__icon-svg" viewBox="0 0 20 20" width="20" height="20" focusable="false">
+                      <circle cx="10" cy="10" r="8.333" fill="none" stroke="currentColor" stroke-width="1.667" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M7.5 10l1.667 1.667L12.5 8.333" fill="none" stroke="currentColor" stroke-width="1.667" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- endif -%}
+                </span>
+              {%- endif -%}
+              <span class="zt-mq__label">{{ block.settings.text | escape }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .zt-mq {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    background: var(--zt-mq-bg, #580d93);
+    color: var(--zt-mq-text, #fcfcfc);
+    font-family: var(--zt-font, Manrope, Arial, sans-serif);
+  }
+
+  .zt-mq *,
+  .zt-mq *::before,
+  .zt-mq *::after {
+    box-sizing: border-box;
+  }
+
+  .zt-mq__viewport {
+    width: 100%;
+    overflow: hidden;
+    padding: var(--zt-mq-pad-y, 24px) 0;
+  }
+
+  .zt-mq__track {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    align-items: center;
+    animation: zt-mq-scroll var(--zt-mq-speed, 28s) linear infinite;
+    will-change: transform;
+  }
+
+  .zt-mq__viewport[data-zt-mq-pause]:hover .zt-mq__track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .zt-mq__track {
+      animation: none;
+    }
+  }
+
+  .zt-mq__group {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: var(--zt-mq-gap, 48px);
+    padding-right: var(--zt-mq-gap, 48px);
+  }
+
+  .zt-mq__item {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+
+  .zt-mq__icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: var(--zt-mq-icon-size, 20px);
+    height: var(--zt-mq-icon-size, 20px);
+    color: var(--zt-mq-icon, #009c96);
+  }
+
+  .zt-mq__icon-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .zt-mq__icon-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .zt-mq__label {
+    font-family: var(--zt-label-font, inherit);
+    font-size: var(--zt-label-size, 18px);
+    font-weight: var(--zt-label-weight, 800);
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--zt-mq-text, #fcfcfc);
+  }
+
+  @keyframes zt-mq-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(var(--zt-mq-shift, -50%), 0, 0);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .zt-mq__label {
+      font-size: var(--zt-label-size-m, 14px);
+    }
+
+    .zt-mq__item {
+      gap: 8px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function fillMarquee(root) {
+      if (!root || root.dataset.ztMqFilling === '1') return;
+      var viewport = root.querySelector('.zt-mq__viewport');
+      var track = root.querySelector('[data-zt-mq-track]');
+      if (!viewport || !track) return;
+
+      var groups = track.querySelectorAll('.zt-mq__group');
+      var base = groups[0];
+      if (!base) return;
+
+      root.dataset.ztMqFilling = '1';
+      var groupWidth = base.offsetWidth;
+      var viewportWidth = viewport.offsetWidth;
+      if (!groupWidth || !viewportWidth) {
+        root.dataset.ztMqFilling = '0';
+        return;
+      }
+
+      var copies = Math.max(2, Math.ceil(viewportWidth / groupWidth) * 2);
+      var shift = groupWidth * (copies / 2);
+      track.style.setProperty('--zt-mq-shift', '-' + shift + 'px');
+
+      if (root.dataset.ztMqCopies === String(copies) && groups.length === copies) {
+        root.dataset.ztMqFilling = '0';
+        return;
+      }
+
+      for (var i = 1; i < groups.length; i++) groups[i].remove();
+
+      for (var n = 1; n < copies; n++) {
+        var clone = base.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        var items = clone.querySelectorAll('.zt-mq__item');
+        for (var itemIndex = 0; itemIndex < items.length; itemIndex++) {
+          var names = items[itemIndex].getAttributeNames();
+          for (var nameIndex = 0; nameIndex < names.length; nameIndex++) {
+            if (names[nameIndex].indexOf('shopify') !== -1) {
+              items[itemIndex].removeAttribute(names[nameIndex]);
+            }
+          }
+        }
+        track.appendChild(clone);
+      }
+
+      root.dataset.ztMqCopies = String(copies);
+      root.dataset.ztMqFilling = '0';
+    }
+
+    function fillAll() {
+      var roots = document.querySelectorAll('.zt-mq');
+      for (var i = 0; i < roots.length; i++) fillMarquee(roots[i]);
+    }
+
+    fillAll();
+    window.addEventListener('load', fillAll);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fillAll);
+    window.addEventListener('resize', fillAll);
+
+    if (!window.ztMqSectionLoad) {
+      window.ztMqSectionLoad = true;
+      document.addEventListener('shopify:section:load', function (event) {
+        var root = event.target.querySelector('.zt-mq');
+        if (root) {
+          delete root.dataset.ztMqCopies;
+          fillMarquee(root);
+        }
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Marquee Cacao LP",
+  "tag": "section",
+  "class": "section-marquee-cacao-lp",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#580d93"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#fcfcfc"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#009c96",
+      "info": "Applies to the built-in check icon. Custom uploaded icons keep their own colors."
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icons",
+      "label": "Show icons",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "default_icon",
+      "label": "Default icon",
+      "info": "Used when an item has no custom icon. Leave empty to use the built-in teal check."
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Typography & spacing"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "manrope",
+          "label": "Manrope (Figma)"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "poppins",
+          "label": "Theme body (Poppins alias)"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "custom_font",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+      "visible_if": "{{ section.settings.font_family == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "Marquee label"
+    },
+    {
+      "type": "select",
+      "id": "label_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "label_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ section.settings.label_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "label_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "800"
+    },
+    {
+      "type": "range",
+      "id": "label_size_desktop",
+      "label": "Size - desktop",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "label_size_mobile",
+      "label": "Size - mobile",
+      "min": 11,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between items",
+      "min": 16,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Vertical padding",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll duration",
+      "min": 10,
+      "max": 120,
+      "step": 2,
+      "unit": "s",
+      "default": 72,
+      "info": "Higher = slower. Loop is seamless and continuous. Dana asked to slow the LP bar further."
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Highlight",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "23g protein"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Custom icon",
+          "info": "Optional. Overrides the section default icon for this item."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Cacao LP",
+      "settings": {
+        "bg_color": "#580d93",
+        "text_color": "#fcfcfc",
+        "icon_color": "#009c96",
+        "show_icons": true,
+        "icon_size": 20,
+        "font_family": "manrope",
+        "custom_font": "",
+        "label_font": "manrope",
+        "label_font_custom": "",
+        "label_weight": "800",
+        "label_size_desktop": 18,
+        "label_size_mobile": 14,
+        "gap": 48,
+        "padding_y": 24,
+        "speed": 72,
+        "pause_on_hover": true
+      },
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "text": "23g protein"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Zero sugar"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "6 functional ingredients"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "30-day guarantee"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Clearly listed ingredients"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

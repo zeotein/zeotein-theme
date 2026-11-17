@@ -1,0 +1,1495 @@
+{% style %}
+
+/* =========================================================
+   ZEOTEIN HERO
+   FINAL DESKTOP + MOBILE
+   CENTERED PRODUCT COMPOSITION
+   ========================================================= */
+
+.zeotein-hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #1c0b2e;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   HERO MEDIA
+   ========================================================= */
+
+.zeotein-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+  background: #1c0b2e;
+}
+
+.zeotein-hero__media img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center center;
+}
+
+
+/* =========================================================
+   FALLBACK
+   ========================================================= */
+
+.zeotein-hero__fallback {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(106,32,168,.60),
+      transparent 42%
+    ),
+    linear-gradient(
+      110deg,
+      #321455 0%,
+      #1c0b2e 70%
+    );
+}
+
+
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+.zeotein-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(24,8,40,.04) 0%,
+      rgba(24,8,40,.08) 34%,
+      rgba(24,8,40,.35) 57%,
+      rgba(24,8,40,.90) 100%
+    );
+}
+
+
+/* =========================================================
+   DESKTOP INNER
+   ========================================================= */
+
+.zeotein-hero__inner {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  width: 100%;
+  max-width: 1440px;
+
+  min-height: 650px;
+
+  margin: 0 auto;
+
+  padding:
+    70px
+    6%;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   DESKTOP CONTENT
+   ========================================================= */
+
+.zeotein-hero__content {
+  width: min(520px, 48%);
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.zeotein-hero__eyebrow {
+  margin:
+    0
+    0
+    14px;
+
+  color: #2ec9c9;
+
+  font-family: Poppins, Arial, sans-serif;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  line-height: 1.4;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   HEADLINE
+   ========================================================= */
+
+.zeotein-hero__heading {
+  max-width: 560px;
+
+  margin:
+    0
+    0
+    18px;
+
+  color: #ffffff;
+
+  font-family: Poppins, Arial, sans-serif;
+
+  font-size:
+    clamp(
+      42px,
+      5vw,
+      72px
+    );
+
+  font-weight: 700;
+
+  line-height: 1.02;
+
+  letter-spacing: -2.6px;
+}
+
+.zeotein-hero__heading strong {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   SUPPORTING COPY
+   ========================================================= */
+
+.zeotein-hero__text {
+  max-width: 500px;
+
+  margin:
+    0
+    0
+    21px;
+
+  color: rgba(255,255,255,.90);
+
+  font-family: Poppins, Arial, sans-serif;
+
+  font-size: 17px;
+
+  line-height: 1.5;
+}
+
+.zeotein-hero__text p {
+  margin: 0;
+}
+
+
+/* =========================================================
+   RATING
+   ========================================================= */
+
+.zeotein-hero__rating {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  margin:
+    0
+    0
+    24px;
+
+  font-family: Poppins, Arial, sans-serif;
+}
+
+.zeotein-hero__stars {
+  color: #f2a900;
+
+  font-size: 17px;
+
+  line-height: 1;
+
+  letter-spacing: 2px;
+}
+
+.zeotein-hero__rating-text {
+  color: #ffffff;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  line-height: 1.35;
+}
+
+.zeotein-hero__rating-count {
+  color: rgba(255,255,255,.72);
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.zeotein-hero__cta {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 54px;
+
+  padding:
+    15px
+    31px;
+
+  border-radius: 999px;
+
+  background: #2ec9c9;
+
+  color: #24103d;
+
+  font-family: Poppins, Arial, sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  letter-spacing: .5px;
+
+  text-decoration: none;
+
+  text-transform: uppercase;
+
+  transition:
+    transform .2s ease,
+    background .2s ease;
+}
+
+.zeotein-hero__cta:hover {
+  background: #48dada;
+
+  color: #24103d;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   MICROCOPY
+   ========================================================= */
+
+.zeotein-hero__microcopy {
+  margin:
+    9px
+    0
+    0;
+
+  color: rgba(255,255,255,.64);
+
+  font-family: Poppins, Arial, sans-serif;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   PROOF BAR
+   ========================================================= */
+
+.zeotein-hero__proof {
+  display: flex;
+
+  align-items: stretch;
+
+  width: fit-content;
+
+  max-width: 100%;
+
+  margin-top: 25px;
+
+  padding:
+    12px
+    16px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.20);
+
+  border-radius: 14px;
+
+  background:
+    rgba(30,10,48,.68);
+
+  box-shadow:
+    0
+    8px
+    25px
+    rgba(0,0,0,.16);
+
+  backdrop-filter: blur(9px);
+
+  -webkit-backdrop-filter: blur(9px);
+}
+
+
+/* =========================================================
+   PROOF ITEMS
+   ========================================================= */
+
+.zeotein-hero__proof-item {
+  min-width: 96px;
+
+  padding:
+    0
+    18px;
+
+  color: #ffffff;
+
+  font-family: Poppins, Arial, sans-serif;
+
+  font-size: 12px;
+
+  line-height: 1.3;
+
+  text-align: left;
+}
+
+.zeotein-hero__proof-item:first-child {
+  padding-left: 4px;
+}
+
+.zeotein-hero__proof-item:last-child {
+  padding-right: 4px;
+}
+
+.zeotein-hero__proof-item + .zeotein-hero__proof-item {
+  border-left:
+    1px solid
+    rgba(255,255,255,.22);
+}
+
+.zeotein-hero__proof-item strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #2ec9c9;
+
+  font-size: 21px;
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+.zeotein-hero__proof-item span {
+  display: block;
+
+  color: #ffffff;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  line-height: 1.35;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media screen and (max-width: 900px) {
+
+  .zeotein-hero__inner {
+    min-height: 620px;
+
+    padding:
+      55px
+      30px;
+  }
+
+  .zeotein-hero__content {
+    width: min(560px, 62%);
+  }
+
+  .zeotein-hero__overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(24,8,40,.10) 0%,
+        rgba(24,8,40,.30) 48%,
+        rgba(24,8,40,.88) 100%
+      );
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 768px) {
+
+  /* -------------------------------------------------------
+     HERO
+     ------------------------------------------------------- */
+
+  .zeotein-hero {
+    position: relative !important;
+
+    display: block !important;
+
+    width: 100% !important;
+
+    height: 700px !important;
+
+    min-height: 700px !important;
+
+    overflow: hidden !important;
+
+    background: #1c0b2e !important;
+
+    color: #ffffff !important;
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE IMAGE AREA
+     
+     Product image is centered underneath the copy.
+     ------------------------------------------------------- */
+
+  .zeotein-hero__media {
+    position: absolute !important;
+
+    top: auto !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+
+    z-index: 0 !important;
+
+    width: 100% !important;
+
+    height: 430px !important;
+
+    min-height: 430px !important;
+
+    overflow: hidden !important;
+
+    background: #1c0b2e !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CENTERED PRODUCT IMAGE
+     
+     IMPORTANT:
+     The image is wider than a phone.
+     34% keeps the pouch as the primary visual while keeping
+     the glass clearly visible beside it.
+     ------------------------------------------------------- */
+
+  .zeotein-hero__media img {
+    position: absolute !important;
+
+    top: 0 !important;
+    bottom: 0 !important;
+
+    left: 50% !important;
+
+    display: block !important;
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    min-width: 100% !important;
+
+    min-height: 100% !important;
+
+    max-width: none !important;
+
+    max-height: none !important;
+
+    transform: translateX(-50%) !important;
+
+    object-fit: cover !important;
+
+    object-position: 24% center !important;
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE OVERLAY
+     ------------------------------------------------------- */
+
+  .zeotein-hero__overlay {
+    position: absolute !important;
+
+    inset: 0 !important;
+
+    z-index: 1 !important;
+
+    background:
+      linear-gradient(
+        180deg,
+
+        #1c0b2e 0%,
+
+        #1c0b2e 38%,
+
+        rgba(28,11,46,.98) 46%,
+
+        rgba(28,11,46,.91) 55%,
+
+        rgba(28,11,46,.60) 68%,
+
+        rgba(28,11,46,.18) 84%,
+
+        rgba(28,11,46,.05) 100%
+      ) !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CONTENT
+     ------------------------------------------------------- */
+
+  .zeotein-hero__inner {
+    position: relative !important;
+
+    z-index: 2 !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    align-items: stretch !important;
+
+    justify-content: flex-start !important;
+
+    width: 100% !important;
+
+    height: 700px !important;
+
+    min-height: 700px !important;
+
+    margin: 0 !important;
+
+    padding:
+      35px
+      16px
+      20px !important;
+
+    box-sizing: border-box !important;
+
+    background: transparent !important;
+  }
+
+
+  .zeotein-hero__content {
+    position: relative !important;
+
+    z-index: 3 !important;
+
+    width: 100% !important;
+
+    max-width: 390px !important;
+
+    margin:
+      0
+      auto !important;
+
+    padding: 0 !important;
+
+    color: #ffffff !important;
+
+    background: transparent !important;
+
+    text-align: left !important;
+  }
+
+
+  /* -------------------------------------------------------
+     EYEBROW
+     ------------------------------------------------------- */
+
+  .zeotein-hero__eyebrow {
+    margin:
+      0
+      0
+      9px !important;
+
+    color: #2ec9c9 !important;
+
+    font-size: 9px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1.35 !important;
+
+    letter-spacing: 1.7px !important;
+
+    text-transform: uppercase !important;
+  }
+
+
+  /* -------------------------------------------------------
+     HEADLINE
+     ------------------------------------------------------- */
+
+  .zeotein-hero__heading {
+    max-width: 350px !important;
+
+    margin:
+      0
+      0
+      13px !important;
+
+    color: #ffffff !important;
+
+    font-size: 36px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1.02 !important;
+
+    letter-spacing: -1.35px !important;
+
+    text-wrap: balance !important;
+
+    text-shadow:
+      0
+      2px
+      12px
+      rgba(0,0,0,.18) !important;
+  }
+
+
+  /* -------------------------------------------------------
+     DESCRIPTION
+     ------------------------------------------------------- */
+
+  .zeotein-hero__text {
+    max-width: 345px !important;
+
+    margin:
+      0
+      0
+      13px !important;
+
+    color: rgba(255,255,255,.90) !important;
+
+    font-size: 12px !important;
+
+    line-height: 1.48 !important;
+  }
+
+  .zeotein-hero__text p {
+    margin: 0 !important;
+  }
+
+
+  /* -------------------------------------------------------
+     RATING
+     ------------------------------------------------------- */
+
+  .zeotein-hero__rating {
+    display: flex !important;
+
+    align-items: center !important;
+
+    flex-wrap: wrap !important;
+
+    gap: 6px !important;
+
+    margin:
+      0
+      0
+      14px !important;
+  }
+
+
+  .zeotein-hero__stars {
+    color: #f2a900 !important;
+
+    font-size: 13px !important;
+
+    line-height: 1 !important;
+
+    letter-spacing: 1px !important;
+  }
+
+
+  .zeotein-hero__rating-text {
+    color: #ffffff !important;
+
+    font-size: 10px !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1.3 !important;
+  }
+
+
+  .zeotein-hero__rating-count {
+    color: rgba(255,255,255,.70) !important;
+
+    font-weight: 400 !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CTA
+     ------------------------------------------------------- */
+
+  .zeotein-hero__cta {
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    width: 100% !important;
+
+    min-width: 100% !important;
+
+    height: 51px !important;
+
+    min-height: 51px !important;
+
+    margin: 0 !important;
+
+    padding:
+      14px
+      20px !important;
+
+    box-sizing: border-box !important;
+
+    border-radius: 999px !important;
+
+    background: #2ec9c9 !important;
+
+    color: #24103d !important;
+
+    font-size: 12px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1.2 !important;
+
+    letter-spacing: .5px !important;
+
+    text-align: center !important;
+
+    text-decoration: none !important;
+
+    text-transform: uppercase !important;
+
+    box-shadow:
+      0
+      7px
+      18px
+      rgba(0,0,0,.18) !important;
+  }
+
+
+  .zeotein-hero__cta:hover {
+    background: #48dada !important;
+
+    color: #24103d !important;
+  }
+
+
+  /* -------------------------------------------------------
+     MICROCOPY
+     ------------------------------------------------------- */
+
+  .zeotein-hero__microcopy {
+    margin:
+      7px
+      0
+      0 !important;
+
+    color: rgba(255,255,255,.58) !important;
+
+    font-size: 8px !important;
+
+    line-height: 1.3 !important;
+
+    text-align: center !important;
+  }
+
+
+  /* -------------------------------------------------------
+     PROOF BAR
+     
+     Remains in normal flow.
+     No overlap with CTA.
+     ------------------------------------------------------- */
+
+  .zeotein-hero__proof {
+    position: relative !important;
+
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+
+    z-index: 5 !important;
+
+    display: flex !important;
+
+    align-items: stretch !important;
+
+    width: 100% !important;
+
+    min-width: 100% !important;
+
+    max-width: 100% !important;
+
+    margin:
+      12px
+      0
+      0 !important;
+
+    padding:
+      10px
+      5px !important;
+
+    box-sizing: border-box !important;
+
+    border:
+      1px
+      solid
+      rgba(255,255,255,.20) !important;
+
+    border-radius: 13px !important;
+
+    background:
+      rgba(29,11,48,.94) !important;
+
+    box-shadow:
+      0
+      7px
+      20px
+      rgba(0,0,0,.22) !important;
+
+    backdrop-filter: blur(8px) !important;
+
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+
+
+  .zeotein-hero__proof-item {
+    min-width: 0 !important;
+
+    flex:
+      1
+      1
+      0 !important;
+
+    padding:
+      0
+      4px !important;
+
+    color: #ffffff !important;
+
+    font-size: 8px !important;
+
+    line-height: 1.25 !important;
+
+    text-align: center !important;
+  }
+
+
+  .zeotein-hero__proof-item:first-child {
+    padding-left: 2px !important;
+  }
+
+
+  .zeotein-hero__proof-item:last-child {
+    padding-right: 2px !important;
+  }
+
+
+  .zeotein-hero__proof-item
+  + .zeotein-hero__proof-item {
+    border-left:
+      1px
+      solid
+      rgba(255,255,255,.20) !important;
+  }
+
+
+  .zeotein-hero__proof-item strong {
+    display: block !important;
+
+    margin:
+      0
+      0
+      3px !important;
+
+    color: #2ec9c9 !important;
+
+    font-size: 18px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1 !important;
+  }
+
+
+  .zeotein-hero__proof-item span {
+    display: block !important;
+
+    color: #ffffff !important;
+
+    font-size: 8px !important;
+
+    line-height: 1.25 !important;
+
+    white-space: nowrap !important;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 480px) {
+
+  .zeotein-hero {
+    height: 700px !important;
+
+    min-height: 700px !important;
+  }
+
+
+  .zeotein-hero__media {
+    height: 425px !important;
+
+    min-height: 425px !important;
+  }
+
+
+  /*
+     Product-first mobile composition.
+     Shifts the product group right so more of the pouch is visible.
+  */
+
+  .zeotein-hero__media img {
+    object-position: 24% center !important;
+  }
+
+
+  .zeotein-hero__inner {
+    height: 700px !important;
+
+    min-height: 700px !important;
+
+    padding:
+      35px
+      15px
+      20px !important;
+  }
+
+
+  .zeotein-hero__heading {
+    max-width: 330px !important;
+
+    font-size: 35px !important;
+
+    line-height: 1.03 !important;
+
+    letter-spacing: -1.3px !important;
+  }
+
+
+  .zeotein-hero__text {
+    max-width: 340px !important;
+
+    font-size: 12px !important;
+  }
+
+
+  .zeotein-hero__proof {
+    margin-top: 12px !important;
+  }
+
+
+  .zeotein-hero__proof-item strong {
+    font-size: 18px !important;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 360px) {
+
+  .zeotein-hero {
+    height: 665px !important;
+
+    min-height: 665px !important;
+  }
+
+
+  .zeotein-hero__media {
+    height: 395px !important;
+
+    min-height: 395px !important;
+  }
+
+
+  /*
+     Product-first framing on very narrow screens.
+     Keeps more of the pouch visible while retaining the glass.
+  */
+
+  .zeotein-hero__media img {
+    object-position: 23% center !important;
+  }
+
+
+  .zeotein-hero__inner {
+    height: 665px !important;
+
+    min-height: 665px !important;
+
+    padding:
+      32px
+      13px
+      18px !important;
+  }
+
+
+  .zeotein-hero__eyebrow {
+    font-size: 8px !important;
+
+    letter-spacing: 1.5px !important;
+  }
+
+
+  .zeotein-hero__heading {
+    max-width: 300px !important;
+
+    font-size: 32px !important;
+
+    line-height: 1.02 !important;
+
+    letter-spacing: -1.1px !important;
+  }
+
+
+  .zeotein-hero__text {
+    font-size: 11.5px !important;
+
+    line-height: 1.45 !important;
+  }
+
+
+  .zeotein-hero__rating-text {
+    font-size: 9px !important;
+  }
+
+
+  .zeotein-hero__cta {
+    height: 49px !important;
+
+    min-height: 49px !important;
+  }
+
+
+  .zeotein-hero__proof {
+    margin-top: 10px !important;
+
+    padding:
+      9px
+      4px !important;
+  }
+
+
+  .zeotein-hero__proof-item strong {
+    font-size: 16px !important;
+  }
+
+
+  .zeotein-hero__proof-item span {
+    font-size: 7px !important;
+  }
+}
+
+{% endstyle %}
+
+
+{% assign cacao_product = section.settings.cacao_product %}
+
+
+{% if section.settings.cta_url != blank %}
+
+  {% assign hero_cta_url = section.settings.cta_url %}
+
+{% elsif cacao_product != blank %}
+
+  {% assign hero_cta_url = cacao_product.url %}
+
+{% else %}
+
+  {% assign hero_cta_url = routes.all_products_collection_url %}
+
+{% endif %}
+
+
+<section
+  class="zeotein-hero"
+  aria-label="{{ section.settings.heading | escape }}"
+
+
+
+  <!-- =====================================================
+       HERO IMAGE
+       ===================================================== -->
+
+  <div class="zeotein-hero__media">
+
+    {% if section.settings.hero_image != blank %}
+
+      {{
+        section.settings.hero_image
+        | image_url: width: 2400
+        | image_tag:
+          widths: '750, 1100, 1500, 2000, 2400',
+          sizes: '100vw',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: 'Zeotein Cacao Protein Blend'
+      }}
+
+    {% elsif cacao_product != blank
+      and cacao_product.featured_image != blank %}
+
+      {{
+        cacao_product.featured_image
+        | image_url: width: 2400
+        | image_tag:
+          widths: '750, 1100, 1500, 2000, 2400',
+          sizes: '100vw',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: cacao_product.title | escape
+      }}
+
+    {% else %}
+
+      <div class="zeotein-hero__fallback"></div>
+
+    {% endif %}
+
+  </div>
+
+
+  <!-- =====================================================
+       OVERLAY
+       ===================================================== -->
+
+  <div class="zeotein-hero__overlay"></div>
+
+
+  <!-- =====================================================
+       CONTENT
+       ===================================================== -->
+
+  <div class="zeotein-hero__inner">
+
+    <div class="zeotein-hero__content">
+
+
+      <!-- EYEBROW -->
+
+      {% if section.settings.eyebrow != blank %}
+
+        <p class="zeotein-hero__eyebrow">
+          {{ section.settings.eyebrow }}
+        </p>
+
+      {% endif %}
+
+
+      <!-- HEADLINE -->
+
+      {% if section.settings.heading != blank %}
+
+        <h1 class="zeotein-hero__heading">
+          {{ section.settings.heading | newline_to_br }}
+        </h1>
+
+      {% endif %}
+
+
+      <!-- DESCRIPTION -->
+
+      {% if section.settings.text != blank %}
+
+        <div class="zeotein-hero__text">
+          {{ section.settings.text }}
+        </div>
+
+      {% endif %}
+
+
+      <!-- RATING -->
+
+      <div class="zeotein-hero__rating">
+
+        <span
+          class="zeotein-hero__stars"
+          aria-label="5 out of 5 stars"
+        >
+          ★★★★★
+        </span>
+
+        <span class="zeotein-hero__rating-text">
+
+          {{ section.settings.rating }}
+
+          {% if section.settings.review_count != blank %}
+
+            <span class="zeotein-hero__rating-count">
+              · {{ section.settings.review_count }}
+            </span>
+
+          {% endif %}
+
+        </span>
+
+      </div>
+
+
+      <!-- CTA -->
+
+      <a
+        class="zeotein-hero__cta"
+        href="{{ hero_cta_url }}"
+      >
+        {{ section.settings.cta_text }}
+      </a>
+
+
+      <!-- MICROCOPY -->
+
+      {% if section.settings.microcopy != blank %}
+
+        <p class="zeotein-hero__microcopy">
+          {{ section.settings.microcopy }}
+        </p>
+
+      {% endif %}
+
+
+      <!-- PROOF BAR -->
+
+      <div
+        class="zeotein-hero__proof"
+        aria-label="Product highlights"
+      >
+
+        <div class="zeotein-hero__proof-item">
+
+          <strong>
+            {{ section.settings.proof_1_value }}
+          </strong>
+
+          <span>
+            {{ section.settings.proof_1_label }}
+          </span>
+
+        </div>
+
+
+        <div class="zeotein-hero__proof-item">
+
+          <strong>
+            {{ section.settings.proof_2_value }}
+          </strong>
+
+          <span>
+            {{ section.settings.proof_2_label }}
+          </span>
+
+        </div>
+
+
+        <div class="zeotein-hero__proof-item">
+
+          <strong>
+            {{ section.settings.proof_3_value }}
+          </strong>
+
+          <span>
+            {{ section.settings.proof_3_label }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+{% schema %}
+{
+  "name": "Zeotein Cacao Hero",
+  "tag": "section",
+  "class": "zeotein-cacao-hero",
+  "settings": [
+    {
+      "type": "product",
+      "id": "cacao_product",
+      "label": "Cacao Protein Blend product"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image",
+      "info": "Use the wide Cacao Protein Blend hero image. If blank, the selected product's featured image is used."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "CLEAN. FUNCTIONAL. SIMPLE."
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Headline",
+      "default": "Clean protein.\nMade simple."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Supporting text",
+      "default": "<p>Six intentional ingredients. 23g of protein. One simple daily shake.</p>"
+    },
+    {
+      "type": "text",
+      "id": "rating",
+      "label": "Rating text",
+      "default": "4.9 / 5"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review count",
+      "default": "110+ verified reviews"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "SHOP CACAO"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL",
+      "info": "Leave blank to automatically link to the selected Cacao Protein Blend product."
+    },
+    {
+      "type": "text",
+      "id": "microcopy",
+      "label": "Microcopy",
+      "default": "23g protein · mixes in seconds"
+    },
+    {
+      "type": "text",
+      "id": "proof_1_value",
+      "label": "Proof 1 value",
+      "default": "23g"
+    },
+    {
+      "type": "text",
+      "id": "proof_1_label",
+      "label": "Proof 1 label",
+      "default": "Protein"
+    },
+    {
+      "type": "text",
+      "id": "proof_2_value",
+      "label": "Proof 2 value",
+      "default": "0g"
+    },
+    {
+      "type": "text",
+      "id": "proof_2_label",
+      "label": "Proof 2 label",
+      "default": "Sugar"
+    },
+    {
+      "type": "text",
+      "id": "proof_3_value",
+      "label": "Proof 3 value",
+      "default": "6"
+    },
+    {
+      "type": "text",
+      "id": "proof_3_label",
+      "label": "Proof 3 label",
+      "default": "Real Ingredients"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zeotein Cacao Hero"
+    }
+  ]
+}
+{% endschema %}

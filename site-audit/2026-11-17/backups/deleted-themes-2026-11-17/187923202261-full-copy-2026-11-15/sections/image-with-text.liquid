@@ -1,0 +1,542 @@
+{% style %}
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap');
+
+  #shopify-section-{{ section.id }} .z-label {
+    position: relative;
+    overflow: hidden;
+    background: #F3F0FA;
+    padding: 88px 24px 92px;
+  }
+
+  #shopify-section-{{ section.id }} .z-label::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 82% 35%,
+        rgba(111, 75, 179, 0.06) 0%,
+        rgba(111, 75, 179, 0) 34%
+      ),
+      radial-gradient(
+        circle at 18% 70%,
+        rgba(111, 75, 179, 0.035) 0%,
+        rgba(111, 75, 179, 0) 32%
+      );
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__head {
+    text-align: center;
+    max-width: 980px;
+    margin: 0 auto 62px;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__eyebrow {
+    margin: 0 0 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #6F4BB3;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__title {
+    margin: 0 0 22px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(54px, 6.8vw, 110px);
+    line-height: 0.95;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #20202B;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__title span {
+    color: #6F4BB3;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__subhead {
+    margin: 0 auto;
+    max-width: 760px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+    font-weight: 500;
+    color: #686575;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__content {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(340px, 0.78fr);
+    gap: 72px;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-bottom: 34px;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__stat {
+    min-height: 96px;
+    border-radius: 14px;
+    border: 1px solid #D9D1EA;
+    background: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(45, 34, 67, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+    color: #6F4BB3;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__stat-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: 500;
+    color: #383644;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__badges {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__badge {
+    min-height: 42px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid #C9B9E3;
+    background: #F8F5FD;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #6F4BB3;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__badge-check {
+    color: #6F4BB3;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__image-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__image {
+    width: 100%;
+    max-width: 390px;
+    height: auto;
+    display: block;
+    background: #FFFFFF;
+    border: 1px solid #D9D1EA;
+    box-shadow: 0 16px 40px rgba(45, 34, 67, 0.10);
+  }
+
+  #shopify-section-{{ section.id }} .z-label__ingredients {
+    margin: 18px auto 0;
+    max-width: 390px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 500;
+    color: #686575;
+  }
+
+  #shopify-section-{{ section.id }} .z-label__ingredients strong {
+    color: #20202B;
+    font-weight: 700;
+  }
+
+  @media screen and (max-width: 989px) {
+
+    #shopify-section-{{ section.id }} .z-label {
+      padding: 72px 22px;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__content {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__image {
+      max-width: 360px;
+    }
+
+  }
+
+  @media screen and (max-width: 749px) {
+
+    #shopify-section-{{ section.id }} .z-label {
+      padding: 58px 18px 62px;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__head {
+      margin-bottom: 38px;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__eyebrow {
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__title {
+      font-size: 50px;
+      line-height: 0.98;
+      margin-bottom: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__subhead {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 18px;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__stat {
+      min-height: 86px;
+      padding: 14px 8px;
+      border-radius: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__stat-number {
+      font-size: 34px;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__stat-text {
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__badges {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__badge {
+      width: 100%;
+      min-height: 40px;
+      padding: 9px 8px;
+      font-size: 11px;
+      line-height: 1.2;
+      white-space: normal;
+      border-radius: 999px;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__image {
+      max-width: 320px;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__ingredients {
+      max-width: 320px;
+      font-size: 12px;
+      text-align: left;
+    }
+
+  }
+
+  @media screen and (max-width: 390px) {
+
+    #shopify-section-{{ section.id }} .z-label__badge {
+      font-size: 10px;
+      padding: 8px 6px;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__stat-number {
+      font-size: 31px;
+    }
+
+    #shopify-section-{{ section.id }} .z-label__stat-text {
+      font-size: 11px;
+    }
+
+  }
+
+{% endstyle %}
+
+
+<section class="z-label">
+  <div class="z-label__inner">
+
+    <div class="z-label__head">
+
+      <p class="z-label__eyebrow">
+        {{ section.settings.eyebrow }}
+      </p>
+
+      <h2 class="z-label__title">
+        {{ section.settings.title_white }}
+        <span>{{ section.settings.title_teal }}</span>
+      </h2>
+
+      {% if section.settings.subhead != blank %}
+        <p class="z-label__subhead">
+          {{ section.settings.subhead }}
+        </p>
+      {% endif %}
+
+    </div>
+
+    <div class="z-label__content">
+
+      <div class="z-label__left">
+
+        <div class="z-label__stats">
+
+          <div class="z-label__stat">
+            <div class="z-label__stat-number">
+              {{ section.settings.stat_1_number }}
+            </div>
+            <div class="z-label__stat-text">
+              {{ section.settings.stat_1_text }}
+            </div>
+          </div>
+
+          <div class="z-label__stat">
+            <div class="z-label__stat-number">
+              {{ section.settings.stat_2_number }}
+            </div>
+            <div class="z-label__stat-text">
+              {{ section.settings.stat_2_text }}
+            </div>
+          </div>
+
+          <div class="z-label__stat">
+            <div class="z-label__stat-number">
+              {{ section.settings.stat_3_number }}
+            </div>
+            <div class="z-label__stat-text">
+              {{ section.settings.stat_3_text }}
+            </div>
+          </div>
+
+          <div class="z-label__stat">
+            <div class="z-label__stat-number">
+              {{ section.settings.stat_4_number }}
+            </div>
+            <div class="z-label__stat-text">
+              {{ section.settings.stat_4_text }}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="z-label__badges">
+
+          <div class="z-label__badge">
+            <span class="z-label__badge-check">✓</span>
+            {{ section.settings.badge_1 }}
+          </div>
+
+          <div class="z-label__badge">
+            <span class="z-label__badge-check">✓</span>
+            {{ section.settings.badge_2 }}
+          </div>
+
+          <div class="z-label__badge">
+            <span class="z-label__badge-check">✓</span>
+            {{ section.settings.badge_3 }}
+          </div>
+
+          <div class="z-label__badge">
+            <span class="z-label__badge-check">✓</span>
+            {{ section.settings.badge_4 }}
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="z-label__right">
+
+        <div class="z-label__image-wrap">
+
+          {% if section.settings.image != blank %}
+            <img
+              class="z-label__image"
+              src="{{ section.settings.image | image_url: width: 900 }}"
+              alt="{{ section.settings.image.alt | default: 'Zeotein supplement facts label' | escape }}"
+              loading="lazy"
+            >
+          {% endif %}
+
+        </div>
+
+        {% if section.settings.ingredients_text != blank %}
+          <p class="z-label__ingredients">
+            <strong>Ingredients:</strong>
+            {{ section.settings.ingredients_text }}
+          </p>
+        {% endif %}
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Zeotein Label Facts",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "What you're actually getting."
+    },
+    {
+      "type": "text",
+      "id": "title_white",
+      "label": "White title text",
+      "default": "THE LABEL."
+    },
+    {
+      "type": "text",
+      "id": "title_teal",
+      "label": "Teal title text",
+      "default": "NOTHING HIDDEN..."
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subhead",
+      "default": "Whole-food shoppers read every panel. So here’s ours — up front."
+    },
+    {
+      "type": "text",
+      "id": "stat_1_number",
+      "label": "Stat 1 number",
+      "default": "23g"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_text",
+      "label": "Stat 1 text",
+      "default": "Protein"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_number",
+      "label": "Stat 2 number",
+      "default": "0g"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_text",
+      "label": "Stat 2 text",
+      "default": "Added Sugar"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_number",
+      "label": "Stat 3 number",
+      "default": "140"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_text",
+      "label": "Stat 3 text",
+      "default": "Calories"
+    },
+    {
+      "type": "text",
+      "id": "stat_4_number",
+      "label": "Stat 4 number",
+      "default": "6"
+    },
+    {
+      "type": "text",
+      "id": "stat_4_text",
+      "label": "Stat 4 text",
+      "default": "Ingredients"
+    },
+    {
+      "type": "text",
+      "id": "badge_1",
+      "label": "Badge 1",
+      "default": "Non-GMO"
+    },
+    {
+      "type": "text",
+      "id": "badge_2",
+      "label": "Badge 2",
+      "default": "Gluten-Free"
+    },
+    {
+      "type": "text",
+      "id": "badge_3",
+      "label": "Badge 3",
+      "default": "Zero Added Sugar"
+    },
+    {
+      "type": "text",
+      "id": "badge_4",
+      "label": "Badge 4",
+      "default": "No Artificial Anything"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Supplement facts image"
+    },
+    {
+      "type": "textarea",
+      "id": "ingredients_text",
+      "label": "Ingredients text",
+      "default": "Organic Hydrolyzed Bovine Collagen Peptides, Beef Bone Broth Protein, Organic Fermented Cacao Powder, Organic MCT Oil Powder, Zeolite, Organic Sea Moss."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zeotein Label Facts"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,718 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "zeotein_announcement_bar": {
+      "type": "zeotein-announcement-bar",
+      "settings": {
+        "bar_text": "WELCOME TO ZEOTEIN",
+        "highlight_text": "REAL NUTRITION MADE SIMPLE."
+      },
+      "disabled": true
+    },
+    "zeotein_hero_jCjabN": {
+      "type": "zt-home-hero",
+      "name": "Zeotein Home Hero",
+      "settings": {
+        "hero_alt": "A woman holding a Zeotein shaker after a sip, with a Zeotein Cacao pouch on the kitchen counter",
+        "heading": "Real Nutrition. Made for Real Life.",
+        "text": "Protein shakes and single-ingredient supplements that go where you go.",
+        "cta_text": "Shop Protein Blends",
+        "cta_url": "shopify://collections/protein-blends",
+        "link_text": "Single Ingredients",
+        "link_url": "shopify://collections/single-ingredient-supplements",
+        "proof_1": "Zero Added Sugar",
+        "proof_2": "30-Day Money-Back Guarantee"
+      }
+    },
+    "blocks_4aJBEH": {
+      "type": "_blocks",
+      "blocks": {
+        "strip_gUkL3t": {
+          "type": "strip",
+          "name": "Zeotein Trust Strip",
+          "settings": {
+            "trust_1_highlight": "5–6 Real Ingredients",
+            "trust_1_label": "A label you can actually read",
+            "trust_2_highlight": "Grass-Fed or Plant-Based",
+            "trust_2_label": "Pick your protein",
+            "trust_3_highlight": "Tear or Scoop",
+            "trust_3_label": "Sticks or a bag, your call",
+            "trust_4_highlight": "Ready in 10 Seconds",
+            "trust_4_label": "Water, milk or coffee"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_b701387_HTDjwG": {
+          "type": "zt-home-choose",
+          "settings": {
+            "eyebrow": "FIND YOUR FIT",
+            "heading": "Choose Your Zeotein",
+            "cacao_product": "zeotein-cacao-sticks-7",
+            "cacao_image": "shopify://shop_images/cacao_3.png",
+            "vegan_product": "zeotein-vegan-sticks-7",
+            "vegan_image": "shopify://shop_images/vegan_zeotein.png"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_c2e0f9b_EeHD8x": {
+          "type": "the-problem",
+          "settings": {
+            "section_id": "zeotein-problem",
+            "eyebrow": "THE PROBLEM",
+            "heading": "Your supplement shelf shouldn't be this complicated.",
+            "intro": "<p>Different tubs. Different scoops. Different routines.</p><p>Zeotein brings protein and intentional ingredients together in one simple daily format.</p>",
+            "card_1_image": "shopify://shop_images/too_many_tubs.png",
+            "card_1_title": "TOO MANY TUBS",
+            "card_1_text": "Protein, greens, collagen, and more — each with its own container.",
+            "card_2_image": "shopify://shop_images/too_many_routines.png",
+            "card_2_title": "TOO MANY ROUTINES",
+            "card_2_text": "Different scoops, schedules, and steps make daily nutrition harder to keep up with.",
+            "card_3_image": "shopify://shop_images/one_simple_daily_routine_drinking.png",
+            "card_3_title": "ONE SIMPLE DAILY ROUTINE",
+            "card_3_text": "Zeotein brings protein and intentional ingredients together in one easy daily routine.",
+            "cta_text": "SEE WHAT'S INSIDE",
+            "cta_url": ""
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_1e2e197_f839tj": {
+          "type": "zt-home-difference",
+          "settings": {
+            "feature_eyebrow": "SIMPLE, HONEST INGREDIENTS",
+            "feature_url": "#ingredients"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_5b579f1_bxfUtx": {
+          "type": "whats-inside",
+          "settings": {
+            "section_id": "ingredients",
+            "eyebrow": "WHAT'S INSIDE",
+            "heading": "What's Inside Matters.",
+            "subheading": "Simple formulas. Intentional ingredients. Nothing unnecessary.",
+            "cacao_image": "shopify://shop_images/Cacao-image10-31-26.jpg",
+            "cacao_heading": "Six Ingredients.",
+            "cacao_cta": "VIEW FULL INGREDIENT DETAILS",
+            "vegan_image": "shopify://shop_images/Vegan-image10-31-26.jpg",
+            "vegan_heading": "Five Ingredients.",
+            "vegan_cta": "VIEW FULL INGREDIENT DETAILS"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "strip_gUkL3t",
+        "ai_gen_block_b701387_HTDjwG",
+        "ai_gen_block_c2e0f9b_EeHD8x",
+        "ai_gen_block_1e2e197_f839tj",
+        "ai_gen_block_5b579f1_bxfUtx"
+      ],
+      "name": "Trust bar",
+      "settings": {}
+    },
+    "17894848157f6c0a39": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_fe1d443_F7XWwN": {
+          "type": "benefits-by-outcome",
+          "settings": {
+            "approach_image": "shopify://shop_images/approach_2.png",
+            "approach_image_alt": "Zeotein lifestyle and product",
+            "cacao_url": "shopify://collections/zeotein",
+            "cacao_detail": "Animal-based protein · 23g protein",
+            "vegan_url": "shopify://collections/zeotein-vegan-1",
+            "vegan_detail": "Plant-based protein · 20g protein"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_fe1d443_F7XWwN"
+      ],
+      "settings": {},
+      "disabled": true
+    },
+    "1789485625b2af137f": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5795bce_UiymHp": {
+          "type": "routine",
+          "settings": {
+            "eyebrow": "REAL ROUTINES",
+            "heading": "Made for Real Life.",
+            "intro": "From the first sip of the day to wherever the day takes you, Zeotein fits into routines that don't always go according to plan.",
+            "image_1": "shopify://shop_images/breakfast.png",
+            "alt_1": "Woman enjoying a Zeotein protein drink in a bright kitchen",
+            "title_1": "Start Your Day Simply.",
+            "text_1": "An easy addition to the first meal of the day.",
+            "image_2": "shopify://shop_images/post_workout_b13fbe36-061e-4dfd-afd0-422238554e77.png",
+            "alt_2": "Woman holding Zeotein after a workout",
+            "title_2": "Post-Workout",
+            "text_2": "An easy way to add protein to your post-workout routine.",
+            "image_3": "shopify://shop_images/travel.png",
+            "alt_3": "Zeotein packed for a travel day",
+            "title_3": "Travel Day",
+            "text_3": "Simple nutrition that travels with you.",
+            "image_4": "shopify://shop_images/afternoon_protein.png",
+            "alt_4": "Zeotein protein drink enjoyed at home in the afternoon",
+            "title_4": "Afternoon Protein",
+            "text_4": "A simple way to fit protein into the middle of a busy day.",
+            "cta_text": "SEE THE FORMULAS",
+            "cta_url": "shopify://collections/protein-blends"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5795bce_UiymHp"
+      ],
+      "settings": {}
+    },
+    "zeotein_featured_on_6YtGWU": {
+      "type": "zeotein-featured-on",
+      "custom_css": [],
+      "name": "Zeotein Featured On",
+      "settings": {
+        "eyebrow": "CREDIBILITY",
+        "heading": "As Seen With Howie Mandel",
+        "howie_image": "shopify://shop_images/e0f1b359-bf36-484a-93a8-cd6208e32f18.png",
+        "howie_alt": "Howie Mandel holding Zeotein",
+        "media_eyebrow": "FEATURED ON",
+        "media_heading": "Howie Does Stuff",
+        "media_logo_1": "shopify://shop_images/youtube.png",
+        "media_logo_1_alt": "Howie Does Stuff",
+        "media_logo_2": "shopify://shop_images/images.jpg",
+        "media_logo_2_alt": "YouTube",
+        "bottom_text": ""
+      }
+    },
+    "zeotein_comparison_k3Mfhp": {
+      "type": "zeotein-comparison",
+      "name": "Zeotein Comparison",
+      "settings": {
+        "eyebrow": "THE VALUE",
+        "heading": "One Simple Routine. Less to Manage.",
+        "intro": "The value isn't about adding more to your shelf. It's about simplifying what you already manage.",
+        "typical_label": "MULTI-PRODUCT ROUTINE",
+        "zeotein_label": "ZEOTEIN",
+        "row_1_label": "Products",
+        "row_1_typical": "Multiple products",
+        "row_1_zeotein": "One simple daily option",
+        "row_2_label": "Measuring",
+        "row_2_typical": "Multiple scoops",
+        "row_2_zeotein": "Pre-measured stick pack",
+        "row_3_label": "Storage",
+        "row_3_typical": "Multiple tubs",
+        "row_3_zeotein": "One streamlined routine",
+        "row_4_label": "Daily routine",
+        "row_4_typical": "Several steps",
+        "row_4_zeotein": "Simple routine",
+        "row_5_label": "Portability",
+        "row_5_typical": "Depends on the products",
+        "row_5_zeotein": "Single-serve & travel-ready",
+        "row_6_label": "Ingredient transparency",
+        "row_6_typical": "Varies by product",
+        "row_6_zeotein": "Intentional ingredients",
+        "mobile_note": "Comparison focuses on routine simplicity. Nutritional figures below are for Zeotein Cacao 30-Day Stick Packs.",
+        "value_eyebrow": "VERIFIED CACAO VALUE",
+        "value_note": "",
+        "cta_text": "SHOP ZEOTEIN",
+        "cta_url": "shopify://collections/shop-all"
+      },
+      "disabled": true
+    },
+    "zeotein_reviews_9RYFeq": {
+      "type": "zt-home-reviews",
+      "blocks": {
+        "review_zt1": {
+          "type": "review",
+          "settings": {
+            "review_text": "I absolutely love this product. The taste and ingredients are amazing.",
+            "customer_name": "Mary Shilling"
+          }
+        },
+        "review_zt2": {
+          "type": "review",
+          "settings": {
+            "review_text": "Tastes wonderful! Keeps me satisfied with no mid-day hunger urges.",
+            "customer_name": "Barbara Ecker"
+          }
+        },
+        "review_zt3": {
+          "type": "review",
+          "settings": {
+            "review_text": "It tastes great and I love how clean the ingredients are. I'm definitely going to keep this as a staple in my house!",
+            "customer_name": "Melissa Meyer"
+          }
+        },
+        "review_zt4": {
+          "type": "review",
+          "settings": {
+            "review_text": "All the good stuff and ready to go in less than a minute.",
+            "customer_name": "Philip Brown"
+          }
+        },
+        "review_zt5": {
+          "type": "review",
+          "settings": {
+            "review_text": "I love knowing I'm getting a high quality protein without sugar and other additives.",
+            "customer_name": "Elsie Unruh"
+          }
+        },
+        "review_zt6": {
+          "type": "review",
+          "settings": {
+            "review_text": "Great taste and mixes very well.",
+            "customer_name": "Josh Moon"
+          }
+        }
+      },
+      "block_order": [
+        "review_zt1",
+        "review_zt2",
+        "review_zt3",
+        "review_zt4",
+        "review_zt5",
+        "review_zt6"
+      ],
+      "name": "Zeotein Home Reviews",
+      "settings": {
+        "heading": "Real People. Real Reviews.",
+        "cta_text": "Read More Reviews",
+        "cta_url": "/products/zeotein-cacao-sticks-30#judgeme_product_reviews",
+        "bottom_text": "Real reviews from Zeotein customers. Individual results may vary."
+      }
+    },
+    "17894978982e1874e0": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_fae95bd_dLx8AW": {
+          "type": "30day",
+          "settings": {
+            "eyebrow": "TRY IT WITH CONFIDENCE",
+            "heading": "30-Day Money-Back Guarantee",
+            "copy": "Give Zeotein a real try. If it's not the right fit for you, we've got you covered.",
+            "cta_text": "See Guarantee Details",
+            "cta_url": "shopify://pages/shipping-guarantee"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_ba94afc_gVXekm": {
+          "type": "faq",
+          "settings": {
+            "eyebrow": "QUESTIONS, ANSWERED",
+            "heading": "Good Questions. Straight Answers.",
+            "intro": "Everything you need to know before making Zeotein part of your routine.",
+            "bottom_text": "Still have a question?",
+            "bottom_link_text": "Contact Zeotein"
+          },
+          "blocks": {}
+        },
+        "zeotein_final_product_cta_MyKUKT": {
+          "type": "zeotein-final-product-cta",
+          "name": "Final Product CTA",
+          "settings": {
+            "eyebrow": "FINAL STEP",
+            "heading": "Find Your Zeotein.",
+            "intro": "Three ways to start. Choose the one that fits you.",
+            "cacao_product": "",
+            "vegan_product": "",
+            "cacao_button": "SHOP CACAO →",
+            "vegan_button": "SHOP VEGAN →",
+            "bottom_text": "30-Day Money-Back Guarantee on Protein Blends"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_fae95bd_dLx8AW",
+        "ai_gen_block_ba94afc_gVXekm",
+        "zeotein_final_product_cta_MyKUKT"
+      ],
+      "settings": {}
+    },
+    "zeotein_ingredients_hqeE8g": {
+      "type": "zeotein-ingredients",
+      "disabled": true,
+      "name": "Zeotein Ingredients",
+      "settings": {
+        "eyebrow": "WHAT'S INSIDE",
+        "title_line_1": "SIX INGREDIENTS.",
+        "title_line_2": "ZERO JUNK...",
+        "subhead": "Everything your body needs. Nothing it doesn't. If a clean freak wouldn't approve it, it's not in here.",
+        "zeolite_image": "shopify://shop_images/Turqoise.png",
+        "zeolite_image_alt": "Zeolite mineral",
+        "zeolite_label": "THE ONE YOU WON'T FIND ANYWHERE ELSE",
+        "zeolite_title": "Zeolite — THE ONE YOU WON'T FIND ANYWHERE ELSE",
+        "zeolite_desc": "A rare volcanic mineral (clinoptilolite) with a naturally negative charge and a microscopic honeycomb structure. It's expensive and hard to source, so most brands skip it and fill that space with cheap flavoring. We built the whole formula around it. It’s the reason we’re called Zeotein, and the reason this isn’t just another protein.",
+        "badge_1": "GRASS-FED",
+        "name_1": "Beef Bone broth",
+        "desc_1": "Grass-fed and beef-based. Real protein & collagen, not cheap whey.",
+        "badge_2": "ORGANIC",
+        "name_2": "COLLAGEN Peptides",
+        "desc_2": "Hydrolyzed peptides that mix clean & smooth — no clumps, no chalk.",
+        "badge_3": "ORGANIC",
+        "name_3": "Fermented CACAO",
+        "desc_3": "Fermented for real chocolate depth, with zero sugar.",
+        "badge_4": "ORGANIC",
+        "name_4": "MCT",
+        "desc_4": "From coconut, spray-dried into a clean powder. No oils, no gums.",
+        "badge_5": "ORGANIC",
+        "name_5": "SEA MOSS",
+        "desc_5": "A real whole-food sea vegetable, not a lab-made premix.",
+        "name_6": "THAT'S THE WHOLE LIST.",
+        "desc_6": "Six ingredients you can pronounce, that you'd otherwise buy in six separate tubs. One stick. No proprietary blend, nothing hiding."
+      }
+    },
+    "zeotein_philosophy_eAUA8B": {
+      "type": "zeotein-philosophy",
+      "disabled": true,
+      "name": "Zeotein Philosophy",
+      "settings": {
+        "eyebrow": "The Zeotein philosophy",
+        "title": "More than a protein shake",
+        "body": "Most protein powders stop at cheap whey. Zeotein starts with a better source - grass-fed bone broth protein and collagen - then builds a full system around it. Six real ingredients, properly dosed. This isn't just protein. It's real nutrition made simple.",
+        "image": "shopify://shop_images/use_the_actual_zeotein_stick_p_Nano_Banana_2_40971.png"
+      }
+    },
+    "image_with_text_MLgAVQ": {
+      "type": "image-with-text",
+      "disabled": true,
+      "name": "zeotein-label-section",
+      "settings": {
+        "eyebrow": "WHAT YOU'RE ACTUALLY GETTING.",
+        "title_white": "THE LABEL.",
+        "title_teal": "ALL SIX INGREDIENTS...",
+        "subhead": "Whole-food shoppers read every panel. So here's ours, up front.",
+        "stat_1_number": "23G",
+        "stat_1_text": "grass-fed protein",
+        "stat_2_number": "0G",
+        "stat_2_text": "added sugar",
+        "stat_3_number": "140",
+        "stat_3_text": "calories",
+        "stat_4_number": "6",
+        "stat_4_text": "ingredients, zero junk",
+        "badge_1": "Non-GMO",
+        "badge_2": "Gluten-Free",
+        "badge_3": "Zero Added Sugar",
+        "badge_4": "No Artificial Anything",
+        "image": "shopify://shop_images/supplement_facts.png",
+        "ingredients_text": "Ingredients: Organic Hydrolyzed Bovine Collagen Peptides, Beef Bone Broth Protein, Organic Fermented Cacao Powder, Organic MCT Oil Powder, Zeolite, Organic Sea Moss."
+      }
+    },
+    "1781907796c410897a": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "rich_text_dBygP8": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_j9Dbdw": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand"
+          }
+        },
+        "text_RPrjjb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_RrhEgf": {
+          "type": "button",
+          "settings": {
+            "label": "Button label",
+            "link": "#"
+          }
+        }
+      },
+      "block_order": [
+        "heading_j9Dbdw",
+        "text_RPrjjb",
+        "button_RrhEgf"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "title_white": "REAL NUTRITION",
+        "title_teal": "MADE SIMPLE.",
+        "subhead": "Six simple ingredients in one single-serve stick pack.",
+        "card_1_title": "Clean Daily Protein",
+        "card_1_text": "23g of protein from bone broth protein and collagen in every serving.",
+        "card_2_title": "Simple Daily Fuel",
+        "card_2_text": "Organic MCT oil powder and fermented cacao help create a smooth, easy daily shake.",
+        "card_3_title": "One Simple Habit",
+        "card_3_text": "One single-serve stick pack with six simple ingredients, made to fit easily into your daily routine.",
+        "card_4_title": "Made Without the Extras",
+        "card_4_text": "No fillers, no gums, no artificial sweeteners, and no added sugar."
+      }
+    },
+    "zeotein_benefits_MUbyAT": {
+      "type": "zeotein-benefits",
+      "blocks": {
+        "benefit_hfFQgT": {
+          "type": "benefit",
+          "settings": {
+            "title": "energy that holds",
+            "text": "Organic MCTs for clean, steady energy — no sugar, no crash."
+          }
+        },
+        "benefit_XUKtRC": {
+          "type": "benefit",
+          "settings": {
+            "title": "DIGESTION & GUT",
+            "text": "Bone broth and sea moss for easy, comfortable digestion."
+          }
+        },
+        "benefit_mfWt9j": {
+          "type": "benefit",
+          "settings": {
+            "title": "Full, not stuffed",
+            "text": "23g of protein holds you to your next meal — full, not stuffed."
+          }
+        },
+        "benefit_i8htYB": {
+          "type": "benefit",
+          "settings": {
+            "title": "SKIN, HAIR & NAILS",
+            "text": "Organic collagen peptides for the way you look, every day."
+          }
+        },
+        "benefit_eATLEi": {
+          "type": "benefit",
+          "settings": {
+            "title": "muscle & joint support",
+            "text": "Grass-fed protein and collagen for recovery & healthy joints."
+          }
+        },
+        "benefit_dVyUtf": {
+          "type": "benefit",
+          "settings": {
+            "title": "Mental Clarity & Focus",
+            "text": "MCTs provide rapid fuel to the brain and cacao antioxidants support cognitive function — steady focus without caffeine or stimulants."
+          }
+        },
+        "benefit_Nqedpc": {
+          "type": "benefit",
+          "settings": {
+            "title": "Fits Your Clean Eating Goals",
+            "text": "Dairy-free, gluten-free, soy-free. No sugar, no artificial anything. Integrates cleanly into any wellness lifestyle without compromise."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_hfFQgT",
+        "benefit_XUKtRC",
+        "benefit_mfWt9j",
+        "benefit_i8htYB",
+        "benefit_eATLEi",
+        "benefit_dVyUtf",
+        "benefit_Nqedpc"
+      ],
+      "disabled": true,
+      "name": "Zeotein Benefits",
+      "settings": {
+        "eyebrow": "FUNCTIONAL WELLNESS YOU ACTUALLY NOTICE",
+        "title_line_1": "ONE Stick.",
+        "title_line_2": "five jobs...",
+        "subhead": "Six ingredients, each one earning its place",
+        "cta_text": "Get My Discount",
+        "cta_link": "https://zeotein.com/cart/52649698132181:1?discount=HOWIE15"
+      }
+    },
+    "1785295509f4ce82d6": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_3c95168_XRKVMP": {
+          "type": "ai_gen_block_3c95168",
+          "disabled": true,
+          "settings": {
+            "title": "TRY ZEOTEIN RISK-FREE FOR 30 DAYS",
+            "text": "<p>Don't love it, even the taste? Email us within 30 days for a full refund, even if the box is empty. No forms and no runaround.</p>",
+            "note": "First order only • one per customer • refund excludes shipping",
+            "max_width": 1100,
+            "content_gap": 36,
+            "desktop_width_percent": 100,
+            "section_padding_top": 0,
+            "section_padding_bottom": 40,
+            "section_padding_horizontal": 20,
+            "section_padding_top_mobile": 28,
+            "section_padding_bottom_mobile": 28,
+            "section_padding_horizontal_mobile": 16,
+            "card_padding_vertical": 40,
+            "card_padding_horizontal": 36,
+            "card_padding_vertical_mobile": 28,
+            "card_padding_horizontal_mobile": 24,
+            "icon_size": 120,
+            "icon_size_mobile": 90,
+            "icon_background": "#ffffff0a",
+            "icon_color": "#2ec9c9",
+            "title_font": "bebas_neue_n4",
+            "title_size": 36,
+            "title_size_mobile": 34,
+            "title_letter_spacing": 1,
+            "title_margin_bottom": 16,
+            "title_color": "#2ec9c9",
+            "text_font": "poppins_n4",
+            "text_size": 16,
+            "text_size_mobile": 16,
+            "text_color": "#e8e0f2",
+            "note_size": 16,
+            "note_margin_top": 18,
+            "note_color": "#9e90b4",
+            "section_background": "#f4f1f8",
+            "card_background": "#261950",
+            "border_thickness": 1,
+            "border_color": "#2ec9c940",
+            "border_radius": 28
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_3c95168_XRKVMP"
+      ],
+      "settings": {}
+    },
+    "zeotein_how_it_works_PcrzAH": {
+      "type": "zeotein-how-it-works",
+      "disabled": true,
+      "name": "Zeotein How It Works",
+      "settings": {
+        "eyebrow": "How it works",
+        "headline": "Clean nutrition in seconds",
+        "subhead": "No scoops. No mess. Just functional ingredients ready when you are.",
+        "card_1_number": "01",
+        "card_1_title": "PROTEIN + MORE",
+        "card_1_description": "Protein is at the center of every Zeotein formula, combined with additional ingredients in one convenient format.",
+        "card_2_number": "02",
+        "card_2_title": "TWO FORMULA OPTIONS",
+        "card_2_description": "Choose Cacao with animal-based protein or Vegan with plant-based protein.",
+        "card_3_number": "03",
+        "card_3_title": "MADE FOR REAL LIFE",
+        "card_3_description": "Single-serve packets make Zeotein easy to mix at home, take on the go, or fit into your everyday routine."
+      }
+    },
+    "featured_product_z9DJjF": {
+      "type": "featured-product",
+      "disabled": true,
+      "name": "Zeotein bonus offer",
+      "settings": {
+        "bonus_image": "shopify://shop_images/shaker_plus_guides.png",
+        "button_label": "CLAIM MY HOWIE DISCOUNT + FREE BONUSES",
+        "button_link": "https://zeotein.com/cart/52649698132181:1?discount=HOWIE15"
+      }
+    },
+    "zeotein_pricing_cmW3jD": {
+      "type": "zeotein-pricing",
+      "disabled": true,
+      "name": "Zeotein Pricing",
+      "settings": {
+        "title": "Howie's exclusive offer",
+        "button_link_1": "https://zeotein.com/cart/52342958031061:1?discount=HOWIE15",
+        "button_text_1": "Claim 15% off",
+        "button_link_2": "https://zeotein.com/cart/52649698132181:1?discount=HOWIE15",
+        "button_text_2": "Claim 15% off",
+        "badge_1": "Starter",
+        "name_1": "7-day supply",
+        "was_1": "$39.99",
+        "now_1": "$33.99",
+        "per_1": "$4.86 / day",
+        "feat_1a": "7 single-serve stick packs",
+        "feat_1b": "Full functional benefits",
+        "feat_1c": "Perfect way to try it first",
+        "badge_2": "Best value",
+        "name_2": "30-day supply",
+        "was_2": "$134.99",
+        "now_2": "$114.99",
+        "per_2": "$3.83 / day",
+        "feat_2a": "30 single-serve stick packs",
+        "feat_2b": "Full functional benefits",
+        "feat_2c": "Best per-day value at $3.83 a day",
+        "feat_2d": "Includes a free shaker for subscribers"
+      }
+    },
+    "zeotein_howie_quote_H4kaEy": {
+      "type": "zeotein-howie-quote",
+      "disabled": true,
+      "name": "Zeotein Howie Quote",
+      "settings": {
+        "main_headline": "IT'S REAL NUTRITION\nMADE SIMPLE.",
+        "quote": "Zeotein cuts through all the noise.",
+        "attribution": "Howie Mandel",
+        "button_text": "CLAIM MY 15% OFF",
+        "button_link": "https://zeotein.com/cart/52649698132181:1?discount=HOWIE15",
+        "stars_text": "★★★★★"
+      }
+    },
+    "1785310610dcf20bbb": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "zeotein_final_cta_GwV6GT": {
+      "type": "zeotein-final-cta",
+      "disabled": true,
+      "name": "Zeotein Final CTA",
+      "settings": {
+        "title_white": "READY TO UPGRADE YOUR",
+        "title_teal": "PROTEIN?",
+        "subhead": "One clean shake. Six real ingredients. Howie-approved.",
+        "button_text": "Claim my 15% off",
+        "button_link": "https://zeotein.com/cart/52649698132181:1?discount=HOWIE15",
+        "stars": "★★★★★"
+      }
+    },
+    "17692062136b91de2f": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "176920622090429f94": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "17894505379017f9e7": {
+      "type": "_blocks",
+      "settings": {}
+    }
+  },
+  "order": [
+    "zeotein_announcement_bar",
+    "zeotein_hero_jCjabN",
+    "blocks_4aJBEH",
+    "17894848157f6c0a39",
+    "1789485625b2af137f",
+    "zeotein_reviews_9RYFeq",
+    "zeotein_featured_on_6YtGWU",
+    "zeotein_comparison_k3Mfhp",
+    "17894978982e1874e0",
+    "zeotein_ingredients_hqeE8g",
+    "zeotein_philosophy_eAUA8B",
+    "image_with_text_MLgAVQ",
+    "1781907796c410897a",
+    "rich_text_dBygP8",
+    "zeotein_benefits_MUbyAT",
+    "1785295509f4ce82d6",
+    "zeotein_how_it_works_PcrzAH",
+    "featured_product_z9DJjF",
+    "zeotein_pricing_cmW3jD",
+    "zeotein_howie_quote_H4kaEy",
+    "1785310610dcf20bbb",
+    "zeotein_final_cta_GwV6GT",
+    "17692062136b91de2f",
+    "176920622090429f94",
+    "17894505379017f9e7"
+  ]
+}

@@ -1,0 +1,28 @@
+/* Stop horizontal page drag on Cacao LP (mobile + desktop) */
+html:has(.section-hero-banner-cacao-lp),
+html:has(.section-buy-box-cacao-lp-v2) {
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+}
+
+body:has(.section-hero-banner-cacao-lp),
+body:has(.section-buy-box-cacao-lp-v2) {
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+  max-width: 100%;
+}
+
+body:has(.section-hero-banner-cacao-lp) #MainContent,
+body:has(.section-buy-box-cacao-lp-v2) #MainContent,
+body:has(.section-hero-banner-cacao-lp) .content-for-layout,
+body:has(.section-buy-box-cacao-lp-v2) .content-for-layout {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 749px) {
+  body:has(.section-hero-banner-cacao-lp) .shopify-section,
+  body:has(.section-buy-box-cacao-lp-v2) .shopify-section {
+    max-width: 100%;
+  }
+}

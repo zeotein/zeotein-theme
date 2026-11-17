@@ -1,0 +1,1258 @@
+{%- liquid
+  assign sid = 'zt-rt-' | append: section.id
+  assign heading = section.settings.heading
+  assign subtext = section.settings.subtext
+  assign subtext_m = section.settings.subtext_mobile | default: subtext
+  assign rt_bg = section.settings.bg_color
+  assign rt_heading = section.settings.heading_color
+  assign rt_body = section.settings.body_color
+  assign rt_accent = section.settings.accent_color
+  assign rt_bg_key = rt_bg | downcase
+  if rt_bg_key == blank or rt_bg_key == '#fcfbfe'
+    assign rt_bg = '#580d93'
+    assign rt_heading_key = rt_heading | downcase
+    if rt_heading_key == blank or rt_heading_key == '#1e1734'
+      assign rt_heading = '#fcfcfc'
+    endif
+    assign rt_body_key = rt_body | downcase
+    if rt_body_key == blank or rt_body_key == '#1e1734'
+      assign rt_body = '#f3e9ff'
+    endif
+    assign rt_accent_key = rt_accent | downcase
+    if rt_accent_key == blank or rt_accent_key == '#580d93'
+      assign rt_accent = '#fcfcfc'
+    endif
+  endif
+  if section.settings.image_width == blank
+    assign image_width = 322
+  else
+    assign image_width = section.settings.image_width
+  endif
+  if section.settings.image_width_mobile == blank
+    assign image_width_mobile = 236
+  else
+    assign image_width_mobile = section.settings.image_width_mobile
+  endif
+  if section.settings.image_crop == blank
+    assign image_crop = 80
+  else
+    assign image_crop = section.settings.image_crop
+  endif
+  if section.settings.image_crop_mobile == blank
+    assign image_crop_mobile = 120
+  else
+    assign image_crop_mobile = section.settings.image_crop_mobile
+  endif
+  if section.settings.benefit_gap == blank
+    assign benefit_gap = 40
+  else
+    assign benefit_gap = section.settings.benefit_gap
+  endif
+  if section.settings.benefit_gap_mobile == blank
+    assign benefit_gap_mobile = 16
+  else
+    assign benefit_gap_mobile = section.settings.benefit_gap_mobile
+  endif
+  if section.settings.product_gap_mobile == blank
+    assign product_gap_mobile = 8
+  else
+    assign product_gap_mobile = section.settings.product_gap_mobile
+  endif
+  if section.settings.feature_title_line_height == blank
+    assign feature_title_lh = 140
+  else
+    assign feature_title_lh = section.settings.feature_title_line_height
+  endif
+  assign feature_title_lh = feature_title_lh | divided_by: 100.0
+  assign image_sizes = '(max-width: 989px) ' | append: image_width_mobile | append: 'px, ' | append: image_width | append: 'px'
+-%}
+
+{% render 'cacao-lp-fonts', id: sid, font_family: section.settings.font_family, settings: section.settings, prefixes: 'heading,subtext,feature_title,feature_body' %}
+
+<section
+  id="{{ sid }}"
+  class="zt-rt{% if rt_bg == '#580d93' %} zt-rt--brand{% endif %}"
+  {{ section.shopify_attributes }}
+  style="
+    --zt-rt-bg: {{ rt_bg }};
+    --zt-rt-heading: {{ rt_heading }};
+    --zt-rt-body: {{ rt_body }};
+    --zt-rt-accent: {{ rt_accent }};
+    --zt-rt-pad-top: {{ section.settings.padding_top }}px;
+    --zt-rt-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --zt-rt-icon: {{ section.settings.icon_size | default: 32 }}px;
+    --zt-rt-icon-m: {{ section.settings.icon_size_mobile | default: 28 }}px;
+    --zt-rt-image: {{ image_width }}px;
+    --zt-rt-image-m: {{ image_width_mobile }}px;
+    --zt-rt-crop: {{ image_crop }}px;
+    --zt-rt-crop-m: {{ image_crop_mobile }}px;
+    --zt-rt-benefit-gap: {{ benefit_gap }}px;
+    --zt-rt-benefit-gap-m: {{ benefit_gap_mobile }}px;
+    --zt-rt-product-gap-m: {{ product_gap_mobile }}px;
+    --zt-feature-title-lh: {{ feature_title_lh }};
+  "
+>
+  <div class="zt-rt__inner">
+    <div class="zt-rt__header">
+      {%- if heading != blank -%}
+        <h2 class="zt-rt__heading">{{ heading | escape }}</h2>
+      {%- endif -%}
+      {%- if subtext != blank -%}
+        <p class="zt-rt__subtext zt-rt__subtext--desktop">{{ subtext | escape }}</p>
+      {%- endif -%}
+      {%- if subtext_m != blank -%}
+        <p class="zt-rt__subtext zt-rt__subtext--mobile">{{ subtext_m | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="zt-rt__stage">
+      <div class="zt-rt__media">
+        {%- if section.settings.product_image != blank -%}
+          {%- assign product_alt = section.settings.product_image.alt | default: heading -%}
+          {{
+            section.settings.product_image
+            | image_url: width: 1600
+            | image_tag:
+              loading: 'lazy',
+              widths: '280, 400, 600, 800, 1040, 1400, 1600',
+              sizes: image_sizes,
+              class: 'zt-rt__product',
+              alt: product_alt
+          }}
+        {%- else -%}
+          <div class="zt-rt__placeholder">
+            {{ 'product-1' | placeholder_svg_tag: 'zt-rt__placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign slot = block.settings.slot | default: 'auto'
+          if slot == 'auto'
+            case forloop.index
+              when 1
+                assign slot = 'left-top'
+              when 2
+                assign slot = 'right-top'
+              when 3
+                assign slot = 'left-bottom'
+              when 4
+                assign slot = 'right-bottom'
+              else
+                assign slot = 'extra'
+            endcase
+          endif
+          assign icon_preset = block.settings.icon_preset | default: 'dumbbell'
+          assign icon_size = block.settings.icon_size | default: section.settings.icon_size | default: 32
+          assign icon_size_m = block.settings.icon_size_mobile | default: section.settings.icon_size_mobile | default: 28
+          assign icon_sizes = '(max-width: 989px) ' | append: icon_size_m | append: 'px, ' | append: icon_size | append: 'px'
+        -%}
+        <article
+          class="zt-rt__feature zt-rt__feature--{{ slot }}"
+          style="--zt-rt-icon-local: {{ icon_size }}px; --zt-rt-icon-local-m: {{ icon_size_m }}px;"
+          {{ block.shopify_attributes }}
+        >
+          <span class="zt-rt__icon" aria-hidden="true">
+            {%- if block.settings.icon != blank -%}
+              {{
+                block.settings.icon
+                | image_url: width: 400
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '48, 64, 96, 128, 192, 256, 400',
+                  sizes: icon_sizes,
+                  class: 'zt-rt__icon-img',
+                  alt: '',
+                  width: icon_size,
+                  height: icon_size
+              }}
+            {%- else -%}
+              {%- liquid
+                case icon_preset
+                  when 'sparkle'
+                    assign icon_asset = 'zt-routine-sparkle.svg'
+                  when 'bolt'
+                    assign icon_asset = 'zt-routine-bolt.svg'
+                  when 'leaf'
+                    assign icon_asset = 'zt-routine-leaf.svg'
+                  else
+                    assign icon_asset = 'zt-routine-dumbbell.svg'
+                endcase
+              -%}
+              <span class="zt-rt__icon-mask" style="--zt-rt-icon-url: url('{{ icon_asset | asset_url }}');"></span>
+            {%- endif -%}
+          </span>
+          {%- if block.settings.title != blank -%}
+            <h3 class="zt-rt__feature-title">{{ block.settings.title | escape }}</h3>
+          {%- endif -%}
+          {%- if block.settings.body != blank -%}
+            <p class="zt-rt__feature-body">{{ block.settings.body | escape | newline_to_br }}</p>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .zt-rt {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: var(--zt-rt-bg, #fcfbfe);
+    color: var(--zt-rt-heading, #1e1734);
+    padding: var(--zt-rt-pad-top, 64px) 0 var(--zt-rt-pad-bottom, 64px);
+    font-family: var(--zt-font, Manrope, Arial, sans-serif);
+  }
+
+  .zt-rt--brand {
+    background:
+      radial-gradient(90% 80% at 50% 0%, rgba(255, 255, 255, 0.16), transparent 58%),
+      linear-gradient(180deg, #6b22a8 0%, #580d93 46%, #3b0764 100%);
+  }
+
+  .zt-rt *,
+  .zt-rt *::before,
+  .zt-rt *::after {
+    box-sizing: border-box;
+  }
+
+  .zt-rt__inner {
+    width: min(1200px, calc(100% - 48px));
+    margin: 0 auto;
+  }
+
+  .zt-rt__header {
+    max-width: 640px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+
+  .zt-rt__heading {
+    margin: 0 0 14px;
+    font-family: var(--zt-heading-font, inherit);
+    font-size: var(--zt-heading-size, 40px);
+    font-weight: var(--zt-heading-weight, 800);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--zt-rt-heading, #1e1734);
+  }
+
+  .zt-rt__subtext {
+    margin: 0;
+    font-family: var(--zt-subtext-font, inherit);
+    font-size: var(--zt-subtext-size, 16px);
+    font-weight: var(--zt-subtext-weight, 400);
+    line-height: 1.5;
+    color: var(--zt-rt-body, #1e1734);
+  }
+
+  .zt-rt__subtext--mobile {
+    display: none;
+  }
+
+  .zt-rt__stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(160px, var(--zt-rt-image, 322px)) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: clamp(20px, 3vw, 48px);
+    row-gap: var(--zt-rt-benefit-gap, 40px);
+    align-items: start;
+  }
+
+  .zt-rt__media {
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--zt-rt-crop, 0px) * -1);
+    z-index: 0;
+    width: var(--zt-rt-image, 322px);
+    max-width: calc(100% - 48px);
+    margin: 0;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .zt-rt__product {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .zt-rt__placeholder {
+    width: 100%;
+    aspect-ratio: 322 / 410;
+    opacity: 0.35;
+  }
+
+  .zt-rt__placeholder-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .zt-rt__feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .zt-rt__feature--left-top {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
+    margin-top: 12px;
+  }
+
+  .zt-rt__feature--right-top {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
+    margin-top: 12px;
+  }
+
+  .zt-rt__feature--left-bottom {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: end;
+    align-self: end;
+  }
+
+  .zt-rt__feature--right-bottom {
+    grid-column: 3;
+    grid-row: 2;
+    justify-self: start;
+    align-self: end;
+  }
+
+  .zt-rt__feature--extra {
+    grid-column: 1 / -1;
+  }
+
+  .zt-rt__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--zt-rt-icon-local, var(--zt-rt-icon, 32px));
+    height: var(--zt-rt-icon-local, var(--zt-rt-icon, 32px));
+    margin-bottom: 12px;
+    color: var(--zt-rt-accent, #580d93);
+  }
+
+  .zt-rt__icon-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .zt-rt__icon-mask {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: currentColor;
+    -webkit-mask: var(--zt-rt-icon-url) center / contain no-repeat;
+    mask: var(--zt-rt-icon-url) center / contain no-repeat;
+  }
+
+  @media screen and (max-width: 989px) {
+    .zt-rt__icon {
+      width: var(--zt-rt-icon-local-m, var(--zt-rt-icon-m, 28px));
+      height: var(--zt-rt-icon-local-m, var(--zt-rt-icon-m, 28px));
+    }
+  }
+
+  .zt-rt__feature-title {
+    margin: 0 0 8px;
+    font-family: var(--zt-feature_title-font, inherit);
+    font-size: var(--zt-feature_title-size, 20px);
+    font-weight: var(--zt-feature_title-weight, 800);
+    line-height: var(--zt-feature-title-lh, 1.4);
+    color: var(--zt-rt-accent, #580d93);
+  }
+
+  .zt-rt__feature-body {
+    margin: 0;
+    font-family: var(--zt-feature_body-font, inherit);
+    font-size: var(--zt-feature_body-size, 14px);
+    font-weight: var(--zt-feature_body-weight, 400);
+    line-height: 1.45;
+    color: var(--zt-rt-body, #1e1734);
+  }
+
+  @media screen and (max-width: 989px) {
+    .zt-rt__inner {
+      width: min(100% - 40px, 520px);
+    }
+
+    .zt-rt__header {
+      margin-bottom: 28px;
+    }
+
+    .zt-rt__heading {
+      font-size: var(--zt-heading-size-m, 30px);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .zt-rt__subtext {
+      font-size: var(--zt-subtext-size-m, 14px);
+      line-height: 1.7;
+    }
+
+    .zt-rt__feature-title {
+      font-size: var(--zt-feature_title-size-m, 18px);
+    }
+
+    .zt-rt__feature-body {
+      font-size: var(--zt-feature_body-size-m, 13px);
+    }
+
+    .zt-rt__subtext--desktop {
+      display: none;
+    }
+
+    .zt-rt__subtext--mobile {
+      display: block;
+    }
+
+    .zt-rt__stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      gap: var(--zt-rt-benefit-gap-m, 16px) 16px;
+      justify-items: center;
+      padding-bottom: calc(260px + var(--zt-rt-product-gap-m, 8px));
+    }
+
+    .zt-rt__media {
+      width: min(var(--zt-rt-image-m, 236px), calc(100% - 40px));
+      bottom: calc(var(--zt-rt-crop-m, 0px) * -1);
+    }
+
+    .zt-rt__feature--left-top,
+    .zt-rt__feature--right-top,
+    .zt-rt__feature--left-bottom,
+    .zt-rt__feature--right-bottom,
+    .zt-rt__feature--extra {
+      grid-column: auto;
+      grid-row: auto;
+      justify-self: center;
+      align-self: start;
+      margin-top: 0;
+      max-width: 165px;
+      width: 100%;
+    }
+
+    .zt-rt__feature--left-top {
+      order: 1;
+    }
+    .zt-rt__feature--right-top {
+      order: 2;
+    }
+    .zt-rt__feature--left-bottom {
+      order: 3;
+    }
+    .zt-rt__feature--right-bottom {
+      order: 4;
+    }
+
+    .zt-rt__feature-body {
+      line-height: 1.65;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Daily Routine Cacao LP",
+  "tag": "section",
+  "class": "section-daily-routine-cacao-lp",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#fcfbfe"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (titles)",
+      "default": "#580d93"
+    },
+    {
+      "type": "header",
+      "content": "Copy"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Transform your daily routine."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext (desktop)",
+      "default": "Complete protein and purposeful ingredients come together in one simple daily serving."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext_mobile",
+      "label": "Subtext (mobile)",
+      "default": "Complete protein and purposeful ingredients work together in one simple Cacao serving.",
+      "info": "Leave blank to reuse desktop subtext."
+    },
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product image"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Image width - desktop",
+      "min": 122,
+      "max": 1122,
+      "step": 10,
+      "unit": "px",
+      "default": 582
+    },
+    {
+      "type": "range",
+      "id": "image_width_mobile",
+      "label": "Image width - mobile",
+      "min": 140,
+      "max": 540,
+      "step": 4,
+      "unit": "px",
+      "default": 324
+    },
+    {
+      "type": "range",
+      "id": "image_crop",
+      "label": "Image drop - desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 0,
+      "info": "Moves the image down so the bottom is cut at the section edge. The image stays centered."
+    },
+    {
+      "type": "range",
+      "id": "image_crop_mobile",
+      "label": "Image drop - mobile",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "default": 0,
+      "info": "Same drop on mobile, after the feature icons."
+    },
+    {
+      "type": "header",
+      "content": "Feature icons"
+    },
+    {
+      "type": "paragraph",
+      "content": "Each Feature block has its own desktop and mobile icon size."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "manrope",
+          "label": "Manrope (Figma)"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "poppins",
+          "label": "Theme body (Poppins alias)"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "custom_font",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+      "visible_if": "{{ section.settings.font_family == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "heading_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ section.settings.heading_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Size - desktop",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Size - mobile",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Subtext"
+    },
+    {
+      "type": "select",
+      "id": "subtext_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "subtext_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ section.settings.subtext_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "subtext_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "subtext_size_desktop",
+      "label": "Size - desktop",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "subtext_size_mobile",
+      "label": "Size - mobile",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Feature title"
+    },
+    {
+      "type": "select",
+      "id": "feature_title_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "feature_title_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ section.settings.feature_title_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "feature_title_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size_desktop",
+      "label": "Size - desktop",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size_mobile",
+      "label": "Size - mobile",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "feature_title_line_height",
+      "label": "Line height",
+      "min": 100,
+      "max": 180,
+      "step": 2,
+      "default": 120,
+      "info": "Same on desktop and mobile. 140 equals 1.4. Lower is tighter."
+    },
+    {
+      "type": "header",
+      "content": "Feature body"
+    },
+    {
+      "type": "select",
+      "id": "feature_body_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "feature_body_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ section.settings.feature_body_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "feature_body_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "feature_body_size_desktop",
+      "label": "Size - desktop",
+      "min": 11,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "feature_body_size_mobile",
+      "label": "Size - mobile",
+      "min": 11,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "benefit_gap",
+      "label": "Benefit row gap - desktop",
+      "min": 8,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "benefit_gap_mobile",
+      "label": "Benefit row gap - mobile",
+      "min": 4,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "product_gap_mobile",
+      "label": "Space above image - mobile",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 28,
+      "info": "Space between the benefit icons and the product image on mobile."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "slot",
+          "label": "Desktop position",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Auto (by order)"
+            },
+            {
+              "value": "left-top",
+              "label": "Left top"
+            },
+            {
+              "value": "right-top",
+              "label": "Right top"
+            },
+            {
+              "value": "left-bottom",
+              "label": "Left bottom"
+            },
+            {
+              "value": "right-bottom",
+              "label": "Right bottom"
+            }
+          ],
+          "default": "auto"
+        },
+        {
+          "type": "select",
+          "id": "icon_preset",
+          "label": "Built-in icon",
+          "options": [
+            {
+              "value": "dumbbell",
+              "label": "Dumbbell"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "bolt",
+              "label": "Lightning"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            }
+          ],
+          "default": "dumbbell"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Custom icon",
+          "info": "Optional. Overrides the built-in icon."
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon size - desktop",
+          "min": 16,
+          "max": 160,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "icon_size_mobile",
+          "label": "Icon size - mobile",
+          "min": 16,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 28
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "23g complete protein"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Description",
+          "default": "Grass-fed beef bone broth + grass-fed collagen peptides"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Daily Routine Cacao LP",
+      "settings": {
+        "bg_color": "#fcfbfe",
+        "heading_color": "#1e1734",
+        "body_color": "#1e1734",
+        "accent_color": "#580d93",
+        "heading": "Transform your daily routine.",
+        "subtext": "Complete protein and purposeful ingredients come together in one simple daily serving.",
+        "subtext_mobile": "Complete protein and purposeful ingredients work together in one simple Cacao serving.",
+        "product_image": "shopify://shop_images/zeotein-_WBP_NEW.webp",
+        "image_width": 582,
+        "image_width_mobile": 324,
+        "image_crop": 0,
+        "image_crop_mobile": 0,
+        "font_family": "manrope",
+        "custom_font": "",
+        "heading_font": "manrope",
+        "heading_font_custom": "",
+        "heading_weight": "600",
+        "heading_size_desktop": 48,
+        "heading_size_mobile": 32,
+        "subtext_font": "manrope",
+        "subtext_font_custom": "",
+        "subtext_weight": "400",
+        "subtext_size_desktop": 20,
+        "subtext_size_mobile": 16,
+        "feature_title_font": "manrope",
+        "feature_title_font_custom": "",
+        "feature_title_weight": "700",
+        "feature_title_size_desktop": 22,
+        "feature_title_size_mobile": 22,
+        "feature_title_line_height": 120,
+        "feature_body_font": "manrope",
+        "feature_body_font_custom": "",
+        "feature_body_weight": "400",
+        "feature_body_size_desktop": 16,
+        "feature_body_size_mobile": 14,
+        "benefit_gap": 32,
+        "benefit_gap_mobile": 16,
+        "product_gap_mobile": 28,
+        "padding_top": 64,
+        "padding_bottom": 32
+      },
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "slot": "left-top",
+            "icon_preset": "dumbbell",
+            "icon": "shopify://shop_images/4ICONSNEW1200PX4--webp-1.webp",
+            "icon_size": 120,
+            "icon_size_mobile": 60,
+            "title": "23g complete protein",
+            "body": "Grass-fed beef bone broth + grass-fed collagen peptides"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "slot": "right-top",
+            "icon_preset": "sparkle",
+            "icon": "shopify://shop_images/4ICONSNEW1200PX2--webp-2.webp",
+            "icon_size": 120,
+            "icon_size_mobile": 60,
+            "title": "Collagen support",
+            "body": "Built into every daily \nserving"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "slot": "left-bottom",
+            "icon_preset": "bolt",
+            "icon": "shopify://shop_images/4ICONSNEW1200PX1--webp-3.webp",
+            "icon_size": 120,
+            "icon_size_mobile": 60,
+            "title": "Steady daily fuel",
+            "body": "Organic MCT oil with zero sugar"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "slot": "right-bottom",
+            "icon_preset": "leaf",
+            "icon": "shopify://shop_images/4ICONSNEW1200PX3_-webp-4.webp",
+            "icon_size": 120,
+            "icon_size_mobile": 60,
+            "title": "Clean and transparent",
+            "body": "Six clearly listed \ningredients"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,282 @@
+{% doc %}
+  Canonical Cacao bulk bag pricing tiers (1–4 bags) for Buy Box Cacao LP.
+  Static theme block, does not count toward the section 40-setting cap.
+
+  IMPORTANT: Selling plan IDs here must point at LP-only Seal plans.
+  Never reuse / edit the live “Save $10” monthly/6wk/8wk plans.
+{% enddoc %}
+
+{% schema %}
+{
+  "name": "Pricing tiers",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Canonical Cacao bulk bag prices. Wire Seal selling plan IDs only for LP-isolated plans ? do not use live Save $10 plans."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tier_4",
+      "label": "Show 4 bags option",
+      "default": false,
+      "info": "Keep off to hide 4 bags in the buy box. Pricing fields below stay ready."
+    },
+    {
+      "type": "header",
+      "content": "1 bag"
+    },
+    {
+      "type": "text",
+      "id": "tier1_label",
+      "label": "Bag label",
+      "default": "1 bag"
+    },
+    {
+      "type": "text",
+      "id": "tier1_badge",
+      "label": "Sub badge",
+      "default": "Most Popular"
+    },
+    {
+      "type": "text",
+      "id": "tier1_save",
+      "label": "Sub save label (first order)",
+      "default": "Save 30%"
+    },
+    {
+      "type": "text",
+      "id": "tier1_first_price",
+      "label": "Sub first-order price",
+      "default": "76.99"
+    },
+    {
+      "type": "text",
+      "id": "tier1_renew_price",
+      "label": "Sub renew price",
+      "default": "99.99"
+    },
+    {
+      "type": "text",
+      "id": "tier1_meta",
+      "label": "Sub meta",
+      "default": "1 bag every 30 days - $2.57 per serving"
+    },
+    {
+      "type": "text",
+      "id": "tier1_renew_note",
+      "label": "Sub renew note",
+      "default": "then $99.99 every 30 days"
+    },
+    {
+      "type": "text",
+      "id": "tier1_once_price",
+      "label": "One-time price",
+      "default": "109.99"
+    },
+    {
+      "type": "text",
+      "id": "tier1_selling_plan_id",
+      "label": "LP Seal selling plan ID",
+      "info": "Isolated LP plan only ? not live Save $10 plans. 1 bag has no OTP save label.",
+      "default": "6565560533"
+    },
+    {
+      "type": "header",
+      "content": "2 bags"
+    },
+    {
+      "type": "text",
+      "id": "tier2_label",
+      "label": "Bag label",
+      "default": "2 bags"
+    },
+    {
+      "type": "text",
+      "id": "tier2_badge",
+      "label": "Sub badge",
+      "default": "Stock Up"
+    },
+    {
+      "type": "text",
+      "id": "tier2_save",
+      "label": "Sub save label (first order)",
+      "default": "Save 32%"
+    },
+    {
+      "type": "text",
+      "id": "tier2_first_price",
+      "label": "Sub first-order price",
+      "default": "149.98"
+    },
+    {
+      "type": "text",
+      "id": "tier2_renew_price",
+      "label": "Sub renew price",
+      "default": "179.98"
+    },
+    {
+      "type": "text",
+      "id": "tier2_meta",
+      "label": "Sub meta",
+      "default": "2 bags every 60 days - $2.50 per serving"
+    },
+    {
+      "type": "text",
+      "id": "tier2_renew_note",
+      "label": "Sub renew note",
+      "default": "then $179.98 every 60 days"
+    },
+    {
+      "type": "text",
+      "id": "tier2_once_price",
+      "label": "One-time price",
+      "default": "199.98"
+    },
+    {
+      "type": "text",
+      "id": "tier2_once_save",
+      "label": "One-time save label",
+      "default": "Save $20 (9%)"
+    },
+    {
+      "type": "text",
+      "id": "tier2_selling_plan_id",
+      "label": "LP Seal selling plan ID",
+      "info": "Isolated LP plan only - not live Save $10 plans.",
+      "default": "6565593301"
+    },
+    {
+      "type": "header",
+      "content": "3 bags"
+    },
+    {
+      "type": "text",
+      "id": "tier3_label",
+      "label": "Bag label",
+      "default": "3 bags"
+    },
+    {
+      "type": "text",
+      "id": "tier3_badge",
+      "label": "Sub badge",
+      "default": "Best Value"
+    },
+    {
+      "type": "text",
+      "id": "tier3_save",
+      "label": "Sub save label (first order)",
+      "default": "Save 33%"
+    },
+    {
+      "type": "text",
+      "id": "tier3_first_price",
+      "label": "Sub first-order price",
+      "default": "219.99"
+    },
+    {
+      "type": "text",
+      "id": "tier3_renew_price",
+      "label": "Sub renew price",
+      "default": "239.97"
+    },
+    {
+      "type": "text",
+      "id": "tier3_meta",
+      "label": "Sub meta",
+      "default": "3 bags every 90 days - $2.44 per serving"
+    },
+    {
+      "type": "text",
+      "id": "tier3_renew_note",
+      "label": "Sub renew note",
+      "default": "then $239.97 every 90 days"
+    },
+    {
+      "type": "text",
+      "id": "tier3_once_price",
+      "label": "One-time price",
+      "default": "269.97"
+    },
+    {
+      "type": "text",
+      "id": "tier3_once_save",
+      "label": "One-time save label",
+      "default": "Save $60 (18%)"
+    },
+    {
+      "type": "text",
+      "id": "tier3_selling_plan_id",
+      "label": "LP Seal selling plan ID",
+      "info": "Isolated LP plan only - not live Save $10 plans.",
+      "default": "6565626069"
+    },
+    {
+      "type": "header",
+      "content": "4 bags"
+    },
+    {
+      "type": "text",
+      "id": "tier4_label",
+      "label": "Bag label",
+      "default": "4 bags"
+    },
+    {
+      "type": "text",
+      "id": "tier4_badge",
+      "label": "Sub badge",
+      "default": "Max Savings"
+    },
+    {
+      "type": "text",
+      "id": "tier4_save",
+      "label": "Sub save label (first order)",
+      "default": "Save 35%"
+    },
+    {
+      "type": "text",
+      "id": "tier4_first_price",
+      "label": "Sub first-order price",
+      "default": "285.00"
+    },
+    {
+      "type": "text",
+      "id": "tier4_renew_price",
+      "label": "Sub renew price",
+      "default": "299.96"
+    },
+    {
+      "type": "text",
+      "id": "tier4_meta",
+      "label": "Sub meta",
+      "default": "4 bags every 120 days - $2.37 per serving"
+    },
+    {
+      "type": "text",
+      "id": "tier4_renew_note",
+      "label": "Sub renew note",
+      "default": "then $299.96 every 120 days"
+    },
+    {
+      "type": "text",
+      "id": "tier4_once_price",
+      "label": "One-time price",
+      "default": "339.96"
+    },
+    {
+      "type": "text",
+      "id": "tier4_once_save",
+      "label": "One-time save label",
+      "default": "Save $100 (23%)"
+    },
+    {
+      "type": "text",
+      "id": "tier4_selling_plan_id",
+      "label": "LP Seal selling plan ID",
+      "info": "Isolated LP plan only � not live Save $10 plans.",
+      "default": "6565658837"
+    }
+  ],
+  "presets": [{ "name": "Pricing tiers" }]
+}
+{% endschema %}

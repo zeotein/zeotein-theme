@@ -1,0 +1,83 @@
+{% doc %}
+  Minimal Horizon module graph for the cacao LP layout.
+  Only what theme-drawer / cart-drawer need, avoids depending on the full
+  storefront scripts.liquid (which may be absent on older live themes).
+
+  @example
+  {% render 'scripts-cacao-lp' %}
+{% enddoc %}
+
+<script type="importmap">
+  {
+    "imports": {
+      "@theme/component": "{{ 'component.js' | asset_url }}",
+      "@theme/dialog": "{{ 'dialog.js' | asset_url }}",
+      "@theme/events": "{{ 'events.js' | asset_url }}",
+      "@shopify/events": "https://cdn.shopify.com/storefront/standard-events.js",
+      "@theme/focus": "{{ 'focus.js' | asset_url }}",
+      "@theme/utilities": "{{ 'utilities.js' | asset_url }}",
+      "@theme/scrolling": "{{ 'scrolling.js' | asset_url }}",
+      "@theme/scroll-container": "{{ 'scroll-container.js' | asset_url }}",
+      "@theme/theme-drawer": "{{ 'theme-drawer.js' | asset_url }}",
+      "@theme/morph": "{{ 'morph.js' | asset_url }}",
+      "@theme/section-renderer": "{{ 'section-renderer.js' | asset_url }}",
+      "@theme/section-hydration": "{{ 'section-hydration.js' | asset_url }}",
+      "@theme/performance": "{{ 'performance.js' | asset_url }}",
+      "@theme/component-cart-items": "{{ 'component-cart-items.js' | asset_url }}",
+      "@theme/component-quantity-selector": "{{ 'component-quantity-selector.js' | asset_url }}",
+      "@theme/money-formatting": "{{ 'money-formatting.js' | asset_url }}"
+    }
+  }
+</script>
+
+<script
+  src="{{ 'standard-actions-override.js' | asset_url }}"
+  type="module"
+></script>
+
+{%- comment -%}
+  Horizon cart modules (component-cart-items, etc.) read Theme.routes.
+  Without this global, remove/qty updates fail silently and leave a blank drawer.
+{%- endcomment -%}
+<script>
+  globalThis.Theme = {
+    translations: {
+      cart_count: {{ 'accessibility.cart_count' | t | json }},
+    },
+    routes: {
+      cart_add_url: {{ routes.cart_add_url | append: '.js' | json }},
+      cart_change_url: {{ routes.cart_change_url | json }},
+      cart_update_url: {{ routes.cart_update_url | json }},
+      cart_url: {{ routes.cart_url | json }},
+      predictive_search_url: {{ routes.predictive_search_url | json }},
+      search_url: {{ routes.search_url | json }},
+    },
+    template: {
+      name: {{ template | json }},
+    },
+  };
+</script>
+
+{%- comment -%}
+  Must execute these modules, importmap alone does not register custom elements.
+  cart-items-component powers trash/qty updates (on:click="/onLineItemRemove/...").
+{%- endcomment -%}
+<script
+  src="{{ 'component-cart-items.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+<script
+  src="{{ 'component-quantity-selector.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+<link rel="modulepreload" href="{{ 'utilities.js' | asset_url }}" fetchpriority="low">
+<link rel="modulepreload" href="{{ 'component.js' | asset_url }}" fetchpriority="low">
+<link rel="modulepreload" href="{{ 'focus.js' | asset_url }}" fetchpriority="low">
+<link rel="modulepreload" href="{{ 'theme-drawer.js' | asset_url }}" fetchpriority="low">
+<link rel="modulepreload" href="{{ 'events.js' | asset_url }}" fetchpriority="low">
+<link rel="modulepreload" href="{{ 'scroll-container.js' | asset_url }}" fetchpriority="low">
+<link rel="modulepreload" href="{{ 'performance.js' | asset_url }}" fetchpriority="low">
+<link rel="modulepreload" href="{{ 'component-cart-items.js' | asset_url }}" fetchpriority="low">

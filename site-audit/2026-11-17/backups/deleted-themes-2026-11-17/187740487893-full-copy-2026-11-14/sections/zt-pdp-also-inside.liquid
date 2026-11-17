@@ -1,0 +1,81 @@
+{%- comment -%}
+  "Also Inside Zeotein" card(s) for single-ingredient product pages.
+  One block per blend. Built 3 Nov 2026 for the product page rebuild.
+{%- endcomment -%}
+{%- assign sid = 'zt-also-' | append: section.id -%}
+{%- if section.blocks.size > 0 -%}
+<section id="{{ sid }}" class="zt-also" aria-labelledby="{{ sid }}-h">
+  <div class="zt-also__wrap page-width">
+    <h2 id="{{ sid }}-h" class="zt-also__title">{{ section.settings.heading }}</h2>
+    <div class="zt-also__grid zt-also__grid--{{ section.blocks.size }}">
+      {%- for block in section.blocks -%}
+        {%- assign bp = block.settings.product -%}
+        <div class="zt-also__card" {{ block.shopify_attributes }}>
+          {%- if bp != blank and bp.featured_image != blank -%}
+            <a href="{{ block.settings.button_url }}" class="zt-also__img" tabindex="-1" aria-hidden="true">
+              {{ bp.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 450, 600, 900', sizes: '(min-width: 750px) 420px, 90vw', alt: bp.featured_image.alt }}
+            </a>
+          {%- endif -%}
+          <div class="zt-also__body">
+            {%- if block.settings.badge != blank -%}<p class="zt-also__badge">{{ block.settings.badge }}</p>{%- endif -%}
+            <p class="zt-also__text">{{ block.settings.text }}</p>
+            {%- if block.settings.button_label != blank -%}
+              <a class="zt-also__btn" href="{{ block.settings.button_url }}">{{ block.settings.button_label }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+<style>
+#{{ sid }} { padding: 48px 0 56px; background: #f6f2fb; }
+#{{ sid }} .zt-also__title { margin: 0 0 24px; text-align: center; color: #35164f; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; }
+#{{ sid }} .zt-also__grid { display: grid; gap: 20px; max-width: 980px; margin: 0 auto; }
+#{{ sid }} .zt-also__grid--1 { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+#{{ sid }} .zt-also__grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#{{ sid }} .zt-also__card { display: flex; gap: 18px; align-items: center; background: #fff; border: 1px solid #e3d9f0; border-radius: 14px; padding: 18px; }
+#{{ sid }} .zt-also__grid--2 .zt-also__card { flex-direction: column; text-align: center; }
+#{{ sid }} .zt-also__img { flex: 0 0 auto; display: block; width: 180px; }
+#{{ sid }} .zt-also__grid--2 .zt-also__img { width: 220px; }
+#{{ sid }} .zt-also__img img { width: 100%; height: auto; display: block; border-radius: 10px; }
+#{{ sid }} .zt-also__badge { margin: 0 0 8px; color: #5f2d90; font-weight: 700; font-size: 15px; letter-spacing: .02em; }
+#{{ sid }} .zt-also__text { margin: 0 0 14px; color: #4d4855; font-size: 15px; line-height: 1.55; }
+#{{ sid }} .zt-also__btn { display: inline-block; padding: 12px 22px; border-radius: 999px; background: #5f2d90; color: #fff; font-weight: 700; font-size: 14px; text-decoration: none; }
+#{{ sid }} .zt-also__btn:hover { background: #4a2272; }
+@media screen and (max-width: 749px) {
+  #{{ sid }} { padding: 36px 0 40px; }
+  #{{ sid }} .zt-also__grid--2 { grid-template-columns: minmax(0, 1fr); }
+  #{{ sid }} .zt-also__card { flex-direction: column; text-align: center; }
+  #{{ sid }} .zt-also__img, #{{ sid }} .zt-also__grid--2 .zt-also__img { width: 200px; }
+  #{{ sid }} .zt-also__text { font-size: 14px; }
+}
+</style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Also Inside Zeotein",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Also Inside Zeotein" }
+  ],
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Blend card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Blend product (photo)" },
+        { "type": "text", "id": "badge", "label": "Badge line" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "text", "id": "button_label", "label": "Button label" },
+        { "type": "url", "id": "button_url", "label": "Button link" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Also Inside Zeotein" } ]
+}
+{% endschema %}

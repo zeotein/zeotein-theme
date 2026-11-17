@@ -1,0 +1,31 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+/*
+ * ------------------------------------------------------------
+ * Cacao LP only — logo + cart header group.
+ * Used by layout/theme.cacao-lp.liquid. Store-wide header-group is untouched.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Cacao LP Header",
+  "sections": {
+    "header_cacao_lp": {
+      "type": "header-cacao-lp",
+      "settings": {
+        "logo_height": 40,
+        "bg_color": "#f2eee4",
+        "text_color": "#1e1734",
+        "padding_y": 22
+      }
+    }
+  },
+  "order": ["header_cacao_lp"]
+}

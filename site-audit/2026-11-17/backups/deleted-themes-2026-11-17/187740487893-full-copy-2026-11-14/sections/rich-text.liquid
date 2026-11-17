@@ -1,0 +1,400 @@
+{% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;700;800&display=swap');
+
+  #shopify-section-{{ section.id }} {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 88% 34%, rgba(69, 45, 132, 0.24) 0%, transparent 36%),
+      radial-gradient(circle at 42% 60%, rgba(46, 201, 201, 0.06) 0%, transparent 38%),
+      linear-gradient(180deg, #160824 0%, #1B0B30 52%, #170724 100%);
+    padding: 78px 0 86px;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1.5px),
+      radial-gradient(circle, rgba(46,201,201,0.10) 1px, transparent 1.5px);
+    background-size: 160px 160px, 260px 260px;
+    background-position: 40px 30px, 120px 90px;
+    opacity: 0.28;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__head {
+    max-width: 1120px;
+    margin: 0 0 78px;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__title {
+    margin: 0 0 34px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 0.95;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__title span {
+    color: #2EC9C9;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__sub {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    line-height: 1.55;
+    font-weight: 600;
+    color: #CDBFE0;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__card {
+    min-height: 350px;
+    padding: 36px 28px 34px;
+    border: 1px solid rgba(46, 201, 201, 0.42);
+    border-radius: 16px;
+    background:
+      radial-gradient(circle at 70% 20%, rgba(62, 35, 120, 0.32) 0%, transparent 48%),
+      rgba(31, 12, 52, 0.92);
+    box-shadow:
+      0 0 22px rgba(46, 201, 201, 0.07),
+      inset 0 0 18px rgba(78, 92, 207, 0.07);
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 42px;
+    color: #2EC9C9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__icon svg {
+    width: 58px;
+    height: 58px;
+    stroke: currentColor;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__card-title {
+    margin: 0 0 22px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    line-height: 1.18;
+    font-weight: 400;
+    letter-spacing: 0.7px;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-simple__card-text {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    line-height: 1.45;
+    font-weight: 400;
+    color: #CDBFE0;
+  }
+
+  @media (max-width: 1100px) {
+    #shopify-section-{{ section.id }} .z-simple__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__title {
+      font-size: 58px;
+    }
+  }
+
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .z-simple {
+      padding: 58px 0 68px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__inner {
+      padding: 0 18px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__head {
+      margin-bottom: 42px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__title {
+      font-size: 44px;
+      line-height: 1;
+      margin-bottom: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__sub {
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__card {
+      min-height: auto;
+      padding: 32px 26px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__icon {
+      margin-bottom: 34px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__card-title {
+      font-size: 30px;
+      margin-bottom: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .z-simple__card-text {
+      font-size: 15px;
+    }
+  }
+{% endstyle %}
+
+<section class="z-simple">
+  <div class="z-simple__inner">
+
+    <div class="z-simple__head">
+      <h2 class="z-simple__title">
+        {{ section.settings.title_white }}
+        <span>{{ section.settings.title_teal }}</span>
+      </h2>
+
+      <p class="z-simple__sub">
+        {{ section.settings.subhead }}
+      </p>
+    </div>
+
+    <div class="z-simple__grid">
+
+      <div class="z-simple__card">
+        <div class="z-simple__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L5 14h7l-1 8 8-12h-7l1-8z"></path>
+          </svg>
+        </div>
+        <h3 class="z-simple__card-title">{{ section.settings.card_1_title }}</h3>
+        <p class="z-simple__card-text">{{ section.settings.card_1_text }}</p>
+      </div>
+
+      <div class="z-simple__card">
+        <div class="z-simple__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v3"></path>
+            <path d="M12 18v3"></path>
+            <path d="M3 12h3"></path>
+            <path d="M18 12h3"></path>
+            <path d="M5.6 5.6l2.1 2.1"></path>
+            <path d="M16.3 16.3l2.1 2.1"></path>
+            <path d="M18.4 5.6l-2.1 2.1"></path>
+            <path d="M7.7 16.3l-2.1 2.1"></path>
+            <circle cx="12" cy="12" r="3.5"></circle>
+          </svg>
+        </div>
+        <h3 class="z-simple__card-title">{{ section.settings.card_2_title }}</h3>
+        <p class="z-simple__card-text">{{ section.settings.card_2_text }}</p>
+      </div>
+
+      <div class="z-simple__card">
+        <div class="z-simple__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3l8 4-8 4-8-4 8-4z"></path>
+            <path d="M4 12l8 4 8-4"></path>
+            <path d="M4 17l8 4 8-4"></path>
+          </svg>
+        </div>
+        <h3 class="z-simple__card-title">{{ section.settings.card_3_title }}</h3>
+        <p class="z-simple__card-text">{{ section.settings.card_3_text }}</p>
+      </div>
+
+      <div class="z-simple__card">
+        <div class="z-simple__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 5c-9 0-14 5-14 14 9 0 14-5 14-14z"></path>
+            <path d="M6 19c2.5-5.5 6.5-8.5 12-10"></path>
+          </svg>
+        </div>
+        <h3 class="z-simple__card-title">{{ section.settings.card_4_title }}</h3>
+        <p class="z-simple__card-text">{{ section.settings.card_4_text }}</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Real Nutrition Simple",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_white",
+      "label": "White title text",
+      "default": "REAL NUTRITION"
+    },
+    {
+      "type": "text",
+      "id": "title_teal",
+      "label": "Teal title text",
+      "default": "MADE SIMPLE."
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subheading",
+      "default": "Get protein, collagen, minerals, and energy from a single stick pack."
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Card 1 title",
+      "default": "RECOVER FASTER, FEEL IT SOONER."
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_text",
+      "label": "Card 1 text",
+      "default": "23g of clean protein plus collagen help muscles bounce back and joints stay strong."
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Card 2 title",
+      "default": "ENERGY THAT LASTS, NO CRASH."
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_text",
+      "label": "Card 2 text",
+      "default": "MCT fuel that carries you past the 3pm slump with no jitters."
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Card 3 title",
+      "default": "ONE HABIT, NOT TEN."
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_text",
+      "label": "Card 3 text",
+      "default": "Six real ingredients replace a counter full of separate scoops and blends. One stick pack, ten seconds, done."
+    },
+    {
+      "type": "text",
+      "id": "card_4_title",
+      "label": "Card 4 title",
+      "default": "NOTHING TO FEEL GUILTY ABOUT."
+    },
+    {
+      "type": "textarea",
+      "id": "card_4_text",
+      "label": "Card 4 text",
+      "default": "Zero fillers, zero artificial sweeteners, zero junk. If a clean freak wouldn't approve it, it's not in here."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Heading"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Text"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button label",
+          "default": "Button label"
+        },
+        {
+          "type": "text",
+          "id": "link",
+          "label": "Button link",
+          "default": "#"
+        }
+      ]
+    },
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column title",
+          "default": "Column"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Column text",
+          "default": "Column text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Real Nutrition Simple"
+    }
+  ]
+}
+{% endschema %}

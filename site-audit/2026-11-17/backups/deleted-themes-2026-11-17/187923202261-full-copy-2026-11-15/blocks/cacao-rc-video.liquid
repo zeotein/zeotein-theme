@@ -1,0 +1,87 @@
+{% doc %}
+  Playable video card for a Real Customers video row.
+{% enddoc %}
+
+{%- liquid
+  assign card_label = block.settings.label
+  assign poster = block.settings.image
+  assign video_url = block.settings.video_url
+  assign hosted = ''
+  if block.settings.video != blank
+    for source in block.settings.video.sources
+      assign hosted = source.url
+    endfor
+  endif
+-%}
+
+<button
+  type="button"
+  class="zt-rc__video"
+  data-zt-rc-video
+  data-video-url="{{ video_url | escape }}"
+  data-video-src="{{ hosted | escape }}"
+  {{ block.shopify_attributes }}
+  aria-label="{% if card_label != blank %}Play {{ card_label | escape }}{% else %}Play video{% endif %}"
+>
+  {%- if card_label != blank -%}
+    <span class="zt-rc__video-badge">{{ card_label | escape }}</span>
+  {%- endif -%}
+  {%- if poster != blank -%}
+    {{
+      poster
+      | image_url: width: 800
+      | image_tag:
+        class: 'zt-rc__video-poster',
+        loading: 'lazy',
+        widths: '240, 360, 480, 640, 800',
+        sizes: '(max-width: 989px) 45vw, 12vw',
+        alt: card_label
+    }}
+  {%- else -%}
+    <span class="zt-rc__video-placeholder" aria-hidden="true"></span>
+  {%- endif -%}
+  <span class="zt-rc__video-play" aria-hidden="true">
+    <span class="zt-rc__video-play-icon">
+      <svg viewBox="0 0 24 24" width="18" height="18" focusable="false">
+        <path fill="currentColor" d="M8 5.5v13l11-6.5L8 5.5z"/>
+      </svg>
+    </span>
+  </span>
+</button>
+
+{% schema %}
+{
+  "name": "Video card",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Badge",
+      "default": "Review"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Cover image"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video link",
+      "info": "YouTube, Vimeo, or a direct video link."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Hosted video",
+      "info": "Optional. Used when Video link is empty."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video card"
+    }
+  ]
+}
+{% endschema %}

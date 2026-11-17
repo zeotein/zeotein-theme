@@ -1,0 +1,30 @@
+/* Cacao LP locked layout helpers (body.cacao-lp-locked) */
+
+/* Hide Essential Free Shipping / $150 progress bar on this LP */
+body.cacao-lp-locked .essential_free_shipping_bar_wrapper,
+body.cacao-lp-locked [class*='essential_free_shipping'],
+body.cacao-lp-locked [id*='essential_free_shipping'],
+body.cacao-lp-locked [class*='EssentialFreeShipping'],
+body.cacao-lp-locked .efs-bar,
+body.cacao-lp-locked #efs-bar {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Reduce footer browse paths — keep legal/support, hide menu columns */
+body.cacao-lp-locked .footer-block--menu,
+body.cacao-lp-locked .footer__blocks-wrapper .footer-block:has(ul),
+body.cacao-lp-locked .footer-block__details-content .list-menu,
+body.cacao-lp-locked .footer .footer-block__navbar,
+body.cacao-lp-locked .zt-footer__nav,
+body.cacao-lp-locked .zt-footer__menus,
+body.cacao-lp-locked .zt-footer__menu {
+  display: none !important;
+}

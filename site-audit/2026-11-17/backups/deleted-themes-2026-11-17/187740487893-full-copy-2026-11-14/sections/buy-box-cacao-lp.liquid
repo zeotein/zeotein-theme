@@ -1,0 +1,4334 @@
+{%- liquid
+  assign sid = 'zt-bb-' | append: section.id
+  assign bb_product = all_products['zeotein-cacao-bulk-bag-cacao-lp']
+  if bb_product == blank
+    assign bb_product = section.settings.product
+  endif
+  assign variant = bb_product.selected_or_first_available_variant
+  assign variant_id = variant.id | default: '67596435783893'
+  assign seal_plan_1 = '6565560533'
+  assign seal_plan_2 = '6565593301'
+  assign seal_plan_3 = '6565626069'
+  assign seal_plan_4 = '6565658837'
+
+  # Cart gifts are unlisted $0 products so checkout stays free without a discount code.
+  # Theme Editor shaker picker is for the kit image only.
+  assign shaker = all_products['lp-gift-cleanblend-shaker']
+  assign shaker_variant_id = '67706369704149'
+  if shaker != blank and shaker.selected_or_first_available_variant
+    assign shaker_variant_id = shaker.selected_or_first_available_variant.id
+  endif
+
+  assign scoop_product = all_products['lp-gift-save-a-scoop']
+  assign scoop_variant_id = '67706369507541'
+  if scoop_product != blank and scoop_product.selected_or_first_available_variant
+    assign scoop_variant_id = scoop_product.selected_or_first_available_variant.id
+  endif
+  assign guide_starter = all_products['lp-gift-starter-guide']
+  assign guide_cacao = all_products['lp-gift-cacao-recipe-guide']
+  assign guide_vegan = all_products['lp-gift-vegan-recipe-guide']
+  assign guide_starter_vid = '67706369540309'
+  assign guide_cacao_vid = '67706369605845'
+  assign guide_vegan_vid = '67706369638613'
+  if guide_starter != blank and guide_starter.selected_or_first_available_variant
+    assign guide_starter_vid = guide_starter.selected_or_first_available_variant.id
+  endif
+  if guide_cacao != blank and guide_cacao.selected_or_first_available_variant
+    assign guide_cacao_vid = guide_cacao.selected_or_first_available_variant.id
+  endif
+  if guide_vegan != blank and guide_vegan.selected_or_first_available_variant
+    assign guide_vegan_vid = guide_vegan.selected_or_first_available_variant.id
+  endif
+
+  assign offer = nil
+  assign tiers = nil
+  assign gallery = nil
+  assign product_info = nil
+  assign cta = nil
+  for block in section.blocks
+    case block.type
+      when 'buy_box'
+        assign offer = block.settings
+      when 'pricing_tiers'
+        assign tiers = block.settings
+      when 'gallery'
+        assign gallery = block.settings
+      when 'product_info'
+        assign product_info = block.settings
+      when 'cta'
+        assign cta = block.settings
+    endcase
+  endfor
+  if tiers == blank and offer != blank
+    assign tiers = offer
+  endif
+
+  # Gallery: product media and/or manual pickers; theme assets fill empty slots in markup/JSON
+  assign media_source = 'manual'
+  if gallery != blank and gallery.media_source != blank
+    assign media_source = gallery.media_source
+  endif
+
+  assign slide_1 = nil
+  assign slide_2 = nil
+  assign slide_3 = nil
+  assign slide_4 = nil
+  assign slide_5 = nil
+  assign slide_6 = nil
+
+  if media_source == 'product' and bb_product != blank
+    assign product_image_i = 0
+    for media in bb_product.media
+      if media.media_type == 'image' and product_image_i < 6
+        assign product_image_i = product_image_i | plus: 1
+        case product_image_i
+          when 1
+            assign slide_1 = media
+          when 2
+            assign slide_2 = media
+          when 3
+            assign slide_3 = media
+          when 4
+            assign slide_4 = media
+          when 5
+            assign slide_5 = media
+          when 6
+            assign slide_6 = media
+        endcase
+      endif
+    endfor
+  endif
+
+  if slide_1 == blank and gallery != blank
+    assign slide_1 = gallery.image_1
+  endif
+  if slide_2 == blank and gallery != blank
+    assign slide_2 = gallery.image_2
+  endif
+  if slide_3 == blank and gallery != blank
+    assign slide_3 = gallery.image_3
+  endif
+  if slide_4 == blank and gallery != blank
+    assign slide_4 = gallery.image_4
+  endif
+  if slide_5 == blank and gallery != blank
+    assign slide_5 = gallery.image_5
+  endif
+  if slide_6 == blank and gallery != blank
+    assign slide_6 = gallery.image_6
+  endif
+
+  assign product_title = product_info.product_title | default: '30-Day Cacao Bulk Bag'
+  assign cta_prefix = cta.cta_prefix | default: 'Start Now'
+  assign after_add_action = cta.after_add_action | default: 'none'
+  assign tier1_label = tiers.tier1_label | default: '1 bag'
+  assign tier2_label = tiers.tier2_label | default: '2 bags'
+  assign tier3_label = tiers.tier3_label | default: '3 bags'
+  assign tier4_label = tiers.tier4_label | default: '4 bags'
+  assign show_tier_4 = false
+  if tiers.show_tier_4
+    assign show_tier_4 = true
+  endif
+  assign add_shaker_gift = false
+  if shaker_variant_id != blank
+    assign add_shaker_gift = true
+  endif
+  assign add_bulk_bag_gifts = false
+  if scoop_variant_id != blank or guide_starter_vid != blank or guide_cacao_vid != blank or guide_vegan_vid != blank
+    assign add_bulk_bag_gifts = true
+  endif
+-%}
+
+{% render 'cacao-lp-fonts', id: sid, font_family: section.settings.font_family, settings: section.settings %}
+
+{{ 'buy-box-cacao-lp.css' | asset_url | stylesheet_tag }}
+{% render 'measure-header-heights', only_on_desktop: true %}
+<script
+  src="{{ 'buy-box-cacao-lp.js' | asset_url }}"
+  type="module"
+  defer
+></script>
+
+{%- liquid
+  assign thumb_count = 4
+  if gallery != blank and gallery.thumbnail_count != blank
+    assign thumb_count = gallery.thumbnail_count | plus: 0
+  endif
+  if thumb_count < 1
+    assign thumb_count = 1
+  elsif thumb_count > 6
+    assign thumb_count = 6
+  endif
+-%}
+{%- capture slides_json -%}
+[
+  {%- if slide_1 != blank -%}{{ slide_1 | image_url: width: 1400 | json }}{%- else -%}{{ 'zt-bb-main.png' | asset_url | json }}{%- endif -%}
+  {%- if thumb_count >= 2 -%}{%- if slide_2 != blank -%},{{ slide_2 | image_url: width: 1400 | json }}{%- else -%},{{ 'zt-bb-thumb-2.png' | asset_url | json }}{%- endif -%}{%- endif -%}
+  {%- if thumb_count >= 3 -%}{%- if slide_3 != blank -%},{{ slide_3 | image_url: width: 1400 | json }}{%- else -%},{{ 'zt-bb-thumb-3.png' | asset_url | json }}{%- endif -%}{%- endif -%}
+  {%- if thumb_count >= 4 -%}{%- if slide_4 != blank -%},{{ slide_4 | image_url: width: 1400 | json }}{%- else -%},{{ 'zt-bb-thumb-4.png' | asset_url | json }}{%- endif -%}{%- endif -%}
+  {%- if thumb_count >= 5 -%}{%- if slide_5 != blank -%},{{ slide_5 | image_url: width: 1400 | json }}{%- else -%},{{ 'zt-bb-thumb-2.png' | asset_url | json }}{%- endif -%}{%- endif -%}
+  {%- if thumb_count >= 6 -%}{%- if slide_6 != blank -%},{{ slide_6 | image_url: width: 1400 | json }}{%- else -%},{{ 'zt-bb-thumb-3.png' | asset_url | json }}{%- endif -%}{%- endif -%}
+]
+{%- endcapture -%}
+
+{%- capture buybox_config -%}
+{
+  "productTitle": {{ bb_product.title | default: product_title | json }},
+  "variantId": {{ variant_id | json }},
+  "defaultPlan": {{ section.settings.default_plan | default: 'sub' | json }},
+  "defaultBag": "1",
+  "ctaPrefix": {{ cta_prefix | json }},
+  "afterAddAction": {{ after_add_action | json }},
+  "addShakerGift": {{ add_shaker_gift | json }},
+  "shakerVariantId": {{ shaker_variant_id | json }},
+  "addBulkBagGifts": {{ add_bulk_bag_gifts | json }},
+  "giftItems": {
+    "bulkBag": [
+      {%- assign gift_comma = false -%}
+      {%- if scoop_variant_id != blank -%}
+        { "id": {{ scoop_variant_id }}, "key": "save_a_scoop" }
+        {%- assign gift_comma = true -%}
+      {%- endif -%}
+      {%- if guide_starter_vid != blank -%}
+        {%- if gift_comma -%},{%- endif -%}
+        { "id": {{ guide_starter_vid }}, "key": "starter_guide" }
+        {%- assign gift_comma = true -%}
+      {%- endif -%}
+      {%- if guide_cacao_vid != blank -%}
+        {%- if gift_comma -%},{%- endif -%}
+        { "id": {{ guide_cacao_vid }}, "key": "cacao_recipe_guide" }
+        {%- assign gift_comma = true -%}
+      {%- endif -%}
+      {%- if guide_vegan_vid != blank -%}
+        {%- if gift_comma -%},{%- endif -%}
+        { "id": {{ guide_vegan_vid }}, "key": "vegan_recipe_guide" }
+      {%- endif -%}
+    ],
+    "subscribeOnly": [
+      {%- if shaker_variant_id != blank -%}
+        { "id": {{ shaker_variant_id }}, "key": "cleanblend_shaker" }
+      {%- endif -%}
+    ]
+  },
+  "slides": {{ slides_json }},
+  "tiers": [
+    {
+      "key": "1",
+      "qty": 1,
+      "label": {{ tier1_label | json }},
+      "badge": {{ tiers.tier1_badge | default: 'Most Popular' | json }},
+      "saveLabel": {{ tiers.tier1_save | default: 'Save 30%' | json }},
+      "firstPrice": {{ tiers.tier1_first_price | default: '76.99' | json }},
+      "renewPrice": {{ tiers.tier1_renew_price | default: '99.99' | json }},
+      "meta": {{ tiers.tier1_meta | default: '1 bag every 30 days - $2.57 per serving' | json }},
+      "renewNote": {{ tiers.tier1_renew_note | default: 'then $99.99 every 30 days' | json }},
+      "oncePrice": {{ tiers.tier1_once_price | default: '109.99' | json }},
+      "onceSave": "",
+      "onceMeta": "1 bag, delivered once",
+      "sellingPlanId": {{ seal_plan_1 | json }}
+    },
+    {
+      "key": "2",
+      "qty": 2,
+      "label": {{ tier2_label | json }},
+      "badge": {{ tiers.tier2_badge | default: 'Stock Up' | json }},
+      "saveLabel": {{ tiers.tier2_save | default: 'Save 32%' | json }},
+      "firstPrice": {{ tiers.tier2_first_price | default: '149.98' | json }},
+      "renewPrice": {{ tiers.tier2_renew_price | default: '179.98' | json }},
+      "meta": {{ tiers.tier2_meta | default: '2 bags every 60 days - $2.50 per serving' | json }},
+      "renewNote": {{ tiers.tier2_renew_note | default: 'then $179.98 every 60 days' | json }},
+      "oncePrice": {{ tiers.tier2_once_price | default: '199.98' | json }},
+      "onceSave": {{ tiers.tier2_once_save | default: 'Save $20 (9%)' | json }},
+      "onceMeta": "2 bags, delivered once",
+      "sellingPlanId": {{ seal_plan_2 | json }}
+    },
+    {
+      "key": "3",
+      "qty": 3,
+      "label": {{ tier3_label | json }},
+      "badge": {{ tiers.tier3_badge | default: 'Best Value' | json }},
+      "saveLabel": {{ tiers.tier3_save | default: 'Save 33%' | json }},
+      "firstPrice": {{ tiers.tier3_first_price | default: '219.99' | json }},
+      "renewPrice": {{ tiers.tier3_renew_price | default: '239.97' | json }},
+      "meta": {{ tiers.tier3_meta | default: '3 bags every 90 days - $2.44 per serving' | json }},
+      "renewNote": {{ tiers.tier3_renew_note | default: 'then $239.97 every 90 days' | json }},
+      "oncePrice": {{ tiers.tier3_once_price | default: '269.97' | json }},
+      "onceSave": {{ tiers.tier3_once_save | default: 'Save $60 (18%)' | json }},
+      "onceMeta": "3 bags, delivered once",
+      "sellingPlanId": {{ seal_plan_3 | json }}
+    }{%- if show_tier_4 -%}
+    ,{
+      "key": "4",
+      "qty": 4,
+      "label": {{ tier4_label | json }},
+      "badge": {{ tiers.tier4_badge | default: 'Max Savings' | json }},
+      "saveLabel": {{ tiers.tier4_save | default: 'Save 35%' | json }},
+      "firstPrice": {{ tiers.tier4_first_price | default: '285.00' | json }},
+      "renewPrice": {{ tiers.tier4_renew_price | default: '299.96' | json }},
+      "meta": {{ tiers.tier4_meta | default: '4 bags every 120 days - $2.37 per serving' | json }},
+      "renewNote": {{ tiers.tier4_renew_note | default: 'then $299.96 every 120 days' | json }},
+      "oncePrice": {{ tiers.tier4_once_price | default: '339.96' | json }},
+      "onceSave": {{ tiers.tier4_once_save | default: 'Save $100 (23%)' | json }},
+      "onceMeta": "4 bags, delivered once",
+      "sellingPlanId": {{ seal_plan_4 | json }}
+    }{%- endif -%}
+  ]
+}
+{%- endcapture -%}
+
+<section
+  id="{{ sid }}"
+  class="zt-bb"
+  data-zt-bb
+  data-zt-bb-config="zt-bb-config-{{ section.id }}"
+  {{ section.shopify_attributes }}
+  style="
+    --zt-bb-bg: {{ section.settings.bg_color }};
+    --zt-bb-accent: {{ section.settings.accent_color }};
+    --zt-bb-ink: {{ section.settings.ink_color }};
+    --zt-bb-pad-top: {{ section.settings.padding_top }}px;
+    --zt-bb-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --zt-bb-max-width: {{ section.settings.content_width | default: 1060 }}px;
+  "
+>
+  <script type="application/json" id="zt-bb-config-{{ section.id }}">{{ buybox_config }}</script>
+
+  <div class="zt-bb__inner" id="purchase">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'header' -%}
+        {% render 'zt-bb-block-header', block: block %}
+      {%- endif -%}
+    {%- endfor -%}
+
+    <div class="zt-bb__layout">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'gallery' -%}
+          {% render 'zt-bb-block-gallery',
+            block: block,
+            slide_1: slide_1,
+            slide_2: slide_2,
+            slide_3: slide_3,
+            slide_4: slide_4,
+            slide_5: slide_5,
+            slide_6: slide_6
+          %}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <div class="zt-bb__offer">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'product_info' -%}
+              {% render 'zt-bb-block-product-info', block: block %}
+            {%- when 'buy_box' -%}
+              {% render 'zt-bb-block-buy-box', block: block %}
+            {%- when 'cta' -%}
+              {% render 'zt-bb-block-cta', block: block %}
+            {%- when 'faq' -%}
+              {% render 'zt-bb-block-faq', block: block %}
+          {%- endcase -%}
+        {%- endfor -%}
+
+        <form class="zt-bb__form" data-zt-bb-form>
+          <input type="hidden" name="id" data-zt-bb-variant value="{{ variant_id }}">
+          <input type="hidden" name="quantity" data-zt-bb-qty value="1">
+          <input type="hidden" name="selling_plan" data-zt-bb-selling-plan value="">
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Buy Box Cacao LP",
+  "tag": "section",
+  "class": "section-buy-box-cacao-lp",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product (checkout)"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "LP-only product for cacao-lp Seal plans."
+    },
+    {
+      "type": "product",
+      "id": "shaker_product",
+      "label": "CleanBlend Shaker product (optional)",
+      "info": "Added free to cart on the first Subscribe & Save order only (when set)."
+    },
+    {
+      "type": "select",
+      "id": "default_plan",
+      "label": "Default plan",
+      "options": [
+        {
+          "value": "sub",
+          "label": "Subscribe & Save"
+        },
+        {
+          "value": "once",
+          "label": "One-time"
+        }
+      ],
+      "default": "sub"
+    },
+    {
+      "type": "header",
+      "content": "Colors & type"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#fcfbfe"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#580d93"
+    },
+    {
+      "type": "color",
+      "id": "ink_color",
+      "label": "Ink",
+      "default": "#1e1734"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Section font",
+      "options": [
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "system",
+          "label": "System"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "custom_font",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+      "visible_if": "{{ section.settings.font_family == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "info": "Max width of the buy box content. Increase for a wider layout.",
+      "min": 960,
+      "max": 1440,
+      "step": 20,
+      "unit": "px",
+      "default": 1280
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "header",
+      "name": "Header",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_family",
+          "label": "Font",
+          "info": "Leave as Same as section to inherit the section font.",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "custom_font",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+          "visible_if": "{{ block.settings.font_family == 'custom' }}"
+        },
+        {
+          "type": "header",
+          "content": "Eyebrow"
+        },
+        {
+          "type": "select",
+          "id": "eyebrow_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.eyebrow_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "eyebrow_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "800"
+        },
+        {
+          "type": "range",
+          "id": "eyebrow_size_desktop",
+          "label": "Size Â desktop",
+          "min": 10,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "eyebrow_size_mobile",
+          "label": "Size Â mobile",
+          "min": 10,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "header",
+          "content": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "heading_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.heading_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "heading_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "800"
+        },
+        {
+          "type": "range",
+          "id": "heading_size_desktop",
+          "label": "Size Â desktop",
+          "min": 20,
+          "max": 56,
+          "step": 1,
+          "unit": "px",
+          "default": 36
+        },
+        {
+          "type": "range",
+          "id": "heading_size_mobile",
+          "label": "Size Â mobile",
+          "min": 18,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 28
+        },
+        {
+          "type": "header",
+          "content": "Subtext"
+        },
+        {
+          "type": "select",
+          "id": "subtext_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "subtext_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.subtext_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "subtext_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "range",
+          "id": "subtext_size_desktop",
+          "label": "Size Â desktop",
+          "min": 12,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "subtext_size_mobile",
+          "label": "Size Â mobile",
+          "min": 12,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "OUR BEST FIRST-MONTH VALUE"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Build your Cacao routine."
+        },
+        {
+          "type": "textarea",
+          "id": "subtext",
+          "label": "Subtext",
+          "default": "Choose one, two, or three 30-day bags. Subscription includes your welcome kit."
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "name": "Gallery",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_family",
+          "label": "Font",
+          "info": "Leave as Same as section to inherit the section font.",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "custom_font",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+          "visible_if": "{{ block.settings.font_family == 'custom' }}"
+        },
+        {
+          "type": "header",
+          "content": "Save badge"
+        },
+        {
+          "type": "select",
+          "id": "badge_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "badge_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.badge_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "badge_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "800"
+        },
+        {
+          "type": "range",
+          "id": "badge_size_desktop",
+          "label": "Size Â desktop",
+          "min": 9,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "range",
+          "id": "badge_size_mobile",
+          "label": "Size Â mobile",
+          "min": 9,
+          "max": 14,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "header",
+          "content": "Nutrition button"
+        },
+        {
+          "type": "select",
+          "id": "nutrition_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "nutrition_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.nutrition_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "nutrition_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "range",
+          "id": "nutrition_size_desktop",
+          "label": "Size Â desktop",
+          "min": 11,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "nutrition_size_mobile",
+          "label": "Size Â mobile",
+          "min": 11,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "select",
+          "id": "media_source",
+          "label": "Image source",
+          "info": "Product media uses the Buy Box product above. Missing slots fall back to the manual images below, then theme assets.",
+          "options": [
+            {
+              "value": "manual",
+              "label": "Manual images (theme asset fallback)"
+            },
+            {
+              "value": "product",
+              "label": "Product media (manual/asset fallback)"
+            }
+          ],
+          "default": "manual"
+        },
+        {
+          "type": "select",
+          "id": "main_aspect_ratio",
+          "label": "Main image aspect ratio",
+          "options": [
+            {
+              "value": "portrait",
+              "label": "Portrait"
+            },
+            {
+              "value": "square",
+              "label": "Square"
+            },
+            {
+              "value": "landscape",
+              "label": "Landscape"
+            }
+          ],
+          "default": "portrait"
+        },
+        {
+          "type": "select",
+          "id": "thumbnail_count",
+          "label": "Thumbnails to show",
+          "info": "Controls how many gallery thumbnails appear under the main image (and how many slides swipe).",
+          "options": [
+            {
+              "value": "1",
+              "label": "1 (main image only)"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4"
+            },
+            {
+              "value": "5",
+              "label": "5"
+            },
+            {
+              "value": "6",
+              "label": "6"
+            }
+          ],
+          "default": "4"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1 (main)",
+          "info": "Used for manual mode, or as fallback when product media is missing."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2",
+          "info": "Used for manual mode, or as fallback when product media is missing."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image 3",
+          "info": "Used for manual mode, or as fallback when product media is missing."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Image 4",
+          "info": "Used for manual mode, or as fallback when product media is missing."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "Image 5",
+          "info": "Used when Thumbnails to show is 5 or 6."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_6",
+          "label": "Image 6",
+          "info": "Used when Thumbnails to show is 6."
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Main image alt text",
+          "default": "30-Day Cacao Bulk Bag"
+        },
+        {
+          "type": "header",
+          "content": "Save badge on main image"
+        },
+        {
+          "type": "image_picker",
+          "id": "save_badge_image",
+          "label": "Save badge image",
+          "info": "Optional custom badge. Prefer a PNG with transparent background. Overrides the text badge when set."
+        },
+        {
+          "type": "range",
+          "id": "save_badge_size",
+          "label": "Badge size Â desktop",
+          "min": 40,
+          "max": 140,
+          "step": 2,
+          "unit": "px",
+          "default": 64
+        },
+        {
+          "type": "range",
+          "id": "save_badge_size_mobile",
+          "label": "Badge size Â mobile",
+          "min": 36,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 56
+        },
+        {
+          "type": "textarea",
+          "id": "save_badge",
+          "label": "Save badge text (fallback)",
+          "default": "SAVE\n$33.00",
+          "info": "Used when no badge image is uploaded. Use a line break for two lines."
+        },
+        {
+          "type": "image_picker",
+          "id": "nutrition_label",
+          "label": "Nutrition label image"
+        },
+        {
+          "type": "url",
+          "id": "nutrition_link",
+          "label": "Nutrition label link (fallback)"
+        },
+        {
+          "type": "text",
+          "id": "nutrition_btn_label",
+          "label": "Nutrition button label",
+          "default": "View Nutrition Label"
+        }
+      ]
+    },
+    {
+      "type": "product_info",
+      "name": "Product info",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_family",
+          "label": "Font",
+          "info": "Leave as Same as section to inherit the section font.",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "custom_font",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+          "visible_if": "{{ block.settings.font_family == 'custom' }}"
+        },
+        {
+          "type": "header",
+          "content": "Urgency banner"
+        },
+        {
+          "type": "select",
+          "id": "urgency_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "urgency_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.urgency_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "urgency_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "range",
+          "id": "urgency_size_desktop",
+          "label": "Size Â desktop",
+          "min": 11,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "urgency_size_mobile",
+          "label": "Size Â mobile",
+          "min": 11,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "header",
+          "content": "Rating / social"
+        },
+        {
+          "type": "select",
+          "id": "rating_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "rating_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.rating_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "rating_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "600"
+        },
+        {
+          "type": "range",
+          "id": "rating_size_desktop",
+          "label": "Size Â desktop",
+          "min": 11,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "rating_size_mobile",
+          "label": "Size Â mobile",
+          "min": 11,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "header",
+          "content": "Product title"
+        },
+        {
+          "type": "select",
+          "id": "title_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "title_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.title_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "title_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "800"
+        },
+        {
+          "type": "range",
+          "id": "title_size_desktop",
+          "label": "Size Â desktop",
+          "min": 18,
+          "max": 42,
+          "step": 1,
+          "unit": "px",
+          "default": 28
+        },
+        {
+          "type": "range",
+          "id": "title_size_mobile",
+          "label": "Size Â mobile",
+          "min": 16,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "header",
+          "content": "Feature chips"
+        },
+        {
+          "type": "select",
+          "id": "chip_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "chip_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.chip_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "chip_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "600"
+        },
+        {
+          "type": "range",
+          "id": "chip_size_desktop",
+          "label": "Size Â desktop",
+          "min": 11,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "chip_size_mobile",
+          "label": "Size Â mobile",
+          "min": 11,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "image_picker",
+          "id": "urgency_icon",
+          "label": "Urgency icon",
+          "info": "Gift icon or image shown before the urgency text."
+        },
+        {
+          "type": "range",
+          "id": "urgency_icon_size",
+          "label": "Urgency icon size",
+          "min": 14,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 22
+        },
+        {
+          "type": "text",
+          "id": "urgency_text",
+          "label": "Urgency banner",
+          "default": "Order by September 20th for 61% off with free gifts!"
+        },
+        {
+          "type": "text",
+          "id": "urgency_accent",
+          "label": "Urgency accent phrase",
+          "default": "September 20th",
+          "info": "This phrase is highlighted in purple inside the urgency banner."
+        },
+        {
+          "type": "text",
+          "id": "rating_score",
+          "label": "Rating score",
+          "default": "4.8/5.0"
+        },
+        {
+          "type": "text",
+          "id": "rating_count",
+          "label": "Rating count",
+          "default": "100,000"
+        },
+        {
+          "type": "text",
+          "id": "customers_label",
+          "label": "Customers label",
+          "default": "1M+ Customers"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Product title",
+          "default": "30-Day Cacao Bulk Bag"
+        },
+        {
+          "type": "header",
+          "content": "Benefit chips"
+        },
+        {
+          "type": "range",
+          "id": "chip_icon_size",
+          "label": "Chip icon size",
+          "min": 16,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 20
+        },
+        {
+          "type": "text",
+          "id": "chip_1",
+          "label": "Chip 1 text",
+          "default": "23g protein"
+        },
+        {
+          "type": "image_picker",
+          "id": "chip_1_icon",
+          "label": "Chip 1 icon",
+          "info": "Optional. Falls back to a checkmark."
+        },
+        {
+          "type": "text",
+          "id": "chip_2",
+          "label": "Chip 2 text",
+          "default": "6 functional ingredients"
+        },
+        {
+          "type": "image_picker",
+          "id": "chip_2_icon",
+          "label": "Chip 2 icon",
+          "info": "Optional. Falls back to a checkmark."
+        },
+        {
+          "type": "text",
+          "id": "chip_3",
+          "label": "Chip 3 text",
+          "default": "Zero sugar"
+        },
+        {
+          "type": "image_picker",
+          "id": "chip_3_icon",
+          "label": "Chip 3 icon",
+          "info": "Optional. Falls back to a checkmark."
+        },
+        {
+          "type": "text",
+          "id": "chip_4",
+          "label": "Chip 4 text",
+          "default": "30 servings"
+        },
+        {
+          "type": "image_picker",
+          "id": "chip_4_icon",
+          "label": "Chip 4 icon",
+          "info": "Optional. Falls back to a checkmark."
+        }
+      ]
+    },
+    {
+      "type": "buy_box",
+      "name": "Buy box & kit",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_family",
+          "label": "Font",
+          "info": "Leave as Same as section to inherit the section font.",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "custom_font",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+          "visible_if": "{{ block.settings.font_family == 'custom' }}"
+        },
+        {
+          "type": "header",
+          "content": "Bag buttons"
+        },
+        {
+          "type": "select",
+          "id": "bag_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "bag_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.bag_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "bag_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "range",
+          "id": "bag_size_desktop",
+          "label": "Size Â desktop",
+          "min": 11,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "bag_size_mobile",
+          "label": "Size Â mobile",
+          "min": 11,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "header",
+          "content": "Plan title"
+        },
+        {
+          "type": "select",
+          "id": "plan_title_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "plan_title_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.plan_title_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "plan_title_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "800"
+        },
+        {
+          "type": "range",
+          "id": "plan_title_size_desktop",
+          "label": "Size Â desktop",
+          "min": 13,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "plan_title_size_mobile",
+          "label": "Size Â mobile",
+          "min": 12,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "header",
+          "content": "Plan meta"
+        },
+        {
+          "type": "select",
+          "id": "plan_meta_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "plan_meta_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.plan_meta_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "plan_meta_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "500"
+        },
+        {
+          "type": "range",
+          "id": "plan_meta_size_desktop",
+          "label": "Size Â desktop",
+          "min": 11,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "plan_meta_size_mobile",
+          "label": "Size Â mobile",
+          "min": 11,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "header",
+          "content": "Plan price"
+        },
+        {
+          "type": "select",
+          "id": "plan_price_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "plan_price_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.plan_price_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "plan_price_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "800"
+        },
+        {
+          "type": "range",
+          "id": "plan_price_size_desktop",
+          "label": "Size Â desktop",
+          "min": 16,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 22
+        },
+        {
+          "type": "range",
+          "id": "plan_price_size_mobile",
+          "label": "Size Â mobile",
+          "min": 14,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 20
+        },
+        {
+          "type": "header",
+          "content": "Welcome kit"
+        },
+        {
+          "type": "select",
+          "id": "kit_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "kit_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.kit_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "kit_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "range",
+          "id": "kit_size_desktop",
+          "label": "Size Â desktop",
+          "min": 11,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "kit_size_mobile",
+          "label": "Size Â mobile",
+          "min": 11,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "header",
+          "content": "Plan banner"
+        },
+        {
+          "type": "select",
+          "id": "banner_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "banner_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.banner_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "banner_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "800"
+        },
+        {
+          "type": "range",
+          "id": "banner_size_desktop",
+          "label": "Size — desktop",
+          "min": 8,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "banner_size_mobile",
+          "label": "Size — mobile",
+          "min": 8,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "Renewal price"
+        },
+        {
+          "type": "select",
+          "id": "renew_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "renew_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.renew_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "renew_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "range",
+          "id": "renew_size_desktop",
+          "label": "Size — desktop",
+          "min": 8,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "renew_size_mobile",
+          "label": "Size — mobile",
+          "min": 8,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "Plan perks"
+        },
+        {
+          "type": "select",
+          "id": "perk_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "perk_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.perk_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "perk_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "600"
+        },
+        {
+          "type": "range",
+          "id": "perk_size_desktop",
+          "label": "Size — desktop",
+          "min": 8,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "range",
+          "id": "perk_size_mobile",
+          "label": "Size — mobile",
+          "min": 8,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "Kit badge"
+        },
+        {
+          "type": "select",
+          "id": "kit_badge_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "kit_badge_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.kit_badge_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "kit_badge_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "range",
+          "id": "kit_badge_size_desktop",
+          "label": "Size — desktop",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "kit_badge_size_mobile",
+          "label": "Size — mobile",
+          "min": 10,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "header",
+          "content": "Locked kit note"
+        },
+        {
+          "type": "select",
+          "id": "kit_lock_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "kit_lock_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.kit_lock_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "kit_lock_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "600"
+        },
+        {
+          "type": "range",
+          "id": "kit_lock_size_desktop",
+          "label": "Size — desktop",
+          "min": 8,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "range",
+          "id": "kit_lock_size_mobile",
+          "label": "Size — mobile",
+          "min": 8,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "header",
+          "content": "Guarantee pill"
+        },
+        {
+          "type": "select",
+          "id": "guarantee_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "guarantee_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.guarantee_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "guarantee_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "800"
+        },
+        {
+          "type": "range",
+          "id": "guarantee_size_desktop",
+          "label": "Size — desktop",
+          "min": 10,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "guarantee_size_mobile",
+          "label": "Size — mobile",
+          "min": 10,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "header",
+          "content": "Plan titles"
+        },
+        {
+          "type": "text",
+          "id": "sub_title",
+          "label": "Subscribe title",
+          "default": "Subscribe & Save"
+        },
+        {
+          "type": "text",
+          "id": "once_title",
+          "label": "One-time title",
+          "default": "One-Time Purchase"
+        },
+        {
+          "type": "text",
+          "id": "once_meta",
+          "label": "One-time meta (1 bag default)",
+          "default": "1 bag, delivered once"
+        },
+        {
+          "type": "header",
+          "content": "Subscribe perks"
+        },
+        {
+          "type": "range",
+          "id": "perk_icon_size",
+          "label": "Perk icon size",
+          "min": 12,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "text",
+          "id": "sub_perk_1_text",
+          "label": "Perk 1 text",
+          "default": "Save-A-Scoop (first Bulk Bag order)"
+        },
+        {
+          "type": "image_picker",
+          "id": "sub_perk_1_icon",
+          "label": "Perk 1 icon",
+          "info": "Optional. Falls back to a checkmark."
+        },
+        {
+          "type": "text",
+          "id": "sub_perk_2_text",
+          "label": "Perk 2 text",
+          "default": "3 digital guides included"
+        },
+        {
+          "type": "image_picker",
+          "id": "sub_perk_2_icon",
+          "label": "Perk 2 icon",
+          "info": "Optional. Falls back to a checkmark."
+        },
+        {
+          "type": "text",
+          "id": "sub_perk_3_text",
+          "label": "Perk 3 text",
+          "default": "Free black shaker (first sub order)"
+        },
+        {
+          "type": "image_picker",
+          "id": "sub_perk_3_icon",
+          "label": "Perk 3 icon",
+          "info": "Optional. Falls back to CleanBlend Shaker image, then the theme shaker asset."
+        },
+        {
+          "type": "text",
+          "id": "sub_perk_4_text",
+          "label": "Perk 4 text",
+          "default": "Pause or cancel"
+        },
+        {
+          "type": "image_picker",
+          "id": "sub_perk_4_icon",
+          "label": "Perk 4 icon",
+          "info": "Optional. Falls back to a checkmark."
+        },
+        {
+          "type": "header",
+          "content": "One-time lines"
+        },
+        {
+          "type": "text",
+          "id": "once_includes",
+          "label": "One-time includes line",
+          "default": "Save-A-Scoop + 3 guides (first Bulk Bag order)"
+        },
+        {
+          "type": "image_picker",
+          "id": "once_includes_icon",
+          "label": "One-time includes icon",
+          "info": "Optional. Falls back to a checkmark."
+        },
+        {
+          "type": "text",
+          "id": "once_excludes",
+          "label": "One-time excludes line",
+          "default": "Black shaker is first subscription order only"
+        },
+        {
+          "type": "image_picker",
+          "id": "once_excludes_icon",
+          "label": "One-time excludes icon",
+          "info": "Optional. Falls back to CleanBlend Shaker image, then the theme shaker asset."
+        },
+        {
+          "type": "header",
+          "content": "Welcome kit"
+        },
+        {
+          "type": "text",
+          "id": "kit_heading",
+          "label": "Welcome kit heading",
+          "default": "FREE WELCOME KIT"
+        },
+        {
+          "type": "text",
+          "id": "kit_value",
+          "label": "Welcome kit value",
+          "default": "$62.98 VALUE"
+        },
+        {
+          "type": "image_picker",
+          "id": "kit_scoop_image",
+          "label": "Save-A-Scoop image"
+        },
+        {
+          "type": "range",
+          "id": "kit_scoop_height",
+          "label": "Save-A-Scoop height - desktop",
+          "min": 48,
+          "max": 220,
+          "step": 2,
+          "unit": "px",
+          "default": 118
+        },
+        {
+          "type": "range",
+          "id": "kit_scoop_height_mobile",
+          "label": "Save-A-Scoop height - mobile",
+          "min": 40,
+          "max": 160,
+          "step": 2,
+          "unit": "px",
+          "default": 92
+        },
+        {
+          "type": "text",
+          "id": "kit_scoop_label",
+          "label": "Save-A-Scoop label",
+          "default": "Save-A-Scoop"
+        },
+        {
+          "type": "image_picker",
+          "id": "kit_guides_image",
+          "label": "Digital guides image"
+        },
+        {
+          "type": "range",
+          "id": "kit_guides_height",
+          "label": "Digital guides height - desktop",
+          "min": 48,
+          "max": 220,
+          "step": 2,
+          "unit": "px",
+          "default": 118
+        },
+        {
+          "type": "range",
+          "id": "kit_guides_height_mobile",
+          "label": "Digital guides height - mobile",
+          "min": 40,
+          "max": 160,
+          "step": 2,
+          "unit": "px",
+          "default": 92
+        },
+        {
+          "type": "text",
+          "id": "kit_guides_label",
+          "label": "Digital guides label",
+          "default": "3 Digital Guides"
+        },
+        {
+          "type": "image_picker",
+          "id": "kit_shaker_image",
+          "label": "CleanBlend Shaker image"
+        },
+        {
+          "type": "range",
+          "id": "kit_shaker_height",
+          "label": "CleanBlend Shaker height - desktop",
+          "min": 48,
+          "max": 220,
+          "step": 2,
+          "unit": "px",
+          "default": 118
+        },
+        {
+          "type": "range",
+          "id": "kit_shaker_height_mobile",
+          "label": "CleanBlend Shaker height - mobile",
+          "min": 40,
+          "max": 160,
+          "step": 2,
+          "unit": "px",
+          "default": 92
+        },
+        {
+          "type": "text",
+          "id": "kit_shaker_label",
+          "label": "CleanBlend Shaker label",
+          "default": "CleanBlend Shaker"
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "name": "Add to cart",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_family",
+          "label": "Font",
+          "info": "Leave as Same as section to inherit the section font.",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "custom_font",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+          "visible_if": "{{ block.settings.font_family == 'custom' }}"
+        },
+        {
+          "type": "header",
+          "content": "CTA button"
+        },
+        {
+          "type": "select",
+          "id": "cta_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "cta_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.cta_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "cta_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "800"
+        },
+        {
+          "type": "range",
+          "id": "cta_size_desktop",
+          "label": "Size Â desktop",
+          "min": 14,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "cta_size_mobile",
+          "label": "Size Â mobile",
+          "min": 13,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Discount note"
+        },
+        {
+          "type": "select",
+          "id": "note_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "note_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.note_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "note_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "800"
+        },
+        {
+          "type": "range",
+          "id": "note_size_desktop",
+          "label": "Size Â desktop",
+          "min": 10,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "note_size_mobile",
+          "label": "Size Â mobile",
+          "min": 10,
+          "max": 14,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "header",
+          "content": "Trust labels"
+        },
+        {
+          "type": "select",
+          "id": "trust_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "trust_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.trust_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "trust_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "600"
+        },
+        {
+          "type": "range",
+          "id": "trust_size_desktop",
+          "label": "Size Â desktop",
+          "min": 10,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "range",
+          "id": "trust_size_mobile",
+          "label": "Size Â mobile",
+          "min": 10,
+          "max": 14,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "text",
+          "id": "cta_prefix",
+          "label": "CTA prefix",
+          "default": "Start Now"
+        },
+        {
+          "type": "select",
+          "id": "after_add_action",
+          "label": "After add to cart",
+          "info": "After Start Now: opens the theme cart drawer (Theme settings ? Cart ? Drawer). Does not leave the page.",
+          "options": [
+            {
+              "value": "none",
+              "label": "Stay on page (green message)"
+            },
+            {
+              "value": "drawer",
+              "label": "Open cart drawer"
+            },
+            {
+              "value": "cart",
+              "label": "Go to cart page"
+            },
+            {
+              "value": "checkout",
+              "label": "Go to checkout"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "header",
+          "content": "Discount note"
+        },
+        {
+          "type": "image_picker",
+          "id": "discount_icon",
+          "label": "Discount icon",
+          "info": "Shown in front of the discount note text."
+        },
+        {
+          "type": "range",
+          "id": "discount_icon_size",
+          "label": "Discount icon size",
+          "min": 12,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "text",
+          "id": "discount_note",
+          "label": "Discount note",
+          "default": "Discount auto-applied"
+        },
+        {
+          "type": "html",
+          "id": "guarantee_pill",
+          "label": "Guarantee pill HTML",
+          "default": "<span>Less than 1%</span> of customers use our Money-Back Guarantee"
+        },
+        {
+          "type": "header",
+          "content": "Trust row"
+        },
+        {
+          "type": "range",
+          "id": "trust_icon_size",
+          "label": "Trust icon size",
+          "min": 16,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "default": 28
+        },
+        {
+          "type": "image_picker",
+          "id": "trust_1_icon",
+          "label": "Trust 1 icon",
+          "info": "Shown above the Trust 1 text."
+        },
+        {
+          "type": "text",
+          "id": "trust_1",
+          "label": "Trust 1",
+          "default": "30-Day Money-Back Guarantee"
+        },
+        {
+          "type": "image_picker",
+          "id": "trust_2_icon",
+          "label": "Trust 2 icon",
+          "info": "Shown above the Trust 2 text."
+        },
+        {
+          "type": "text",
+          "id": "trust_2",
+          "label": "Trust 2",
+          "default": "Ships in 1-2 Business Days"
+        }
+      ]
+    },
+    {
+      "type": "pricing_tiers",
+      "name": "Pricing tiers",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Canonical Cacao bulk bag prices. Wire Seal selling plan IDs only for LP-isolated plans ? do not use live Save $10 plans."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tier_4",
+          "label": "Show 4 bags option",
+          "default": false,
+          "info": "Keep off to hide 4 bags in the buy box. Pricing fields below stay ready."
+        },
+        {
+          "type": "header",
+          "content": "1 bag"
+        },
+        {
+          "type": "text",
+          "id": "tier1_label",
+          "label": "Bag label",
+          "default": "1 bag"
+        },
+        {
+          "type": "text",
+          "id": "tier1_badge",
+          "label": "Sub badge",
+          "default": "Most Popular"
+        },
+        {
+          "type": "text",
+          "id": "tier1_save",
+          "label": "Sub save label (first order)",
+          "default": "Save 30%"
+        },
+        {
+          "type": "text",
+          "id": "tier1_first_price",
+          "label": "Sub first-order price",
+          "default": "76.99"
+        },
+        {
+          "type": "text",
+          "id": "tier1_renew_price",
+          "label": "Sub renew price",
+          "default": "99.99"
+        },
+        {
+          "type": "text",
+          "id": "tier1_meta",
+          "label": "Sub meta",
+          "default": "1 bag every 30 days - $2.57 per serving"
+        },
+        {
+          "type": "text",
+          "id": "tier1_renew_note",
+          "label": "Sub renew note",
+          "default": "then $99.99 every 30 days"
+        },
+        {
+          "type": "text",
+          "id": "tier1_once_price",
+          "label": "One-time price",
+          "default": "109.99"
+        },
+        {
+          "type": "text",
+          "id": "tier1_once_save",
+          "label": "One-time save label",
+          "info": "Leave blank for 1 bag (no OTP savings)."
+        },
+        {
+          "type": "text",
+          "id": "tier1_selling_plan_id",
+          "label": "LP Seal selling plan ID",
+          "info": "Isolated LP plan only Ã¢ÂÂ not live Save $10 plans.",
+          "default": "6565560533"
+        },
+        {
+          "type": "header",
+          "content": "2 bags"
+        },
+        {
+          "type": "text",
+          "id": "tier2_label",
+          "label": "Bag label",
+          "default": "2 bags"
+        },
+        {
+          "type": "text",
+          "id": "tier2_badge",
+          "label": "Sub badge",
+          "default": "Stock Up"
+        },
+        {
+          "type": "text",
+          "id": "tier2_save",
+          "label": "Sub save label (first order)",
+          "default": "Save 32%"
+        },
+        {
+          "type": "text",
+          "id": "tier2_first_price",
+          "label": "Sub first-order price",
+          "default": "149.98"
+        },
+        {
+          "type": "text",
+          "id": "tier2_renew_price",
+          "label": "Sub renew price",
+          "default": "179.98"
+        },
+        {
+          "type": "text",
+          "id": "tier2_meta",
+          "label": "Sub meta",
+          "default": "2 bags every 60 days - $2.50 per serving"
+        },
+        {
+          "type": "text",
+          "id": "tier2_renew_note",
+          "label": "Sub renew note",
+          "default": "then $179.98 every 60 days"
+        },
+        {
+          "type": "text",
+          "id": "tier2_once_price",
+          "label": "One-time price",
+          "default": "199.98"
+        },
+        {
+          "type": "text",
+          "id": "tier2_once_save",
+          "label": "One-time save label",
+          "default": "Save $20 (9%)"
+        },
+        {
+          "type": "text",
+          "id": "tier2_selling_plan_id",
+          "label": "LP Seal selling plan ID",
+          "info": "Isolated LP plan only Ã¢ÂÂ not live Save $10 plans.",
+          "default": "6565593301"
+        },
+        {
+          "type": "header",
+          "content": "3 bags"
+        },
+        {
+          "type": "text",
+          "id": "tier3_label",
+          "label": "Bag label",
+          "default": "3 bags"
+        },
+        {
+          "type": "text",
+          "id": "tier3_badge",
+          "label": "Sub badge",
+          "default": "Best Value"
+        },
+        {
+          "type": "text",
+          "id": "tier3_save",
+          "label": "Sub save label (first order)",
+          "default": "Save 33%"
+        },
+        {
+          "type": "text",
+          "id": "tier3_first_price",
+          "label": "Sub first-order price",
+          "default": "219.99"
+        },
+        {
+          "type": "text",
+          "id": "tier3_renew_price",
+          "label": "Sub renew price",
+          "default": "239.97"
+        },
+        {
+          "type": "text",
+          "id": "tier3_meta",
+          "label": "Sub meta",
+          "default": "3 bags every 90 days - $2.44 per serving"
+        },
+        {
+          "type": "text",
+          "id": "tier3_renew_note",
+          "label": "Sub renew note",
+          "default": "then $239.97 every 90 days"
+        },
+        {
+          "type": "text",
+          "id": "tier3_once_price",
+          "label": "One-time price",
+          "default": "269.97"
+        },
+        {
+          "type": "text",
+          "id": "tier3_once_save",
+          "label": "One-time save label",
+          "default": "Save $60 (18%)"
+        },
+        {
+          "type": "text",
+          "id": "tier3_selling_plan_id",
+          "label": "LP Seal selling plan ID",
+          "info": "Isolated LP plan only Ã¢ÂÂ not live Save $10 plans.",
+          "default": "6565626069"
+        },
+        {
+          "type": "header",
+          "content": "4 bags"
+        },
+        {
+          "type": "text",
+          "id": "tier4_label",
+          "label": "Bag label",
+          "default": "4 bags"
+        },
+        {
+          "type": "text",
+          "id": "tier4_badge",
+          "label": "Sub badge",
+          "default": "Max Savings"
+        },
+        {
+          "type": "text",
+          "id": "tier4_save",
+          "label": "Sub save label (first order)",
+          "default": "Save 35%"
+        },
+        {
+          "type": "text",
+          "id": "tier4_first_price",
+          "label": "Sub first-order price",
+          "default": "285.00"
+        },
+        {
+          "type": "text",
+          "id": "tier4_renew_price",
+          "label": "Sub renew price",
+          "default": "299.96"
+        },
+        {
+          "type": "text",
+          "id": "tier4_meta",
+          "label": "Sub meta",
+          "default": "4 bags every 120 days - $2.37 per serving"
+        },
+        {
+          "type": "text",
+          "id": "tier4_renew_note",
+          "label": "Sub renew note",
+          "default": "then $299.96 every 120 days"
+        },
+        {
+          "type": "text",
+          "id": "tier4_once_price",
+          "label": "One-time price",
+          "default": "339.96"
+        },
+        {
+          "type": "text",
+          "id": "tier4_once_save",
+          "label": "One-time save label",
+          "default": "Save $100 (23%)"
+        },
+        {
+          "type": "text",
+          "id": "tier4_selling_plan_id",
+          "label": "LP Seal selling plan ID",
+          "info": "Isolated LP plan only Â not live Save $10 plans.",
+          "default": "6565658837"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ accordion",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_family",
+          "label": "Font",
+          "info": "Leave as Same as section to inherit the section font.",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "custom_font",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+          "visible_if": "{{ block.settings.font_family == 'custom' }}"
+        },
+        {
+          "type": "header",
+          "content": "Question"
+        },
+        {
+          "type": "select",
+          "id": "question_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "question_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.question_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "question_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "range",
+          "id": "question_size_desktop",
+          "label": "Size Â desktop",
+          "min": 12,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "question_size_mobile",
+          "label": "Size Â mobile",
+          "min": 12,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "header",
+          "content": "Answer"
+        },
+        {
+          "type": "select",
+          "id": "answer_font",
+          "label": "Font name",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Same as section"
+            },
+            {
+              "value": "manrope",
+              "label": "Manrope"
+            },
+            {
+              "value": "theme_heading",
+              "label": "Theme heading"
+            },
+            {
+              "value": "theme_body",
+              "label": "Theme body"
+            },
+            {
+              "value": "system",
+              "label": "System sans"
+            },
+            {
+              "value": "custom",
+              "label": "Custom font"
+            }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "text",
+          "id": "answer_font_custom",
+          "label": "Custom font name",
+          "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+          "visible_if": "{{ block.settings.answer_font == 'custom' }}"
+        },
+        {
+          "type": "select",
+          "id": "answer_weight",
+          "label": "Font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "500",
+              "label": "500"
+            },
+            {
+              "value": "600",
+              "label": "600"
+            },
+            {
+              "value": "700",
+              "label": "700"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            }
+          ],
+          "default": "500"
+        },
+        {
+          "type": "range",
+          "id": "answer_size_desktop",
+          "label": "Size Â desktop",
+          "min": 12,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "answer_size_mobile",
+          "label": "Size Â mobile",
+          "min": 12,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "header",
+          "content": "Question 1"
+        },
+        {
+          "type": "text",
+          "id": "question_1",
+          "label": "Question",
+          "default": "How does the subscription work?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer_1",
+          "label": "Answer",
+          "default": "<p>Choose how many bags you want and Subscribe & Save. Your first order ships at the first-order price, then renews automatically at the renew price on your chosen schedule. You can pause or cancel anytime before the next billing date.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Question 2"
+        },
+        {
+          "type": "text",
+          "id": "question_2",
+          "label": "Question",
+          "default": "When will my order arrive?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer_2",
+          "label": "Answer",
+          "default": "<p>Orders typically ship within 1Â2 business days. Delivery time depends on your location and carrier. YouÂll get tracking once your order ships.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Question 3"
+        },
+        {
+          "type": "text",
+          "id": "question_3",
+          "label": "Question",
+          "default": "What is the return policy?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer_3",
+          "label": "Answer",
+          "default": "<p>YouÂre covered by our 30-day money-back guarantee. If itÂs not a fit, contact us within 30 days of delivery and weÂll help make it right.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Question 4"
+        },
+        {
+          "type": "text",
+          "id": "question_4",
+          "label": "Question",
+          "default": "Can I pause or cancel anytime?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer_4",
+          "label": "Answer",
+          "default": "<p>Yes. Manage your subscription anytime from your account or the link in your order emailsÂpause, skip, or cancel before your next renewal with no lock-in.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Question 5"
+        },
+        {
+          "type": "text",
+          "id": "question_5",
+          "label": "Question",
+          "default": "Are the gifts really free?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer_5",
+          "label": "Answer",
+          "default": "<p>Yes. Save-A-Scoop is free on your first Bulk Bag order. The 3 digital guides are included with Cacao purchases. The free black shaker is included on your first subscription order only. Intro pricing is for new customers, once per customer.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Buy Box Cacao LP",
+      "settings": {
+        "product": "gid://shopify/product/15398808027349",
+        "shaker_product": "zeotein-cleanblend-shaker-27oz-usa-made",
+        "default_plan": "sub",
+        "bg_color": "#fcfbfe",
+        "accent_color": "#580d93",
+        "ink_color": "#1e1734",
+        "font_family": "manrope",
+        "custom_font": "",
+        "content_width": 1280,
+        "padding_top": 80,
+        "padding_bottom": 64
+      },
+      "blocks": [
+        {
+          "type": "header",
+          "settings": {
+            "font_family": "manrope",
+            "custom_font": "",
+            "eyebrow_font": "inherit",
+            "eyebrow_font_custom": "",
+            "eyebrow_weight": "800",
+            "eyebrow_size_desktop": 20,
+            "eyebrow_size_mobile": 14,
+            "heading_font": "inherit",
+            "heading_font_custom": "",
+            "heading_weight": "800",
+            "heading_size_desktop": 36,
+            "heading_size_mobile": 32,
+            "subtext_font": "inherit",
+            "subtext_font_custom": "",
+            "subtext_weight": "400",
+            "subtext_size_desktop": 18,
+            "subtext_size_mobile": 14,
+            "eyebrow": "OUR BEST FIRST-MONTH VALUE",
+            "heading": "Build your Cacao routine.",
+            "subtext": "Choose one, two, or three 30-day bags. Subscription includes your welcome kit."
+          }
+        },
+        {
+          "type": "gallery",
+          "settings": {
+            "font_family": "inherit",
+            "custom_font": "",
+            "badge_font": "inherit",
+            "badge_font_custom": "",
+            "badge_weight": "800",
+            "badge_size_desktop": 11,
+            "badge_size_mobile": 11,
+            "nutrition_font": "inherit",
+            "nutrition_font_custom": "",
+            "nutrition_weight": "700",
+            "nutrition_size_desktop": 13,
+            "nutrition_size_mobile": 13,
+            "media_source": "product",
+            "main_aspect_ratio": "square",
+            "thumbnail_count": "5",
+            "image_alt": "30-Day Cacao Bulk Bag",
+            "save_badge_image": "shopify://shop_images/BUY_MORE_WBP.webp",
+            "save_badge_size": 120,
+            "save_badge_size_mobile": 76,
+            "save_badge": "SAVE\n$33.00",
+            "nutrition_link": "",
+            "nutrition_btn_label": "View Nutrition Label"
+          }
+        },
+        {
+          "type": "product_info",
+          "settings": {
+            "font_family": "manrope",
+            "custom_font": "",
+            "urgency_font": "inherit",
+            "urgency_font_custom": "",
+            "urgency_weight": "700",
+            "urgency_size_desktop": 16,
+            "urgency_size_mobile": 14,
+            "rating_font": "inherit",
+            "rating_font_custom": "",
+            "rating_weight": "600",
+            "rating_size_desktop": 16,
+            "rating_size_mobile": 12,
+            "title_font": "inherit",
+            "title_font_custom": "",
+            "title_weight": "800",
+            "title_size_desktop": 28,
+            "title_size_mobile": 24,
+            "chip_font": "inherit",
+            "chip_font_custom": "",
+            "chip_weight": "600",
+            "chip_size_desktop": 16,
+            "chip_size_mobile": 13,
+            "urgency_icon": "shopify://shop_images/Gift_Png_-Wbp_8.5kb.webp",
+            "urgency_icon_size": 22,
+            "urgency_text": "Order by September 20th for 61% off with free gifts!",
+            "urgency_accent": "September 20th",
+            "rating_score": "4.8/5.0",
+            "rating_count": "100,000",
+            "customers_label": "1M+ Customers",
+            "product_title": "30-Day Cacao Bulk Bag",
+            "chip_icon_size": 25,
+            "chip_1": "23g protein",
+            "chip_1_icon": "shopify://shop_images/1-ezgif.com-png-to-webp-converter.webp",
+            "chip_2": "Six ingredients",
+            "chip_2_icon": "shopify://shop_images/3-ezgif.com-png-to-webp-converter.webp",
+            "chip_3": "Zero sugar",
+            "chip_3_icon": "shopify://shop_images/2-ezgif.com-png-to-webp-converter_1.webp",
+            "chip_4": "30 servings",
+            "chip_4_icon": "shopify://shop_images/30_Calendar.webp"
+          }
+        },
+        {
+          "type": "buy_box",
+          "settings": {
+            "font_family": "inherit",
+            "custom_font": "",
+            "bag_font": "inherit",
+            "bag_font_custom": "",
+            "bag_weight": "700",
+            "bag_size_desktop": 16,
+            "bag_size_mobile": 16,
+            "plan_title_font": "inherit",
+            "plan_title_font_custom": "",
+            "plan_title_weight": "800",
+            "plan_title_size_desktop": 16,
+            "plan_title_size_mobile": 16,
+            "plan_meta_font": "inherit",
+            "plan_meta_font_custom": "",
+            "plan_meta_weight": "500",
+            "plan_meta_size_desktop": 14,
+            "plan_meta_size_mobile": 11,
+            "plan_price_font": "inherit",
+            "plan_price_font_custom": "",
+            "plan_price_weight": "800",
+            "plan_price_size_desktop": 22,
+            "plan_price_size_mobile": 18,
+            "kit_font": "inherit",
+            "kit_font_custom": "",
+            "kit_weight": "400",
+            "kit_size_desktop": 16,
+            "kit_size_mobile": 16,
+            "banner_font": "inherit",
+            "banner_font_custom": "",
+            "banner_weight": "800",
+            "banner_size_desktop": 10,
+            "banner_size_mobile": 10,
+            "renew_font": "inherit",
+            "renew_font_custom": "",
+            "renew_weight": "400",
+            "renew_size_desktop": 10,
+            "renew_size_mobile": 10,
+            "perk_font": "inherit",
+            "perk_font_custom": "",
+            "perk_weight": "600",
+            "perk_size_desktop": 11,
+            "perk_size_mobile": 10,
+            "kit_badge_font": "inherit",
+            "kit_badge_font_custom": "",
+            "kit_badge_weight": "700",
+            "kit_badge_size_desktop": 15,
+            "kit_badge_size_mobile": 13,
+            "kit_lock_font": "inherit",
+            "kit_lock_font_custom": "",
+            "kit_lock_weight": "600",
+            "kit_lock_size_desktop": 11,
+            "kit_lock_size_mobile": 11,
+            "guarantee_font": "inherit",
+            "guarantee_font_custom": "",
+            "guarantee_weight": "800",
+            "guarantee_size_desktop": 12,
+            "guarantee_size_mobile": 12,
+            "sub_title": "Subscribe & Save",
+            "once_title": "One-Time Purchase",
+            "once_meta": "1 bag, delivered once",
+            "perk_icon_size": 16,
+            "sub_perk_1_text": "Save-A-Scoop",
+            "sub_perk_1_icon": "shopify://shop_images/scoop_2.png",
+            "sub_perk_2_text": "3 digital guides",
+            "sub_perk_2_icon": "shopify://shop_images/Guides_Wbp.webp",
+            "sub_perk_3_text": "Free black shaker",
+            "sub_perk_3_icon": "shopify://shop_images/Shaker_Png_-Wbp_8.31kb.webp",
+            "sub_perk_4_text": "Pause or cancel",
+            "sub_perk_4_icon": "shopify://shop_images/Pause.webp",
+            "once_includes": "Save-A-Scoop + 3 guides (first Bulk Bag order)",
+            "once_includes_icon": "shopify://shop_images/scoop_2.png",
+            "once_excludes": "Black shaker is first subscription order only",
+            "once_excludes_icon": "shopify://shop_images/Shaker_Png_-Wbp_8.31kb.webp",
+            "kit_heading": "FREE WELCOME KIT",
+            "kit_value": "$62.98 VALUE",
+            "kit_scoop_image": "shopify://shop_images/Save_a_Scoop_Image_-_Png_-Wbp_94kb.webp",
+            "kit_scoop_height": 78,
+            "kit_scoop_height_mobile": 60,
+            "kit_scoop_label": "Save-A-Scoop",
+            "kit_guides_image": "shopify://shop_images/Starterguide_webp.webp",
+            "kit_guides_height": 78,
+            "kit_guides_height_mobile": 60,
+            "kit_guides_label": "3 Digital Guides",
+            "kit_shaker_image": "shopify://shop_images/Shaker_Image_Png_-Wbp_79.33kb.webp",
+            "kit_shaker_height": 78,
+            "kit_shaker_height_mobile": 60,
+            "kit_shaker_label": "CleanBlend Shaker"
+          }
+        },
+        {
+          "type": "cta",
+          "settings": {
+            "font_family": "inherit",
+            "custom_font": "",
+            "cta_font": "inherit",
+            "cta_font_custom": "",
+            "cta_weight": "800",
+            "cta_size_desktop": 18,
+            "cta_size_mobile": 16,
+            "note_font": "inherit",
+            "note_font_custom": "",
+            "note_weight": "800",
+            "note_size_desktop": 12,
+            "note_size_mobile": 11,
+            "trust_font": "inherit",
+            "trust_font_custom": "",
+            "trust_weight": "600",
+            "trust_size_desktop": 11,
+            "trust_size_mobile": 11,
+            "cta_prefix": "Start Now",
+            "after_add_action": "drawer",
+            "discount_icon": "shopify://shop_images/Discoount_tag.webp",
+            "discount_icon_size": 16,
+            "discount_note": "Discount auto-applied",
+            "guarantee_pill": "<span>Less than 1%</span> of customers use our Money-Back Guarantee",
+            "trust_icon_size": 26,
+            "trust_1_icon": "shopify://shop_images/30_Dyas.webp",
+            "trust_1": "30-Day Money-Back Guarantee",
+            "trust_2_icon": "shopify://shop_images/Trucdds.webp",
+            "trust_2": "Ships in 1-2 Business Days"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "font_family": "inherit",
+            "custom_font": "",
+            "question_font": "inherit",
+            "question_font_custom": "",
+            "question_weight": "700",
+            "question_size_desktop": 15,
+            "question_size_mobile": 14,
+            "answer_font": "inherit",
+            "answer_font_custom": "",
+            "answer_weight": "500",
+            "answer_size_desktop": 14,
+            "answer_size_mobile": 13,
+            "question_1": "How does the subscription work?",
+            "answer_1": "<p>Choose how many bags you want and Subscribe & Save. Your first order ships at the first-order price, then renews automatically at the renew price on your chosen schedule. You can pause or cancel anytime before the next billing date.</p>",
+            "question_2": "When will my order arrive?",
+            "answer_2": "<p>Orders typically ship within 1–2 business days. Delivery time depends on your location and carrier. You’ll get tracking once your order ships.</p>",
+            "question_3": "What is the return policy?",
+            "answer_3": "<p>You’re covered by our 30-day money-back guarantee. If it’s not a fit, contact us within 30 days of delivery and we’ll help make it right.</p>",
+            "question_4": "Can I pause or cancel anytime?",
+            "answer_4": "<p>Yes. Manage your subscription anytime from your account or the link in your order emails—pause, skip, or cancel before your next renewal with no lock-in.</p>",
+            "question_5": "Are the gifts really free?",
+            "answer_5": "<p>Yes. Save-A-Scoop is free on your first Bulk Bag order. The 3 digital guides are included with Cacao purchases. The free black shaker is included on your first subscription order only. Intro pricing is for new customers, once per customer.</p>"
+          }
+        },
+        {
+          "type": "pricing_tiers",
+          "settings": {
+            "show_tier_4": false,
+            "tier1_label": "1 bag",
+            "tier1_badge": "Most Popular",
+            "tier1_save": "Save 30%",
+            "tier1_first_price": "76.99",
+            "tier1_renew_price": "99.99",
+            "tier1_meta": "1 bag every 30 days - $2.57 per serving",
+            "tier1_renew_note": "then $99.99 every 30 days",
+            "tier1_once_price": "109.99",
+            "tier1_once_save": "",
+            "tier1_selling_plan_id": "6565560533",
+            "tier2_label": "2 bags",
+            "tier2_badge": "Stock Up",
+            "tier2_save": "Save 32%",
+            "tier2_first_price": "149.98",
+            "tier2_renew_price": "179.98",
+            "tier2_meta": "2 bags every 60 days - $2.50 per serving",
+            "tier2_renew_note": "then $179.98 every 60 days",
+            "tier2_once_price": "199.98",
+            "tier2_once_save": "Save $20 (9%)",
+            "tier2_selling_plan_id": "6565593301",
+            "tier3_label": "3 bags",
+            "tier3_badge": "Best Value",
+            "tier3_save": "Save 33%",
+            "tier3_first_price": "219.99",
+            "tier3_renew_price": "239.97",
+            "tier3_meta": "3 bags every 90 days - $2.44 per serving",
+            "tier3_renew_note": "then $239.97 every 90 days",
+            "tier3_once_price": "269.97",
+            "tier3_once_save": "Save $60 (18%)",
+            "tier3_selling_plan_id": "6565626069",
+            "tier4_label": "4 bags",
+            "tier4_badge": "Max Savings",
+            "tier4_save": "Save 35%",
+            "tier4_first_price": "285.00",
+            "tier4_renew_price": "299.96",
+            "tier4_meta": "4 bags every 120 days - $2.37 per serving",
+            "tier4_renew_note": "then $299.96 every 120 days",
+            "tier4_once_price": "339.96",
+            "tier4_once_save": "Save $100 (23%)",
+            "tier4_selling_plan_id": "6565658837"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,43 @@
+{% doc %}
+  Section header copy for Buy Box Cacao LP. Clickable in Theme Inspector.
+{% enddoc %}
+
+<header class="zt-bb__header" {{ block.shopify_attributes }}>
+  {%- if block.settings.eyebrow != blank -%}
+    <p class="zt-bb__eyebrow">{{ block.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  {%- if block.settings.heading != blank -%}
+    <h2 class="zt-bb__heading">{{ block.settings.heading | escape }}</h2>
+  {%- endif -%}
+  {%- if block.settings.subtext != blank -%}
+    <p class="zt-bb__subtext">{{ block.settings.subtext | escape }}</p>
+  {%- endif -%}
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "OUR BEST FIRST-MONTH VALUE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Build your Cacao routine."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Choose one, two, or three 30-day bags. Subscription includes your welcome kit."
+    }
+  ],
+  "presets": [{ "name": "Header" }]
+}
+{% endschema %}

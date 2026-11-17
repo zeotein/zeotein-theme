@@ -1,0 +1,293 @@
+{% # theme-check-disable ExcessiveSettingsCount %}
+{% doc %}
+  Category tab for Real Customers Cacao LP.
+  Renders the tab button and its reviews. The section lays the buttons into one row.
+{% enddoc %}
+
+{%- liquid
+  assign sid = 'zt-rc-' | append: section.id
+  assign text_count = block.settings.text_count | default: 3 | plus: 0
+  if text_count < 0
+    assign text_count = 0
+  elsif text_count > 6
+    assign text_count = 6
+  endif
+  assign tab_label = block.settings.label | default: 'Tab'
+-%}
+
+<div class="zt-rc__item" {{ block.shopify_attributes }}>
+  <button
+    type="button"
+    class="zt-rc__tab"
+    id="{{ sid }}-tab-{{ block.id }}"
+    role="tab"
+    aria-selected="false"
+    aria-controls="{{ sid }}-panel-{{ block.id }}"
+    tabindex="-1"
+    data-zt-rc-tab="{{ block.id }}"
+  >
+    {{ tab_label | escape }}
+  </button>
+  <div
+    class="zt-rc__panel"
+    id="{{ sid }}-panel-{{ block.id }}"
+    role="tabpanel"
+    aria-labelledby="{{ sid }}-tab-{{ block.id }}"
+    data-zt-rc-panel="{{ block.id }}"
+  >
+{%- if text_count > 0 -%}
+  <div class="zt-rc__text-grid">
+    {%- for i in (1..6) -%}
+      {%- if i <= text_count -%}
+        {%- liquid
+          assign t_key = 'text_' | append: i | append: '_title'
+          assign b_key = 'text_' | append: i | append: '_body'
+          assign n_key = 'text_' | append: i | append: '_name'
+          assign s_key = 'text_' | append: i | append: '_stars'
+          assign r_title = block.settings[t_key]
+          assign r_body = block.settings[b_key]
+          assign r_name = block.settings[n_key]
+          assign r_stars = block.settings[s_key] | default: 5 | plus: 0
+          if r_stars < 1
+            assign r_stars = 1
+          elsif r_stars > 5
+            assign r_stars = 5
+          endif
+        -%}
+        {%- if r_title != blank or r_body != blank or r_name != blank -%}
+          <article class="zt-rc__review">
+            <span class="zt-rc__review-stars" aria-hidden="true">
+              {%- for s in (1..r_stars) -%}
+                <svg viewBox="0 0 20 20" width="14" height="14" focusable="false">
+                  <path fill="currentColor" d="M10 1.5l2.47 5.01 5.53.8-4 3.9.94 5.52L10 14.27 5.06 16.73 6 11.21l-4-3.9 5.53-.8L10 1.5z"/>
+                </svg>
+              {%- endfor -%}
+            </span>
+            {%- if r_title != blank -%}
+              <h3 class="zt-rc__review-title">{{ r_title | escape }}</h3>
+            {%- endif -%}
+            {%- if r_body != blank -%}
+              <p class="zt-rc__review-body">{{ r_body | escape }}</p>
+            {%- endif -%}
+            {%- if r_name != blank -%}
+              <p class="zt-rc__review-name">{{ r_name | escape }}</p>
+            {%- endif -%}
+          </article>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Category tab",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Tab label",
+      "default": "Taste"
+    },
+    {
+      "type": "header",
+      "content": "How many reviews"
+    },
+    {
+      "type": "range",
+      "id": "text_count",
+      "label": "Text reviews to show",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "info": "Written reviews for this category only. Videos and images are in the Video row block."
+    },
+    {
+      "type": "header",
+      "content": "Text review 1"
+    },
+    {
+      "type": "range",
+      "id": "text_1_stars",
+      "label": "Stars",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "text_1_title",
+      "label": "Title",
+      "default": "Smooth Cacao without the sugar rush"
+    },
+    {
+      "type": "textarea",
+      "id": "text_1_body",
+      "label": "Body",
+      "default": "It tastes great and the ingredients are clean. It has genuinely become part of my morning routine—the Cacao flavor is rich without being too sweet and mixes smoothly with oat milk."
+    },
+    {
+      "type": "text",
+      "id": "text_1_name",
+      "label": "Name",
+      "default": "Melissa M."
+    },
+    {
+      "type": "header",
+      "content": "Text review 2"
+    },
+    {
+      "type": "range",
+      "id": "text_2_stars",
+      "label": "Stars",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "text_2_title",
+      "label": "Title",
+      "default": "Just what I wanted"
+    },
+    {
+      "type": "textarea",
+      "id": "text_2_body",
+      "label": "Body",
+      "default": "I was looking for a clean protein that didn’t taste chalky. Zeotein Cacao is smooth, filling, and easy to stick with every morning."
+    },
+    {
+      "type": "text",
+      "id": "text_2_name",
+      "label": "Name",
+      "default": "Traci P."
+    },
+    {
+      "type": "header",
+      "content": "Text review 3"
+    },
+    {
+      "type": "range",
+      "id": "text_3_stars",
+      "label": "Stars",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "text_3_title",
+      "label": "Title",
+      "default": "Simple to start"
+    },
+    {
+      "type": "textarea",
+      "id": "text_3_body",
+      "label": "Body",
+      "default": "One scoop made my morning routine much easier. Instead of stacking powders, collagen, and MCT—now it’s all in a single scoop."
+    },
+    {
+      "type": "text",
+      "id": "text_3_name",
+      "label": "Name",
+      "default": "Jordan R."
+    },
+    {
+      "type": "header",
+      "content": "Text review 4"
+    },
+    {
+      "type": "range",
+      "id": "text_4_stars",
+      "label": "Stars",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "text_4_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "text_4_body",
+      "label": "Body"
+    },
+    {
+      "type": "text",
+      "id": "text_4_name",
+      "label": "Name"
+    },
+    {
+      "type": "header",
+      "content": "Text review 5"
+    },
+    {
+      "type": "range",
+      "id": "text_5_stars",
+      "label": "Stars",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "text_5_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "text_5_body",
+      "label": "Body"
+    },
+    {
+      "type": "text",
+      "id": "text_5_name",
+      "label": "Name"
+    },
+    {
+      "type": "header",
+      "content": "Text review 6"
+    },
+    {
+      "type": "range",
+      "id": "text_6_stars",
+      "label": "Stars",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "text_6_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "text_6_body",
+      "label": "Body"
+    },
+    {
+      "type": "text",
+      "id": "text_6_name",
+      "label": "Name"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category tab"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1303 @@
+{%- liquid
+  assign sid = 'zt-wi-' | append: section.id
+-%}
+
+{% render 'cacao-lp-fonts', id: sid, font_family: section.settings.font_family, settings: section.settings, prefixes: 'eyebrow,heading,subtext,tag,card_title,card_body,badge' %}
+
+<section
+  id="{{ sid }}"
+  class="zt-wi"
+  {{ section.shopify_attributes }}
+  style="
+    --zt-wi-bg: {{ section.settings.bg_color }};
+    --zt-wi-accent: {{ section.settings.accent_color }};
+    --zt-wi-tag: {{ section.settings.tag_color }};
+    --zt-wi-title: {{ section.settings.title_color }};
+    --zt-wi-body: {{ section.settings.body_color }};
+    --zt-wi-card: {{ section.settings.card_bg }};
+    --zt-wi-border: {{ section.settings.card_border }};
+    --zt-wi-pad-top: {{ section.settings.padding_top }}px;
+    --zt-wi-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --zt-wi-photo: {{ section.settings.image_size | default: 76 }}px;
+  "
+>
+  <div class="zt-wi__inner">
+    <div class="zt-wi__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="zt-wi__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="zt-wi__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtext != blank -%}
+        <p class="zt-wi__subtext">{{ section.settings.subtext | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="zt-wi__slider">
+      <div class="zt-wi__grid" data-zt-wi-track>
+        {%- assign zt_wi_index = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type != 'ingredient' -%}{% continue %}{%- endif -%}
+          <article class="zt-wi__card{% if block.settings.image != blank %} zt-wi__card--image{% endif %}" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="zt-wi__photo">
+                {%- assign zt_wi_photo_size = section.settings.image_size | default: 76 | append: 'px' -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 400
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '120, 180, 240, 360',
+                    sizes: zt_wi_photo_size,
+                    class: 'zt-wi__photo-img',
+                    alt: ''
+                }}
+              </div>
+            {%- endif -%}
+            {%- case block.settings.origin_badge -%}
+              {%- when 'organic' -%}
+                <span class="zt-wi__pill zt-wi__pill--organic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 21c0-9 6-15 16-16-1 10-7 16-16 16zm2-2c3-1 7-4 10-11-5 3-8 7-10 11z"/></svg>ORGANIC</span>
+              {%- when 'grass_fed' -%}
+                <span class="zt-wi__pill zt-wi__pill--grass"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M4 20h16v2H4zm3-2c0-5 1-9 3-12-1 4-1 8 0 12zm4 0c0-6 1-11 4-15-2 5-2 10-1 15zm5 0c0-4 1-7 3-9-1 3-1 6-1 9z"/></svg>GRASS-FED</span>
+              {%- when 'mineral' -%}
+                <span class="zt-wi__pill zt-wi__pill--mineral"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2l8 5v10l-8 5-8-5V7zm0 3L7 8v8l5 3 5-3V8z"/></svg>MINERAL</span>
+            {%- endcase -%}
+            {%- if block.settings.tag != blank -%}
+              <p class="zt-wi__tag">{{ block.settings.tag | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="zt-wi__card-title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+            {%- if block.settings.body != blank -%}
+              <p class="zt-wi__card-body">{{ block.settings.body | escape }}</p>
+            {%- endif -%}
+          </article>
+          {%- assign zt_wi_index = zt_wi_index | plus: 1 -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if zt_wi_index > 1 -%}
+        <div class="zt-wi__controls">
+          <button type="button" class="zt-wi__arrow" data-zt-wi-prev aria-label="Previous ingredient">
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="zt-wi__dots" role="tablist" aria-label="Ingredient cards">
+            {%- assign zt_wi_dot = 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type != 'ingredient' -%}{% continue %}{%- endif -%}
+              <button
+                type="button"
+                class="zt-wi__dot{% if zt_wi_dot == 0 %} is-active{% endif %}"
+                data-zt-wi-dot="{{ zt_wi_dot }}"
+                role="tab"
+                aria-label="Show {{ block.settings.title | default: 'ingredient' | escape }}"
+                {% if zt_wi_dot == 0 %}aria-current="true"{% endif %}
+              ></button>
+              {%- assign zt_wi_dot = zt_wi_dot | plus: 1 -%}
+            {%- endfor -%}
+          </div>
+          <button type="button" class="zt-wi__arrow" data-zt-wi-next aria-label="Next ingredient">
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <path d="M7.5 4.5 13 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.badge_1_text != blank or section.settings.badge_2_text != blank -%}
+      <div class="zt-wi__badges">
+        {%- if section.settings.badge_1_text != blank -%}
+          <div class="zt-wi__badge">
+            {%- if section.settings.badge_1_icon != blank -%}
+              {{
+                section.settings.badge_1_icon
+                | image_url: width: 64
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '32, 64',
+                  sizes: '22px',
+                  class: 'zt-wi__badge-icon',
+                  alt: ''
+              }}
+            {%- endif -%}
+            <span>{{ section.settings.badge_1_text | escape }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.badge_2_text != blank -%}
+          <div class="zt-wi__badge">
+            {%- if section.settings.badge_2_icon != blank -%}
+              {{
+                section.settings.badge_2_icon
+                | image_url: width: 64
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '32, 64',
+                  sizes: '22px',
+                  class: 'zt-wi__badge-icon',
+                  alt: ''
+              }}
+            {%- endif -%}
+            <span>{{ section.settings.badge_2_text | escape }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .zt-wi .zt-wi__card {
+    border-color: #1f1830;
+    border-radius: 14px;
+    box-shadow: 4px 4px 0 #1f1830;
+  }
+  .zt-wi .zt-wi__photo {
+    border-color: #1f1830;
+  }
+  .zt-wi .zt-wi__tag {
+    margin-top: 8px;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #137a80;
+  }
+  .zt-wi .zt-wi__card-title {
+    font-size: 18px;
+  }
+  .zt-wi .zt-wi__card-body {
+    font-size: 14px;
+    color: #4a4258;
+  }
+  .zt-wi__pill {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 11px 6px 8px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1.5px solid #cfe8d2;
+    box-shadow: 0 2px 8px rgba(40, 20, 70, 0.18);
+    color: #2e7d32;
+    font: 800 11px/1 var(--zt-font, Manrope, Arial, sans-serif);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .zt-wi__pill svg {
+    display: block;
+    flex: 0 0 15px;
+    width: 15px;
+    height: 15px;
+  }
+  .zt-wi__pill--grass {
+    color: #137a80;
+    border-color: #bfe6e8;
+  }
+  .zt-wi__pill--mineral {
+    color: #5F2D90;
+    border-color: #dccbee;
+  }
+  .zt-wi {
+    width: 100%;
+    background: var(--zt-wi-bg, #f2eee4);
+    padding: var(--zt-wi-pad-top, 48px) 0 var(--zt-wi-pad-bottom, 64px);
+    font-family: var(--zt-font, Manrope, Arial, sans-serif);
+  }
+
+  .zt-wi *,
+  .zt-wi *::before,
+  .zt-wi *::after {
+    box-sizing: border-box;
+  }
+
+  .zt-wi__inner {
+    width: min(1265px, calc(100% - 48px));
+    margin: 0 auto;
+  }
+
+  .zt-wi__header {
+    max-width: 720px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+
+  .zt-wi__eyebrow {
+    margin: 0 0 12px;
+    font-family: var(--zt-eyebrow-font, inherit);
+    font-size: var(--zt-eyebrow-size, 12px);
+    font-weight: var(--zt-eyebrow-weight, 800);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--zt-wi-accent, #580d93);
+  }
+
+  .zt-wi__heading {
+    margin: 0 0 14px;
+    font-family: var(--zt-heading-font, inherit);
+    font-size: var(--zt-heading-size, 40px);
+    font-weight: var(--zt-heading-weight, 800);
+    line-height: 1.15;
+    color: var(--zt-wi-accent, #580d93);
+  }
+
+  .zt-wi__subtext {
+    margin: 0;
+    font-family: var(--zt-subtext-font, inherit);
+    font-size: var(--zt-subtext-size, 16px);
+    font-weight: var(--zt-subtext-weight, 600);
+    line-height: 1.5;
+    color: rgba(30, 23, 52, 0.8);
+  }
+
+  .zt-wi__grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+  }
+
+  .zt-wi__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 200px;
+    padding: 28px;
+    background: var(--zt-wi-card, #fcfbfe);
+    border: 2px solid var(--zt-wi-border, #000);
+    border-radius: 10px;
+    box-shadow: 4px 6px 0 var(--zt-wi-border, #000);
+  }
+
+  .zt-wi__card--image {
+    margin-top: calc(var(--zt-wi-photo, 76px) / 2 + 8px);
+    padding-top: calc(var(--zt-wi-photo, 76px) / 2 + 18px);
+  }
+
+  .zt-wi__photo {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: var(--zt-wi-photo, 76px);
+    height: var(--zt-wi-photo, 76px);
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--zt-wi-border, #000);
+    border-radius: 50%;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .zt-wi__photo-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .zt-wi__controls {
+    display: none;
+  }
+
+  .zt-wi__tag {
+    margin: 0 0 8px;
+    font-family: var(--zt-tag-font, inherit);
+    font-size: var(--zt-tag-size, 11px);
+    font-weight: var(--zt-tag-weight, 800);
+    letter-spacing: 0.09px;
+    text-transform: uppercase;
+    line-height: 1.4;
+    color: var(--zt-wi-tag, #2ec9c9);
+  }
+
+  .zt-wi__card-title {
+    margin: 0 0 10px;
+    font-family: var(--zt-card_title-font, inherit);
+    font-size: var(--zt-card_title-size, 20px);
+    font-weight: var(--zt-card_title-weight, 700);
+    line-height: 1.2;
+    color: var(--zt-wi-title, #1b1a3a);
+  }
+
+  .zt-wi__card-body {
+    margin: 0;
+    font-family: var(--zt-card_body-font, inherit);
+    font-size: var(--zt-card_body-size, 16px);
+    font-weight: var(--zt-card_body-weight, 400);
+    line-height: 1.5;
+    color: var(--zt-wi-body, #1e1734);
+  }
+
+  .zt-wi__badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 24px;
+    margin-top: 40px;
+  }
+
+  .zt-wi__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 43px;
+    max-width: 100%;
+    padding: 10px 28px 10px 20px;
+    border-radius: 999px;
+    background: #fff;
+    font-family: var(--zt-badge-font, inherit);
+    font-size: var(--zt-badge-size, 14px);
+    font-weight: var(--zt-badge-weight, 400);
+    line-height: 1.35;
+    color: #1b1a3a;
+  }
+
+  .zt-wi__badge-icon {
+    display: block;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex: 0 0 auto;
+  }
+
+  @media screen and (max-width: 989px) {
+    .zt-wi__inner {
+      width: min(100% - 32px, 520px);
+    }
+
+    .zt-wi__header {
+      margin-bottom: 28px;
+    }
+
+    .zt-wi__eyebrow {
+      font-size: var(--zt-eyebrow-size-m, 12px);
+    }
+
+    .zt-wi__heading {
+      font-size: var(--zt-heading-size-m, 28px);
+    }
+
+    .zt-wi__subtext {
+      font-size: var(--zt-subtext-size-m, 14px);
+    }
+
+    .zt-wi__grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .zt-wi__card {
+      min-height: 0;
+      padding: 22px;
+      box-shadow: 3px 4px 0 var(--zt-wi-border, #000);
+    }
+
+    .zt-wi__card.zt-wi__card--image {
+      padding-top: calc(var(--zt-wi-photo, 76px) / 2 + 18px);
+    }
+
+    .zt-wi__tag {
+      font-size: var(--zt-tag-size-m, 11px);
+    }
+
+    .zt-wi__card-title {
+      font-size: var(--zt-card_title-size-m, 18px);
+    }
+
+    .zt-wi__card-body {
+      font-size: var(--zt-card_body-size-m, 14px);
+    }
+
+    .zt-wi__badge {
+      font-size: var(--zt-badge-size-m, 14px);
+    }
+
+    .zt-wi__badges {
+      flex-direction: column;
+      align-items: stretch;
+      margin-top: 28px;
+    }
+
+    .zt-wi__badge {
+      justify-content: flex-start;
+      padding: 12px 18px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .zt-wi__inner {
+      width: min(100% - 32px, 520px);
+    }
+
+    .zt-wi__slider {
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .zt-wi__grid {
+      display: flex;
+      gap: 14px;
+      padding-top: calc(var(--zt-wi-photo, 76px) / 2 + 8px);
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 0;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .zt-wi__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .zt-wi__card {
+      flex: 0 0 86%;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .zt-wi__card--image {
+      margin-top: 0;
+    }
+
+    .zt-wi__controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .zt-wi__dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .zt-wi__dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: #6e6880;
+      cursor: pointer;
+    }
+
+    .zt-wi__dot.is-active {
+      width: 10px;
+      height: 10px;
+      background: var(--zt-wi-accent, #580d93);
+    }
+
+    .zt-wi__arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 2px solid var(--zt-wi-border, #000);
+      border-radius: 50%;
+      background: #fff;
+      color: var(--zt-wi-accent, #580d93);
+      cursor: pointer;
+    }
+
+    .zt-wi__arrow svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    .zt-wi__dot:focus-visible,
+    .zt-wi__arrow:focus-visible {
+      outline: 2px solid var(--zt-wi-accent, #580d93);
+      outline-offset: 2px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function init(root) {
+      if (!root || root.dataset.ztWiReady === 'true') return;
+      var track = root.querySelector('[data-zt-wi-track]');
+      if (!track) return;
+      var cards = track.querySelectorAll('.zt-wi__card');
+      var dots = root.querySelectorAll('[data-zt-wi-dot]');
+      var prev = root.querySelector('[data-zt-wi-prev]');
+      var next = root.querySelector('[data-zt-wi-next]');
+      if (!cards.length || !dots.length) return;
+      root.dataset.ztWiReady = 'true';
+
+      function currentIndex() {
+        var left = track.scrollLeft;
+        var best = 0;
+        var bestDistance = Infinity;
+        cards.forEach(function (card, index) {
+          var distance = Math.abs(card.offsetLeft - left);
+          if (distance < bestDistance) {
+            bestDistance = distance;
+            best = index;
+          }
+        });
+        return best;
+      }
+
+      function paint() {
+        var current = currentIndex();
+        dots.forEach(function (dot, index) {
+          var active = index === current;
+          dot.classList.toggle('is-active', active);
+          if (active) dot.setAttribute('aria-current', 'true');
+          else dot.removeAttribute('aria-current');
+        });
+      }
+
+      function go(index) {
+        var card = cards[index];
+        if (!card) return;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        track.scrollTo({
+          left: card.offsetLeft,
+          behavior: reduce ? 'auto' : 'smooth'
+        });
+      }
+
+      track.addEventListener('scroll', function () {
+        window.requestAnimationFrame(paint);
+      }, { passive: true });
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          go(Number(dot.getAttribute('data-zt-wi-dot')));
+        });
+      });
+
+      if (prev) {
+        prev.addEventListener('click', function () {
+          var index = currentIndex();
+          go(index <= 0 ? cards.length - 1 : index - 1);
+        });
+      }
+
+      if (next) {
+        next.addEventListener('click', function () {
+          var index = currentIndex();
+          go(index >= cards.length - 1 ? 0 : index + 1);
+        });
+      }
+
+      paint();
+    }
+
+    document.querySelectorAll('.zt-wi').forEach(init);
+
+    if (!window.__ztWiSlider) {
+      window.__ztWiSlider = true;
+      document.addEventListener('shopify:section:load', function (event) {
+        if (!event.target || !event.target.querySelectorAll) return;
+        event.target.querySelectorAll('.zt-wi').forEach(init);
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "What's Inside Cacao LP",
+  "tag": "section",
+  "class": "section-whats-inside-cacao-lp",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#f2eee4"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Heading accent",
+      "default": "#580d93"
+    },
+    {
+      "type": "color",
+      "id": "tag_color",
+      "label": "Card tag",
+      "default": "#2ec9c9"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Card title",
+      "default": "#1b1a3a"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Card body",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#fcfbfe"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card border / shadow",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "image_size",
+      "label": "Ingredient image size",
+      "min": 48,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Copy"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "WHAT'S INSIDE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Six ingredients. Nothing hidden."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Every ingredient is named on the label."
+    },
+    {
+      "type": "header",
+      "content": "Badges"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_1_icon",
+      "label": "Badge 1 icon"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_text",
+      "label": "Badge 1 text"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_2_icon",
+      "label": "Badge 2 icon"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_text",
+      "label": "Badge 2 text",
+      "default": "Every ingredient is named on the label"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "manrope",
+          "label": "Manrope (Figma)"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "poppins",
+          "label": "Theme body (Poppins alias)"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "custom_font",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+      "visible_if": "{{ section.settings.font_family == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "Eyebrow"
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_desktop",
+      "label": "Size - desktop",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_mobile",
+      "label": "Size - mobile",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Size - desktop",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Size - mobile",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "header",
+      "content": "Subtext"
+    },
+    {
+      "type": "select",
+      "id": "subtext_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "subtext_size_desktop",
+      "label": "Size - desktop",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "subtext_size_mobile",
+      "label": "Size - mobile",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Card tag"
+    },
+    {
+      "type": "select",
+      "id": "tag_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "tag_size_desktop",
+      "label": "Size - desktop",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "tag_size_mobile",
+      "label": "Size - mobile",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Card title"
+    },
+    {
+      "type": "select",
+      "id": "card_title_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size_desktop",
+      "label": "Size - desktop",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_title_size_mobile",
+      "label": "Size - mobile",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Card body"
+    },
+    {
+      "type": "select",
+      "id": "card_body_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "card_body_size_desktop",
+      "label": "Size - desktop",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "card_body_size_mobile",
+      "label": "Size - mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "select",
+      "id": "badge_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "badge_size_desktop",
+      "label": "Size - desktop",
+      "min": 11,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "badge_size_mobile",
+      "label": "Size - mobile",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag"
+        },
+        {
+          "type": "select",
+          "id": "origin_badge",
+          "label": "Corner badge",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "organic", "label": "Organic" },
+            { "value": "grass_fed", "label": "Grass-fed" },
+            { "value": "mineral", "label": "Mineral" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Zeolite (Clinoptilolite)"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Description",
+          "default": "A naturally occurring volcanic mineral with a honeycomb structure. Included to support the body's everyday mineral balance.†"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "What's Inside Cacao LP",
+      "settings": {
+        "bg_color": "#f2eee4",
+        "accent_color": "#580d93",
+        "tag_color": "#2ec9c9",
+        "title_color": "#1b1a3a",
+        "body_color": "#1e1734",
+        "card_bg": "#fcfbfe",
+        "card_border": "#000000",
+        "image_size": 100,
+        "eyebrow": "WHAT'S INSIDE",
+        "heading": "Six ingredients. Nothing hidden.",
+        "subtext": "Every ingredient is named on the label.",
+        "badge_1_icon": "shopify://shop_images/Ingridients.webp",
+        "badge_1_text": "",
+        "badge_2_icon": "shopify://shop_images/Label.webp",
+        "badge_2_text": "Every ingredient is named on the label",
+        "font_family": "manrope",
+        "custom_font": "",
+        "eyebrow_weight": "700",
+        "eyebrow_size_desktop": 18,
+        "eyebrow_size_mobile": 16,
+        "heading_weight": "600",
+        "heading_size_desktop": 42,
+        "heading_size_mobile": 28,
+        "subtext_weight": "500",
+        "subtext_size_desktop": 20,
+        "subtext_size_mobile": 16,
+        "tag_weight": "600",
+        "tag_size_desktop": 14,
+        "tag_size_mobile": 14,
+        "card_title_weight": "700",
+        "card_title_size_desktop": 18,
+        "card_title_size_mobile": 16,
+        "card_body_weight": "400",
+        "card_body_size_desktop": 15,
+        "card_body_size_mobile": 14,
+        "badge_weight": "400",
+        "badge_size_desktop": 15,
+        "badge_size_mobile": 14,
+        "padding_top": 48,
+        "padding_bottom": 48
+      },
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/Zeo_Wbp1.webp",
+            "tag": "",
+            "title": "Zeolite (Clinoptilolite)",
+            "body": "A naturally occurring volcanic mineral with a honeycomb structure. Included to support the body's everyday mineral balance."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/1-Sea_Moss_PNG-WBP.webp",
+            "tag": "",
+            "title": "Organic Sea Moss",
+            "body": "A blend of purple and gold sea moss (Gracilaria spp.)."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/MCT_OIL-_Wbp.webp",
+            "tag": "",
+            "title": "MCT Oil Powder",
+            "body": "Medium-chain triglycerides from coconut, added as a functional fat that keeps the serving satisfying without added sugar."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/6_Cacao_PNG_-WBP.webp",
+            "tag": "",
+            "title": "Cacao Powder",
+            "body": "Organic fermented cacao, never alkalized. It is where the rich chocolate flavor comes from, and why nothing sweet has to be added."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/5_Beef_Bone_Protein_PNG_-WBP.webp",
+            "tag": "",
+            "title": "Beef Bone Broth Protein",
+            "body": "The protein base of the blend, contributing to the 23g of protein in every serving alongside collagen peptides."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/4-HYDROLYZED_PNG_-WBP.webp",
+            "tag": "",
+            "title": "Hydrolyzed Collagen Peptides",
+            "body": "14g per serving. Bovine collagen peptides, hydrolyzed so they mix smoothly and are included in the serving rather than bought separately."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

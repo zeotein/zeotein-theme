@@ -1,0 +1,35 @@
+{%- comment -%}
+  zt-clarity-internal: tags Zeotein team visits in Microsoft Clarity (custom tag internal=1).
+  Turn on: visit any page with ?zt_internal=1 (sets cookie zt_internal=1, 1 year, .zeotein.com).
+  Turn off: visit any page with ?zt_internal=0 (clears the cookie).
+  Also tags logged-in customers tagged internal or staff. No visible output. Added 2026-11-13 by FORGE.
+{%- endcomment -%}
+{%- liquid
+  assign zt_int_tagged = false
+  if customer
+    assign zt_int_tags = customer.tags | join: '|' | downcase | split: '|'
+    if zt_int_tags contains 'internal' or zt_int_tags contains 'staff'
+      assign zt_int_tagged = true
+    endif
+  endif
+-%}
+<script>
+  (function () {
+    try {
+      var w = window;
+      w.clarity = w.clarity || function () { (w.clarity.q = w.clarity.q || []).push(arguments); };
+      var dom = /(^|\.)zeotein\.com$/.test(location.hostname) ? '; domain=.zeotein.com' : '';
+      var m = /[?&]zt_internal=([01])(?:&|#|$)/.exec(location.search);
+      if (m && m[1] === '1') {
+        document.cookie = 'zt_internal=1; path=/; max-age=31536000; SameSite=Lax; Secure' + dom;
+      } else if (m && m[1] === '0') {
+        document.cookie = 'zt_internal=; path=/; max-age=0; SameSite=Lax; Secure' + dom;
+        document.cookie = 'zt_internal=; path=/; max-age=0';
+      }
+      var isInternal = /(?:^|;\s*)zt_internal=1(?:;|$)/.test(document.cookie);
+      if (isInternal || {{ zt_int_tagged }}) {
+        w.clarity('set', 'internal', '1');
+      }
+    } catch (e) {}
+  })();
+</script>

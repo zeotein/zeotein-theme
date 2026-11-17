@@ -1,0 +1,1030 @@
+{%- liquid
+  assign sid = 'zt-tm-' | append: section.id
+  assign header_stars = section.settings.header_stars | default: 5
+-%}
+
+{% render 'cacao-lp-fonts',
+  id: sid,
+  font_family: section.settings.font_family,
+  settings: section.settings,
+  prefixes: 'heading,title,body,sub,name,meta'
+%}
+
+{{ 'testimonials-cacao-lp.css' | asset_url | stylesheet_tag }}
+
+{%- capture zt_tm_star -%}
+  <svg class="zt-tm__star" viewBox="0 0 20 20" width="18" height="18" focusable="false" aria-hidden="true">
+    <path fill="currentColor" d="M10 1.6l2.35 5.1 5.55.72-4.1 3.78.1 5.55L10 14.3l-4.9 2.75.1-5.55-4.1-3.78 5.55-.72L10 1.6z"/>
+  </svg>
+{%- endcapture -%}
+
+<section
+  id="{{ sid }}"
+  class="zt-tm"
+  {{ section.shopify_attributes }}
+  style="
+    --zt-tm-bg: {{ section.settings.bg_color }};
+    --zt-tm-heading: {{ section.settings.heading_color }};
+    --zt-tm-sub: {{ section.settings.sub_color }};
+    --zt-tm-star: {{ section.settings.star_color }};
+    --zt-tm-card-bg: {{ section.settings.card_bg_color }};
+    --zt-tm-card-border: {{ section.settings.card_border_color }};
+    --zt-tm-shadow: {{ section.settings.shadow_color }};
+    --zt-tm-title: {{ section.settings.title_color }};
+    --zt-tm-body: {{ section.settings.body_color }};
+    --zt-tm-name: {{ section.settings.name_color }};
+    --zt-tm-meta: {{ section.settings.meta_color }};
+    --zt-tm-radius: {{ section.settings.card_radius }}px;
+    --zt-tm-shadow-x: {{ section.settings.shadow_x }}px;
+    --zt-tm-shadow-y: {{ section.settings.shadow_y }}px;
+    --zt-tm-avatar: {{ section.settings.avatar_size }}px;
+    --zt-tm-max-width: {{ section.settings.content_width | default: 1120 }}px;
+    --zt-tm-pad-top: {{ section.settings.padding_top }}px;
+    --zt-tm-pad-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="zt-tm__inner">
+    <div class="zt-tm__header">
+      {%- if section.settings.show_header_stars -%}
+        <div class="zt-tm__stars" aria-hidden="true">
+          {%- for i in (1..header_stars) -%}
+            {{ zt_tm_star }}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="zt-tm__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="zt-tm__sub">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="zt-tm__grid">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign rating = block.settings.rating | default: 5
+            if rating < 1
+              assign rating = 1
+            endif
+            if rating > 5
+              assign rating = 5
+            endif
+            assign name_alt = block.settings.name | default: 'Customer'
+          -%}
+          <article class="zt-tm__card" {{ block.shopify_attributes }}>
+            <div class="zt-tm__avatar">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 240
+                  | image_tag:
+                    class: 'zt-tm__avatar-img',
+                    loading: 'lazy',
+                    widths: '72, 120, 180, 240',
+                    sizes: '72px',
+                    alt: name_alt
+                }}
+              {%- else -%}
+                <div class="zt-tm__avatar-placeholder">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {%- endif -%}
+            </div>
+
+            <div class="zt-tm__card-stars" aria-label="{{ rating }} out of 5 stars">
+              {%- for i in (1..rating) -%}
+                {{ zt_tm_star }}
+              {%- endfor -%}
+            </div>
+
+            {%- if block.settings.title != blank -%}
+              <h3 class="zt-tm__title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.body != blank -%}
+              <p class="zt-tm__body">{{ block.settings.body | escape }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.name != blank -%}
+              <p class="zt-tm__name">{{ block.settings.name | escape }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.meta != blank -%}
+              <p class="zt-tm__meta">{{ block.settings.meta | escape }}</p>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials Cacao LP",
+  "tag": "section",
+  "class": "section-testimonials-cacao-lp",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#f7f7f9"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#14121f"
+    },
+    {
+      "type": "color",
+      "id": "sub_color",
+      "label": "Subheading",
+      "default": "#7a7589"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Stars",
+      "default": "#00c9b8"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Card shadow",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Quote title",
+      "default": "#14121f"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body",
+      "default": "#5b5b71"
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Name",
+      "default": "#14121f"
+    },
+    {
+      "type": "color",
+      "id": "meta_color",
+      "label": "Verified label",
+      "default": "#9a9aab"
+    },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header_stars",
+      "label": "Show header stars",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "header_stars",
+      "label": "Header star count",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Loved in real routines."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Verified experiences from Zeotein customers."
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card radius",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "shadow_x",
+      "label": "Shadow X",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "shadow_y",
+      "label": "Shadow Y",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "avatar_size",
+      "label": "Avatar size",
+      "min": 56,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 720,
+      "max": 1280,
+      "step": 20,
+      "unit": "px",
+      "default": 1120
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "manrope",
+          "label": "Manrope (Figma)"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "custom_font",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. Used when Font name is Custom font.",
+      "visible_if": "{{ section.settings.font_family == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "heading_font_custom",
+      "label": "Heading custom font",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ section.settings.heading_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size — desktop",
+      "min": 28,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size — mobile",
+      "min": 22,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "title_font",
+      "label": "Quote title font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "title_font_custom",
+      "label": "Quote title custom font",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ section.settings.title_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Quote title weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Quote title size — desktop",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Quote title size — mobile",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "select",
+      "id": "body_font",
+      "label": "Body font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "body_font_custom",
+      "label": "Body custom font",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ section.settings.body_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "body_weight",
+      "label": "Body weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "body_size_desktop",
+      "label": "Body size — desktop",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "body_size_mobile",
+      "label": "Body size — mobile",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Sub"
+    },
+    {
+      "type": "select",
+      "id": "sub_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "sub_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ section.settings.sub_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "sub_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "sub_size_desktop",
+      "label": "Size — desktop",
+      "min": 8,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "sub_size_mobile",
+      "label": "Size — mobile",
+      "min": 8,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Name"
+    },
+    {
+      "type": "select",
+      "id": "name_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "name_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ section.settings.name_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "name_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "name_size_desktop",
+      "label": "Size — desktop",
+      "min": 8,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "name_size_mobile",
+      "label": "Size — mobile",
+      "min": 8,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Meta"
+    },
+    {
+      "type": "select",
+      "id": "meta_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "text",
+      "id": "meta_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ section.settings.meta_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "meta_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "meta_size_desktop",
+      "label": "Size — desktop",
+      "min": 8,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "meta_size_mobile",
+      "label": "Size — mobile",
+      "min": 8,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Avatar"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Quote title",
+          "default": "A staple in my house"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Review",
+          "default": "It tastes great, the ingredients feel clean, and it’s become part of my morning routine. The cacao flavor is rich but not too sweet, and it mixes smoothly with oat milk."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "MELISSA M."
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Label",
+          "default": "Verified customer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials Cacao LP",
+      "category": "Cacao LP",
+      "settings": {
+        "bg_color": "#f7f7f9",
+        "heading_color": "#14121f",
+        "sub_color": "#7a7589",
+        "star_color": "#00c9b8",
+        "card_bg_color": "#ffffff",
+        "card_border_color": "#1e1734",
+        "shadow_color": "#1e1734",
+        "title_color": "#14121f",
+        "body_color": "#5b5b71",
+        "name_color": "#14121f",
+        "meta_color": "#9a9aab",
+        "show_header_stars": true,
+        "header_stars": 5,
+        "heading": "Loved in real routines.",
+        "subheading": "Verified experiences from Zeotein customers.",
+        "card_radius": 16,
+        "shadow_x": 6,
+        "shadow_y": 6,
+        "avatar_size": 72,
+        "content_width": 1120,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "font_family": "manrope",
+        "custom_font": "",
+        "heading_font": "manrope",
+        "heading_font_custom": "",
+        "heading_weight": "700",
+        "heading_size_desktop": 44,
+        "heading_size_mobile": 30,
+        "title_font": "manrope",
+        "title_font_custom": "",
+        "title_weight": "600",
+        "title_size_desktop": 18,
+        "title_size_mobile": 17,
+        "body_font": "manrope",
+        "body_font_custom": "",
+        "body_weight": "400",
+        "body_size_desktop": 14,
+        "body_size_mobile": 14,
+        "sub_font": "manrope",
+        "sub_font_custom": "",
+        "sub_weight": "400",
+        "sub_size_desktop": 15,
+        "sub_size_mobile": 14,
+        "name_font": "manrope",
+        "name_font_custom": "",
+        "name_weight": "600",
+        "name_size_desktop": 14,
+        "name_size_mobile": 12,
+        "meta_font": "manrope",
+        "meta_font_custom": "",
+        "meta_weight": "500",
+        "meta_size_desktop": 12,
+        "meta_size_mobile": 14
+      },
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/4ava.jpg",
+            "rating": 5,
+            "title": "A staple in my house",
+            "body": "It tastes great, the ingredients feel clean, and it’s become part of my morning routine. The cacao flavor is rich but not too sweet, and it mixes smoothly with oat milk.",
+            "name": "MELISSA M.",
+            "meta": "Verified customer"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/AVA_A1.webp",
+            "rating": 5,
+            "title": "Simple to stay consistent",
+            "body": "One scoop makes my morning routine easier to keep up with. Protein, collagen, and MCT in a single scoop I mix with water while the coffee brews.",
+            "name": "ANDREA K.",
+            "meta": "Verified customer"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/AVA_A2.webp",
+            "rating": 5,
+            "title": "Exactly what I wanted",
+            "body": "Satisfying protein with no overly sweet aftertaste. It tastes like real cacao, mixes in a basic shaker, and keeps me full enough to skip the mid-morning snack.",
+            "name": "TRACI P.",
+            "meta": "Verified customer"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1232 @@
+{% comment %}
+  ZEOTEIN — STEP 14
+  REAL PEOPLE. REAL ROUTINES.
+
+  FINAL BLOCK-COMPATIBLE VERSION
+
+  IMPORTANT:
+  - Keeps the "review" block type for existing Shopify blocks
+  - Automatically replaces old placeholder text with featured content
+  - Three review cards maximum
+  - Verified Buyer is controlled by each block
+  - Premium cream / white / lavender design
+{% endcomment %}
+
+<section
+  id="zeotein-reviews-{{ section.id }}"
+  class="zt-reviews"
+>
+  <div class="zt-reviews__container">
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="zt-reviews__header">
+
+      {% if section.settings.eyebrow != blank %}
+        <div class="zt-reviews__eyebrow">
+          {{ section.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="zt-reviews__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.intro != blank %}
+        <p class="zt-reviews__intro">
+          {{ section.settings.intro }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.rating_text != blank %}
+        <div class="zt-reviews__rating">
+
+          <span
+            class="zt-reviews__rating-stars"
+            aria-hidden="true"
+          >
+            ★★★★★
+          </span>
+
+          <span class="zt-reviews__rating-text">
+            {{ section.settings.rating_text | default: 'Real customer reviews' }}
+          </span>
+
+        </div>
+      {% endif %}
+
+    </header>
+
+
+    <!-- =========================================
+         REVIEWS
+    ========================================== -->
+
+    {% if section.blocks.size > 0 %}
+
+      <div class="zt-reviews__grid">
+
+        {% for block in section.blocks limit: 3 %}
+
+          {% comment %}
+            Determine fallback content based on position.
+
+            This specifically fixes existing blocks that still contain:
+            "Paste the exact customer review here."
+          {% endcomment %}
+
+          {% if forloop.index == 1 %}
+
+            {% assign fallback_theme = "TASTE · FULLNESS · TRAVEL" %}
+            {% assign fallback_text = "I absolutely love this product. The taste and ingredients are amazing." %}
+            {% assign fallback_name = "Mary Shilling" %}
+
+          {% elsif forloop.index == 2 %}
+
+            {% assign fallback_theme = "NO SWEETNESS · INGREDIENTS" %}
+            {% assign fallback_text = "I love knowing I'm getting a high quality protein without sugar and other additives." %}
+            {% assign fallback_name = "Elsie Unruh" %}
+
+          {% else %}
+
+            {% assign fallback_theme = "CONVENIENCE · DAILY ROUTINE" %}
+            {% assign fallback_text = "All we need in one packet. The drink itself is so smooth and easy to make." %}
+            {% assign fallback_name = "Clara George" %}
+
+          {% endif %}
+
+
+          {% comment %}
+            Use the saved block value when it is real content.
+            If the old placeholder is still saved, use the featured
+            review content instead.
+          {% endcomment %}
+
+          {% assign review_text = block.settings.review_text %}
+          {% assign customer_name = block.settings.customer_name %}
+          {% assign review_theme = block.settings.theme %}
+
+          {% if review_text == blank
+            or review_text == "Paste the exact customer review here."
+          %}
+            {% assign review_text = fallback_text %}
+          {% endif %}
+
+          {% if customer_name == blank
+            or customer_name == "Customer"
+          %}
+            {% assign customer_name = fallback_name %}
+          {% endif %}
+
+          {% if review_theme == blank
+            or review_theme == "CUSTOMER EXPERIENCE"
+          %}
+            {% assign review_theme = fallback_theme %}
+          {% endif %}
+
+
+          <!-- REVIEW CARD -->
+
+          <article
+            class="zt-review{% if forloop.index == 2 %} zt-review--highlight{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+
+            <div class="zt-review__top">
+
+              <div
+                class="zt-review__stars"
+                aria-label="5 out of 5 stars"
+              >
+                ★★★★★
+              </div>
+
+              <div class="zt-review__number">
+                {% if forloop.index < 10 %}
+                  0{{ forloop.index }}
+                {% else %}
+                  {{ forloop.index }}
+                {% endif %}
+              </div>
+
+            </div>
+
+
+            <!-- REVIEW THEME -->
+
+            {% if review_theme != blank %}
+              <div class="zt-review__theme">
+                {{ review_theme }}
+              </div>
+            {% endif %}
+
+
+            <!-- REVIEW TEXT -->
+
+            <blockquote class="zt-review__quote">
+              {{ review_text }}
+            </blockquote>
+
+
+            <!-- CUSTOMER -->
+
+            <div class="zt-review__footer">
+
+              {% if customer_name != blank %}
+                <div class="zt-review__customer">
+                  {{ customer_name }}
+                </div>
+              {% endif %}
+
+
+              {% if block.settings.verified_buyer %}
+
+                <div class="zt-review__verified">
+
+                  <span class="zt-review__verified-icon">
+                    ✓
+                  </span>
+
+                  <span>
+                    Verified Buyer
+                  </span>
+
+                </div>
+
+              {% endif %}
+
+            </div>
+
+          </article>
+
+        {% endfor %}
+
+      </div>
+
+    {% elsif request.design_mode %}
+
+      <div class="zt-reviews__empty">
+
+        <div class="zt-reviews__empty-icon">
+          ★
+        </div>
+
+        <div class="zt-reviews__empty-title">
+          Add customer reviews
+        </div>
+
+        <div class="zt-reviews__empty-text">
+          Add up to three Review blocks to feature customer proof.
+        </div>
+
+      </div>
+
+    {% endif %}
+
+
+    <!-- =========================================
+         BOTTOM PROOF BAR
+    ========================================== -->
+
+    {% if section.settings.bottom_text != blank
+      or section.settings.cta_text != blank
+    %}
+
+      <div class="zt-reviews__bottom">
+
+        {% if section.settings.bottom_text != blank %}
+
+          <div class="zt-reviews__bottom-left">
+
+            <div class="zt-reviews__bottom-stars">
+              ★★★★★
+            </div>
+
+            <div class="zt-reviews__bottom-copy">
+              {{ section.settings.bottom_text }}
+            </div>
+
+          </div>
+
+        {% endif %}
+
+
+        {% if section.settings.cta_text != blank
+          and section.settings.cta_url != blank
+        %}
+
+          <a
+            href="{{ section.settings.cta_url }}"
+            class="zt-reviews__cta"
+          >
+
+            <span>
+              {{ section.settings.cta_text }}
+            </span>
+
+            <span class="zt-reviews__cta-arrow">
+              →
+            </span>
+
+          </a>
+
+        {% endif %}
+
+      </div>
+
+    {% endif %}
+
+  </div>
+</section>
+
+
+<style>
+
+  /* =========================================
+     BASE
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }} {
+
+    --zt-cream: #F8F6F2;
+    --zt-lavender: #F0ECF8;
+    --zt-purple: #6F4AA8;
+    --zt-purple-dark: #51357D;
+    --zt-ink: #242228;
+    --zt-muted: #716D76;
+    --zt-border: rgba(81, 53, 125, 0.13);
+
+    background: var(--zt-cream);
+
+    padding: 58px 24px 72px;
+  }
+
+
+  #zeotein-reviews-{{ section.id }} *,
+  #zeotein-reviews-{{ section.id }} *::before,
+  #zeotein-reviews-{{ section.id }} *::after {
+
+    box-sizing: border-box;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__container {
+
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto;
+  }
+
+
+  /* =========================================
+     HEADER
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__header {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto 48px;
+    text-align: left;
+  }
+
+  /* =========================================
+     DESKTOP — EDITORIAL HEADER ALIGNMENT
+  ========================================== */
+
+  @media screen and (min-width: 750px) {
+    #zeotein-reviews-{{ section.id }} .zt-reviews__header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
+      column-gap: 80px;
+      align-items: end;
+    }
+
+    #zeotein-reviews-{{ section.id }} .zt-reviews__eyebrow {
+      grid-column: 1 / -1;
+      margin-bottom: 14px;
+    }
+
+    #zeotein-reviews-{{ section.id }} .zt-reviews__heading {
+      grid-column: 1;
+      margin: 0;
+    }
+
+    #zeotein-reviews-{{ section.id }} .zt-reviews__intro {
+      grid-column: 2;
+      max-width: 520px;
+      margin: 0 0 4px !important;
+    }
+
+    #zeotein-reviews-{{ section.id }} .zt-reviews__rating {
+      grid-column: 1 / -1;
+      justify-self: start;
+      margin-top: 22px;
+    }
+  }
+
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__eyebrow {
+
+    margin-bottom: 14px;
+
+    color: var(--zt-purple);
+
+    font-size: 11px;
+    line-height: 1.4;
+
+    font-weight: 700;
+
+    letter-spacing: 0.18em;
+
+    text-transform: uppercase;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__heading {
+
+    margin: 0;
+
+    color: var(--zt-ink);
+
+    font-size: clamp(40px, 5.5vw, 66px);
+
+    line-height: 0.98;
+
+    font-weight: 600;
+
+    letter-spacing: -0.05em;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__intro {
+
+    max-width: 590px;
+
+    margin: 22px auto 0;
+
+    color: var(--zt-muted);
+
+    font-size: 16px;
+
+    line-height: 1.65;
+  }
+
+
+  /* =========================================
+     RATING
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__rating {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 22px;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__rating-stars {
+
+    color: var(--zt-purple);
+
+    font-size: 14px;
+
+    line-height: 1;
+
+    letter-spacing: 0.08em;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__rating-text {
+
+    color: var(--zt-muted);
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    font-weight: 600;
+  }
+
+
+  /* =========================================
+     REVIEW GRID
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__grid {
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+  }
+
+
+  /* =========================================
+     REVIEW CARD
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 390px;
+
+    padding: 34px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid var(--zt-border);
+
+    border-radius: 24px;
+
+    box-shadow:
+      0 16px 45px rgba(44, 32, 60, 0.045);
+
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 22px 52px rgba(44, 32, 60, 0.08);
+  }
+
+
+  /* =========================================
+     HIGHLIGHT CARD
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review--highlight {
+
+    background: var(--zt-lavender);
+
+    border-color:
+      rgba(111, 74, 168, 0.16);
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review--highlight::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 210px;
+    height: 210px;
+
+    right: -105px;
+    bottom: -105px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(111, 74, 168, 0.065);
+
+    pointer-events: none;
+  }
+
+
+  /* =========================================
+     CARD TOP
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review__top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 27px;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review__stars {
+
+    color: var(--zt-purple);
+
+    font-size: 14px;
+
+    line-height: 1;
+
+    letter-spacing: 0.08em;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review__number {
+
+    color:
+      rgba(81, 53, 125, 0.30);
+
+    font-size: 10px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+  }
+
+
+  /* =========================================
+     THEME
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review__theme {
+
+    margin-bottom: 18px;
+
+    color: var(--zt-purple);
+
+    font-size: 9px;
+
+    line-height: 1.4;
+
+    font-weight: 800;
+
+    letter-spacing: 0.14em;
+
+    text-transform: uppercase;
+  }
+
+
+  /* =========================================
+     QUOTE
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review__quote {
+
+    position: relative;
+
+    margin: 0;
+
+    padding: 0;
+
+    color: var(--zt-ink);
+
+    font-size: 20px;
+
+    line-height: 1.45;
+
+    font-weight: 500;
+
+    letter-spacing: -0.015em;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review__quote::before {
+
+    content: "“";
+
+    display: block;
+
+    height: 25px;
+
+    color: var(--zt-purple);
+
+    font-family: Georgia, serif;
+
+    font-size: 48px;
+
+    line-height: 0.8;
+
+    font-weight: 700;
+  }
+
+
+  /* =========================================
+     FOOTER
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review__footer {
+
+    margin-top: auto;
+
+    padding-top: 28px;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review__customer {
+
+    color: var(--zt-ink);
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    font-weight: 700;
+  }
+
+
+  /* =========================================
+     VERIFIED BUYER
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review__verified {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 7px;
+
+    color: var(--zt-muted);
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+    font-weight: 600;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-review__verified-icon {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 16px;
+    height: 16px;
+
+    border-radius: 50%;
+
+    background: var(--zt-purple);
+
+    color: #ffffff;
+
+    font-size: 9px;
+
+    font-weight: 800;
+  }
+
+
+  /* =========================================
+     EMPTY STATE
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__empty {
+
+    padding: 70px 30px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px dashed
+      rgba(111, 74, 168, 0.25);
+
+    border-radius: 24px;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__empty-icon {
+
+    color: var(--zt-purple);
+
+    font-size: 30px;
+
+    margin-bottom: 12px;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__empty-title {
+
+    color: var(--zt-ink);
+
+    font-size: 18px;
+
+    font-weight: 700;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__empty-text {
+
+    margin-top: 7px;
+
+    color: var(--zt-muted);
+
+    font-size: 13px;
+  }
+
+
+  /* =========================================
+     BOTTOM BAR
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__bottom {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-top: 22px;
+
+    padding: 24px 30px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--zt-border);
+
+    border-radius: 20px;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__bottom-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__bottom-stars {
+
+    color: var(--zt-purple);
+
+    font-size: 14px;
+
+    line-height: 1;
+
+    letter-spacing: 0.08em;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__bottom-copy {
+
+    color: var(--zt-muted);
+
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+
+
+  /* =========================================
+     CTA
+  ========================================== */
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__cta {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    min-height: 46px;
+
+    padding: 0 22px;
+
+    flex: 0 0 auto;
+
+    border-radius: 999px;
+
+    background: var(--zt-purple);
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+
+    text-decoration: none;
+
+    text-transform: uppercase;
+
+    box-shadow:
+      0 8px 20px
+      rgba(111, 74, 168, 0.18);
+
+    transition:
+      transform 180ms ease,
+      background 180ms ease;
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__cta:hover {
+
+    transform: translateY(-2px);
+
+    background: var(--zt-purple-dark);
+  }
+
+
+  #zeotein-reviews-{{ section.id }}
+  .zt-reviews__cta-arrow {
+
+    font-size: 17px;
+
+    line-height: 0;
+  }
+
+
+  /* =========================================
+     TABLET
+  ========================================== */
+
+  @media screen and (max-width: 989px) {
+
+    #zeotein-reviews-{{ section.id }} {
+
+      padding: 85px 20px;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-reviews__grid {
+
+      gap: 14px;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-review {
+
+      min-height: 380px;
+
+      padding: 27px;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-review__quote {
+
+      font-size: 17px;
+    }
+
+  }
+
+
+  /* =========================================
+     MOBILE
+  ========================================== */
+
+  @media screen and (max-width: 700px) {
+
+    #zeotein-reviews-{{ section.id }} {
+
+      padding: 42px 16px 52px;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-reviews__header {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto 28px;
+      display: block;
+      text-align: center;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-reviews__heading {
+
+      font-size: 40px;
+
+      line-height: 1;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-reviews__intro {
+
+      font-size: 14px;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-reviews__rating {
+
+      flex-wrap: wrap;
+
+      gap: 8px;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-reviews__grid {
+
+      grid-template-columns: 1fr;
+
+      gap: 14px;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-review {
+
+      min-height: 0;
+
+      padding: 30px;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-review__quote {
+
+      font-size: 19px;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-reviews__bottom {
+
+      display: block;
+
+      padding: 24px;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-reviews__bottom-left {
+
+      display: block;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-reviews__bottom-copy {
+
+      margin-top: 10px;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-reviews__cta {
+
+      width: 100%;
+
+      margin-top: 20px;
+    }
+
+  }
+
+
+  /* =========================================
+     SMALL MOBILE
+  ========================================== */
+
+  @media screen and (max-width: 420px) {
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-review {
+
+      padding: 25px;
+    }
+
+
+    #zeotein-reviews-{{ section.id }}
+    .zt-review__quote {
+
+      font-size: 18px;
+    }
+
+  }
+
+</style>
+
+
+{% schema %}
+{
+  "name": "Reviews / Real Routines",
+  "tag": "section",
+  "class": "section",
+
+  "settings": [
+
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "REAL CUSTOMER PROOF"
+    },
+
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Real People. Real Routines."
+    },
+
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro",
+      "default": "What matters most is how Zeotein fits into real people's everyday routines."
+    },
+
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating Text",
+      "default": "Real customer reviews"
+    },
+
+    {
+      "type": "header",
+      "content": "Bottom Proof"
+    },
+
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom Proof Text",
+      "default": "Real reviews from customers using Zeotein in their everyday routines."
+    },
+
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "SHOP ZEOTEIN"
+    },
+
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+
+  ],
+
+  "blocks": [
+
+    {
+      "type": "review",
+      "name": "Review",
+
+      "settings": [
+
+        {
+          "type": "text",
+          "id": "theme",
+          "label": "Review Theme",
+          "default": "CUSTOMER EXPERIENCE"
+        },
+
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Exact Review Text",
+          "default": "Paste the exact customer review here."
+        },
+
+        {
+          "type": "text",
+          "id": "customer_name",
+          "label": "Customer Name",
+          "default": "Customer"
+        },
+
+        {
+          "type": "checkbox",
+          "id": "verified_buyer",
+          "label": "Show Verified Buyer",
+          "default": false
+        }
+
+      ]
+    }
+
+  ],
+
+  "max_blocks": 3,
+
+  "presets": [
+
+    {
+      "name": "Reviews / Real Routines",
+
+      "blocks": [
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        }
+      ]
+    }
+
+  ]
+}
+{% endschema %}

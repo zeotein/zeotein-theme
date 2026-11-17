@@ -1,0 +1,80 @@
+{% # theme-check-disable ValidBlockTarget %}
+{% doc %}
+  Video row for Real Customers Cacao LP.
+  Sits on the section, under the category tabs, and stays visible for every tab.
+  Card files: blocks/cacao-rc-video.liquid and blocks/cacao-rc-image.liquid.
+{% enddoc %}
+
+{%- liquid
+  assign cols = block.settings.columns_desktop | default: 5
+  assign cols_m = block.settings.columns_mobile | default: 2
+  assign gap = block.settings.gap | default: 12
+  if cols < 2
+    assign cols = 2
+  endif
+  if cols_m < 1
+    assign cols_m = 1
+  endif
+-%}
+
+<div
+  class="zt-rc__videos"
+  {{ block.shopify_attributes }}
+  style="--zt-rc-video-cols: {{ cols }}; --zt-rc-video-cols-m: {{ cols_m }}; --zt-rc-video-gap: {{ gap }}px;"
+>
+  {% content_for 'blocks' %}
+  {%- if request.design_mode -%}
+    <p class="zt-rc__videos-empty">Add a video card or an image card. Delete a card to remove it.</p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Video row",
+  "tag": null,
+  "blocks": [
+    { "type": "cacao-rc-video" },
+    { "type": "cacao-rc-image" }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Add Video card or Image card blocks here. Delete a card to remove it. This row stays the same on every category tab."
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns - desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "label": "Visible cards - mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2,
+      "info": "How many cards peek in the mobile slider."
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap",
+      "min": 8,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video row"
+    }
+  ]
+}
+{% endschema %}

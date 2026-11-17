@@ -1,0 +1,216 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "name": "Zeotein Vegan 7-Day Supply",
+          "settings": {}
+        },
+        "rating_GXjadk": {
+          "type": "rating",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "text_hyPQYJ": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible_tab_jNbWFq": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Ingredients",
+            "icon": "none",
+            "content": "<ul><li>Organic Pumpkin Seed Protein</li><li>Organic Hemp Protein</li><li>Organic MCT Oil Powder</li><li>Zeolite (Clinoptilolite)</li><li>Organic Sea Moss</li></ul><p>Five ingredients. No fillers, no sweeteners, nothing added to pad it out.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_M4C4HP": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Benefits",
+            "icon": "none",
+            "content": "<p>• Supports lean, sustained energy without added sugars or stimulants   <br/>• Supports digestive balance as part of a clean nutrition routine  <br/>• Supports overall well-being through thoughtfully selected ingredients   <br/>• Provides 20g of plant-based protein to support daily nutrition  <br/>• No added sugars, sweeteners, fillers, or artificial ingredients</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_CGD3BP": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How to Use",
+            "icon": "none",
+            "content": "<p>Mix one packet with 10–12 oz of water, almond milk, or coconut milk.<br/>Blends easily into smoothies. Once daily, any time of day.<br/><br/>These statements have not been evaluated by the Food and Drug<br/>Administration. This product is not intended to diagnose, treat, cure,<br/>or prevent any disease.<br/></p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_YJbWnM": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Supplement Facts",
+            "icon": "none",
+            "content": "<p>Supplement Facts Panel – Zeotein Vegan <br/><br/>Serving Size: 1 Stick Pack (42 g)<br/><br/>Amount Per Serving<br/>Calories: 165<br/>Total Fat: 6 g<br/>– Saturated Fat: 2 g<br/>Total Carbohydrate: 9 g<br/>– Dietary Fiber: 4 g<br/>– Total Sugars: 2 g<br/>Protein: 20 g<br/>Sodium: 145 mg</p><p><strong>Allergen Statement</strong><br/>Manufactured in a facility that may process: Tree Nuts, Sesame, Mustard, Celery. </p><p><strong>Disclaimer</strong><br/>Supplement Facts are estimated and subject to change based on final third-party lab results and any formula adjustments. The product you receive may have updated values.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "rating_GXjadk",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "text_hyPQYJ",
+        "buy_buttons",
+        "description",
+        "collapsible_tab_jNbWFq",
+        "collapsible_tab_M4C4HP",
+        "collapsible_tab_CGD3BP",
+        "collapsible_tab_YJbWnM"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "multicolumn_3fd3PL": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_3FpGjm": {
+          "type": "column",
+          "settings": {
+            "title": "<strong>Sustained Energy</strong>",
+            "text": "<p><br>Plant-powered protein and healthy fats help support steady energy levels without spikes or crashes.<br><br></p>"
+          }
+        },
+        "column_yYmx6G": {
+          "type": "column",
+          "settings": {
+            "title": "<strong>Digestive Support</strong>",
+            "text": "<p><br>Thoughtfully selected plant ingredients designed to be gentle on digestion and easy to incorporate into daily routines.<br><br></p>"
+          }
+        },
+        "column_4Jp6yD": {
+          "type": "column",
+          "settings": {
+            "title": "<strong>Focus + Clarity</strong>",
+            "text": "<p><br>A balanced blend of plant proteins and functional ingredients to support mental clarity and daily performance.<br><br><br><br></p>"
+          }
+        },
+        "column_zUX9yQ": {
+          "type": "column",
+          "settings": {
+            "title": "<strong>Natural Detox Support</strong>",
+            "text": "<p><br>Zeolite and whole-food ingredients support the body’s natural detox pathways as part of an overall wellness-focused lifestyle.<br><br></p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_3FpGjm",
+        "column_yYmx6G",
+        "column_4Jp6yD",
+        "column_zUX9yQ"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title_white": "REAL NUTRITION",
+        "title_teal": "MADE SIMPLE.",
+        "subhead": "Get protein, collagen, minerals, and energy from a single stick pack.",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "1768838317647a13f3": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_cPkXxp": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_cPkXxp"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "multicolumn_3fd3PL",
+    "related-products",
+    "1768838317647a13f3"
+  ]
+}

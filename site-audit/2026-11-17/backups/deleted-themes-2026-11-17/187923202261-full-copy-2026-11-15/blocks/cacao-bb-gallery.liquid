@@ -1,0 +1,215 @@
+{% doc %}
+  Product image gallery for Buy Box Cacao LP. Clickable in Theme Inspector.
+{% enddoc %}
+
+{%- liquid
+  assign slide_1 = block.settings.image_1
+  assign img_alt = block.settings.image_alt | default: '30-Day Cacao Bulk Bag'
+-%}
+
+<div class="zt-bb__gallery" {{ block.shopify_attributes }}>
+  <div class="zt-bb__main">
+    {%- if slide_1 != blank -%}
+      {{
+        slide_1
+        | image_url: width: 1400
+        | image_tag:
+          class: 'zt-bb__main-img',
+          alt: img_alt,
+          widths: '700, 1000, 1400',
+          sizes: '(max-width: 989px) 100vw, 50vw',
+          loading: 'eager'
+      }}
+    {%- else -%}
+      <img
+        class="zt-bb__main-img"
+        src="{{ 'zt-bb-main.png' | asset_url }}"
+        alt="{{ img_alt | escape }}"
+        width="1062"
+        height="1328"
+        loading="eager"
+      >
+    {%- endif -%}
+    {%- liquid
+      assign save_badge_size = block.settings.save_badge_size | default: 64
+      assign save_badge_size_m = block.settings.save_badge_size_mobile | default: 56
+      assign show_save_badge = false
+      if block.settings.save_badge_image != blank or block.settings.save_badge != blank
+        assign show_save_badge = true
+      endif
+    -%}
+    {%- if show_save_badge -%}
+      <div
+        class="zt-bb__save-badge{% if block.settings.save_badge_image != blank %} zt-bb__save-badge--image{% endif %}"
+        style="--zt-bb-save-badge: {{ save_badge_size }}px; --zt-bb-save-badge-m: {{ save_badge_size_m }}px;"
+      >
+        {%- if block.settings.save_badge_image != blank -%}
+          {%- assign save_badge_sizes = '(max-width: 989px) ' | append: save_badge_size_m | append: 'px, ' | append: save_badge_size | append: 'px' -%}
+          {{
+            block.settings.save_badge_image
+            | image_url: width: 256
+            | image_tag:
+              class: 'zt-bb__save-badge-img',
+              loading: 'lazy',
+              widths: '48, 64, 96, 128, 192, 256',
+              sizes: save_badge_sizes,
+              alt: '',
+              width: save_badge_size,
+              height: save_badge_size
+          }}
+        {%- else -%}
+          {{ block.settings.save_badge | newline_to_br }}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="zt-bb__thumbs" role="tablist" aria-label="Product images">
+    {%- for i in (1..4) -%}
+      {%- liquid
+        assign img_key = 'image_' | append: i
+        assign img = block.settings[img_key]
+        assign fallback = 'zt-bb-main.png'
+        if i == 2
+          assign fallback = 'zt-bb-thumb-2.png'
+        elsif i == 3
+          assign fallback = 'zt-bb-thumb-3.png'
+        elsif i == 4
+          assign fallback = 'zt-bb-thumb-4.png'
+        endif
+      -%}
+      <button
+        type="button"
+        class="zt-bb__thumb{% if i == 1 %} is-active{% endif %}"
+        data-zt-bb-thumb
+        aria-label="View product image {{ i }}"
+      >
+        {%- if img != blank -%}
+          {{
+            img
+            | image_url: width: 240
+            | image_tag:
+              loading: 'lazy',
+              widths: '120, 240',
+              sizes: '80px',
+              alt: ''
+          }}
+        {%- else -%}
+          <img
+            src="{{ fallback | asset_url }}"
+            alt=""
+            width="120"
+            height="120"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </button>
+    {%- endfor -%}
+  </div>
+
+  {%- if block.settings.nutrition_label != blank -%}
+    <a
+      class="zt-bb__nutrition"
+      href="{{ block.settings.nutrition_label | image_url: width: 1600 }}"
+      target="_blank"
+      rel="noopener"
+    >
+      <span class="zt-bb__icon zt-bb__icon--doc" aria-hidden="true"></span>
+      <span>{{ block.settings.nutrition_btn_label | default: 'View Nutrition Label' | escape }}</span>
+    </a>
+  {%- elsif block.settings.nutrition_link != blank -%}
+    <a class="zt-bb__nutrition" href="{{ block.settings.nutrition_link }}" target="_blank" rel="noopener">
+      <span class="zt-bb__icon zt-bb__icon--doc" aria-hidden="true"></span>
+      <span>{{ block.settings.nutrition_btn_label | default: 'View Nutrition Label' | escape }}</span>
+    </a>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Gallery",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1 (main)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image 4"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Main image alt text",
+      "default": "30-Day Cacao Bulk Bag"
+    },
+    {
+      "type": "header",
+      "content": "Save badge on main image"
+    },
+    {
+      "type": "image_picker",
+      "id": "save_badge_image",
+      "label": "Save badge image",
+      "info": "Optional custom badge. Prefer a PNG with transparent background. Overrides the text badge when set."
+    },
+    {
+      "type": "range",
+      "id": "save_badge_size",
+      "label": "Badge size - desktop",
+      "min": 40,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "save_badge_size_mobile",
+      "label": "Badge size - mobile",
+      "min": 36,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "textarea",
+      "id": "save_badge",
+      "label": "Save badge text (fallback)",
+      "default": "SAVE\n$33.00",
+      "info": "Used when no badge image is uploaded. Use a line break for two lines."
+    },
+    {
+      "type": "image_picker",
+      "id": "nutrition_label",
+      "label": "Nutrition label image"
+    },
+    {
+      "type": "url",
+      "id": "nutrition_link",
+      "label": "Nutrition label link (fallback)"
+    },
+    {
+      "type": "text",
+      "id": "nutrition_btn_label",
+      "label": "Nutrition button label",
+      "default": "View Nutrition Label"
+    }
+  ],
+  "presets": [{ "name": "Gallery" }]
+}
+{% endschema %}

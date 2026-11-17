@@ -1,0 +1,84 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer_custom": {
+      "type": "footer-custom",
+      "disabled": true,
+      "name": "Footer custom",
+      "settings": {
+        "brand_name": "ZEOTEIN",
+        "tagline": "Functional protein blends for a simpler daily routine.",
+        "explore_heading": "Explore",
+        "link_1_label": "",
+        "link_1_url": "/collections/all",
+        "link_2_label": "Cacao Offer",
+        "link_2_url": "https://zeotein.com/products/cacao",
+        "offer_heading": "Offer details",
+        "offer_text": "Subscription renews every 30 days until paused or canceled.",
+        "logo": "shopify://shop_images/Zeotein_Logo_5.0_white_png_high_res_larger_image.png",
+        "logo_width_desktop": 1400,
+        "logo_width_mobile": 300,
+        "wordmark": "ZEOTEIN",
+        "copyright": "© 2026 Zeotein. All rights reserved.",
+        "disclaimer": "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.",
+        "show_payment_icons": true,
+        "background": "#1b1430",
+        "wordmark_color": "#7a2fbe",
+        "text_color": "#ffffff"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "text_gQErYm": {
+          "type": "text",
+          "settings": {
+            "heading": "Contact Info:",
+            "subtext": "<p>hello@zeotein.com</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_gQErYm"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "footer_logo": "shopify://shop_images/zeotein_logo_white.png",
+        "footer_logo_alt": "Zeotein logo",
+        "newsletter_enable": true,
+        "newsletter_title": "Learn to read a label like we do.",
+        "newsletter_text": "Spot what’s in the formula, understand the label, and keep your routine simple.",
+        "newsletter_note": "No spam. Unsubscribe anytime.",
+        "contact_email": "hello@zeotein.com",
+        "enable_follow_on_shop": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "show_social": true,
+        "margin_top": 0,
+        "padding_top": 100,
+        "padding_bottom": 36
+      }
+    },
+    "zt_gift_lock": {
+      "type": "zt-gift-lock",
+      "settings": {}
+    }
+  },
+  "order": [
+    "footer_custom",
+    "footer",
+    "zt_gift_lock"
+  ]
+}

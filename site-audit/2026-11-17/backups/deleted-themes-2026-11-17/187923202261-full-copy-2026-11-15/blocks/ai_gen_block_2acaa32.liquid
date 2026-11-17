@@ -1,0 +1,326 @@
+<!-- =========================================================
+  BONUS OFFER SECTION — paste into a Shopify "Custom Liquid" 
+  section, or into theme.liquid inside a <section> block.
+  Replace the 4 placeholder image blocks (marked below) with
+  your real product photos.
+========================================================= -->
+<style>
+  .bonus-offer-section * { box-sizing: border-box; }
+
+  .bonus-offer-section {
+    --purple-bg-1: #1a0e33;
+    --purple-bg-2: #120823;
+    --border-teal: #35c9c1;
+    --teal: #3ddbd2;
+    --teal-dark: #1fa89f;
+    --text-white: #ffffff;
+    --text-muted: #b9aed1;
+    --strike: #7a6d97;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    max-width: 480px;
+    margin: 40px auto;
+    padding: 28px 24px 24px;
+    background: radial-gradient(circle at 50% 0%, var(--purple-bg-1), var(--purple-bg-2));
+    border: 1px solid rgba(61, 219, 210, 0.35);
+    border-radius: 24px;
+    box-shadow: 0 0 40px rgba(61, 219, 210, 0.08);
+    color: var(--text-white);
+    text-align: center;
+  }
+
+  /* Badge */
+  .bonus-offer-section .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--teal);
+    color: #0c1f1e;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+
+  /* Headline */
+  .bonus-offer-section h2 {
+    font-size: 26px;
+    line-height: 1.15;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 2px;
+    letter-spacing: 0.01em;
+  }
+  .bonus-offer-section h2.highlight {
+    color: var(--teal);
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  .bonus-offer-section .subtext {
+    font-size: 14px;
+    color: #e7e1f2;
+    margin: 0 0 22px;
+  }
+  .bonus-offer-section .subtext .accent { color: var(--teal); font-weight: 700; }
+
+  /* Product image row */
+  .bonus-offer-section .product-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .bonus-offer-section .product-row img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+
+  .bonus-offer-section .bundle-label {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .bonus-offer-section .bundle-label .accent { color: var(--teal); }
+
+  .bonus-offer-section .divider {
+    width: 60px;
+    height: 2px;
+    background: var(--teal);
+    border: none;
+    margin: 8px auto 18px;
+    opacity: 0.6;
+  }
+
+  .bonus-offer-section .included-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #d9d2ea;
+    margin-bottom: 12px;
+  }
+
+  /* Checklist */
+  .bonus-offer-section .checklist {
+    list-style: none;
+    margin: 0 0 18px;
+    padding: 0;
+    text-align: left;
+  }
+  .bonus-offer-section .checklist li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 14px;
+  }
+  .bonus-offer-section .checklist li:last-child { border-bottom: none; }
+
+  .bonus-offer-section .check-icon {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: #0c1f1e;
+    font-size: 11px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bonus-offer-section .item-name {
+    flex: 1;
+    color: #f1eefb;
+  }
+
+  .bonus-offer-section .old-price {
+    color: var(--strike);
+    text-decoration: line-through;
+    font-size: 13px;
+    margin-right: 10px;
+  }
+
+  .bonus-offer-section .free-tag {
+    color: var(--teal);
+    font-weight: 700;
+    font-size: 13px;
+    min-width: 40px;
+    text-align: right;
+  }
+
+  /* Total bonus value box */
+  .bonus-offer-section .total-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(103, 58, 183, 0.28);
+    border: 1px solid rgba(180, 140, 255, 0.35);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+  }
+  .bonus-offer-section .total-box .old-total {
+    color: var(--strike);
+    text-decoration: line-through;
+    font-weight: 500;
+    text-transform: none;
+  }
+  .bonus-offer-section .total-box .free-total {
+    color: var(--text-white);
+  }
+
+  /* CTA button */
+  .bonus-offer-section .cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: var(--teal);
+    color: #0c1f1e;
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    border: none;
+    border-radius: 999px;
+    padding: 16px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .bonus-offer-section .cta-btn:hover {
+    background: var(--teal-dark);
+    transform: translateY(-1px);
+  }
+  .bonus-offer-section .cta-btn .arrow-circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #0c1f1e;
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex: 0 0 22px;
+  }
+
+  @media (max-width: 420px) {
+    .bonus-offer-section { padding: 22px 16px 18px; }
+    .bonus-offer-section h2 { font-size: 22px; }
+    .bonus-offer-section h2.highlight { font-size: 25px; }
+    .bonus-offer-section .shaker-ph { width: 64px; height: 140px; }
+    .bonus-offer-section .guide-ph { width: 68px; height: 120px; }
+  }
+</style>
+
+<div class="bonus-offer-section">
+
+  <span class="badge">⏳ {{ section.settings.badge_text }}</span>
+
+  <h2>Order Now &amp; Get</h2>
+  <h2 class="highlight">$55 In Free Bonuses</h2>
+
+  <p class="subtext">
+    On top of your <span class="accent">15% off</span> – added automatically at checkout
+  </p>
+
+  <div class="product-row">
+    {% if section.settings.bundle_image %}
+      <img src="{{ section.settings.bundle_image | image_url: width: 600 }}" alt="Free bonus bundle">
+    {% endif %}
+  </div>
+
+  <p class="bundle-label">+ SHAKER + 3 DIGITAL GUIDES – <span class="accent">YOURS FREE</span></p>
+  <hr class="divider">
+
+  <p class="included-label">Included With Your First 30-Day Subscription</p>
+
+  <ul class="checklist">
+    <li>
+      <span class="check-icon">✓</span>
+      <span class="item-name">Branded Shaker</span>
+      <span class="old-price">$15.00</span>
+      <span class="free-tag">FREE</span>
+    </li>
+    <li>
+      <span class="check-icon">✓</span>
+      <span class="item-name">Cacao Recipe Guide</span>
+      <span class="old-price">$14.00</span>
+      <span class="free-tag">FREE</span>
+    </li>
+    <li>
+      <span class="check-icon">✓</span>
+      <span class="item-name">Vegan Recipe Guide</span>
+      <span class="old-price">$14.00</span>
+      <span class="free-tag">FREE</span>
+    </li>
+    <li>
+      <span class="check-icon">✓</span>
+      <span class="item-name">Starter Guide</span>
+      <span class="old-price">$12.00</span>
+      <span class="free-tag">FREE</span>
+    </li>
+  </ul>
+
+  <div class="total-box">
+    🎁 Total Bonus Value <span class="old-total">$55.00</span> <span class="free-total">FREE</span>
+  </div>
+
+  <a href="{{ section.settings.cta_link }}" class="cta-btn">
+    <span class="arrow-circle">➔</span>
+    {{ section.settings.cta_text }}
+  </a>
+
+</div>
+
+{% schema %}
+{
+  "name": "Bonus Offer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Today Only"
+    },
+    {
+      "type": "image_picker",
+      "id": "bundle_image",
+      "label": "Bundle image"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Claim My Discount + Free Bonuses"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bonus Offer"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,514 @@
+{% comment %}
+  ZEOTEIN — TRUST STRIP
+  CRO reassurance bar
+
+  FINAL APPROVED MESSAGING:
+  5–6 INGREDIENTS
+  SINGLE-SERVE PACKETS
+  ZERO SUGAR
+  30-DAY GUARANTEE
+
+  ICON MATCHING:
+  1. Leaf = ingredients
+  2. Stick packet = single-serve packets
+  3. Crossed-out sugar cube = zero sugar
+  4. Shield/check = 30-day guarantee
+{% endcomment %}
+
+<section
+  id="zeotein-trust-{{ block.id }}"
+  class="zeotein-trust"
+>
+  <div class="zeotein-trust__inner">
+
+    <!-- 01 — 5–6 INGREDIENTS -->
+    <div class="zeotein-trust__item">
+      <div class="zeotein-trust__icon" aria-hidden="true">
+        <svg
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M30.8 8.8C21.4 9.3 13.2 13.2 10.4 20.2C7.9 26.4 11.7 32.2 17.4 32.2C24.6 32.2 29.9 25.1 30.8 8.8Z"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M11.2 30.2C16.5 26.2 21.3 21.1 26.7 14.7"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+        </svg>
+      </div>
+
+      <div class="zeotein-trust__copy">
+        <strong>
+          {{ block.settings.trust_1_highlight | default: '5–6' }}
+        </strong>
+        <span>
+          {{ block.settings.trust_1_label | default: 'INGREDIENTS' }}
+        </span>
+      </div>
+    </div>
+
+
+    <div class="zeotein-trust__divider" aria-hidden="true"></div>
+
+
+    <!-- 02 PROTEIN TYPE -->
+    <div class="zeotein-trust__item">
+      <div class="zeotein-trust__icon" aria-hidden="true">
+        <svg
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M20 33V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 19C20 13 15.5 9 9 9C9 15.5 13 19 20 19Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M20 23C20 17 24.5 13 31 13C31 19.5 27 23 20 23Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="zeotein-trust__copy">
+        <strong>
+          {{ block.settings.trust_2_highlight | default: 'SINGLE-SERVE' }}
+        </strong>
+        <span>
+          {{ block.settings.trust_2_label | default: 'PACKETS' }}
+        </span>
+      </div>
+    </div>
+
+
+    <div class="zeotein-trust__divider" aria-hidden="true"></div>
+
+
+    <!-- 03 TEAR OR SCOOP -->
+    <div class="zeotein-trust__item">
+      <div class="zeotein-trust__icon" aria-hidden="true">
+        <svg
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="13" y="6.5" width="14" height="27" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M13.5 11H26.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M13.5 29H26.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M17.5 18.5H22.5M17.5 22.5H22.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="zeotein-trust__copy">
+        <strong>
+          {{ block.settings.trust_3_highlight | default: 'ZERO' }}
+        </strong>
+        <span>
+          {{ block.settings.trust_3_label | default: 'SUGAR' }}
+        </span>
+      </div>
+    </div>
+
+
+    <div class="zeotein-trust__divider" aria-hidden="true"></div>
+
+
+    <!-- 04 READY IN 10 SECONDS -->
+    <div class="zeotein-trust__item">
+      <div class="zeotein-trust__icon" aria-hidden="true">
+        <svg
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="20" cy="21" r="13" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M20 13.5V21L25 24" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 5.5H24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="zeotein-trust__copy">
+        <strong>
+          {{ block.settings.trust_4_highlight | default: '30-DAY' }}
+        </strong>
+        <span>
+          {{ block.settings.trust_4_label | default: 'GUARANTEE' }}
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+  #zeotein-trust-{{ block.id }} {
+    --zt-bg: #f0ecf8;
+    --zt-purple: #6f4aa8;
+    --zt-text: #292230;
+    --zt-muted: #716879;
+    --zt-divider: rgba(41, 34, 48, 0.13);
+
+    width: 100%;
+    background: var(--zt-bg);
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+
+  #zeotein-trust-{{ block.id }} *,
+  #zeotein-trust-{{ block.id }} *::before,
+  #zeotein-trust-{{ block.id }} *::after {
+    box-sizing: border-box;
+  }
+
+
+  /* ================================
+     DESKTOP
+     ================================ */
+
+  #zeotein-trust-{{ block.id }} .zeotein-trust__inner {
+    width: min(1080px, calc(100% - 48px));
+    min-height: 72px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  #zeotein-trust-{{ block.id }} .zeotein-trust__item {
+    flex: 1 1 25%;
+    min-width: 0;
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+    padding: 10px 18px;
+
+    color: var(--zt-text);
+
+    transition: transform 180ms ease;
+  }
+
+  #zeotein-trust-{{ block.id }} .zeotein-trust__item:hover {
+    transform: translateY(-1px);
+  }
+
+
+  /* ICONS */
+
+  #zeotein-trust-{{ block.id }} .zeotein-trust__icon {
+    width: 27px;
+    height: 27px;
+    flex: 0 0 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--zt-purple);
+  }
+
+  #zeotein-trust-{{ block.id }} .zeotein-trust__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+
+  /* TEXT */
+
+  #zeotein-trust-{{ block.id }} .zeotein-trust__copy {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  #zeotein-trust-{{ block.id }} .zeotein-trust__copy strong {
+    display: block;
+
+    color: var(--zt-text);
+
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: .15px;
+  }
+
+  #zeotein-trust-{{ block.id }} .zeotein-trust__copy span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--zt-muted);
+
+    font-size: 8px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+  }
+
+
+  /* DIVIDERS */
+
+  #zeotein-trust-{{ block.id }} .zeotein-trust__divider {
+    width: 1px;
+    flex: 0 0 1px;
+
+    margin: 17px 0;
+
+    background: var(--zt-divider);
+  }
+
+
+  /* ================================
+     TABLET
+     ================================ */
+
+  @media screen and (max-width: 989px) {
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__inner {
+      width: min(760px, calc(100% - 36px));
+    }
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__item {
+      gap: 9px;
+      padding: 13px 10px;
+    }
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__icon {
+      width: 24px;
+      height: 24px;
+      flex-basis: 24px;
+    }
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__copy strong {
+      font-size: 13px;
+    }
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__copy span {
+      font-size: 7px;
+      letter-spacing: .75px;
+    }
+  }
+
+
+  /* ================================
+     MOBILE
+     ================================ */
+
+  @media screen and (max-width: 749px) {
+
+    #zeotein-trust-{{ block.id }} {
+      padding: 0;
+    }
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__inner {
+      width: 100%;
+      min-height: 0;
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+
+      padding: 13px 18px 14px;
+
+      column-gap: 0;
+      row-gap: 0;
+    }
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__item {
+      width: 100%;
+      min-height: 68px;
+
+      justify-content: flex-start;
+
+      gap: 10px;
+      padding: 10px 12px;
+    }
+
+
+    /* Item 1 */
+    #zeotein-trust-{{ block.id }} .zeotein-trust__item:nth-of-type(1) {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+
+    /* Item 2 */
+    #zeotein-trust-{{ block.id }} .zeotein-trust__item:nth-of-type(3) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+
+    /* Item 3 */
+    #zeotein-trust-{{ block.id }} .zeotein-trust__item:nth-of-type(5) {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+
+    /* Item 4 */
+    #zeotein-trust-{{ block.id }} .zeotein-trust__item:nth-of-type(7) {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+
+    /* Hide desktop dividers */
+    #zeotein-trust-{{ block.id }} .zeotein-trust__divider {
+      display: none;
+    }
+
+
+    /* Vertical dividers */
+    #zeotein-trust-{{ block.id }} .zeotein-trust__item:nth-of-type(3),
+    #zeotein-trust-{{ block.id }} .zeotein-trust__item:nth-of-type(7) {
+      border-left: 1px solid var(--zt-divider);
+    }
+
+
+    /* Horizontal dividers */
+    #zeotein-trust-{{ block.id }} .zeotein-trust__item:nth-of-type(5),
+    #zeotein-trust-{{ block.id }} .zeotein-trust__item:nth-of-type(7) {
+      border-top: 1px solid var(--zt-divider);
+    }
+
+
+    /* Mobile icons */
+    #zeotein-trust-{{ block.id }} .zeotein-trust__icon {
+      width: 23px;
+      height: 23px;
+      flex: 0 0 23px;
+    }
+
+
+    /* Mobile text */
+    #zeotein-trust-{{ block.id }} .zeotein-trust__copy strong {
+      font-size: 12px;
+      line-height: 1.15;
+      white-space: nowrap;
+    }
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__copy span {
+      margin-top: 3px;
+
+      font-size: 7px;
+      line-height: 1.25;
+      letter-spacing: .65px;
+
+      white-space: nowrap;
+    }
+  }
+
+
+  /* ================================
+     VERY SMALL PHONES
+     ================================ */
+
+  @media screen and (max-width: 390px) {
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__inner {
+      padding: 11px 12px 12px;
+    }
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__item {
+      min-height: 64px;
+
+      gap: 8px;
+      padding: 9px 7px;
+    }
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__icon {
+      width: 21px;
+      height: 21px;
+      flex-basis: 21px;
+    }
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__copy strong {
+      font-size: 11px;
+    }
+
+    #zeotein-trust-{{ block.id }} .zeotein-trust__copy span {
+      font-size: 6.5px;
+      letter-spacing: .5px;
+    }
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "Zeotein Trust Strip",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "trust_1_highlight",
+      "label": "Trust 1 Highlight",
+      "default": "5–6"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_label",
+      "label": "Trust 1 Label",
+      "default": "INGREDIENTS"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_highlight",
+      "label": "Trust 2 Highlight",
+      "default": "SINGLE-SERVE"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_label",
+      "label": "Trust 2 Label",
+      "default": "PACKETS"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_highlight",
+      "label": "Trust 3 Highlight",
+      "default": "EASY DAILY"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_label",
+      "label": "Trust 3 Label",
+      "default": "ROUTINE"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_highlight",
+      "label": "Trust 4 Highlight",
+      "default": "30-DAY"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_label",
+      "label": "Trust 4 Label",
+      "default": "GUARANTEE"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zeotein Trust Strip"
+    }
+  ]
+}
+{% endschema %}

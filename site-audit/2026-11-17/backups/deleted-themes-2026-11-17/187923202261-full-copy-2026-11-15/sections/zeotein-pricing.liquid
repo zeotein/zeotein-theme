@@ -1,0 +1,368 @@
+{% style %}
+  #shopify-section-{{ section.id }} .z-price {
+    background: #1B0B30;
+    padding: 72px 24px;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+    text-align: center;
+    margin: 0 0 40px;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__title span {
+    color: #2EC9C9;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__grid {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__card {
+    background: #2A1142;
+    border: 1px solid #3E2860;
+    border-radius: 14px;
+    padding: 28px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__card--best {
+    border: 2px solid #2EC9C9;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__badge {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #CDBFE0;
+    border: 1px solid #5A4378;
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin: 0 auto 14px;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__badge--best {
+    color: #06303A;
+    background: #2EC9C9;
+    border-color: #2EC9C9;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    color: #FFFFFF;
+    margin: 0 0 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__was {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #8A7AA0;
+    text-decoration: line-through;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__now {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: 52px;
+    color: #2EC9C9;
+    line-height: 1;
+    margin: 4px 0 2px;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__per {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #9C8AB5;
+    margin: 0 0 18px;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__feats {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 22px;
+    text-align: left;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__feats li {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #CDBFE0;
+    padding: 6px 0 6px 24px;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__feats li::before {
+    content: "✓";
+    color: #2EC9C9;
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__btn {
+    margin-top: auto;
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #06303A;
+    background: #2EC9C9;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 10px;
+    transition: background 0.2s;
+  }
+
+  #shopify-section-{{ section.id }} .z-price__btn:hover {
+    background: #23A3A3;
+  }
+
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .z-price {
+      padding: 52px 18px;
+    }
+
+    #shopify-section-{{ section.id }} .z-price__title {
+      font-size: 34px;
+    }
+
+    #shopify-section-{{ section.id }} .z-price__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstyle %}
+
+<div class="z-price">
+  <h2 class="z-price__title">
+    {{ section.settings.title | replace: 'exclusive offer', '<span>exclusive offer</span>' }}
+  </h2>
+
+  <div class="z-price__grid">
+    <div class="z-price__card">
+      <span class="z-price__badge">{{ section.settings.badge_1 }}</span>
+      <h3 class="z-price__name">{{ section.settings.name_1 }}</h3>
+      <p class="z-price__was">{{ section.settings.was_1 }}</p>
+      <p class="z-price__now">{{ section.settings.now_1 }}</p>
+      <p class="z-price__per">{{ section.settings.per_1 }}</p>
+
+      <ul class="z-price__feats">
+        {% if section.settings.feat_1a != blank %}
+          <li>{{ section.settings.feat_1a }}</li>
+        {% endif %}
+        {% if section.settings.feat_1b != blank %}
+          <li>{{ section.settings.feat_1b }}</li>
+        {% endif %}
+        {% if section.settings.feat_1c != blank %}
+          <li>{{ section.settings.feat_1c }}</li>
+        {% endif %}
+      </ul>
+
+      <a class="z-price__btn" href="{{ section.settings.button_link_1 }}">
+        {{ section.settings.button_text_1 }}
+      </a>
+    </div>
+
+    <div class="z-price__card z-price__card--best">
+      <span class="z-price__badge z-price__badge--best">{{ section.settings.badge_2 }}</span>
+      <h3 class="z-price__name">{{ section.settings.name_2 }}</h3>
+      <p class="z-price__was">{{ section.settings.was_2 }}</p>
+      <p class="z-price__now">{{ section.settings.now_2 }}</p>
+      <p class="z-price__per">{{ section.settings.per_2 }}</p>
+
+      <ul class="z-price__feats">
+        {% if section.settings.feat_2a != blank %}
+          <li>{{ section.settings.feat_2a }}</li>
+        {% endif %}
+        {% if section.settings.feat_2b != blank %}
+          <li>{{ section.settings.feat_2b }}</li>
+        {% endif %}
+        {% if section.settings.feat_2c != blank %}
+          <li>{{ section.settings.feat_2c }}</li>
+        {% endif %}
+        {% if section.settings.feat_2d != blank %}
+          <li>{{ section.settings.feat_2d }}</li>
+        {% endif %}
+      </ul>
+
+      <a class="z-price__btn" href="{{ section.settings.button_link_2 }}">
+        {{ section.settings.button_text_2 }}
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Zeotein Pricing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Howie's exclusive offer"
+    },
+    {
+      "type": "text",
+      "id": "button_link_1",
+      "label": "Card 1 button link",
+      "default": "/discount/HOWIE15?redirect=/products/zeotein-protein-cacao"
+    },
+    {
+      "type": "text",
+      "id": "button_text_1",
+      "label": "Card 1 button text",
+      "default": "Claim 15% off"
+    },
+    {
+      "type": "text",
+      "id": "button_link_2",
+      "label": "Card 2 button link",
+      "default": "/discount/HOWIE15?redirect=/products/zeotein-30-day-supply"
+    },
+    {
+      "type": "text",
+      "id": "button_text_2",
+      "label": "Card 2 button text",
+      "default": "Claim 15% off"
+    },
+    {
+      "type": "header",
+      "content": "Card 1 — Starter"
+    },
+    {
+      "type": "text",
+      "id": "badge_1",
+      "label": "Badge",
+      "default": "Starter"
+    },
+    {
+      "type": "text",
+      "id": "name_1",
+      "label": "Name",
+      "default": "7-day supply"
+    },
+    {
+      "type": "text",
+      "id": "was_1",
+      "label": "Was price",
+      "default": "$39.99"
+    },
+    {
+      "type": "text",
+      "id": "now_1",
+      "label": "Now price",
+      "default": "$33.99"
+    },
+    {
+      "type": "text",
+      "id": "per_1",
+      "label": "Per day",
+      "default": "$4.86 / day"
+    },
+    {
+      "type": "text",
+      "id": "feat_1a",
+      "label": "Feature 1",
+      "default": "7 single-serve stick packs"
+    },
+    {
+      "type": "text",
+      "id": "feat_1b",
+      "label": "Feature 2",
+      "default": "Full functional benefits"
+    },
+    {
+      "type": "text",
+      "id": "feat_1c",
+      "label": "Feature 3",
+      "default": "Perfect way to try it first"
+    },
+    {
+      "type": "header",
+      "content": "Card 2 — Best Value"
+    },
+    {
+      "type": "text",
+      "id": "badge_2",
+      "label": "Badge",
+      "default": "Best value"
+    },
+    {
+      "type": "text",
+      "id": "name_2",
+      "label": "Name",
+      "default": "30-day supply"
+    },
+    {
+      "type": "text",
+      "id": "was_2",
+      "label": "Was price",
+      "default": "$134.99"
+    },
+    {
+      "type": "text",
+      "id": "now_2",
+      "label": "Now price",
+      "default": "$114.99"
+    },
+    {
+      "type": "text",
+      "id": "per_2",
+      "label": "Per day",
+      "default": "$3.83 / day"
+    },
+    {
+      "type": "text",
+      "id": "feat_2a",
+      "label": "Feature 1",
+      "default": "30 single-serve stick packs"
+    },
+    {
+      "type": "text",
+      "id": "feat_2b",
+      "label": "Feature 2",
+      "default": "Full functional benefits"
+    },
+    {
+      "type": "text",
+      "id": "feat_2c",
+      "label": "Feature 3",
+      "default": "Best per-day value at $3.83 a day"
+    },
+    {
+      "type": "text",
+      "id": "feat_2d",
+      "label": "Feature 4",
+      "default": "Includes a free shaker for subscribers"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zeotein Pricing"
+    }
+  ]
+}
+{% endschema %}

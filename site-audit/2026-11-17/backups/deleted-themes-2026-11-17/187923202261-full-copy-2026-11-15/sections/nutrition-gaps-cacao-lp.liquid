@@ -1,0 +1,1058 @@
+{%- liquid
+  assign sid = 'zt-ng-' | append: section.id
+-%}
+
+{% render 'cacao-lp-fonts', id: sid, font_family: section.settings.font_family, settings: section.settings, prefixes: 'eyebrow,heading,body,stat_value,stat_text,cta' %}
+
+<section
+  id="{{ sid }}"
+  class="zt-ng"
+  {{ section.shopify_attributes }}
+  style="
+    --zt-ng-outer: {{ section.settings.outer_bg }};
+    --zt-ng-card: {{ section.settings.card_bg }};
+    --zt-ng-accent: {{ section.settings.accent_color }};
+    --zt-ng-text: {{ section.settings.text_color }};
+    --zt-ng-shadow: {{ section.settings.shadow_color }};
+    --zt-ng-pad-top: {{ section.settings.padding_top }}px;
+    --zt-ng-pad-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="zt-ng__shell">
+    <div class="zt-ng__card">
+      <div class="zt-ng__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="zt-ng__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="zt-ng__heading">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.body != blank -%}
+          <p class="zt-ng__body">{{ section.settings.body | escape }}</p>
+        {%- endif -%}
+
+        <div class="zt-ng__stats">
+          {%- if section.settings.stat_1_value != blank or section.settings.stat_1_text != blank -%}
+            <div class="zt-ng__stat">
+              {%- if section.settings.stat_1_value != blank -%}
+                <p class="zt-ng__stat-value">{{ section.settings.stat_1_value | escape }}</p>
+              {%- endif -%}
+              {%- if section.settings.stat_1_text != blank -%}
+                <p class="zt-ng__stat-text">{{ section.settings.stat_1_text | escape }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.stat_2_value != blank or section.settings.stat_2_text != blank -%}
+            <div class="zt-ng__stat">
+              {%- if section.settings.stat_2_value != blank -%}
+                <p class="zt-ng__stat-value">{{ section.settings.stat_2_value | escape }}</p>
+              {%- endif -%}
+              {%- if section.settings.stat_2_text != blank -%}
+                <p class="zt-ng__stat-text">{{ section.settings.stat_2_text | escape }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.cta_label != blank -%}
+          <a class="zt-ng__cta" href="{{ section.settings.cta_link | default: '#purchase' }}">
+            <span>{{ section.settings.cta_label | escape }}</span>
+            <svg class="zt-ng__cta-arrow" viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="zt-ng__media">
+        {%- if section.settings.image != blank -%}
+          {%- assign img_alt = section.settings.image.alt | default: section.settings.heading -%}
+          {{
+            section.settings.image
+            | image_url: width: 1400
+            | image_tag:
+              loading: 'lazy',
+              widths: '400, 700, 1000, 1400',
+              sizes: '(max-width: 989px) 100vw, 50vw',
+              class: 'zt-ng__img',
+              alt: img_alt
+          }}
+        {%- else -%}
+          <div class="zt-ng__placeholder">
+            {{ 'image' | placeholder_svg_tag: 'zt-ng__placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .zt-ng {
+    width: 100%;
+    background: var(--zt-ng-outer, #d5fbf6);
+    padding: var(--zt-ng-pad-top, 80px) 0 var(--zt-ng-pad-bottom, 40px);
+    font-family: var(--zt-font, Manrope, Arial, sans-serif);
+  }
+
+  .zt-ng *,
+  .zt-ng *::before,
+  .zt-ng *::after {
+    box-sizing: border-box;
+  }
+
+  .zt-ng__shell {
+    width: min(1400px, calc(100% - 48px));
+    margin: 0 auto;
+  }
+
+  .zt-ng__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    background: var(--zt-ng-card, #fcfbfe);
+    border-radius: 16px;
+    overflow: hidden;
+    min-height: 560px;
+  }
+
+  .zt-ng__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: clamp(40px, 5vw, 72px) clamp(28px, 4vw, 56px);
+  }
+
+  .zt-ng__eyebrow {
+    margin: 0 0 12px;
+    font-family: var(--zt-eyebrow-font, inherit);
+    font-size: var(--zt-eyebrow-size, 12px);
+    font-weight: var(--zt-eyebrow-weight, 800);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    color: var(--zt-ng-accent, #580d93);
+  }
+
+  .zt-ng__heading {
+    margin: 0 0 16px;
+    max-width: 18ch;
+    font-family: var(--zt-heading-font, inherit);
+    font-size: var(--zt-heading-size, 44px);
+    font-weight: var(--zt-heading-weight, 800);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--zt-ng-accent, #580d93);
+  }
+
+  .zt-ng__body {
+    margin: 0 0 28px;
+    max-width: 42ch;
+    font-family: var(--zt-body-font, inherit);
+    font-size: var(--zt-body-size, 18px);
+    font-weight: var(--zt-body-weight, 400);
+    line-height: 1.35;
+    color: var(--zt-ng-text, #1e1734);
+  }
+
+  .zt-ng__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 24px;
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: 28px;
+  }
+
+  .zt-ng__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .zt-ng__stat-value {
+    margin: 0 0 8px;
+    font-family: var(--zt-stat_value-font, inherit);
+    font-size: var(--zt-stat_value-size, 72px);
+    font-weight: var(--zt-stat_value-weight, 500);
+    line-height: 1;
+    color: var(--zt-ng-accent, #580d93);
+  }
+
+  .zt-ng__stat-text {
+    margin: 0;
+    max-width: 22ch;
+    font-family: var(--zt-stat_text-font, inherit);
+    font-size: var(--zt-stat_text-size, 16px);
+    font-weight: var(--zt-stat_text-weight, 700);
+    line-height: 1.5;
+    color: var(--zt-ng-text, #1e1734);
+  }
+
+  .zt-ng__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: min(100%, 320px);
+    min-height: 56px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    border: 2px solid var(--zt-ng-shadow, #1e1734);
+    background: var(--zt-ng-accent, #580d93);
+    color: #fcfcfc;
+    text-decoration: none;
+    box-shadow: 3px 3px 0 var(--zt-ng-shadow, #1e1734);
+    font-family: var(--zt-cta-font, inherit);
+    font-size: var(--zt-cta-size, 18px);
+    font-weight: var(--zt-cta-weight, 600);
+    line-height: 1.2;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .zt-ng__cta:hover {
+    transform: translateY(1px);
+    box-shadow: 2px 2px 0 var(--zt-ng-shadow, #1e1734);
+    color: #fcfcfc;
+  }
+
+  .zt-ng__cta-arrow {
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .zt-ng__media {
+    position: relative;
+    min-height: 100%;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .zt-ng__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .zt-ng__placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    opacity: 0.35;
+  }
+
+  .zt-ng__placeholder-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 989px) {
+    .zt-ng {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .zt-ng__shell {
+      width: 100%;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .zt-ng__card {
+      grid-template-columns: 1fr;
+      min-height: 0;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .zt-ng__copy {
+      order: 2;
+      padding: 36px 20px 28px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .zt-ng__media {
+      order: 1;
+      width: 100%;
+      min-height: 280px;
+      aspect-ratio: 4 / 3;
+      justify-self: center;
+    }
+
+    .zt-ng__img,
+    .zt-ng__placeholder {
+      width: 100%;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      object-position: center center;
+    }
+
+    .zt-ng__eyebrow {
+      font-size: var(--zt-eyebrow-size-m, 12px);
+    }
+
+    .zt-ng__heading {
+      font-size: var(--zt-heading-size-m, 30px);
+      max-width: none;
+    }
+
+    .zt-ng__body {
+      font-size: var(--zt-body-size-m, 14px);
+      line-height: 1.7;
+    }
+
+    .zt-ng__stats {
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .zt-ng__stat-value {
+      font-size: var(--zt-stat_value-size-m, 48px);
+    }
+
+    .zt-ng__stat-text {
+      font-size: var(--zt-stat_text-size-m, 13px);
+    }
+
+    .zt-ng__cta {
+      width: 100%;
+      min-width: 0;
+      font-size: var(--zt-cta-size-m, 14px);
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    if (window.ztNgCtaScroll) return;
+    window.ztNgCtaScroll = true;
+
+    document.addEventListener('click', function (event) {
+      var link = event.target.closest('.zt-ng__cta');
+      if (!link) return;
+
+      var href = link.getAttribute('href') || '';
+      if (href.charAt(0) !== '#') return;
+
+      var target = document.getElementById(href.slice(1));
+      if (!target) return;
+
+      event.preventDefault();
+
+      if (href === '#purchase' && typeof window.ztScrollToCacaoOffer === 'function') {
+        window.ztScrollToCacaoOffer({ frameKey: 'ztNgCtaFrame' });
+        return;
+      }
+
+      var start = window.scrollY || window.pageYOffset;
+      var margin = parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+      var end = target.getBoundingClientRect().top + start - margin;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (window.ztNgCtaFrame) {
+        window.cancelAnimationFrame(window.ztNgCtaFrame);
+        window.ztNgCtaFrame = 0;
+      }
+
+      if (reduce || Math.abs(end - start) < 2) {
+        window.scrollTo(0, end);
+        if (window.history.replaceState) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        return;
+      }
+
+      var duration = 1300;
+      var startTime = null;
+
+      function ease(t) {
+        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      }
+
+      function finish(cancelled) {
+        window.removeEventListener('wheel', cancel);
+        window.removeEventListener('touchstart', cancel);
+        window.ztNgCtaFrame = 0;
+        if (!cancelled && window.history.replaceState) {
+          window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+      }
+
+      function cancel() {
+        if (window.ztNgCtaFrame) window.cancelAnimationFrame(window.ztNgCtaFrame);
+        finish(true);
+      }
+
+      function step(now) {
+        if (startTime === null) startTime = now;
+        var progress = Math.min(1, (now - startTime) / duration);
+        window.scrollTo(0, start + (end - start) * ease(progress));
+        if (progress < 1) {
+          window.ztNgCtaFrame = window.requestAnimationFrame(step);
+        } else {
+          finish(false);
+        }
+      }
+
+      window.addEventListener('wheel', cancel, { passive: true });
+      window.addEventListener('touchstart', cancel, { passive: true });
+      window.ztNgCtaFrame = window.requestAnimationFrame(step);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Nutrition Gaps Cacao LP",
+  "tag": "section",
+  "class": "section-nutrition-gaps-cacao-lp",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "outer_bg",
+      "label": "Outer background",
+      "default": "#d5fbf6"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#fcfbfe"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#5e2f8f"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body text",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Button shadow / border",
+      "default": "#1e1734"
+    },
+    {
+      "type": "header",
+      "content": "Copy"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "MODERN LIVING ASKS A LOT"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Modern Routines Can Leave Nutrition Gaps."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Zeotein Cacao brings complete protein and purposeful ingredients together in one satisfying serving."
+    },
+    {
+      "type": "header",
+      "content": "Stats"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_value",
+      "label": "Stat 1 value",
+      "default": "23g"
+    },
+    {
+      "type": "textarea",
+      "id": "stat_1_text",
+      "label": "Stat 1 text",
+      "default": "of complete protein per serving to support strength, recovery, and everyday nutrition."
+    },
+    {
+      "type": "text",
+      "id": "stat_2_value",
+      "label": "Stat 2 value",
+      "default": "6"
+    },
+    {
+      "type": "textarea",
+      "id": "stat_2_text",
+      "label": "Stat 2 text",
+      "default": "functional ingredients combined in one serving, so your daily routine stays clear and simple."
+    },
+    {
+      "type": "header",
+      "content": "CTA & image"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Claim My 55% Off"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link",
+      "info": "Leave empty to scroll to the buy box. Add a link to send people somewhere else."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Lifestyle image"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "manrope",
+          "label": "Manrope (Figma)"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "poppins",
+          "label": "Theme body (Poppins alias)"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "header",
+      "content": "Eyebrow"
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "800"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_desktop",
+      "label": "Size - desktop",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_mobile",
+      "label": "Size - mobile",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Size - desktop",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Size - mobile",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "header",
+      "content": "Body"
+    },
+    {
+      "type": "select",
+      "id": "body_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "select",
+      "id": "body_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "body_size_desktop",
+      "label": "Size - desktop",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "body_size_mobile",
+      "label": "Size - mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Stat value"
+    },
+    {
+      "type": "select",
+      "id": "stat_value_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "select",
+      "id": "stat_value_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "stat_value_size_desktop",
+      "label": "Size - desktop",
+      "min": 32,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 65
+    },
+    {
+      "type": "range",
+      "id": "stat_value_size_mobile",
+      "label": "Size - mobile",
+      "min": 28,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Stat text"
+    },
+    {
+      "type": "select",
+      "id": "stat_text_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "stat_text_size_desktop",
+      "label": "Size - desktop",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "stat_text_size_mobile",
+      "label": "Size - mobile",
+      "min": 11,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "select",
+      "id": "cta_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        }
+      ],
+      "default": "manrope"
+    },
+    {
+      "type": "select",
+      "id": "cta_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "cta_size_desktop",
+      "label": "Size - desktop",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "cta_size_mobile",
+      "label": "Size - mobile",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nutrition Gaps Cacao LP",
+      "settings": {
+        "outer_bg": "#d5fbf6",
+        "card_bg": "#fcfbfe",
+        "accent_color": "#5e2f8f",
+        "text_color": "#1e1734",
+        "shadow_color": "#1e1734",
+        "eyebrow": "MODERN LIVING ASKS A LOT",
+        "heading": "Modern Routines Can Leave Nutrition Gaps.",
+        "body": "Zeotein Cacao brings complete protein and purposeful ingredients together in one satisfying serving.",
+        "stat_1_value": "23g",
+        "stat_1_text": "of complete protein per serving to support strength, recovery, and everyday nutrition.",
+        "stat_2_value": "6",
+        "stat_2_text": "functional ingredients combined in one serving, so your daily routine stays clear and simple.",
+        "cta_label": "Claim My 55% Off",
+        "cta_link": "",
+        "image": "shopify://shop_images/zeotein-cacao-protein-powder-ingredient-image-ezgif.com-png-to-webp-converter.webp",
+        "font_family": "manrope",
+        "eyebrow_weight": "800",
+        "eyebrow_size_desktop": 15,
+        "eyebrow_size_mobile": 14,
+        "heading_font": "manrope",
+        "heading_weight": "600",
+        "heading_size_desktop": 52,
+        "heading_size_mobile": 28,
+        "body_font": "manrope",
+        "body_weight": "400",
+        "body_size_desktop": 20,
+        "body_size_mobile": 15,
+        "stat_value_font": "manrope",
+        "stat_value_weight": "400",
+        "stat_value_size_desktop": 65,
+        "stat_value_size_mobile": 48,
+        "stat_text_weight": "500",
+        "stat_text_size_desktop": 16,
+        "stat_text_size_mobile": 14,
+        "cta_font": "manrope",
+        "cta_weight": "600",
+        "cta_size_desktop": 18,
+        "cta_size_mobile": 16,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  ]
+}
+{% endschema %}

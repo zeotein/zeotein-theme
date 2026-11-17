@@ -1,0 +1,299 @@
+{% doc %}
+  Reviews carousel, main inspectable block for Hero Banner Cacao LP.
+  Add as many Review card blocks as needed.
+{% enddoc %}
+
+{{ 'hbclp-reviews.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'hbclp-reviews.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign bid = 'hbclp-rev-' | append: block.id
+  assign layout = block.settings.layout | default: 'centered'
+  assign visible = block.settings.visible_cards | default: 3
+  assign visible_m = block.settings.visible_cards_mobile | default: 1
+  if visible < 1
+    assign visible = 3
+  endif
+  if visible_m < 1
+    assign visible_m = 1
+  endif
+-%}
+
+{%- capture zt_rev_fonts -%}
+  {%- render 'cacao-lp-fonts', id: bid, inline: true, font_family: block.settings.font_family, settings: block.settings, prefixes: 'quote,review_body,author' -%}
+{%- endcapture -%}
+
+<div
+  id="{{ bid }}"
+  class="hbclp-reviews hbclp-reviews--{{ layout }}"
+  data-hbclp-reviews
+  data-layout="{{ layout }}"
+  data-visible="{{ visible }}"
+  data-visible-m="{{ visible_m }}"
+  {{ block.shopify_attributes }}
+  style="
+    --hbclp-rev-quote: {{ block.settings.quote_color }};
+    --hbclp-rev-body: {{ block.settings.body_color }};
+    --hbclp-rev-name: {{ block.settings.name_color }};
+    --hbclp-rev-star: {{ block.settings.star_color }};
+    --hbclp-rev-card: {{ block.settings.card_bg }};
+    --hbclp-rev-shadow: {{ block.settings.shadow_color }};
+    --hbclp-rev-gap: {{ block.settings.gap_top }}px;
+    --hbclp-rev-visible: {{ visible }};
+    --hbclp-rev-visible-m: {{ visible_m }};
+    --hbclp-rev-visible-active: {{ visible }};
+    --hbclp-rev-gap-x: 22px;
+    --zt-quote-weight: {{ block.settings.quote_weight }};
+    --zt-quote-size: {{ block.settings.quote_size_desktop }}px;
+    --zt-quote-size-m: {{ block.settings.quote_size_mobile }}px;
+    --zt-review_body-weight: {{ block.settings.review_body_weight }};
+    --zt-review_body-size: {{ block.settings.review_body_size_desktop }}px;
+    --zt-review_body-size-m: {{ block.settings.review_body_size_mobile }}px;
+    --zt-author-weight: {{ block.settings.author_weight }};
+    --zt-author-size: {{ block.settings.author_size_desktop }}px;
+    --zt-author-size-m: {{ block.settings.author_size_mobile }}px;
+    {{ zt_rev_fonts }}
+  "
+>
+  <div class="hbclp-reviews__viewport" data-hbclp-viewport>
+    <div class="hbclp-reviews__track" data-hbclp-track>
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+
+  <div class="hbclp-reviews__nav" aria-label="Review carousel controls">
+    <button type="button" class="hbclp-reviews__btn" data-hbclp-prev aria-label="Previous review">
+      <svg viewBox="0 0 24 24" width="18" height="18" focusable="false" aria-hidden="true">
+        <path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/>
+      </svg>
+    </button>
+    <div class="hbclp-reviews__dots" data-hbclp-dots></div>
+    <button type="button" class="hbclp-reviews__btn" data-hbclp-next aria-label="Next review">
+      <svg viewBox="0 0 24 24" width="18" height="18" focusable="false" aria-hidden="true">
+        <path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Reviews carousel",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "review-card-cacao-lp"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Carousel alignment",
+      "options": [
+        {
+          "value": "centered",
+          "label": "Centered (peek sides)"
+        },
+        {
+          "value": "left",
+          "label": "Left aligned"
+        }
+      ],
+      "default": "centered",
+      "info": "Centered keeps the active card in the middle with faded peeks on the sides."
+    },
+    {
+      "type": "range",
+      "id": "visible_cards",
+      "label": "Visible cards (desktop)",
+      "min": 1,
+      "max": 7,
+      "step": 1,
+      "default": 3,
+      "info": "How many cards fit across the carousel at once. Example: 3 = center active + one peek on each side. 5 = center + two peeks on each side."
+    },
+    {
+      "type": "range",
+      "id": "visible_cards_mobile",
+      "label": "Visible cards (mobile)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "gap_top",
+      "label": "Space above carousel",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote color",
+      "default": "#008159"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body color",
+      "default": "#1C1630"
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Name color",
+      "default": "#1C1630"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#E0A800"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Card shadow",
+      "default": "#1A1430"
+    },
+    {
+      "type": "header",
+      "content": "Typography - quote"
+    },
+        {
+      "type": "select",
+      "id": "quote_font",
+      "label": "Font name",
+      "options": [
+        { "value": "inherit", "label": "Same as section" },
+        { "value": "manrope", "label": "Manrope" },
+        { "value": "theme_heading", "label": "Theme heading" },
+        { "value": "theme_body", "label": "Theme body" },
+        { "value": "system", "label": "System sans" },
+        { "value": "custom", "label": "Custom font" }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "quote_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.quote_font == 'custom' }}"
+    },
+{ "type": "select", "id": "quote_weight", "label": "Font weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }, { "value": "800", "label": "800" }], "default": "800" },
+    { "type": "range", "id": "quote_size_desktop", "label": "Size - desktop", "min": 14, "max": 40, "step": 1, "unit": "px", "default": 28 },
+    { "type": "range", "id": "quote_size_mobile", "label": "Size - mobile", "min": 12, "max": 28, "step": 1, "unit": "px", "default": 16 },
+    {
+      "type": "header",
+      "content": "Typography - body"
+    },
+        {
+      "type": "select",
+      "id": "review_body_font",
+      "label": "Font name",
+      "options": [
+        { "value": "inherit", "label": "Same as section" },
+        { "value": "manrope", "label": "Manrope" },
+        { "value": "theme_heading", "label": "Theme heading" },
+        { "value": "theme_body", "label": "Theme body" },
+        { "value": "system", "label": "System sans" },
+        { "value": "custom", "label": "Custom font" }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "review_body_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.review_body_font == 'custom' }}"
+    },
+{ "type": "select", "id": "review_body_weight", "label": "Font weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }, { "value": "800", "label": "800" }], "default": "500" },
+    { "type": "range", "id": "review_body_size_desktop", "label": "Size - desktop", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "review_body_size_mobile", "label": "Size - mobile", "min": 12, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    {
+      "type": "header",
+      "content": "Typography - author"
+    },
+        {
+      "type": "select",
+      "id": "author_font",
+      "label": "Font name",
+      "options": [
+        { "value": "inherit", "label": "Same as section" },
+        { "value": "manrope", "label": "Manrope" },
+        { "value": "theme_heading", "label": "Theme heading" },
+        { "value": "theme_body", "label": "Theme body" },
+        { "value": "system", "label": "System sans" },
+        { "value": "custom", "label": "Custom font" }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "author_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.author_font == 'custom' }}"
+    },
+{ "type": "select", "id": "author_weight", "label": "Font weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }, { "value": "800", "label": "800" }], "default": "800" },
+    { "type": "range", "id": "author_size_desktop", "label": "Size - desktop", "min": 10, "max": 18, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "author_size_mobile", "label": "Size - mobile", "min": 10, "max": 16, "step": 1, "unit": "px", "default": 12 }
+  ],
+  "presets": [
+    {
+      "name": "Reviews carousel",
+      "blocks": [
+        {
+          "type": "review-card-cacao-lp",
+          "settings": {
+            "quote": "A staple in my house",
+            "body": "It tastes great and the ingredients are clean. It has genuinely become part of my morning routine - the Cacao flavor is rich without being too sweet and mixes smoothly with oat milk.",
+            "author": "Melissa M.",
+            "stars": 5
+          }
+        },
+        {
+          "type": "review-card-cacao-lp",
+          "settings": {
+            "quote": "Just what I wanted",
+            "body": "I was looking for a clean protein that did not taste chalky. Zeotein Cacao is smooth, filling, and easy to stick with every morning.",
+            "author": "Traci P.",
+            "stars": 5
+          }
+        },
+        {
+          "type": "review-card-cacao-lp",
+          "settings": {
+            "quote": "Simple to start",
+            "body": "Instead of stacking powders, collagen, and MCT, now it is all in one serving.",
+            "author": "Jordan R.",
+            "stars": 5
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

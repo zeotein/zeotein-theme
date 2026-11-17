@@ -1,0 +1,305 @@
+{% doc %}
+  Column titles, comparison labels, accent values, and the footnote for Us vs Them Cacao LP.
+  Static typography block. Keeps each schema within Theme Check's 40-setting limit.
+{% enddoc %}
+
+{%- liquid
+  assign sid = 'zt-uvt-' | append: section.id
+  assign base = section.blocks | where: 'type', 'cacao-type-uvt' | first
+  assign ff = 'manrope'
+  assign font_custom = ''
+  if base != blank
+    assign ff = base.settings.font_family | default: 'manrope'
+    assign font_custom = base.settings.custom_font
+  endif
+-%}
+{% render 'cacao-lp-fonts',
+  id: sid,
+  font_family: ff,
+  font_custom: font_custom,
+  emit_root: false,
+  settings: block.settings,
+  prefixes: 'comp_label,accent_value,note'
+%}
+
+{% schema %}
+{
+  "name": "Typography, continued",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Comp Label"
+    },
+    {
+      "type": "select",
+      "id": "comp_label_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "comp_label_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.comp_label_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "comp_label_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "comp_label_size_desktop",
+      "label": "Size - desktop",
+      "min": 8,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "comp_label_size_mobile",
+      "label": "Size - mobile",
+      "min": 8,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 9
+    },
+    {
+      "type": "header",
+      "content": "Accent Value"
+    },
+    {
+      "type": "select",
+      "id": "accent_value_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "accent_value_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.accent_value_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "accent_value_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "accent_value_size_desktop",
+      "label": "Size - desktop",
+      "min": 8,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "accent_value_size_mobile",
+      "label": "Size - mobile",
+      "min": 8,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Note"
+    },
+    {
+      "type": "select",
+      "id": "note_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "note_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.note_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "note_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "note_size_desktop",
+      "label": "Size - desktop",
+      "min": 8,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "note_size_mobile",
+      "label": "Size - mobile",
+      "min": 8,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1126 @@
+{% liquid
+  assign cacao = block.settings.cacao_product
+  assign vegan = block.settings.vegan_product
+
+  if cacao == blank
+    assign cacao = all_products['zeotein-cacao-sticks-30']
+  endif
+
+  if vegan == blank
+    assign vegan = all_products['zeotein-vegan-sticks-30']
+  endif
+
+  assign eyebrow = block.settings.eyebrow | default: 'FINAL STEP'
+  assign heading = block.settings.heading | default: 'Find Your Zeotein.'
+  assign intro = block.settings.intro | default: 'Three ways to start. Choose the one that fits you.'
+
+  assign cacao_button = block.settings.cacao_button | default: 'SHOP CACAO →'
+  assign vegan_button = block.settings.vegan_button | default: 'SHOP VEGAN →'
+
+  assign bottom_text = block.settings.bottom_text | default: '30-Day Money-Back Guarantee on Protein Blends'
+%}
+
+
+<section
+  id="zeotein-final-product-cta-{{ block.id }}"
+  class="zt-final-choice"
+>
+
+  <div class="zt-final-choice__container">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="zt-final-choice__header">
+
+      <p class="zt-final-choice__eyebrow">
+        {{ eyebrow }}
+      </p>
+
+      <h2 class="zt-final-choice__heading">
+        {{ heading }}
+      </h2>
+
+      <p class="zt-final-choice__intro">
+        {{ intro }}
+      </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         PRODUCT CHOICES
+         ===================================================== -->
+
+    <div class="zt-final-choice__grid">
+
+
+      <!-- ===================================================
+           CACAO
+           =================================================== -->
+
+      <a
+        class="zt-final-card zt-final-card--cacao"
+        href="/collections/zeotein"
+        aria-label="Shop Zeotein Cacao"
+      >
+
+        <div class="zt-final-card__visual">
+
+          {% if cacao.featured_image %}
+
+            {{
+              cacao.featured_image
+              | image_url: width: 1000
+              | image_tag:
+                loading: 'lazy',
+                widths: '500, 700, 900, 1000',
+                sizes: '(min-width: 750px) 50vw, 100vw',
+                class: 'zt-final-card__image',
+                alt: 'Zeotein Cacao'
+            }}
+
+          {% endif %}
+
+          <span class="zt-final-card__tag">
+            CACAO
+          </span>
+
+        </div>
+
+
+        <div class="zt-final-card__body">
+
+          <div class="zt-final-card__info">
+
+            <p class="zt-final-card__label">
+              ANIMAL-BASED PROTEIN
+            </p>
+
+            <h3 class="zt-final-card__title">
+              Cacao
+            </h3>
+
+            <p class="zt-final-card__description">
+              Bone broth + collagen protein
+            </p>
+
+            <p class="zt-final-card__detail">
+              23g protein · Cacao formula
+            </p>
+
+          </div>
+
+
+          <span class="zt-final-card__button">
+            <span>
+              {{ cacao_button }}
+            </span>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <!-- ===================================================
+           VEGAN
+           =================================================== -->
+
+      <a
+        class="zt-final-card zt-final-card--vegan"
+        href="/collections/zeotein-vegan-1"
+        aria-label="Shop Zeotein Vegan"
+      >
+
+        <div class="zt-final-card__visual">
+
+          {% if vegan.featured_image %}
+
+            {{
+              vegan.featured_image
+              | image_url: width: 1000
+              | image_tag:
+                loading: 'lazy',
+                widths: '500, 700, 900, 1000',
+                sizes: '(min-width: 750px) 50vw, 100vw',
+                class: 'zt-final-card__image',
+                alt: 'Zeotein Vegan'
+            }}
+
+          {% endif %}
+
+          <span class="zt-final-card__tag">
+            VEGAN
+          </span>
+
+        </div>
+
+
+        <div class="zt-final-card__body">
+
+          <div class="zt-final-card__info">
+
+            <p class="zt-final-card__label">
+              PLANT-BASED PROTEIN
+            </p>
+
+            <h3 class="zt-final-card__title">
+              Vegan
+            </h3>
+
+            <p class="zt-final-card__description">
+              Pumpkin seed + hemp protein
+            </p>
+
+            <p class="zt-final-card__detail">
+              20g plant-based protein · Vegan formula
+            </p>
+
+          </div>
+
+
+          <span class="zt-final-card__button">
+            <span>
+              {{ vegan_button }}
+            </span>
+          </span>
+
+        </div>
+
+      </a>
+
+      <!-- ===================================================
+           SINGLE INGREDIENTS (Nov 2026)
+           =================================================== -->
+
+      <a
+        class="zt-final-card zt-final-card--singles"
+        href="/collections/single-ingredient-supplements"
+        aria-label="Shop Zeotein Single Ingredients"
+      >
+        <div class="zt-final-card__visual">
+          <img class="zt-final-card__image" src="{{ 'zt-home-singles.jpg' | asset_url }}" alt="Zeotein single-ingredient pouches on a wooden table" width="1024" height="1024" loading="lazy">
+          <span class="zt-final-card__tag">SINGLES</span>
+        </div>
+        <div class="zt-final-card__body">
+          <div class="zt-final-card__info">
+            <p class="zt-final-card__label">ONE INGREDIENT AT A TIME</p>
+            <h3 class="zt-final-card__title">Single Ingredients</h3>
+            <p class="zt-final-card__description">Collagen, bone broth, hemp, MCT, sea moss and more</p>
+            <p class="zt-final-card__detail">9 ingredients to choose from</p>
+          </div>
+          <span class="zt-final-card__button"><span>{{ block.settings.singles_button | default: 'SHOP SINGLES →' }}</span></span>
+        </div>
+      </a>
+
+
+
+    </div>
+
+
+    <!-- =====================================================
+         TRUST LINE
+         ===================================================== -->
+
+    <div class="zt-final-choice__trust">
+
+      <span class="zt-final-choice__trust-line"></span>
+
+      <span class="zt-final-choice__trust-text">
+        {{ bottom_text }}
+      </span>
+
+      <span class="zt-final-choice__trust-line"></span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<style>
+
+  /* =========================================================
+     BASE
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }} {
+
+    width: 100%;
+
+    background: #f7f3ed;
+
+    color: #35264c;
+
+    padding: 76px 24px 72px;
+
+    overflow: hidden;
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }} *,
+  #zeotein-final-product-cta-{{ block.id }} *::before,
+  #zeotein-final-product-cta-{{ block.id }} *::after {
+
+    box-sizing: border-box;
+  }
+
+
+  /* =========================================================
+     CONTAINER
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-choice__container {
+
+    width: 100%;
+
+    max-width: 1080px;
+
+    margin: 0 auto;
+  }
+
+
+  /* =========================================================
+     HEADER
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-choice__header {
+
+    max-width: 650px;
+
+    margin: 0 auto 40px;
+
+    text-align: center;
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-choice__eyebrow {
+
+    margin: 0 0 11px;
+
+    color: #67459a;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .2em;
+
+    line-height: 1.3;
+
+    text-transform: uppercase;
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-choice__heading {
+
+    margin: 0;
+
+    color: #35264c;
+
+    font-size: clamp(38px, 5vw, 56px);
+
+    font-weight: 500;
+
+    letter-spacing: -.045em;
+
+    line-height: 1;
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-choice__intro {
+
+    max-width: 500px;
+
+    margin: 15px auto 0;
+
+    color: #71697b;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+  }
+
+
+  /* =========================================================
+     PRODUCT GRID
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-choice__grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+  }
+
+
+  /* =========================================================
+     PRODUCT CARD
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    color: #35264c;
+
+    text-decoration: none;
+
+    border: 1px solid rgba(53, 38, 76, .13);
+
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    box-shadow:
+      0 8px 26px rgba(53, 38, 76, .05);
+
+    transition:
+      transform .3s ease,
+      box-shadow .3s ease,
+      border-color .3s ease;
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card:hover {
+
+    transform: translateY(-4px);
+
+    border-color: rgba(103, 69, 154, .3);
+
+    box-shadow:
+      0 16px 38px rgba(53, 38, 76, .1);
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card:focus-visible {
+
+    outline: 2px solid #67459a;
+
+    outline-offset: 3px;
+  }
+
+
+  /* =========================================================
+     IMAGE
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card__visual {
+
+    position: relative;
+
+    height: 280px;
+
+    overflow: hidden;
+
+    background: #eee8f7;
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card--vegan .zt-final-card__visual {
+
+    background: #eef3f0;
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card__image {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform .45s ease;
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card:hover
+  .zt-final-card__image {
+
+    transform: scale(1.025);
+  }
+
+
+  /* =========================================================
+     IMAGE TAG
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card__tag {
+
+    position: absolute;
+
+    top: 15px;
+
+    left: 15px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 29px;
+
+    padding: 0 12px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.94);
+
+    color: #35264c;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: .16em;
+
+    line-height: 1;
+
+    text-transform: uppercase;
+
+    box-shadow:
+      0 3px 10px rgba(0,0,0,.06);
+  }
+
+
+  /* =========================================================
+     CARD BODY
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card__body {
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+    padding: 22px 25px 24px;
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card__info {
+
+    flex: 1;
+  }
+
+
+  /* =========================================================
+     PROTEIN TYPE
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card__label {
+
+    margin: 0 0 5px;
+
+    color: #67459a;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: .15em;
+
+    line-height: 1.4;
+
+    text-transform: uppercase;
+  }
+
+
+  /* =========================================================
+     TITLE
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card__title {
+
+    margin: 0;
+
+    color: #35264c;
+
+    font-size: 25px;
+
+    font-weight: 500;
+
+    letter-spacing: -.025em;
+
+    line-height: 1.15;
+  }
+
+
+  /* =========================================================
+     PROTEIN SOURCES
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card__description {
+
+    max-width: 360px;
+
+    margin: 7px 0 0;
+
+    color: #71697b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+  }
+
+
+  /* =========================================================
+     PROOF
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card__detail {
+
+    margin: 11px 0 0;
+
+    color: #35264c;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    line-height: 1.5;
+  }
+
+
+  /* =========================================================
+     PRODUCT CTA BUTTON
+     
+     NORMAL:
+     Background: #6F4AA8
+     Text: #FFFFFF
+
+     HOVER:
+     Background: #FFFFFF
+     Text: #6F4AA8
+     Border: #FFFFFF
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card__button {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+
+    min-height: 45px;
+
+    margin-top: 20px;
+
+    padding: 0 18px;
+
+    border: 1px solid #6F4AA8;
+
+    border-radius: 999px;
+
+    background: #6F4AA8;
+
+    color: #FFFFFF !important;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .13em;
+
+    line-height: 1;
+
+    text-align: center;
+
+    text-transform: uppercase;
+
+    transition:
+      background-color .25s ease,
+      color .25s ease,
+      border-color .25s ease;
+  }
+
+
+  /* Both Cacao + Vegan use the same purple CTA */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card--cacao
+  .zt-final-card__button {
+
+    background: #6F4AA8;
+
+    color: #FFFFFF !important;
+
+    border-color: #6F4AA8;
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card--vegan
+  .zt-final-card__button {
+
+    background: #6F4AA8;
+
+    color: #FFFFFF !important;
+
+    border-color: #6F4AA8;
+  }
+
+
+  /* =========================================================
+     CTA HOVER
+     White background
+     Purple text
+     White border
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card:hover
+  .zt-final-card__button {
+
+    background: #FFFFFF;
+
+    color: #6F4AA8 !important;
+
+    border-color: #FFFFFF;
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-card__button span {
+
+    display: inline-block;
+
+    color: inherit !important;
+
+    white-space: nowrap;
+
+    transition: color .25s ease;
+  }
+
+
+  /* =========================================================
+     TRUST LINE
+     ========================================================= */
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-choice__trust {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 29px;
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-choice__trust-line {
+
+    width: 42px;
+
+    height: 1px;
+
+    background: rgba(53,38,76,.15);
+  }
+
+
+  #zeotein-final-product-cta-{{ block.id }}
+  .zt-final-choice__trust-text {
+
+    color: #71697b;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: .1em;
+
+    line-height: 1.4;
+
+    text-align: center;
+
+    text-transform: uppercase;
+  }
+
+
+  /* =========================================================
+     MOBILE
+     ========================================================= */
+
+  @media screen and (max-width: 749px) {
+
+    #zeotein-final-product-cta-{{ block.id }} {
+
+      padding: 48px 14px 48px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-choice__header {
+
+      margin-bottom: 23px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-choice__eyebrow {
+
+      margin-bottom: 8px;
+
+      font-size: 7px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-choice__heading {
+
+      font-size: 36px;
+
+      line-height: 1;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-choice__intro {
+
+      max-width: 330px;
+
+      margin-top: 11px;
+
+      font-size: 11px;
+
+      line-height: 1.45;
+    }
+
+
+    /* ONE COLUMN */
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-choice__grid {
+
+      grid-template-columns: 1fr;
+
+      gap: 13px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card {
+
+      border-radius: 16px;
+    }
+
+
+    /* IMAGE */
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card__visual {
+
+      height: 225px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card__tag {
+
+      top: 11px;
+
+      left: 11px;
+
+      min-height: 26px;
+
+      padding: 0 10px;
+
+      font-size: 7px;
+    }
+
+
+    /* BODY */
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card__body {
+
+      padding: 17px 16px 17px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card__label {
+
+      margin-bottom: 4px;
+
+      font-size: 7px;
+
+      letter-spacing: .13em;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card__title {
+
+      font-size: 22px;
+
+      line-height: 1.1;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card__description {
+
+      margin-top: 6px;
+
+      font-size: 11px;
+
+      line-height: 1.4;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card__detail {
+
+      margin-top: 8px;
+
+      font-size: 9px;
+
+      line-height: 1.4;
+    }
+
+
+    /* BUTTON */
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card__button {
+
+      min-height: 42px;
+
+      margin-top: 15px;
+
+      padding: 0 15px;
+
+      font-size: 8px;
+
+      letter-spacing: .11em;
+
+      background: #6F4AA8;
+
+      color: #FFFFFF !important;
+
+      border-color: #6F4AA8;
+    }
+
+
+    /* MOBILE HOVER */
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card:hover
+    .zt-final-card__button {
+
+      background: #FFFFFF;
+
+      color: #6F4AA8 !important;
+
+      border-color: #FFFFFF;
+    }
+
+
+    /* TRUST */
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-choice__trust {
+
+      gap: 8px;
+
+      margin-top: 20px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-choice__trust-line {
+
+      width: 20px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-choice__trust-text {
+
+      font-size: 7px;
+
+      letter-spacing: .08em;
+    }
+
+  }
+
+
+  /* =========================================================
+     SMALL MOBILE
+     ========================================================= */
+
+  @media screen and (max-width: 390px) {
+
+    #zeotein-final-product-cta-{{ block.id }} {
+
+      padding: 44px 12px 44px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-choice__heading {
+
+      font-size: 34px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-choice__grid {
+
+      gap: 11px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card__visual {
+
+      height: 215px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card__body {
+
+      padding: 16px 14px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card__title {
+
+      font-size: 21px;
+    }
+
+
+    #zeotein-final-product-cta-{{ block.id }}
+    .zt-final-card__description {
+
+      font-size: 10.5px;
+    }
+
+  }
+
+
+  /* NOV 2026: THREE CARDS */
+  #zeotein-final-product-cta-{{ block.id }} .zt-final-choice__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media screen and (max-width: 989px) {
+    #zeotein-final-product-cta-{{ block.id }} .zt-final-choice__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "Final Product CTA",
+  "tag": "section",
+  "class": "section",
+
+  "settings": [
+
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "FINAL STEP"
+    },
+
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find Your Zeotein."
+    },
+
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Supporting Copy",
+      "default": "Two formulas. One simple daily routine. Choose the one that fits you."
+    },
+
+    {
+      "type": "product",
+      "id": "cacao_product",
+      "label": "Cacao Product"
+    },
+
+    {
+      "type": "product",
+      "id": "vegan_product",
+      "label": "Vegan Product"
+    },
+
+    {
+      "type": "text",
+      "id": "cacao_button",
+      "label": "Cacao Button",
+      "default": "SHOP CACAO →"
+    },
+
+    {
+      "type": "text",
+      "id": "vegan_button",
+      "label": "Vegan Button",
+      "default": "SHOP VEGAN →"
+    },
+
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom Supporting Text",
+      "default": "30-Day Guarantee · Simple daily format"
+    }
+
+  ],
+
+  "presets": [
+    {
+      "name": "Final Product CTA"
+    }
+  ]
+}
+{% endschema %}

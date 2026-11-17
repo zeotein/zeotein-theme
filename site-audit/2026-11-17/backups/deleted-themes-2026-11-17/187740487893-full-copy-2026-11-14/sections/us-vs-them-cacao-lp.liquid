@@ -1,0 +1,618 @@
+{%- liquid
+  assign sid = 'zt-uvt-' | append: section.id
+-%}
+
+{% content_for 'block', type: 'cacao-type-uvt', id: 'type-uvt' %}
+{% content_for 'block', type: 'cacao-type-uvt-2', id: 'type-uvt-2' %}
+
+{{ 'us-vs-them-cacao-lp.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="{{ sid }}"
+  class="zt-uvt"
+  {{ section.shopify_attributes }}
+  style="
+    --zt-uvt-bg: {{ section.settings.bg_color }};
+    --zt-uvt-heading: {{ section.settings.heading_color }};
+    --zt-uvt-body: {{ section.settings.body_color }};
+    --zt-uvt-ink: {{ section.settings.ink_color }};
+    --zt-uvt-border: {{ section.settings.border_color }};
+    --zt-uvt-featured: {{ section.settings.featured_bg }};
+    --zt-uvt-featured-text: {{ section.settings.featured_text_color }};
+    --zt-uvt-accent: {{ section.settings.accent_color }};
+    --zt-uvt-check-bg: {{ section.settings.check_bg }};
+    --zt-uvt-check-icon: {{ section.settings.check_icon_color }};
+    --zt-uvt-cross-bg: {{ section.settings.cross_bg }};
+    --zt-uvt-cross-icon: {{ section.settings.cross_icon_color }};
+    --zt-uvt-note: {{ section.settings.note_color }};
+    --zt-uvt-max-width: {{ section.settings.content_width | default: 1180 }}px;
+    --zt-uvt-pad-top: {{ section.settings.padding_top }}px;
+    --zt-uvt-pad-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="zt-uvt2">
+    <div class="zt-uvt2__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="zt-uvt2__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="zt-uvt2__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <p class="zt-uvt2__body">{{ section.settings.body | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- assign uvt_rows = section.settings.compare_rows | newline_to_br | split: '<br />' -%}
+    <div class="zt-uvt2__wrap">
+      <table class="zt-uvt2__table">
+        <thead>
+          <tr>
+            <th scope="col"><span class="visually-hidden">Feature</span></th>
+            <th scope="col">{{ section.settings.comp1_label | escape }}</th>
+            <th scope="col" class="zt-uvt2__us">{{ section.settings.featured_title | escape }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for row in uvt_rows -%}
+            {%- assign row_clean = row | strip -%}
+            {%- if row_clean == blank -%}{% continue %}{%- endif -%}
+            {%- assign cells = row_clean | split: '|' -%}
+            <tr>
+              <th scope="row">{{ cells[0] | strip | escape }}</th>
+              <td>{{ cells[1] | strip | escape }}</td>
+              <td class="zt-uvt2__us">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden="true" focusable="false"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>{{ cells[2] | strip | escape }}</span>
+              </td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+
+    {%- if section.settings.footnote != blank -%}
+      <p class="zt-uvt__note">{{ section.settings.footnote | escape }}</p>
+    {%- endif -%}
+  </div>
+
+  <style>
+    #{{ sid }} .zt-uvt2 {
+      width: min(900px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+    #{{ sid }} .zt-uvt2__copy {
+      margin: 0 0 28px;
+      text-align: left;
+    }
+    #{{ sid }} .zt-uvt2__eyebrow {
+      margin: 0 0 10px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #137a80;
+    }
+    #{{ sid }} .zt-uvt2__heading {
+      margin: 0 0 12px;
+      font-family: var(--zt-heading-font, inherit);
+      font-size: var(--zt-heading-size, 44px);
+      font-weight: var(--zt-heading-weight, 700);
+      line-height: 1.15;
+      color: var(--zt-uvt-ink, #1e1734);
+    }
+    #{{ sid }} .zt-uvt2__body {
+      margin: 0;
+      max-width: 620px;
+      font-size: var(--zt-body-size, 18px);
+      line-height: 1.5;
+      color: var(--zt-uvt-body, #5b5b71);
+    }
+    #{{ sid }} .zt-uvt2__wrap {
+      width: 100%;
+    }
+    #{{ sid }} .zt-uvt2__table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 16px;
+      line-height: 1.45;
+      color: var(--zt-uvt-ink, #1e1734);
+    }
+    #{{ sid }} .zt-uvt2__table th,
+    #{{ sid }} .zt-uvt2__table td {
+      padding: 16px 14px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid #e3ddef;
+    }
+    #{{ sid }} .zt-uvt2__table thead th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5d5670;
+      border-bottom: 1px solid #d6c5e8;
+    }
+    #{{ sid }} .zt-uvt2__table tbody th {
+      font-weight: 500;
+      color: #4a4258;
+    }
+    #{{ sid }} .zt-uvt2__table td {
+      color: #6b6480;
+    }
+    #{{ sid }} .zt-uvt2__table .zt-uvt2__us {
+      background: #f1eaf8;
+      color: var(--zt-uvt-ink, #1e1734);
+      font-weight: 800;
+    }
+    #{{ sid }} .zt-uvt2__table thead .zt-uvt2__us {
+      color: #5F2D90;
+    }
+    #{{ sid }} .zt-uvt2__table td.zt-uvt2__us svg {
+      display: inline-block;
+      vertical-align: -1px;
+      margin-right: 4px;
+      color: #5F2D90;
+    }
+    @media screen and (max-width: 749px) {
+      #{{ sid }} .zt-uvt2__heading {
+        font-size: var(--zt-heading-size-m, 30px);
+      }
+      #{{ sid }} .zt-uvt2__body {
+        font-size: 15px;
+      }
+      #{{ sid }} .zt-uvt2__table {
+        font-size: 14px;
+      }
+      #{{ sid }} .zt-uvt2__table th,
+      #{{ sid }} .zt-uvt2__table td {
+        padding: 12px 8px;
+      }
+      #{{ sid }} .zt-uvt2__table thead th {
+        font-size: 11px;
+      }
+    }
+  </style></section>
+
+{% schema %}
+{
+  "name": "Us vs Them Cacao LP",
+  "tag": "section",
+  "class": "section-us-vs-them-cacao-lp",
+  "max_blocks": 16,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "HOW IT COMPARES"
+    },
+    {
+      "type": "textarea",
+      "id": "compare_rows",
+      "label": "Comparison rows",
+      "info": "One row per line as Label|Typical protein powder|Zeotein Cacao",
+      "default": "Protein source|Usually whey|Grass-fed beef bone broth\nCollagen|Bought separately|14g in every serving\nHealthy fat|Bought separately|Organic MCT oil powder\nSugar|Varies|Zero\nGluten and dairy free|Varies|Both\nIngredient list|Varies|6, every one named"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#f7f7f9"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#580d93"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text",
+      "default": "#5b5b71"
+    },
+    {
+      "type": "color",
+      "id": "ink_color",
+      "label": "Table text",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Table border",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "featured_bg",
+      "label": "Featured column background",
+      "default": "#580d93"
+    },
+    {
+      "type": "color",
+      "id": "featured_text_color",
+      "label": "Featured column text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (price / highlights)",
+      "default": "#00c9b8"
+    },
+    {
+      "type": "color",
+      "id": "check_bg",
+      "label": "Check mark background",
+      "default": "#00c9b8"
+    },
+    {
+      "type": "color",
+      "id": "check_icon_color",
+      "label": "Check mark icon",
+      "default": "#0b2f4a"
+    },
+    {
+      "type": "color",
+      "id": "cross_bg",
+      "label": "Cross mark background",
+      "default": "#1e1734"
+    },
+    {
+      "type": "color",
+      "id": "cross_icon_color",
+      "label": "Cross mark icon",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "note_color",
+      "label": "Footnote",
+      "default": "#9a9aab"
+    },
+    {
+      "type": "header",
+      "content": "Copy"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Us vs. Them"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Not overhyped or overcomplicated. Just complete, purposeful nutrition made simple enough for every day."
+    },
+    {
+      "type": "textarea",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "*Zeotein price reflects the $76.99 first-month offer across 30 servings. Other prices vary by brand and serving size."
+    },
+    {
+      "type": "header",
+      "content": "Featured column"
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_logo",
+      "label": "Logo image (optional)"
+    },
+    {
+      "type": "text",
+      "id": "featured_title",
+      "label": "Title",
+      "default": "ZEOTEIN"
+    },
+    {
+      "type": "text",
+      "id": "featured_subtitle",
+      "label": "Subtitle",
+      "default": "CACAO BLEND"
+    },
+    {
+      "type": "header",
+      "content": "Competitor 1"
+    },
+    {
+      "type": "text",
+      "id": "comp1_label",
+      "label": "Label",
+      "default": "basic protein powder"
+    },
+    {
+      "type": "select",
+      "id": "comp1_icon_preset",
+      "label": "Icon preset",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "dumbbell",
+          "label": "Dumbbell"
+        },
+        {
+          "value": "boxes",
+          "label": "Stacked boxes"
+        }
+      ],
+      "default": "dumbbell"
+    },
+    {
+      "type": "image_picker",
+      "id": "comp1_icon",
+      "label": "Custom icon (overrides preset)"
+    },
+    {
+      "type": "header",
+      "content": "Competitor 2"
+    },
+    {
+      "type": "text",
+      "id": "comp2_label",
+      "label": "Label",
+      "default": "multiple supplement tubs"
+    },
+    {
+      "type": "select",
+      "id": "comp2_icon_preset",
+      "label": "Icon preset",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "dumbbell",
+          "label": "Dumbbell"
+        },
+        {
+          "value": "boxes",
+          "label": "Stacked boxes"
+        }
+      ],
+      "default": "boxes"
+    },
+    {
+      "type": "image_picker",
+      "id": "comp2_icon",
+      "label": "Custom icon (overrides preset)"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 960,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 1180
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cacao-type-uvt"
+    },
+    {
+      "type": "cacao-type-uvt-2"
+    },
+    {
+      "type": "row"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Us vs Them Cacao LP",
+      "category": "Cacao LP",
+      "settings": {
+        "bg_color": "#f7f7f9",
+        "heading_color": "#580d93",
+        "body_color": "#5b5b71",
+        "ink_color": "#1e1734",
+        "border_color": "#1e1734",
+        "featured_bg": "#580d93",
+        "featured_text_color": "#ffffff",
+        "accent_color": "#00c9b8",
+        "check_bg": "#00c9b8",
+        "check_icon_color": "#0b2f4a",
+        "cross_bg": "#1e1734",
+        "cross_icon_color": "#ffffff",
+        "note_color": "#9a9aab",
+        "heading": "Us vs. Them",
+        "body": "Not overhyped or overcomplicated. Just complete, purposeful nutrition made simple enough for every day.",
+        "footnote": "*Zeotein price reflects the $76.99 first-month offer across 30 servings. Other prices vary by brand and serving size.",
+        "featured_title": "ZEOTEIN",
+        "featured_subtitle": "CACAO BLEND",
+        "comp1_label": "basic protein powder",
+        "comp1_icon_preset": "dumbbell",
+        "comp1_icon": "shopify://shop_images/Dumbel_500px_8.4_kb.webp",
+        "comp2_label": "multiple supplement tubs",
+        "comp2_icon_preset": "boxes",
+        "comp2_icon": "shopify://shop_images/Box_7.71kb.webp",
+        "content_width": 1180,
+        "padding_top": 72,
+        "padding_bottom": 64
+      },
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "label": "Cost Per Serving",
+            "featured_type": "text",
+            "featured_text": "$2.57",
+            "featured_accent": true,
+            "comp1_type": "text",
+            "comp1_text": "$1.50–$3+",
+            "comp2_type": "text",
+            "comp2_text": "Adds up"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Complete Protein",
+            "featured_type": "check",
+            "featured_text": "$2.57",
+            "featured_accent": false,
+            "comp1_type": "text",
+            "comp1_text": "Varies",
+            "comp2_type": "text",
+            "comp2_text": "Separate"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Collagen Included",
+            "featured_type": "check",
+            "featured_text": "$2.57",
+            "featured_accent": false,
+            "comp1_type": "cross",
+            "comp1_text": "",
+            "comp2_type": "text",
+            "comp2_text": "Separate"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Functional Fats",
+            "featured_type": "check",
+            "featured_text": "$2.57",
+            "featured_accent": false,
+            "comp1_type": "cross",
+            "comp1_text": "",
+            "comp2_type": "text",
+            "comp2_text": "Separate"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Ingredients Listed With Amounts",
+            "featured_type": "check",
+            "featured_text": "$2.57",
+            "featured_accent": false,
+            "comp1_type": "text",
+            "comp1_text": "Varies",
+            "comp2_type": "text",
+            "comp2_text": "Varies"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "One Simple Serving",
+            "featured_type": "check",
+            "featured_text": "$2.57",
+            "featured_accent": false,
+            "comp1_type": "check_plain",
+            "comp1_text": "",
+            "comp2_type": "cross",
+            "comp2_text": ""
+          }
+        },
+        {
+          "type": "cacao-type-uvt",
+          "id": "type-uvt",
+          "static": true,
+          "settings": {
+            "font_family": "manrope",
+            "custom_font": "",
+            "heading_font": "manrope",
+            "heading_font_custom": "",
+            "heading_weight": "700",
+            "heading_size_desktop": 44,
+            "heading_size_mobile": 32,
+            "body_font": "manrope",
+            "body_font_custom": "",
+            "body_weight": "400",
+            "body_size_desktop": 20,
+            "body_size_mobile": 14,
+            "cell_font": "manrope",
+            "cell_font_custom": "",
+            "cell_weight": "700",
+            "cell_size_desktop": 16,
+            "cell_size_mobile": 14,
+            "label_font": "manrope",
+            "label_font_custom": "",
+            "label_weight": "700",
+            "label_size_desktop": 16,
+            "label_size_mobile": 14,
+            "feat_title_font": "manrope",
+            "feat_title_font_custom": "",
+            "feat_title_weight": "700",
+            "feat_title_size_desktop": 16,
+            "feat_title_size_mobile": 14,
+            "feat_sub_font": "manrope",
+            "feat_sub_font_custom": "",
+            "feat_sub_weight": "700",
+            "feat_sub_size_desktop": 16,
+            "feat_sub_size_mobile": 8
+          }
+        },
+        {
+          "type": "cacao-type-uvt-2",
+          "id": "type-uvt-2",
+          "static": true,
+          "settings": {
+            "comp_label_font": "manrope",
+            "comp_label_font_custom": "",
+            "comp_label_weight": "700",
+            "comp_label_size_desktop": 16,
+            "comp_label_size_mobile": 9,
+            "accent_value_font": "manrope",
+            "accent_value_font_custom": "",
+            "accent_value_weight": "700",
+            "accent_value_size_desktop": 16,
+            "accent_value_size_mobile": 14,
+            "note_font": "manrope",
+            "note_font_custom": "",
+            "note_weight": "400",
+            "note_size_desktop": 14,
+            "note_size_mobile": 12
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

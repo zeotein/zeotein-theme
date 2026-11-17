@@ -1,0 +1,79 @@
+{% comment %}
+  ZEOTEIN HOMEPAGE REVIEWS (Nov 2026)
+  Replaces zeotein-reviews on the homepage: no numbers on the cards, scrolls sideways.
+{% endcomment %}
+
+{% assign review_count = shop.metafields.judgeme.all_reviews_count | default: 152 %}
+
+<section id="zt-home-reviews-{{ section.id }}" class="zt-home-reviews">
+  <div class="zt-home-reviews__inner">
+    <div class="zt-home-reviews__head">
+      <h2 class="zt-home-reviews__heading">{{ section.settings.heading }}</h2>
+      {% if section.settings.cta_url != blank %}
+        <a class="zt-home-reviews__link" href="{{ section.settings.cta_url }}">
+          {{ section.settings.cta_text | replace: '[count]', review_count }} <span aria-hidden="true">→</span>
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="zt-home-reviews__rail" role="list">
+      {% for block in section.blocks %}
+        <figure class="zt-home-reviews__card" role="listitem" {{ block.shopify_attributes }}>
+          <div class="zt-home-reviews__stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote class="zt-home-reviews__text">{{ block.settings.review_text }}</blockquote>
+          <figcaption class="zt-home-reviews__name">{{ block.settings.customer_name }}</figcaption>
+        </figure>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.bottom_text != blank %}
+      <p class="zt-home-reviews__note">{{ section.settings.bottom_text }}</p>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  #zt-home-reviews-{{ section.id }} { background: #f8f7f4; padding: 52px 24px 40px; }
+  #zt-home-reviews-{{ section.id }} .zt-home-reviews__inner { max-width: 1200px; margin: 0 auto; }
+  #zt-home-reviews-{{ section.id }} .zt-home-reviews__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; }
+  #zt-home-reviews-{{ section.id }} .zt-home-reviews__heading { margin: 0; color: #35164f; font-size: clamp(26px, 3vw, 36px); font-weight: 600; letter-spacing: -0.03em; }
+  #zt-home-reviews-{{ section.id }} .zt-home-reviews__link { color: #47206b; font-size: 14px; font-weight: 600; text-decoration: none; }
+  #zt-home-reviews-{{ section.id }} .zt-home-reviews__link:hover { text-decoration: underline; }
+  #zt-home-reviews-{{ section.id }} .zt-home-reviews__rail { display: flex; gap: 16px; margin-top: 20px; padding: 4px 2px 14px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  #zt-home-reviews-{{ section.id }} .zt-home-reviews__card { flex: 0 0 300px; margin: 0; box-sizing: border-box; padding: 22px; border-radius: 16px; background: #ffffff; scroll-snap-align: start; }
+  #zt-home-reviews-{{ section.id }} .zt-home-reviews__stars { color: #8a5a00; letter-spacing: 2px; }
+  #zt-home-reviews-{{ section.id }} .zt-home-reviews__text { margin: 8px 0 0; padding: 0; border: 0; color: #231433; font-size: 16px; line-height: 1.5; font-style: normal; font-weight: 400; quotes: none; }
+  #zt-home-reviews-{{ section.id }} .zt-home-reviews__text::before, #zt-home-reviews-{{ section.id }} .zt-home-reviews__text::after { content: none; display: none; }
+  #zt-home-reviews-{{ section.id }} .zt-home-reviews__name { margin-top: 10px; color: #47206b; font-size: 13px; font-weight: 600; }
+  #zt-home-reviews-{{ section.id }} .zt-home-reviews__note { margin: 12px 0 0; color: #6b6470; font-size: 12px; }
+  @media screen and (max-width: 749px) {
+    #zt-home-reviews-{{ section.id }} { padding: 36px 16px 28px; }
+    #zt-home-reviews-{{ section.id }} .zt-home-reviews__card { flex-basis: 260px; padding: 18px; }
+    #zt-home-reviews-{{ section.id }} .zt-home-reviews__text { font-size: 15px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Zeotein Home Reviews",
+  "tag": "section",
+  "class": "section-zt-home-reviews",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Real People. Real Reviews." },
+    { "type": "text", "id": "cta_text", "label": "Link text ([count] shows the review count)", "default": "Read all [count] reviews" },
+    { "type": "url", "id": "cta_url", "label": "Link" },
+    { "type": "text", "id": "bottom_text", "label": "Note under the cards", "default": "Real reviews from Zeotein customers. Individual results may vary." }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "review_text", "label": "Review" },
+        { "type": "text", "id": "customer_name", "label": "Name" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Zeotein Home Reviews" }]
+}
+{% endschema %}

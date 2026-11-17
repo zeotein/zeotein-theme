@@ -1,0 +1,202 @@
+{% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap');
+
+  #shopify-section-{{ section.id }} .z-upgrade {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 96px 24px 96px;
+    background:
+      radial-gradient(circle at 50% 20%, rgba(74, 49, 132, 0.35) 0%, rgba(74, 49, 132, 0.12) 32%, transparent 62%),
+      radial-gradient(circle at 50% 75%, rgba(46, 201, 201, 0.06) 0%, transparent 30%),
+      linear-gradient(180deg, #1B0B30 0%, #220E3A 48%, #1B0B30 100%);
+  }
+
+  #shopify-section-{{ section.id }} .z-upgrade::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1.5px),
+      radial-gradient(circle, rgba(46,201,201,0.08) 1px, transparent 1.5px);
+    background-size: 170px 170px, 260px 260px;
+    background-position: 40px 40px, 120px 100px;
+    opacity: 0.14;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .z-upgrade__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .z-upgrade__title {
+    margin: 0 0 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: clamp(54px, 6vw, 92px);
+    line-height: 0.95;
+    letter-spacing: 0.8px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .z-upgrade__title span {
+    color: #2EC9C9;
+  }
+
+  #shopify-section-{{ section.id }} .z-upgrade__sub {
+    margin: 0 auto 36px;
+    max-width: 620px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.55;
+    color: #D4C7E8;
+  }
+
+  #shopify-section-{{ section.id }} .z-upgrade__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+    padding: 22px 34px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #48D0D6 0%, #38BBC3 100%);
+    color: #082D36;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    box-shadow: 0 0 26px rgba(46, 201, 201, 0.24);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .z-upgrade__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 32px rgba(46, 201, 201, 0.38);
+  }
+
+  #shopify-section-{{ section.id }} .z-upgrade__stars {
+    margin-top: 30px;
+    font-size: 28px;
+    line-height: 1;
+    color: #F4B52C;
+    letter-spacing: 5px;
+  }
+
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .z-upgrade {
+      padding: 68px 18px 66px;
+    }
+
+    #shopify-section-{{ section.id }} .z-upgrade__title {
+      font-size: 46px;
+      line-height: 0.98;
+      margin-bottom: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .z-upgrade__sub {
+      font-size: 16px;
+      margin-bottom: 28px;
+    }
+
+    #shopify-section-{{ section.id }} .z-upgrade__button {
+      min-width: 0;
+      width: 100%;
+      max-width: 290px;
+      padding: 18px 24px;
+      font-size: 16px;
+      border-radius: 14px;
+    }
+
+    #shopify-section-{{ section.id }} .z-upgrade__stars {
+      font-size: 22px;
+      letter-spacing: 4px;
+      margin-top: 24px;
+    }
+  }
+{% endstyle %}
+
+<section class="z-upgrade">
+  <div class="z-upgrade__inner">
+
+    <h2 class="z-upgrade__title">
+      {{ section.settings.title_white }}
+      <span>{{ section.settings.title_teal }}</span>
+    </h2>
+
+    {% if section.settings.subhead != blank %}
+      <p class="z-upgrade__sub">
+        {{ section.settings.subhead }}
+      </p>
+    {% endif %}
+
+    {% if section.settings.button_text != blank %}
+      <a href="{{ section.settings.button_link }}" class="z-upgrade__button">
+        {{ section.settings.button_text }}
+      </a>
+    {% endif %}
+
+    {% if section.settings.stars != blank %}
+      <div class="z-upgrade__stars">
+        {{ section.settings.stars }}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zeotein Upgrade CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_white",
+      "label": "White title text",
+      "default": "READY TO UPGRADE YOUR"
+    },
+    {
+      "type": "text",
+      "id": "title_teal",
+      "label": "Teal title text",
+      "default": "PROTEIN?"
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subhead",
+      "default": "One clean shake. Six real ingredients. Howie-approved."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "CLAIM MY 15% OFF"
+    },
+    {
+      "type": "text",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "/discount/HOWIE15?redirect=/products/zeotein-30-day-supply"
+    },
+    {
+      "type": "text",
+      "id": "stars",
+      "label": "Stars",
+      "default": "★★★★★"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zeotein Upgrade CTA"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,172 @@
+{% doc %}
+  Comparison row for Us vs Them Cacao LP.
+{% enddoc %}
+
+<div class="zt-uvt__row" role="row" {{ block.shopify_attributes }}>
+  <div class="zt-uvt__cell zt-uvt__cell--label" role="rowheader">
+    {%- if block.settings.label != blank -%}
+      {{ block.settings.label | escape }}
+    {%- endif -%}
+  </div>
+  <div class="zt-uvt__cell zt-uvt__cell--featured" role="cell">
+    {% render 'zt-uvt-cell-value',
+      type: block.settings.featured_type,
+      text: block.settings.featured_text,
+      accent: block.settings.featured_accent
+    %}
+  </div>
+  <div class="zt-uvt__cell" role="cell">
+    {% render 'zt-uvt-cell-value',
+      type: block.settings.comp1_type,
+      text: block.settings.comp1_text,
+      accent: false
+    %}
+  </div>
+  <div class="zt-uvt__cell" role="cell">
+    {% render 'zt-uvt-cell-value',
+      type: block.settings.comp2_type,
+      text: block.settings.comp2_text,
+      accent: false
+    %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Comparison row",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Row label",
+      "default": "Cost Per Serving"
+    },
+    {
+      "type": "header",
+      "content": "Featured column cell"
+    },
+    {
+      "type": "select",
+      "id": "featured_type",
+      "label": "Value type",
+      "options": [
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "check",
+          "label": "Check mark"
+        },
+        {
+          "value": "cross",
+          "label": "Cross mark"
+        },
+        {
+          "value": "check_plain",
+          "label": "Plain check"
+        },
+        {
+          "value": "none",
+          "label": "Empty"
+        }
+      ],
+      "default": "check"
+    },
+    {
+      "type": "text",
+      "id": "featured_text",
+      "label": "Text value",
+      "default": "$2.57"
+    },
+    {
+      "type": "checkbox",
+      "id": "featured_accent",
+      "label": "Use accent color for text",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Competitor 1 cell"
+    },
+    {
+      "type": "select",
+      "id": "comp1_type",
+      "label": "Value type",
+      "options": [
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "check",
+          "label": "Check mark"
+        },
+        {
+          "value": "cross",
+          "label": "Cross mark"
+        },
+        {
+          "value": "check_plain",
+          "label": "Plain check"
+        },
+        {
+          "value": "none",
+          "label": "Empty"
+        }
+      ],
+      "default": "text"
+    },
+    {
+      "type": "text",
+      "id": "comp1_text",
+      "label": "Text value",
+      "default": "$1.50–$3+"
+    },
+    {
+      "type": "header",
+      "content": "Competitor 2 cell"
+    },
+    {
+      "type": "select",
+      "id": "comp2_type",
+      "label": "Value type",
+      "options": [
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "check",
+          "label": "Check mark"
+        },
+        {
+          "value": "cross",
+          "label": "Cross mark"
+        },
+        {
+          "value": "check_plain",
+          "label": "Plain check"
+        },
+        {
+          "value": "none",
+          "label": "Empty"
+        }
+      ],
+      "default": "text"
+    },
+    {
+      "type": "text",
+      "id": "comp2_text",
+      "label": "Text value",
+      "default": "Adds up"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison row"
+    }
+  ]
+}
+{% endschema %}

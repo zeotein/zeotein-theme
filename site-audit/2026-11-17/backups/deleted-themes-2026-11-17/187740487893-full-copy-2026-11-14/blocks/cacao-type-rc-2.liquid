@@ -1,0 +1,214 @@
+{% doc %}
+  Review body, author, disclaimer, and video badge for Real Customers Cacao LP.
+  Static typography block. Keeps each schema within Theme Check's 40-setting limit.
+{% enddoc %}
+
+{%- liquid
+  assign sid = 'zt-rc-' | append: section.id
+  assign base = section.blocks | where: 'type', 'cacao-type-rc' | first
+  assign ff = 'manrope'
+  assign font_custom = ''
+  if base != blank
+    assign ff = base.settings.font_family | default: 'manrope'
+    assign font_custom = base.settings.custom_font
+  endif
+-%}
+{% render 'cacao-lp-fonts',
+  id: sid,
+  font_family: ff,
+  font_custom: font_custom,
+  emit_root: false,
+  settings: block.settings,
+  prefixes: 'disclaimer,video_badge'
+%}
+
+{% schema %}
+{
+  "name": "Typography, continued",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Disclaimer type"
+    },
+    {
+      "type": "select",
+      "id": "disclaimer_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.disclaimer_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "disclaimer_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "disclaimer_size_desktop",
+      "label": "Size - desktop",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "disclaimer_size_mobile",
+      "label": "Size - mobile",
+      "min": 10,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "header",
+      "content": "Video badge"
+    },
+    {
+      "type": "select",
+      "id": "video_badge_font",
+      "label": "Font name",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Same as section"
+        },
+        {
+          "value": "manrope",
+          "label": "Manrope"
+        },
+        {
+          "value": "theme_heading",
+          "label": "Theme heading"
+        },
+        {
+          "value": "theme_body",
+          "label": "Theme body"
+        },
+        {
+          "value": "system",
+          "label": "System sans"
+        },
+        {
+          "value": "custom",
+          "label": "Custom font"
+        }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "text",
+      "id": "video_badge_font_custom",
+      "label": "Custom font name",
+      "info": "CSS font-family, for example Georgia, serif. The font must already load on the store.",
+      "visible_if": "{{ block.settings.video_badge_font == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "video_badge_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        }
+      ],
+      "default": "800"
+    },
+    {
+      "type": "range",
+      "id": "video_badge_size_desktop",
+      "label": "Size - desktop",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "video_badge_size_mobile",
+      "label": "Size - mobile",
+      "min": 8,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    }
+  ]
+}
+{% endschema %}
