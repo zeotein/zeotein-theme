@@ -309,6 +309,38 @@ Theme Register artifact must be updated the same day (it still lists "+ gift loc
   sections are shared custom sections that need a heading-tag setting); best sellers on the 404 and empty-cart pages;
   shorter homepage with prices; footer social links (need the URLs).
 
+## Round 5, 17 Nov after the publish (verified from this session)
+
+- **Hotfix live**: theme `#188199928021` is MAIN since 13:11 UTC (7:11 AM CT). No live file changed after the last hotfix
+  commit (12:55 UTC). Storefront: home, Hemp, Cacao 30, Vegan 30, bulk bag, Organic Cacao, Cacao landing page and cart
+  all 200 on the new theme; Hemp shows "Organic hemp protein powder", 1/4 cup (28 g), 120 calories, no collagen text; the
+  landing page has the PNG cutouts, "Simplify", no SEOAnt code. Screenshots: `evidence/screenshots/2026-11-17-morning/after-*`.
+- **Themes**: 4 remain (live, Black Friday `#187825914069`, Holiday Popup draft `#187982840021`, Jewels staging
+  `#188057845973`). 9 were deleted, including five the morning check marked keep (Rafael's three themes, the 11-4-26
+  pre-Rafael landing page copy, Dawn Original). Partial file copies: `backups/deleted-themes-2026-11-17/`. Theme Register
+  artifact rewritten to match (https://claude.ai/artifact/NxAU5unCQihSesgbejSWoB, version 2).
+- **Flows (reported by the relay, not readable from here)**: Save-A-Scoop now keys on product title "Cacao" plus "bulk bag",
+  excluding product 15398808027349; win-back includes `ZEO-CAC-STICK-07-SBF-GIFT`. Every Cacao bag title contains
+  "Cacao" and "Bulk Bag" except `cacao-protein-starter-kit` (title "Zeotein Cacao"). Community posts say Flow text
+  conditions ignore letter case; confirm on the first Black Friday bag order.
+- **Step 6 (Dana, in admin)**: homepage title and description live (read from the homepage); "Home page" and "Protein"
+  collections hidden, both URLs 301 to Shop All; free-shipping bar reads "(U.S. only)". Store name still "Zeotein LLC" at
+  14:10 UTC. Checkout logo and review reply not checkable from here.
+- **Landing page Liquid errors**: 8 "Could not find asset snippets/util-palette-hover-shift.liquid" errors inside the landing
+  pages' CSS, there before the publish too. Fixed in the Black Friday theme (commit `ecc4208a`, new 5-line pass-through
+  snippet): 0 errors in its preview. Live gets it on Nov 27, or by adding the same snippet in the code editor.
+- **Review score shows "5.0 stars"**: Judge.me's store-wide average (`shop.metafields.judgeme.all_reviews_rating`) became
+  4.95 at 13:54 UTC and six places round it to one decimal, so live shows "5.0". The Black Friday theme now rounds down
+  everywhere (commits `a69d9da2`, `1875e439`); its preview shows 4.9 on the homepage, landing pages, BF bag and product
+  pages (Judge.me's own badge keeps the exact 4.95). To do the same on live before Nov 27, in the code editor change:
+  `snippets/cacao-lp-review-score.liquid` and `sections/buy-box-cacao-lp-v2.liquid` (`times: 10 | round` to
+  `times: 10 | floor`); `sections/hero-banner-cacao-lp.liquid` (`plus: 0 | round: 1` to
+  `plus: 0 | times: 10 | floor | divided_by: 10.0`); `sections/zt-home-hero.liquid` (`times: 1.0 | round: 1` to
+  `times: 10 | floor | divided_by: 10.0`); `snippets/zt-buybox-tidy.liquid` (`avg | round: 1` to
+  `avg | times: 10 | floor | divided_by: 10.0`). (`hero-banner-cacao-lp-bf` and `zt-bf-bb-panel` exist only in the BF theme.)
+- **Landing page speed after publish** (`tools/lpperf.js`, Chrome engine): HTML 131 to 113 KB compressed, total about the
+  same (1.97 to 2.00 MB); timings within run-to-run noise. The iPhone image saving is Safari-specific and not visible here.
+
 ## Needs a person (not available by API on this plan)
 
 1. **Checkout logo.** Checkout header shows the text "Zeotein LLC". Settings → Checkout → Customize → Branding → Logo.

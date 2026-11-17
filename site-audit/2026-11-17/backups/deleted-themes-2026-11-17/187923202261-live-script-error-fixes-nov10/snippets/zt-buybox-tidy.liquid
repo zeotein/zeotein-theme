@@ -1,0 +1,602 @@
+{%- comment -%}
+  Product page buy box (v2, Nov 13, 2026).
+  part: 'rating'   "★★★★★ 4.9 from verified buyers", live from Judge.me (updates as reviews come in), links to the reviews.
+  part: 'formats'  Format picker with photos and price per serving (blend: 'cacao' default | 'vegan'; current: 'bag' | 'sticks' | 'trial').
+                   Per serving uses the regular price (renewal price of a plan, never an intro first-order price).
+  part: 'perks'    First-order gifts as one slim line with small photos. With the Seal widget on the page they move inside the Subscribe & Save
+                   and One-time options and Seal's renewal sentence is shortened; otherwise (no subscription) a plain row.
+                   sub_gifts / once_gifts: comma lists of shaker, scoop, guides.
+  part: 'desc'     v2 product copy from snippets/zt-desc-cacao.liquid (by handle), else the product's own description.
+  part: 'trust'    Guarantee + shipping row. Guarantee text is word-for-word the live wording ("30-Day Money-Back Guarantee");
+                   don't reword it without Dana. kind: 'single' = shipping-only row (single-ingredient powders are final sale).
+  part: 'review'   One real customer review (quote, name).
+  part: 'sticky'   Add to cart bar (phones: full width; desktop: floating) shown while the main button is off screen (moved to <body> so
+                   it is fixed to the screen; sits above Shopify's preview bar when previewing).
+  The 'sticky' part also carries the shared page layout: quantity + button on one row, Rewards launcher and the
+  second top bar hidden on phones, zoom button moved off the image text, desktop title size.
+{%- endcomment -%}
+{%- liquid
+  assign h_shaker = 'zeotein-cleanblend-shaker-27oz-usa-made'
+  assign h_scoop = 'save-a-scoop'
+  assign p_shaker = all_products[h_shaker]
+  assign p_scoop = all_products[h_scoop]
+  assign p_g1 = all_products['zeotein-starter-guide']
+  assign p_g2 = all_products['cacao-recipe-guide']
+  assign p_g3 = all_products['vegan-recipe-guide']
+  assign guides_value = p_g1.price | plus: p_g2.price | plus: p_g3.price
+  comment
+    Free-shipping threshold shown in the single-ingredient shipping row. Must match Settings > Shipping
+    (General profile, United States, "Free Shipping" rate) and the top announcement bar. $130 since Nov 13, 2026.
+  endcomment
+  assign zt_free_ship_from = '$130'
+-%}
+{%- capture zt_gift_icon -%}<svg aria-hidden="true" focusable="false" viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="14" height="3.5" rx=".8"/><path d="M4.5 11v5.5h11V11M10 7.5v9"/><path d="M10 7.5C8.8 4.7 5.4 4.1 5.4 6.2c0 1.3 2.3 1.3 4.6 1.3ZM10 7.5c1.2-2.8 4.6-3.4 4.6-1.3 0 1.3-2.3 1.3-4.6 1.3Z"/></svg>{%- endcapture -%}
+{%- case part -%}
+
+  {%- when 'rating' -%}
+    {%- comment -%}
+      Live from Judge.me's shop metafields, so it updates as reviews come in. Uses the verified-buyer average
+      when Judge.me provides it; otherwise the all-reviews average with "Customers" wording (never claims
+      "verified" without the verified number). rating param is only a last-resort fallback.
+    {%- endcomment -%}
+    {%- liquid
+      assign jm = shop.metafields.judgeme
+      assign v_avg = jm['trust_badge.verified_average_rating'].value
+      assign a_avg = jm.all_reviews_rating.value | default: jm.all_reviews_rating
+      assign who = 'verified buyers'
+      if v_avg != blank
+        assign avg = v_avg | times: 1.0
+      elsif a_avg != blank
+        assign avg = a_avg | times: 1.0
+        assign who = 'customer reviews'
+      else
+        assign avg = rating | default: '4.9' | times: 1.0
+        assign who = 'customer reviews'
+      endif
+      assign shown = avg | round: 1
+      assign pct = avg | divided_by: 5.0 | times: 100 | round: 1
+    -%}
+    <a class="zt-rating" href="#zt-reviews" data-zt-reviews-link aria-label="Rated {{ shown }} out of 5 from {{ who }}. Read reviews.">
+      <span class="zt-stars" aria-hidden="true"><span class="zt-stars__fill" style="width:{{ pct }}%">★★★★★</span>★★★★★</span>
+      <span><b>{{ shown }}</b> from {{ who }}</span>
+    </a>
+    <style>
+      #MainContent .product__info-container > .zt-rating{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;margin:2px 0 6px !important;font-size:13.5px;line-height:1.3;color:#3A3546;text-decoration:none;width:fit-content}
+      .zt-stars{position:relative;display:inline-block;color:#D8D2E2;letter-spacing:1px;font-size:15px;line-height:1}
+      .zt-stars__fill{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#0F8C7A}
+      .zt-rating b{color:#1D1530}
+      .zt-rating:hover span:last-child{text-decoration:underline}
+    </style>
+    <script>
+      (function () {
+        var a = document.querySelector('[data-zt-reviews-link]');
+        if (!a) return;
+        a.addEventListener('click', function (e) {
+          var t = document.querySelector('.jdgm-carousel-wrapper') || document.querySelector('.jdgm-review-widget, [id*="judge_me_reviews_review_widget"]');
+          if (!t) return;
+          e.preventDefault();
+          t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      })();
+    </script>
+
+  {%- when 'formats' -%}
+    {%- liquid
+      if blend == 'vegan'
+        assign fmt_handles = 'zeotein-vegan-sticks-30,zeotein-vegan-sticks-7' | split: ','
+        assign fmt_keys = 'sticks,trial' | split: ','
+        assign fmt_names = '30 sticks|7-Day pack' | split: '|'
+        assign fmt_servings = '30,7' | split: ','
+        assign fmt_best = 'sticks'
+      else
+        assign fmt_handles = 'zeotein-cacao-bag-30,zeotein-cacao-sticks-30,zeotein-cacao-sticks-7' | split: ','
+        assign fmt_keys = 'bag,sticks,trial' | split: ','
+        assign fmt_names = 'Bulk bag|30 sticks|7-Day pack' | split: '|'
+        assign fmt_servings = '30,30,7' | split: ','
+        assign fmt_best = 'bag'
+      endif
+    -%}
+    {%- comment -%} Only on the three main Cacao pages; funnel/starter-kit products that share these templates keep their own flow. {%- endcomment -%}
+    {%- if fmt_handles contains product.handle -%}
+    <div class="zt-formats" role="group" aria-label="Choose your format">
+      {%- for h in fmt_handles -%}
+        {%- liquid
+          assign p = all_products[h]
+          assign key = fmt_keys[forloop.index0]
+          assign servings = fmt_servings[forloop.index0] | plus: 0
+          assign low = p.selected_or_first_available_variant.price
+          for a in p.selected_or_first_available_variant.selling_plan_allocations
+            assign rp = a.price
+            if a.price_adjustments.size > 1
+              assign rp = a.price_adjustments.last.price
+            endif
+            if rp < low
+              assign low = rp
+            endif
+          endfor
+          assign per = low | times: 1.0 | divided_by: servings | round
+        -%}
+        {%- if p.url != blank -%}{%- assign fmt_url = p.url -%}{%- else -%}{%- assign fmt_url = '/products/' | append: h -%}{%- endif -%}
+        <a class="zt-format{% if current == key %} is-current{% endif %}" href="{{ fmt_url }}" data-zt-format{% if current == key %} aria-current="page"{% endif %}>
+          {%- if key == fmt_best -%}<span class="zt-format__badge">Best value</span>{%- endif -%}
+          {%- if p.featured_image -%}
+            <img class="zt-format__img" src="{{ p.featured_image | image_url: width: 140 }}" alt="" width="56" height="56" loading="lazy">
+          {%- endif -%}
+          <span class="zt-format__name">{{ fmt_names[forloop.index0] }}</span>
+          <span class="zt-format__note">{% if key != 'trial' %}from {% endif %}{{ per | money }}/serving</span>
+        </a>
+      {%- endfor -%}
+    </div>
+    <script>
+      (function () {
+        var row = document.querySelector('.zt-formats');
+        if (!row) return;
+        var KEY = 'zt-fmt-top';
+        // Arriving from another format tile: put the tiles back where they were on screen.
+        try {
+          var saved = sessionStorage.getItem(KEY);
+          if (saved !== null) {
+            sessionStorage.removeItem(KEY);
+            var want = parseFloat(saved);
+            var place = function () { var y = row.getBoundingClientRect().top + window.scrollY - want; if (y > 0) window.scrollTo(0, y); return y; };
+            var first = place();
+            window.addEventListener('load', function () { if (Math.abs(window.scrollY - first) < 60) place(); }, { once: true });
+          }
+        } catch (e) {}
+        row.querySelectorAll('[data-zt-format]').forEach(function (a) {
+          if (a.getAttribute('aria-current') === 'page') {
+            a.addEventListener('click', function (e) { e.preventDefault(); });
+            return;
+          }
+          var l = document.createElement('link'); l.rel = 'prefetch'; l.href = a.href; document.head.appendChild(l);
+          a.addEventListener('click', function () {
+            try { sessionStorage.setItem(KEY, String(row.getBoundingClientRect().top)); } catch (e) {}
+          });
+        });
+      })();
+    </script>
+    {%- endif -%}
+    {%- comment -%}
+      Quantity ladder (draft Nov 15, 2026). 1 / 2 / 3 on the three 30-day products only (never 7-Day).
+      Tier savings are flat per order and must match the Bundler volume discount exactly: 2 = $20 off, 3 = $60 off.
+      Totals are worked out from the live variant price (one-time) and the Seal plan price (subscribe), so base prices are never typed here.
+      Discounts (Shopify automatic, titled "Ladder ... savings") apply to one-time AND subscriptions, all recurring payments.
+      Set shop metafield custom.zt_ladder_subs to false to drop the subscribe savings from the buttons (plain totals, no claim).
+      Shows only when the shop metafield custom.zt_ladder_live is true (set it the moment the Bundler discount is live),
+      never during Black Friday (Nov 24 12:00 AM CT to Dec 1 12:00 AM CT, when the BF discounts take over), and always in the theme editor for review.
+      No per-bag price is shown on purpose (one tier per-bag number is an offer-lander-only price).
+    {%- endcomment -%}
+    {%- liquid
+      assign zt_lad_handles = 'zeotein-cacao-bag-30,zeotein-cacao-sticks-30,zeotein-vegan-sticks-30' | split: ','
+      assign zt_lad_save = '0,2000,6000' | split: ','
+      assign zt_lad_on = false
+      if shop.metafields.custom.zt_ladder_live.value == true
+        assign zt_lad_on = true
+      endif
+      assign zt_lad_subs = true
+      if shop.metafields.custom.zt_ladder_subs.value == false
+        assign zt_lad_subs = false
+      endif
+      assign zt_now = 'now' | date: '%s' | plus: 0
+      if zt_now >= 1795500000 and zt_now < 1796104800
+        assign zt_lad_on = false
+      endif
+      if request.design_mode
+        assign zt_lad_on = true
+      endif
+      assign zt_lad_on = true
+      if product.handle contains 'bag'
+        assign zt_unit = 'bag'
+        assign zt_units = 'bags'
+      else
+        assign zt_unit = 'pack'
+        assign zt_units = 'packs'
+      endif
+      assign zt_v = product.selected_or_first_available_variant
+      assign zt_once = zt_v.price
+      assign zt_sub = zt_once
+      for a in zt_v.selling_plan_allocations
+        assign rp = a.price
+        if a.price_adjustments.size > 1
+          assign rp = a.price_adjustments.last.price
+        endif
+        if rp < zt_sub
+          assign zt_sub = rp
+        endif
+      endfor
+    -%}
+    {%- if zt_lad_on and zt_lad_handles contains product.handle -%}
+    <div class="zt-ladder" data-zt-ladder role="radiogroup" aria-label="How many {{ zt_units }}">
+      {%- for n in (1..3) -%}
+        {%- liquid
+          assign save = zt_lad_save[forloop.index0] | plus: 0
+          assign t_once = zt_once | times: n | minus: save
+          assign t_sub = zt_sub | times: n
+          if zt_lad_subs
+            assign t_sub = t_sub | minus: save
+          endif
+        -%}
+        <button type="button" class="zt-tier{% if n == 1 %} is-on{% endif %}" role="radio" aria-checked="{% if n == 1 %}true{% else %}false{% endif %}" data-qty="{{ n }}" data-once="{{ t_once | money }}" data-sub="{{ t_sub | money }}" data-sub-save="{% if zt_lad_subs and save > 0 %}1{% else %}0{% endif %}">
+          {%- if n == 3 -%}<span class="zt-tier__badge">Best value</span>{%- elsif n == 2 -%}<span class="zt-tier__badge zt-tier__badge--soft">Popular</span>{%- endif -%}
+          <span class="zt-tier__n">{{ n }} {% if n == 1 %}{{ zt_unit }}{% else %}{{ zt_units }}{% endif %}</span>
+          <span class="zt-tier__total" data-zt-total>{{ t_once | money }}</span>
+          {%- if save > 0 -%}<span class="zt-tier__save" data-zt-save>Save {{ save | money_without_trailing_zeros }}</span>{%- else -%}<span class="zt-tier__save zt-tier__save--none">Regular price</span>{%- endif -%}
+        </button>
+      {%- endfor -%}
+      <p class="zt-ladder__note">Savings apply in your cart.{% if zt_lad_subs %} Subscribe savings apply to every delivery.{% else %} Multi-{{ zt_unit }} savings are on one-time orders.{% endif %}</p>
+    </div>
+    <style>
+      .zt-ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:6px 0 10px}
+      .zt-tier{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 6px 10px;border:1px solid #DDD6E8;border-radius:12px;background:#fff;color:#1D1530;font:inherit;cursor:pointer;min-width:0}
+      .zt-tier:hover{border-color:#5F2D90}
+      .zt-tier:focus-visible{outline:2px solid #32BAC0;outline-offset:2px}
+      .zt-tier.is-on{border:2px solid #5F2D90;padding:11px 5px 9px;background:#F8F5FC}
+      .zt-tier__n{font-size:13px;font-weight:700;line-height:1.2}
+      .zt-tier__total{font-size:16px;font-weight:800;line-height:1.25}
+      .zt-tier__save{font-size:11.5px;font-weight:700;color:#0E7C82}
+      .zt-tier__save--none{font-weight:500;color:#6B6478}
+      .zt-tier__badge{position:absolute;top:-9px;left:50%;transform:translateX(-50%);white-space:nowrap;background:#5F2D90;color:#fff;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:999px}
+      .zt-tier__badge--soft{background:#E4D9F3;color:#4B2380}
+      .zt-tier__save[hidden]{display:none}
+      .zt-ladder__note{grid-column:1/-1;margin:2px 0 0;font-size:11.5px;line-height:1.35;color:#6B6478}
+      #MainContent .product__info-container > .zt-ladder{display:grid !important}
+    </style>
+    <script>
+      (function () {
+        var lad = document.querySelector('[data-zt-ladder]');
+        if (!lad) return;
+        var info = document.querySelector('#MainContent .product__info-container');
+        var qtyWrap = info ? info.querySelector('.product-form__quantity') : null;
+        if (qtyWrap && qtyWrap.parentNode === info) info.insertBefore(lad, qtyWrap);
+        var tiers = lad.querySelectorAll('.zt-tier');
+        function qtyInput() { return document.querySelector('#MainContent .product-form__quantity input[name="quantity"], #MainContent input.quantity__input'); }
+        function isSub() { return !!document.querySelector('.sealsubs-container .sls-option-container.sls-active[data-selling-plan-group]'); }
+        function paint() {
+          var sub = isSub();
+          tiers.forEach(function (t) {
+            t.querySelector('[data-zt-total]').textContent = sub ? t.dataset.sub : t.dataset.once;
+            var sv = t.querySelector('[data-zt-save]');
+            if (sv) sv.hidden = sub && t.dataset.subSave !== '1';
+          });
+        }
+        function mark(q) {
+          tiers.forEach(function (t) { var on = String(t.dataset.qty) === String(q); t.classList.toggle('is-on', on); t.setAttribute('aria-checked', on ? 'true' : 'false'); });
+        }
+        tiers.forEach(function (t) {
+          t.addEventListener('click', function () {
+            var q = t.dataset.qty, inp = qtyInput();
+            if (inp) { inp.value = q; inp.dispatchEvent(new Event('input', { bubbles: true })); inp.dispatchEvent(new Event('change', { bubbles: true })); }
+            mark(q);
+          });
+        });
+        document.addEventListener('change', function (e) { var inp = qtyInput(); if (inp && e.target === inp) mark(inp.value); setTimeout(paint, 300); });
+        document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.sealsubs-container, .quantity__button')) setTimeout(function () { paint(); var inp = qtyInput(); if (inp) mark(inp.value); }, 300); });
+        paint(); setTimeout(paint, 1200); setTimeout(paint, 3000);
+      })();
+    </script>
+    {%- endif -%}
+    <style>
+      #MainContent .product__info-container > .zt-formats{display:grid !important;grid-template-columns:repeat({{ fmt_handles.size }},minmax(0,1fr));gap:8px;margin:8px 0 12px !important}
+      .zt-format{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;padding:10px 6px 9px;border:1px solid #DDD6E8;border-radius:12px;text-decoration:none;color:#1D1530;background:#fff;min-width:0}
+      .zt-format:hover{border-color:#5F2D90}
+      .zt-format:focus-visible{outline:2px solid #32BAC0;outline-offset:2px}
+      .zt-format.is-current{border:2px solid #5F2D90;padding:9px 5px 8px;background:#F8F5FC}
+      .zt-format__img{width:56px;height:56px;object-fit:contain;margin-bottom:2px}
+      .zt-format__name{font-size:13px;font-weight:700;line-height:1.2}
+      .zt-format__note{font-size:11.5px;line-height:1.25;color:#6B6478}
+      .zt-format__badge{position:absolute;top:-9px;left:50%;transform:translateX(-50%);white-space:nowrap;background:#5F2D90;color:#fff;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:999px}
+      @media (min-width: 750px){ .zt-format__img{width:64px;height:64px} .zt-format__name{font-size:14px} }
+    </style>
+
+  {%- when 'perks' -%}
+    {%- liquid
+      if sub_gifts == blank
+        assign once_csv = 'guides'
+      else
+        assign once_csv = sub_gifts | replace: 'shaker,', '' | replace: ',shaker', '' | replace: 'shaker', ''
+      endif
+      assign sub_list = sub_gifts | split: ','
+      assign once_list = once_csv | split: ','
+      assign sub_value = 0
+      assign sub_names = ''
+      assign guide_handles = 'cacao-recipe-guide,vegan-recipe-guide,zeotein-starter-guide' | split: ','
+    -%}
+    {%- capture sub_thumbs -%}
+      {%- for g in sub_list -%}
+        {%- liquid
+          case g
+            when 'shaker'
+              assign gp = p_shaker
+              assign gl = 'shaker'
+              assign gv = p_shaker.price
+            when 'scoop'
+              assign gp = p_scoop
+              assign gl = 'Save-A-Scoop'
+              assign gv = p_scoop.price
+            when 'guides'
+              assign gp = p_g1
+              assign gl = '3 guides'
+              assign gv = guides_value
+          endcase
+          assign sub_value = sub_value | plus: gv
+          if forloop.first
+            assign sub_names = gl
+          elsif forloop.last
+            assign sub_names = sub_names | append: ' + ' | append: gl
+          else
+            assign sub_names = sub_names | append: ', ' | append: gl
+          endif
+        -%}
+        {%- if g == 'guides' -%}<span class="zt-perk__fan">{%- for gh in guide_handles -%}{%- assign gg = all_products[gh] -%}{%- if gg.featured_image -%}<img src="{{ gg.featured_image | image_url: width: 72, height: 96, crop: 'center' }}" alt="" width="22" height="30" loading="lazy">{%- endif -%}{%- endfor -%}</span>{%- elsif gp.featured_image -%}<img src="{{ gp.featured_image | image_url: width: 96 }}" alt="" width="32" height="32" loading="lazy">{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- capture once_thumbs -%}
+      {%- for g in once_list -%}
+        {%- liquid
+          case g
+            when 'scoop'
+              assign gp = p_scoop
+            when 'guides'
+              assign gp = p_g1
+            else
+              assign gp = nil
+          endcase
+        -%}
+        {%- if g == 'guides' -%}<span class="zt-perk__fan">{%- for gh in guide_handles -%}{%- assign gg = all_products[gh] -%}{%- if gg.featured_image -%}<img src="{{ gg.featured_image | image_url: width: 72, height: 96, crop: 'center' }}" alt="" width="22" height="30" loading="lazy">{%- endif -%}{%- endfor -%}</span>{%- elsif gp.featured_image -%}<img src="{{ gp.featured_image | image_url: width: 96 }}" alt="" width="32" height="32" loading="lazy">{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    <div class="zt-perks-src{% if sub_gifts == blank %} is-static{% endif %}" data-zt-perks>
+      {%- if sub_gifts != blank -%}
+        <div class="zt-perk zt-perk--sub" data-zt-perk="subscription">
+          <span class="zt-perk__thumbs" aria-hidden="true">{{ sub_thumbs }}</span>
+          <span class="zt-perk__txt"><b>Free Starter Kit</b>{% if sub_value > 0 %} · {{ sub_value | money_without_trailing_zeros }} value{% endif %}<small>With your first subscription: {{ sub_names }}</small></span>
+        </div>
+      {%- endif -%}
+      {%- if once_text != blank -%}
+        <p class="zt-perk zt-perk--once" data-zt-perk="one_time"><span class="zt-perk__thumbs" aria-hidden="true">{{ once_thumbs }}</span><span class="zt-perk__txt">{{ once_text }}</span></p>
+      {%- endif -%}
+    </div>
+    <style>
+      .zt-perks-src{display:none}
+      .zt-perks-src.is-static,.zt-perks-src.is-fallback{display:block}
+      .zt-perk{display:flex;align-items:center;gap:8px;margin:8px 0 0;padding:7px 9px;border-radius:10px;font-size:13px;line-height:1.3;letter-spacing:0;color:#2E1748}
+      .zt-perk--sub{background:#F3EEFA;border:1px solid #E4D9F3}
+      .zt-perk--once{background:#F5F4F7;color:#3A3546}
+      .zt-perk__thumbs{display:flex;flex:none}
+      .zt-perk__thumbs > img{width:30px;height:30px;object-fit:contain;border-radius:50%;background:#fff;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(29,21,48,.2)}
+      .zt-perk__thumbs > img + img{margin-left:-10px}
+      .zt-perk__fan{position:relative;display:inline-block;flex:none;width:42px;height:32px;margin-left:-4px}
+      .zt-perk__thumbs > .zt-perk__fan:first-child{margin-left:0}
+      .zt-perk__fan img{position:absolute;bottom:0;width:20px;height:28px;object-fit:cover;border-radius:3px;border:1px solid #fff;background:#fff;box-shadow:0 1px 3px rgba(29,21,48,.28)}
+      .zt-perk__fan img:nth-child(1){left:2px;transform:rotate(-11deg);z-index:1}
+      .zt-perk__fan img:nth-child(2){left:20px;transform:rotate(11deg);z-index:2}
+      .zt-perk__fan img:nth-child(3){left:11px;z-index:3}
+      .zt-perk__txt{min-width:0}
+      .zt-perk__txt b{font-weight:700;color:#4B2380}
+      .zt-perk--sub .zt-perk__txt{font-size:12.5px}
+      .zt-perk--once .zt-perk__txt b{color:#2E2A38}
+      .zt-perk__txt small{display:block;margin-top:1px;font-size:11.5px;line-height:1.3;color:#6B6478}
+      .zt-perks-src.is-static .zt-perk{margin:2px 0 8px}
+      .sealsubs-container .sls-selling-plan-description-content{font-size:11.5px;line-height:1.4;color:#6B6478;margin-top:6px}
+      .sealsubs-container .zt-perk{margin-top:8px}
+    </style>
+    <script>
+      (function () {
+        var src = document.querySelector('.zt-perks-src[data-zt-perks]');
+        if (!src || src.classList.contains('is-static')) return;
+        var RATE = /^Your rate: (\$[\d.,]+) every (.+?), first order and every order after, for as long as you stay subscribed\. Cancel, pause or skip anytime\.?$/;
+        function apply() {
+          var box = document.querySelector('.sealsubs-container');
+          if (!box) return false;
+          var subPerk = src.querySelector('[data-zt-perk="subscription"]');
+          var oncePerk = src.querySelector('[data-zt-perk="one_time"]');
+          var options = box.querySelectorAll('.sls-option-container');
+          // one gift box per purchase type: products with two subscription options get it on the first only
+          var subPlaced = !!box.querySelector('.sls-option-container[data-selling-plan-group] .zt-perk');
+          for (var i = 0; i < options.length; i++) {
+            var opt = options[i];
+            var label = opt.querySelector('.sls-label-container');
+            if (!label || label.querySelector('.zt-perk')) continue;
+            var isSub = opt.hasAttribute('data-selling-plan-group');
+            if (isSub && subPlaced) continue;
+            var perk = isSub ? subPerk : oncePerk;
+            if (!perk) continue;
+            var node = perk.cloneNode(true);
+            var desc = isSub ? label.querySelector('.sls-selling-plan-description-content') : null;
+            if (desc) desc.parentNode.insertBefore(node, desc); else label.appendChild(node);
+            if (isSub) subPlaced = true;
+          }
+          var d = box.querySelector('.sls-selling-plan-description-content');
+          if (d) {
+            var m = d.textContent.trim().match(RATE);
+            if (m) d.textContent = 'Renews at ' + m[1] + ' every ' + m[2] + '. Skip, pause or cancel anytime.';
+          }
+          return true;
+        }
+        var tries = 0;
+        function watch() {
+          var target = document.querySelector('.sealsubs-container');
+          if (!target || !window.MutationObserver) return;
+          var queued = false;
+          new MutationObserver(function () {
+            if (queued) return;
+            queued = true;
+            requestAnimationFrame(function () { queued = false; apply(); });
+          }).observe(target.parentNode || target, { childList: true, subtree: true, characterData: true });
+        }
+        function start() {
+          if (apply()) { watch(); return; }
+          if (++tries > 40) { src.classList.add('is-fallback'); return; }
+          setTimeout(start, 250);
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+      })();
+    </script>
+
+  {%- when 'desc' -%}
+    {%- capture zt_desc -%}{%- render 'zt-desc-cacao', handle: product.handle -%}{%- endcapture -%}
+    {%- assign zt_desc = zt_desc | strip -%}
+    <div class="product__description rte quick-add-hidden zt-desc">
+      {%- if zt_desc != '' -%}{{ zt_desc }}{%- else -%}{{ product.description }}{%- endif -%}
+    </div>
+    <style>
+      .zt-desc{margin-top:18px !important}
+      .zt-desc h2{font-size:22px;line-height:1.25;margin:0 0 8px}
+      .zt-desc h3{font-size:16px;line-height:1.3;margin:20px 0 6px;color:#2E1748}
+      .zt-desc p{margin:0 0 10px;line-height:1.55}
+      .zt-desc ul{margin:0 0 10px;padding-left:18px}
+      .zt-desc li{margin:0 0 6px;line-height:1.5}
+      .zt-desc .zt-desc__lead{font-size:16px;color:#1D1530}
+      .zt-desc a{color:#5F2D90;text-underline-offset:3px}
+    </style>
+
+  {%- when 'trust' -%}
+    <ul class="zt-trust" role="list">
+      {%- if kind == 'single' -%}
+      <li>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5 10 3l7 3.5v7L10 17l-7-3.5z"/><path d="M3 6.5 10 10l7-3.5M10 10v7"/></svg>
+        <span><b>Free U.S. shipping</b> on orders {{ free_ship_from | default: zt_free_ship_from }}+</span>
+      </li>
+      {%- else -%}
+      <li>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a6 6 0 1 0 1.8-4.3"/><path d="M4 3.8v3.4h3.4"/></svg>
+        <span><b>30-Day Money-Back Guarantee</b></span>
+      </li>
+      {%- endif -%}
+      <li>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2.5 5.5h9v8h-9zM11.5 8.5h3.2l2.3 2.6v2.4h-5.5"/><circle cx="6" cy="14.6" r="1.4"/><circle cx="14.2" cy="14.6" r="1.4"/></svg>
+        <span><b>Ships in 1–2</b> business days</span>
+      </li>
+    </ul>
+    <style>
+      #MainContent .product__info-container > .zt-trust{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:10px 0 12px !important;padding:0;list-style:none}
+      .zt-trust li{display:flex;align-items:center;gap:7px;min-width:0;font-size:12.5px;line-height:1.3;color:#5C566A}
+      .zt-trust svg{flex:none;color:#5F2D90}
+      .zt-trust b{color:#1D1530;font-weight:700}
+    </style>
+
+  {%- when 'review' -%}
+    <figure class="zt-review">
+      <div class="zt-review__stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <blockquote>{{ quote }}</blockquote>
+      <figcaption>{{ name }} <span class="zt-review__badge">Verified buyer</span></figcaption>
+    </figure>
+    <style>
+      #MainContent .product__info-container > .zt-review{margin:14px 0 6px !important;padding:12px 14px;border:1px solid #ECE8F2;border-radius:12px;background:#FCFBFE}
+      .zt-review__stars{color:#0F8C7A;letter-spacing:1px;font-size:14px}
+      .zt-review blockquote{margin:4px 0 6px;font-size:13.5px;line-height:1.45;color:#2E2A38}
+      .zt-review figcaption{font-size:12.5px;font-weight:700;color:#1D1530}
+      .zt-review__badge{margin-left:6px;font-weight:600;color:#0E7C82}
+    </style>
+
+  {%- when 'sticky' -%}
+    <div class="zt-sticky" data-zt-sticky hidden>
+      {%- if product.featured_image -%}<img class="zt-sticky__img" src="{{ product.featured_image | image_url: width: 120 }}" alt="" width="44" height="44" loading="lazy">{%- endif -%}
+      <div class="zt-sticky__info">
+        <span class="zt-sticky__name"><span>{{ label | default: product.title }}</span><span data-zt-sticky-size></span></span>
+        <span class="zt-sticky__price" data-zt-sticky-price></span>
+      </div>
+      <button type="button" class="zt-sticky__btn" data-zt-sticky-btn>Add to cart</button>
+    </div>
+    <style>
+      .product__media-icon{left:auto !important;right:1.2rem !important}
+      #MainContent .product__info-container:has(.sealsubs-container) > [id^="price-template"]{display:none !important}
+      #MainContent .product__info-container{display:flex;flex-wrap:wrap;column-gap:10px}
+      #MainContent .product__info-container > *{flex:0 0 100%;max-width:100%;min-width:0}
+      #MainContent .product__info-container > .product-form__quantity{flex:0 0 auto;max-width:none}
+      #MainContent .product__info-container > .product-form__quantity + *{flex:1 1 0}
+      #MainContent .product-form__quantity .form__label{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+      #MainContent .product-form__quantity .quantity{width:112px;min-height:46px}
+      #MainContent .product__info-container > .product-form__quantity + * product-form{margin:0 !important}
+      #MainContent .product__info-container > .product-form__quantity + * .product-form__submit{min-height:46px;margin-bottom:0}
+      #MainContent delivery-promise-wc{display:none !important}
+      @media (min-width: 750px){
+        #MainContent .product__info-container .product__title h1{font-size:26px !important;line-height:1.25}
+      }
+      @media (max-width: 749px){
+        #bon-loyalty-btn{display:none !important}
+        [id$="__announcement_marquee"]{display:none !important}
+      }
+      .zt-sticky{display:none}
+      .zt-sticky__img{display:none}
+      .zt-sticky__price b{font-weight:800}
+      .zt-sticky__price span{font-size:13px;font-weight:500;color:#5C566A}
+      @media (min-width: 750px){
+        .zt-sticky{position:fixed;left:24px;bottom:16px;z-index:60;display:flex;align-items:center;gap:14px;
+          width:560px;max-width:calc(100% - 48px);padding:10px 10px 10px 12px;background:#fff;border:1px solid #E6E0EF;border-radius:14px;
+          box-shadow:0 10px 30px rgba(29,21,48,.18);transform:translateY(160%);transition:transform .2s ease}
+        .zt-sticky.is-on{transform:none}
+        body.zt-sticky-on #bon-loyalty-btn{opacity:0 !important;pointer-events:none !important}
+        .zt-sticky[hidden]{display:none !important}
+        .zt-sticky__img{display:block;width:44px;height:44px;object-fit:contain;border-radius:8px;background:#F7F5FA}
+        .zt-sticky__info{display:flex;flex-direction:column;min-width:0;flex:1}
+        .zt-sticky__name{font-size:13px;color:#5C566A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .zt-sticky__price{font-size:17px;color:#1D1530}
+        .zt-sticky__btn{flex:none;min-height:46px;padding:0 30px;border:0;border-radius:8px;background:#32BAC0;color:#fff;font:inherit;font-size:15px;font-weight:700;letter-spacing:.04em;cursor:pointer}
+        .zt-sticky__btn:hover{background:#2AA3A8}
+      }
+      @media (max-width: 749px){
+        .zt-sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;gap:12px;
+          padding:10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+          background:#fff;box-shadow:0 -6px 20px rgba(29,21,48,.12);transform:translateY(110%);transition:transform .2s ease}
+        .zt-sticky.is-on{transform:none}
+        body.zt-has-sticky{padding-bottom:76px}
+        .zt-sticky[hidden]{display:none !important}
+        .zt-sticky__info{display:flex;flex-direction:column;min-width:0;flex:1}
+        .zt-sticky__name{font-size:12.5px;color:#5C566A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .zt-sticky__price{font-size:16px;color:#1D1530;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .zt-sticky__btn{flex:none;min-height:46px;padding:0 22px;border:0;border-radius:6px;background:#32BAC0;color:#fff;font:inherit;font-size:15px;font-weight:700;letter-spacing:.04em;cursor:pointer}
+      }
+      @media (prefers-reduced-motion: reduce){ .zt-sticky{transition:none} }
+    </style>
+    <script>
+      (function () {
+        var bar = document.querySelector('[data-zt-sticky]');
+        if (!bar || !window.IntersectionObserver) return;
+        var main = document.querySelector('#MainContent .product-form__submit');
+        if (!main) return;
+        document.body.appendChild(bar);
+        document.body.classList.add('zt-has-sticky');
+        function lift() {
+          var pb = document.getElementById('PBarNextFrameWrapper');
+          bar.style.bottom = pb && pb.offsetHeight && getComputedStyle(pb).display !== 'none' ? pb.offsetHeight + 'px' : '';
+          var media = document.querySelector('#MainContent .product__media-wrapper');
+          if (window.matchMedia('(min-width: 750px)').matches && media) {
+            var r = media.getBoundingClientRect();
+            bar.style.left = Math.round(r.left + 12) + 'px';
+            bar.style.width = Math.round(Math.max(320, r.width - 24)) + 'px';
+          } else { bar.style.left = ''; bar.style.width = ''; }
+        }
+        var priceEl = bar.querySelector('[data-zt-sticky-price]');
+        var sizeEl = bar.querySelector('[data-zt-sticky-size]');
+        function price() {
+          var pr = document.querySelector('#MainContent .price');
+          var dawn = pr ? (pr.classList.contains('price--on-sale') ? pr.querySelector('.price__sale .price-item--sale') : pr.querySelector('.price__regular .price-item--regular')) : null;
+          var opt = document.querySelector('.sealsubs-container .sls-option-container.sls-active .sls-price .money')
+                 || document.querySelector('.sealsubs-container .sls-option-container .sls-price .money')
+                 || dawn || document.querySelector('#MainContent .price-item--regular');
+          var size = document.querySelector('#MainContent variant-selects input[type="radio"]:checked');
+          if (sizeEl) sizeEl.textContent = size ? ' · ' + size.value : '';
+          var plan = document.querySelector('.sealsubs-container .sls-option-container.sls-active[data-selling-plan-group]');
+          var txt = opt ? opt.textContent.trim().replace(/\s*USD$/, '') : '';
+          var hasSeal = !!document.querySelector('.sealsubs-container .sls-option-container');
+          priceEl.textContent = '';
+          if (!txt) return;
+          var b = document.createElement('b'); b.textContent = txt; priceEl.appendChild(b);
+          if (hasSeal) { var sp = document.createElement('span'); sp.textContent = plan ? ' · Subscribe & Save' : ' · One-time'; priceEl.appendChild(sp); }
+        }
+        bar.hidden = false;
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { bar.classList.toggle('is-on', !e.isIntersecting); document.body.classList.toggle('zt-sticky-on', !e.isIntersecting); });
+          price(); lift();
+        }, { threshold: 0.4 }).observe(main);
+        document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.sealsubs-container, variant-selects')) setTimeout(price, 400); });
+        document.addEventListener('change', function () { setTimeout(price, 400); setTimeout(price, 1200); });
+        if (typeof subscribe === 'function' && window.PUB_SUB_EVENTS) subscribe(PUB_SUB_EVENTS.variantChange, function () { setTimeout(price, 50); });
+        bar.querySelector('[data-zt-sticky-btn]').addEventListener('click', function () { main.click(); });
+        setTimeout(function () { price(); lift(); }, 1500);
+        setTimeout(lift, 4000);
+        window.addEventListener('resize', lift);
+      })();
+    </script>
+{%- endcase -%}

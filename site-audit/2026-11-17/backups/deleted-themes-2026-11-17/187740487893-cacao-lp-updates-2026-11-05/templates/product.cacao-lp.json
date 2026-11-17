@@ -1,0 +1,1763 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme.cacao-lp",
+  "sections": {
+    "hero_banner_cacao_lp_WkQKMw": {
+      "type": "hero-banner-cacao-lp",
+      "blocks": {
+        "reviews_carousel_cacao_lp_NDNjt7": {
+          "type": "reviews-carousel-cacao-lp",
+          "settings": {
+            "layout": "centered",
+            "visible_cards": 3,
+            "visible_cards_mobile": 1,
+            "gap_top": 56,
+            "quote_color": "#008159",
+            "body_color": "#1c1630",
+            "name_color": "#1c1630",
+            "star_color": "#e0a800",
+            "card_bg": "#ffffff",
+            "shadow_color": "#1a1430",
+            "quote_font": "manrope",
+            "quote_font_custom": "",
+            "quote_weight": "600",
+            "quote_size_desktop": 20,
+            "quote_size_mobile": 18,
+            "review_body_font": "manrope",
+            "review_body_font_custom": "",
+            "review_body_weight": "500",
+            "review_body_size_desktop": 15,
+            "review_body_size_mobile": 14,
+            "author_font": "manrope",
+            "author_font_custom": "",
+            "author_weight": "800",
+            "author_size_desktop": 12,
+            "author_size_mobile": 12
+          },
+          "blocks": {
+            "review_card_cacao_lp_6YJBWm": {
+              "type": "review-card-cacao-lp",
+              "settings": {
+                "quote": "A staple in my house",
+                "body": "It tastes great and the ingredients are clean. It has genuinely become part of my morning routine - the Cacao flavor is rich without being too sweet and mixes smoothly with oat milk.",
+                "avatar": "shopify://shop_images/Ava_1_wbp.webp",
+                "author": "Melissa M.",
+                "stars": 5
+              },
+              "blocks": {}
+            },
+            "review_card_cacao_lp_Umja4i": {
+              "type": "review-card-cacao-lp",
+              "settings": {
+                "quote": "Just what I wanted",
+                "body": "I was looking for a clean protein that did not taste chalky. Zeotein Cacao is smooth, filling, and easy to stick with every morning.",
+                "avatar": "shopify://shop_images/Ava_2_wbp_c69842ad-68e7-4f9b-93d9-e3701620c333.webp",
+                "author": "Traci P.",
+                "stars": 5
+              },
+              "blocks": {}
+            },
+            "review_card_cacao_lp_Cr8dkD": {
+              "type": "review-card-cacao-lp",
+              "settings": {
+                "quote": "Simple ingredients, smooth chocolate",
+                "body": "I love that Zeotein gives me protein and collagen in one convenient serving without making my routine complicated. It blends beautifully with oat milk, and the cacao taste is rich without being overwhelming.",
+                "avatar": "shopify://shop_images/Ava_4_wbp.webp",
+                "author": "Nicole R.",
+                "stars": 5
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "review_card_cacao_lp_6YJBWm",
+            "review_card_cacao_lp_Umja4i",
+            "review_card_cacao_lp_Cr8dkD"
+          ]
+        },
+        "cacao-type": {
+          "type": "cacao-type-hero",
+          "static": true,
+          "settings": {
+            "font_family": "manrope",
+            "custom_font": "",
+            "rating_score_font": "manrope",
+            "rating_score_font_custom": "",
+            "rating_score_weight": "800",
+            "rating_score_size_desktop": 14,
+            "rating_score_size_mobile": 14,
+            "rating_label_font": "manrope",
+            "rating_label_font_custom": "",
+            "rating_label_weight": "800",
+            "rating_label_size_desktop": 12,
+            "rating_label_size_mobile": 12,
+            "heading_font": "manrope",
+            "heading_font_custom": "",
+            "heading_weight": "600",
+            "heading_size_desktop": 54,
+            "heading_size_mobile": 32,
+            "benefit_font": "manrope",
+            "benefit_font_custom": "",
+            "benefit_weight": "500",
+            "benefit_size_desktop": 15,
+            "benefit_size_mobile": 14,
+            "subtext_font": "manrope",
+            "subtext_font_custom": "",
+            "subtext_weight": "600",
+            "subtext_size_desktop": 15,
+            "subtext_size_mobile": 13,
+            "cta_top_font": "manrope",
+            "cta_top_font_custom": "",
+            "cta_top_weight": "400",
+            "cta_top_size_desktop": 10,
+            "cta_top_size_mobile": 10
+          },
+          "blocks": {}
+        },
+        "type-hero-2": {
+          "type": "cacao-type-hero-2",
+          "static": true,
+          "settings": {
+            "cta_bottom_font": "manrope",
+            "cta_bottom_font_custom": "",
+            "cta_bottom_weight": "700",
+            "cta_bottom_size_desktop": 18,
+            "cta_bottom_size_mobile": 18,
+            "risk_font": "manrope",
+            "risk_font_custom": "",
+            "risk_weight": "400",
+            "risk_size_desktop": 12,
+            "risk_size_mobile": 11,
+            "formula_label_font": "manrope",
+            "formula_label_font_custom": "",
+            "formula_label_weight": "800",
+            "formula_label_size_desktop": 12,
+            "formula_label_size_mobile": 12,
+            "formula_text_font": "manrope",
+            "formula_text_font_custom": "",
+            "formula_text_weight": "600",
+            "formula_text_size_desktop": 16,
+            "formula_text_size_mobile": 14,
+            "badge_top_font": "manrope",
+            "badge_top_font_custom": "",
+            "badge_top_weight": "800",
+            "badge_top_size_desktop": 7,
+            "badge_top_size_mobile": 7,
+            "badge_pct_font": "manrope",
+            "badge_pct_font_custom": "",
+            "badge_pct_weight": "800",
+            "badge_pct_size_desktop": 30,
+            "badge_pct_size_mobile": 30
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "reviews_carousel_cacao_lp_NDNjt7"
+      ],
+      "custom_css": [
+        ".hbclp__heading-main:first-child, .hbclp__heading-accent {margin-right: 0.25em; }"
+      ],
+      "name": "Hero Banner Cacao LP",
+      "settings": {
+        "bg_color": "#f2eee4",
+        "panel_color": "#580d93",
+        "accent_color": "#580d93",
+        "text_color": "#1e1734",
+        "star_color": "#008159",
+        "cta_bg_color": "#580d93",
+        "cta_text_color": "#fcfcfc",
+        "shadow_color": "#1e1734",
+        "show_rating": true,
+        "avatar_1": "shopify://shop_images/Ava_3_wbp_2.webp",
+        "avatar_2": "shopify://shop_images/Ava_2_wbp.webp",
+        "avatar_3": "shopify://shop_images/Ava_3_wbp.webp",
+        "rating_score": "5.0 stars",
+        "rating_label": "Verified Zeotein customers",
+        "preheadline": "For anyone who reads the label before they buy",
+        "heading": "Can You Name",
+        "heading_accent": "Everything",
+        "heading_after": "In Your Protein Powder?",
+        "subtext": "Grass-fed bone broth, collagen peptides, fermented cacao, MCT, sea moss and zeolite.",
+        "chips": "23g Protein|14g Collagen|Zero Sugar",
+        "preheadline_color": "#1aa6a0",
+        "kit_title": "The Starter Kit · What arrives in your first order",
+        "kit_items": "Zeotein Cacao 30-Day Bulk Bag|$109.99\nCleanBlend Shaker|$15.99\nSave-A-Scoop|$6.99\nZeotein Starter Guide|$12.00\nCacao + Vegan Recipe Guides|$28.00",
+        "kit_compare": "$172.97",
+        "offer_price": "$76.99",
+        "offer_price_note": "your first order",
+        "cta_line_1": "Claim My 55% Off",
+        "cta_line_2": "You save $95.98",
+        "cta_link": "",
+        "renew_text": "Then $99.99 per delivery. First-time subscribers only.",
+        "risk_free_text": "",
+        "show_guarantee": true,
+        "guarantee_lead": "Try it risk-free.",
+        "guarantee_text": "Drink your first bag. If it is not for you within 30 days of delivery, we will refund it.",
+        "panel_cover_image": "shopify://shop_images/Bag_Wbp_93kb.webp",
+        "product_image": "shopify://shop_images/Bag_Wbp_93kb.webp",
+        "show_badge": true,
+        "badge_image": "shopify://shop_images/BUY_MORE_WBP.webp",
+        "formula_label": "EASY START",
+        "formula_text": "Ships in 1 to 2 business days. Pause, skip or cancel anytime.",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "marquee_cacao_lp_BrtQjQ": {
+      "type": "marquee-cacao-lp",
+      "blocks": {
+        "item_WJpTCF": {
+          "type": "item",
+          "settings": {
+            "text": "23g protein"
+          }
+        },
+        "item_6dP7en": {
+          "type": "item",
+          "settings": {
+            "text": "Zero sugar"
+          }
+        },
+        "item_KAtDHh": {
+          "type": "item",
+          "settings": {
+            "text": "6 functional ingredients"
+          }
+        },
+        "item_heeXt4": {
+          "type": "item",
+          "settings": {
+            "text": "30-day guarantee"
+          }
+        },
+        "item_BPqaYk": {
+          "type": "item",
+          "settings": {
+            "text": "Every ingredient named"
+          }
+        }
+      },
+      "block_order": [
+        "item_WJpTCF",
+        "item_6dP7en",
+        "item_KAtDHh",
+        "item_heeXt4",
+        "item_BPqaYk"
+      ],
+      "name": "Marquee Cacao LP",
+      "settings": {
+        "bg_color": "#580d93",
+        "text_color": "#fcfcfc",
+        "icon_color": "#009c96",
+        "show_icons": true,
+        "icon_size": 20,
+        "font_family": "manrope",
+        "custom_font": "",
+        "label_font": "manrope",
+        "label_font_custom": "",
+        "label_weight": "800",
+        "label_size_desktop": 18,
+        "label_size_mobile": 14,
+        "gap": 48,
+        "padding_y": 24,
+        "speed": 72,
+        "pause_on_hover": true
+      }
+    },
+    "daily_routine_cacao_lp_FbdPWk": {
+      "type": "daily-routine-cacao-lp",
+      "blocks": {
+        "feature_7MDHG4": {
+          "type": "feature",
+          "settings": {
+            "slot": "left-top",
+            "icon_preset": "dumbbell",
+            "icon": "shopify://shop_images/4ICONSNEW1200PX4--webp-1.webp",
+            "icon_size": 120,
+            "icon_size_mobile": 60,
+            "title": "23g protein",
+            "body": "Grass-fed beef bone broth + grass-fed collagen peptides"
+          }
+        },
+        "feature_bXyP8h": {
+          "type": "feature",
+          "settings": {
+            "slot": "right-top",
+            "icon_preset": "sparkle",
+            "icon": "shopify://shop_images/4ICONSNEW1200PX2--webp-2.webp",
+            "icon_size": 120,
+            "icon_size_mobile": 60,
+            "title": "14g collagen",
+            "body": "Built into every serving"
+          }
+        },
+        "feature_jMGnFf": {
+          "type": "feature",
+          "settings": {
+            "slot": "left-bottom",
+            "icon_preset": "bolt",
+            "icon": "shopify://shop_images/4ICONSNEW1200PX1--webp-3.webp",
+            "icon_size": 120,
+            "icon_size_mobile": 60,
+            "title": "Steady daily fuel",
+            "body": "Organic MCT oil with zero sugar"
+          }
+        },
+        "feature_dnzATg": {
+          "type": "feature",
+          "settings": {
+            "slot": "right-bottom",
+            "icon_preset": "leaf",
+            "icon": "shopify://shop_images/4ICONSNEW1200PX3_-webp-4.webp",
+            "icon_size": 120,
+            "icon_size_mobile": 60,
+            "title": "Clean and transparent",
+            "body": "Six named ingredients"
+          }
+        }
+      },
+      "block_order": [
+        "feature_7MDHG4",
+        "feature_bXyP8h",
+        "feature_jMGnFf",
+        "feature_dnzATg"
+      ],
+      "name": "Daily Routine Cacao LP",
+      "settings": {
+        "bg_color": "#fcfbfe",
+        "heading_color": "#1e1734",
+        "body_color": "#1e1734",
+        "accent_color": "#580d93",
+        "heading": "Transform your daily routine.",
+        "subtext": "23g protein and purposeful ingredients come together in one simple serving.",
+        "subtext_mobile": "23g protein and purposeful ingredients work together in one simple Cacao serving.",
+        "product_image": "shopify://shop_images/zeotein-_WBP_NEW.webp",
+        "image_width": 582,
+        "image_width_mobile": 324,
+        "image_crop": 0,
+        "image_crop_mobile": 0,
+        "font_family": "manrope",
+        "custom_font": "",
+        "heading_font": "manrope",
+        "heading_font_custom": "",
+        "heading_weight": "600",
+        "heading_size_desktop": 48,
+        "heading_size_mobile": 32,
+        "subtext_font": "manrope",
+        "subtext_font_custom": "",
+        "subtext_weight": "400",
+        "subtext_size_desktop": 20,
+        "subtext_size_mobile": 16,
+        "feature_title_font": "manrope",
+        "feature_title_font_custom": "",
+        "feature_title_weight": "700",
+        "feature_title_size_desktop": 22,
+        "feature_title_size_mobile": 22,
+        "feature_title_line_height": 120,
+        "feature_body_font": "manrope",
+        "feature_body_font_custom": "",
+        "feature_body_weight": "400",
+        "feature_body_size_desktop": 16,
+        "feature_body_size_mobile": 14,
+        "benefit_gap": 32,
+        "benefit_gap_mobile": 16,
+        "product_gap_mobile": 28,
+        "padding_top": 64,
+        "padding_bottom": 32
+      }
+    },
+    "nutrition_gaps_cacao_lp_Fnd4MX": {
+      "type": "nutrition-gaps-cacao-lp",
+      "name": "Nutrition Gaps Cacao LP",
+      "settings": {
+        "outer_bg": "#d5fbf6",
+        "card_bg": "#fcfbfe",
+        "accent_color": "#5e2f8f",
+        "text_color": "#1e1734",
+        "shadow_color": "#1e1734",
+        "eyebrow": "MODERN LIVING ASKS A LOT",
+        "heading": "Modern Routines Can Leave Nutrition Gaps.",
+        "body": "Zeotein Cacao brings 23g protein and purposeful ingredients together in one satisfying serving.",
+        "stat_1_value": "23g",
+        "stat_1_text": "of protein per serving to support strength, recovery, and everyday nutrition.",
+        "stat_2_value": "6",
+        "stat_2_text": "functional ingredients combined in one serving, so your daily routine stays clear and simple.",
+        "cta_label": "Claim My 55% Off",
+        "cta_link": "",
+        "image": "shopify://shop_images/zeotein-cacao-protein-powder-ingredient-image-ezgif.com-png-to-webp-converter.webp",
+        "font_family": "manrope",
+        "eyebrow_weight": "800",
+        "eyebrow_size_desktop": 15,
+        "eyebrow_size_mobile": 14,
+        "heading_font": "manrope",
+        "heading_weight": "600",
+        "heading_size_desktop": 52,
+        "heading_size_mobile": 28,
+        "body_font": "manrope",
+        "body_weight": "400",
+        "body_size_desktop": 20,
+        "body_size_mobile": 15,
+        "stat_value_font": "manrope",
+        "stat_value_weight": "400",
+        "stat_value_size_desktop": 65,
+        "stat_value_size_mobile": 48,
+        "stat_text_weight": "500",
+        "stat_text_size_desktop": 16,
+        "stat_text_size_mobile": 14,
+        "cta_font": "manrope",
+        "cta_weight": "600",
+        "cta_size_desktop": 18,
+        "cta_size_mobile": 16,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "whats_inside_cacao_lp_mfzH3R": {
+      "type": "whats-inside-cacao-lp",
+      "blocks": {
+        "ingredient_zCkhjM": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/Zeo_Wbp1.webp",
+            "tag": "FROM THE EARTH",
+            "origin_badge": "mineral",
+            "title": "Zeolite Mineral",
+            "body": "A naturally occurring volcanic mineral. It is the Zeo in Zeotein."
+          }
+        },
+        "ingredient_W3rtqK": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/1-Sea_Moss_PNG-WBP.webp",
+            "tag": "FROM THE SEA",
+            "origin_badge": "organic",
+            "title": "Sea Moss",
+            "body": "A blend of purple and gold sea moss (Gracilaria spp.)."
+          }
+        },
+        "ingredient_nWa9hz": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/MCT_OIL-_Wbp.webp",
+            "tag": "FROM COCONUT",
+            "origin_badge": "organic",
+            "title": "MCT Oil Powder",
+            "body": "Medium-chain triglycerides from coconut, in powder form."
+          }
+        },
+        "ingredient_rdejWd": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/6_Cacao_PNG_-WBP.webp",
+            "tag": "FROM THE CACAO BEAN",
+            "origin_badge": "organic",
+            "title": "Fermented Cacao",
+            "body": "Never alkalized. It is where the chocolate comes from."
+          }
+        },
+        "ingredient_ggbx9m": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/5_Beef_Bone_Protein_PNG_-WBP.webp",
+            "tag": "FROM GRASS-FED CATTLE",
+            "origin_badge": "grass_fed",
+            "title": "Beef Bone Broth",
+            "body": "The protein base of every serving, from real bone broth."
+          }
+        },
+        "ingredient_6A978H": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/4-HYDROLYZED_PNG_-WBP.webp",
+            "tag": "FROM GRASS-FED CATTLE",
+            "origin_badge": "grass_fed",
+            "title": "Collagen Peptides",
+            "body": "14g in every serving. Hydrolyzed so it mixes smooth."
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_ggbx9m",
+        "ingredient_6A978H",
+        "ingredient_W3rtqK",
+        "ingredient_rdejWd",
+        "ingredient_nWa9hz",
+        "ingredient_zCkhjM"
+      ],
+      "name": "What's Inside Cacao LP",
+      "settings": {
+        "bg_color": "#f2eee4",
+        "accent_color": "#580d93",
+        "tag_color": "#2ec9c9",
+        "title_color": "#1b1a3a",
+        "body_color": "#1e1734",
+        "card_bg": "#fcfbfe",
+        "card_border": "#1f1830",
+        "image_size": 96,
+        "eyebrow": "WHAT'S INSIDE",
+        "heading": "Six ingredients. Every one named on the label.",
+        "subtext": "What is in every serving, and where it comes from.",
+        "badge_1_icon": "shopify://shop_images/Ingridients.webp",
+        "badge_1_text": "",
+        "badge_2_icon": "shopify://shop_images/Label.webp",
+        "badge_2_text": "",
+        "font_family": "manrope",
+        "custom_font": "",
+        "eyebrow_weight": "700",
+        "eyebrow_size_desktop": 18,
+        "eyebrow_size_mobile": 16,
+        "heading_weight": "600",
+        "heading_size_desktop": 42,
+        "heading_size_mobile": 28,
+        "subtext_weight": "500",
+        "subtext_size_desktop": 20,
+        "subtext_size_mobile": 16,
+        "tag_weight": "800",
+        "tag_size_desktop": 11,
+        "tag_size_mobile": 11,
+        "card_title_weight": "700",
+        "card_title_size_desktop": 18,
+        "card_title_size_mobile": 16,
+        "card_body_weight": "400",
+        "card_body_size_desktop": 15,
+        "card_body_size_mobile": 14,
+        "badge_weight": "400",
+        "badge_size_desktop": 15,
+        "badge_size_mobile": 14,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "buy_box_cacao_lp_v2_k9n3zd": {
+      "type": "buy-box-cacao-lp-v2",
+      "blocks": {
+        "faq_E8nf7w": {
+          "type": "faq",
+          "settings": {
+            "title": "Why Zeotein Cacao?",
+            "body": "Most protein powder starts with whey. Zeotein Cacao starts with grass-fed beef bone broth and grass-fed collagen, with organic fermented cacao for the chocolate. Six ingredients, every one named on the label."
+          }
+        },
+        "faq_nWi4G8": {
+          "type": "faq",
+          "settings": {
+            "title": "What's in the Starter Kit?",
+            "body": "Your 30-day bulk bag (30 servings), a free CleanBlend shaker and a free Save-A-Scoop with your first order, plus three digital guides emailed right after you order: the Zeotein Starter Guide, the Cacao Recipe Guide and the Vegan Recipe Guide."
+          }
+        },
+        "faq_NGtfYq": {
+          "type": "faq",
+          "settings": {
+            "title": "How to Use",
+            "body": "Add two scoops to 10 to 12 oz of water, milk or your favorite smoothie. Shake or blend."
+          }
+        },
+        "faq_QqXyca": {
+          "type": "faq",
+          "settings": {
+            "title": "Subscription Details",
+            "body": "Renews every month at the renewal price. Pause or cancel anytime in your https://zeotein.com/a/subscriptions/login."
+          }
+        }
+      },
+      "block_order": [
+        "faq_E8nf7w",
+        "faq_nWi4G8",
+        "faq_NGtfYq",
+        "faq_QqXyca"
+      ],
+      "name": "Buy Box Cacao LP-v2",
+      "settings": {
+        "show_image_benefits": false,
+        "default_plan": "sub",
+        "after_add_action": "drawer",
+        "rating_text": "4.98/5.0 (134 Reviews)",
+        "title": "Zeotein Cacao\n30-Day Bulk Bag",
+        "subtitle": "Everything you need for your first 30 days, in one box.",
+        "bullet_1": "Protein from grass-fed beef bone broth, not whey",
+        "bullet_2": "Shakes up smooth with 10 to 12 oz of milk or water",
+        "bullet_3": "Gluten free and dairy free",
+        "bullet_4": "Two scoops per serving, 30 servings per bag",
+        "bags_heading": "How many bags?",
+        "bags_badge": "Buy More. Save More.",
+        "bags_badge_icon": "shopify://shop_images/marketing1-ezgif.com-png-to-webp-converter.webp",
+        "plans_heading": "Subscribe and Save:",
+        "sub_banner": "Most Popular: Cacao Starter Kit + Free Gifts",
+        "sub_title": "Subscribe & Save",
+        "once_title": "One-Time Purchase",
+        "once_extra": "Save-A-Scoop included",
+        "perk_1": "Pause or cancel anytime",
+        "perk_2": "",
+        "shaker_name": "FREE Black Shaker",
+        "shaker_note": "First subscription order",
+        "guides_name": "3 FREE Digital Guides",
+        "guides_note": "Emailed after purchase",
+        "scoop_name": "FREE Save-A-Scoop",
+        "scoop_note": "First Bulk Bag order",
+        "cta_sub": "Claim My 55% Off",
+        "cta_once": "Claim My 55% Off",
+        "intro_note": "Introductory offer auto-applied",
+        "intro_icon": "shopify://shop_images/Discoount_tag.webp",
+        "limit_lead": "First-time subscribers only.",
+        "limit_rest": "Limit one introductory offer per customer.",
+        "trust_1": "30-Day Money-Back\nGuarantee",
+        "trust_2": "Fast, Tracked\nShipping",
+        "trust_3": "Secure\nCheckout",
+        "nutrition_label": "View Nutrition Facts",
+        "facts_format": "written",
+        "facts_image": "shopify://shop_images/supplement_facts.webp",
+        "primary_color": "#580d93",
+        "layout_width": 1280
+      }
+    },
+    "buy_box_cacao_lp_Jyard4": {
+      "type": "buy-box-cacao-lp",
+      "blocks": {
+        "bb_header": {
+          "type": "header",
+          "settings": {
+            "font_family": "manrope",
+            "custom_font": "",
+            "eyebrow_font": "inherit",
+            "eyebrow_font_custom": "",
+            "eyebrow_weight": "800",
+            "eyebrow_size_desktop": 20,
+            "eyebrow_size_mobile": 14,
+            "heading_font": "inherit",
+            "heading_font_custom": "",
+            "heading_weight": "800",
+            "heading_size_desktop": 36,
+            "heading_size_mobile": 32,
+            "subtext_font": "inherit",
+            "subtext_font_custom": "",
+            "subtext_weight": "400",
+            "subtext_size_desktop": 18,
+            "subtext_size_mobile": 14,
+            "eyebrow": "OUR BEST FIRST-MONTH VALUE",
+            "heading": "Build your Cacao routine.",
+            "subtext": "Choose one, two, or three 30-day bags. Subscription includes your welcome kit."
+          }
+        },
+        "bb_gallery": {
+          "type": "gallery",
+          "settings": {
+            "font_family": "inherit",
+            "custom_font": "",
+            "badge_font": "inherit",
+            "badge_font_custom": "",
+            "badge_weight": "800",
+            "badge_size_desktop": 11,
+            "badge_size_mobile": 11,
+            "nutrition_font": "inherit",
+            "nutrition_font_custom": "",
+            "nutrition_weight": "700",
+            "nutrition_size_desktop": 13,
+            "nutrition_size_mobile": 13,
+            "media_source": "product",
+            "main_aspect_ratio": "square",
+            "thumbnail_count": "5",
+            "image_alt": "30-Day Cacao Bulk Bag",
+            "save_badge_image": "shopify://shop_images/BUY_MORE_WBP.webp",
+            "save_badge_size": 120,
+            "save_badge_size_mobile": 76,
+            "save_badge": "SAVE\n$33.00",
+            "nutrition_link": "",
+            "nutrition_btn_label": "View Nutrition Label"
+          }
+        },
+        "bb_product_info": {
+          "type": "product_info",
+          "settings": {
+            "font_family": "manrope",
+            "custom_font": "",
+            "urgency_font": "inherit",
+            "urgency_font_custom": "",
+            "urgency_weight": "700",
+            "urgency_size_desktop": 16,
+            "urgency_size_mobile": 14,
+            "rating_font": "inherit",
+            "rating_font_custom": "",
+            "rating_weight": "600",
+            "rating_size_desktop": 16,
+            "rating_size_mobile": 12,
+            "title_font": "inherit",
+            "title_font_custom": "",
+            "title_weight": "800",
+            "title_size_desktop": 28,
+            "title_size_mobile": 24,
+            "chip_font": "inherit",
+            "chip_font_custom": "",
+            "chip_weight": "600",
+            "chip_size_desktop": 16,
+            "chip_size_mobile": 13,
+            "urgency_icon": "shopify://shop_images/Gift_Png_-Wbp_8.5kb.webp",
+            "urgency_icon_size": 22,
+            "urgency_text": "Order by September 20th for 61% off with free gifts!",
+            "urgency_accent": "September 20th",
+            "rating_score": "4.98/5.0",
+            "rating_count": "134",
+            "customers_label": "1M+ Customers",
+            "product_title": "30-Day Cacao Bulk Bag",
+            "chip_icon_size": 25,
+            "chip_1": "23g protein",
+            "chip_1_icon": "shopify://shop_images/1-ezgif.com-png-to-webp-converter.webp",
+            "chip_2": "Six ingredients",
+            "chip_2_icon": "shopify://shop_images/3-ezgif.com-png-to-webp-converter.webp",
+            "chip_3": "Zero sugar",
+            "chip_3_icon": "shopify://shop_images/2-ezgif.com-png-to-webp-converter_1.webp",
+            "chip_4": "30 servings",
+            "chip_4_icon": "shopify://shop_images/30_Calendar.webp"
+          }
+        },
+        "bb_offer": {
+          "type": "buy_box",
+          "settings": {
+            "font_family": "inherit",
+            "custom_font": "",
+            "bag_font": "inherit",
+            "bag_font_custom": "",
+            "bag_weight": "700",
+            "bag_size_desktop": 16,
+            "bag_size_mobile": 16,
+            "plan_title_font": "inherit",
+            "plan_title_font_custom": "",
+            "plan_title_weight": "800",
+            "plan_title_size_desktop": 16,
+            "plan_title_size_mobile": 16,
+            "plan_meta_font": "inherit",
+            "plan_meta_font_custom": "",
+            "plan_meta_weight": "500",
+            "plan_meta_size_desktop": 14,
+            "plan_meta_size_mobile": 11,
+            "plan_price_font": "inherit",
+            "plan_price_font_custom": "",
+            "plan_price_weight": "800",
+            "plan_price_size_desktop": 22,
+            "plan_price_size_mobile": 18,
+            "kit_font": "inherit",
+            "kit_font_custom": "",
+            "kit_weight": "400",
+            "kit_size_desktop": 16,
+            "kit_size_mobile": 16,
+            "banner_font": "inherit",
+            "banner_font_custom": "",
+            "banner_weight": "800",
+            "banner_size_desktop": 10,
+            "banner_size_mobile": 10,
+            "renew_font": "inherit",
+            "renew_font_custom": "",
+            "renew_weight": "400",
+            "renew_size_desktop": 10,
+            "renew_size_mobile": 10,
+            "perk_font": "inherit",
+            "perk_font_custom": "",
+            "perk_weight": "600",
+            "perk_size_desktop": 11,
+            "perk_size_mobile": 10,
+            "kit_badge_font": "inherit",
+            "kit_badge_font_custom": "",
+            "kit_badge_weight": "700",
+            "kit_badge_size_desktop": 15,
+            "kit_badge_size_mobile": 13,
+            "kit_lock_font": "inherit",
+            "kit_lock_font_custom": "",
+            "kit_lock_weight": "600",
+            "kit_lock_size_desktop": 11,
+            "kit_lock_size_mobile": 11,
+            "guarantee_font": "inherit",
+            "guarantee_font_custom": "",
+            "guarantee_weight": "800",
+            "guarantee_size_desktop": 12,
+            "guarantee_size_mobile": 12,
+            "sub_title": "Subscribe & Save",
+            "once_title": "One-Time Purchase",
+            "once_meta": "1 bag, delivered once",
+            "perk_icon_size": 16,
+            "sub_perk_1_text": "Save-A-Scoop",
+            "sub_perk_1_icon": "shopify://shop_images/scoop_2.png",
+            "sub_perk_2_text": "3 digital guides",
+            "sub_perk_2_icon": "shopify://shop_images/Guides_Wbp.webp",
+            "sub_perk_3_text": "Free black shaker",
+            "sub_perk_3_icon": "shopify://shop_images/Shaker_Png_-Wbp_8.31kb.webp",
+            "sub_perk_4_text": "Pause or cancel",
+            "sub_perk_4_icon": "shopify://shop_images/Pause.webp",
+            "once_includes": "Save-A-Scoop + 3 guides (first Bulk Bag order)",
+            "once_includes_icon": "shopify://shop_images/scoop_2.png",
+            "once_excludes": "Black shaker is first subscription order only",
+            "once_excludes_icon": "shopify://shop_images/Shaker_Png_-Wbp_8.31kb.webp",
+            "kit_heading": "FREE WELCOME KIT",
+            "kit_value": "$62.98 VALUE",
+            "kit_scoop_image": "shopify://shop_images/Save_a_Scoop_Image_-_Png_-Wbp_94kb.webp",
+            "kit_scoop_height": 78,
+            "kit_scoop_height_mobile": 60,
+            "kit_scoop_label": "Save-A-Scoop",
+            "kit_guides_image": "shopify://shop_images/Starterguide_webp.webp",
+            "kit_guides_height": 78,
+            "kit_guides_height_mobile": 60,
+            "kit_guides_label": "3 Digital Guides",
+            "kit_shaker_image": "shopify://shop_images/Shaker_Image_Png_-Wbp_79.33kb.webp",
+            "kit_shaker_height": 78,
+            "kit_shaker_height_mobile": 60,
+            "kit_shaker_label": "CleanBlend Shaker"
+          }
+        },
+        "bb_cta": {
+          "type": "cta",
+          "settings": {
+            "font_family": "inherit",
+            "custom_font": "",
+            "cta_font": "inherit",
+            "cta_font_custom": "",
+            "cta_weight": "800",
+            "cta_size_desktop": 18,
+            "cta_size_mobile": 16,
+            "note_font": "inherit",
+            "note_font_custom": "",
+            "note_weight": "800",
+            "note_size_desktop": 12,
+            "note_size_mobile": 11,
+            "trust_font": "inherit",
+            "trust_font_custom": "",
+            "trust_weight": "600",
+            "trust_size_desktop": 11,
+            "trust_size_mobile": 11,
+            "cta_prefix": "Start Now",
+            "after_add_action": "drawer",
+            "discount_icon": "shopify://shop_images/Discoount_tag.webp",
+            "discount_icon_size": 16,
+            "discount_note": "Discount auto-applied",
+            "guarantee_pill": "<span>Less than 1%</span> of customers use our Money-Back Guarantee",
+            "trust_icon_size": 26,
+            "trust_1_icon": "shopify://shop_images/30_Dyas.webp",
+            "trust_1": "30-Day Money-Back Guarantee",
+            "trust_2_icon": "shopify://shop_images/Trucdds.webp",
+            "trust_2": "Ships in 1-2 Business Days"
+          }
+        },
+        "bb_faq": {
+          "type": "faq",
+          "settings": {
+            "font_family": "inherit",
+            "custom_font": "",
+            "question_font": "inherit",
+            "question_font_custom": "",
+            "question_weight": "700",
+            "question_size_desktop": 15,
+            "question_size_mobile": 14,
+            "answer_font": "inherit",
+            "answer_font_custom": "",
+            "answer_weight": "500",
+            "answer_size_desktop": 14,
+            "answer_size_mobile": 13,
+            "question_1": "How does the subscription work?",
+            "answer_1": "<p>Choose how many bags you want and Subscribe & Save. Your first order ships at the first-order price, then renews automatically at the renew price on your chosen schedule. You can pause or cancel anytime before the next billing date.</p>",
+            "question_2": "When will my order arrive?",
+            "answer_2": "<p>Orders typically ship within 1–2 business days. Delivery time depends on your location and carrier. You’ll get tracking once your order ships.</p>",
+            "question_3": "What is the return policy?",
+            "answer_3": "<p>You’re covered by our 30-day money-back guarantee. If it’s not a fit, contact us within 30 days of delivery and we’ll help make it right.</p>",
+            "question_4": "Can I pause or cancel anytime?",
+            "answer_4": "<p>Yes. Manage your subscription anytime from your account or the link in your order emails, pause, skip, or cancel before your next renewal with no lock-in.</p>",
+            "question_5": "Are the gifts really free?",
+            "answer_5": "<p>Yes. Save-A-Scoop ships free with your first Bulk Bag order. The 3 digital guides are emailed after purchase (not shipped, and not re-sent on subscription renewals). The free black shaker is included on your first subscription order only. Intro pricing and welcome gifts are for new customers, once per customer.</p>"
+          }
+        },
+        "bb_tiers": {
+          "type": "pricing_tiers",
+          "settings": {
+            "show_tier_4": false,
+            "tier1_label": "1 bag",
+            "tier1_badge": "Most Popular",
+            "tier1_save": "Save 30%",
+            "tier1_first_price": "76.99",
+            "tier1_renew_price": "99.99",
+            "tier1_meta": "1 bag every 30 days - $2.57 per serving",
+            "tier1_renew_note": "then $99.99 every 30 days",
+            "tier1_once_price": "109.99",
+            "tier1_once_save": "",
+            "tier1_selling_plan_id": "6565560533",
+            "tier2_label": "2 bags",
+            "tier2_badge": "Stock Up",
+            "tier2_save": "Save 32%",
+            "tier2_first_price": "149.98",
+            "tier2_renew_price": "179.98",
+            "tier2_meta": "2 bags every 60 days - $2.50 per serving",
+            "tier2_renew_note": "then $179.98 every 60 days",
+            "tier2_once_price": "199.98",
+            "tier2_once_save": "Save $20 (9%)",
+            "tier2_selling_plan_id": "6565593301",
+            "tier3_label": "3 bags",
+            "tier3_badge": "Best Value",
+            "tier3_save": "Save 33%",
+            "tier3_first_price": "219.99",
+            "tier3_renew_price": "239.97",
+            "tier3_meta": "3 bags every 90 days - $2.44 per serving",
+            "tier3_renew_note": "then $239.97 every 90 days",
+            "tier3_once_price": "269.97",
+            "tier3_once_save": "Save $60 (18%)",
+            "tier3_selling_plan_id": "6565626069",
+            "tier4_label": "4 bags",
+            "tier4_badge": "Max Savings",
+            "tier4_save": "Save 35%",
+            "tier4_first_price": "285.00",
+            "tier4_renew_price": "299.96",
+            "tier4_meta": "4 bags every 120 days - $2.37 per serving",
+            "tier4_renew_note": "then $299.96 every 120 days",
+            "tier4_once_price": "339.96",
+            "tier4_once_save": "Save $100 (23%)",
+            "tier4_selling_plan_id": "6565658837"
+          }
+        }
+      },
+      "block_order": [
+        "bb_header",
+        "bb_gallery",
+        "bb_product_info",
+        "bb_offer",
+        "bb_cta",
+        "bb_faq",
+        "bb_tiers"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "Buy Box Cacao LP",
+      "settings": {
+        "product": "gid://shopify/product/15398808027349",
+        "shaker_product": "zeotein-cleanblend-shaker-27oz-usa-made",
+        "default_plan": "sub",
+        "bg_color": "#fcfbfe",
+        "accent_color": "#580d93",
+        "ink_color": "#1e1734",
+        "font_family": "manrope",
+        "custom_font": "",
+        "content_width": 1280,
+        "padding_top": 80,
+        "padding_bottom": 64
+      }
+    },
+    "one_scoop_cacao_lp_FE3pxW": {
+      "type": "one-scoop-cacao-lp",
+      "name": "One Scoop Cacao LP",
+      "settings": {
+        "bg_color": "#6b1fb8",
+        "accent_color": "#00c9b8",
+        "text_color": "#ffffff",
+        "cta_bg_color": "#00c9b8",
+        "cta_text_color": "#3b0a6b",
+        "bg_image": "shopify://shop_images/Z_Overlay.webp",
+        "bg_image_mobile": "shopify://shop_images/Zeotein_Wbp.webp",
+        "bg_shade_color": "#000000",
+        "bg_shade": 0,
+        "eyebrow": "EVERYTHING IN ONE SERVING.",
+        "heading": "Make your routine easier to keep.",
+        "body": "One serving covers grass-fed bone broth protein, collagen and functional fats.",
+        "body_mobile": "One serving covers grass-fed bone broth protein, collagen and functional fats.",
+        "cta_label": "Claim My 55% Off",
+        "cta_link": "",
+        "product_image": "shopify://shop_images/Zeotein_Bag_PNG_-WBP_71.8_Kb.webp",
+        "content_width": 1200,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "font_family": "manrope",
+        "eyebrow_font": "manrope",
+        "eyebrow_font_custom": "",
+        "eyebrow_weight": "800",
+        "eyebrow_size_desktop": 15,
+        "eyebrow_size_mobile": 14,
+        "heading_font": "manrope",
+        "heading_font_custom": "",
+        "heading_weight": "600",
+        "heading_size_desktop": 52,
+        "heading_size_mobile": 28,
+        "body_font": "manrope",
+        "body_font_custom": "",
+        "body_weight": "400",
+        "body_size_desktop": 16,
+        "body_size_mobile": 14,
+        "cta_font": "inherit",
+        "cta_font_custom": "",
+        "cta_weight": "600",
+        "cta_size_desktop": 18,
+        "cta_size_mobile": 15
+      }
+    },
+    "real_customers_cacao_lp_9xwn9t": {
+      "type": "real-customers-cacao-lp",
+      "blocks": {
+        "tab_4znfkL": {
+          "type": "tab",
+          "settings": {
+            "label": "Taste",
+            "text_count": 3,
+            "text_1_stars": 5,
+            "text_1_title": "Just what I wanted",
+            "text_1_body": "I was looking for a clean protein that didn’t taste chalky. Zeotein Cacao is smooth, filling, and easy to stick with every morning.",
+            "text_1_name": "Traci P.",
+            "text_2_stars": 5,
+            "text_2_title": "Smooth Cacao without the sugar rush",
+            "text_2_body": "It tastes great and the ingredients are clean. It has genuinely become part of my morning routine, the Cacao flavor is rich without being too sweet and mixes smoothly with oat milk.",
+            "text_2_name": "Melissa M.",
+            "text_3_stars": 5,
+            "text_3_title": "Simple ingredients, smooth chocolate",
+            "text_3_body": "I love that Zeotein gives me protein and collagen in one convenient serving without making my routine complicated. It blends beautifully with oat milk, and the cacao taste is rich without being overwhelming.",
+            "text_3_name": "Nicole R.",
+            "text_4_stars": 5,
+            "text_4_title": "",
+            "text_4_body": "",
+            "text_4_name": "",
+            "text_5_stars": 5,
+            "text_5_title": "",
+            "text_5_body": "",
+            "text_5_name": "",
+            "text_6_stars": 5,
+            "text_6_title": "",
+            "text_6_body": "",
+            "text_6_name": ""
+          },
+          "blocks": {}
+        },
+        "tab_jML64P": {
+          "type": "tab",
+          "settings": {
+            "label": "Value",
+            "text_count": 3,
+            "text_1_stars": 5,
+            "text_1_title": "Worth every scoop",
+            "text_1_body": "I stopped buying separate collagen and protein. One bag covers my morning and the price per serving feels fair for how clean it is.",
+            "text_1_name": "Alicia K.",
+            "text_2_stars": 5,
+            "text_2_title": "Better value than stacking tubs",
+            "text_2_body": "I used to spend more piecing together powders. Zeotein simplified my cart and my routine without cutting corners on quality.",
+            "text_2_name": "Chris D.",
+            "text_3_stars": 5,
+            "text_3_title": "Gift kit sealed the deal",
+            "text_3_body": "Between the first-order savings and the welcome kit, trying Cacao felt low-risk, and I kept the subscription.",
+            "text_3_name": "Priya S.",
+            "text_4_stars": 5,
+            "text_4_title": "",
+            "text_4_body": "",
+            "text_4_name": "",
+            "text_5_stars": 5,
+            "text_5_title": "",
+            "text_5_body": "",
+            "text_5_name": "",
+            "text_6_stars": 5,
+            "text_6_title": "",
+            "text_6_body": "",
+            "text_6_name": ""
+          },
+          "blocks": {}
+        },
+        "tab_bztMc9": {
+          "type": "tab",
+          "settings": {
+            "label": "Vs Powders",
+            "text_count": 3,
+            "text_1_stars": 5,
+            "text_1_title": "The easiest protein routine I’ve ever kept up with.",
+            "text_1_body": "I’ve tried a few protein powders, but most felt complicated or had long ingredient lists. Zeotein keeps it simple with 23g of protein and six intentional ingredients in one serving. I mix it with almond milk, and the creamy cacao flavor makes it easy to enjoy every morning.",
+            "text_1_name": "Rebecca D.",
+            "text_2_stars": 5,
+            "text_2_title": "Finally, a simple daily nutrition option.",
+            "text_2_body": "I wanted something practical that I could add to my routine without mixing several different products. Two scoops of Zeotein with water takes less than a minute, and I like knowing I’m getting protein and collagen in the same serving.",
+            "text_2_name": "Lauren P.",
+            "text_3_stars": 5,
+            "text_3_title": "Great for a quick shake at home.",
+            "text_3_body": "I like that Zeotein can be mixed with water or blended into a smoothie, depending on what I feel like that day. The cacao flavor is rich without being overwhelming, and the powder blends especially well with frozen berries and almond milk.",
+            "text_3_name": "Marcus W.",
+            "text_4_stars": 5,
+            "text_4_title": "",
+            "text_4_body": "",
+            "text_4_name": "",
+            "text_5_stars": 5,
+            "text_5_title": "",
+            "text_5_body": "",
+            "text_5_name": "",
+            "text_6_stars": 5,
+            "text_6_title": "",
+            "text_6_body": "",
+            "text_6_name": ""
+          },
+          "blocks": {}
+        },
+        "tab_rfnCWj": {
+          "type": "tab",
+          "settings": {
+            "label": "Benefits",
+            "text_count": 3,
+            "text_1_stars": 5,
+            "text_1_title": "A simple way to add more to my day",
+            "text_1_body": "I like that Zeotein brings protein and collagen together in one easy serving. It makes my daily shake feel simple and intentional, without adding a lot of steps to my routine.”",
+            "text_1_name": "Casey M.",
+            "text_2_stars": 5,
+            "text_2_title": "Convenient nutrition, without the fuss",
+            "text_2_body": "Having 23g of protein in a cacao shake makes it easy to fit into my day. I can mix it with milk or blend it into a smoothie, depending on what I’m in the mood for.",
+            "text_2_name": "Alexa S.",
+            "text_3_stars": 5,
+            "text_3_title": "A routine I can keep up with",
+            "text_3_body": "I wanted a straightforward protein option with a short ingredient list. Zeotein is easy to prepare and the creamy chocolate flavor makes it enjoyable as part of my everyday routine.",
+            "text_3_name": "Riley S.",
+            "text_4_stars": 5,
+            "text_4_title": "",
+            "text_4_body": "",
+            "text_4_name": "",
+            "text_5_stars": 5,
+            "text_5_title": "",
+            "text_5_body": "",
+            "text_5_name": "",
+            "text_6_stars": 5,
+            "text_6_title": "",
+            "text_6_body": "",
+            "text_6_name": ""
+          },
+          "blocks": {}
+        },
+        "tab_ADxFWa": {
+          "type": "tab",
+          "settings": {
+            "label": "Ingredients",
+            "text_count": 3,
+            "text_1_stars": 5,
+            "text_1_title": "A convenient shake with a thoughtful formula.",
+            "text_1_body": "I was looking for a protein powder with a more intentional ingredient list, and Zeotein stood out to me. The cacao flavor is creamy and easy to enjoy, whether I mix it with water or turn it into a smoothie.",
+            "text_1_name": "Kylie J.",
+            "text_2_stars": 5,
+            "text_2_title": "Simple ingredients and a seriously smooth chocolate flavor.",
+            "text_2_body": "I love that Zeotein gives me protein and collagen in one convenient serving without making my routine complicated. It blends beautifully with oat milk, and the cacao taste is rich without being overwhelming.",
+            "text_2_name": "Nicole R.",
+            "text_3_stars": 5,
+            "text_3_title": "A routine I can keep up with",
+            "text_3_body": "I wanted a straightforward protein option with a short ingredient list. Zeotein is easy to prepare and the creamy chocolate flavor makes it enjoyable as part of my everyday routine.",
+            "text_3_name": "Riley S.",
+            "text_4_stars": 5,
+            "text_4_title": "",
+            "text_4_body": "",
+            "text_4_name": "",
+            "text_5_stars": 5,
+            "text_5_title": "",
+            "text_5_body": "",
+            "text_5_name": "",
+            "text_6_stars": 5,
+            "text_6_title": "",
+            "text_6_body": "",
+            "text_6_name": ""
+          },
+          "blocks": {}
+        },
+        "tab_LkkikQ": {
+          "type": "tab",
+          "settings": {
+            "label": "Convenience",
+            "text_count": 1,
+            "text_1_stars": 5,
+            "text_1_title": "So easy to fit into my busy mornings.",
+            "text_1_body": "I mix Zeotein Cacao with milk, give it a quick shake, and I’m ready to go. It’s a simple way to add 23g of protein to my morning without making breakfast complicated.",
+            "text_1_name": "Ava A.",
+            "text_2_stars": 5,
+            "text_2_title": "",
+            "text_2_body": "",
+            "text_2_name": "",
+            "text_3_stars": 5,
+            "text_3_title": "",
+            "text_3_body": "",
+            "text_3_name": "",
+            "text_4_stars": 5,
+            "text_4_title": "",
+            "text_4_body": "",
+            "text_4_name": "",
+            "text_5_stars": 5,
+            "text_5_title": "",
+            "text_5_body": "",
+            "text_5_name": "",
+            "text_6_stars": 5,
+            "text_6_title": "",
+            "text_6_body": "",
+            "text_6_name": ""
+          },
+          "blocks": {}
+        },
+        "type-rc": {
+          "type": "cacao-type-rc",
+          "static": true,
+          "settings": {
+            "font_family": "manrope",
+            "custom_font": "",
+            "heading_font": "manrope",
+            "heading_font_custom": "",
+            "heading_weight": "700",
+            "heading_size_desktop": 40,
+            "heading_size_mobile": 30,
+            "rating_font": "manrope",
+            "rating_font_custom": "",
+            "rating_weight": "600",
+            "rating_size_desktop": 15,
+            "rating_size_mobile": 14,
+            "tab_font": "manrope",
+            "tab_font_custom": "",
+            "tab_weight": "700",
+            "tab_size_desktop": 15,
+            "tab_size_mobile": 14,
+            "review_title_font": "manrope",
+            "review_title_font_custom": "",
+            "review_title_weight": "800",
+            "review_title_size_desktop": 18,
+            "review_title_size_mobile": 16,
+            "review_body_font": "manrope",
+            "review_body_font_custom": "",
+            "review_body_weight": "400",
+            "review_body_size_desktop": 15,
+            "review_body_size_mobile": 14,
+            "author_font": "manrope",
+            "author_font_custom": "",
+            "author_weight": "800",
+            "author_size_desktop": 15,
+            "author_size_mobile": 14
+          },
+          "blocks": {}
+        },
+        "type-rc-2": {
+          "type": "cacao-type-rc-2",
+          "static": true,
+          "settings": {
+            "disclaimer_font": "manrope",
+            "disclaimer_font_custom": "",
+            "disclaimer_weight": "400",
+            "disclaimer_size_desktop": 12,
+            "disclaimer_size_mobile": 12,
+            "video_badge_font": "manrope",
+            "video_badge_font_custom": "",
+            "video_badge_weight": "800",
+            "video_badge_size_desktop": 10,
+            "video_badge_size_mobile": 10
+          },
+          "blocks": {}
+        },
+        "video-row": {
+          "type": "cacao-rc-videos",
+          "static": true,
+          "settings": {
+            "columns_desktop": 5,
+            "columns_mobile": 2,
+            "gap": 12
+          },
+          "blocks": {
+            "cacao_rc_image_T74a9B": {
+              "type": "cacao-rc-image",
+              "name": "Image card",
+              "settings": {
+                "label": "",
+                "image": "shopify://shop_images/3_4.png",
+                "aspect_ratio": "square",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "cacao_rc_image_tcNV9W": {
+              "type": "cacao-rc-image",
+              "name": "Image card",
+              "settings": {
+                "label": "",
+                "image": "shopify://shop_images/1_3.png",
+                "aspect_ratio": "square",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "cacao_rc_image_Qi7EJA": {
+              "type": "cacao-rc-image",
+              "name": "Image card",
+              "settings": {
+                "label": "",
+                "image": "shopify://shop_images/5_2.png",
+                "aspect_ratio": "square",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "cacao_rc_image_mtx8bn": {
+              "type": "cacao-rc-image",
+              "name": "Image card",
+              "settings": {
+                "label": "",
+                "image": "shopify://shop_images/4_2.png",
+                "aspect_ratio": "square",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "cacao_rc_image_zrFGWK": {
+              "type": "cacao-rc-image",
+              "name": "Image card",
+              "settings": {
+                "label": "",
+                "image": "shopify://shop_images/2_3.png",
+                "aspect_ratio": "square",
+                "link": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "cacao_rc_image_T74a9B",
+            "cacao_rc_image_tcNV9W",
+            "cacao_rc_image_Qi7EJA",
+            "cacao_rc_image_mtx8bn",
+            "cacao_rc_image_zrFGWK"
+          ]
+        }
+      },
+      "block_order": [
+        "tab_4znfkL",
+        "tab_jML64P",
+        "tab_bztMc9",
+        "tab_rfnCWj",
+        "tab_ADxFWa",
+        "tab_LkkikQ"
+      ],
+      "name": "Real Customers Cacao LP",
+      "settings": {
+        "bg_color": "#d5fbf6",
+        "heading_color": "#580d93",
+        "text_color": "#1e1734",
+        "muted_color": "#6b6b80",
+        "star_color": "#008159",
+        "tab_active_color": "#580d93",
+        "tab_border_color": "#1e1734",
+        "badge_color": "#00c9b8",
+        "play_color": "#580d93",
+        "rating_label": "4.98 stars",
+        "heading": "Real Customers. Real Cacao Routines.",
+        "disclaimer": "Customer experiences are personal and individual results may vary.",
+        "text_columns_desktop": 3,
+        "video_columns_desktop": 5,
+        "video_columns_mobile": 2,
+        "content_width": 1280,
+        "padding_top": 72,
+        "padding_bottom": 56
+      }
+    },
+    "us_vs_them_cacao_lp_9LRj3R": {
+      "type": "us-vs-them-cacao-lp",
+      "blocks": {
+        "type-uvt": {
+          "type": "cacao-type-uvt",
+          "static": true,
+          "settings": {
+            "font_family": "manrope",
+            "custom_font": "",
+            "heading_font": "manrope",
+            "heading_font_custom": "",
+            "heading_weight": "700",
+            "heading_size_desktop": 44,
+            "heading_size_mobile": 32,
+            "body_font": "manrope",
+            "body_font_custom": "",
+            "body_weight": "400",
+            "body_size_desktop": 20,
+            "body_size_mobile": 14,
+            "cell_font": "manrope",
+            "cell_font_custom": "",
+            "cell_weight": "700",
+            "cell_size_desktop": 16,
+            "cell_size_mobile": 14,
+            "label_font": "manrope",
+            "label_font_custom": "",
+            "label_weight": "700",
+            "label_size_desktop": 16,
+            "label_size_mobile": 14,
+            "feat_title_font": "manrope",
+            "feat_title_font_custom": "",
+            "feat_title_weight": "700",
+            "feat_title_size_desktop": 16,
+            "feat_title_size_mobile": 14,
+            "feat_sub_font": "manrope",
+            "feat_sub_font_custom": "",
+            "feat_sub_weight": "700",
+            "feat_sub_size_desktop": 16,
+            "feat_sub_size_mobile": 8
+          },
+          "blocks": {}
+        },
+        "type-uvt-2": {
+          "type": "cacao-type-uvt-2",
+          "static": true,
+          "settings": {
+            "comp_label_font": "manrope",
+            "comp_label_font_custom": "",
+            "comp_label_weight": "700",
+            "comp_label_size_desktop": 16,
+            "comp_label_size_mobile": 9,
+            "accent_value_font": "manrope",
+            "accent_value_font_custom": "",
+            "accent_value_weight": "700",
+            "accent_value_size_desktop": 16,
+            "accent_value_size_mobile": 14,
+            "note_font": "manrope",
+            "note_font_custom": "",
+            "note_weight": "400",
+            "note_size_desktop": 14,
+            "note_size_mobile": 12
+          },
+          "blocks": {}
+        }
+      },
+      "name": "Us vs Them Cacao LP",
+      "settings": {
+        "eyebrow": "HOW IT COMPARES",
+        "compare_rows": "Protein source|Usually whey|Grass-fed beef bone broth\nCollagen|Bought separately|14g in every serving\nHealthy fat|Bought separately|Organic MCT oil powder\nSugar|Varies|Zero\nGluten and dairy free|Varies|Both\nIngredient list|Varies|6, every one named",
+        "bg_color": "#f7f7f9",
+        "heading_color": "#580d93",
+        "body_color": "#5b5b71",
+        "ink_color": "#1e1734",
+        "border_color": "#1e1734",
+        "featured_bg": "#580d93",
+        "featured_text_color": "#ffffff",
+        "accent_color": "#00c9b8",
+        "check_bg": "#00c9b8",
+        "check_icon_color": "#0b2f4a",
+        "cross_bg": "#1e1734",
+        "cross_icon_color": "#ffffff",
+        "note_color": "#9a9aab",
+        "heading": "Not Your Typical Protein Powder.",
+        "body": "What you get in every serving, next to what most tubs give you.",
+        "footnote": "",
+        "featured_title": "Zeotein Cacao",
+        "featured_subtitle": "",
+        "comp1_label": "Typical protein powder",
+        "comp1_icon_preset": "dumbbell",
+        "comp1_icon": "shopify://shop_images/Dumbel_500px_8.4_kb.webp",
+        "comp2_label": "multiple supplement tubs",
+        "comp2_icon_preset": "boxes",
+        "comp2_icon": "shopify://shop_images/Box_7.71kb.webp",
+        "content_width": 1180,
+        "padding_top": 72,
+        "padding_bottom": 64
+      }
+    },
+    "customer_story_cacao_lp_YBqfLP": {
+      "type": "customer-story-cacao-lp",
+      "name": "Customer Story Cacao LP",
+      "settings": {
+        "bg_color": "#ffffff",
+        "ink_color": "#1e1734",
+        "body_color": "#5b5b71",
+        "muted_color": "#9a9aab",
+        "cta_bg_color": "#00c9b8",
+        "cta_text_color": "#1e1734",
+        "shadow_color": "#1e1734",
+        "image": "shopify://shop_images/Andrea_K..webp",
+        "image_radius": 14,
+        "image_ratio": "square",
+        "quote": "I love that it makes better nutrition easier to work into my day.",
+        "auto_quotes": true,
+        "body": "As someone who trains hard and travels often, I’m always looking for ways to stay sharp and fuel my body without overcomplicating it. Zeotein uses clean ingredients that actually deliver, and I love that it makes better nutrition easier to work into my day, whether you’re training at the highest level or just trying to make good choices every day.",
+        "name": "Andrea K.",
+        "meta": "Verified Zeotein customer · 3x marathon finisher",
+        "disclaimer": "Andrea is a paid Zeotein partner and still uses Zeotein on every long run.",
+        "cta_label": "Claim My 55% Off",
+        "cta_link": "",
+        "content_width": 1120,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "font_family": "manrope",
+        "custom_font": "",
+        "quote_weight": "700",
+        "quote_size_desktop": 32,
+        "quote_size_mobile": 24,
+        "body_weight": "400",
+        "body_size_desktop": 16,
+        "body_size_mobile": 14,
+        "name_weight": "800",
+        "name_size_desktop": 18,
+        "name_size_mobile": 16,
+        "cta_weight": "800",
+        "cta_size_desktop": 18,
+        "cta_size_mobile": 16,
+        "meta_weight": "400",
+        "meta_size_desktop": 14,
+        "meta_size_mobile": 14,
+        "disclaimer_weight": "400",
+        "disclaimer_size_desktop": 12
+      }
+    },
+    "risk_free_cacao_lp_hH9BC6": {
+      "type": "risk-free-cacao-lp",
+      "blocks": {
+        "type-rf": {
+          "type": "cacao-type-rf",
+          "static": true,
+          "settings": {
+            "font_family": "manrope",
+            "custom_font": "",
+            "heading_font": "manrope",
+            "heading_font_custom": "",
+            "heading_weight": "600",
+            "heading_size_desktop": 44,
+            "heading_size_mobile": 30,
+            "body_font": "manrope",
+            "body_font_custom": "",
+            "body_weight": "400",
+            "body_size_desktop": 16,
+            "body_size_mobile": 14,
+            "cta_font": "manrope",
+            "cta_font_custom": "",
+            "cta_weight": "700",
+            "cta_size_desktop": 16,
+            "cta_size_mobile": 15,
+            "seal_font": "inherit",
+            "seal_font_custom": "",
+            "seal_weight": "800",
+            "seal_size_desktop": 16,
+            "seal_size_mobile": 14,
+            "eyebrow_font": "manrope",
+            "eyebrow_font_custom": "",
+            "eyebrow_weight": "700",
+            "eyebrow_size_desktop": 12,
+            "eyebrow_size_mobile": 11
+          },
+          "blocks": {}
+        }
+      },
+      "name": "Risk Free Cacao LP",
+      "settings": {
+        "bg_color": "#580d93",
+        "text_color": "#ffffff",
+        "accent_color": "#009c96",
+        "badge_text_color": "#3b0a6b",
+        "cta_bg_color": "#009c96",
+        "cta_text_color": "#1e1734",
+        "overlay_color": "#580d93",
+        "overlay_opacity": 55,
+        "show_badge": true,
+        "badge_image": "shopify://shop_images/Untitled_design_5.png",
+        "badge_knockout_white": false,
+        "badge_text": "",
+        "badge_size": 260,
+        "badge_size_mobile": 160,
+        "eyebrow": "30-DAY MONEY-BACK GUARANTEE",
+        "heading": "Try It Risk-Free.",
+        "body": "Drink your first bag. If it is not for you within 30 days of delivery, we will refund it. No hoops.",
+        "cta_label": "Claim My 55% Off",
+        "cta_link": "",
+        "content_width": 720,
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    },
+    "faq_cacao_lp_6zCNeE": {
+      "type": "faq-cacao-lp",
+      "blocks": {
+        "item_cacao_faq_1": {
+          "type": "item",
+          "settings": {
+            "question": "What comes in my Starter Kit?",
+            "answer": "A 30-day bulk bag (30 servings), a CleanBlend shaker, a Save-A-Scoop, and three digital guides emailed after you order: the Zeotein Starter Guide, the Cacao Recipe Guide and the Vegan Recipe Guide.",
+            "open_by_default": false
+          }
+        },
+        "item_cacao_faq_2": {
+          "type": "item",
+          "settings": {
+            "question": "What do I pay after my first order?",
+            "answer": "$99.99 per delivery. It ships every 30 days, and you can switch to every 6 or 8 weeks in your portal.",
+            "open_by_default": false
+          }
+        },
+        "item_cacao_faq_3": {
+          "type": "item",
+          "settings": {
+            "question": "What does it taste like?",
+            "answer": "This is what clean tastes like: real organic fermented cacao, zero sugar. Most people shake it with milk, oat milk or into a smoothie. Your recipe guides have more ideas.",
+            "open_by_default": false
+          }
+        },
+        "item_cacao_faq_4": {
+          "type": "item",
+          "settings": {
+            "question": "Is this a whey protein?",
+            "answer": "No. The protein comes from grass-fed beef bone broth and grass-fed collagen peptides.",
+            "open_by_default": false
+          }
+        },
+        "item_cacao_faq_ingredients": {
+          "type": "item",
+          "settings": {
+            "question": "What are the six ingredients?",
+            "answer": "Grass-fed collagen peptides, grass-fed beef bone broth, organic fermented cacao, organic MCT oil powder, zeolite mineral, and organic purple and gold sea moss. Every ingredient is named on the label.",
+            "open_by_default": false
+          }
+        },
+        "item_cacao_faq_5": {
+          "type": "item",
+          "settings": {
+            "question": "Is it gluten free and dairy free?",
+            "answer": "Yes. Zeotein Cacao is gluten free and dairy free.",
+            "open_by_default": false
+          }
+        },
+        "item_cacao_faq_6": {
+          "type": "item",
+          "settings": {
+            "question": "When does it ship?",
+            "answer": "Orders ship in 1 to 2 business days. Standard U.S. shipping takes 2 to 5 business days after that.",
+            "open_by_default": false
+          }
+        },
+        "item_cacao_faq_7": {
+          "type": "item",
+          "settings": {
+            "question": "Can I pause or cancel?",
+            "answer": "Yes. Pause, skip, change your date or cancel anytime in your customer portal.",
+            "open_by_default": false
+          }
+        },
+        "item_cacao_faq_8": {
+          "type": "item",
+          "settings": {
+            "question": "How does the guarantee work?",
+            "answer": "Drink your first bag. If it is not for you within 30 days of delivery, email hello@zeotein.com and we will refund it.",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "item_cacao_faq_1",
+        "item_cacao_faq_2",
+        "item_cacao_faq_3",
+        "item_cacao_faq_4",
+        "item_cacao_faq_ingredients",
+        "item_cacao_faq_5",
+        "item_cacao_faq_6",
+        "item_cacao_faq_7",
+        "item_cacao_faq_8"
+      ],
+      "name": "FAQ Cacao LP",
+      "settings": {
+        "bg_color": "#e6f7f4",
+        "eyebrow_color": "#6b2db8",
+        "heading_color": "#14121f",
+        "question_color": "#14121f",
+        "answer_color": "#4a4458",
+        "divider_color": "#c9ddd8",
+        "icon_color": "#14121f",
+        "eyebrow": "ANY LAST QUESTIONS?",
+        "heading": "Everything before your first serving.",
+        "open_first": false,
+        "content_width": 1180,
+        "padding_top": 88,
+        "padding_bottom": 88,
+        "font_family": "manrope",
+        "custom_font": "",
+        "heading_font": "manrope",
+        "heading_font_custom": "",
+        "heading_weight": "700",
+        "heading_size_desktop": 44,
+        "heading_size_mobile": 30,
+        "question_font": "manrope",
+        "question_font_custom": "",
+        "question_weight": "700",
+        "question_size_desktop": 18,
+        "question_size_mobile": 16,
+        "answer_font": "manrope",
+        "answer_font_custom": "",
+        "answer_weight": "400",
+        "answer_size_desktop": 16,
+        "answer_size_mobile": 14,
+        "eyebrow_font": "inherit",
+        "eyebrow_font_custom": "",
+        "eyebrow_weight": "800",
+        "eyebrow_size_desktop": 12,
+        "eyebrow_size_mobile": 11
+      }
+    },
+    "1768838317647a13f3": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_cPkXxp": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_cPkXxp"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "cacao_lp_reviews_jdgm": {
+      "type": "cacao-lp-reviews",
+      "settings": {
+        "heading": "Reviews"
+      }
+    },
+    "sticky_offer_cacao_lp_raf1": {
+      "type": "sticky-offer-cacao-lp",
+      "settings": {
+        "enable": true,
+        "button_label": "Claim My 55% Off",
+        "mobile_only": true,
+        "mobile_max_width": 750,
+        "hide_over_buybox": true,
+        "buybox_selector": ".zt-bb2",
+        "dock_below_footer": true,
+        "scroll_target_id": "zt-bb2-offer",
+        "scroll_fallback_id": "purchase",
+        "body_padding": true,
+        "enable_fade": true,
+        "fade_ms": 280,
+        "show_bar_gradient": true,
+        "bar_background": "#fcfbfd",
+        "bar_fade_color": "#fcfbfd",
+        "end_bar_background": "#fcfbfd",
+        "bar_padding_x": 16,
+        "bar_padding_y": 12,
+        "z_index": 40,
+        "button_background": "#580d93",
+        "button_background_end": "#3d0a66",
+        "button_text_color": "#ffffff",
+        "button_radius": 12,
+        "button_font_size": 17,
+        "button_font_weight": "700",
+        "button_min_height": 52,
+        "button_padding_x": 18,
+        "button_padding_y": 14,
+        "button_shadow": true,
+        "button_shadow_color": "#580d93",
+        "focus_ring_color": "#1aa6a0"
+      }
+    }
+  },
+  "order": [
+    "hero_banner_cacao_lp_WkQKMw",
+    "marquee_cacao_lp_BrtQjQ",
+    "daily_routine_cacao_lp_FbdPWk",
+    "nutrition_gaps_cacao_lp_Fnd4MX",
+    "whats_inside_cacao_lp_mfzH3R",
+    "buy_box_cacao_lp_v2_k9n3zd",
+    "buy_box_cacao_lp_Jyard4",
+    "one_scoop_cacao_lp_FE3pxW",
+    "real_customers_cacao_lp_9xwn9t",
+    "us_vs_them_cacao_lp_9LRj3R",
+    "customer_story_cacao_lp_YBqfLP",
+    "risk_free_cacao_lp_hH9BC6",
+    "faq_cacao_lp_6zCNeE",
+    "1768838317647a13f3",
+    "cacao_lp_reviews_jdgm",
+    "sticky_offer_cacao_lp_raf1"
+  ]
+}

@@ -1,0 +1,323 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_jfXkaH": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "seal_subscriptions_subscription_widget_XhxCaM": {
+          "type": "shopify://apps/seal-subscriptions/blocks/subscription-widget/13b25004-a140-4ab7-b5fe-29918f759699",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "text_denenW": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Included with every order: both our Cacao and Vegan recipe guides, sent to your inbox as soon as you order.",
+            "text_style": "body"
+          }
+        },
+        "text_ULgrKF": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Creamy chocolate flavor with a lightly cacao-forward taste.",
+            "text_style": "body"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "icon_with_text_aRigQD": {
+          "type": "icon-with-text",
+          "disabled": true,
+          "settings": {
+            "layout": "vertical",
+            "icon_1": "lock",
+            "image_1": "shopify://shop_images/zeotein-leaf-teal.png",
+            "heading_1": "6 Intentional Ingredients",
+            "icon_2": "plant",
+            "image_2": "shopify://shop_images/zeotein-truck-teal.png",
+            "heading_2": "Ships in 1–2 Business Days",
+            "icon_3": "truck",
+            "image_3": "shopify://shop_images/zeotein-shield-check-teal.png",
+            "heading_3": "30-Day Money-Back Guarantee"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "text_PJyiQ4": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<strong>Same 30 servings, $25 less. </strong><a href=\"/products/zeotein-cacao-30-day-bulk-powder\" target=\"_blank\" title=\"Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth\">Zeotein Cacao Bulk Bag →</a>",
+            "text_style": "body"
+          }
+        },
+        "text_i7VNN7": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<strong>New to Zeotein? </strong><a href=\"/products/zeotein-protein-cacao\" target=\"_blank\" title=\"Zeotein Cacao Protein Powder - 7 Stick Packs, Collagen & Bone Broth\">Try the 7-Day Pack →</a>",
+            "text_style": "body"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible_tab_jNbWFq": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Ingredients",
+            "icon": "none",
+            "content": "<ul><li>Organic Hydrolyzed Bovine Collagen Peptides</li><li>Beef Bone Broth Protein</li><li>Organic Fermented Cacao Powder</li><li>Organic MCT Oil Powder</li><li>Zeolite (Clinoptilolite)</li><li>Organic Sea Moss</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_M4C4HP": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Benefits",
+            "icon": "none",
+            "content": "<ul><li><strong>All-In-One Daily Format</strong><br/>Protein and six intentional ingredients in a single serving.</li><li><strong>Simple Ingredient List<br/></strong>A short, purposeful ingredient list that's easy to understand.</li><li><strong>Easy Daily Routine</strong><br/>One convenient daily serving that's simple to mix at home.</li><li><strong>Made for Everyday Use<br/></strong>A convenient format for your everyday Zeotein routine.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_CGD3BP": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "How to Use",
+            "icon": "none",
+            "content": "<ul><li>Mix <strong>one serving (1 stick pack)</strong> with<strong> 10–12 oz</strong> of water, milk, or your favorite milk alternative.</li><li>Shake well or blend into a smoothie</li><li>Enjoy <strong>once daily</strong>, or as directed.<br/></li></ul><p><strong>Tip:</strong> For a creamier taste, blend with a banana or frozen berries.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_YJbWnM": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Supplement Facts",
+            "icon": "none",
+            "content": "<p><strong>SUPPLEMENT FACTS</strong><br/><br/>Zeotein Cacao – Supplement Facts</p><p>Serving Size: 1 Stick Pack (38.7 g)</p><p><strong>Amount Per Serving</strong></p><p>Calories: 140<br/>Total Fat: 3 g – 4%<br/>Saturated Fat: 2.5 g – 13%<br/>Sodium: 420 mg – 18%<br/>Total Carbohydrate: 2 g – 1%<br/>Dietary Fiber: 1 g – 4%<br/>Total Sugars: 0 g<br/>Protein: 23 g</p><p>Zeotein Cacao Protein Blend – 38.7 g †</p><p>† Daily Value not established.<br/>* Percent Daily Values are based on a 2,000 calorie diet.</p>",
+            "page": ""
+          }
+        },
+        "text_zt_gc_free7day": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Free Cacao 7-Day</strong> when you spend $50 or more on gift cards.",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "judge_me_reviews_preview_badge_jfXkaH",
+        "price",
+        "seal_subscriptions_subscription_widget_XhxCaM",
+        "text_denenW",
+        "text_ULgrKF",
+        "variant_picker",
+        "text_zt_gc_free7day",
+        "quantity_selector",
+        "icon_with_text_aRigQD",
+        "buy_buttons",
+        "text_PJyiQ4",
+        "text_i7VNN7",
+        "description",
+        "collapsible_tab_jNbWFq",
+        "collapsible_tab_M4C4HP",
+        "collapsible_tab_CGD3BP",
+        "collapsible_tab_YJbWnM"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "image_with_text_cp9ar3": {
+      "type": "image-with-text",
+      "disabled": true,
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "eyebrow": "What you're actually getting.",
+        "title_white": "THE LABEL.",
+        "title_teal": "All six ingredients...",
+        "subhead": "Whole-food shoppers read every panel. So here’s ours — up front.",
+        "stat_1_number": "23g",
+        "stat_1_text": "Protein",
+        "stat_2_number": "SINGLE-SERVE",
+        "stat_2_text": "Packets",
+        "stat_3_number": "140",
+        "stat_3_text": "Calories",
+        "stat_4_number": "6",
+        "stat_4_text": "Ingredients",
+        "badge_1": "Easy Daily Routine",
+        "badge_2": "Travel-Friendly",
+        "badge_3": "Single-Serve Format",
+        "badge_4": "Ingredient Transparency",
+        "image": "shopify://shop_images/supplement_facts.png",
+        "ingredients_text": "Organic Hydrolyzed Bovine Collagen Peptides, Beef Bone Broth Protein, Organic Fermented Cacao Powder, Organic MCT Oil Powder, Zeolite, Organic Sea Moss."
+      }
+    },
+    "multicolumn_3fd3PL": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_3FpGjm": {
+          "type": "column",
+          "settings": {
+            "title": "23G PROTEIN + PURPOSEFUL INGREDIENTS",
+            "text": "<p>Meaningful protein and thoughtfully selected ingredients for your everyday routine.</p>"
+          }
+        },
+        "column_yYmx6G": {
+          "type": "column",
+          "settings": {
+            "title": "SIMPLE DAILY NUTRITION",
+            "text": "<p>Protein and purposeful ingredients in an easy daily format.</p>"
+          }
+        },
+        "column_4Jp6yD": {
+          "type": "column",
+          "settings": {
+            "title": "SIX INTENTIONAL INGREDIENTS",
+            "text": "<p>A short, purposeful ingredient list designed to keep your daily nutrition simple.</p>"
+          }
+        },
+        "column_zUX9yQ": {
+          "type": "column",
+          "settings": {
+            "title": "SIMPLE & CONVENIENT",
+            "text": "<p>A convenient format that makes it easy to mix Zeotein into your daily routine.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_3FpGjm",
+        "column_yYmx6G",
+        "column_4Jp6yD",
+        "column_zUX9yQ"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title_white": "REAL NUTRITION",
+        "title_teal": "MADE SIMPLE...",
+        "subhead": "Get protein, collagen, and intentional ingredients in one convenient daily serving.",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "collapsible_content_B8Cq6z": {
+      "type": "collapsible-content",
+      "disabled": true,
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "eyebrow": "QUESTIONS, ANSWERED",
+        "heading": "FAQ's",
+        "intro": "Everything you need to know before making Zeotein part of your routine.",
+        "shipping_guarantee_url": "",
+        "bottom_text": "Still have a question?",
+        "bottom_link_text": "Contact Zeotein"
+      }
+    },
+    "1768838317647a13f3": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_cPkXxp": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_cPkXxp"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "image_with_text_cp9ar3",
+    "multicolumn_3fd3PL",
+    "collapsible_content_B8Cq6z",
+    "1768838317647a13f3"
+  ]
+}

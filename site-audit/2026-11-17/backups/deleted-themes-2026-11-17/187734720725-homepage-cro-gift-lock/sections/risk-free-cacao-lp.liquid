@@ -1,0 +1,486 @@
+{%- liquid
+  assign sid = 'zt-rf-' | append: section.id
+  assign cta_href = section.settings.cta_link | default: '#purchase'
+  assign overlay_color = section.settings.overlay_color | default: '#5a148c'
+  assign overlay_alpha = section.settings.overlay_opacity | default: 55 | times: 1.0 | divided_by: 100
+  assign bg_desktop = section.settings.bg_image
+  assign bg_mobile = section.settings.bg_image_mobile
+  if bg_desktop == blank
+    assign bg_desktop = bg_mobile
+  endif
+  if bg_mobile == blank
+    assign bg_mobile = bg_desktop
+  endif
+-%}
+
+{% content_for 'block', type: 'cacao-type-rf', id: 'type-rf' %}
+
+{{ 'risk-free-cacao-lp.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="{{ sid }}"
+  class="zt-rf"
+  {{ section.shopify_attributes }}
+  style="
+    --zt-rf-bg: {{ section.settings.bg_color }};
+    --zt-rf-text: {{ section.settings.text_color }};
+    --zt-rf-accent: {{ section.settings.accent_color }};
+    --zt-rf-badge-text: {{ section.settings.badge_text_color }};
+    --zt-rf-cta-bg: {{ section.settings.cta_bg_color }};
+    --zt-rf-cta-text: {{ section.settings.cta_text_color }};
+    --zt-rf-overlay: {{ overlay_color | color_modify: 'alpha', overlay_alpha }};
+    --zt-rf-max-width: {{ section.settings.content_width | default: 720 }}px;
+    --zt-rf-pad-top: {{ section.settings.padding_top }}px;
+    --zt-rf-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --zt-rf-badge-size: {{ section.settings.badge_size }}px;
+    --zt-rf-badge-size-m: {{ section.settings.badge_size_mobile }}px;
+  "
+>
+  {%- if bg_desktop != blank or bg_mobile != blank -%}
+    <div class="zt-rf__bg" aria-hidden="true">
+      {%- if bg_desktop != blank -%}
+        {{
+          bg_desktop
+          | image_url: width: 2400
+          | image_tag:
+            class: 'zt-rf__bg-img zt-rf__bg-img--desktop',
+            loading: 'lazy',
+            widths: '800, 1200, 1600, 2400',
+            sizes: '100vw',
+            alt: ''
+        }}
+      {%- endif -%}
+      {%- if bg_mobile != blank -%}
+        {{
+          bg_mobile
+          | image_url: width: 1200
+          | image_tag:
+            class: 'zt-rf__bg-img zt-rf__bg-img--mobile',
+            loading: 'lazy',
+            widths: '400, 700, 1000, 1200',
+            sizes: '100vw',
+            alt: ''
+        }}
+      {%- endif -%}
+      <div class="zt-rf__shade"></div>
+    </div>
+  {%- endif -%}
+
+  <div class="zt-rf__inner">
+    {%- if section.settings.show_badge -%}
+      {%- liquid
+        assign badge_class = 'zt-rf__badge'
+        assign badge_knockout = false
+        if section.settings.badge_image != blank
+          assign badge_class = badge_class | append: ' zt-rf__badge--image'
+          if section.settings.badge_knockout_white
+            assign badge_knockout = true
+            assign badge_class = badge_class | append: ' zt-rf__badge--knockout'
+          endif
+        endif
+      -%}
+      <div class="{{ badge_class }}">
+        {%- if section.settings.badge_image != blank -%}
+          {%- if badge_knockout -%}
+            {%- assign badge_src = section.settings.badge_image | image_url: width: 800 -%}
+            <span
+              class="zt-rf__badge-img zt-rf__badge-img--knockout"
+              role="img"
+              aria-label="{{ section.settings.badge_text | escape }}"
+              style="background-image: url('{{ badge_src }}');"
+            ></span>
+          {%- else -%}
+            {{
+              section.settings.badge_image
+              | image_url: width: 800
+              | image_tag:
+                class: 'zt-rf__badge-img',
+                loading: 'lazy',
+                widths: '160, 240, 360, 520, 800',
+                sizes: '(min-width: 750px) 360px, 280px',
+                alt: section.settings.badge_text
+            }}
+          {%- endif -%}
+        {%- else -%}
+          <div class="zt-rf__badge-fallback">
+            {%- if section.settings.badge_text != blank -%}
+              <p class="zt-rf__badge-text">{{ section.settings.badge_text | escape | newline_to_br }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="zt-rf__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="zt-rf__heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.body != blank -%}
+      <p class="zt-rf__body">{{ section.settings.body | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.cta_label != blank -%}
+      <a class="zt-rf__cta" href="{{ cta_href }}">
+        <span>{{ section.settings.cta_label | escape }}</span>
+        <svg class="zt-rf__cta-arrow" viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true">
+          <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    if (window.ztRfCtaScroll) return;
+    window.ztRfCtaScroll = true;
+
+    document.addEventListener('click', function (event) {
+      var link = event.target.closest('.zt-rf__cta');
+      if (!link) return;
+
+      var href = link.getAttribute('href') || '';
+      if (href.charAt(0) !== '#') return;
+
+      var target = document.getElementById(href.slice(1));
+      if (!target) return;
+
+      event.preventDefault();
+
+      if (href === '#purchase' && typeof window.ztScrollToCacaoOffer === 'function') {
+        window.ztScrollToCacaoOffer({ frameKey: 'ztRfCtaFrame' });
+        return;
+      }
+
+      var start = window.scrollY || window.pageYOffset;
+      var margin = parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+      var end = target.getBoundingClientRect().top + start - margin;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (window.ztRfCtaFrame) {
+        window.cancelAnimationFrame(window.ztRfCtaFrame);
+        window.ztRfCtaFrame = 0;
+      }
+
+      if (reduce || Math.abs(end - start) < 2) {
+        window.scrollTo(0, end);
+        if (window.history.replaceState) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        return;
+      }
+
+      var duration = 1300;
+      var startTime = null;
+
+      function ease(t) {
+        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      }
+
+      function finish(cancelled) {
+        window.removeEventListener('wheel', cancel);
+        window.removeEventListener('touchstart', cancel);
+        window.ztRfCtaFrame = 0;
+        if (!cancelled && window.history.replaceState) {
+          window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+      }
+
+      function cancel() {
+        if (window.ztRfCtaFrame) window.cancelAnimationFrame(window.ztRfCtaFrame);
+        finish(true);
+      }
+
+      function step(now) {
+        if (startTime === null) startTime = now;
+        var progress = Math.min(1, (now - startTime) / duration);
+        window.scrollTo(0, start + (end - start) * ease(progress));
+        if (progress < 1) {
+          window.ztRfCtaFrame = window.requestAnimationFrame(step);
+        } else {
+          finish(false);
+        }
+      }
+
+      window.addEventListener('wheel', cancel, { passive: true });
+      window.addEventListener('touchstart', cancel, { passive: true });
+      window.ztRfCtaFrame = window.requestAnimationFrame(step);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Risk Free Cacao LP",
+  "tag": "section",
+  "class": "section-risk-free-cacao-lp",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#580d93"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Badge / accent",
+      "default": "#009c96"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#3b0a6b"
+    },
+    {
+      "type": "color",
+      "id": "cta_bg_color",
+      "label": "CTA background",
+      "default": "#009c96"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "CTA text",
+      "default": "#1e1734"
+    },
+    {
+      "type": "header",
+      "content": "Background imagery"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image - desktop",
+      "info": "Product bags / cacao scene behind the copy."
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Background image - mobile",
+      "info": "Optional. Falls back to desktop background."
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#580d93"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 55
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_image",
+      "label": "Badge image",
+      "info": "Optional. If empty, a teal circle with text is used. Prefer a PNG with transparent background."
+    },
+    {
+      "type": "checkbox",
+      "id": "badge_knockout_white",
+      "label": "Remove white square from badge image",
+      "default": false,
+      "info": "Turn ON to hide white squares in badge uploads. Turn OFF if your badge is already a transparent PNG."
+    },
+    {
+      "type": "textarea",
+      "id": "badge_text",
+      "label": "Badge text (fallback)",
+      "info": "Use a line break for two lines (e.g. 30 / DAYS)."
+    },
+    {
+      "type": "range",
+      "id": "badge_size",
+      "label": "Badge size - desktop",
+      "min": 60,
+      "max": 360,
+      "step": 4,
+      "unit": "px",
+      "default": 260
+    },
+    {
+      "type": "range",
+      "id": "badge_size_mobile",
+      "label": "Badge size - mobile",
+      "min": 52,
+      "max": 280,
+      "step": 4,
+      "unit": "px",
+      "default": 160
+    },
+    {
+      "type": "header",
+      "content": "Copy"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "TRY IT WITHOUT THE PRESSURE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your routine, risk-free."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "If Zeotein Cacao is not the right fit, your first order is covered by our 30-day satisfaction guarantee."
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Claim My 55% Off"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link",
+      "info": "Leave empty to scroll to the buy box. Add a link to send people somewhere else."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 480,
+      "max": 960,
+      "step": 20,
+      "unit": "px",
+      "default": 720
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Risk Free Cacao LP",
+      "category": "Cacao LP",
+      "settings": {
+        "bg_color": "#580d93",
+        "text_color": "#ffffff",
+        "accent_color": "#009c96",
+        "badge_text_color": "#3b0a6b",
+        "cta_bg_color": "#009c96",
+        "cta_text_color": "#1e1734",
+        "overlay_color": "#580d93",
+        "overlay_opacity": 55,
+        "show_badge": true,
+        "badge_image": "shopify://shop_images/Untitled_design_5.png",
+        "badge_knockout_white": false,
+        "badge_text": "",
+        "badge_size": 260,
+        "badge_size_mobile": 160,
+        "eyebrow": "TRY IT WITHOUT THE PRESSURE",
+        "heading": "Your routine, risk-free.",
+        "body": "If Zeotein Cacao is not the right fit, your first order is covered by our 30-day satisfaction guarantee.",
+        "cta_label": "Claim My 55% Off",
+        "cta_link": "",
+        "content_width": 720,
+        "padding_top": 20,
+        "padding_bottom": 60
+      },
+      "blocks": [
+        {
+          "type": "cacao-type-rf",
+          "id": "type-rf",
+          "static": true,
+          "settings": {
+            "font_family": "manrope",
+            "custom_font": "",
+            "heading_font": "manrope",
+            "heading_font_custom": "",
+            "heading_weight": "600",
+            "heading_size_desktop": 44,
+            "heading_size_mobile": 30,
+            "body_font": "manrope",
+            "body_font_custom": "",
+            "body_weight": "400",
+            "body_size_desktop": 16,
+            "body_size_mobile": 14,
+            "cta_font": "manrope",
+            "cta_font_custom": "",
+            "cta_weight": "700",
+            "cta_size_desktop": 16,
+            "cta_size_mobile": 15,
+            "seal_font": "inherit",
+            "seal_font_custom": "",
+            "seal_weight": "800",
+            "seal_size_desktop": 16,
+            "seal_size_mobile": 14,
+            "eyebrow_font": "manrope",
+            "eyebrow_font_custom": "",
+            "eyebrow_weight": "700",
+            "eyebrow_size_desktop": 12,
+            "eyebrow_size_mobile": 11
+          }
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cacao-type-rf"
+    }
+  ]
+}
+{% endschema %}

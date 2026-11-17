@@ -1,0 +1,2981 @@
+
+
+{% liquid
+  assign order = 'logo,menu,localization,search,drawer_search,actions'
+
+  if shop.customer_accounts_enabled
+    assign order = 'drawer_search,logo,menu,localization,search,actions'
+  endif
+
+  assign rows = 'top,bottom' | split: ','
+  assign search_style = 'none'
+
+  if section.settings.show_search
+    assign search_style = 'modal'
+  endif
+
+  if section.settings.show_search
+    render 'slideshow-styles'
+  endif
+
+  if section.settings.enable_transparent_header_home and template.name == 'index'
+    assign transparent = 'always'
+    assign transparent_text_color_setting = section.settings.text_color_transparent_home
+  elsif section.settings.enable_transparent_header_product and template.name == 'product'
+    assign transparent = 'always'
+    assign transparent_text_color_setting = section.settings.text_color_transparent_product
+  elsif section.settings.enable_transparent_header_collection and template.name == 'collection'
+    assign transparent = 'always'
+    assign transparent_text_color_setting = section.settings.text_color_transparent_collection
+  endif
+
+  if section.settings.enable_sticky_header == 'always'
+    assign sticky = 'always'
+  elsif section.settings.enable_sticky_header == 'scroll-up'
+    assign sticky = 'scroll-up'
+  endif
+
+  if transparent and sticky
+    assign transparent = 'not-sticky'
+  endif
+
+  assign text_color_transparent = transparent_text_color_setting | default: settings.page_text_color
+  assign transparent_text_brightness = text_color_transparent | color_brightness
+  if transparent_text_brightness > 128
+    assign transparent_text_contrast = 'var(--palette-darkest)'
+  else
+    assign transparent_text_contrast = 'var(--palette-lightest)'
+  endif
+
+  # Cart bubble colors: custom styles apply in every header state; default
+  # mirrors the top row's effective text color, with a contrasting text color.
+  if section.settings.bubble_style == 'custom' or section.settings.text_color_top != blank or section.settings.background_color_top != blank
+    assign cart_bubble_color_override = true
+  endif
+  if cart_bubble_color_override
+    if section.settings.bubble_style == 'custom'
+      assign cart_bubble_background = section.settings.bubble_background_color | default: section.settings.text_color_top | default: settings.page_text_color
+      assign cart_bubble_text = section.settings.bubble_text_color | default: section.settings.background_color_top | default: settings.page_background_color
+    elsif section.settings.text_color_top != blank
+      assign cart_bubble_background = section.settings.text_color_top
+      if section.settings.background_color_top != blank
+        assign cart_bubble_text = section.settings.background_color_top
+      else
+        assign cart_bubble_bg_brightness = cart_bubble_background | color_brightness
+        if cart_bubble_bg_brightness > 128
+          assign cart_bubble_text = 'var(--palette-darkest)'
+        else
+          assign cart_bubble_text = 'var(--palette-lightest)'
+        endif
+      endif
+    elsif section.settings.background_color_top != blank
+      assign bg_top = section.settings.background_color_top
+      assign bg_top_brightness = bg_top | color_brightness
+      assign cart_bubble_text = bg_top
+      if bg_top_brightness > 128
+        assign cart_bubble_background = 'var(--palette-darkest)'
+      else
+        assign cart_bubble_background = 'var(--palette-lightest)'
+      endif
+    endif
+  endif
+
+  capture logo
+    content_for 'block', type: '_header-logo', id: 'header-logo'
+  endcapture
+
+  capture menu
+    content_for 'block', type: '_header-menu-custom', id: 'header-menu'
+  endcapture
+
+  capture drawer_menu
+    content_for 'block', type: '_header-menu-custom', id: 'header-menu', variant: 'mobile'
+  endcapture
+
+  capture navigation_bar
+    content_for 'block', type: '_header-menu-custom', id: 'header-menu', variant: 'navigation_bar', transparent: transparent
+  endcapture
+
+  assign has_navigation_bar = false
+  if navigation_bar contains 'data-navigation-bar-enabled'
+    assign has_navigation_bar = true
+  endif
+
+  capture actions
+    render 'header-custom-actions', customer_account_menu: section.settings.customer_account_menu, display_style: section.settings.actions_display_style, section: section
+  endcapture
+
+  if shop.customer_accounts_enabled
+    assign search_class = 'search-action--hidden-on-drawer'
+  endif
+
+  # Handle localization positioning
+  if section.settings.localization_position == 'left'
+    if section.settings.search_position == 'left'
+      if shop.customer_accounts_enabled
+        assign order = 'drawer_search,logo,search,localization,menu,actions'
+      else
+        assign order = 'logo,search,localization,menu,drawer_search,actions'
+      endif
+    else
+      if shop.customer_accounts_enabled
+        assign order = 'drawer_search,logo,localization,menu,search,actions'
+      else
+        assign order = 'logo,localization,menu,search,drawer_search,actions'
+      endif
+    endif
+  else
+    if section.settings.search_position == 'left'
+      if shop.customer_accounts_enabled
+        assign order = 'drawer_search,logo,search,menu,localization,actions'
+      else
+        assign order = 'logo,search,menu,localization,drawer_search,actions'
+      endif
+    endif
+  endif
+  capture search
+    render 'header-custom-search', style: search_style, class: search_class, display_style: section.settings.actions_display_style
+  endcapture
+
+  # Skip drawer search under specific conditions:
+  # Always render if search_row is bottom
+  # Don't render when shop.customer_accounts_enabled is false and search_position is left and search_style is not none
+  assign skip_drawer_search = false
+  if shop.customer_accounts_enabled == false and section.settings.search_position == 'left' and search_style != 'none'
+    assign skip_drawer_search = true
+  endif
+
+  if section.settings.search_row == 'bottom' or search_style != 'none' and skip_drawer_search == false
+    # Mobile search duplicate for when search is not in the right order for mobile layout
+    capture drawer_search
+      render 'header-custom-search', class: 'search-action--hidden-on-menu', style: search_style, display_style: section.settings.actions_display_style
+    endcapture
+  endif
+
+  assign show_language = section.settings.show_language
+  if localization.available_languages.size <= 1
+    assign show_language = false
+  endif
+
+  assign show_country = section.settings.show_country
+  if localization.available_countries.size <= 1
+    assign show_country = false
+  endif
+
+  if section.settings.show_market_selector == false
+    assign show_country = false
+    assign show_language = false
+  endif
+
+  assign bottom_row_blocks = ''
+
+  if section.settings.menu_row == 'bottom'
+    assign bottom_row_blocks = bottom_row_blocks | append: 'menu,'
+  endif
+
+  if section.settings.show_search
+    if section.settings.search_row == 'bottom'
+      assign bottom_row_blocks = bottom_row_blocks | append: 'search,'
+    endif
+  endif
+
+  if section.settings.show_country or section.settings.show_language
+    if section.settings.localization_row == 'bottom'
+      assign bottom_row_blocks = bottom_row_blocks | append: 'localization,'
+    endif
+  endif
+
+  assign bottom_row_blocks = bottom_row_blocks | split: ',' | compact
+
+  assign has_second_row = false
+  if bottom_row_blocks.size > 0
+    assign has_second_row = true
+  endif
+
+  if section.settings.section_height == 'compact'
+    assign header_height_class = ' header--compact'
+  endif
+
+  if bottom_row_blocks.size > 0 and section.settings.background_color_top == section.settings.background_color_bottom and section.settings.divider_width == 0
+    assign collapse_header_paddings_class = 'header--collapse-row-paddings'
+  endif
+
+  assign class = 'header'
+
+  if header_height_class
+    assign class = class | append: ' ' | append: header_height_class
+  endif
+
+  if collapse_header_paddings_class
+    assign class = class | append: ' ' | append: collapse_header_paddings_class
+  endif
+
+  # Determine transparent background value
+  assign top_transparent = false
+  assign bottom_transparent = false
+
+  # Only explicit colors make a row transparent
+  assign top_row_color = section.settings.background_color_top
+  assign bottom_row_color = section.settings.background_color_bottom
+
+  if top_row_color != blank and top_row_color.alpha != 1
+    assign top_transparent = true
+  endif
+
+  if bottom_row_color != blank and bottom_row_color.alpha != 1 and has_second_row
+    assign bottom_transparent = true
+  endif
+
+  if top_transparent and bottom_transparent
+    assign background_transparent_color_value = 'both'
+  elsif top_transparent
+    assign background_transparent_color_value = 'top'
+  elsif bottom_transparent
+    assign background_transparent_color_value = 'bottom'
+  endif
+%}
+
+{% capture localization_markup %}
+  {% liquid
+    assign localization_font_choice = section.settings.localization_font | default: 'heading'
+    assign localization_size_choice = section.settings.localization_font_size | default: '1rem'
+    assign localization_font = '--menu-localization-font: var(--font-[localization_font]--family); ' | replace: '[localization_font]', localization_font_choice
+    assign localization_font_size = '--menu-localization-font-size: [localization_font_size]; ' | replace: '[localization_font_size]', localization_size_choice
+    assign color_shadow = '--color-shadow: rgb(var(--color-foreground-rgb) / var(--opacity-10-25));'
+    assign form_style = localization_font | append: localization_font_size | append: color_shadow
+  %}
+  {% if show_language and show_country == false %}
+    <div class="dropdown-localization mobile:hidden">
+      {% render 'localization-form',
+        show_country: show_country,
+        show_language: show_language,
+        localization_style: 'dropdown',
+        form_style: form_style,
+        form_id: section.id
+      %}
+    </div>
+  {% elsif show_country %}
+    <dropdown-localization-component
+      class="dropdown-localization mobile:hidden"
+    >
+      <button
+        type="button"
+        class="button dropdown-localization__button localization-selector header-actions__action"
+        aria-expanded="false"
+        aria-controls="dropdown-localization-results"
+        ref="button"
+        on:click="/toggleSelector"
+        style="{{ localization_font }} {{ localization_font_size }}"
+      >
+        {% if show_country %}
+          {% if section.settings.country_selector_style == true %}
+            {% assign localization_background_color = 'background_color_[row]' | replace: '[row]', section.settings.localization_row %}
+            {% liquid
+              assign background_brightness = section.settings[localization_background_color] | color_brightness
+              if background_brightness < 64
+                assign shadow_size = 4
+              else
+                assign shadow_size = 2
+              endif
+            %}
+            <span
+              class="icon-flag"
+              style="
+                background-image: url({{- localization.country | image_url: width: 32 }});
+                --size-shadow: {{ shadow_size }}px;
+                --color-shadow: rgb(var(--color-foreground-rgb) / var(--opacity-30-60));
+              "
+            ></span>
+          {% endif %}
+          <span
+            class="currency-code"
+            data-testid="localization-currency-code"
+          >
+            {{- localization.country.currency.iso_code -}}
+          </span>
+        {% endif %}
+        <span
+          class="visually-hidden"
+          data-testid="localization-visually-hidden"
+        >
+          {{- 'accessibility.localization_region_and_language' | t -}}
+        </span>
+
+        {%- if show_country and show_language -%}
+          <span>/</span>
+        {%- endif -%}
+
+        {%- if show_language -%}
+          <span>
+            {{ localization.language.iso_code | upcase }}
+          </span>
+        {%- endif -%}
+        {%- if section.settings.show_localization_caret -%}
+          <span class="svg-wrapper icon-caret">
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </span>
+        {%- endif -%}
+      </button>
+
+      <div
+        class="localization-wrapper {{ section.settings.localization_position }}-bound color-custom-popover"
+        hidden
+        ref="panel"
+      >
+        {% render 'localization-form',
+          show_country: show_country,
+          show_language: show_language,
+          localization_style: 'dropdown',
+          form_style: form_style,
+          form_id: section.id
+        %}
+      </div>
+    </dropdown-localization-component>
+  {% endif %}
+{% endcapture %}
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if settings.logo %}
+      "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    {% endif %}
+    "url": {{ request.origin | append: page.url | json }}
+  }
+</script>
+
+<header-component
+  id="header-component"
+  class="{{ class }} zt-header{% if section.settings.logo != blank %} zt-header--has-logo{% endif %}"
+  data-theme-color="rgb({{ section.settings.background_color_top.rgb | default: settings.page_background_color.rgb }})"
+  data-bubble-style="{{ section.settings.bubble_style }}"
+  {% if transparent %}
+    transparent="{{ transparent }}"
+  {% endif %}
+  {% if sticky %}
+    sticky="{{ sticky }}"
+  {% endif %}
+  data-skip-node-update
+  data-scroll-direction="none"
+  {% if section.settings.menu_row == 'top' and bottom_row_blocks.size > 0 %}
+    data-submenu-overlap-bottom-row
+  {% endif %}
+  {% if background_transparent_color_value %}
+    data-transparent-background="{{ background_transparent_color_value }}"
+  {% endif %}
+  {% if has_second_row == false %}
+    data-header-rows="single"
+  {% endif %}
+  style="
+    --color-background-top-row: rgba({{ section.settings.background_color_top.rgba | default: settings.page_background_color.rgba }});
+    --color-background-bottom-row: rgba({{ section.settings.background_color_bottom.rgba | default: settings.page_background_color.rgba }});
+    {% if transparent and text_color_transparent != blank %}
+      --color-transparent-text: {{ text_color_transparent }};
+      --color-transparent-text-rgb: {{ text_color_transparent.rgb }};
+      --color-transparent-text-contrast: {{ transparent_text_contrast }};
+    {% endif %}
+    {% if cart_bubble_color_override %}
+      --cart-bubble-background: {{ cart_bubble_background }};
+      --cart-bubble-text: {{ cart_bubble_text }};
+    {% endif %}
+    {% if section.settings.actions_display_style == 'text' %}
+      --header-actions-font-size: {{ section.settings.actions_font_size | default: '1rem' }};
+      --header-actions-font-family: var(--font-{{ section.settings.actions_font | default: 'heading' }}--family);
+      --header-actions-font-weight: var(--font-{{ section.settings.actions_font | default: 'heading' }}--weight);
+      --header-actions-text-case: {{ section.settings.actions_text_case | default: 'none' }};
+    {% endif %}
+    --zt-layout-width: {{ section.settings.layout_width | default: 2000 }}px;
+  "
+>
+  <div class="header__underlay header__underlay-closed"></div>
+  <div
+    class="header__underlay header__underlay-open"
+  ></div>
+  {%- if request.page_type == 'index' -%}
+    <h1 class="visually-hidden">{{ shop.name }}</h1>
+  {%- endif -%}
+  {% for row in rows %}
+    {% liquid
+      assign background = 'background_color_' | append: row
+      assign row_setting = 'background_color_' | append: row
+      assign text_setting = 'text_color_' | append: row
+      assign row_class_id = row | append: '-' | append: section.id
+      assign row_class = ' color-custom-' | append: row_class_id
+      assign class = 'header__row header__row--[row] color-[row_background] section section--full-width-margin section--[section-width]' | replace: '[row]', row | replace: '[row_background]', section.settings[background] | replace: '[section-width]', section.settings.section_width
+
+      case row
+        when 'top'
+          assign first = drawer_menu
+
+          if bottom_row_blocks.size > 0 and section.settings.divider_size == 'page-width'
+            assign class = class | append: ' divider--page-width'
+          endif
+
+          if bottom_row_blocks.size > 0
+            assign border_bottom_setting_id = 'divider_width'
+            assign border_bottom_color_setting_id = 'divider_color'
+          else
+            assign border_bottom_setting_id = 'border_width'
+            assign border_bottom_color_setting_id = 'bottom_border_color'
+          endif
+        when 'bottom'
+          assign first = ''
+          assign class = class | append: ' mobile:hidden'
+
+          assign border_bottom_setting_id = 'border_width'
+          assign border_bottom_color_setting_id = 'bottom_border_color'
+      endcase
+
+      assign style = '--border-bottom-width: [width]px; ' | replace: '[width]', section.settings[border_bottom_setting_id]
+
+      assign border_bottom_color_value = section.settings[border_bottom_color_setting_id]
+      if border_bottom_color_value != blank
+        assign style = style | append: '--border-bottom-color: [color]; ' | replace: '[color]', border_bottom_color_value
+      endif
+
+      if row == 'top'
+        assign custom_color_styles = true
+        assign class = class | append: row_class
+        assign style = style | append: '--border-bottom-width-mobile: [width]px; ' | replace: '[width]', section.settings.border_width
+
+        assign mobile_border_color = section.settings.bottom_border_color | default: 'var(--color-border)'
+        assign style = style | append: '--border-bottom-color-mobile: [color]; ' | replace: '[color]', mobile_border_color
+      elsif bottom_row_blocks.size > 0
+        assign custom_color_styles = true
+        assign class = class | append: row_class
+      else
+        assign custom_color_styles = false
+      endif
+    %}
+
+    {% capture content %}
+      {% if custom_color_styles %}
+        {% render 'contrast-override', background_color: section.settings[row_setting], text_color: section.settings[text_setting], section_id: row_class_id %}
+      {% endif %}
+      {% render 'header-row',
+        row: row,
+        order: order,
+        settings: section.settings,
+        first: first,
+        logo: logo,
+        menu: menu,
+        actions: actions,
+        localization: localization_markup,
+        search: search,
+        drawer_search: drawer_search
+      %}
+    {% endcapture %}
+
+    {% assign content = content | strip %}
+    {% if content != blank %}
+      <div
+        class="{{ class | strip }}"
+        ref="headerRowTop"
+        {%- if style != blank -%}
+          style="{{ style | strip }}"
+        {%- endif -%}
+      >
+        <div class="header__columns spacing-style">
+          {{ content }}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+  {% if has_navigation_bar %}
+    <div class="header__row header__navigation-bar-row">
+      {{ navigation_bar }}
+    </div>
+  {% endif %}
+</header-component>
+
+<dialog id="zt-search-modal" class="zt-search-modal" aria-labelledby="zt-search-heading">
+  <div class="zt-search-modal__panel">
+    <h2 id="zt-search-heading" class="visually-hidden">Search</h2>
+    <form class="zt-search-modal__form" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="visually-hidden" for="zt-search-input">Search</label>
+      <div class="zt-search-modal__field">
+        <span class="zt-search-modal__glyph" aria-hidden="true">
+          {% render 'zt-header-icon', name: 'search' %}
+        </span>
+        <input
+          id="zt-search-input"
+          type="search"
+          name="q"
+          placeholder="Search"
+          autocomplete="off"
+        >
+        <input type="hidden" name="options[prefix]" value="last">
+      </div>
+      <button class="zt-search-modal__submit" type="submit">Search</button>
+    </form>
+    <button class="zt-search-modal__close" type="button" data-zt-search-close aria-label="{{ 'actions.close' | t }}">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M3.75 3.75 10.25 10.25M10.25 3.75 3.75 10.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+      </svg>
+    </button>
+  </div>
+</dialog>
+
+<script>
+  (function () {
+    var dialog = document.getElementById('zt-search-modal');
+    if (!dialog) return;
+
+    document.addEventListener('click', function (event) {
+      var opener = event.target.closest('[data-zt-search-open]');
+      if (opener) {
+        event.preventDefault();
+        if (typeof dialog.showModal === 'function' && !dialog.open) dialog.showModal();
+        var input = dialog.querySelector('input[type="search"]');
+        if (input) input.focus();
+        return;
+      }
+
+      var closer = event.target.closest('[data-zt-search-close]');
+      if (closer && dialog.open) dialog.close();
+    });
+
+    dialog.addEventListener('click', function (event) {
+      if (event.target === dialog) dialog.close();
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    function placeAccountDialog() {
+      var header = document.getElementById('header-component');
+      if (!header) return;
+      var topPx = Math.ceil(header.getBoundingClientRect().bottom + 8);
+      var desktop = window.matchMedia('(min-width: 751px)').matches;
+      header.style.setProperty('--zt-account-dialog-top', topPx + 'px');
+      header.querySelectorAll('shopify-account').forEach(function (el) {
+        el.style.setProperty('--shopify-account-dialog-position-top', topPx + 'px');
+        var dialog = el.shadowRoot && el.shadowRoot.querySelector('.dialog');
+        if (!dialog) return;
+        if (!desktop) {
+          dialog.style.left = '';
+          dialog.style.right = '';
+          dialog.style.insetInlineStart = '';
+          dialog.style.insetInlineEnd = '';
+          return;
+        }
+        var icon = el.getBoundingClientRect();
+        var width = dialog.getBoundingClientRect().width || 360;
+        var left = icon.right - width;
+        var margin = 12;
+        if (left < margin) left = margin;
+        if (left + width > window.innerWidth - margin) left = window.innerWidth - margin - width;
+        left = Math.round(left);
+        dialog.style.top = topPx + 'px';
+        dialog.style.left = left + 'px';
+        dialog.style.right = 'auto';
+        dialog.style.insetInlineStart = left + 'px';
+        dialog.style.insetInlineEnd = 'auto';
+      });
+    }
+
+    placeAccountDialog();
+    window.addEventListener('resize', placeAccountDialog);
+    window.addEventListener('scroll', placeAccountDialog, { passive: true });
+    document.addEventListener('click', function (event) {
+      if (!event.target.closest || !event.target.closest('shopify-account')) return;
+      window.requestAnimationFrame(placeAccountDialog);
+      window.setTimeout(placeAccountDialog, 50);
+    });
+  })();
+</script>
+
+<script
+  src="{{ 'header.js' | asset_url }}"
+  type="module"
+></script>
+{% # theme-check-disable MissingAsset %}
+<script src="{{ 'cacao-lp-cart-plans.js' | asset_url }}" defer="defer"></script>
+{% # theme-check-enable MissingAsset %}
+{% stylesheet %}
+  body {
+    --header-height: 60px;
+    --header-group-height: var(--header-height);
+    --transparent-header-offset-boolean: 0; /* stylelint-disable-line declaration-property-value-disallowed-list */
+  }
+
+  .header {
+    /* Set header paddings based on height setting */
+    --header-padding: var(--padding-sm);
+    --font-paragraph--line-height: 1;
+    --header-content-transition-timing: 0s;
+
+    display: block;
+    contain: layout style;
+    background: transparent;
+
+    a,
+    .button,
+    .button-secondary,
+    .header-actions__action {
+      /* reset style from base.css */
+      transition: color var(--header-content-transition-timing), border-color var(--header-content-transition-timing);
+    }
+  }
+
+  #header-component :is(.header-menu, .dropdown-localization) {
+    display: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    #header-component[data-menu-style='menu'] :is(.header-menu, .dropdown-localization) {
+      display: flex;
+    }
+  }
+
+  #header-component[data-menu-style='drawer'] .header__column {
+    display: contents;
+  }
+
+  @media screen and (min-width: 750px) {
+    #header-component[data-menu-style='menu'] .header__navigation-bar-row {
+      display: none;
+    }
+  }
+
+  .header[transparent] {
+    --language-button-background-color: transparent;
+    --language-button-border-color: transparent;
+    --header-content-transition-timing: calc(var(--submenu-animation-speed) - var(--animation-speed-fast))
+      var(--animation-speed-fast) var(--ease-out-cubic);
+
+    --closed-underlay-height: 0px;
+
+    /* used to display the appropriate logo based on transparency state */
+    --header-logo-display: none;
+    --header-logo-inverse-display: block;
+
+    position: absolute;
+    top: 0;
+    inset-inline: 0;
+
+    z-index: var(--layer-overlay);
+
+    &[transparent='not-sticky'][data-sticky-state='active'],
+    &:has(.menu-list__list-item > .menu-list__link:not([aria-haspopup]):hover) {
+      --header-logo-display: unset;
+      --header-logo-inverse-display: unset;
+      --color-foreground: inherit;
+      --color-foreground-rgb: inherit;
+      --color-background: inherit;
+      --color-background-rgb: inherit;
+      --color-border: inherit;
+      --color-border-rgb: inherit;
+      --closed-underlay-height: 100%;
+    }
+
+    /** For transparent header, apply transparent text color to rows when menu is not hovered */
+    &:not([data-sticky-state='active']):not(:has(.menu-list__link:hover)):not(:has(header-menu[aria-expanded='true']))
+      .header__row {
+      --color-foreground: var(--color-transparent-text);
+      --color-foreground-rgb: var(--color-transparent-text-rgb);
+      --color-border: var(--color-transparent-text);
+      --color-border-rgb: var(--color-transparent-text-rgb);
+      --color-primary-button-background: var(--color-transparent-text);
+      --color-primary-button-text: var(--color-transparent-text-contrast);
+    }
+
+    /* Swap the cart bubble in transparent state only when using the default
+       style. Custom bubble colors apply unchanged across header states. */
+    &[data-bubble-style='default']:not([data-sticky-state='active']):not(:has(.menu-list__link:hover)):not(
+        :has(header-menu[aria-expanded='true'])
+      )
+      .header__row {
+      --cart-bubble-background: var(--color-transparent-text, var(--cart-bubble-background-fallback));
+      --cart-bubble-text: var(--color-transparent-text-contrast, var(--cart-bubble-text-fallback));
+    }
+
+    /* Multiple selectors for performance: each simple :has() check is faster than one complex selector with multiple conditions */
+    &:has(.mega-menu__list:hover),
+    &:has(.menu-list__link:hover),
+    &:has(header-menu[aria-expanded='true']) {
+      --header-logo-display: unset;
+      --header-logo-inverse-display: unset;
+      --color-foreground: inherit;
+      --color-foreground-rgb: inherit;
+      --color-background: inherit;
+      --color-background-rgb: inherit;
+      --color-border: inherit;
+      --color-border-rgb: inherit;
+      --header-content-transition-timing: var(--submenu-animation-speed) var(--ease-out-cubic);
+    }
+  }
+
+  /* When top row has transparent background, make it inherit colors from header component */
+  [data-transparent-background='top']:hover .header__row--top,
+  [data-transparent-background='top']:focus-within .header__row--top,
+  [data-transparent-background='both']:hover .header__row--top,
+  [data-transparent-background='both']:focus-within .header__row--top {
+    --color-foreground: inherit;
+    --color-foreground-rgb: inherit;
+    --color-border: inherit;
+    --color-border-rgb: inherit;
+    --color-primary-button-background: inherit;
+    --color-primary-button-text: inherit;
+  }
+
+  /* When bottom row has transparent background, make it inherit colors from header component */
+  [data-transparent-background='bottom']:hover .header__row--bottom,
+  [data-transparent-background='bottom']:focus-within .header__row--bottom,
+  [data-transparent-background='both']:hover .header__row--bottom,
+  [data-transparent-background='both']:focus-within .header__row--bottom {
+    --color-foreground: inherit;
+    --color-foreground-rgb: inherit;
+    --color-border: inherit;
+    --color-border-rgb: inherit;
+    --color-primary-button-background: inherit;
+    --color-primary-button-text: inherit;
+  }
+
+  .header-section {
+    position: relative;
+    z-index: var(--layer-menu-drawer);
+  }
+
+  /* need default values for non-flash transitions on first overflow menu open */
+  #header-component {
+    --submenu-height: 0px;
+    --full-open-header-height: 0px;
+  }
+
+  #header-group:has(#header-component[sticky]) {
+    display: contents;
+  }
+
+  .header-section:has(> #header-component[sticky='always']),
+  .header-section:has(> #header-component[sticky='scroll-up'][data-sticky-state='active']) {
+    position: sticky;
+
+    /* -1 lets the sticky observer detect the stuck state. An app bar sets --zt-sticky-offset so the header sits below it. */
+    top: var(--zt-sticky-offset, -1px);
+    z-index: var(--layer-menu-drawer);
+  }
+
+  .header[data-sticky-state] {
+    transition: opacity var(--animation-speed) var(--animation-easing);
+    opacity: 1;
+  }
+
+  .header[data-sticky-state='active'] {
+    view-transition-name: sticky-header;
+  }
+
+  :active-view-transition-type(empty-cart-drawer) {
+    .header[data-sticky-state='active'] {
+      view-transition-name: none;
+    }
+  }
+
+  .header[data-sticky-state='idle'] {
+    opacity: 0;
+  }
+
+  /* ================================
+     * Underlays
+     * ================================ */
+  .header__underlay {
+    position: absolute;
+    inset: 0;
+  }
+
+  .header__underlay-closed {
+    height: var(--closed-underlay-height, 100%);
+    z-index: var(--layer-lowest);
+    background: linear-gradient(
+      var(--color-background-top-row) 0 var(--top-row-height),
+      var(--color-background-bottom-row) var(--top-row-height) var(--header-height)
+    );
+    transition: height var(--animation-speed-slow) var(--ease-out-cubic);
+  }
+
+  .header__underlay-open {
+    height: var(--full-open-header-height);
+    background: linear-gradient(
+      var(--color-background-top-row) 0 var(--top-row-height),
+      var(--color-background-bottom-row) var(--top-row-height) var(--header-height),
+      var(--color-submenu) var(--header-height) 100%
+    );
+    /* header-height is updated via js, the transition works automagically */
+    transition: height var(--submenu-animation-speed) var(--ease-out-cubic);
+  }
+
+  .header__underlay-open::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: var(--shadow-popover);
+    clip-path: inset(var(--header-height) 0 -100px 0); /* stylelint-disable-line */
+    transition: height var(--submenu-animation-speed) var(--ease-out-cubic);
+  }
+
+  /* When top row has transparent background, swap underlay to merchant's chosen color at full opacity */
+  [data-transparent-background='top']:hover,
+  [data-transparent-background='top']:focus-within,
+  [data-transparent-background='both']:hover,
+  [data-transparent-background='both']:focus-within {
+    :is(.header__underlay-open, .header__underlay-closed) {
+      --color-background-top-row: var(--color-background);
+    }
+  }
+
+  /* When bottom row has transparent background, swap underlay to merchant's chosen color at full opacity */
+  [data-transparent-background='bottom']:hover,
+  [data-transparent-background='bottom']:focus-within,
+  [data-transparent-background='both']:hover,
+  [data-transparent-background='both']:focus-within {
+    :is(.header__underlay-open, .header__underlay-closed) {
+      --color-background-bottom-row: var(--color-background);
+    }
+  }
+
+  [data-submenu-overlap-bottom-row] {
+    .header__underlay-open {
+      background: linear-gradient(
+        var(--color-background-top-row) 0 var(--top-row-height),
+        var(--color-submenu) var(--top-row-height) 100%
+      );
+    }
+
+    .header__row--bottom {
+      z-index: var(--layer-lowest);
+    }
+  }
+
+  [data-header-rows='single'] .header__underlay-closed {
+    background: var(--color-background-top-row);
+  }
+
+  [data-header-rows='single'] .header__underlay-open {
+    background: linear-gradient(
+      var(--color-background-top-row) 0 var(--top-row-height),
+      var(--color-submenu) var(--top-row-height) 100%
+    );
+  }
+
+  /* End Underlays ================ */
+
+  .header__row {
+    /* The account component uses a different background color, but we need to override it to inherit the color of the header row */
+    --color-account-icon: var(--color-foreground);
+
+    position: relative;
+
+    /* Overwrite color from section settings, background is controlled by the underlays */
+    /* stylelint-disable-next-line declaration-no-important */
+    background-color: transparent !important;
+
+    &:has(.mega-menu__list:hover),
+    &:has(.menu-list__submenu:not([inert])) {
+      /* Only elevate the row when the submenu is open to avoid overlapping other elevated content */
+      z-index: var(--layer-heightened);
+    }
+  }
+
+  .header__row--top:not(.divider--page-width),
+  .header__row--top.divider--page-width .header__columns,
+  .header__row--bottom {
+    border-bottom: var(--border-bottom-width) solid var(--border-bottom-color, var(--color-border));
+  }
+
+  @media screen and (max-width: 749px) {
+    .header__row--top:not(.divider--page-width),
+    .header__row--top.divider--page-width .header__columns {
+      border-bottom-width: var(--border-bottom-width-mobile);
+      border-bottom-color: var(--border-bottom-color-mobile);
+    }
+  }
+
+  #header-component[data-menu-style='drawer'] .header__row--top:not(.divider--page-width),
+  #header-component[data-menu-style='drawer'] .header__row--top.divider--page-width .header__columns {
+    border-bottom-width: var(--border-bottom-width-mobile);
+    border-bottom-color: var(--border-bottom-color-mobile);
+  }
+
+  .header__row.divider--page-width:not(.section--page-width) .header__columns {
+    @media screen and (min-width: 750px) {
+      padding-inline-start: 0;
+      padding-inline-end: 0;
+      margin-inline-start: var(--page-margin);
+      margin-inline-end: var(--page-margin);
+    }
+  }
+
+  .header__column {
+    display: flex;
+    align-items: center;
+
+    /* on mobile, header__column nodes are ignored to create a new grid-template-area based on all visible content */
+    @media screen and (max-width: 749px) {
+      display: contents;
+    }
+  }
+
+  .header__column--left,
+  .header__column--center {
+    gap: var(--gap-xl);
+    grid-area: left;
+  }
+
+  .header__column--center {
+    justify-content: center;
+    grid-area: center;
+
+    header-menu:only-child .overflow-menu::part(list) {
+      justify-content: center;
+    }
+  }
+
+  .header__column--right {
+    gap: var(--gap-xl);
+    justify-content: flex-end;
+    grid-area: right;
+
+    .overflow-menu::part(list) {
+      justify-content: flex-end;
+    }
+  }
+
+  .header__columns {
+    /* Three column layout */
+    --header-left: 1fr;
+    --header-center: auto;
+    --header-right: 1fr;
+    --header-template-columns: var(--header-left) var(--header-center) var(--header-right);
+
+    /* Mobile layout */
+    --header-mobile-bookend: 44px;
+
+    display: grid;
+    grid-template-areas: 'left center right';
+    grid-gap: var(--gap-xl);
+    grid-template-columns: var(--header-template-columns);
+
+    /* If menu is in center column */
+    &:has(.header__column--center header-menu) {
+      --header-center: auto;
+      --header-left: minmax(max-content, 1fr);
+      --header-right: minmax(max-content, 1fr);
+    }
+
+    /* If there is no center column, make the column the menu is in grow eagerly */
+    &:where(:not(:has(.header__column--center))) {
+      @media screen and (min-width: 750px) {
+        --header-template-columns: var(--header-left) var(--header-right);
+
+        grid-template-areas: 'left right';
+      }
+
+      /* If the header-menu is in the right column */
+      &:has(.header__column--right header-menu) {
+        --header-right: auto;
+        --header-left: minmax(max-content, 1fr);
+      }
+
+      /* If the header-menu is in the left column */
+      &:has(.header__column--left header-menu) {
+        --header-left: auto;
+        --header-right: minmax(max-content, 1fr);
+      }
+    }
+
+    @media screen and (max-width: 749px) {
+      --header-template-columns: var(--header-mobile-bookend) var(--header-mobile-bookend) 1fr
+        var(--header-mobile-bookend) var(--header-mobile-bookend);
+
+      grid-template-areas: 'leftA leftB center rightA rightB';
+      grid-column: span 3;
+      column-gap: 0;
+      align-items: center;
+      padding-block: 0;
+
+      /* Match the page gutter so edge icons visually align with in-flow content.
+         --page-margin already includes the larger safe-area inset at this breakpoint. */
+      padding-inline: var(--page-margin);
+
+      .header-logo {
+        grid-area: center;
+      }
+
+      &:not(:has(header-actions)) .search-action {
+        grid-area: leftB;
+      }
+
+      &:not(:has(shopify-account)) .search-action {
+        grid-area: rightA;
+      }
+
+      .search-action {
+        grid-area: leftB;
+      }
+
+      .header__icon--menu {
+        justify-content: flex-start;
+        padding-inline: 0;
+      }
+
+      header-actions {
+        grid-area: rightB;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  /* not ideal but we need to duplicate these styles for when touch comes into play
+    We could avoid the duplication using js to set the data-menu-style attribute on small screens instead of using @media queries */
+  #header-component[data-menu-style='drawer'] .header__columns {
+    --header-template-columns: var(--header-mobile-bookend) var(--header-mobile-bookend) 1fr
+      var(--header-mobile-bookend) var(--header-mobile-bookend);
+
+    grid-template-areas: 'leftA leftB center rightA rightB';
+    grid-column: span 3;
+    column-gap: 0;
+    align-items: center;
+    padding-block: 0;
+
+    /* Match the page gutter so edge icons visually align with in-flow content.
+       --page-margin already includes the larger safe-area inset at this breakpoint. */
+    padding-inline: var(--page-margin);
+
+    .header-logo {
+      grid-area: center;
+    }
+
+    &:not(:has(header-actions)) .search-action {
+      grid-area: leftB;
+    }
+
+    &:not(:has(shopify-account)) .search-action {
+      grid-area: rightA;
+    }
+
+    .search-action {
+      grid-area: leftB;
+    }
+
+    /* Pin glyphs to the content edge of the 44px bookend; keep the full tap target */
+    .header__icon--menu {
+      justify-content: flex-start;
+      padding-inline: 0;
+    }
+
+    header-actions {
+      grid-area: rightB;
+      justify-content: flex-end;
+    }
+  }
+
+  /* Single column layout if there are no columns within */
+  .header__columns:not(:has(.header__column)) {
+    grid-template-columns: 1fr;
+  }
+
+  /* Check for hover support to avoid unnecessary expensive recalculations when tapping on mobile */
+  @media (hover: hover) {
+    /* Column-specific dimming effect when any interactive element is hovered
+        Multiple selectors for performance: each simple :has() check is faster than one complex selector with multiple conditions */
+    .header__column:has(header-menu:hover),
+    .header__column:has(.header-actions__action:hover),
+    .header__column:has(.header__icon--menu:hover) {
+      header-menu:not(:hover),
+      .header-actions__action:not(:hover),
+      .header__icon--menu:not(:hover) {
+        opacity: var(--opacity-subdued-text);
+        transition: opacity var(--animation-speed) var(--animation-easing);
+      }
+    }
+  }
+
+  /* Ensure smooth transitions for all interactive elements */
+  header-menu,
+  .header-actions__action,
+  .header__icon--menu {
+    transition: opacity var(--animation-speed) var(--animation-easing);
+  }
+
+  /* Header action button styles */
+  .header-actions__action {
+    --button-color: var(--color-foreground);
+    color: var(--button-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+
+    &:hover {
+      --button-color: var(--color-foreground);
+    }
+  }
+
+  .header-actions__action:not(.account-button) .svg-wrapper {
+    height: var(--button-size);
+    width: var(--button-size);
+  }
+
+  .header-actions__action:not(.account-button) svg {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+  }
+
+  .header:has(#Details-menu-drawer-container[open]) {
+    contain: style;
+  }
+
+  .header.header--compact {
+    --header-padding: var(--padding-2xs);
+  }
+
+  .header__columns {
+    --padding-block-start: var(--header-padding);
+    --padding-block-end: var(--header-padding);
+  }
+
+  .header:not(.header--compact) .header__row--bottom {
+    --header-padding: var(--padding-xs);
+  }
+
+  .header--collapse-row-paddings {
+    .header__row--top .header__columns {
+      --padding-block-end: 0px;
+    }
+
+    .header__row--bottom .header__columns {
+      --padding-block-start: 0px;
+    }
+  }
+
+  /* Transparent header layout. Keep this in sync with snippets/section.liquid's first-section height compensation. */
+  body:has(#header-component[transparent]) .content-for-layout > .shopify-section:first-child {
+    margin-top: calc(var(--header-group-height) * -1);
+  }
+
+  body:has(#header-component[transparent]) #header-group > .header-section {
+    z-index: var(--layer-menu-drawer);
+  }
+
+  /* All other header group content should be beneath the floating header, but above
+  the rest of the page content. Keep a class at the end of this selector: a `*` there
+  gives the browser nothing to filter on, and it then recalculates the styles of every
+  element below. */
+  body:has(#header-component[transparent]) #header-group > .shopify-section:not(.header-section) {
+    z-index: calc(var(--layer-menu-drawer) - 1);
+  }
+
+  /* When the header is transparent, add a margin to a potential header-section below it */
+  .header-section:has(.header[transparent]) + .shopify-section {
+    margin-top: var(--header-height);
+  }
+
+  /* Optimize layout performance for hidden menus */
+  .header-menu .menu-list__submenu {
+    content-visibility: auto;
+    contain-intrinsic-size: 0px 500px;
+  }
+
+  /* Force visibility when open/animating and in overflow submenu to prevent layout issues */
+  .header-menu details[open] .menu-list__submenu,
+  .header-menu .menu-list__submenu[data-active],
+  .header-menu .menu-list__list-item[slot='overflow'] .menu-list__submenu {
+    content-visibility: visible;
+  }
+
+  /* Dropdown Localization Styles */
+  .dropdown-localization__button {
+    display: flex;
+    position: relative;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--menu-localization-font);
+    font-size: var(--menu-localization-font-size);
+    font-weight: var(--menu-top-level-font-weight);
+    padding-inline: var(--padding-2xs);
+    margin-inline: calc(-1 * var(--padding-2xs));
+  }
+
+  .dropdown-localization__button .svg-wrapper.icon-caret {
+    height: var(--icon-size-xs);
+    width: var(--icon-size-xs);
+    inset-inline-end: var(--margin-xs);
+    top: calc(50% - var(--padding-2xs));
+    flex-shrink: 0;
+    transition: transform var(--animation-speed) var(--animation-easing);
+  }
+
+  .dropdown-localization__button .icon-flag {
+    width: var(--menu-localization-font-size, var(--icon-size-sm));
+    height: var(--menu-localization-font-size, var(--icon-size-sm));
+    clip-path: circle(50%); /* stylelint-disable-line */
+    background-position: center;
+    background-size: cover;
+    margin-inline-end: 4px;
+    position: relative;
+  }
+
+  .dropdown-localization__button .icon-flag::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 var(--size-shadow) var(--color-shadow);
+    border-radius: 50%;
+  }
+
+  .dropdown-localization__button[aria-expanded='true'] .icon-caret svg {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-localization__button,
+  .dropdown-localization__button:hover {
+    box-shadow: none;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 0;
+  }
+
+  dropdown-localization-component .localization-form__list {
+    max-height: 20.5rem;
+  }
+
+  .localization-wrapper {
+    position: fixed;
+    z-index: var(--layer-raised);
+    border-radius: var(--style-border-radius-popover);
+    transition-property: display, opacity, translate;
+    transition-duration: 0.3s;
+    transition-timing-function: var(--ease-out-quad);
+    transition-behavior: allow-discrete;
+    translate: 0 20px;
+    opacity: 0;
+  }
+
+  .localization-wrapper:not([hidden]) {
+    translate: 0 0;
+    opacity: 1;
+  }
+
+  dropdown-localization-component {
+    position: relative;
+    background-color: transparent;
+  }
+
+  dropdown-localization-component .country-filter {
+    position: relative;
+    padding: 8px;
+  }
+
+  dropdown-localization-component .country-filter__input {
+    border: none;
+  }
+
+  dropdown-localization-component .localization-form__list-item {
+    margin-inline: 8px;
+  }
+
+  dropdown-localization-component .localization-wrapper {
+    box-shadow: var(--shadow-popover);
+    border: var(--style-border-popover);
+    background-color: var(--color-background);
+    max-height: 27.5rem;
+    position: absolute;
+    top: calc(100% + 10px);
+    z-index: calc(var(--layer-header-menu) + 1);
+  }
+
+  dropdown-localization-component .localization-wrapper.right-bound {
+    inset-inline-end: 0;
+    inset-inline-start: unset;
+  }
+
+  dropdown-localization-component .localization-wrapper.left-bound {
+    inset-inline-start: -8px;
+    inset-inline-end: unset;
+  }
+
+  /* Additional specificity due to dropdown-localization-component getting a low score */
+  dropdown-localization-component .language-selector.language-selector {
+    padding-block: 10px;
+    padding-inline: 16px 8px;
+  }
+
+  dropdown-localization-component .localization-form__currency {
+    width: max-content;
+    opacity: 0;
+    visibility: hidden;
+    transition: none;
+  }
+
+  dropdown-localization-component .localization-form__select:hover {
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-8));
+  }
+
+  dropdown-localization-component
+    :is(
+      .localization-form__list-item:hover,
+      .localization-form__list-item[aria-selected='true'],
+      .localization-form__list-item[aria-current='true']
+    )
+    .localization-form__currency {
+    opacity: 1;
+    color: var(--color-foreground-muted);
+    transition: opacity var(--animation-speed-slow) var(--animation-easing);
+    visibility: visible;
+  }
+
+  .dropdown-localization .language-selector:where(:not(.language-selector--top-shadow)) {
+    font-weight: var(--menu-top-level-font-weight);
+  }
+
+  .dropdown-localization:not(dropdown-localization-component) .language-selector {
+    font-family: var(--menu-localization-font);
+    font-size: var(--menu-localization-font-size);
+  }
+
+  /* Zeotein header chrome — Dawn behavior, reference layout */
+  #header-component.zt-header {
+    --zt-header-purple: #6a2f9e;
+    --zt-header-icon: #3c3458;
+    --color-foreground: var(--zt-header-icon);
+    --color-foreground-rgb: 60 52 88;
+    --icon-stroke-width: 1.4px;
+    display: block;
+    width: 100%;
+    grid-template: none;
+    position: relative;
+    background: #fff;
+  }
+
+  #header-component.zt-header .header__underlay-closed,
+  #header-component.zt-header .header__row--top {
+    background: #fff;
+  }
+
+  #header-component.zt-header .header__row--top {
+    border-bottom: 3px solid var(--zt-header-purple);
+    --border-bottom-width: 0px;
+    width: 100%;
+    position: static;
+    box-shadow: none;
+  }
+
+  #header-component.zt-header .header__columns {
+    align-items: center;
+    width: 100%;
+    min-height: 74px;
+    max-width: var(--zt-layout-width, 2000px);
+    margin-inline: auto;
+    padding-inline: 28px;
+    column-gap: 24px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #header-component.zt-header .header__column {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      min-width: 0;
+    }
+
+    #header-component.zt-header .header__column--left {
+      justify-content: flex-start;
+      flex: none;
+    }
+
+    #header-component.zt-header .header__column--center,
+    #header-component.zt-header .header-menu,
+    #header-component.zt-header overflow-list {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    #header-component.zt-header .header__column--center {
+      justify-content: center;
+      overflow: visible;
+    }
+
+    #header-component.zt-header .header__column--right {
+      justify-content: flex-end;
+    }
+
+    #header-component.zt-header .header__columns:has(.header__column--center .header-menu) {
+      --header-left: auto;
+      --header-center: minmax(0, 1fr);
+      --header-right: auto;
+    }
+
+    #header-component.zt-header .header__column--center .header-menu,
+    #header-component.zt-header .header__column--center .header-menu__inner,
+    #header-component.zt-header .header__column--center .menu-list,
+    #header-component.zt-header .header__column--center overflow-list {
+      flex: 1 1 auto;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    #header-component.zt-header .header__column--center overflow-list {
+      overflow: hidden;
+    }
+
+    #header-component.zt-header.header .header-menu,
+    #header-component.zt-header.header .dropdown-localization {
+      display: flex;
+    }
+
+    #header-component.zt-header.header .header__drawer {
+      display: none;
+      min-height: 0;
+    }
+
+    #header-component.zt-header .menu-list__link {
+      color: var(--zt-header-icon);
+      font-size: 15px;
+      font-weight: 600;
+      white-space: nowrap;
+      padding-inline: 10px;
+    }
+
+    #header-component.zt-header .overflow-menu::part(list) {
+      gap: 4px;
+    }
+
+    #header-component.zt-header .header__column--center .overflow-menu::part(list) {
+      justify-content: safe center;
+      flex-wrap: nowrap;
+      width: max-content;
+      max-width: 100%;
+      margin-inline: auto;
+    }
+
+    #header-component.zt-header .zt-header-nav__list {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    #header-component.zt-header .zt-nav-item--has-children {
+      position: relative;
+    }
+
+    #header-component.zt-header .menu-list__trigger {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 4px;
+      height: 100%;
+    }
+
+    /* Keep chevron after "Shop" — base theme absolute-positions it to the start side */
+    #header-component.zt-header .menu-list__disclosure {
+      position: static;
+      inset: auto;
+      transform: none;
+      display: inline-flex;
+      align-items: center;
+      order: 2;
+      color: var(--zt-header-icon);
+      opacity: 1;
+      pointer-events: none;
+      padding: 0;
+      width: auto;
+    }
+
+    #header-component.zt-header .menu-list__trigger > .menu-list__link {
+      order: 1;
+    }
+
+    #header-component.zt-header .menu-list__disclosure-icon {
+      display: block;
+      width: 8px;
+      height: 5px;
+    }
+
+    #header-component.zt-header .zt-header-submenu-panel {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      z-index: 50;
+      width: max-content;
+      min-width: 260px;
+      max-width: min(360px, 90vw);
+      padding-top: 8px;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease, visibility 0.15s ease;
+    }
+
+    #header-component.zt-header .zt-nav-item--has-children:hover > .zt-header-submenu-panel,
+    #header-component.zt-header .zt-nav-item--has-children:focus-within > .zt-header-submenu-panel {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #header-component.zt-header .zt-header-submenu {
+      list-style: none;
+      margin: 0;
+      padding: 10px 0;
+      width: max-content;
+      min-width: 100%;
+      background: #fff;
+      border: 1px solid #e8e4f0;
+      border-top: 3px solid var(--zt-header-purple);
+      box-shadow: 0 14px 32px rgb(60 52 88 / 0.14);
+    }
+
+    #header-component.zt-header .zt-header-submenu a {
+      display: block;
+      padding: 10px 18px;
+      color: #3c3458;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    #header-component.zt-header .zt-header-submenu a:hover,
+    #header-component.zt-header .zt-header-submenu a:focus-visible {
+      background: #f6f3fb;
+      color: var(--zt-header-purple);
+    }
+
+    #header-component.zt-header .zt-header-submenu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 4px 12px;
+    }
+  }
+
+  #header-component.zt-header header-actions {
+    display: contents;
+  }
+
+  #header-component.zt-header .search-action--hidden-on-drawer {
+    order: 1;
+  }
+
+  #header-component.zt-header .account-button {
+    order: 2;
+  }
+
+  #header-component.zt-header [data-testid='cart-drawer-trigger'],
+  #header-component.zt-header a.action__cart {
+    order: 3;
+  }
+
+  #header-component.zt-header .header__drawer {
+    min-height: 0;
+  }
+
+  .header-section:has(> #header-component.zt-header) {
+    z-index: 30;
+  }
+
+  body:has(#header-component.zt-header details.menu-open) .header-section {
+    z-index: 250;
+  }
+
+  #header-component.zt-header .menu-drawer {
+    background: #fff;
+    color: #3c3458;
+    z-index: 200;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: min(380px, 88vw);
+    max-width: 88vw;
+    padding: 8px 0 32px;
+    overflow: auto;
+    box-shadow: 12px 0 32px rgb(36 27 58 / 14%);
+  }
+
+  #header-component.zt-header .menu-drawer__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: rgb(36 27 58 / 32%);
+  }
+
+  #header-component.zt-header .menu-drawer__close-button.button {
+    background: transparent;
+    color: #3c3458;
+    border: 0;
+    box-shadow: none;
+    min-width: 0;
+    min-height: 0;
+    width: 40px;
+    height: 40px;
+    margin: 4px 12px 4px auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #header-component.zt-header .menu-drawer__close-button svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
+  #header-component.zt-header .menu-drawer__close-button,
+  #header-component.zt-header .menu-drawer__close-button .svg-wrapper {
+    color: #3c3458;
+  }
+
+  #header-component.zt-header .menu-drawer__close-button svg path {
+    stroke: #3c3458;
+    stroke-width: 1.7px;
+  }
+
+  #header-component.zt-header .menu-drawer__navigation {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+
+  /* Menu lists inherit nav padding — don't pad again or Shop's + sits mid-row */
+  #header-component.zt-header .menu-drawer__menu,
+  #header-component.zt-header .menu-drawer__menu--grid,
+  #header-component.zt-header .menu-drawer__menu--childlist,
+  #header-component.zt-header .menu-drawer__menu--grandchildlist {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    grid-template-columns: none;
+    gap: 0;
+    margin: 0;
+    padding-inline: 0;
+    box-sizing: border-box;
+  }
+
+  #header-component.zt-header .menu-drawer__menu accordion-custom,
+  #header-component.zt-header .menu-drawer__menu details {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  #header-component.zt-header .menu-drawer__link-image,
+  #header-component.zt-header .menu-drawer__featured-content,
+  #header-component.zt-header .menu-drawer__utility-links,
+  #header-component.zt-header .menu-drawer__menu--grid .menu-drawer__menu-item::before {
+    display: none;
+  }
+
+  #header-component.zt-header .menu-drawer__list-item,
+  #header-component.zt-header .menu-drawer__list-item--flat,
+  #header-component.zt-header .menu-drawer__list-item--deep {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    margin: 0;
+  }
+
+  #header-component.zt-header .menu-drawer__menu-item,
+  #header-component.zt-header .menu-drawer__menu-item:has(> .menu-drawer__link-image) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    min-height: 42px;
+    padding: 8px 0;
+    color: #3c3458;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-decoration: none;
+    text-align: left;
+  }
+
+  /* Parents with children (Shop): label left, chevron pinned to row end */
+  #header-component.zt-header .menu-drawer__menu-item--mainlist,
+  #header-component.zt-header summary.menu-drawer__menu-item {
+    position: relative;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: flex-start !important;
+    gap: 0;
+    width: 100% !important;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-inline-end: 28px; /* room for absolute chevron */
+    list-style: none;
+  }
+
+  #header-component.zt-header summary.menu-drawer__menu-item::-webkit-details-marker {
+    display: none;
+  }
+
+  #header-component.zt-header .menu-drawer__menu-item--mainlist .menu-drawer__menu-item-text,
+  #header-component.zt-header summary.menu-drawer__menu-item .menu-drawer__menu-item-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    max-width: 100%;
+    display: block;
+    line-height: 1.3;
+  }
+
+  #header-component.zt-header .menu-drawer__menu-item--mainlist > .svg-wrapper,
+  #header-component.zt-header summary.menu-drawer__menu-item > .svg-wrapper {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    inset-inline-end: 0;
+    transform: translateY(-50%);
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 20px;
+    height: 20px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    flex: none;
+  }
+
+  /* Same chevron as desktop Shop dropdown (not plus) */
+  #header-component.zt-header summary.menu-drawer__menu-item > .svg-wrapper.icon-caret svg {
+    width: 12px;
+    height: 12px;
+    display: block;
+    transition: transform var(--animation-speed, 0.2s) var(--animation-easing, ease);
+  }
+
+  #header-component.zt-header details[open] > summary.menu-drawer__menu-item > .svg-wrapper.icon-caret {
+    transform: translateY(-50%);
+  }
+
+  #header-component.zt-header details[open] > summary.menu-drawer__menu-item > .svg-wrapper.icon-caret svg {
+    transform: rotate(180deg);
+  }
+
+  #header-component.zt-header .menu-drawer__menu-item--child {
+    min-height: 36px;
+    padding: 6px 0 6px 14px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #5a516f;
+  }
+
+  #header-component.zt-header .search-action--hidden-on-menu {
+    display: none;
+  }
+
+  #header-component.zt-header .search-action--hidden-on-drawer {
+    display: flex;
+  }
+
+  #header-component.zt-header .header__icon--menu,
+  #header-component.zt-header .header-actions__action:not(.dropdown-localization__button),
+  #header-component.zt-header .search-action .header-actions__action,
+  #header-component.zt-header .account-button {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    color: var(--zt-header-icon);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+  }
+
+  #header-component.zt-header .dropdown-localization__button.header-actions__action,
+  #header-component.zt-header .dropdown-localization__button.button:hover,
+  #header-component.zt-header .dropdown-localization__button.button:focus,
+  #header-component.zt-header .dropdown-localization__button.button:focus-visible {
+    width: auto;
+    height: 32px;
+    min-width: 0;
+    min-height: 32px;
+    padding: 0 8px;
+    gap: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    line-height: 1;
+    background-color: var(--color-primary-button-background, rgba(var(--color-button), var(--alpha-button-background, 1)));
+    color: var(--color-primary-button-text, rgb(var(--color-button-text)));
+    border: 0;
+    border-radius: 4px;
+    box-shadow: none;
+  }
+
+  #header-component.zt-header .dropdown-localization__button .currency-code,
+  #header-component.zt-header .dropdown-localization__button .icon-flag,
+  #header-component.zt-header .dropdown-localization__button .icon-caret {
+    position: relative;
+    z-index: 2;
+  }
+
+  #header-component.zt-header .dropdown-localization__button.button::before,
+  #header-component.zt-header .dropdown-localization__button.button::after,
+  #header-component.zt-header .dropdown-localization__button.button:hover::before,
+  #header-component.zt-header .dropdown-localization__button.button:hover::after {
+    content: none;
+    display: none;
+    border: 0;
+    box-shadow: none;
+  }
+
+  #header-component.zt-header .dropdown-localization__button .currency-code {
+    display: inline;
+    color: inherit;
+    opacity: 1;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  #header-component.zt-header .dropdown-localization__button .icon-flag {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    flex: none;
+  }
+
+  #header-component.zt-header .dropdown-localization__button .svg-wrapper.icon-caret,
+  #header-component.zt-header .dropdown-localization__button .icon-caret svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  #header-component.zt-header .header__column--right,
+  #header-component.zt-header dropdown-localization-component {
+    overflow: visible;
+  }
+
+  #header-component.zt-header dropdown-localization-component .localization-wrapper {
+    z-index: 50;
+    width: 280px;
+    overflow: hidden;
+    background: #fff;
+    color: #3c3458;
+    box-shadow: 0 8px 24px rgb(60 52 88 / 16%);
+    border: 1px solid #e6e0f0;
+  }
+
+  #header-component.zt-header dropdown-localization-component .localization-wrapper[hidden] {
+    display: none;
+    pointer-events: none;
+  }
+
+  #header-component.zt-header dropdown-localization-component .localization-form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: auto;
+    max-height: 27.5rem;
+  }
+
+  #header-component.zt-header dropdown-localization-component .country-selector-form__wrapper {
+    width: 100%;
+    max-height: 18rem;
+    overflow-y: auto;
+  }
+
+  #header-component.zt-header dropdown-localization-component .country-filter__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: 36px 12px;
+    color: #3c3458;
+  }
+
+  #header-component.zt-header dropdown-localization-component .country-filter__search-icon,
+  #header-component.zt-header dropdown-localization-component .country-filter__search-icon .svg-wrapper,
+  #header-component.zt-header dropdown-localization-component .country-filter__search-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  #header-component.zt-header dropdown-localization-component .country-filter__reset-button[hidden] {
+    display: none;
+  }
+
+  #header-component.zt-header dropdown-localization-component .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  #header-component.zt-header .localization-form__list-item {
+    cursor: pointer;
+    color: #3c3458;
+  }
+
+  #header-component.zt-header shopify-account {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    overflow: visible;
+    color: var(--zt-header-icon);
+    line-height: 0;
+    --shopify-account-color-background: #ffffff;
+    --shopify-account-color-text: #1e1734;
+    --shopify-account-color-accent: #6a2f9e;
+    --shopify-account-color-accent-text: #ffffff;
+    --shopify-account-dialog-position-top: var(--zt-account-dialog-top, 124px);
+  }
+
+  #header-component.zt-header .svg-wrapper,
+  #header-component.zt-header .account-button__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: var(--zt-header-icon);
+    line-height: 0;
+    vertical-align: middle;
+  }
+
+  #header-component.zt-header .header__column--right .account-button,
+  #header-component.zt-header .header__column--right .search-action,
+  #header-component.zt-header .header__column--right [data-testid='cart-drawer-trigger'],
+  #header-component.zt-header .header__column--right a.action__cart {
+    align-self: center;
+  }
+
+  #header-component.zt-header .header-actions__action:has(.header-actions__cart-icon) {
+    overflow: visible;
+    width: 32px;
+    height: 32px;
+  }
+
+  #header-component.zt-header .header-actions__cart-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+    width: 28px;
+    height: 28px;
+    color: var(--zt-header-icon);
+    line-height: 1;
+  }
+
+  #header-component.zt-header .header-actions__cart-icon .cart-bubble {
+    position: absolute;
+    top: -4px;
+    right: -6px;
+    inset-inline-end: -6px;
+    width: auto;
+    height: 16px;
+    min-width: 16px;
+    aspect-ratio: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border-radius: 50%;
+    background: #6a2f9e;
+    color: #fff;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  #header-component.zt-header .header-actions__cart-icon .cart-bubble__background {
+    background: #6a2f9e;
+    border-radius: 50%;
+  }
+
+  #header-component.zt-header .header-actions__cart-icon .cart-bubble__text,
+  #header-component.zt-header .header-actions__cart-icon .cart-bubble__text-count {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  #header-component.zt-header details:not(.menu-open) .header-drawer-icon--close,
+  #header-component.zt-header details.menu-open .header-drawer-icon--open {
+    display: none;
+  }
+
+  #header-component.zt-header .zt-header-icon,
+  #header-component.zt-header .account-button__icon,
+  .zt-search-modal__glyph .zt-header-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    max-width: none;
+    object-fit: contain;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    overflow: visible;
+  }
+
+  #header-component.zt-header .header-actions__cart-icon:not(.header-actions__cart-icon--has-cart) .cart-bubble {
+    display: none;
+  }
+
+  #header-component.zt-header .header-logo {
+    position: static;
+    transform: none;
+    display: flex;
+    padding: 0;
+    margin: 0 24px 0 0;
+    max-width: min(220px, 46vw);
+  }
+
+  #header-component.zt-header .header-logo__image {
+    display: block;
+    width: auto;
+    height: auto;
+    max-height: 48px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  #header-component.zt-header .zt-header-wordmark {
+    display: none;
+    color: var(--zt-header-purple);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  @media screen and (max-width: 749px) {
+    #header-component.zt-header .header__drawer {
+      display: flex;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #header-component.zt-header .header__columns {
+      min-height: 64px;
+      padding-inline: 16px;
+      grid-template-columns: 40px auto minmax(16px, 1fr) 40px 40px 40px;
+      grid-template-areas: 'menu logo . search account cart';
+      justify-content: stretch;
+      column-gap: 4px;
+    }
+
+    #header-component.zt-header .header__columns .header__drawer {
+      grid-area: menu;
+      justify-self: start;
+    }
+
+    #header-component.zt-header .header__columns .header-logo {
+      grid-area: logo;
+      justify-self: start;
+      margin: 0 8px 0 0;
+      max-width: none;
+    }
+
+    #header-component.zt-header .header__columns .search-action--hidden-on-drawer {
+      grid-area: search;
+      justify-self: center;
+      display: flex;
+    }
+
+    #header-component.zt-header .header__columns .search-action--hidden-on-menu,
+    #header-component.zt-header .dropdown-localization {
+      display: none;
+    }
+
+    #header-component.zt-header .header__columns .account-button {
+      display: inline-flex;
+      grid-area: account;
+      justify-self: center;
+    }
+
+    #header-component.zt-header .header__columns [data-testid='cart-drawer-trigger'],
+    #header-component.zt-header .header__columns a.action__cart {
+      grid-area: cart;
+      justify-self: center;
+    }
+
+    #header-component.zt-header .header-logo__image,
+    #header-component.zt-header .header-logo__solid-header-image-container,
+    #header-component.zt-header .header-logo__transparent-header-image-container {
+      display: none;
+    }
+
+    #header-component.zt-header .zt-header-wordmark {
+      display: block;
+      font-size: 20px;
+      letter-spacing: 0.08em;
+    }
+
+    #header-component.zt-header.zt-header--has-logo .header-logo__image,
+    #header-component.zt-header.zt-header--has-logo .header-logo__solid-header-image-container {
+      display: block;
+    }
+
+    #header-component.zt-header.zt-header--has-logo .header-logo__image {
+      max-height: 36px;
+    }
+
+    #header-component.zt-header.zt-header--has-logo .zt-header-wordmark {
+      display: none;
+    }
+
+    #header-component.zt-header .header__icon--menu svg,
+    #header-component.zt-header .header-actions__action svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .zt-search-modal {
+    width: min(680px, calc(100vw - 32px));
+    max-width: none;
+    margin: 14vh auto auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: visible;
+  }
+
+  .zt-search-modal::backdrop {
+    background: rgb(36 27 58 / 46%);
+  }
+
+  .zt-search-modal__panel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 18px 48px rgb(36 27 58 / 18%);
+  }
+
+  .zt-search-modal__form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .zt-search-modal__field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+    height: 48px;
+    padding: 0 16px;
+    border: 1px solid #d8d2e4;
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
+    color: #3c3458;
+  }
+
+  .zt-search-modal__field:focus-within {
+    border-color: #6a2f9e;
+    box-shadow: none;
+  }
+
+  .zt-search-modal__glyph,
+  .zt-search-modal__glyph svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    flex: none;
+  }
+
+  .zt-search-modal__field input,
+  .zt-search-modal__field input:focus,
+  .zt-search-modal__field input:focus-visible {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #3c3458;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 0;
+    margin: 0;
+    appearance: none;
+  }
+
+  .zt-search-modal__field input::-webkit-search-decoration,
+  .zt-search-modal__field input::-webkit-search-cancel-button {
+    appearance: none;
+  }
+
+  .zt-search-modal__submit,
+  .zt-search-modal__close {
+    appearance: none;
+    border: 0;
+    cursor: pointer;
+    flex: none;
+  }
+
+  .zt-search-modal__submit {
+    height: 48px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: #6a2f9e;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .zt-search-modal__close {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: #3c3458;
+    padding: 0;
+  }
+
+  .zt-search-modal__close svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+{% endstylesheet %}
+
+<script>
+  (function () {
+    if (window.__ztCurrencySelector) return;
+    window.__ztCurrencySelector = true;
+
+    document.addEventListener('click', function (event) {
+      var root = document.getElementById('header-component');
+      if (!root || !event.target.closest) return;
+      if (customElements.get('dropdown-localization-component')) return;
+
+      var button = event.target.closest('.dropdown-localization__button');
+      if (button && root.contains(button)) {
+        var host = button.closest('dropdown-localization-component');
+        var panel = host && host.querySelector('.localization-wrapper');
+        if (!panel) return;
+        var willOpen = panel.hasAttribute('hidden');
+        root.querySelectorAll('.localization-wrapper').forEach(function (other) {
+          other.setAttribute('hidden', '');
+        });
+        root.querySelectorAll('.dropdown-localization__button').forEach(function (other) {
+          other.setAttribute('aria-expanded', 'false');
+        });
+        if (willOpen) {
+          panel.removeAttribute('hidden');
+          button.setAttribute('aria-expanded', 'true');
+        }
+        return;
+      }
+
+      var item = event.target.closest('.localization-form__list-item[data-value]');
+      if (item && root.contains(item)) {
+        var form = item.closest('form');
+        var input = form && form.querySelector('input[name="country_code"]');
+        if (!form || !input) return;
+        input.value = item.getAttribute('data-value');
+        event.preventDefault();
+        HTMLFormElement.prototype.submit.call(form);
+        return;
+      }
+
+      if (event.target.closest('#header-component dropdown-localization-component')) return;
+
+      root.querySelectorAll('.localization-wrapper').forEach(function (panel) {
+        panel.setAttribute('hidden', '');
+      });
+      root.querySelectorAll('.dropdown-localization__button').forEach(function (other) {
+        other.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.addEventListener('change', function (event) {
+      var select = event.target;
+      if (!select || select.name !== 'language_code') return;
+      if (customElements.get('localization-form-component')) return;
+      var root = document.getElementById('header-component');
+      if (!root || !root.contains(select)) return;
+      var form = select.closest('form');
+      if (form) form.submit();
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      var root = document.getElementById('header-component');
+      if (!root) return;
+      root.querySelectorAll('.localization-wrapper').forEach(function (panel) {
+        panel.setAttribute('hidden', '');
+      });
+      root.querySelectorAll('.dropdown-localization__button').forEach(function (button) {
+        button.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    if (window.__ztStickyAppBar) return;
+    window.__ztStickyAppBar = true;
+
+    var SELECTOR = '.essential_free_shipping_bar_wrapper';
+
+    function appBarHeight() {
+      var total = 0;
+      document.querySelectorAll(SELECTOR).forEach(function (bar) {
+        var cs = getComputedStyle(bar);
+        if (cs.display === 'none' || cs.visibility === 'hidden') return;
+        if (cs.position !== 'sticky' && cs.position !== 'fixed') return;
+        total += bar.getBoundingClientRect().height;
+      });
+      // Overlap the bar by 1px so subpixel rounding cannot show the page between them.
+      return Math.max(0, Math.floor(total) - 1);
+    }
+
+    function apply() {
+      var section = document.querySelector('.header-section');
+      if (!section) return;
+      var height = appBarHeight();
+      if (height > 0) section.style.setProperty('--zt-sticky-offset', height + 'px');
+      else section.style.removeProperty('--zt-sticky-offset');
+    }
+
+    function watchBar(bar) {
+      if (!bar || bar.dataset.ztStickyWatch) return;
+      bar.dataset.ztStickyWatch = 'true';
+      if (typeof ResizeObserver === 'function') new ResizeObserver(apply).observe(bar);
+    }
+
+    function scan() {
+      document.querySelectorAll(SELECTOR).forEach(watchBar);
+      apply();
+    }
+
+    scan();
+    if (document.body) new MutationObserver(scan).observe(document.body, { childList: true });
+    window.addEventListener('resize', apply);
+  })();
+</script>
+
+{% unless request.design_mode %}
+  <script type="module">
+    import { hydrate } from '@theme/section-hydration';
+    const url = new URL(window.location.href);
+    url.searchParams.delete('page');
+    hydrate('{{ section.id }}', url);
+  </script>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "Header custom",
+  "tag": "header",
+  "class": "header-section",
+  "enabled_on": {
+    "groups": [
+      "header"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "layout_width",
+      "label": "Layout width",
+      "min": 1000,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 1440,
+      "info": "Desktop only. Lower values pull the menu and icons inward."
+    },
+    {
+      "type": "header",
+      "content": "t:content.logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Upload a logo for this header. Leave empty to keep the ZEOTEIN wordmark on mobile and the theme logo on desktop."
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "t:settings.position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.direction_start"
+        },
+        {
+          "value": "center",
+          "label": "t:options.direction_center"
+        },
+        {
+          "value": "right",
+          "label": "t:options.direction_end"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:content.menu"
+    },
+    {
+      "type": "select",
+      "id": "menu_position",
+      "label": "t:settings.position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.direction_start"
+        },
+        {
+          "value": "center",
+          "label": "t:options.direction_center"
+        },
+        {
+          "value": "right",
+          "label": "t:options.direction_end"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "menu_row",
+      "label": "t:settings.row",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:options.top"
+        },
+        {
+          "value": "bottom",
+          "label": "t:options.bottom"
+        }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "header",
+      "content": "t:content.customer_account"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:content.manage_customer_accounts"
+    },
+    {
+      "type": "link_list",
+      "id": "customer_account_menu",
+      "label": "t:settings.menu",
+      "default": "customer-account-main-menu"
+    },
+    {
+      "type": "header",
+      "content": "t:content.search"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "t:settings.search_icon",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "search_position",
+      "label": "t:settings.search_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.direction_start"
+        },
+        {
+          "value": "right",
+          "label": "t:options.direction_end"
+        }
+      ],
+      "default": "right",
+      "visible_if": "{{ section.settings.show_search }}"
+    },
+    {
+      "type": "select",
+      "id": "search_row",
+      "label": "t:settings.search_row",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:options.top"
+        },
+        {
+          "value": "bottom",
+          "label": "t:options.bottom"
+        }
+      ],
+      "default": "top",
+      "visible_if": "{{ section.settings.show_search }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.localization"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_market_selector",
+      "label": "Show market selector",
+      "info": "Show or hide the currency and country selector in the header.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country",
+      "label": "t:settings.country_region",
+      "info": "t:info.manage_countries_regions",
+      "default": true,
+      "visible_if": "{{ section.settings.show_market_selector }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "country_selector_style",
+      "label": "t:settings.flag",
+      "default": true,
+      "visible_if": "{{ section.settings.show_market_selector and section.settings.show_country }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_language",
+      "label": "t:settings.language_selector",
+      "info": "t:info.manage_languages",
+      "default": true,
+      "visible_if": "{{ section.settings.show_market_selector }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_localization_caret",
+      "label": "Show dropdown arrow",
+      "default": true,
+      "visible_if": "{{ section.settings.show_market_selector }}"
+    },
+    {
+      "type": "select",
+      "id": "localization_position",
+      "label": "t:settings.position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.direction_start"
+        },
+        {
+          "value": "right",
+          "label": "t:options.direction_end"
+        }
+      ],
+      "default": "right",
+      "visible_if": "{{ section.settings.show_market_selector }}"
+    },
+    {
+      "type": "select",
+      "id": "localization_row",
+      "label": "t:settings.row",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:options.top"
+        },
+        {
+          "value": "bottom",
+          "label": "t:options.bottom"
+        }
+      ],
+      "default": "top",
+      "visible_if": "{{ section.settings.show_market_selector }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:options.page"
+        },
+        {
+          "value": "full-width",
+          "label": "t:options.full"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "select",
+      "id": "section_height",
+      "label": "t:settings.height",
+      "options": [
+        {
+          "value": "compact",
+          "label": "t:options.compact"
+        },
+        {
+          "value": "standard",
+          "label": "t:options.standard"
+        }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "select",
+      "id": "enable_sticky_header",
+      "label": "t:settings.sticky_header",
+      "options": [
+        {
+          "value": "always",
+          "label": "t:options.always"
+        },
+        {
+          "value": "scroll-up",
+          "label": "t:options.on_scroll_up"
+        },
+        {
+          "value": "never",
+          "label": "t:options.never"
+        }
+      ],
+      "default": "always"
+    },
+    {
+      "type": "range",
+      "id": "divider_width",
+      "label": "t:settings.divider_thickness",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.menu_row == 'bottom' or section.settings.localization_row == 'bottom' or section.settings.search_row == 'bottom' }}"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "t:settings.divider_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.divider_width > 0 and section.settings.menu_row == 'bottom' or section.settings.localization_row == 'bottom' or section.settings.search_row == 'bottom' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "t:settings.border_width",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "bottom_border_color",
+      "label": "t:settings.bottom_border_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.border_width > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.utilities"
+    },
+    {
+      "type": "select",
+      "id": "actions_display_style",
+      "label": "t:settings.actions_display_style",
+      "info": "t:info.actions_display_style",
+      "options": [
+        {
+          "value": "icon",
+          "label": "t:options.icons"
+        },
+        {
+          "value": "text",
+          "label": "t:options.text"
+        }
+      ],
+      "default": "icon"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color_top",
+      "label": "t:settings.top_row_background",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "text_color_top",
+      "label": "t:settings.top_row_text",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "background_color_bottom",
+      "label": "t:settings.bottom_row_background",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.menu_row == 'bottom' or section.settings.localization_row == 'bottom' or section.settings.search_row == 'bottom' }}"
+    },
+    {
+      "type": "color",
+      "id": "text_color_bottom",
+      "label": "t:settings.bottom_row_text",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.menu_row == 'bottom' or section.settings.localization_row == 'bottom' or section.settings.search_row == 'bottom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.cart_bubble"
+    },
+    {
+      "type": "select",
+      "id": "bubble_style",
+      "label": "t:settings.bubble_style",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:options.default"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "color",
+      "id": "bubble_background_color",
+      "label": "t:settings.background",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.bubble_style == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "bubble_text_color",
+      "label": "t:settings.text",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.bubble_style == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.home_page"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_transparent_header_home",
+      "label": "t:settings.transparent_background",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "home_inverse_logo",
+      "label": "t:settings.inverse_logo",
+      "default": false,
+      "visible_if": "{{ section.settings.enable_transparent_header_home }}"
+    },
+    {
+      "type": "color",
+      "id": "text_color_transparent_home",
+      "label": "t:settings.text_color_transparent",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.enable_transparent_header_home }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.product_page"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_transparent_header_product",
+      "label": "t:settings.transparent_background",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "product_inverse_logo",
+      "label": "t:settings.inverse_logo",
+      "default": false,
+      "visible_if": "{{ section.settings.enable_transparent_header_product }}"
+    },
+    {
+      "type": "color",
+      "id": "text_color_transparent_product",
+      "label": "t:settings.text_color_transparent",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.enable_transparent_header_product }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.collection_page"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_transparent_header_collection",
+      "label": "t:settings.transparent_background",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_inverse_logo",
+      "label": "t:settings.inverse_logo",
+      "default": false,
+      "visible_if": "{{ section.settings.enable_transparent_header_collection }}"
+    },
+    {
+      "type": "color",
+      "id": "text_color_transparent_collection",
+      "label": "t:settings.text_color_transparent",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.enable_transparent_header_collection }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header custom",
+      "settings": {
+        "layout_width": 1440,
+        "logo": "shopify://shop_images/Zeotein_Logo_banner_2.0.png",
+        "logo_position": "left",
+        "menu_position": "center",
+        "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
+        "show_search": true,
+        "search_position": "right",
+        "search_row": "top",
+        "show_market_selector": false,
+        "show_country": true,
+        "country_selector_style": true,
+        "show_language": true,
+        "show_localization_caret": true,
+        "localization_position": "right",
+        "localization_row": "top",
+        "section_width": "page-width",
+        "section_height": "standard",
+        "enable_sticky_header": "always",
+        "divider_width": 0,
+        "divider_color": "",
+        "border_width": 0,
+        "bottom_border_color": "",
+        "actions_display_style": "icon",
+        "background_color_top": "",
+        "text_color_top": "",
+        "background_color_bottom": "",
+        "text_color_bottom": "",
+        "bubble_style": "default",
+        "bubble_background_color": "",
+        "bubble_text_color": "",
+        "enable_transparent_header_home": false,
+        "home_inverse_logo": false,
+        "text_color_transparent_home": "",
+        "enable_transparent_header_product": false,
+        "product_inverse_logo": false,
+        "text_color_transparent_product": "",
+        "enable_transparent_header_collection": false,
+        "collection_inverse_logo": false,
+        "text_color_transparent_collection": ""
+      },
+      "blocks": [
+        {
+          "type": "_header-logo",
+          "id": "header-logo",
+          "static": true,
+          "settings": {
+            "hide_logo_on_home_page": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          }
+        },
+        {
+          "type": "_header-menu-custom",
+          "id": "header-menu",
+          "static": true,
+          "settings": {
+            "menu": "main-menu",
+            "background_color": "",
+            "text_color": "",
+            "type_font_primary_size": "1rem",
+            "menu_font_style": "inverse",
+            "type_font_primary_link": "heading",
+            "type_case_primary_link": "none",
+            "menu_style": "collection_images",
+            "featured_products_aspect_ratio": "4 / 5",
+            "featured_collections_aspect_ratio": "16 / 9",
+            "image_border_radius": 0,
+            "navigation_bar": false,
+            "background_color_navigation_bar": "",
+            "text_color_navigation_bar": "",
+            "drawer_accordion": false,
+            "drawer_accordion_expand_first": false,
+            "drawer_dividers": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

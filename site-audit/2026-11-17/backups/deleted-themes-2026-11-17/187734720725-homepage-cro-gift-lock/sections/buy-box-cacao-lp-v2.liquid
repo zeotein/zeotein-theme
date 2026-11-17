@@ -1,0 +1,1015 @@
+{% comment %}
+  Buy Box Cacao LP v2.
+  Lovable purchase layout. Checkout prices, Seal plans, gifts, and the hidden
+  4-bag option follow the current Buy Box Cacao LP.
+{% endcomment %}
+{%- liquid
+  assign sid = 'zt-bb2-' | append: section.id
+  assign details_id = 'zt-bb2-details-' | append: section.id
+  assign reviews_id = 'zt-bb2-reviews-' | append: section.id
+  assign bb_product = all_products['zeotein-cacao-bulk-bag-cacao-lp']
+  assign variant = bb_product.selected_or_first_available_variant
+  assign variant_id = variant.id | default: '67596435783893'
+  assign seal_plan_1 = '6565560533'
+  assign seal_plan_2 = '6565593301'
+  assign seal_plan_3 = '6565626069'
+  assign seal_plan_4 = '6565658837'
+
+  assign shaker = all_products['lp-gift-cleanblend-shaker']
+  assign shaker_variant_id = '67706369704149'
+  if shaker != blank and shaker.selected_or_first_available_variant
+    assign shaker_variant_id = shaker.selected_or_first_available_variant.id
+  endif
+  assign scoop_product = all_products['lp-gift-save-a-scoop']
+  assign scoop_variant_id = '67706369507541'
+  if scoop_product != blank and scoop_product.selected_or_first_available_variant
+    assign scoop_variant_id = scoop_product.selected_or_first_available_variant.id
+  endif
+  assign guide_starter = all_products['lp-gift-starter-guide']
+  assign guide_cacao = all_products['lp-gift-cacao-recipe-guide']
+  assign guide_vegan = all_products['lp-gift-vegan-recipe-guide']
+  assign guide_starter_vid = '67706369540309'
+  assign guide_cacao_vid = '67706369605845'
+  assign guide_vegan_vid = '67706369638613'
+  if guide_starter != blank and guide_starter.selected_or_first_available_variant
+    assign guide_starter_vid = guide_starter.selected_or_first_available_variant.id
+  endif
+  if guide_cacao != blank and guide_cacao.selected_or_first_available_variant
+    assign guide_cacao_vid = guide_cacao.selected_or_first_available_variant.id
+  endif
+  if guide_vegan != blank and guide_vegan.selected_or_first_available_variant
+    assign guide_vegan_vid = guide_vegan.selected_or_first_available_variant.id
+  endif
+
+  if section.settings.layout_width == blank
+    assign layout_width = 1180
+  else
+    assign layout_width = section.settings.layout_width
+  endif
+
+  assign show_tier_4 = false
+  assign rating_href = '#zt-cacao-reviews'
+
+  assign slide_1 = nil
+  if bb_product != blank
+    for media in bb_product.media
+      if media.media_type == 'image'
+        assign slide_1 = media
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{{ 'buy-box-cacao-lp-v2.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cacao-lp-scroll-offer.js' | asset_url }}" defer></script>
+<script src="{{ 'buy-box-cacao-lp.js' | asset_url }}" type="module" defer></script>
+<script>
+  (function () {
+    function updateZtBb2Sticky() {
+      var nodes = document.querySelectorAll(
+        '.essential_free_shipping_bar_wrapper, .header-section, .shopify-section-header'
+      );
+      var offset = 0;
+      nodes.forEach(function (el) {
+        var style = window.getComputedStyle(el);
+        if (style.position !== 'sticky' && style.position !== 'fixed') return;
+        var rect = el.getBoundingClientRect();
+        if (rect.height < 1 || rect.top > 180) return;
+        offset = Math.max(offset, rect.bottom);
+      });
+      if (!offset) offset = 115;
+      document.querySelectorAll('.zt-bb2__gallery').forEach(function (gallery) {
+        gallery.style.setProperty('--zt-bb2-sticky-top', Math.ceil(offset + 16) + 'px');
+      });
+    }
+    function sizeZtBb2Thumbs() {
+      document.querySelectorAll('.zt-bb2__stage').forEach(function (stage) {
+        var main = stage.querySelector('.zt-bb2__main');
+        var thumbs = stage.querySelector('.zt-bb2__thumbs');
+        var gallery = stage.closest('.zt-bb2__gallery');
+        if (!main || !thumbs) return;
+        var gap = 8;
+        var desktop = window.matchMedia('(min-width: 640px)').matches;
+        var size;
+        if (desktop) {
+          var height = main.getBoundingClientRect().height;
+          if (height < 40) return;
+          size = (height - gap * 5) / 6;
+          thumbs.style.setProperty('--zt-bb2-main-h', height + 'px');
+        } else {
+          var width = stage.getBoundingClientRect().width;
+          if (width < 40) return;
+          size = (width - gap * 5) / 6;
+          thumbs.style.removeProperty('--zt-bb2-main-h');
+        }
+        var px = Math.max(36, size) + 'px';
+        thumbs.style.setProperty('--zt-bb2-thumb', px);
+        if (gallery) gallery.style.setProperty('--zt-bb2-thumb', px);
+      });
+    }
+    function updateZtBb2Gallery() {
+      updateZtBb2Sticky();
+      sizeZtBb2Thumbs();
+    }
+    function bindZtBb2Gallery() {
+      updateZtBb2Gallery();
+      if (!window.ResizeObserver) return;
+      document.querySelectorAll('.zt-bb2__main').forEach(function (main) {
+        if (main.dataset.ztBb2Observed === 'true') return;
+        main.dataset.ztBb2Observed = 'true';
+        new ResizeObserver(sizeZtBb2Thumbs).observe(main);
+      });
+    }
+    bindZtBb2Gallery();
+    window.addEventListener('resize', updateZtBb2Gallery);
+    window.addEventListener('load', bindZtBb2Gallery);
+    document.addEventListener('shopify:section:load', bindZtBb2Gallery);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bindZtBb2Gallery);
+    }
+  })();
+</script>
+
+{%- capture buybox_config -%}
+{
+  "productTitle": {{ bb_product.title | default: 'Zeotein Cacao 30-Day Bulk Bag' | json }},
+  "variantId": {{ variant_id | json }},
+  "defaultPlan": {{ section.settings.default_plan | default: 'sub' | json }},
+  "defaultBag": "1",
+  "ctaSub": {{ section.settings.cta_sub | default: 'Claim My 55% Off' | json }},
+  "ctaOnce": {{ section.settings.cta_once | default: 'Claim My 55% Off' | json }},
+  "afterAddAction": {{ section.settings.after_add_action | default: 'drawer' | json }},
+  "addShakerGift": {{ true | json }},
+  "shakerVariantId": {{ shaker_variant_id | json }},
+  "addBulkBagGifts": {{ true | json }},
+  "giftItems": {
+    "bulkBag": [
+      {%- assign gift_comma = false -%}
+      {%- if scoop_variant_id != blank -%}
+        { "id": {{ scoop_variant_id }}, "key": "save_a_scoop" }
+        {%- assign gift_comma = true -%}
+      {%- endif -%}
+      {%- if guide_starter_vid != blank -%}
+        {%- if gift_comma -%},{%- endif -%}
+        { "id": {{ guide_starter_vid }}, "key": "starter_guide" }
+        {%- assign gift_comma = true -%}
+      {%- endif -%}
+      {%- if guide_cacao_vid != blank -%}
+        {%- if gift_comma -%},{%- endif -%}
+        { "id": {{ guide_cacao_vid }}, "key": "cacao_recipe_guide" }
+        {%- assign gift_comma = true -%}
+      {%- endif -%}
+      {%- if guide_vegan_vid != blank -%}
+        {%- if gift_comma -%},{%- endif -%}
+        { "id": {{ guide_vegan_vid }}, "key": "vegan_recipe_guide" }
+      {%- endif -%}
+    ],
+    "subscribeOnly": [
+      {%- if shaker_variant_id != blank -%}
+        { "id": {{ shaker_variant_id }}, "key": "cleanblend_shaker" }
+      {%- endif -%}
+    ]
+  },
+  "tiers": [
+    {
+      "key": "1",
+      "qty": 1,
+      "firstPrice": "76.99",
+      "renewPrice": "99.99",
+      "oncePrice": "109.99",
+      "sellingPlanId": {{ seal_plan_1 | json }}
+    },
+    {
+      "key": "2",
+      "qty": 2,
+      "firstPrice": "149.98",
+      "renewPrice": "179.98",
+      "oncePrice": "199.98",
+      "sellingPlanId": {{ seal_plan_2 | json }}
+    },
+    {
+      "key": "3",
+      "qty": 3,
+      "firstPrice": "219.99",
+      "renewPrice": "239.97",
+      "oncePrice": "269.97",
+      "sellingPlanId": {{ seal_plan_3 | json }}
+    }{%- if show_tier_4 -%}
+    ,{
+      "key": "4",
+      "qty": 4,
+      "firstPrice": "285.00",
+      "renewPrice": "299.96",
+      "oncePrice": "339.96",
+      "sellingPlanId": {{ seal_plan_4 | json }}
+    }{%- endif -%}
+  ]
+}
+{%- endcapture -%}
+
+<section
+  id="{{ sid }}"
+  class="zt-bb2"
+  data-zt-bb
+  data-zt-bb-version="v2"
+  data-zt-bb-config="zt-bb2-config-{{ section.id }}"
+  data-zt-bb-once-extra="{{ section.settings.once_extra | default: 'Save-A-Scoop included' | escape }}"
+  style="
+    --zt-bb2-primary: {{ section.settings.primary_color }};
+    --zt-bb2-pad-top: 24px;
+    --zt-bb2-pad-bottom: 40px;
+    --zt-bb2-width: {{ layout_width }}px;
+    --zt-bb2-bag-cols: {% if show_tier_4 %}4{% else %}3{% endif %};
+  "
+  {{ section.shopify_attributes }}
+>
+  <script type="application/json" id="zt-bb2-config-{{ section.id }}">{{ buybox_config }}</script>
+
+  <div class="zt-bb2__inner" id="purchase">
+    <div class="zt-bb2__gallery" aria-label="Product gallery">
+      <div class="zt-bb2__stage">
+        <div class="zt-bb2__thumbs" data-zt-bb-thumbs aria-label="Choose product image">
+          {%- assign thumb_i = 0 -%}
+          {%- if bb_product != blank -%}
+            {%- for media in bb_product.media -%}
+              {%- if media.media_type == 'image' -%}
+                {%- assign thumb_i = thumb_i | plus: 1 -%}
+                {%- assign full = media | image_url: width: 1400 -%}
+                {%- assign thumb = media | image_url: width: 200 -%}
+                <button
+                  type="button"
+                  class="zt-bb2__thumb{% if thumb_i == 1 %} is-active{% endif %}"
+                  data-zt-bb-thumb
+                  data-zt-bb-full-src="{{ full | escape }}"
+                  aria-label="Show image {{ thumb_i }}"
+                  aria-pressed="{% if thumb_i == 1 %}true{% else %}false{% endif %}"
+                >
+                  <img
+                    src="{{ thumb | escape }}"
+                    alt=""
+                    width="128"
+                    height="128"
+                    loading="{% if thumb_i <= 6 %}eager{% else %}lazy{% endif %}"
+                  >
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+          {%- if thumb_i == 0 -%}
+            {%- assign fallbacks = 'zt-bb-main.png|zt-bb-thumb-2.png|zt-bb-thumb-3.png|zt-bb-thumb-4.png' | split: '|' -%}
+            {%- for fallback in fallbacks -%}
+              <button
+                type="button"
+                class="zt-bb2__thumb{% if forloop.first %} is-active{% endif %}"
+                data-zt-bb-thumb
+                data-zt-bb-full-src="{{ fallback | asset_url | escape }}"
+                aria-label="Show image {{ forloop.index }}"
+                aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+              >
+                <img src="{{ fallback | asset_url }}" alt="" width="112" height="112" loading="lazy">
+              </button>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+
+        <div class="zt-bb2__main" data-zt-bb-main tabindex="0">
+          {%- if slide_1 != blank -%}
+            {%- assign main_alt = slide_1.alt | default: bb_product.title -%}
+            {{
+              slide_1
+              | image_url: width: 1400
+              | image_tag:
+                class: 'zt-bb2__main-img zt-bb__main-img',
+                widths: '600, 900, 1400',
+                sizes: '(min-width: 1024px) 640px, 100vw',
+                alt: main_alt,
+                loading: 'eager'
+            }}
+          {%- else -%}
+            <img
+              class="zt-bb2__main-img zt-bb__main-img"
+              src="{{ 'zt-bb-main.png' | asset_url }}"
+              alt="Zeotein Cacao 30-Day Bulk Bag"
+              width="1400"
+              height="1400"
+            >
+          {%- endif -%}
+
+          {%- unless section.settings.show_image_benefits == false -%}
+          <ul class="zt-bb2__benefits" aria-label="Product benefits">
+            <li><span class="zt-bb2__benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 21c6-2 8-8 8-14-4 2-8 6-8 14zM19 21c-6-2-8-8-8-14 4 2 8 6 8 14z" stroke="currentColor" stroke-width="1.8"/></svg></span>23g complete protein</li>
+            <li><span class="zt-bb2__benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 14c2-6 6-8 8-8s6 2 8 8c-3 1-5 1-8 1s-5 0-8-1z" stroke="currentColor" stroke-width="1.8"/></svg></span>Supports digestion</li>
+            <li><span class="zt-bb2__benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 8h10v10H7zM10 8V6h4v2M9 18v2M15 18v2" stroke="currentColor" stroke-width="1.8"/></svg></span>Sustained energy</li>
+            <li><span class="zt-bb2__benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.6-7 10-7 10z" stroke="currentColor" stroke-width="1.8"/></svg></span>Functional ingredients</li>
+            <li><span class="zt-bb2__benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.5 5h5L14.5 11l1.5 5L12 13.5 8 16l1.5-5L5 8h5z" stroke="currentColor" stroke-width="1.8"/></svg></span>No artificial ingredients</li>
+          </ul>
+          {%- endunless -%}
+
+          <div class="zt-bb2__price-chip">
+            <p class="zt-bb2__price-chip-kicker">Starter Kit from</p>
+            <p class="zt-bb2__price-chip-value" data-zt-bb-kit-price>$76.99</p>
+            <p class="zt-bb2__price-chip-note">Your First Order</p>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="zt-bb2__nutrition" data-zt-bb-nutrition-open aria-haspopup="dialog" aria-controls="zt-bb2-nutrition-{{ section.id }}">
+        {{ section.settings.nutrition_label | default: 'View Nutrition Facts' | escape }}
+      </button>
+    </div>
+
+    <div class="zt-bb2__panel" aria-label="Purchase options">
+      <a class="zt-bb2__rating" href="{{ rating_href }}">
+        <span class="zt-bb2__stars" aria-hidden="true">★★★★★</span>
+        {% render 'cacao-lp-review-score', format: 'buybox', fallback: section.settings.rating_text %}
+      </a>
+
+      <h2 class="zt-bb2__title">{{ section.settings.title | default: 'Zeotein Cacao
+30-Day Bulk Bag' | escape | newline_to_br }}</h2>
+      <p class="zt-bb2__subtitle">{{ section.settings.subtitle | escape }}</p>
+
+      <ul class="zt-bb2__bullets">
+        {%- if section.settings.bullet_1 != blank -%}
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ section.settings.bullet_1 | escape }}</li>
+        {%- endif -%}
+        {%- if section.settings.bullet_2 != blank -%}
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ section.settings.bullet_2 | escape }}</li>
+        {%- endif -%}
+        {%- if section.settings.bullet_3 != blank -%}
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ section.settings.bullet_3 | escape }}</li>
+        {%- endif -%}
+        {%- if section.settings.bullet_4 != blank -%}
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ section.settings.bullet_4 | escape }}</li>
+        {%- endif -%}
+      </ul>
+
+      <hr class="zt-bb2__rule">
+
+      <div class="zt-bb2__bags-head">
+        <h3 class="zt-bb2__label">{{ section.settings.bags_heading | escape }}</h3>
+        <span class="zt-bb2__save-pill">
+          {%- if section.settings.bags_badge_icon != blank -%}
+            {{
+              section.settings.bags_badge_icon
+              | image_url: width: 64
+              | image_tag: class: 'zt-bb2__inline-icon', alt: '', widths: '32, 64', sizes: '14px'
+            }}
+          {%- else -%}
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" aria-hidden="true"><path d="M4 12h8M8 8l-4 4 4 4M20 7l-6 10h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          {%- endif -%}
+          {{ section.settings.bags_badge | escape }}
+        </span>
+      </div>
+
+      <div class="zt-bb2__bags" role="group" aria-label="Bag quantity">
+        <button type="button" class="zt-bb2__bag is-active" data-zt-bb-bag aria-pressed="true">1 Bag<span class="zt-bb2__bag-days"> · 30 days</span></button>
+        <button type="button" class="zt-bb2__bag" data-zt-bb-bag aria-pressed="false">2 Bags<span class="zt-bb2__bag-days"> · 60 days</span></button>
+        <button type="button" class="zt-bb2__bag" data-zt-bb-bag aria-pressed="false">3 Bags<span class="zt-bb2__bag-days"> · 90 days</span></button>
+        {%- if show_tier_4 -%}
+          <button type="button" class="zt-bb2__bag" data-zt-bb-bag aria-pressed="false">4 Bags<span class="zt-bb2__bag-days"> · 120 days</span></button>
+        {%- endif -%}
+      </div>
+
+      <h3 class="zt-bb2__plans-head" id="zt-bb2-offer">{{ section.settings.plans_heading | escape }}</h3>
+      <div class="zt-bb2__plans">
+        <button type="button" class="zt-bb2__plan is-active" data-zt-bb-plan="sub" aria-pressed="true">
+          <div class="zt-bb2__banner" data-zt-bb-sub-banner>{{ section.settings.sub_banner | escape }}</div>
+          <div class="zt-bb2__plan-body">
+            <div class="zt-bb2__plan-top">
+              <span class="zt-bb2__radio" aria-hidden="true"></span>
+              <div class="zt-bb2__plan-copy">
+                <p class="zt-bb2__plan-title">{{ section.settings.sub_title | escape }}</p>
+                <p class="zt-bb2__plan-meta" data-zt-bb-sub-meta>1 bag every 30 days - $2.57 per serving</p>
+              </div>
+              <div class="zt-bb2__prices">
+                <p class="zt-bb2__price" data-zt-bb-sub-price>$76.99</p>
+                <p class="zt-bb2__renew" data-zt-bb-sub-renew>then $99.99 every 30 days</p>
+              </div>
+            </div>
+            <ul class="zt-bb2__perks">
+              <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>{{ section.settings.perk_1 | escape }}</li>
+              {%- if section.settings.perk_2 != blank -%}<li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>{{ section.settings.perk_2 | escape }}</li>{%- endif -%}
+            </ul>
+          </div>
+        </button>
+
+        <button type="button" class="zt-bb2__plan zt-bb2__plan--once" data-zt-bb-plan="once" aria-pressed="false">
+          <div class="zt-bb2__plan-top">
+            <span class="zt-bb2__radio" aria-hidden="true"></span>
+            <div class="zt-bb2__plan-copy">
+              <p class="zt-bb2__plan-title">{{ section.settings.once_title | escape }}</p>
+              <p class="zt-bb2__plan-meta" data-zt-bb-once-meta>1 bag delivered at once</p>
+            </div>
+            <div class="zt-bb2__prices">
+              <p class="zt-bb2__price" data-zt-bb-once-price>$109.99</p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="zt-bb2__gifts" data-zt-bb-kit>
+        <span class="zt-bb2__gifts-badge">Gifts Unlocked</span>
+        <div class="zt-bb2__gift-row">
+          <div class="zt-bb2__gift" data-zt-bb-gift="shaker">
+            <span class="zt-bb2__gift-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M8 8h8l-1 12H9L8 8zM9 8c0-3 6-3 6 0" stroke="currentColor" stroke-width="1.6"/><path d="M10 12h4" stroke="currentColor" stroke-width="1.6"/></svg>
+              <svg class="zt-bb2__lock" viewBox="0 0 24 24" fill="none"><rect x="6" y="11" width="12" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg>
+            </span>
+            <p class="zt-bb2__gift-name zt-bb2__gift-open">{{ section.settings.shaker_name | escape }}</p>
+            <p class="zt-bb2__gift-note zt-bb2__gift-open">{{ section.settings.shaker_note | escape }}</p>
+            <p class="zt-bb2__gift-name zt-bb2__gift-locked">Locked</p>
+            <p class="zt-bb2__gift-note zt-bb2__gift-locked">Subscribe to unlock</p>
+          </div>
+          <span class="zt-bb2__plus" aria-hidden="true"><svg viewBox="0 0 12 12" width="12" height="12" fill="none"><path d="M6 1.5v9M1.5 6h9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          <div class="zt-bb2__gift">
+            <span class="zt-bb2__gift-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 5h9l3 3v11H6zM15 5v3h3M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.6"/></svg></span>
+            <p class="zt-bb2__gift-name">{{ section.settings.guides_name | escape }}</p>
+            <p class="zt-bb2__gift-note">{{ section.settings.guides_note | escape }}</p>
+          </div>
+          <span class="zt-bb2__plus" aria-hidden="true"><svg viewBox="0 0 12 12" width="12" height="12" fill="none"><path d="M6 1.5v9M1.5 6h9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          <div class="zt-bb2__gift">
+            <span class="zt-bb2__gift-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 8h16v10H4zM8 8V6h8v2M12 12v4" stroke="currentColor" stroke-width="1.6"/></svg></span>
+            <p class="zt-bb2__gift-name">{{ section.settings.scoop_name | escape }}</p>
+            <p class="zt-bb2__gift-note">{{ section.settings.scoop_note | escape }}</p>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="zt-bb2__cta" data-zt-bb-cta>
+        <svg class="zt-bb2__cta-check" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <span data-zt-bb-cta-label>{{ section.settings.cta_sub | escape }}</span>
+      </button>
+      <p class="zt-bb2__plan-note" data-zt-bb-plan-note>Renews at $99.99 every 30 days. Cancel anytime.</p>
+      <p class="zt-bb2__intro zt-bb2__sub-only">
+        {%- if section.settings.intro_icon != blank -%}
+          {{
+            section.settings.intro_icon
+            | image_url: width: 64
+            | image_tag: class: 'zt-bb2__inline-icon', alt: '', widths: '32, 64', sizes: '14px'
+          }}
+        {%- else -%}
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden="true"><path d="M4 12h8M8 8l-4 4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        {%- endif -%}
+        {{ section.settings.intro_note | escape }}
+      </p>
+      <p class="zt-bb2__limit zt-bb2__sub-only"><strong>{{ section.settings.limit_lead | escape }}</strong> {{ section.settings.limit_rest | escape }}</p>
+      <p class="zt-bb2__status" data-zt-bb-status role="status" aria-live="polite"></p>
+
+      <div class="zt-bb2__trust">
+        <div class="zt-bb2__trust-item"><span class="zt-bb2__trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M12 3 5 6v6c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6z" stroke="currentColor" stroke-width="1.6"/></svg></span><span>{{ section.settings.trust_1 | escape | newline_to_br }}</span></div>
+        <div class="zt-bb2__trust-item"><span class="zt-bb2__trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M3 15h11V7H3zM14 11h4l3 4v4h-7M7 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM17 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" stroke="currentColor" stroke-width="1.6"/></svg></span><span>{{ section.settings.trust_2 | escape | newline_to_br }}</span></div>
+        <div class="zt-bb2__trust-item"><span class="zt-bb2__trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"><rect x="6" y="11" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.6"/></svg></span><span>{{ section.settings.trust_3 | escape | newline_to_br }}</span></div>
+      </div>
+
+      <div id="{{ details_id }}" class="zt-bb2__faq" data-zt-bb-faq>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq' and block.settings.title != blank -%}
+            <details class="zt-bb2__faq-item" {{ block.shopify_attributes }}>
+              <summary>
+                {{ block.settings.title | escape }}
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </summary>
+              {%- liquid
+                assign faq_body = block.settings.body | escape
+                assign portal_url = 'https://zeotein.com/a/subscriptions/login'
+                capture portal_link
+                  echo '<a href="https://zeotein.com/a/subscriptions/login" target="_blank" rel="noopener noreferrer">customer portal</a>'
+                endcapture
+              -%}
+              <p>{{ faq_body | replace: portal_url, portal_link }}</p>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div id="{{ reviews_id }}" class="zt-bb2__reviews"></div>
+
+      <form class="zt-bb__form" data-zt-bb-form hidden>
+        <input type="hidden" name="id" data-zt-bb-variant value="{{ variant_id }}">
+        <input type="hidden" name="quantity" data-zt-bb-qty value="1">
+        <input type="hidden" name="selling_plan" data-zt-bb-selling-plan value="">
+      </form>
+    </div>
+  </div>
+
+  <dialog id="zt-bb2-nutrition-{{ section.id }}" class="zt-bb2__sheet" data-zt-bb-nutrition aria-labelledby="zt-bb2-nutrition-title-{{ section.id }}">
+    <div class="zt-bb2__sheet-panel">
+      <header class="zt-bb2__sheet-head">
+        <h2 id="zt-bb2-nutrition-title-{{ section.id }}" class="zt-bb2__sheet-title">Nutrition Facts</h2>
+        <button type="button" class="zt-bb2__sheet-x" data-zt-bb-nutrition-close aria-label="Close nutrition facts">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+      <div class="zt-bb2__sheet-body">
+        <p class="zt-bb2__sr">Nutrition facts and ingredients for Zeotein Cacao 30-Day Bulk Bag.</p>
+        <section class="zt-bb2__nf-hero">
+          <p class="zt-bb2__nf-kicker">Zeotein Cacao</p>
+          <h3 class="zt-bb2__nf-name">30-Day Bulk Bag</h3>
+          <p class="zt-bb2__nf-serve">Serving Size: 2 Scoops (50 mL each) (38.7 g) · Servings Per Container: 30 · Suggested Use: Mix one serving (2 scoops) with 10–12 oz of water, milk, or your favorite smoothie.</p>
+          <div class="zt-bb2__nf-highlights">
+            <div><p>23g</p><span>Protein</span></div>
+            <div><p>30</p><span>Servings per Bag</span></div>
+            <div><p>2</p><span>Scoops per Serving</span></div>
+          </div>
+        </section>
+
+        <section class="zt-bb2__nf-block" aria-label="Ingredient highlights">
+          <h3>What's Inside</h3>
+          <div class="zt-bb2__nf-chips">
+            <span>Grass-Fed Collagen Peptides</span>
+            <span>Grass-Fed Beef Bone Broth</span>
+            <span>Organic Fermented Cacao</span>
+            <span>Organic MCT Oil Powder</span>
+            <span>Organic Purple &amp; Gold Sea Moss</span>
+            <span>Zeolite Mineral</span>
+          </div>
+        </section>
+
+        <section class="zt-bb2__nf-block" aria-label="Clean label">
+          <h3>Clean Label</h3>
+          <div class="zt-bb2__nf-tags">
+            <span>Gluten Free</span>
+            <span>Dairy Free</span>
+            <span>Soy Free</span>
+            <span>Zero Sugar</span>
+            <span>Zero Artificial Colors</span>
+            <span>Zero Artificial Flavors</span>
+          </div>
+        </section>
+
+        <section class="zt-bb2__nf-block" aria-label="Supplement facts">
+          <h3 class="zt-bb2__nf-facts-title">Supplement Facts</h3>
+          {%- if section.settings.facts_format == 'photo' -%}
+            {%- if section.settings.facts_image != blank -%}
+              {{
+                section.settings.facts_image
+                | image_url: width: 1200
+                | image_tag:
+                  class: 'zt-bb2__nf-photo',
+                  widths: '400, 600, 800, 1200',
+                  sizes: '(min-width: 750px) 420px, 90vw',
+                  alt: 'Zeotein Cacao supplement facts label',
+                  loading: 'lazy'
+              }}
+            {%- else -%}
+              <img
+                class="zt-bb2__nf-photo"
+                src="{{ 'cacao-supplement-facts.webp' | asset_url }}"
+                alt="Zeotein Cacao supplement facts label"
+                width="800"
+                height="1000"
+                loading="lazy"
+              >
+            {%- endif -%}
+          {%- else -%}
+          <div class="zt-bb2__nf-facts-head"><span>Amount Per Serving</span><span>%DV</span></div>
+          <dl class="zt-bb2__nf-facts">
+            <div class="is-bold"><dt>Calories <span>140</span></dt><dd></dd></div>
+            <div class="is-bold"><dt>Total Fat <span>3 g</span></dt><dd>4%</dd></div>
+            <div class="is-indent"><dt>Saturated Fat <span>2.5 g</span></dt><dd>13%</dd></div>
+            <div class="is-bold"><dt>Sodium <span>420 mg</span></dt><dd>18%</dd></div>
+            <div class="is-bold"><dt>Total Carbohydrate <span>2 g</span></dt><dd>1%</dd></div>
+            <div class="is-indent"><dt>Dietary Fiber <span>1 g</span></dt><dd>4%</dd></div>
+            <div class="is-indent"><dt>Total Sugars <span>0 g</span></dt><dd></dd></div>
+            <div class="is-bold"><dt>Protein <span>23 g</span></dt><dd></dd></div>
+          </dl>
+          <p class="zt-bb2__nf-copy"><strong>Zeotein Cacao Protein Blend 38.7 g †</strong><br>Grass-Fed Hydrolyzed Bovine Collagen Peptides, Grass-Fed Beef Bone Broth Protein, Organic Fermented Cacao Powder, Organic MCT Oil Powder, Zeolite (Clinoptilolite), Organic Purple and Gold Sea Moss Blend (Gracilaria spp.)</p>
+          <p class="zt-bb2__nf-fine">* Percent Daily Values are based on a 2,000 calorie diet. † Daily Value not established.</p>
+          {%- endif -%}
+        </section>
+
+
+        <button type="button" class="zt-bb2__sheet-close" data-zt-bb-nutrition-close>Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <style>
+    .zt-bb2__sheet .zt-bb2__nf-chips span {
+      display: inline-block;
+      background: #f1eaf8;
+      color: #5a0d91;
+      font-weight: 800;
+      border: 0;
+      border-radius: 999px;
+      padding: 6px 12px;
+    }
+    .zt-bb2__sheet .zt-bb2__nf-tags span {
+      display: inline-block;
+      background: #fff;
+      color: #5a0d91;
+      font-weight: 800;
+      border: 2px solid #d6c5e8;
+      border-radius: 999px;
+      padding: 6px 12px;
+    }
+  </style>
+</section>
+
+{%- comment -%}
+  Live theme cart type can be "page" or "notification". Those modes do not print a drawer.
+  This slot adds Dawn's existing drawer only on this landing page, so "Open cart drawer"
+  works here while other templates keep the theme cart setting.
+{%- endcomment -%}
+{%- unless settings.cart_type == 'drawer' -%}
+  {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+  {{ 'component-cart.css' | asset_url | stylesheet_tag }}
+  {{ 'component-totals.css' | asset_url | stylesheet_tag }}
+  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+  <div data-zt-bb-drawer-slot>
+    {%- render 'cart-drawer' -%}
+  </div>
+  <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Buy Box Cacao LP-v2",
+  "tag": "section",
+  "class": "section-buy-box-cacao-lp-v2",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_image_benefits",
+      "label": "Show benefits on product image",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "default_plan",
+      "label": "Default plan",
+      "default": "sub",
+      "options": [
+        {
+          "value": "sub",
+          "label": "Subscribe"
+        },
+        {
+          "value": "once",
+          "label": "One-time"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "after_add_action",
+      "label": "After add to cart",
+      "default": "drawer",
+      "options": [
+        {
+          "value": "drawer",
+          "label": "Open cart drawer"
+        },
+        {
+          "value": "cart",
+          "label": "Go to cart"
+        },
+        {
+          "value": "checkout",
+          "label": "Go to checkout"
+        },
+        {
+          "value": "none",
+          "label": "Stay on page"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text (fallback)",
+      "default": "5.0/5.0 (149 Reviews)",
+      "info": "Used only if Judge.me store-wide metafields are unavailable. Live page pulls shop.metafields.judgeme.all_reviews_*."
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title",
+      "default": "Zeotein Cacao\n30-Day Bulk Bag"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "23g protein and 14g collagen in every serving."
+    },
+    {
+      "type": "text",
+      "id": "bullet_1",
+      "label": "Bullet 1",
+      "default": "23g of complete protein in every serving"
+    },
+    {
+      "type": "text",
+      "id": "bullet_2",
+      "label": "Bullet 2",
+      "default": "Grass-fed collagen and bone broth in one serving"
+    },
+    {
+      "type": "text",
+      "id": "bullet_3",
+      "label": "Bullet 3",
+      "default": "Organic fermented cacao, zero sugar"
+    },
+    {
+      "type": "text",
+      "id": "bullet_4",
+      "label": "Bullet 4",
+      "default": "Six ingredients, all printed on the label"
+    },
+    {
+      "type": "text",
+      "id": "bags_heading",
+      "label": "Quantity heading",
+      "default": "How many bags?"
+    },
+    {
+      "type": "text",
+      "id": "bags_badge",
+      "label": "Quantity badge",
+      "default": "Buy More. Save More."
+    },
+    {
+      "type": "image_picker",
+      "id": "bags_badge_icon",
+      "label": "Quantity badge icon",
+      "info": "Shown before Buy More. Save More. Leave empty to use the built-in icon."
+    },
+    {
+      "type": "text",
+      "id": "plans_heading",
+      "label": "Plans heading",
+      "default": "Subscribe and Save:"
+    },
+    {
+      "type": "text",
+      "id": "sub_banner",
+      "label": "Subscribe banner",
+      "default": "Most Popular: Cacao Starter Kit + Free Gifts"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Subscribe title",
+      "default": "Subscribe & Save"
+    },
+    {
+      "type": "text",
+      "id": "once_title",
+      "label": "One-time title",
+      "default": "One-Time Purchase"
+    },
+    {
+      "type": "text",
+      "id": "once_extra",
+      "label": "One-time extra",
+      "default": "Save-A-Scoop included"
+    },
+    {
+      "type": "text",
+      "id": "perk_1",
+      "label": "Subscribe perk 1",
+      "default": "Pause or cancel anytime"
+    },
+    {
+      "type": "text",
+      "id": "perk_2",
+      "label": "Subscribe perk 2",
+      "default": "30-Day Money-Back Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "shaker_name",
+      "label": "Shaker gift",
+      "default": "FREE Black Shaker"
+    },
+    {
+      "type": "text",
+      "id": "shaker_note",
+      "label": "Shaker note",
+      "default": "First subscription order"
+    },
+    {
+      "type": "text",
+      "id": "guides_name",
+      "label": "Guides gift",
+      "default": "3 FREE Digital Guides"
+    },
+    {
+      "type": "text",
+      "id": "guides_note",
+      "label": "Guides note",
+      "default": "Instant access"
+    },
+    {
+      "type": "text",
+      "id": "scoop_name",
+      "label": "Scoop gift",
+      "default": "FREE Save-A-Scoop"
+    },
+    {
+      "type": "text",
+      "id": "scoop_note",
+      "label": "Scoop note",
+      "default": "First Bulk Bag order"
+    },
+    {
+      "type": "text",
+      "id": "cta_sub",
+      "label": "Subscribe button",
+      "default": "Claim My 55% Off"
+    },
+    {
+      "type": "text",
+      "id": "cta_once",
+      "label": "One-time button",
+      "default": "Claim My 55% Off"
+    },
+    {
+      "type": "text",
+      "id": "intro_note",
+      "label": "Intro note",
+      "default": "Introductory offer auto-applied"
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_icon",
+      "label": "Intro note icon",
+      "info": "Shown before the introductory offer line. Leave empty to use the built-in icon."
+    },
+    {
+      "type": "text",
+      "id": "limit_lead",
+      "label": "Limit lead",
+      "default": "First-time subscribers only."
+    },
+    {
+      "type": "text",
+      "id": "limit_rest",
+      "label": "Limit text",
+      "default": "Limit one introductory offer per customer."
+    },
+    {
+      "type": "textarea",
+      "id": "trust_1",
+      "label": "Trust 1",
+      "default": "30-Day Money-Back\nGuarantee"
+    },
+    {
+      "type": "textarea",
+      "id": "trust_2",
+      "label": "Trust 2",
+      "default": "Fast, Tracked\nShipping"
+    },
+    {
+      "type": "textarea",
+      "id": "trust_3",
+      "label": "Trust 3",
+      "default": "Secure\nCheckout"
+    },
+    {
+      "type": "text",
+      "id": "nutrition_label",
+      "label": "Nutrition button",
+      "default": "View Nutrition Facts"
+    },
+    {
+      "type": "select",
+      "id": "facts_format",
+      "label": "Supplement facts",
+      "options": [
+        { "value": "written", "label": "Written" },
+        { "value": "photo", "label": "Photo" }
+      ],
+      "default": "written"
+    },
+    {
+      "type": "image_picker",
+      "id": "facts_image",
+      "label": "Supplement facts photo",
+      "info": "Used when Supplement facts is set to Photo. Leave empty to use the included label image.",
+      "visible_if": "{{ section.settings.facts_format == 'photo' }}"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary color",
+      "default": "#580d93"
+    },
+    {
+      "type": "range",
+      "id": "layout_width",
+      "label": "Layout width",
+      "min": 980,
+      "max": 1600,
+      "step": 10,
+      "unit": "px",
+      "default": 1280,
+      "info": "Width of the buy box. It stays inside the screen."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Detail",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Detail"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Buy Box Cacao LP-v2",
+      "settings": {
+        "show_image_benefits": false,
+        "default_plan": "sub",
+        "after_add_action": "drawer",
+        "rating_text": "4.98/5.0 (134 Reviews)",
+        "title": "Zeotein Cacao\n30-Day Bulk Bag",
+        "subtitle": "23g protein and 14g collagen in every serving.",
+        "bullet_1": "23g of complete protein in every serving",
+        "bullet_2": "Grass-fed collagen and bone broth in one serving",
+        "bullet_3": "Organic fermented cacao, zero sugar",
+        "bullet_4": "Six ingredients, all printed on the label",
+        "bags_heading": "How many bags?",
+        "bags_badge": "Buy More. Save More.",
+        "bags_badge_icon": "shopify://shop_images/marketing1-ezgif.com-png-to-webp-converter.webp",
+        "plans_heading": "Subscribe and Save:",
+        "sub_banner": "Most Popular: Cacao Starter Kit + Free Gifts",
+        "sub_title": "Subscribe & Save",
+        "once_title": "One-Time Purchase",
+        "once_extra": "Save-A-Scoop included",
+        "perk_1": "Pause or cancel anytime",
+        "perk_2": "30-Day Money-Back Guarantee",
+        "shaker_name": "FREE Black Shaker",
+        "shaker_note": "First subscription order",
+        "guides_name": "3 FREE Digital Guides",
+        "guides_note": "Instant access",
+        "scoop_name": "FREE Save-A-Scoop",
+        "scoop_note": "First Bulk Bag order",
+        "cta_sub": "Claim My 55% Off",
+        "cta_once": "Claim My 55% Off",
+        "intro_note": "Introductory offer auto-applied",
+        "intro_icon": "shopify://shop_images/Discoount_tag.webp",
+        "limit_lead": "First-time subscribers only.",
+        "limit_rest": "Limit one introductory offer per customer.",
+        "trust_1": "30-Day Money-Back\nGuarantee",
+        "trust_2": "Fast, Tracked\nShipping",
+        "trust_3": "Secure\nCheckout",
+        "nutrition_label": "View Nutrition Facts",
+        "facts_format": "written",
+        "primary_color": "#580d93",
+        "layout_width": 1280
+      },
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "title": "Why Zeotein Cacao?",
+            "body": "A simple daily Cacao routine with protein and functional ingredients in one serving."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "title": "What's in the Starter Kit?",
+            "body": "Your Bulk Bag(s), a FREE Black Shaker (first subscription order), 3 FREE Digital Guides and a FREE Save-A-Scoop with your first Bulk Bag order. Limit one per customer."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "title": "Ingredients & Nutrition",
+            "body": "Serving size: 2 scoops (50 mL each, 38.7 g). Servings per bag: 30. Per serving: 140 calories, 23 g protein, 3 g total fat (2.5 g saturated), 420 mg sodium, 2 g carbohydrate, 1 g fiber, 0 g total sugars. Ingredients: Grass-Fed Hydrolyzed Bovine Collagen Peptides, Grass-Fed Beef Bone Broth Protein, Organic Fermented Cacao Powder, Organic MCT Oil Powder, Zeolite (Clinoptilolite), Organic Purple and Gold Sea Moss Blend (Gracilaria spp.). Open View Nutrition Facts above for the full Supplement Facts panel."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "title": "How to Use",
+            "body": "Mix one serving (2 scoops) with 10–12 oz of water, milk, or your favorite milk alternative."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "title": "Subscription Details",
+            "body": "Renews every month at the renewal price. Pause or cancel anytime in your https://zeotein.com/a/subscriptions/login."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

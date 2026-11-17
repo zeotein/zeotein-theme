@@ -1,0 +1,226 @@
+<title>Shopify Theme Register</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column; summary band, rules, theme cards grouped by role, deleted logs, method */
+:root{
+  --purple:#5F2D90; --teal:#32BAC0;
+  --bg:#F7F5FA; --surface:#FFFFFF; --ink:#22192E; --muted:#635A70; --line:#E3DDEA;
+  --purple-soft:#EEE6F6; --teal-soft:#E0F5F6;
+  --ok:#1F8A5B; --ok-soft:#E3F4EC; --warn:#B26A00; --warn-soft:#FFF2DC; --bad:#B3261E; --bad-soft:#FCE8E6; --info:#2C5FA8; --info-soft:#E6EEFA;
+  --display:"Poppins",system-ui,sans-serif; --body:"Nunito Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17121E; --surface:#211A2B; --ink:#EEE8F5; --muted:#ABA1B8; --line:#3A3048;
+  --purple:#B48CE0; --teal:#5FD3D8; --purple-soft:#2E2340; --teal-soft:#173538;
+  --ok:#5FCB97; --ok-soft:#173228; --warn:#F0B35A; --warn-soft:#3A2C14; --bad:#F2867E; --bad-soft:#3D1D1B; --info:#8DB4F0; --info-soft:#1B2A40; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17121E; --surface:#211A2B; --ink:#EEE8F5; --muted:#ABA1B8; --line:#3A3048;
+  --purple:#B48CE0; --teal:#5FD3D8; --purple-soft:#2E2340; --teal-soft:#173538;
+  --ok:#5FCB97; --ok-soft:#173228; --warn:#F0B35A; --warn-soft:#3A2C14; --bad:#F2867E; --bad-soft:#3D1D1B; --info:#8DB4F0; --info-soft:#1B2A40; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2}
+h1{font-size:30px;color:var(--purple)}
+h2{font-size:20px;display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:6px;height:22px;border-radius:3px;background:var(--teal)}
+h3{font-size:16px}
+p{margin:0}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px}
+header{display:flex;flex-direction:column;gap:10px}
+.sub{color:var(--muted);max-width:68ch}
+.band{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.stat .k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.stat .v{font-family:var(--display);font-size:22px;font-weight:600}
+.meter{display:flex;gap:3px;margin-top:4px}
+.meter i{flex:1;height:10px;border-radius:2px;background:var(--line)}
+.meter i.u{background:var(--purple)}
+.rules{background:var(--purple-soft);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.rules ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.rules b{color:var(--purple)}
+section{display:flex;flex-direction:column;gap:14px}
+.group-note{color:var(--muted);max-width:70ch}
+.cards{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--c,var(--line));border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card.live{--c:var(--ok)} .card.keep{--c:var(--teal)} .card.ask{--c:var(--warn)} .card.soon{--c:var(--info)}
+.top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.c-ok{background:var(--ok-soft);color:var(--ok)} .c-warn{background:var(--warn-soft);color:var(--warn)} .c-bad{background:var(--bad-soft);color:var(--bad)} .c-info{background:var(--info-soft);color:var(--info)} .c-teal{background:var(--teal-soft);color:var(--ink)} .c-purple{background:var(--purple-soft);color:var(--purple)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 18px;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
+.grid2 > div{min-width:0}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+.lbl{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:3px}
+.lbl.s{color:var(--ok)} .lbl.w{color:var(--warn)}
+ul.tight{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px}
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:620px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--purple-soft)}
+tr:last-child td{border-bottom:none}
+td.loss{color:var(--bad);font-weight:600}
+.queue{display:flex;flex-direction:column;gap:8px;counter-reset:q}
+.q{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.q::before{counter-increment:q;content:counter(q);font-family:var(--display);font-weight:700;color:var(--purple);font-size:18px}
+footer{color:var(--muted);font-size:13px}
+code{font-family:var(--mono);font-size:12.5px;background:var(--purple-soft);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+</style>
+
+<div class="wrap">
+
+<header>
+  <h1>Shopify Theme Register</h1>
+  <p class="sub">Every theme in the Zeotein Shopify theme library: what is in it that exists nowhere else, whether to keep it, and what would make it safe to delete. Read this before deleting, duplicating or publishing any theme. Last checked against the store on 17 Nov 2026, after the morning cleanup.</p>
+</header>
+
+<div class="band">
+  <div class="stat"><span class="k">Theme slots used</span><span class="v">4 of 20</span>
+    <div class="meter" aria-label="4 of 20 slots used"><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  <div class="stat"><span class="k">Live theme</span><span class="v" style="font-size:16px">Live + fixes 2026-11-17 (Claude hotfix)</span><span class="muted">Published 17 Nov, 7:11 am CT</span></div>
+  <div class="stat"><span class="k">Next publish</span><span class="v" style="font-size:16px">Black Friday Store 2026</span><span class="muted">27 Nov at 12:00 am CT, not earlier</span></div>
+  <div class="stat"><span class="k">Deleted 17 Nov</span><span class="v">9 themes</span><span class="muted">Shopify cannot restore them</span></div>
+</div>
+
+<div class="rules">
+  <h2>Theme rules</h2>
+  <ol>
+    <li><b>Shopify allows 20 themes.</b> At 20, nobody can make a working copy or a backup, so edits stall.</li>
+    <li><b>Name every copy with what it is for and the date</b>, for example "Backup before Black Friday page 20 Nov". "Copy of..." and "New Theme" tell nobody what is inside.</li>
+    <li><b>One rollback backup at a time.</b> When a new backup of the live theme is made, the older one goes on the delete list below.</li>
+    <li><b>A working copy goes once its changes are live and checked</b>, after a short safety window.</li>
+    <li><b>Publish the Black Friday theme at 12:00 am CT on 27 Nov, not earlier.</b> Its "30% off" copy would show before the storewide discount starts.</li>
+    <li><b>When switching to a new theme, app embeds do not carry over.</b> Judge.me and every other app embed must be on in the new theme before it goes live, or reviews disappear from the site. The Black Friday theme was checked on 17 Nov: same embeds as live.</li>
+    <li><b>Before deleting, check this page</b>, then update it the same day.</li>
+  </ol>
+</div>
+
+<section>
+  <h2>Live</h2>
+  <div class="cards">
+    <article class="card live">
+      <div class="top"><h3>Live + fixes 2026-11-17 (Claude hotfix)</h3><div class="chips"><span class="chip c-ok">LIVE</span><span class="chip c-ok">Never delete</span></div></div>
+      <div class="meta mono"><span>Made 16 Nov 2026, 8:34 pm</span><span>Published 17 Nov, 7:11 am</span><span>id 188199928021</span></div>
+      <div class="grid2">
+        <div><div class="lbl s">Settled: what is in it</div><p>The live site as it ran from 5 to 17 Nov ("Cacao LP updates 2026-11-05"), plus 12 fixes from the 17 Nov site audit: the Organic Hemp Protein page shows hemp facts again, footer menus, lighter Cacao landing page images, chat loads after the page, prices without "USD", the SEOAnt sticky cart embed off, and more. The full list is in the zeotein-theme repo, <code>site-audit/2026-11-17/README.md</code>.</p></div>
+        <div><div class="lbl w">Rollback</div><p>None in the library: the theme it replaced was deleted on 17 Nov. Single files can still be rolled back from the code editor's file history. When the Black Friday theme goes live on 27 Nov, this one stays in the library and becomes the rollback.</p></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section>
+  <h2>Scheduled</h2>
+  <div class="cards">
+    <article class="card soon">
+      <div class="top"><h3>Black Friday Store 2026 (draft, publish Nov 27)</h3><div class="chips"><span class="chip c-info">Goes live 27 Nov</span><span class="chip c-ok">Keep</span></div></div>
+      <div class="meta mono"><span>Made 7 Nov 2026, 6:41 pm</span><span>Last saved 17 Nov</span><span>id 187825914069</span></div>
+      <div class="grid2">
+        <div><div class="lbl s">Settled: what is in it</div><p>The Black Friday banners, countdown, hero, sale prices and buttons, plus every change live has had through 17 Nov (product page redesign, fixes, guides in the cart). Prices were checked against the scheduled discounts on 17 Nov.</p></div>
+        <div><div class="lbl w">Before it goes live</div><p>A scheduled check on 26 Nov at 2:13 pm CT compares it with live again and copies across anything new. After Black Friday weekend, decide which theme carries on and add the other to the delete list.</p></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section>
+  <h2>Drafts</h2>
+  <p class="group-note">Copies holding work that has not shipped. Each was compared file by file with live and the Black Friday theme on 17 Nov.</p>
+  <div class="cards">
+    <article class="card ask">
+      <div class="top"><h3>Holiday Popup DRAFT (Nov 11) - do not publish</h3><div class="chips"><span class="chip c-bad">Holds something unique</span><span class="chip c-warn">Dana's call</span></div></div>
+      <div class="meta mono"><span>Made 11 Nov 2026, 1:56 pm</span><span>Last saved 14 Nov, 3:17 pm</span><span>id 187982840021</span></div>
+      <div class="grid2">
+        <div><div class="lbl s">Settled: only place these exist</div><ul class="tight"><li><code>sections/zt-holiday-popup.liquid</code></li><li><code>snippets/zt-holiday-popup.liquid</code> (holiday guide opt-in popup)</li><li><code>assets/zt-holiday-guide-cover.webp</code></li></ul><p class="muted" style="margin-top:6px">The popup is not wired in and its form endpoint is blank.</p></div>
+        <div><div class="lbl w">Current call: safe to delete when</div><p>Dana confirms the OptiMonk holiday popup, live since 15 Nov, replaces it.</p></div>
+      </div>
+    </article>
+    <article class="card ask">
+      <div class="top"><h3>Jewels checkout trust staging 2026-11-13</h3><div class="chips"><span class="chip c-bad">Holds something unique</span><span class="chip c-teal">Keep</span></div></div>
+      <div class="meta mono"><span>Made 13 Nov 2026, 7:05 am</span><span>Last saved 13 Nov, 7:24 am</span><span>id 188057845973</span></div>
+      <div class="grid2">
+        <div><div class="lbl s">Settled: only place these exist</div><ul class="tight"><li><code>snippets/zt-checkout-trust.liquid</code> (guarantee and cancel links)</li><li><code>sections/main-cart-footer.liquid</code>, <code>sections/main-cart-items.liquid</code> and <code>snippets/cart-drawer.liquid</code> (one free-gifts line with its value, trust badge)</li></ul></div>
+        <div><div class="lbl w">Current call: safe to delete when</div><p>These cart changes from Jewels' call ship to live, or the open item is dropped.</p></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section>
+  <h2>Next to delete, in order</h2>
+  <div class="queue">
+    <div class="q"><div><b>Holiday Popup DRAFT (Nov 11)</b>: once Dana confirms OptiMonk replaces it</div></div>
+    <div class="q"><div><b>Jewels checkout trust staging 2026-11-13</b>: once its cart changes ship or are dropped</div></div>
+    <div class="q"><div><b>Whichever of the live and Black Friday themes stops being used</b>: after Black Friday weekend, keeping one rollback</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Deleted on 17 Nov 2026</h2>
+  <p class="group-note">Deleted on Dana's instruction (17 Nov, 6:29 am CT: outdated themes that are no longer in use or needed). The morning's file-by-file check found the content in red in no other theme; it is gone with the theme. Partial file copies of four of these themes are in the zeotein-theme repo, <code>site-audit/2026-11-17/backups/deleted-themes-2026-11-17</code>.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Theme</th><th>id</th><th>What went with it</th></tr></thead>
+      <tbody>
+        <tr><td>Cacao LP updates 2026-11-05</td><td class="mono">187740487893</td><td>Nothing unique. Live 5 to 17 Nov; everything in it is in the new live theme.</td></tr>
+        <tr><td>Live + script error fixes (Nov 10)</td><td class="mono">187923202261</td><td>Nothing unique. All of its changes were already in live and the Black Friday theme.</td></tr>
+        <tr><td>Homepage CRO and Compliance + gift lock</td><td class="mono">187734720725</td><td>Nothing unique. Live on 5 Nov, later replaced file by file.</td></tr>
+        <tr><td>Copy of Zeotein-Custom (Raf)</td><td class="mono">186382254293</td><td>Nothing unique. Never edited.</td></tr>
+        <tr><td>Zeotein LLC - Custom (Raf)</td><td class="mono">186296926421</td><td class="loss">Rafael's Black Friday page layout and Cacao stick product page: 87 files, including 32 zt-bf images. 3 of its files are in the repo.</td></tr>
+        <tr><td>Zeotein-Custom (Raf)</td><td class="mono">186335789269</td><td class="loss">Rafael's start on the Horizon move (on hold since 2 Oct).</td></tr>
+        <tr><td>Homepage CRO and Compliance (Raf-Copy)</td><td class="mono">186848575701</td><td class="loss">A changed Vegan 30 stick product page layout, and the last copy of the mid-October homepage.</td></tr>
+        <tr><td>Homepage CRO and Compliance (11-4-26)</td><td class="mono">187649786069</td><td class="loss">The Cacao landing page as it was before Rafael's version replaced it on 3 Nov.</td></tr>
+        <tr><td>Dawn Original Version</td><td class="mono">153876201685</td><td class="loss">The launch theme. Screenshots are saved in Documents, Zeotein, Theme Snapshots.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Gone between 5 and 17 Nov, date not recorded</h2>
+  <p class="group-note">Listed on this page on 5 Nov and no longer in the library on the morning of 17 Nov.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Theme</th><th>id</th><th>What this page said it held</th></tr></thead>
+      <tbody>
+        <tr><td>Homepage CRO and Compliance</td><td class="mono">162459812053</td><td>The live site before 5 Nov, plus the old Labor Day Sale, Digital Guides and old product page layouts</td></tr>
+        <tr><td>Homepage Revamp Nov 2026</td><td class="mono">187660337365</td><td>The first-built Cacao landing page</td></tr>
+        <tr><td>Product page build 3 Nov</td><td class="mono">187660566741</td><td>Nothing unique</td></tr>
+        <tr><td>Backup before product page build 3 Nov</td><td class="mono">187660533973</td><td>The 14 product page layouts and the homepage from before 3 Nov</td></tr>
+        <tr><td>Homepage CRO and Compliance (10-30-26)</td><td class="mono">187454030037</td><td>The homepage, Cacao landing page and site layout as of 29 Oct</td></tr>
+        <tr><td>Homepage CRO and Compliance - Orig (10-17-26)</td><td class="mono">186940424405</td><td>The mid-October site and the three old page layouts</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Deleted on 5 Nov 2026</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Theme</th><th>Made</th><th>Why it was safe</th></tr></thead>
+      <tbody>
+        <tr><td>Homepage CRO and Compliance (11-3-26)</td><td class="mono">2 Nov 2026</td><td>Exact copy of "(11-4-26)", file for file.</td></tr>
+        <tr><td>Horizon</td><td class="mono">4 Nov 2025</td><td>The stock Horizon theme, never customized. Free to add again from the theme store.</td></tr>
+        <tr><td>Zeotein LLC</td><td class="mono">19 Jun 2026</td><td>The live theme before September. Its unique layouts had identical copies in other themes.</td></tr>
+        <tr><td>Copy of Zeotein LLC</td><td class="mono">17 Jul 2026</td><td>Older copy of the June theme.</td></tr>
+        <tr><td>Copy of Zeotein LLC</td><td class="mono">18 Aug 2026</td><td>Older copy of the June theme.</td></tr>
+        <tr><td>Copy of Zeotein LLC</td><td class="mono">14 Sep 2026</td><td>Older copy of the June theme.</td></tr>
+        <tr><td>New Theme (Canvas)</td><td class="mono">29 Oct 2026</td><td>A blank Shopify starter theme, never edited.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>How each theme was checked</h2>
+  <p style="max-width:70ch">Shopify keeps a fingerprint of every file in every theme. Each theme's page layouts, sections, snippets, settings, scripts and images were compared against the live theme and the other themes; JSON settings files were compared by content. A theme counts as safe to delete only when every file that matters also exists, unchanged, in a theme that is being kept. On 17 Nov, Gmail and Drive were also searched for preview links and mentions of each theme; none pointed at a theme then in the library.</p>
+</section>
+
+<footer>Kept with the Zeotein document hub. Update this page whenever a theme is added, pushed live or deleted. Last updated 17 Nov 2026.</footer>
+
+</div>

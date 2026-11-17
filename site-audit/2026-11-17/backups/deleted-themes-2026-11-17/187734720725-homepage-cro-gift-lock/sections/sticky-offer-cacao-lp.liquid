@@ -1,0 +1,634 @@
+{% comment %}
+  Section contract.
+  Mobile sticky "Get Offer" CTA for the Cacao LP. Hides over the buy box,
+  fades in elsewhere, and can dock below the footer so disclaimer stays readable.
+  @example
+  <!-- Add on product.cacao-lp via Theme Editor → Sticky Offer CTA -->
+{% endcomment %}
+
+{%- liquid
+  assign sid = 'zt-sticky-' | append: section.id
+  assign label = section.settings.button_label | default: 'Claim My 55% Off'
+  assign max_w = section.settings.mobile_max_width | default: 749
+  assign buybox_sel = section.settings.buybox_selector | default: '.zt-bb2'
+  assign target_id = section.settings.scroll_target_id | default: 'zt-bb2-offer'
+  assign fallback_id = section.settings.scroll_fallback_id | default: 'purchase'
+-%}
+
+{%- if section.settings.enable -%}
+
+<div
+  id="{{ sid }}"
+  class="zt-sticky-offer"
+  data-zt-sticky-offer
+  data-section-id="{{ section.id }}"
+  style="
+    --zt-so-max: {{ max_w }}px;
+    --zt-so-z: {{ section.settings.z_index | default: 40 }};
+    --zt-so-pad-x: {{ section.settings.bar_padding_x }}px;
+    --zt-so-pad-y: {{ section.settings.bar_padding_y }}px;
+    --zt-so-bar-bg: {{ section.settings.bar_background }};
+    --zt-so-bar-fade: {{ section.settings.bar_fade_color }};
+    --zt-so-end-bg: {{ section.settings.end_bar_background }};
+    --zt-so-btn-bg: {{ section.settings.button_background }};
+    --zt-so-btn-bg-end: {{ section.settings.button_background_end }};
+    --zt-so-btn-color: {{ section.settings.button_text_color }};
+    --zt-so-btn-radius: {{ section.settings.button_radius }}px;
+    --zt-so-btn-size: {{ section.settings.button_font_size }}px;
+    --zt-so-btn-weight: {{ section.settings.button_font_weight }};
+    --zt-so-btn-min-h: {{ section.settings.button_min_height }}px;
+    --zt-so-btn-pad-x: {{ section.settings.button_padding_x }}px;
+    --zt-so-btn-pad-y: {{ section.settings.button_padding_y }}px;
+    --zt-so-shadow: {% if section.settings.button_shadow %}0 10px 28px color-mix(in srgb, {{ section.settings.button_shadow_color | default: '#580D93' }} 32%, transparent){% else %}none{% endif %};
+    --zt-so-focus: {{ section.settings.focus_ring_color }};
+    --zt-so-fade-ms: {% if section.settings.enable_fade %}{{ section.settings.fade_ms }}ms{% else %}0ms{% endif %};
+  "
+  {{ section.shopify_attributes }}
+>
+  <div
+    class="zt-sticky-offer__bar{% unless section.settings.show_bar_gradient %} zt-sticky-offer__bar--flat{% endunless %}"
+    data-zt-sticky-offer-bar
+    aria-hidden="true"
+  >
+    <button
+      type="button"
+      class="zt-sticky-offer__btn"
+      data-zt-sticky-offer-btn
+    >
+      {{ label | escape }}
+    </button>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById({{ sid | json }});
+    if (!root || root.dataset.ztStickyBound === '1') return;
+    root.dataset.ztStickyBound = '1';
+
+    var bar = root.querySelector('[data-zt-sticky-offer-bar]');
+    var btn = root.querySelector('[data-zt-sticky-offer-btn]');
+    if (!bar || !btn) return;
+
+    var cfg = {
+      maxWidth: {{ max_w | json }},
+      mobileOnly: {{ section.settings.mobile_only | json }},
+      hideOverBuybox: {{ section.settings.hide_over_buybox | json }},
+      dockFooter: {{ section.settings.dock_below_footer | json }},
+      buyboxSelector: {{ buybox_sel | json }},
+      targetId: {{ target_id | json }},
+      fallbackId: {{ fallback_id | json }},
+      bodyPad: {{ section.settings.body_padding | default: true | json }}
+    };
+
+    var mq = window.matchMedia('(max-width: ' + cfg.maxWidth + 'px)');
+    var buyboxInView = false;
+    var footerInView = false;
+    var footer = null;
+    var endBar = null;
+    var footerIo = null;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var htmlPadClass = 'zt-sticky-offer-on';
+
+    function findFooter() {
+      return (
+        document.querySelector('.zt-footer') ||
+        document.querySelector('footer.footer') ||
+        document.querySelector('[id^="shopify-section-"][id*="footer"]')
+      );
+    }
+
+    function findBuybox() {
+      try {
+        return document.querySelector(cfg.buyboxSelector);
+      } catch (e) {
+        return document.querySelector('.zt-bb2');
+      }
+    }
+
+    function findTarget() {
+      return (
+        document.getElementById(cfg.targetId) ||
+        document.getElementById(cfg.fallbackId) ||
+        document.getElementById('purchase')
+      );
+    }
+
+    function setVisible(el, show) {
+      if (!el) return;
+      el.classList.toggle('is-visible', show);
+      el.setAttribute('aria-hidden', show ? 'false' : 'true');
+    }
+
+    function matchesViewport() {
+      if (!cfg.mobileOnly) return true;
+      return mq.matches;
+    }
+
+    function scrollToOffer() {
+      setVisible(bar, false);
+      if (cfg.bodyPad) document.documentElement.classList.remove(htmlPadClass);
+
+      if (typeof window.ztScrollToCacaoOffer === 'function') {
+        window.ztScrollToCacaoOffer({ frameKey: 'ztStickyOfferFrame' });
+        return;
+      }
+      var target = findTarget();
+      if (!target) return;
+      if (window.history.replaceState) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+      target.scrollIntoView({
+        behavior: reduceMotion.matches ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    }
+
+    function ensureEndBar() {
+      if (!cfg.dockFooter) return null;
+      footer = footer || findFooter();
+      if (!footer || endBar) return endBar;
+      endBar = document.createElement('div');
+      endBar.className = 'zt-sticky-offer__bar zt-sticky-offer__bar--end';
+      endBar.setAttribute('data-zt-sticky-offer-end', '');
+      endBar.setAttribute('aria-hidden', 'true');
+      // End bar sits outside the section, copy tokens so Theme Editor styles still apply
+      if (root.getAttribute('style')) {
+        endBar.setAttribute('style', root.getAttribute('style'));
+      }
+      var endBtn = document.createElement('button');
+      endBtn.type = 'button';
+      endBtn.className = 'zt-sticky-offer__btn';
+      endBtn.textContent = btn.textContent;
+      endBtn.addEventListener('click', scrollToOffer);
+      endBar.appendChild(endBtn);
+      footer.insertAdjacentElement('afterend', endBar);
+      return endBar;
+    }
+
+    function syncBars() {
+      var on = matchesViewport();
+      var hideBuy = cfg.hideOverBuybox && buyboxInView;
+      var wantSticky = on && !hideBuy && !(cfg.dockFooter && footerInView);
+      var wantEnd = on && !hideBuy && cfg.dockFooter && footerInView;
+
+      setVisible(bar, wantSticky);
+      if (cfg.bodyPad) {
+        document.documentElement.classList.toggle(htmlPadClass, wantSticky);
+      }
+
+      if (cfg.dockFooter && (footer || wantEnd)) {
+        ensureEndBar();
+        setVisible(endBar, wantEnd);
+      } else if (endBar) {
+        setVisible(endBar, false);
+      }
+    }
+
+    function bindFooterObserver() {
+      if (!cfg.dockFooter) return true;
+      footer = findFooter();
+      if (!footer || footerIo || !('IntersectionObserver' in window)) return false;
+      footerIo = new IntersectionObserver(
+        function (entries) {
+          footerInView = entries.some(function (entry) {
+            return entry.isIntersecting;
+          });
+          syncBars();
+        },
+        { root: null, threshold: 0, rootMargin: '0px' }
+      );
+      footerIo.observe(footer);
+      ensureEndBar();
+      syncBars();
+      return true;
+    }
+
+    var buybox = findBuybox();
+    if (cfg.hideOverBuybox && buybox && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          buyboxInView = entries.some(function (entry) {
+            return entry.isIntersecting;
+          });
+          syncBars();
+        },
+        { root: null, threshold: 0.08, rootMargin: '0px 0px -12% 0px' }
+      );
+      io.observe(buybox);
+    }
+
+    if (!bindFooterObserver()) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bindFooterObserver);
+      } else {
+        window.setTimeout(bindFooterObserver, 0);
+      }
+      window.addEventListener('load', bindFooterObserver);
+    }
+
+    syncBars();
+
+    if (mq.addEventListener) mq.addEventListener('change', syncBars);
+    else if (mq.addListener) mq.addListener(syncBars);
+
+    btn.addEventListener('click', scrollToOffer);
+  })();
+</script>
+
+<style>
+  {%- if section.settings.mobile_only -%}
+  @media screen and (max-width: {{ max_w }}px) {
+    #{{ sid }} .zt-sticky-offer__bar,
+    .zt-sticky-offer__bar--end[data-zt-sticky-offer-end] {
+      display: block;
+    }
+  }
+  @media screen and (min-width: {{ max_w | plus: 1 }}px) {
+    #{{ sid }} .zt-sticky-offer__bar,
+    .zt-sticky-offer__bar--end[data-zt-sticky-offer-end] {
+      display: none !important;
+    }
+    html.zt-sticky-offer-on {
+      padding-bottom: 0;
+    }
+  }
+  {%- else -%}
+  #{{ sid }} .zt-sticky-offer__bar,
+  .zt-sticky-offer__bar--end[data-zt-sticky-offer-end] {
+    display: block;
+  }
+  {%- endif -%}
+</style>
+
+{%- endif -%}
+
+{% stylesheet %}
+  .zt-sticky-offer__bar {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--zt-so-z, 40);
+    padding: var(--zt-so-pad-y, 12px) var(--zt-so-pad-x, 16px)
+      calc(var(--zt-so-pad-y, 12px) + env(safe-area-inset-bottom, 0px));
+    background: linear-gradient(
+      180deg,
+      rgba(252, 251, 253, 0) 0%,
+      rgba(252, 251, 253, 0.92) 28%,
+      var(--zt-so-bar-bg, #fcfbfd) 100%
+    );
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px);
+    transition:
+      opacity var(--zt-so-fade-ms, 280ms) ease,
+      transform var(--zt-so-fade-ms, 280ms) ease,
+      visibility var(--zt-so-fade-ms, 280ms) ease;
+  }
+
+  .zt-sticky-offer__bar--flat {
+    background: var(--zt-so-bar-bg, #fcfbfd);
+  }
+
+  .zt-sticky-offer__bar.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .zt-sticky-offer__bar--end {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    z-index: 1;
+    background: var(--zt-so-end-bg, #fcfbfd);
+    transform: none;
+    padding-bottom: calc(var(--zt-so-pad-y, 12px) + 4px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .zt-sticky-offer__bar--end.is-visible {
+    pointer-events: auto;
+  }
+
+  .zt-sticky-offer__btn {
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: var(--zt-so-btn-min-h, 52px);
+    margin: 0;
+    padding: var(--zt-so-btn-pad-y, 14px) var(--zt-so-btn-pad-x, 18px);
+    border: 0;
+    border-radius: var(--zt-so-btn-radius, 12px);
+    background: linear-gradient(
+      135deg,
+      var(--zt-so-btn-bg, #580d93) 0%,
+      var(--zt-so-btn-bg-end, #3d0a66) 100%
+    );
+    color: var(--zt-so-btn-color, #fff);
+    font-family: inherit;
+    font-size: var(--zt-so-btn-size, 17px);
+    font-weight: var(--zt-so-btn-weight, 700);
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    box-shadow: var(--zt-so-shadow, none);
+    cursor: pointer;
+  }
+
+  .zt-sticky-offer__bar.is-visible .zt-sticky-offer__btn {
+    pointer-events: auto;
+  }
+
+  .zt-sticky-offer__btn:focus-visible {
+    outline: 3px solid var(--zt-so-focus, #1aa6a0);
+    outline-offset: 2px;
+  }
+
+  html.zt-sticky-offer-on {
+    padding-bottom: calc(
+      var(--zt-so-btn-min-h, 52px) + (var(--zt-so-pad-y, 12px) * 2) + env(safe-area-inset-bottom, 0px)
+    );
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .zt-sticky-offer__bar {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Sticky Offer CTA",
+  "tag": "section",
+  "class": "section-sticky-offer-cacao-lp",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Enable"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Show sticky offer button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Button content"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Claim My 55% Off"
+    },
+    {
+      "type": "header",
+      "content": "Behavior"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_only",
+      "label": "Mobile only",
+      "default": true,
+      "info": "Hide on viewports wider than Mobile max width"
+    },
+    {
+      "type": "range",
+      "id": "mobile_max_width",
+      "label": "Mobile max width",
+      "min": 480,
+      "max": 990,
+      "step": 10,
+      "unit": "px",
+      "default": 750
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_over_buybox",
+      "label": "Hide when buy box is in view",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "buybox_selector",
+      "label": "Buy box CSS selector",
+      "default": ".zt-bb2",
+      "info": "Element used to detect when the offer is on screen"
+    },
+    {
+      "type": "checkbox",
+      "id": "dock_below_footer",
+      "label": "Dock below footer at page end",
+      "default": true,
+      "info": "Keeps disclaimer readable; places a twin button under the footer"
+    },
+    {
+      "type": "text",
+      "id": "scroll_target_id",
+      "label": "Scroll target element ID",
+      "default": "zt-bb2-offer"
+    },
+    {
+      "type": "text",
+      "id": "scroll_fallback_id",
+      "label": "Fallback scroll target ID",
+      "default": "purchase"
+    },
+    {
+      "type": "checkbox",
+      "id": "body_padding",
+      "label": "Add bottom page padding when sticky is visible",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_fade",
+      "label": "Fade in / out",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "fade_ms",
+      "label": "Fade duration",
+      "min": 0,
+      "max": 800,
+      "step": 20,
+      "unit": "ms",
+      "default": 280
+    },
+    {
+      "type": "header",
+      "content": "Bar (behind button)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bar_gradient",
+      "label": "Show fade gradient above bar",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "bar_background",
+      "label": "Bar background",
+      "default": "#FCFBFD"
+    },
+    {
+      "type": "color",
+      "id": "bar_fade_color",
+      "label": "Bar fade color",
+      "default": "#FCFBFD"
+    },
+    {
+      "type": "color",
+      "id": "end_bar_background",
+      "label": "Footer-docked bar background",
+      "default": "#FCFBFD"
+    },
+    {
+      "type": "range",
+      "id": "bar_padding_x",
+      "label": "Bar horizontal padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "bar_padding_y",
+      "label": "Bar vertical padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "z_index",
+      "label": "Z-index",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background (start)",
+      "default": "#580D93"
+    },
+    {
+      "type": "color",
+      "id": "button_background_end",
+      "label": "Button background (end)",
+      "default": "#3D0A66"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra bold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "button_min_height",
+      "label": "Min height",
+      "min": 40,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "label": "Button horizontal padding",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "label": "Button vertical padding",
+      "min": 6,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "checkbox",
+      "id": "button_shadow",
+      "label": "Show button shadow",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "button_shadow_color",
+      "label": "Shadow color",
+      "default": "#580D93",
+      "info": "Applied at 32% opacity (same softness as before)"
+    },
+    {
+      "type": "color",
+      "id": "focus_ring_color",
+      "label": "Focus ring color",
+      "default": "#1AA6A0"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sticky Offer CTA"
+    }
+  ]
+}
+{% endschema %}
