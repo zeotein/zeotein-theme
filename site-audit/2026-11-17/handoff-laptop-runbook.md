@@ -77,13 +77,15 @@ Goal: SKU ZEO-CAC-STICK-07-SBF-GIFT is recognized wherever the flow checks gift 
 4. CONFIRM, Save, keep it On, then read back with screenshots.
 Note: that SKU's product ("Free Gift: Cacao 7-Day for Subscribers", 15535933325525) is Draft in Shopify. Leave it as is.
 
-## Step 5. Guides in the cart, live theme (only after step 3 is saved)
+## Step 5. Guides in the cart (already live, check F2 only)
+The live theme has loaded the guides-cart script since Nov 16, 10:02 to 10:09 AM CT (snippets/meta-tags.liquid renders
+zt-guides-cart-data, which loads assets/zt-guides-cart.js). It matches the Black Friday theme's copy except for code
+comments, so there is nothing to paste. The one order since then (#2759, first Cacao bag order) got both guides and the
+Save-A-Scoop. So the only thing left here is the F2 check:
 1. Open the Flow "F2 (offer A/B kit gifts after order)" read-only and check that it has the line
    "Product handle does not include free-guide-cart-auto-add". Screenshot. Change nothing.
-2. Report: "Save-A-Scoop saved: yes. F2 has the line: yes/no."
-3. If yes, the cloud session puts the guides script (the same three pieces the Black Friday theme has) into a copy of
-   the live theme, tests it to add to cart, and messages you to publish that copy and then delete the theme it
-   replaces. CONFIRM before that publish.
+2. Report: "Save-A-Scoop saved: yes/no. F2 has the line: yes/no." If F2 lacks the line, tell Dana: guides are already
+   in live carts, so F2 needs that line added (CONFIRM before adding it, same way as its other line-item rows).
 
 ## Step 6. Admin-only fixes from the overnight audit (CONFIRM each)
 a. Checkout logo. Settings > Checkout > Customize > Branding (or Header) > Logo: choose the store's existing logo file

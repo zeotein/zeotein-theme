@@ -252,6 +252,11 @@ Editing that scheduled task's prompt was not permitted in this session, so these
   Protein collections, the review reply). Copy in it passed the compliance prescan with 0 findings and has no em dashes.
 - Facts for the Save-A-Scoop Flow: the Black Friday bag (product 15501241352405) and the landing-page bag (15398808027349)
   share SKU `ZEO-CAC-BULK-30-LP`, so only a product ID or handle rule can include one and exclude the other.
+- **The guides-cart script is already live** (live theme since Nov 16, 16:02 to 16:09 UTC: `snippets/meta-tags.liquid`
+  line 50 renders `zt-guides-cart-data`; live page shows `window.ztGuidesCart` and loads `zt-guides-cart.js`). It matches
+  the Black Friday theme's copy except for code comments and trailing newlines, so step 5 needs no paste. One order since
+  then: #2759 (Nov 16, 6:02 PM CT, first order, regular bulk bag) got both guides and the Save-A-Scoop (tags guides-added,
+  scoop-sent). The Flow fixes are still needed for the Black Friday bag and to keep guides from affecting other cases.
 - The Black Friday theme already loads the guides-cart script (`snippets/meta-tags.liquid` renders
   `snippets/zt-guides-cart-data.liquid`, which loads `assets/zt-guides-cart.js`). **The Save-A-Scoop Flow fix and the F2
   handle exclusion must be in place before the Black Friday theme is published on Nov 27**, or the guides go live with
