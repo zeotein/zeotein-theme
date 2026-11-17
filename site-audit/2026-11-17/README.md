@@ -6,10 +6,12 @@ plus fixes. Report for Dana: https://claude.ai/artifact/5td2VJohqYXkEWyggC2a6b (
 ## Result in one paragraph
 
 The site is technically healthy: 79 pages on desktop and iPhone, 119 internal links, 0 broken links, 0 real script errors,
-no sideways scrolling, and 0 disease, detox or weight-loss claims. Seven live fixes are done (redirects for dead links that
-real shoppers used, two retired pages, blog name and search descriptions). Five theme fixes are built and verified in an
-unpublished copy of the live theme; Dana approved them and they go live with one Publish click in admin. Four small admin tasks need a person because Shopify
-does not allow them by API.
+no sideways scrolling, and 0 disease, detox or weight-loss claims. Live now: redirects for dead links that real shoppers
+used, two retired pages hidden, blog name and search descriptions, plant-only "You may also like" on the Vegan, pumpkin
+seed and hemp pages, and two outdated collections hidden from Google. Ten theme fixes, including the Organic Hemp Protein
+page that has shown the collagen page since Nov 16, are built and verified in an unpublished copy of the live theme; Dana
+approved publishing and they go live with one Publish click in admin. The Black Friday theme is patched, synced with live
+and price-checked. Four small admin tasks need a person because Shopify does not allow them by API.
 
 ## Changed on the live store (all reversible)
 
@@ -68,8 +70,14 @@ that change is lost. Files the hotfix changes: `sections/main-page-content.liqui
 `layout/theme.liquid`, `blocks/zt-home-choose.liquid`, `sections/zt-home-hero.liquid`, `templates/product.cacao-lp.json`,
 `sections/daily-routine-cacao-lp.liquid`, `sections/start-strong-cacao-lp.liquid`, `sections/whats-inside-cacao-lp.liquid`,
 `templates/product.hemp.json`. Simplest check: in Online Store > Themes, the live theme's "last saved" time must still be
-before 8:34 PM CT on 16 Nov (it was at 03:50 UTC 17 Nov: last live change 01:27 UTC).
+before 8:34 PM CT on 16 Nov (it still was at 05:11 UTC 17 Nov: last live change 01:27 UTC).
 Rollback: publish "Cacao LP updates 2026-11-05" again (Online Store > Themes).
+
+Publish soon: until then the live Organic Hemp Protein page keeps showing the collagen page's ingredient and Nutrition Facts
+(about one landing visit a day, 63 in 60 days; 2 units sold in 90 days). A temporary switch of the hemp product to another
+template was checked and rejected: on live, the default `product.json` is the Zeotein Cacao page (collagen, bone broth, Cacao
+facts) and `product.zeotein-vegan-products.json` has the old 6 g fat and "detox" wording, and any switch would have to be
+undone after publishing or the fixed hemp page would never show.
 
 ## Black Friday theme: patched 17 Nov (Dana approved)
 
@@ -107,7 +115,8 @@ Do not edit the theme's JSON in a stale workspace: check `theme.files` `updatedA
   (hard-coded in `layout/theme.liquid`, not one of Dana's digest projects). The internal-traffic tag (`?zt_internal=1`) only
   reaches `v65ogd4cbw`. Decision for Dana: keep one. Not changed.
 - Page-level Clarity data (which elements get dead clicks, error messages) needs a Clarity Data Export API token
-  (Clarity, project settings, Data Export). `www.clarity.ms` is reachable from the session.
+  (Clarity, project settings, Data Export). `www.clarity.ms` is reachable from the session. Dana chose not to add the token
+  on 17 Nov; optional, nothing in this audit depends on it.
 
 ### Live store (data, live now)
 - Search & Discovery related products (metafield `shopify--discovery--product_recommendation.related_products`) on Vegan 30,
@@ -127,8 +136,9 @@ Do not edit the theme's JSON in a stale workspace: check `theme.files` `updatedA
   retina sizes. Visually identical (side-by-side checked).
 - "Transform your daily routine." → "Simplify your daily routine." on the Cacao landing pages (compliance prescan HIGH flag on
   "transform"; landing page used by Meta ads).
-- Not done, blocked by the Shopify tool: unpublishing the default "Home page" collection and the outdated "Protein" collection
-  from the Online Store (`publishableUnpublish` refused). Optional admin task.
+- The default "Home page" collection and the outdated "Protein" collection: unpublishing is blocked for the app
+  (`publishableUnpublish` refused), so both are hidden from search engines, the sitemap and storefront search instead
+  (`seo.hidden`, see the change table). Fully unpublishing them in admin is optional.
 
 ### Black Friday theme audit
 - 10 key pages in preview (home, protein-blends collection and page, regular and BF Cacao bag, BF and regular stick packs,
