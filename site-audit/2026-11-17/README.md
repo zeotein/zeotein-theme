@@ -341,6 +341,18 @@ Theme Register artifact must be updated the same day (it still lists "+ gift loc
 - **Landing page speed after publish** (`tools/lpperf.js`, Chrome engine): HTML 131 to 113 KB compressed, total about the
   same (1.97 to 2.00 MB); timings within run-to-run noise. The iPhone image saving is Safari-specific and not visible here.
 
+## Homepage "Liquid error (sections/_blocks line 13): Could not find asset snippets/section.liquid" (17 Nov, 7:57 AM CT)
+- Seen by Dana on her phone: five copies of the error between the "Featured on" section and the footer. The homepage
+  (`templates/index.json`) has 8 sections of type `_blocks` (7 enabled; 5 after "Featured on"). The theme has no
+  `sections/_blocks.liquid`, so Shopify uses its built-in wrapper (shopify.dev, AI generated theme blocks); the version
+  Dana got calls `render 'section'`, a snippet this theme does not have.
+- Could not reproduce from here: logged-out curl and real iPhone browser (empty cart and with items), section rendering
+  (`?section_id=`, `?sections=`), and previews of the other three themes all show 0 Liquid errors.
+- Fix, so the output no longer depends on Shopify's wrapper: the theme's own `sections/_blocks.liquid` (Shopify's documented
+  minimal wrapper) plus a `snippets/section.liquid` safety net (`theme-patch/blocks-wrapper/`). Black Friday theme commit
+  `28a927ba`: homepage main content byte-for-byte identical before and after (123,091 bytes normalized), 0 Liquid errors.
+- Live: add the same two files in the code editor (the API cannot write to the live theme).
+
 ## Needs a person (not available by API on this plan)
 
 1. **Checkout logo.** Checkout header shows the text "Zeotein LLC". Settings → Checkout → Customize → Branding → Logo.
