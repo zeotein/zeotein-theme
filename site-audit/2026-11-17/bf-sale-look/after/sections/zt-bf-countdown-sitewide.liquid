@@ -1,0 +1,184 @@
+{%- comment -%}
+  Sitewide Black Friday banner (black, one banner on top), Nov 17 2026, on Dana's direction: one black storewide
+  banner instead of the countdown bar, purple ticker, purple hero and blend price band. Lives in the header group,
+  so it shows on every page. Shows only during the storewide sale (default Nov 27 12:00 AM CT to Nov 30 11:59 PM CT,
+  the scheduled "BFCM Storewide" automatic discount) and hides itself at the end. On an unpublished theme preview (or with
+  ?zt_bf_preview=1, cleared with ?zt_bf_preview=0) it shows so it can be reviewed.
+  Also runs the show/hide for every [data-ztbf-start] element (Black Friday prices from zt-bf-blend-price),
+  and carries the shared Black Friday price styles, so keep this section enabled.
+  Previous version: zeotein-theme repo, site-audit/2026-11-17/backups/bf-187825914069.
+{%- endcomment -%}
+{%- liquid
+  assign cid = 'ztbfcd-' | append: section.id
+  assign st = section.settings.start_epoch | default: 1795759200
+  assign en = section.settings.end_epoch | default: 1796104740
+  assign now_s = 'now' | date: '%s' | plus: 0
+  assign hide = true
+  if now_s >= st and now_s < en
+    assign hide = false
+  endif
+-%}
+<div id="{{ cid }}" class="ztbfcd" data-ztbf-start="{{ st }}" data-ztbf-end="{{ en }}" data-ztbfcd{% if hide %} hidden{% endif %} role="region" aria-label="Black Friday sale">
+  <div class="ztbfcd__inner">
+    <div class="ztbfcd__msg">
+      <p class="ztbfcd__title"><span class="ztbfcd__bf">{{ section.settings.title | escape }}</span> <span class="ztbfcd__offer">{{ section.settings.offer | escape }}</span></p>
+      {%- if section.settings.sub != blank -%}
+      <p class="ztbfcd__sub">{{ section.settings.sub | escape }}</p>
+      {%- endif -%}
+    </div>
+    <div class="ztbfcd__end">
+      {%- if section.settings.label != blank -%}
+      <span class="ztbfcd__label">{{ section.settings.label | escape }}</span>
+      {%- endif -%}
+      <div class="ztbfcd__clock" role="timer" aria-live="off">
+        <span class="ztbfcd__u"><b data-d>--</b><i>days</i></span>
+        <span class="ztbfcd__u"><b data-h>--</b><i>hrs</i></span>
+        <span class="ztbfcd__u"><b data-m>--</b><i>min</i></span>
+        <span class="ztbfcd__u"><b data-s>--</b><i>sec</i></span>
+      </div>
+      {%- if section.settings.cta_text != blank -%}
+      <a class="ztbfcd__cta" href="{{ section.settings.cta_url | default: '/collections/shop-all' }}">{{ section.settings.cta_text | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+<style>
+  [data-ztbf-start][hidden]{display:none !important}
+  /* shared Black Friday price styles (zt-bf-blend-price, zt-bf-blends-band) */
+  .ztbf-strip{background:#f4eefb;border-bottom:2px solid #5F2D90;color:#2a1640;padding:12px 16px;text-align:center;font-size:15px}
+  .ztbf-strip__tag,.ztbf-card__tag{display:inline-block;background:#0B0B0D;color:#fff;font-weight:700;border-radius:4px;padding:2px 8px;margin-right:8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+  .ztbf-card{margin:6px 0 0;font-size:13px;color:#2a1640;line-height:1.35}
+  .ztbf-card__tag{font-size:10px;padding:1px 6px;margin-right:6px}
+  .ztbf-panel{border:2px solid #5F2D90;border-radius:12px;background:#f8f4fd;padding:14px 16px;margin:10px 0 14px;color:#2a1640}
+  .ztbf-panel__head{margin:0 0 10px;font-weight:700;font-size:14px}
+  .ztbf-panel__table{width:100%;border-collapse:collapse;font-size:14px;background:#fff;border-radius:8px;overflow:hidden}
+  .ztbf-panel__table th,.ztbf-panel__table td{padding:7px 8px;text-align:left;border-bottom:1px solid #e6dcf3}
+  .ztbf-panel__table th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#5F2D90;background:#efe6fa}
+  .ztbf-panel__table td b{color:#5F2D90;font-size:15px}
+  .ztbf-panel__table s{opacity:.6}
+  .ztbf-panel__fine{margin:10px 0 0;font-size:12.5px;line-height:1.45;opacity:.85}
+  /* Black Friday sale price (zt-bf-blend-price mode 'price'): regular price struck through, BF price next to it. Replaces the theme price while it shows. */
+  .ztbf-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;margin:2px 0 0;line-height:1.25;color:#2a1640}
+  .ztbf-price__was{color:#8A8296;font-size:.95em}
+  .ztbf-price__now{color:#5F2D90;font-weight:800;font-size:1.12em}
+  .ztbf-price__from{font-size:.9em}
+  .ztbf-price__lbl{color:#5F2D90;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+  .ztbf-price--pdp{font-size:22px;margin:2px 0 14px}
+  .ztbf-price--pdp .ztbf-price__lbl{font-size:12px}
+  .card-information:has(> .ztbf-price:not([hidden])) > .price{display:none}
+  #MainContent .product__info-container:has(.ztbf-price--pdp:not([hidden])) [id^="price-template"]{display:none !important}
+  @media (max-width:749px){.ztbf-price--pdp{font-size:20px}.ztbf-price__lbl{font-size:10px}}
+  .ztbf-band{background:#171320;color:#fff;padding:40px 16px 34px}
+  .ztbf-band__inner{max-width:1240px;margin:0 auto;text-align:center}
+  .ztbf-band__eyebrow{margin:0 0 6px;color:#7fe3e7;font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .ztbf-band__h{margin:0 0 8px;color:#fff;font-size:clamp(24px,3.4vw,38px);line-height:1.1}
+  .ztbf-band__lede{margin:0 auto 22px;max-width:640px;opacity:.88;font-size:16px}
+  .ztbf-band__grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+  .ztbf-band__card{display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;color:#2a1640;border-radius:14px;padding:14px 10px 16px;text-decoration:none}
+  .ztbf-band__card img{width:100%;max-width:170px;height:auto;aspect-ratio:1/1;object-fit:contain}
+  .ztbf-band__name{font-weight:800;font-size:15px;line-height:1.2}
+  .ztbf-band__price{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:4px 8px}
+  .ztbf-band__was{opacity:.55;font-size:14px}
+  .ztbf-band__now{color:#5F2D90;font-weight:800;font-size:22px}
+  .ztbf-band__pill{background:#32BAC0;color:#171320;font-weight:800;font-size:11px;border-radius:999px;padding:2px 8px;text-transform:uppercase;letter-spacing:.04em}
+  .ztbf-band__note{width:100%;font-size:12px;opacity:.8}
+  .ztbf-band__go{margin-top:auto;font-weight:800;font-size:13px;color:#5F2D90;text-decoration:underline}
+  .ztbf-band__fine{margin:18px auto 0;max-width:720px;font-size:12.5px;opacity:.75}
+  @media (max-width:989px){.ztbf-band__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media (max-width:599px){.ztbf-band{padding:28px 12px 26px}.ztbf-band__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.ztbf-band__now{font-size:19px}.ztbf-strip{font-size:13.5px;padding:10px 12px}}
+  #{{ cid }}{--ztbf-accent:{{ section.settings.accent | default: '#32BAC0' }};background:{{ section.settings.bg | default: '#0B0B0D' }};color:#fff;padding:14px 20px;border-bottom:3px solid var(--ztbf-accent);font-family:'Manrope',ui-sans-serif,system-ui,-apple-system,sans-serif}
+  #{{ cid }} .ztbfcd__inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px 28px;flex-wrap:wrap}
+  #{{ cid }} .ztbfcd__msg{display:flex;flex-direction:column;gap:3px;min-width:0}
+  #{{ cid }} .ztbfcd__title{margin:0;font-size:clamp(19px,2.4vw,27px);line-height:1.1;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+  #{{ cid }} .ztbfcd__bf{color:#fff}
+  #{{ cid }} .ztbfcd__offer{color:var(--ztbf-accent)}
+  #{{ cid }} .ztbfcd__sub{margin:0;font-size:13px;font-weight:600;line-height:1.35;color:rgba(255,255,255,.72)}
+  #{{ cid }} .ztbfcd__end{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+  #{{ cid }} .ztbfcd__label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+  #{{ cid }} .ztbfcd__clock{display:flex;gap:6px;font-variant-numeric:tabular-nums}
+  #{{ cid }} .ztbfcd__u{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:6px;padding:4px 7px;min-width:44px;text-align:center;line-height:1.05}
+  #{{ cid }} .ztbfcd__u b{display:block;font-size:18px;font-weight:800}
+  #{{ cid }} .ztbfcd__u i{display:block;font-style:normal;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin-top:2px}
+  #{{ cid }} .ztbfcd__cta{background:var(--ztbf-accent);color:#0B0B0D;font-weight:800;font-size:14px;padding:10px 20px;border-radius:999px;text-decoration:none;white-space:nowrap}
+  #{{ cid }} .ztbfcd__cta:hover{filter:brightness(1.08)}
+  #{{ cid }} .ztbfcd__cta:focus-visible{outline:2px solid #fff;outline-offset:2px}
+  @media (max-width:749px){
+    #{{ cid }}{padding:10px 12px 11px;text-align:center}
+    #{{ cid }} .ztbfcd__inner{justify-content:center;gap:8px}
+    #{{ cid }} .ztbfcd__msg{width:100%;align-items:center;gap:2px}
+    #{{ cid }} .ztbfcd__title{font-size:clamp(14px,4.3vw,17px);letter-spacing:.03em;text-wrap:balance}
+    #{{ cid }} .ztbfcd__sub{font-size:11.5px}
+    #{{ cid }} .ztbfcd__label{display:none}
+    #{{ cid }} .ztbfcd__clock{gap:4px}
+    #{{ cid }} .ztbfcd__u{min-width:34px;padding:3px 4px;border-radius:5px}
+    #{{ cid }} .ztbfcd__u b{font-size:14px}
+    #{{ cid }} .ztbfcd__u i{font-size:8px;margin-top:1px}
+    #{{ cid }} .ztbfcd__cta{font-size:12.5px;padding:8px 14px}
+  }
+  /* While the banner shows, the free shipping app bar above it turns black too, so the top reads as one banner. */
+  body:has(.ztbfcd:not([hidden])) .essential_free_shipping_bar_wrapper.top_page{background:{{ section.settings.bg | default: '#0B0B0D' }} !important;border-bottom:1px solid rgba(255,255,255,.14) !important;min-height:0 !important;padding-top:7px !important;padding-bottom:7px !important}
+  body:has(.ztbfcd:not([hidden])) .essential_free_shipping_bar_wrapper.top_page,
+  body:has(.ztbfcd:not([hidden])) .essential_free_shipping_bar_wrapper.top_page *{color:rgba(255,255,255,.88) !important}
+  body:has(.ztbfcd:not([hidden])) .essential_free_shipping_bar_wrapper.top_page [class*="free_shipping_bar_title"]{font-family:'Manrope',ui-sans-serif,system-ui,sans-serif !important;font-size:13px !important;font-weight:700 !important;letter-spacing:.02em;line-height:1.3 !important}
+</style>
+<script>
+(function(){
+  if (window.__ztbfWinBound) { if (window.ztbfApply) window.ztbfApply(); return; }
+  window.__ztbfWinBound = true;
+  function preview(){
+    try {
+      var q = location.search;
+      if (/[?&]zt_bf_preview=1/.test(q)) sessionStorage.setItem('ztbfPreview','1');
+      if (/[?&]zt_bf_preview=0/.test(q)) sessionStorage.removeItem('ztbfPreview');
+      if (sessionStorage.getItem('ztbfPreview') === '1') return true;
+    } catch(e) {}
+    var S = window.Shopify || {};
+    return !!(S.designMode || (S.theme && S.theme.role && S.theme.role !== 'main'));
+  }
+  var isPrev = preview();
+  function pad(n){ return n < 10 ? '0' + n : String(n); }
+  function apply(){
+    var now = Date.now();
+    var els = document.querySelectorAll('[data-ztbf-start]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      var s = parseInt(el.getAttribute('data-ztbf-start'), 10) * 1000;
+      var e = parseInt(el.getAttribute('data-ztbf-end'), 10) * 1000;
+      var on = now < e && (isPrev || now >= s);
+      el.hidden = !on;
+      if (el.hasAttribute('data-ztbfcd')) {
+        var left = Math.max(0, e - now), sec = Math.floor(left / 1000);
+        var q = function(sel){ return el.querySelector(sel); };
+        if (q('[data-d]')) {
+          q('[data-d]').textContent = String(Math.floor(sec / 86400));
+          q('[data-h]').textContent = pad(Math.floor(sec / 3600) % 24);
+          q('[data-m]').textContent = pad(Math.floor(sec / 60) % 60);
+          q('[data-s]').textContent = pad(sec % 60);
+        }
+      }
+    }
+  }
+  window.ztbfApply = apply;
+  apply();
+  document.addEventListener('DOMContentLoaded', apply);
+  setInterval(apply, 1000);
+})();
+</script>
+{% schema %}
+{
+  "name": "BF banner (sitewide)",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Black Friday" },
+    { "type": "text", "id": "offer", "label": "Offer (shown in the accent color)", "default": "30% off storewide" },
+    { "type": "text", "id": "sub", "label": "Fine print", "default": "One-time orders, no code needed. Gift cards excluded." },
+    { "type": "text", "id": "label", "label": "Countdown label (desktop)", "default": "Ends in" },
+    { "type": "text", "id": "cta_text", "label": "Button text", "default": "Shop the sale" },
+    { "type": "url", "id": "cta_url", "label": "Button link" },
+    { "type": "number", "id": "start_epoch", "label": "Show from (Unix seconds)", "default": 1795759200, "info": "1795759200 = Nov 27 2026 12:00 AM CT, when the storewide 30% discount starts" },
+    { "type": "number", "id": "end_epoch", "label": "Count down to (Unix seconds)", "default": 1796104740, "info": "1796104740 = Nov 30 2026 11:59 PM CT, when the BF discounts end. Hidden after this." },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#0B0B0D" },
+    { "type": "color", "id": "accent", "label": "Accent and button color", "default": "#32BAC0" }
+  ]
+}
+{% endschema %}
