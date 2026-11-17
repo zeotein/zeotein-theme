@@ -1,8 +1,8 @@
 LIVE THEME PASTE LIST, 17 Nov 2026
 Live theme: "Live + fixes 2026-11-17 (Claude hotfix)" (#188199928021). The API cannot write to the live theme, so these are
-pasted by hand in the code editor. Items 1 to 3 are NEW files (nothing existing is replaced). Item 4 edits one existing file;
-its original is backed up in site-audit/2026-11-17/backups/live-188199928021/.
-The Black Friday theme (#187825914069) already has all four changes.
+pasted by hand in the code editor. Items 1 to 3 are NEW files (nothing existing is replaced). Items 4 and 5 edit existing files;
+their originals are backed up in site-audit/2026-11-17/backups/live-188199928021/.
+The Black Friday theme (#187825914069) already has all five changes.
 
 Where: Shopify admin > Online Store > Themes > "Live + fixes 2026-11-17 (Claude hotfix)" > ... > Edit code.
 How:   for each row, use "Add a new section" or "Add a new snippet" with the exact name below, select all of the
@@ -38,7 +38,20 @@ How:   for each row, use "Add a new section" or "Add a new snippet" with the exa
    product, price and Add to cart.
    Black Friday theme: already done (theme commit f035b00d), checked on iPhone.
 
-Order: 1 first (fixes an error that shows today). Then 3, then 2. Item 4 any time.
+5  templates/page.zt-chooser-blends.json  (EXISTING file: replace its content)   added 17 Nov evening, Dana's request
+   Fills out the Protein Blends page (/pages/protein-blends). Under the chooser it adds five sections that already run on
+   the homepage, in this order: "What's Inside Matters." (Cacao and Vegan side by side), "More Than a Protein Shake.",
+   "Made for Real Life.", "Real People. Real Reviews." and "Good Questions. Straight Answers.". The chooser itself is
+   unchanged. No guarantee band, no Howie section. Copy checked: no em dashes, no zeolite, no "complete protein".
+   Paste items 2 and 3 FIRST: four of the new sections are block groups, which then use the theme's own wrapper instead
+   of Shopify's built-in one (the one that printed errors on the homepage this morning).
+   How: open templates/page.zt-chooser-blends.json, select all (Ctrl+A or Cmd+A), paste the whole content of
+   templates/page.zt-chooser-blends.json from this folder (md5 959dd9a0480a7f71a0eb427279bced6c), Save.
+   Original backed up in site-audit/2026-11-17/backups/live-188199928021/.
+   Check: open https://zeotein.com/pages/protein-blends on desktop and phone: the chooser, then the five sections.
+   Black Friday theme: already done (theme commit febcb3d7), checked on desktop and iPhone: all six sections, 0 Liquid errors.
+
+Order: 1 first (fixes an error that shows today). Then 3, then 2. Item 4 any time. Item 5 after 2 and 3.
 
 Check after pasting (2 minutes):
 - https://zeotein.com/products/cacao-protein-starter-kit : right-click > View page source, search "Liquid error": 0 results.

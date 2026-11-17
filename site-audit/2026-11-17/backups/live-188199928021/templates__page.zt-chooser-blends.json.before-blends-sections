@@ -1,0 +1,131 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "chooser": {
+      "type": "zt-blend-chooser",
+      "blocks": {
+        "blend_cacao": {
+          "type": "blend",
+          "settings": {
+            "key": "cacao",
+            "label": "Cacao",
+            "sublabel": "Bulk bag or sticks"
+          }
+        },
+        "blend_vegan": {
+          "type": "blend",
+          "settings": {
+            "key": "vegan",
+            "label": "Vegan",
+            "sublabel": "Stick packs"
+          }
+        },
+        "opt_cacao_bag": {
+          "type": "option",
+          "settings": {
+            "product": "zeotein-cacao-bag-30",
+            "blend": "cacao",
+            "title": "30-Day Bulk Bag – Cacao",
+            "description": "Zeotein Cacao in one resealable bag, 30 servings",
+            "badge": "",
+            "one_time_only": false,
+            "selling_plan_id": "",
+            "gifts_sub": "Free Save-A-Scoop with your first bag\nFree CleanBlend shaker with your first subscription order\nFree Starter Guide + Cacao Recipe Guide (digital) with your first order",
+            "gifts_once": "Free Save-A-Scoop with your first bag\nFree Starter Guide + Cacao Recipe Guide (digital) with your first order"
+          }
+        },
+        "opt_cacao_30": {
+          "type": "option",
+          "settings": {
+            "product": "zeotein-cacao-sticks-30",
+            "blend": "cacao",
+            "title": "30-Day Stick Packs – Cacao",
+            "description": "Zeotein Cacao in 30 single-serve stick packs",
+            "badge": "",
+            "one_time_only": false,
+            "selling_plan_id": "",
+            "gifts_sub": "Free CleanBlend shaker with your first subscription order\nFree Starter Guide + Cacao Recipe Guide (digital) with your first order",
+            "gifts_once": "Free Starter Guide + Cacao Recipe Guide (digital) with your first order"
+          }
+        },
+        "opt_cacao_7": {
+          "type": "option",
+          "settings": {
+            "product": "zeotein-cacao-sticks-7",
+            "blend": "cacao",
+            "title": "7-Day Stick Packs – Cacao",
+            "description": "Zeotein Cacao in 7 single-serve stick packs, try it for a week",
+            "badge": "",
+            "one_time_only": true,
+            "selling_plan_id": "",
+            "gifts_sub": "Free Starter Guide + Cacao Recipe Guide (digital) with your first order",
+            "gifts_once": "Free Starter Guide + Cacao Recipe Guide (digital) with your first order"
+          }
+        },
+        "opt_vegan_30": {
+          "type": "option",
+          "settings": {
+            "product": "zeotein-vegan-sticks-30",
+            "blend": "vegan",
+            "title": "30-Day Stick Packs – Vegan",
+            "description": "Zeotein Vegan in 30 single-serve stick packs",
+            "badge": "",
+            "one_time_only": false,
+            "selling_plan_id": "",
+            "gifts_sub": "Free CleanBlend shaker with your first subscription order\nFree Starter Guide + Vegan Recipe Guide (digital) with your first order",
+            "gifts_once": "Free Starter Guide + Vegan Recipe Guide (digital) with your first order"
+          }
+        },
+        "opt_vegan_7": {
+          "type": "option",
+          "settings": {
+            "product": "zeotein-vegan-sticks-7",
+            "blend": "vegan",
+            "title": "7-Day Stick Packs – Vegan",
+            "description": "Zeotein Vegan in 7 single-serve stick packs, try it for a week",
+            "badge": "",
+            "one_time_only": true,
+            "selling_plan_id": "",
+            "gifts_sub": "Free Starter Guide + Vegan Recipe Guide (digital) with your first order",
+            "gifts_once": "Free Starter Guide + Vegan Recipe Guide (digital) with your first order"
+          }
+        }
+      },
+      "block_order": [
+        "blend_cacao",
+        "blend_vegan",
+        "opt_cacao_bag",
+        "opt_cacao_30",
+        "opt_cacao_7",
+        "opt_vegan_30",
+        "opt_vegan_7"
+      ],
+      "settings": {
+        "heading": "Protein",
+        "heading_accent": "Blends",
+        "intro": "Subscribe & Save. Stock up. Stay consistent. Free welcome gifts with every subscription, and you can pause or cancel anytime.",
+        "rating_text": "Rated 4.9 stars by verified buyers",
+        "blend_step": "Pick your blend",
+        "mode_step": "How do you want it?",
+        "size_step": "Pick your size",
+        "subscribe_label": "Subscribe & Save",
+        "onetime_label": "One-Time",
+        "save_prefix": "You save",
+        "once_only_label": "One-time only",
+        "gifts_heading": "Included free",
+        "cta_label": "Continue"
+      }
+    }
+  },
+  "order": [
+    "chooser"
+  ]
+}
