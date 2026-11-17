@@ -1,0 +1,84 @@
+{
+ "mode": "live",
+ "flows": [
+  {
+   "prof": "desktop",
+   "selected": "no plan field",
+   "buttonText": null,
+   "error": "TimeoutError: locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action*=\"/cart/add\"] [type=\"submit\"]:visible, form[action*=\"/cart/add\"] [name=\"add\"]",
+   "cleared": true,
+   "scriptErrors": []
+  },
+  {
+   "prof": "iphone",
+   "selected": "subscription plan 6671237333",
+   "buttonText": "Add to cart",
+   "addStatus": 200,
+   "afterAdd": {
+    "status": 200,
+    "total": "99.99",
+    "items": [
+     "1 x Free Gift: Cacao Recipe Guide with Your Protein Order |  | $0.00",
+     "1 x Free Gift: Zeotein Starter Guide with Your Protein Order |  | $0.00",
+     "1 x Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth |  | $99.99 | 1 bag every 30 days"
+    ]
+   },
+   "cartPage": {
+    "status": 200,
+    "total": "99.99",
+    "items": [
+     "1 x Free Gift: Cacao Recipe Guide with Your Protein Order |  | $0.00",
+     "1 x Free Gift: Zeotein Starter Guide with Your Protein Order |  | $0.00",
+     "1 x Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth |  | $99.99 | 1 bag every 30 days"
+    ]
+   },
+   "cartLiquidErrors": 0,
+   "checkout": {
+    "host": "zeotein.com",
+    "path": "/checkouts/cn/<id>/en-us",
+    "title": "Checkout - Zeotein LLC",
+    "sections": [
+     "Contact",
+     "Delivery",
+     "Shipping",
+     "Payment",
+     "Order summary"
+    ],
+    "lines": []
+   },
+   "cleared": true,
+   "scriptErrors": [
+    "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+   ]
+  }
+ ],
+ "rechecks": [
+  {
+   "prof": "iphone",
+   "path": "/",
+   "status": 200,
+   "title": "Zeotein: Protein Powder With Ingredients You Can Name – Zeotein LLC",
+   "liquid": 0,
+   "side": false,
+   "scriptErrors": []
+  },
+  {
+   "prof": "iphone",
+   "path": "/products/zeotein-bone-broth-protein-powder",
+   "status": 200,
+   "title": "Beef Bone Broth Protein Powder — Grass-Fed – Zeotein LLC",
+   "liquid": 0,
+   "side": false,
+   "scriptErrors": []
+  },
+  {
+   "prof": "iphone",
+   "path": "/products/organic-hemp-protein-powder-premium-plant-based-protein",
+   "status": 200,
+   "title": "Organic Hemp Protein Powder — Plant-Based, Unflavored – Zeotein LLC",
+   "liquid": 0,
+   "side": false,
+   "scriptErrors": []
+  }
+ ]
+}

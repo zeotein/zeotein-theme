@@ -1,0 +1,35 @@
+{
+ "mode": "live",
+ "flows": [
+  {
+   "prof": "desktop",
+   "selected": "subscription plan 6671237333",
+   "buttonText": "Add to cart",
+   "addStatus": 429,
+   "afterAdd": {
+    "status": 429,
+    "notJson": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta n"
+   },
+   "cartPage": {
+    "status": 429,
+    "notJson": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta n"
+   },
+   "cartLiquidErrors": 0,
+   "checkout": "no checkout button found",
+   "cleared": true,
+   "scriptErrors": [
+    "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON @  on https://zeotein.com/products/zeotein-cacao-bag-30",
+    "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON @  on https://zeotein.com/products/zeotein-cacao-bag-30"
+   ]
+  },
+  {
+   "prof": "iphone",
+   "selected": "no plan field",
+   "buttonText": null,
+   "error": "TimeoutError: locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action*=\"/cart/add\"] [type=\"submit\"]:visible, form[action*=\"/cart/add\"] [name=\"add\"]",
+   "cleared": true,
+   "scriptErrors": []
+  }
+ ],
+ "rechecks": []
+}

@@ -1,0 +1,27 @@
+{
+ "mode": "bf",
+ "flows": [
+  {
+   "prof": "desktop",
+   "selected": "subscription plan 6671237333",
+   "buttonText": "Add to cart",
+   "addStatus": 429,
+   "afterAdd": {
+    "status": 429,
+    "notJson": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta n"
+   },
+   "cartPage": {
+    "status": 429,
+    "notJson": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta n"
+   },
+   "cartLiquidErrors": 0,
+   "checkout": "no checkout button found",
+   "cleared": true,
+   "scriptErrors": [
+    "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON @  on https://zeotein.com/products/zeotein-cacao-bag-30",
+    "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON @  on https://zeotein.com/products/zeotein-cacao-bag-30"
+   ]
+  }
+ ],
+ "rechecks": []
+}

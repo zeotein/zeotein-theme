@@ -1,0 +1,6 @@
+{%- comment -%}
+  Safety net for Shopify's built-in _blocks wrapper, which can call
+  render 'section', section: section, children: children.
+  This theme has its own sections/_blocks.liquid; if anything still calls this, it outputs the blocks unchanged.
+{%- endcomment -%}
+{{- children -}}

@@ -1,0 +1,15 @@
+{%- comment -%}
+  Wrapper for the homepage block groups (theme blocks and AI-generated blocks).
+  Without this file Shopify uses its own built-in wrapper. On 17 Nov 2026 a version of that wrapper
+  printed "Could not find asset snippets/section.liquid" on the live homepage. With this file the
+  output is the same for every visitor. Per Shopify's docs (AI generated theme blocks, custom _blocks.liquid).
+{%- endcomment -%}
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "Section",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "presets": [{ "name": "Section" }]
+}
+{% endschema %}

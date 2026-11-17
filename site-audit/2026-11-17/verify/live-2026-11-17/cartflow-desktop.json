@@ -1,0 +1,14 @@
+{
+ "mode": "live",
+ "flows": [
+  {
+   "prof": "desktop",
+   "selected": "no plan field",
+   "buttonText": null,
+   "error": "TimeoutError: locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action*=\"/cart/add\"] [type=\"submit\"]:visible, form[action*=\"/cart/add\"] [name=\"add\"]",
+   "cleared": true,
+   "scriptErrors": []
+  }
+ ],
+ "rechecks": []
+}
