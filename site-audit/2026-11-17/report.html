@@ -181,6 +181,23 @@ footer.end { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--li
 .fix figure, .fix .table-wrap { margin: 0; }
 .fix figure img { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); }
 .fix .meta { font-size: 13px; color: var(--muted); }
+/* Drop-off charts: one series each, one mark color validated per mode (light #6f3fa3, dark #a37bd8) */
+:root { --chart-mark: #6f3fa3; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --chart-mark: #a37bd8; } }
+:root[data-theme="dark"] { --chart-mark: #a37bd8; }
+.bar-fill.mark { background: var(--chart-mark); }
+.charts2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.chart { margin: 0; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.chart-title { font-size: 14px; font-weight: 600; color: var(--ink); }
+.chart-title span { display: block; font-size: 13px; font-weight: 400; color: var(--muted); }
+.cols { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; align-items: end; height: 140px; border-bottom: 1px solid var(--line); }
+.col { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 4px; }
+.col b { font-size: 12px; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.col i { display: block; width: 100%; max-width: 30px; height: calc(var(--v) * 8px); background: var(--chart-mark); border-radius: 4px 4px 0 0; }
+.col.split { border-left: 1px dashed var(--muted); }
+.col-labels { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; font-size: 11px; color: var(--muted); text-align: center; font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) { .charts2 { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 520px) { .col-labels span:nth-child(even) { visibility: hidden; } }
 .fix figure.narrow { max-width: 640px; }
 @media (max-width: 640px) { .mini-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 </style>
@@ -194,7 +211,7 @@ footer.end { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--li
       <div class="stat" role="listitem"><b>79</b><span>pages checked on desktop and iPhone</span></div>
       <div class="stat good" role="listitem"><b>0</b><span>broken links of 119; 0 real script errors</span></div>
       <div class="stat good" role="listitem"><b>8</b><span>fixes live now</span></div>
-      <div class="stat wait" role="listitem"><b>10</b><span>fixes one click from live, incl. the hemp page</span></div>
+      <div class="stat wait" role="listitem"><b>11</b><span>fixes one click from live, incl. the hemp page</span></div>
       <div class="stat good" role="listitem"><b>7</b><span>Black Friday product pages brought up to date</span></div>
       <div class="stat you" role="listitem"><b>4</b><span>two-minute admin tasks for you</span></div>
     </div>
@@ -250,9 +267,54 @@ footer.end { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--li
         <li><span><b>Dead clicks:</b> people tap the product photos on the homepage, and they weren&rsquo;t links. The photos in "Choose Your Zeotein" and the hero photo now open the product, like their buttons.</span></li>
         <li><span><b>Quick backs:</b> the paid Cacao landing page sent iPhones about 1.3 MB of images. The same images now come in at 0.67 MB and look identical. The chat widget now loads after the page instead of holding it up.</span></li>
         <li><span><b>Script errors:</b> they come from Shopify&rsquo;s own tracking calls failing when a shopper&rsquo;s ad blocker stops them. Shoppers see nothing, and the theme&rsquo;s own code is clean. Nothing to fix.</span></li>
-        <li><span><b>Two Clarity projects record the site.</b> One is the app&rsquo;s project that emails you; the other is a second code in the theme. Pick one (see recommendations).</span></li>
+        <li><span><b>Two Clarity projects record the site, and both email you a weekly digest named "Zeotein LLC".</b> That&rsquo;s why you get two sets of numbers for the same week: the other one read 4.8% dead clicks, 6.2% quick backs and 16.2% script errors. Pick one (see recommendations).</span></li>
       </ul>
-      <p class="meta">Clarity numbers are from your weekly digest for Nov 8 to 14. The homepage and landing page fixes are in the hotfix and the Black Friday theme.</p>
+      <p class="meta">Numbers above are from the Clarity app&rsquo;s digest for Nov 8 to 14. Page-by-page Clarity detail needs a Clarity API token, which you chose not to add, so the next section answers &ldquo;where do people stop&rdquo; from Shopify and GA4. The homepage and landing page fixes are in the hotfix and the Black Friday theme.</p>
+    </div>
+
+    <div class="fix">
+      <div class="fix-head"><h3>Where shoppers drop off</h3><span class="pill wait">Found · fixes in the hotfix</span></div>
+      <p class="why">Checkout is fine. People leave on the product pages before they add to cart, and most of all on the Cacao landing page your Meta ads send them to: on a phone, 73% leave after about 15 seconds.</p>
+      <div class="mini-stats" role="list" aria-label="Phone shoppers, last 30 days, team and test visits removed">
+        <div class="stat" role="listitem"><b>1,529</b><span>phone visits, last 30 days (team and test removed)</span></div>
+        <div class="stat wait" role="listitem"><b>4.7%</b><span>added to cart (72): the weak step</span></div>
+        <div class="stat" role="listitem"><b>74%</b><span>of carts reached checkout (53)</span></div>
+        <div class="stat good" role="listitem"><b>47%</b><span>of checkouts became orders (25), normal</span></div>
+      </div>
+      <div class="charts2">
+        <figure class="chart">
+          <figcaption class="chart-title">Visits that leave without engaging<span>GA4, 30 days to Nov 16</span></figcaption>
+          <div class="bars" role="img" aria-label="Bounce rate, last 30 days: Meta landing page on phones 73 percent, same page on desktop 32 percent, other product pages on phones about 35 percent">
+            <div class="bar-row" title="Cacao landing page on phones: 73% bounce, about 15 seconds of engagement"><span>Meta landing page, phone</span><div class="bar-track"><div class="bar-fill mark" style="width:73%"></div></div><span class="val">73%</span></div>
+            <div class="bar-row" title="Same page on desktop: 32% bounce"><span>Same page, desktop</span><div class="bar-track"><div class="bar-fill mark" style="width:32%"></div></div><span class="val">32%</span></div>
+            <div class="bar-row" title="Other product pages on phones: about 35% bounce"><span>Other product pages, phone</span><div class="bar-track"><div class="bar-fill mark" style="width:35%"></div></div><span class="val">~35%</span></div>
+          </div>
+        </figure>
+        <figure class="chart">
+          <figcaption class="chart-title">New customers per week<span>Shopify, weeks starting Sep 7 to Nov 9</span></figcaption>
+          <div class="cols" role="img" aria-label="New customers per week: 8, 12, 12 and 9 in the four weeks from Sep 7; then 1, 4, 3, 5, 3 and 5 in the six weeks from Oct 5">
+            <div class="col" style="--v:8" title="Week of Sep 7: 8 new customers"><b>8</b><i></i></div>
+            <div class="col" style="--v:12" title="Week of Sep 14: 12 new customers"><b>12</b><i></i></div>
+            <div class="col" style="--v:12" title="Week of Sep 21: 12 new customers"><b>12</b><i></i></div>
+            <div class="col" style="--v:9" title="Week of Sep 28: 9 new customers"><b>9</b><i></i></div>
+            <div class="col split" style="--v:1" title="Week of Oct 5: 1 new customer"><b>1</b><i></i></div>
+            <div class="col" style="--v:4" title="Week of Oct 12: 4 new customers"><b>4</b><i></i></div>
+            <div class="col" style="--v:3" title="Week of Oct 19: 3 new customers"><b>3</b><i></i></div>
+            <div class="col" style="--v:5" title="Week of Oct 26: 5 new customers"><b>5</b><i></i></div>
+            <div class="col" style="--v:3" title="Week of Nov 2: 3 new customers"><b>3</b><i></i></div>
+            <div class="col" style="--v:5" title="Week of Nov 9: 5 new customers"><b>5</b><i></i></div>
+          </div>
+          <div class="col-labels" aria-hidden="true"><span>9/7</span><span>9/14</span><span>9/21</span><span>9/28</span><span>10/5</span><span>10/12</span><span>10/19</span><span>10/26</span><span>11/2</span><span>11/9</span></div>
+        </figure>
+      </div>
+      <ul class="short">
+        <li><span><b>The landing page isn&rsquo;t broken, it&rsquo;s heavy.</b> I loaded it the way a Meta visitor does: Facebook&rsquo;s in-app browser on an iPhone, slow mobile signal. It paints at 2.2 seconds, the &ldquo;Claim My 55% Off&rdquo; button is on screen by 3 seconds and works before the scripts finish, and no popup covers it. But it downloads 1.97 MB in 250 files, mostly app code and four font families.</span></li>
+        <li><span><b>In the hotfix and the Black Friday theme:</b> half the image weight on iPhone, chat loads after the page, and an app that showed nothing is switched off (fix 11). After you publish, the true test is whether the 73% comes down. That re-check is a ClickUp task due Dec 1.</span></li>
+        <li><span><b>Google Shopping visitors on the Organic Cacao page look, then leave:</b> 264 visits, 2 orders in 30 days, with normal reading time. That&rsquo;s price and intent, not a broken page. Z_Shopping_SI is your decided campaign, and its stop figure is already an open question in your Ad Decisions doc, so I left it alone.</span></li>
+        <li><span><b>New customers fell from about 10 a week to about 3 a week from Oct 5.</b> Orders held at 15 to 20 a week thanks to repeat and subscription customers. This is the open question &ldquo;Paid ads produced no new customers&rdquo; in your Ad Decisions doc; I added these numbers there.</span></li>
+        <li><span><b>GA4&rsquo;s add-to-cart count on the landing page reads about 5x too high,</b> because the four free gifts are added to the cart automatically. Don&rsquo;t judge the page by it.</span></li>
+      </ul>
+      <p class="meta">Logged in your Ad Decisions doc (Nov 16 site audit follow-up, which also marks its &ldquo;run a page speed test&rdquo; item done) and in ClickUp: <a href="https://app.clickup.com/t/86bd48yhm">Recheck Cacao landing page phone bounce 14 days after the hotfix theme is published</a>. Shopify numbers exclude Manitowoc and no-city sessions (your team and test machines).</p>
     </div>
 
     <div class="fix">
@@ -260,7 +322,7 @@ footer.end { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--li
       <ul class="short">
         <li><span><b>Vegan pages recommend plant-based products only</b> (Vegan packs, pumpkin seed, hemp, MCT, shaker) instead of Cacao, collagen and bone broth. Live now.</span></li>
         <li><span><b>Cacao landing page copy:</b> "Transform your daily routine" became "Simplify your daily routine". Your compliance rules flag "transform", and Meta ads point to this page. In the hotfix and the Black Friday theme.</span></li>
-        <li><span><b>Black Friday prices checked</b> against every scheduled discount: bag $76.99, sticks $94.49, Vegan 30 at $97.99, $189.99, $275.99 and $355.99 for 1 to 4 packs. <b>Publish the Black Friday theme at 12:00 AM CT on Friday, Nov 27, not earlier.</b> Its "30% off everything" copy would show before that discount starts.</span></li>
+        <li><span><b>Black Friday prices checked</b> against every scheduled discount: bag $76.99, sticks $94.49, Vegan 30 at $97.99, $189.99, $275.99 and $355.99 for 1 to 4 packs. <b>Publish the Black Friday theme at 12:00 AM CT on Friday, Nov 27, not earlier.</b> Its "30% off everything" copy would show before that discount starts. One pricing call for you: the Black Friday bag&rsquo;s $68.99 first-order subscription price already works today for anyone with its direct link. It&rsquo;s unlisted, so nobody can browse to it.</span></li>
         <li><span><b>Thanksgiving afternoon (Nov 26, 2:13 PM CT)</b> I&rsquo;ll compare the Black Friday theme with live again and copy across anything new, so last-minute edits aren&rsquo;t lost at midnight.</span></li>
       </ul>
     </div>
@@ -354,6 +416,11 @@ footer.end { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--li
     <div class="fix">
       <div class="fix-head"><h3>10 · "Simplify your daily routine"</h3><span class="pill wait">Overnight · publish pending</span></div>
       <p class="why">Replaces "Transform your daily routine" on the Cacao landing page, per your compliance rules.</p>
+    </div>
+
+    <div class="fix">
+      <div class="fix-head"><h3>11 · Lighter pages: an app that showed nothing is switched off</h3><span class="pill wait">Overnight · publish pending</span></div>
+      <p class="why">The SEOAnt Sticky Add to Cart app added about 115 KB of code to every page but never showed its bar, because your theme has its own sticky Add to cart. Its app embed is off in the hotfix and the Black Friday theme. The app stays installed, and Theme settings › App embeds turns it back on. Every page gets lighter, the Meta landing page included, with no visible change.</p>
     </div>
   </section>
 
@@ -450,7 +517,7 @@ footer.end { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--li
 
       <div class="rec"><span class="pill p2">Soon</span><div class="body">
         <h3>Keep one Clarity project</h3>
-        <p>Two Clarity projects record every visit: the one the Clarity app set up (it sends your weekly email) and a second one hard-coded in the theme. Your team's visits are tagged "internal" only in the second one, so the numbers you read are not filtered. Tell me which to keep and I'll remove the other and point the internal tag at the one you keep.</p>
+        <p>Two Clarity projects record every visit, and both send you a weekly email named "Zeotein LLC": the one the Clarity app set up and a second one hard-coded in the theme. For Nov 8 to 14 they disagreed (dead clicks 3.9% vs 4.8%, quick backs 4.9% vs 6.2%). Your team's visits are tagged "internal" only in the theme one, so the app one's numbers include your team. Tell me which to keep and I'll remove the other and point the internal tag at the one you keep.</p>
       </div></div>
 
       <div class="rec"><span class="pill p3">Later</span><div class="body">
@@ -482,7 +549,8 @@ footer.end { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--li
       <div><b>Links and old URLs</b><span>119 links found on the site, plus every address shoppers landed on in 60 days (67 paths). Found the 5 dead ones and redirected them.</span></div>
       <div><b>Cart and checkout</b><span>Added the Cacao bag on subscription on an iPhone: free guides added themselves, the cart showed $99.99 and the $30.01 free-shipping nudge, and checkout opened. No details entered, no order placed.</span></div>
       <div><b>Compliance</b><span>Ran your compliance scanner on all 79 pages: no disease, detox or weight-loss language, FDA disclaimer present. The one real finding is the Vegan fat number.</span></div>
-      <div><b>Analytics</b><span>Shopify sessions, add-to-cart, checkout and orders by device, landing page, location and day, for the last 30 and 60 days.</span></div>
+      <div><b>Analytics</b><span>Shopify sessions, add-to-cart, checkout and orders by device, landing page, location, source and week (30 to 140 days); GA4 bounce and engagement by landing page and device; Meta and Google Ads spend by week, read only. Your Ad Decisions doc and guardrails were read first, so nothing settled there is re-raised.</span></div>
+      <div><b>Landing page speed</b><span>The Meta landing page loaded as a Facebook in-app visit on an iPhone over a slow mobile signal: when it paints, when the button works, what it downloads, and whether anything covers it.</span></div>
       <div><b>The fixes themselves</b><span>Every live change re-checked on the live site. The hotfix theme previewed on desktop and iPhone across home, product, collection and page templates.</span></div>
       <div><b>Clarity</b><span>Weekly digests for Nov 8 to 14, then every script error on the six busiest pages traced to its source.</span></div>
       <div><b>Black Friday theme</b><span>All 448 files compared with live. Ten key pages and the seven updated product pages opened in its preview on iPhone; every price checked against the scheduled discounts.</span></div>

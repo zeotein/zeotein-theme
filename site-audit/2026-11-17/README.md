@@ -8,7 +8,7 @@ plus fixes. Report for Dana: https://claude.ai/artifact/5td2VJohqYXkEWyggC2a6b (
 The site is technically healthy: 79 pages on desktop and iPhone, 119 internal links, 0 broken links, 0 real script errors,
 no sideways scrolling, and 0 disease, detox or weight-loss claims. Live now: redirects for dead links that real shoppers
 used, two retired pages hidden, blog name and search descriptions, plant-only "You may also like" on the Vegan, pumpkin
-seed and hemp pages, and two outdated collections hidden from Google. Ten theme fixes, including the Organic Hemp Protein
+seed and hemp pages, and two outdated collections hidden from Google. Eleven theme fixes, including the Organic Hemp Protein
 page that has shown the collagen page since Nov 16, are built and verified in an unpublished copy of the live theme; Dana
 approved publishing and they go live with one Publish click in admin. The Black Friday theme is patched, synced with live
 and price-checked. Four small admin tasks need a person because Shopify does not allow them by API.
@@ -69,7 +69,8 @@ that change is lost. Files the hotfix changes: `sections/main-page-content.liqui
 `templates/collection.json`, `templates/product.vegan-30-day.json`, `templates/product.vegan-7-day.json`,
 `layout/theme.liquid`, `blocks/zt-home-choose.liquid`, `sections/zt-home-hero.liquid`, `templates/product.cacao-lp.json`,
 `sections/daily-routine-cacao-lp.liquid`, `sections/start-strong-cacao-lp.liquid`, `sections/whats-inside-cacao-lp.liquid`,
-`templates/product.hemp.json`. Simplest check: in Online Store > Themes, the live theme's "last saved" time must still be
+`templates/product.hemp.json`, `config/settings_data.json` (SEOAnt Sticky Add to Cart app embed off; if live's settings
+changed after 02:34 UTC, take live's file and switch that one embed off again). Simplest check: in Online Store > Themes, the live theme's "last saved" time must still be
 before 8:34 PM CT on 16 Nov (it still was at 05:11 UTC 17 Nov: last live change 01:27 UTC).
 Rollback: publish "Cacao LP updates 2026-11-05" again (Online Store > Themes).
 
@@ -111,9 +112,10 @@ Do not edit the theme's JSON in a stale workspace: check `theme.files` `updatedA
 - JavaScript errors: on the top six pages the only errors are Shopify's own analytics/agent scripts throwing "Failed to fetch"
   when their tracking calls are blocked (ad blockers do this for real shoppers) and Shopify's experiment fetch. Not theme code,
   harmless to shoppers; most likely what drives the 18.6%. The theme's own fetch wrappers handle failures correctly.
-- Two Clarity projects record zeotein.com: `v65yhyq9ay` (Clarity Shopify app pixel, the one that emails Dana) and `v65ogd4cbw`
-  (hard-coded in `layout/theme.liquid`, not one of Dana's digest projects). The internal-traffic tag (`?zt_internal=1`) only
-  reaches `v65ogd4cbw`. Decision for Dana: keep one. Not changed.
+- Two Clarity projects record zeotein.com and both email Dana a weekly digest named "Zeotein LLC": `v65yhyq9ay` (Clarity
+  Shopify app pixel) and `v65ogd4cbw` (hard-coded in `layout/theme.liquid`). Nov 8 to 14 on `v65ogd4cbw`: dead clicks 4.84%,
+  quick backs 6.18% (up 59%), script errors 16.2% (down 51.8%). The internal-traffic tag (`?zt_internal=1`) only reaches
+  `v65ogd4cbw`. Decision for Dana: keep one. Not changed.
 - Page-level Clarity data (which elements get dead clicks, error messages) needs a Clarity Data Export API token
   (Clarity, project settings, Data Export). `www.clarity.ms` is reachable from the session. Dana chose not to add the token
   on 17 Nov; optional, nothing in this audit depends on it.
@@ -184,6 +186,57 @@ Do not edit the theme's JSON in a stale workspace: check `theme.files` `updatedA
 - Note for whoever edits live before Nov 27: the BF theme does not pick up live edits. Re-run the comparison before
   publishing (`tools/theme-sync-check.sh` for theme_bash, `tools/portcheck.js` for the preview). A scheduled re-check runs in
   this Claude session on Thu Nov 26 at 2:13 PM CT (scheduled task `trig_01Qs4TUWYcWbq5RhYNq7uv7X`; delete it to cancel).
+
+## Round 3, late 16 Nov CT: where shoppers drop off
+
+Dana re-sent "use Clarity to see where people stop... fix everything". She declined the Clarity API token, so the drop-off
+was read from Shopify (ShopifyQL), GA4, Meta Ads and Google Ads (Supermetrics, read only). Per the zeotein-ad-decisions skill,
+the Ad Decisions doc and the Ad Setup Guardrails were read first; nothing decided there is re-raised (Z_Shopping_SI is a
+deliberate campaign, the LP-only discounts were fixed 5 Nov, the Merchant Center price override is in progress).
+
+### Findings
+- Checkout is fine. Phones, 30 days, Manitowoc and no-city sessions removed: 1,529 visits → 72 add to cart (4.7%) → 53
+  reached checkout (74% of carts) → 25 orders (47% of checkouts, normal).
+- GA4 (property `535557069`, `G-PMY2ZXX539`; the second "Zeotein Website" property `535580236` returns no data), 30 days:
+  `/products/cacao-protein-starter-kit` bounces 73% of phone visits after about 15 s of engagement; same page on desktop 32%;
+  other product pages on phones about 35%.
+- Page speed (`tools/lpperf.js`: Facebook iOS user agent, iPhone 13, Slow 4G 150 ms / 1.6 Mbps, 4x CPU) on the live LP: first
+  paint 2.2 s, LCP 3.3 s, DOM ready 8.8 s, load 12.2 s, 1.97 MB in 250 requests (scripts 841 KB, fonts 337 KB in four families:
+  GT Standard 128 KB for Shop Promise, Inter, Manrope x5, Poppins x5). Nothing covers the page; the "Claim My 55% Off" button
+  is `<a href="#purchase">`, so it works before scripts finish. Biggest scripts (`tools/weights.js`): Judge.me 253 KB in many
+  chunks, Shop Promise PDP 120 KB, Shopify web pixels 87 KB, Seal 75 KB, BON Loyalty 68 KB.
+- LP HTML is 805 KB: inline CSS 244 KB, inline JS 290 KB. 88 KB of `girafflybounce` CSS and a 33 KB currency-converter script
+  come from the SEOAnt Sticky Add to Cart app embed, which renders nothing on any page type (`tools/seoant.js`: bag, Vegan 30,
+  LP, zeolite, shaker, gift card, Shop All; phone and desktop) and calls codeblackbelt.com with `shop=zeotein-llc.myshopify.com`.
+- Organic Cacao page: 264 Google sessions in 30 days, 6 add to cart, 2 orders, normal engagement. Intent and price, not a broken
+  page (Z_Shopping_SI traffic).
+- New customers per week (Shopify): 8, 12, 12, 9 from Sep 7; 1, 4, 3, 5, 3, 5 from Oct 5. Orders held at 15 to 20 a week on
+  repeat and subscription customers. Matches the Decisions doc open question "Paid ads produced no new customers, Oct 1–22".
+- GA4 add-to-carts on the LP read about 5x high (352 on 248 sessions): the four free gifts are added automatically.
+- `/cart` landings that rarely reach checkout are test traffic (no-city and Manitowoc, week of Nov 9), not shoppers.
+- Ad funnel buy links (marketing.zeotein.com, go.zeotein.com) all resolve: product links 301 to current handles, cart
+  permalinks open checkout. Old product URLs still getting visits all 301 to current products.
+- Shopify's cookie banner shows in theme previews only (`tools/banner.js`: live `shouldShowBanner()` false, region US).
+- The Black Friday bag (`30-day-cacao-bulk-bag-black-friday`, UNLISTED, $109.99) has its selling-plan first-order prices
+  ($68.99 / $133.98 / $195.99) usable today by anyone with the direct link. Pricing call for Dana; not changed.
+
+### Changed
+- Hotfix `#188199928021` commit `ef8d055` and Black Friday `#187825914069` commit `f19b0fe`: in `config/settings_data.json` the
+  SEOAnt Sticky Add to Cart app embed (block `6248343940173316906`) is `disabled: true`. One-line diff each, every other embed
+  unchanged. Verified in both previews: home, LP, bag, zeolite and Shop All return 200 with no SEOAnt code; LP HTML 806 KB on
+  live vs 690 KB; theme sticky bars present; no script errors. Undo: Theme settings › App embeds › SEOAnt Sticky Add to Cart on.
+- Ad Decisions doc: the "Run a page speed test on zeotein.com/products/cacao" item now reads DONE 16 Nov; a "SITE AUDIT
+  FOLLOW-UP, Mon 16 Nov 2026" entry at the end holds these findings and an open question on the LP phone bounce.
+- ClickUp, Meta Ads list: task `86bd48yhm` "Recheck Cacao landing page phone bounce 14 days after the hotfix theme is
+  published", due Dec 1, assigned to Dana.
+- Report v6: "Where shoppers drop off" section, fix 11, corrected Clarity wording.
+
+### For the Nov 26 pre-launch check (`trig_01Qs4TUWYcWbq5RhYNq7uv7X`)
+Editing that scheduled task's prompt was not permitted in this session, so these notes carry two additions:
+- Keep the SEOAnt Sticky Add to Cart embed OFF in `config/settings_data.json` of both the hotfix and the BF theme; if live has
+  it on, do not copy that setting across.
+- If the hotfix is live by then, re-time the LP with `tools/lpperf.js` on the live URL (not a preview: previews add Shopify's
+  preview bar and cookie banner scripts) against the baseline above, and note the publish date for ClickUp `86bd48yhm`.
 
 ## Needs a person (not available by API on this plan)
 
