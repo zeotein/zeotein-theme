@@ -7,3 +7,6 @@ Shows on: zeotein-cacao-bag-30 ($99.99 struck, $69.99) and zeotein-cacao-sticks-
 
 ## Follow-up (theme version 2cc4cb7236cefd9868e8eada4b8135d82c02f504)
 Headline price, One-time row and sticky Add to cart bar now follow the selected option. Subscribe (default): $99.99 struck, $69.99, first month, renews at $99.99/mo. One-time: $109.99 struck, $76.99. Sticks: $114.99/$80.49 and $134.99/$94.49. before-2/ = theme file before this follow-up, after-2/ = committed (MD5 matched).
+
+## Follow-up 3 (theme version f6e39d7e17c01e7df26b2e84e6a7ad1b81da4a9e)
+Banner fine print (sections/header-group.json, zt_bf_countdown sub): "No code needed. 30% off one-time orders, or 30% off your first subscription month. Gift cards excluded." Vegan 30 sticks headline: normal subscription price with Subscribe selected, BF one-time strike only with One-time selected. before-3/ and after-3/ match the theme by MD5.
