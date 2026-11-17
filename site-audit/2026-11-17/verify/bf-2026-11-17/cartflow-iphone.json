@@ -3,11 +3,33 @@
  "flows": [
   {
    "prof": "iphone",
-   "selected": "no plan field",
-   "buttonText": null,
-   "error": "TimeoutError: locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action*=\"/cart/add\"] [type=\"submit\"]:visible, form[action*=\"/cart/add\"] [name=\"add\"]",
+   "selected": "subscription plan 6671237333",
+   "buttonText": "Add to cart",
+   "addStatus": 200,
+   "afterAdd": {
+    "status": 200,
+    "total": "99.99",
+    "items": [
+     "1 x Free Gift: Cacao Recipe Guide with Your Protein Order |  | $0.00",
+     "1 x Free Gift: Zeotein Starter Guide with Your Protein Order |  | $0.00",
+     "1 x Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth |  | $99.99 | 1 bag every 30 days"
+    ]
+   },
+   "cartPage": {
+    "status": 200,
+    "total": "99.99",
+    "items": [
+     "1 x Free Gift: Cacao Recipe Guide with Your Protein Order |  | $0.00",
+     "1 x Free Gift: Zeotein Starter Guide with Your Protein Order |  | $0.00",
+     "1 x Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth |  | $99.99 | 1 bag every 30 days"
+    ]
+   },
+   "cartLiquidErrors": 0,
+   "error": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button[name=\"checkout\"]:visible, input[name=\"checkout\"]:visible, a[href*=\"/checkout\"]:visible').first()\u001b[2",
    "cleared": true,
-   "scriptErrors": []
+   "scriptErrors": [
+    "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON @  on https://zeotein.com/products/zeotein-cacao-bag-30"
+   ]
   }
  ],
  "rechecks": []

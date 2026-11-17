@@ -3,9 +3,40 @@
  "flows": [
   {
    "prof": "desktop",
-   "selected": "no plan field",
-   "buttonText": null,
-   "error": "TimeoutError: locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action*=\"/cart/add\"] [type=\"submit\"]:visible, form[action*=\"/cart/add\"] [name=\"add\"]",
+   "selected": "subscription plan 6671237333",
+   "buttonText": "Add to cart",
+   "addStatus": 200,
+   "afterAdd": {
+    "status": 429,
+    "notJson": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta n"
+   },
+   "cartPage": {
+    "status": 200,
+    "total": "99.99",
+    "items": [
+     "1 x Free Gift: Cacao Recipe Guide with Your Protein Order |  | $0.00",
+     "1 x Free Gift: Zeotein Starter Guide with Your Protein Order |  | $0.00",
+     "1 x Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth |  | $99.99 | 1 bag every 30 days"
+    ]
+   },
+   "cartLiquidErrors": 0,
+   "checkout": {
+    "host": "zeotein.com",
+    "path": "/checkouts/cn/<id>/en-us",
+    "title": "Checkout - Zeotein LLC",
+    "sections": [
+     "Contact",
+     "Delivery",
+     "Shipping",
+     "Payment",
+     "Order summary"
+    ],
+    "lines": [
+     "Free Gift: Cacao Recipe Guide with Your Protein Order",
+     "Free Gift: Zeotein Starter Guide with Your Protein Order",
+     "Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth"
+    ]
+   },
    "cleared": true,
    "scriptErrors": []
   }

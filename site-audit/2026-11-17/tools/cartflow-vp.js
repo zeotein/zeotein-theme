@@ -44,9 +44,11 @@ fs.mkdirSync(outDir, { recursive: true });
       f.cartPage = await cartJs();
       f.cartLiquidErrors = await p.evaluate(() => (document.documentElement.outerHTML.match(/Liquid error[^<]{0,100}/g) || []).length);
       await p.screenshot({ path: `${outDir}/${prof}-cart.jpg`, type: 'jpeg', quality: 72 });
+      await p.evaluate(() => document.querySelectorAll('#shopify-pc__banner, #preview-bar-iframe, #PBarNextFrameWrapper, iframe[src*="preview_bar"], [id^="PBar"]').forEach(e => e.remove())).catch(() => {});
       const co = p.locator('button[name="checkout"]:visible, input[name="checkout"]:visible, a[href*="/checkout"]:visible').first();
+      if (await co.count()) await co.scrollIntoViewIfNeeded().catch(() => {});
       if (await co.count()) {
-        await Promise.all([p.waitForURL(u => /\/checkouts?\//.test(String(u)), { timeout: 45000 }).catch(() => null), co.click({ timeout: 10000 })]);
+        await Promise.all([p.waitForURL(u => /\/checkouts?\//.test(String(u)), { timeout: 45000 }).catch(() => null), co.click({ timeout: 10000 }).catch(() => co.click({ timeout: 10000, force: true }))]);
         await sleep(7000);
         const u = new URL(p.url());
         f.checkout = { host: u.host, path: u.pathname.replace(/[A-Za-z0-9]{16,}/g, '<id>'), title: (await p.title()).slice(0, 80),

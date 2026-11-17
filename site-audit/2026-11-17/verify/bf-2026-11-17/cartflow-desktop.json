@@ -5,22 +5,45 @@
    "prof": "desktop",
    "selected": "subscription plan 6671237333",
    "buttonText": "Add to cart",
-   "addStatus": 429,
+   "addStatus": 200,
    "afterAdd": {
-    "status": 429,
-    "notJson": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta n"
+    "status": 200,
+    "total": "99.99",
+    "items": [
+     "1 x Free Gift: Cacao Recipe Guide with Your Protein Order |  | $0.00",
+     "1 x Free Gift: Zeotein Starter Guide with Your Protein Order |  | $0.00",
+     "1 x Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth |  | $99.99 | 1 bag every 30 days"
+    ]
    },
    "cartPage": {
-    "status": 429,
-    "notJson": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta n"
+    "status": 200,
+    "total": "99.99",
+    "items": [
+     "1 x Free Gift: Cacao Recipe Guide with Your Protein Order |  | $0.00",
+     "1 x Free Gift: Zeotein Starter Guide with Your Protein Order |  | $0.00",
+     "1 x Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth |  | $99.99 | 1 bag every 30 days"
+    ]
    },
    "cartLiquidErrors": 0,
-   "checkout": "no checkout button found",
+   "checkout": {
+    "host": "zeotein.com",
+    "path": "/checkouts/cn/<id>/en-us",
+    "title": "Checkout - Zeotein LLC",
+    "sections": [
+     "Contact",
+     "Delivery",
+     "Shipping",
+     "Payment",
+     "Order summary"
+    ],
+    "lines": [
+     "Free Gift: Cacao Recipe Guide with Your Protein Order",
+     "Free Gift: Zeotein Starter Guide with Your Protein Order",
+     "Zeotein Cacao Protein Powder Bulk Bag - 30 Servings, Collagen & Bone Broth"
+    ]
+   },
    "cleared": true,
-   "scriptErrors": [
-    "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON @  on https://zeotein.com/products/zeotein-cacao-bag-30",
-    "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON @  on https://zeotein.com/products/zeotein-cacao-bag-30"
-   ]
+   "scriptErrors": []
   }
  ],
  "rechecks": []
