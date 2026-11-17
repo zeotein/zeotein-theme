@@ -1,7 +1,8 @@
 LIVE THEME PASTE LIST, 17 Nov 2026
 Live theme: "Live + fixes 2026-11-17 (Claude hotfix)" (#188199928021). The API cannot write to the live theme, so these are
-pasted by hand in the code editor. All three are NEW files (nothing existing is replaced), so there is no "before" to back up.
-The Black Friday theme (#187825914069) already has all three, byte for byte (same md5).
+pasted by hand in the code editor. Items 1 to 3 are NEW files (nothing existing is replaced). Item 4 edits one existing file;
+its original is backed up in site-audit/2026-11-17/backups/live-188199928021/.
+The Black Friday theme (#187825914069) already has all four changes.
 
 Where: Shopify admin > Online Store > Themes > "Live + fixes 2026-11-17 (Claude hotfix)" > ... > Edit code.
 How:   for each row, use "Add a new section" or "Add a new snippet" with the exact name below, select all of the
@@ -22,7 +23,22 @@ How:   for each row, use "Add a new section" or "Add a new snippet" with the exa
    Safety net for the same error: if anything still calls render 'section', it outputs the blocks unchanged.
    md5 a9a303a6dce515ebd303ab807c3c03d0
 
-Order: 1 first (fixes an error that shows today). Then 3, then 2.
+4  snippets/zt-buybox-tidy.liquid  (EXISTING file: edit, do not add)   added 17 Nov afternoon, Dana's request
+   Removes "30 days to try it. Not for you? We refund it." from the sticky Add to cart bar on phones (blend pages).
+   The same line stays once, in the row under the main Add to cart button.
+   Easiest way (a small edit):
+     Open snippets/zt-buybox-tidy.liquid, press Ctrl+F (Cmd+F on a Mac) and search:  zt-sticky__guarantee">
+     It lands about 590 lines down, right under the line   {%- when 'sticky' -%}   and   <div class="zt-sticky" data-zt-sticky hidden>
+     Delete the 6 lines from   {%- if zt_show_guarantee -%}   (the line just above the match) down to and including the
+     {%- endif -%}   two lines below   </p>  . The exact 6 lines are in snippets/zt-buybox-tidy.DELETE-THESE-6-LINES.txt. Save.
+   Or replace the whole file with snippets/zt-buybox-tidy.liquid from this folder (md5 277274bcbd8bdf289c876875b02bdfdd). It was
+   built from the live file exactly as it is today (md5 8d6356a295b3f2803f3185e15028412e, backup in
+   site-audit/2026-11-17/backups/live-188199928021/), so nothing else changes; the star rating rounding is left as is (on HOLD).
+   Check: open a blend page on your phone (for example the Cacao bulk bag), scroll down: the bottom bar shows only the
+   product, price and Add to cart.
+   Black Friday theme: already done (theme commit f035b00d), checked on iPhone.
+
+Order: 1 first (fixes an error that shows today). Then 3, then 2. Item 4 any time.
 
 Check after pasting (2 minutes):
 - https://zeotein.com/products/cacao-protein-starter-kit : right-click > View page source, search "Liquid error": 0 results.
