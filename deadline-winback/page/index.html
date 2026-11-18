@@ -1,0 +1,165 @@
+<title>Win-Back Gift Deadline</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a purple header band, then one reading column of decision cards; the proof images sit full width. */
+:root{
+  --bg:#f7f5fa; --surface:#ffffff; --surface-2:#f0ebf6; --line:#e2dbeb;
+  --fg:#1b1524; --fg-2:#574d64; --fg-3:#847a91;
+  --purple:#5F2D90; --teal:#32BAC0; --teal-dk:#17797f;
+  --ok:#176b47; --ok-soft:#e4f4ec; --warn:#9a6405; --warn-soft:#fdf3e2; --bad:#bb352b; --bad-soft:#fbeae8;
+  --on-band:#ffffff; --band-sub:#e3d0f5;
+  --display:'Space Grotesk',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121017; --surface:#1c1724; --surface-2:#271f33; --line:#342b42;
+  --fg:#f4f0f8; --fg-2:#bcb2c8; --fg-3:#8d839a;
+  --purple:#b48ae6; --teal:#5fd4d9; --teal-dk:#5fd4d9;
+  --ok:#5fc795; --ok-soft:#133026; --warn:#e0a34a; --warn-soft:#35270f; --bad:#f08879; --bad-soft:#3a1f1c;
+  --on-band:#ffffff; --band-sub:#e3d0f5; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121017; --surface:#1c1724; --surface-2:#271f33; --line:#342b42;
+  --fg:#f4f0f8; --fg-2:#bcb2c8; --fg-3:#8d839a;
+  --purple:#b48ae6; --teal:#5fd4d9; --teal-dk:#5fd4d9;
+  --ok:#5fc795; --ok-soft:#133026; --warn:#e0a34a; --warn-soft:#35270f; --bad:#f08879; --bad-soft:#3a1f1c;
+  --on-band:#ffffff; --band-sub:#e3d0f5; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:#5F2D90}
+.wrap{max-width:940px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px}
+.band{background:#5F2D90}
+.band .wrap{padding-block:30px 26px}
+.eyebrow{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--band-sub)}
+h1{font:700 clamp(28px,5vw,40px)/1.05 var(--display);color:var(--on-band);margin:8px 0 10px;letter-spacing:-.02em;text-wrap:balance}
+.band p{color:var(--band-sub);max-width:68ch;margin:0}
+.band b{color:#fff}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:20px}
+.stat{border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:11px 13px;background:rgba(255,255,255,.08)}
+.stat .k{font:600 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--band-sub)}
+.stat .v{font:700 22px/1.15 var(--display);color:#fff;margin-top:3px}
+.stat .s{font-size:12.5px;color:var(--band-sub)}
+h2{font:700 22px/1.2 var(--display);margin:34px 0 10px;letter-spacing:-.01em;color:var(--purple);text-wrap:balance}
+h3{font:700 16px var(--display);margin:0 0 6px}
+p{margin:0 0 10px;max-width:72ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:0 0 12px;min-width:0}
+.card.ok{border-left:5px solid var(--ok)}.card.warn{border-left:5px solid var(--warn)}.card.bad{border-left:5px solid var(--bad)}
+.chip{display:inline-block;font:600 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:3px 9px;margin-bottom:8px}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}.chip.warn{background:var(--warn-soft);color:var(--warn)}.chip.bad{background:var(--bad-soft);color:var(--bad)}
+ul,ol{margin:6px 0 4px;padding-left:20px}li{margin:5px 0}
+code{font:12.5px var(--mono);background:var(--surface-2);border-radius:4px;padding:1px 5px;word-break:break-word}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:8px 0 12px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px;background:var(--surface)}
+th{font:600 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);text-align:left;background:var(--surface-2);padding:9px 11px}
+td{padding:9px 11px;border-top:1px solid var(--line);vertical-align:top}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+figure{margin:10px 0 14px}figure img{display:block;width:100%;border:1px solid var(--line);border-radius:10px}
+figcaption{font-size:12.5px;color:var(--fg-3);margin-top:6px}
+.ask{background:var(--surface);border:2px solid var(--purple);border-radius:12px;padding:16px 18px}
+.ask ol{padding-left:22px}.ask li{margin:8px 0}
+.prompt{position:relative;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:14px 14px 14px;font:12.5px/1.55 var(--mono);white-space:pre-wrap;overflow-x:auto;max-height:520px;overflow-y:auto}
+.copy{font:600 13px var(--body);background:var(--purple);color:#fff;border:0;border-radius:8px;padding:9px 14px;cursor:pointer;margin-bottom:8px}
+.copy:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.muted{color:var(--fg-3);font-size:13px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="band"><div class="wrap">
+  <p class="eyebrow">Zeotein · Never-bought win-back · 18 Nov 2026</p>
+  <h1>Free Vegan 7-Day, 5-day deadline that really ends</h1>
+  <p><b>The Shopify half is proven on the live store:</b> a per-person code gives the Vegan 7-Day free before its deadline and Shopify refuses it after. <b>Nothing is turned on for customers.</b> The Deadline Funnel campaign, the GoHighLevel webhook and the countdown on the page still need Dana's Deadline Funnel login and the Lenovo browser session, because neither can be reached from the cloud workspace.</p>
+  <div class="stats">
+    <div class="stat"><p class="k">Deadline test</p><p class="v">Passed</p><p class="s">works day 0, refused after expiry</p></div>
+    <div class="stat"><p class="k">Cost</p><p class="v">$0 now</p><p class="s">$7.99 a month after $300 it drives</p></div>
+    <div class="stat"><p class="k">Customer sends</p><p class="v">None</p><p class="s">2 test codes, both expired</p></div>
+    <div class="stat"><p class="k">Waiting on Dana</p><p class="v">4 yeses</p><p class="s">listed at the bottom</p></div>
+  </div>
+</div></div>
+
+<div class="wrap">
+
+<h2>Proof: the code stops working at the deadline</h2>
+<p>Same cart both times: Vegan 7 Stick Packs ($44.99) plus the $76.99 Starter Kit first order. The test codes have the exact shape Deadline Funnel will create: $44.99 off the Vegan 7-Day only, one use, one per customer, with an end time.</p>
+<figure><img src="deadline-proof.png" alt="Two result cards. Left: code TESTWBGIFT5D accepted, Vegan 7 Stick Packs $0.00, discount $44.99. Right: code TESTWBGIFTEXP refused 40 minutes after its deadline, Vegan 7 Stick Packs $44.99, discount $0.00, Shopify status EXPIRED."><figcaption>Read from Shopify's own discount engine on the live store. With two Vegan bags in the cart, only one came off free.</figcaption></figure>
+<div class="card warn"><span class="chip warn">Partly verified</span>
+<p><b>What this proves:</b> Shopify itself enforces the end time on a per-person code. That is the mechanism Deadline Funnel uses, so a code it issues will fail at checkout once that person's 5 days are up.</p>
+<p style="margin:0"><b>What it does not prove yet:</b> that Deadline Funnel creates the code with these settings, starts the clock from the GoHighLevel webhook, and shows the timer. That end-to-end run with Dana's test contact is step 5 of the build below. The storefront checkout could not be screenshotted from the cloud workspace either: Shopify's bot check answered "Your connection needs to be verified". The Lenovo session takes those screenshots.</p></div>
+
+<h2>How the free 7-Day gets into the order</h2>
+<div class="card ok"><span class="chip ok">Chosen</span>
+<h3>The code itself makes the Vegan 7-Day free, visible at checkout</h3>
+<p>Deadline Funnel makes amount codes and can limit them to one product. A $44.99 code limited to the Vegan 7 Stick Packs turns that bag into $0.00 in the cart, so the customer sees the gift before paying. No Shopify Flow is needed to add the gift line, which removes the step where a Flow could fail or double up. The live Vegan 7-Day product is Active, so Deadline Funnel can select it (it cannot see unlisted products like <code>sbf-gift-7day-vegan</code>).</p>
+<p style="margin:0">After the deadline the same cart charges $44.99 for that bag, so the page and checkout fall back to the regular $76.99 offer with no gift.</p></div>
+<div class="card bad"><span class="chip bad">Found in testing</span>
+<h3>A minimum spend cannot force the Starter Kit into the cart</h3>
+<p>The first test code had a $121.98 minimum. Shopify refused it with the kit in the cart, because on a product-limited code Shopify counts only the gift product toward the minimum. So the code alone cannot require a Starter Kit.</p>
+<figure><img src="live-checkout-min-spend-blocks-code.png" alt="Live zeotein.com checkout with the Starter Kit at $76.99 and Vegan 7 Stick Packs at $44.99, total $121.98, and no discount applied."><figcaption>Live checkout, 18 Nov 21:20 UTC: the minimum-spend version of the code did not apply.</figcaption></figure>
+<p style="margin:0"><b>The guard instead:</b> one small Shopify Flow. When an order is paid with a <code>WBGIFT</code> code and no Starter Kit line, it tags the order <code>wb-gift-no-kit</code> and emails Dana. It never cancels anything. Worst case is one free Vegan 7-Day per person, once, because each code is single-use.</p></div>
+
+<h2>Three things the build has to respect</h2>
+<div class="card warn"><span class="chip warn">Timing</span>
+<p><b>WB9003 lands after the deadline.</b> The win-back sends on Day 0, Day 3 and Day 6. A 5-day clock from the first email ends before Day 6. Recommended: the gift version sends Day 0, Day 2 and Day 4, so the last reminder arrives with about a day left.</p>
+<p style="margin:0"><b>The Sale hold pauses emails, not the clock.</b> Between 20 Nov and 1 Dec the Sale active gate holds win-back emails, and win-back never mixes with Black Friday. Recommended: switch the gift on after 1 Dec, so nobody's 5 days run out while their reminders are held.</p></div>
+<div class="card warn"><span class="chip warn">People already in the flow</span>
+<p style="margin:0">203 lapsed buyers got WB9001 on 16 Nov, before any webhook existed, so they have no clock and no code. Recommended: they finish on the current templates with the regular offer and no gift. The gift lives in three new templates on a new branch for new entrants, so no countdown image ever shows to someone without a deadline.</p></div>
+<div class="card warn"><span class="chip warn">Stacking</span>
+<p style="margin:0">The live Shopify Flow that gives a first-order-back free 7-Day must skip orders carrying a <code>WBGIFT</code> code, so nobody gets two free bags. That Flow cannot be read through the API; the Lenovo session checks it in the Flow editor.</p></div>
+
+<h2>The build, step by step</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>Where</th><th>What</th><th>State</th></tr></thead>
+<tbody>
+<tr><td class="n">0</td><td>Deadline Funnel</td><td>Dana sets her account password. Stay on the free app plan; no other paid plan.</td><td><span class="chip warn">Dana</span></td></tr>
+<tr><td class="n">1</td><td>Deadline Funnel</td><td>Evergreen campaign <b>Never-Bought Win-Back: free Vegan 7-Day (5 days)</b>, deadline 5 days after the webhook. Shopify discount: fixed amount <b>$44.99</b>, applies to <b>Zeotein Vegan Protein Powder - 7 Stick Packs</b> only, code prefix <code>WBGIFT</code>, one use. Copy out: webhook URL, email timer image URL, tracking link for <code>try.zeotein.com</code>.</td><td><span class="chip warn">Lenovo</span></td></tr>
+<tr><td class="n">2</td><td>Shopify</td><td>Turn on the Deadline Funnel app embed in the theme that will be live (the 18 Nov theme), with a bar button "Add my free Vegan 7-Day" linking to <code>/cart/add?id=53059759112405&amp;quantity=1&amp;return_to=/cart</code>. Add the guard Flow and the stacking skip.</td><td><span class="chip warn">Lenovo</span></td></tr>
+<tr><td class="n">3</td><td>GoHighLevel</td><td>In <b>WB · Win-back · One flow</b>: a new branch for new entrants. Webhook to Deadline Funnel right before the first email, three new gift templates (timer image in each, every button on the tracking link), sends Day 0, 2, 4. Names stay evergreen.</td><td><span class="chip warn">Lenovo</span></td></tr>
+<tr><td class="n">4</td><td>try.zeotein.com</td><td>While the deadline runs, the bar shows the countdown and the gift button. After it ends, the bar is gone and the page shows the regular $76.99 offer.</td><td><span class="chip warn">Lenovo</span></td></tr>
+<tr><td class="n">5</td><td>All</td><td>Dana's test contact only: run through, screenshot the code working at checkout on day 0; then a copy campaign with a 10-minute deadline, screenshot the code refused.</td><td><span class="chip warn">Lenovo</span></td></tr>
+<tr><td class="n">6</td><td>Shopify</td><td>Per-person code with a real end time, proven on the live store (above).</td><td><span class="chip ok">Done</span></td></tr>
+</tbody></table></div>
+<p class="muted">Why the Lenovo: the GoHighLevel workflow API is switched off for this sub-account (error WORKFLOW_API_NOT_ENABLED_FOR_LOCATION), the Deadline Funnel site is unreachable from the cloud workspace, and the live theme cannot be edited through the API.</p>
+
+<h2>Gift email copy, ready to paste</h2>
+<div class="card">
+<p><b>Gift Email 1 · Day 0</b> · Subject: <i>Your kit, plus a free Vegan 7-Day</i> · Preview: <i>Yours for the next 5 days.</i></p>
+<p class="muted">Body as WB9001, with this block added under the kit paragraph, then the timer image:</p>
+<p>For the next 5 days, your Starter Kit comes with a free Zeotein Vegan 7-Day: seven single-serve sticks of our plant-based blend, on us. The timer below is yours. When it hits zero, the gift is gone.</p>
+<p><b>Gift Email 2 · Day 2</b> · Subject: <i>Thirty seconds, 23 grams of protein</i> · Preview: <i>Your free Vegan 7-Day is still waiting.</i><br><span class="muted">Body as WB9002, plus:</span> Your free Vegan 7-Day is still set aside for you. Timer below.</p>
+<p style="margin:0"><b>Gift Email 3 · Day 4</b> · Subject: <i>Your free Vegan 7-Day ends tomorrow</i> · Preview: <i>Last day for the gift.</i><br><span class="muted">Body as WB9003, plus:</span> This is the last day for your free Vegan 7-Day. After the timer runs out, the Starter Kit is still $76.99, without the gift.</p>
+</div>
+
+<h2>Handoff for the Lenovo session</h2>
+<button class="copy" id="copyBtn" type="button">Copy the prompt</button>
+<div class="prompt" id="prompt">Build the never-bought win-back gift deadline for Zeotein in Dana's regular Chrome window (never incognito). Rules: never use an em dash; no sends to customers; test with Dana's test contact only; evergreen names only; use only the free "DF Discount Codes &amp; Deadlines" app plan.
+
+1. Deadline Funnel (Dana has set her password): create an evergreen campaign named "Never-Bought Win-Back: free Vegan 7-Day (5 days)". Deadline: 5 days, 0 hours after the webhook. Shopify discount: fixed amount $44.99, applies only to the product "Zeotein Vegan Protein Powder - 7 Stick Packs, Pumpkin Seed &amp; Hemp" (variant 53059759112405), code prefix WBGIFT, one use per code, combines with shipping discounts only if offered. Copy the webhook URL, the email timer image URL and a tracking link for https://try.zeotein.com.
+
+2. Shopify: in the theme that will be live (the 18 Nov theme; check which is published first), turn on the Deadline Funnel app embed. Bar text: "Your free Vegan 7-Day ends in" + countdown; bar button "Add my free Vegan 7-Day" linking to /cart/add?id=53059759112405&amp;quantity=1&amp;return_to=/cart. Copy the same change to the Black Friday theme 187825914069.
+
+3. Shopify Flow: (a) new Flow "Win-back gift guard": Order paid, discount codes contain WBGIFT, and no line item from product zeotein-cacao-bag-30-try -> add order tag wb-gift-no-kit and email Dana. Never cancel. (b) In the existing first-order-back 7-Day win-back Flow, add a condition so it ends when the order has a WBGIFT code.
+
+4. GoHighLevel, workflow "WB · Win-back · One flow" (dbb240d7-ab3f-404c-bdfb-b04ae362c810): add a branch for new entrants only (the 203 contacts already past WB9001 stay on the current path, no gift). In the new branch: after the Day 0 Sale hold gate and right before the first email, a Webhook action POST to the Deadline Funnel webhook URL with email and first name. Then three new templates copied from WB9001, WB9002, WB9003 with the gift lines from the build page, the Deadline Funnel timer image in each, and every button on the Deadline Funnel tracking link. Waits: Day 0, Day 2, Day 4, each behind the Sale hold gate. Name the templates "WB · Gift Email 1", "WB · Gift Email 2", "WB · Gift Email 3". Leave the branch OFF for real contacts.
+
+5. Test with Dana's test contact only: run it through, open the email, click through, confirm the bar and the code at checkout show the Vegan 7-Day at $0.00 (screenshot, do not pay). Then duplicate the campaign with a 10-minute deadline, run the test contact through it, wait 15 minutes, confirm the code is refused at checkout and the bar is gone (screenshot). Delete the 10-minute campaign afterwards.
+
+6. Report back: screenshots, the three template IDs, the Flow names, and anything that did not match this plan.</div>
+
+<h2>Cost</h2>
+<div class="card"><p style="margin:0">The app is free until it has driven $300 in revenue, about four Starter Kit orders at $76.99, then <b>$7.99 a month</b>. No other Deadline Funnel plan is used. The gift itself gives away one Vegan 7-Day ($44.99 retail) per buyer who orders inside their 5 days.</p></div>
+
+<h2>The yes Dana needs to give</h2>
+<div class="ask"><ol>
+<li><b>Log in to Deadline Funnel</b> once her password is set, and keep the Lenovo session running so steps 1 to 5 can be built and tested.</li>
+<li><b>Gift emails on Day 0, 2 and 4</b> instead of 0, 3 and 6, so the last one arrives before the deadline.</li>
+<li><b>The 203 already in the flow finish without the gift.</b> Only new entrants get the 5-day clock.</li>
+<li><b>Switch it on for real contacts after 1 Dec</b>, once the test screenshots are in. Until that yes, the branch stays off.</li>
+</ol></div>
+<p class="muted" style="margin-top:14px">Audience note: the win-back targets one-time buyers lapsed 90 days who have never bought the Starter Kit subscription. That is how "never bought" is read here.</p>
+</div>
+<script>
+document.getElementById('copyBtn').addEventListener('click', function(){
+  var t=document.getElementById('prompt').innerText, b=this;
+  var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy the prompt'},1800)};
+  var sel=function(){var r=document.createRange();r.selectNodeContents(document.getElementById('prompt'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press Ctrl+C'};
+  try{navigator.clipboard.writeText(t).then(done,sel)}catch(e){sel()}
+});
+</script>

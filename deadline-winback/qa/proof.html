@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Deadline Proof</title>
+<style>
+body{font:15px/1.5 -apple-system,Segoe UI,sans-serif;background:#f7f5fa;color:#1b1524;margin:0;padding:28px}
+h1{font-size:22px;margin:0 0 4px;color:#5F2D90}.sub{color:#574d64;margin:0 0 18px;max-width:900px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1100px}
+.card{background:#fff;border:1px solid #e2dbeb;border-radius:12px;padding:16px 18px;border-top:6px solid var(--c)}
+.ok{--c:#176b47}.no{--c:#bb352b}
+.tag{display:inline-block;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--c);border-radius:99px;padding:3px 10px}
+h2{font-size:17px;margin:10px 0 2px}.when{font-family:ui-monospace,monospace;font-size:12.5px;color:#847a91}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}td{padding:7px 4px;border-bottom:1px solid #eee}td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.big{font-size:26px;font-weight:800;color:var(--c)}
+.foot{max-width:1100px;margin-top:16px;font-size:12.5px;color:#574d64}
+</style></head><body>
+<h1>Per-person deadline: proof on the live Zeotein store</h1>
+<p class="sub">Same cart both times: Zeotein Vegan 7 Stick Packs ($44.99) plus the $76.99 Starter Kit first order. Same code shape Deadline Funnel will make: $44.99 off the Vegan 7-Day only, one use, one per customer. Result read from Shopify's own discount engine (Admin draftOrderCalculate), 18 Nov 2026.</p>
+<div class="grid">
+<div class="card ok"><span class="tag">Day 0: code works</span>
+<h2>TESTWBGIFT5D</h2><p class="when">Deadline 23 Nov 21:19 UTC (5 days) · checked 18 Nov 21:23 and 22:13 UTC</p>
+<table><tr><td>Vegan 7 Stick Packs</td><td class="r">$0.00 <s style="color:#999">$44.99</s></td></tr>
+<tr><td>Starter Kit first order</td><td class="r">$76.99</td></tr>
+<tr><td>Code accepted by Shopify</td><td class="r">Yes</td></tr></table>
+<p style="margin-top:10px">Discount <span class="big">$44.99</span> &nbsp;· with 2 Vegan bags in the cart, still only one free</p></div>
+<div class="card no"><span class="tag">After expiry: code refused</span>
+<h2>TESTWBGIFTEXP</h2><p class="when">Deadline 18 Nov 21:33 UTC · checked 22:13 UTC, 40 min later · Shopify status EXPIRED</p>
+<table><tr><td>Vegan 7 Stick Packs</td><td class="r">$44.99</td></tr>
+<tr><td>Starter Kit first order</td><td class="r">$76.99</td></tr>
+<tr><td>Code accepted by Shopify</td><td class="r">No, dropped</td></tr></table>
+<p style="margin-top:10px">Discount <span class="big">$0.00</span> &nbsp;· the same code gave $44.99 off at 21:23 UTC, before its deadline</p></div>
+</div>
+<p class="foot">Both test codes are now expired (TESTWBGIFT5D ended by hand at 22:13 UTC so nobody can redeem it). The storefront checkout itself could not be screenshotted from the cloud workspace: Shopify's bot check returned "Your connection needs to be verified" (HTTP 429). The first live checkout screenshot (same cart, code not applied) is kept because it shows why a minimum-spend rule cannot be used.</p>
+</body></html>
