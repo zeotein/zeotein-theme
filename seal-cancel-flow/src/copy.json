@@ -1,0 +1,50 @@
+{
+  "screen1": {
+    "title": "What's the main reason?",
+    "options": [
+      "I have too much product",
+      "I'm not loving the taste",
+      "It costs too much right now",
+      "Something else"
+    ],
+    "button": "Continue"
+  },
+  "screen2": {
+    "title": "Thanks for telling us",
+    "body": "Here's a quick note from Dana. It plays muted with captions on.",
+    "button": "Continue"
+  },
+  "screen3": {
+    "too_much": {
+      "title": "Get it less often",
+      "body": "Switch to one bag every 6 or 8 weeks. Change it back anytime.",
+      "actions": [
+        "Every 6 weeks",
+        "Every 8 weeks"
+      ]
+    },
+    "taste": {
+      "title": "Try it a new way",
+      "body": "Our recipe guides turn it into shakes, smoothies and coffee drinks in minutes.",
+      "actions": [
+        "Open the recipe guides"
+      ]
+    },
+    "money": {
+      "title": "Skip your next delivery",
+      "body": "Nothing ships and nothing is charged next time. Your plan and price stay the same.",
+      "actions": [
+        "Skip next delivery"
+      ]
+    },
+    "other": {
+      "title": "Pause instead",
+      "body": "Take a break and keep your plan and price. Start again whenever you like.",
+      "actions": [
+        "Pause my subscription"
+      ]
+    },
+    "points": "You have {points} rewards points. 3,500 points = $10 off.",
+    "cancel": "Cancel my subscription"
+  }
+}

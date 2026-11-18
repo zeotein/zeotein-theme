@@ -1,0 +1,43 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seal cancel flow test</title>
+<link rel="stylesheet" href="src/zt-cancel-flow.css">
+<style>
+body{margin:0;font-family:Poppins,system-ui,sans-serif;background:linear-gradient(165deg,#e8f6f3,#f3eef9 48%,#faf8fc);min-height:100vh;color:#14121f}
+.seal-subscription-page{padding:20px 16px}
+.card{background:#fff;border:1px solid rgba(88,13,147,.14);border-radius:16px;padding:20px;max-width:520px;margin:0 auto 14px}
+.card h3{margin:0 0 6px;font-size:18px}.muted{color:#5a5568;font-size:14px;margin:0 0 12px}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row button,.row select{font:600 14px Poppins,system-ui;border:1.5px solid #580d93;color:#580d93;background:#fff;border-radius:10px;padding:9px 12px}
+.sm{position:fixed;inset:0;background:rgba(20,18,31,.45);display:flex;align-items:flex-end;justify-content:center}
+.sm[hidden]{display:none}
+.sm .box{background:#fff;width:100%;max-width:440px;border-radius:20px 20px 0 0;padding:22px 20px 26px}
+.sm h2{font-size:22px;margin:0 0 4px}.sm p{margin:0 0 14px;color:#5a5568}
+.sm label{display:flex;gap:10px;align-items:center;border:1.5px solid #ddd6e8;border-radius:12px;padding:13px 14px;margin:0 0 9px;font-size:16px}
+.sm label:has(input:checked){border-color:#5F2D90;background:#f3eef9}
+.sm input{accent-color:#5F2D90;width:18px;height:18px}
+.sm .go{display:block;width:100%;min-height:50px;border:0;border-radius:12px;background:#5F2D90;color:#fff;font:600 17px Poppins,system-ui;margin-top:6px}
+.tag{font-size:11px;font-weight:700;letter-spacing:.12em;color:#580d93;text-transform:uppercase}
+#log{max-width:520px;margin:0 auto;font:12px ui-monospace,monospace;color:#5a5568}
+</style></head><body>
+<div class="seal-subscription-page">
+ <div class="card"><div class="tag">Test subscription · not a customer</div><h3>Zeotein Cacao Starter Kit, 30-Day Bulk Bag</h3><p class="muted">1 bag every 30 days · Next delivery Dec 11</p>
+  <div class="row"><select aria-label="Delivery frequency"><option>Every 4 weeks</option><option>Every 6 weeks</option><option>Every 8 weeks</option></select><button>Skip next delivery</button><button>Pause subscription</button><button id="open">Cancel subscription</button></div></div>
+ <div id="log"></div>
+</div>
+<div class="sm" id="sm" hidden role="dialog"><div class="box">
+ <div style="display:flex;gap:6px;margin-bottom:12px"><i style="width:26px;height:5px;border-radius:5px;background:#5F2D90"></i><i style="width:26px;height:5px;border-radius:5px;background:#e3dcef"></i><i style="width:26px;height:5px;border-radius:5px;background:#e3dcef"></i></div><h2>What's the main reason?</h2><p></p>
+ <form id="rf">
+  <label><input type="radio" name="r" value="I have too much product"> I have too much product</label>
+  <label><input type="radio" name="r" value="I'm not loving the taste"> I'm not loving the taste</label>
+  <label><input type="radio" name="r" value="It costs too much right now"> It costs too much right now</label>
+  <label><input type="radio" name="r" value="Something else"> Something else</label>
+  <button type="button" class="go" id="sealCancel">Cancel subscription</button>
+ </form></div></div>
+<script>window.ZT_CANCEL_FLOW = { points: (new URLSearchParams(location.search).get('pts')||null) && +new URLSearchParams(location.search).get('pts') };</script>
+<script src="src/zt-cancel-flow.js"></script>
+<script>
+const log=m=>{document.getElementById('log').insertAdjacentHTML('beforeend','<div>'+m+'</div>')};
+document.getElementById('open').addEventListener('click',()=>{document.getElementById('sm').hidden=false});
+document.getElementById('sealCancel').addEventListener('click',()=>{log('SEAL CANCEL HANDLER RAN with reason: '+(document.querySelector('input[name=r]:checked')||{}).value);document.getElementById('sm').hidden=true});
+document.querySelectorAll('.row button').forEach(b=>b.addEventListener('click',()=>log('Seal control clicked: '+b.textContent)));
+document.querySelector('.row select').addEventListener('change',e=>log('Seal frequency changed to: '+e.target.value));
+</script></body></html>
