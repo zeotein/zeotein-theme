@@ -4,6 +4,13 @@ pasted by hand in the code editor. Items 1 to 3 are NEW files (nothing existing 
 their originals are backed up in site-audit/2026-11-17/backups/live-188199928021/.
 The Black Friday theme (#187825914069) already has all five changes.
 
+UPDATE 18 Nov 2026, 00:30 UTC: NO PASTING NEEDED. All five items below are already in the theme
+"Live + fixes 2026-11-18 (sticky bar line, Claude)" (#188242723029): an exact copy of the live theme plus these five
+changes, checked in preview (33 pages, 0 Liquid errors, sticky bar on iPhone). Dana approved publishing it (18 Nov).
+Publish it in Shopify admin: Online Store > Themes > Theme library > that theme > "..." > Publish.
+(Claude's tools cannot publish a copied theme, same as the 17 Nov hotfix.) Once it is published this list is done;
+do not paste into the old theme #188199928021 after that.
+
 Where: Shopify admin > Online Store > Themes > "Live + fixes 2026-11-17 (Claude hotfix)" > ... > Edit code.
 How:   for each row, use "Add a new section" or "Add a new snippet" with the exact name below, select all of the
        placeholder text Shopify puts in the new file, replace it with the whole content of the file from this folder, Save.

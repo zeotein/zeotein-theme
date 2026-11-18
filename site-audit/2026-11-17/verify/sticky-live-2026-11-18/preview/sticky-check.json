@@ -1,0 +1,59 @@
+{
+ "theme": "188242723029",
+ "pages": [
+  {
+   "page": "zeotein-cacao-bag-30",
+   "status": 200,
+   "themeId": "188242723029 unpublished",
+   "liquidErrors": 0,
+   "underMainButton": "30 days to try it. Not for you? We refund it.",
+   "sticky": {
+    "on": true,
+    "shown": true,
+    "height": 71,
+    "text": "Cacao bulk bag $99.99 · Subscribe & Save Add to cart",
+    "guaranteeEl": false,
+    "bodyPad": "76px",
+    "guaranteeClass": false
+   },
+   "stickyAddStatus": 429,
+   "error": "Error: page.evaluate: SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+  },
+  {
+   "page": "zeotein-cacao-sticks-30",
+   "status": 429,
+   "themeId": null,
+   "liquidErrors": 0,
+   "underMainButton": null,
+   "sticky": null
+  },
+  {
+   "page": "zeotein-cacao-sticks-7",
+   "status": 429,
+   "themeId": null,
+   "liquidErrors": 0,
+   "underMainButton": null,
+   "sticky": null
+  },
+  {
+   "page": "zeotein-vegan-sticks-30",
+   "status": 429,
+   "themeId": null,
+   "liquidErrors": 0,
+   "underMainButton": null,
+   "sticky": null
+  },
+  {
+   "page": "zeotein-vegan-sticks-7",
+   "status": 429,
+   "themeId": null,
+   "liquidErrors": 0,
+   "underMainButton": null,
+   "sticky": null
+  }
+ ],
+ "scriptErrors": [
+  "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON on https://zeotein.com/products/zeotein-cacao-bag-30",
+  "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON on https://zeotein.com/products/zeotein-cacao-bag-30"
+ ]
+}

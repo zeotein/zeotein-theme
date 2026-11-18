@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Light HTML check of every page (17 Nov 2026 verification pass), for when the headless browser is rate limited.
-Usage: python3 vp_html.py <outDir> live|bf
+Usage: python3 vp_html.py <outDir> live|bf|copy   (copy = preview of the theme in PREVIEW_THEME=<id>, added 18 Nov)
 One plain request per page (Chrome user agent, ~1.5 s apart, cookies kept for the BF preview). Per page: status,
 theme id/role, title, H1, Liquid errors, copy rules (em dash, "complete protein", review count lines), approved
 features present in the HTML (rating line, PDP reviews, guarantee/trust, chooser, BF banner and BF price notes).
@@ -25,7 +25,8 @@ if mode == 'bf':
               ('p-stocking-stuffers-7-day-gift', '/products/stocking-stuffers-7-day-gift')]
 jar = os.path.join(out_dir, f'cookies-{mode}.txt')
 def get(path):
-    url = 'https://zeotein.com' + path + ('&' if '?' in path else '?') + 'zt_internal=1' + ('&preview_theme_id=187825914069' if mode == 'bf' else '')
+    pid = '187825914069' if mode == 'bf' else (os.environ.get('PREVIEW_THEME', '') if mode == 'copy' else '')
+    url = 'https://zeotein.com' + path + ('&' if '?' in path else '?') + 'zt_internal=1' + ('&preview_theme_id=' + pid if pid else '')
     r = subprocess.run(['curl', '-sS', '-L', '-A', UA, '-c', jar, '-b', jar, '-w', '\n%{http_code}', url], capture_output=True, text=True, timeout=90)
     body, _, code = r.stdout.rpartition('\n')
     return int(code or 0), body
@@ -52,6 +53,9 @@ for name, path in PAGES:
         'guaranteeOrTrust': bool(re.search(r'zt-pdp-guarantee|zt-trust__guarantee', h)), 'chooser': 'data-zt-chooser' in h,
         'savingsText': ctx(r'you save|save \d+%|bundle & save', 2), 'bfBanner': 'class="ztbfcd' in h,
         'bfNotes': len(re.findall(r'class="ztbf-(?:strip|card|panel)"', h)),
+        'stickyBar': 'data-zt-sticky' in h, 'stickyGuarantee': h.count('class="zt-sticky__guarantee"'),
+        'tryItLines': t.count('30 days to try it'),
+        'blendsSections': [k for k in ["What's Inside Matters.", 'More Than a Protein Shake.', 'Made for Real Life.', 'Real People. Real Reviews.', 'Good Questions. Straight Answers.'] if k in t],
     })
     time.sleep(1.5)
 json.dump(rows, open(os.path.join(out_dir, f'html-{mode}.json'), 'w'), indent=1)
