@@ -53,3 +53,17 @@ The "19 Nov" bar at the top of the page also changed: "one or two links" now rea
 3. **G201 and G302:** the HTML title, the hidden preheader and G201's headline still use the old wording. Only the subject and preview fields changed.
 4. **QZP04, QZA05 and QZB05:** they say the recipe guide has more combinations, with no link. The quiz Email 1s still link the June guide PDFs.
 5. **Renders still show headings in Poppins.** The 46 emails no longer load that font, so inboxes show the fallback font.
+
+## Later on 19 Nov: quiz guide links and gift-email previews (map versions 161 and 162)
+
+8 GoHighLevel templates were fixed. Before and after copies and change-log.tsv are in site-audit/2026-11-19/email-fixes/. Every write was read back byte-identical, and the sender, subject and preview were unchanged.
+
+| Emails | Change |
+|---|---|
+| QZA01, QZP01, QZB01 | The June 2026 guide PDFs now point to the current Cacao and Vegan guides |
+| QZP04, QZA05, QZB05 | "recipe guide" is now linked (Vegan guide for QZP04, Cacao guide for the other two). www.Zeotein.com became plain text so each email keeps 2 links |
+| G201, G302 | The HTML title and hidden preheader now match the subject and preview text. The visible copy is unchanged |
+
+- **Version 161:** an evidence line on all 8 cards, plus new renders for QZP04, QZA05 and QZB05.
+- **Version 162 (1795100943-6149):** the three quiz Email 1 cards no longer say they link the June PDF.
+- **Independent check, 9:10 AM CT:** QZA01 and QZP04 read straight from GoHighLevel. Their HTML is identical to the after/ copies, with 2 links each and no June PDF.

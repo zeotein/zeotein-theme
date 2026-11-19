@@ -1,0 +1,9 @@
+code	template_id	updatedAt_before	updatedAt_after	fromName	subject	previewText	meta_unchanged	links_before	links_after	readback
+QZA01	6af748beafe6cac654252669	2026-11-19T00:00:57.186Z	2026-11-19T14:48:10.667Z	Dana at Zeotein	Your quiz results + a gift from us 🍫	Your match, plus a free recipe guide inside.	yes	2	2	byte-identical
+QZP01	6af749bed7a8a278d11e6d2a	2026-11-19T00:01:32.683Z	2026-11-19T14:49:42.134Z	Dana at Zeotein	Your quiz results + a gift from us 🌱	Your match, plus a free recipe guide inside.	yes	2	2	byte-identical
+QZB01	6af74c06afe6cac6542593b4	2026-11-19T00:16:40.146Z	2026-11-19T14:51:05.060Z	Dana at Zeotein	You went both ways on the quiz, here's what that tells us 🍫🌱	Both recipe guides, and which one to start with.	yes	2	2	byte-identical
+QZP04	6af74f6646ba79f7ea87ed91	2026-11-19T00:05:17.958Z	2026-11-19T14:52:49.584Z	Dana at Zeotein	Honest question: what does it actually taste like?	The honest answer on how it tastes.	yes	2	2	byte-identical
+QZA05	6af7505ed51aa6d2ef3ff147	2026-11-19T00:05:20.665Z	2026-11-19T14:54:57.845Z	Dana at Zeotein	What does it actually taste like? Honest answer.	Real cacao. Not a chocolate milkshake.	yes	2	2	byte-identical
+QZB05	6af7514832cc8e3564a64326	2026-11-19T00:21:28.810Z	2026-11-19T14:56:50.343Z	Dana at Zeotein	What does it actually taste like? Honest answer.	Real cacao. Not a chocolate milkshake.	yes	2	2	byte-identical
+G201	6af30478336730c93ffc75d0	2026-11-19T00:02:13.310Z	2026-11-19T14:57:50.651Z	Dana at Zeotein	Something extra is coming with your next order	A small thank-you, on its way.	yes	0	0	byte-identical
+G302	6af30489f329be6a4fecfaaf	2026-11-19T00:56:12.914Z	2026-11-19T14:59:01.744Z	Dana at Zeotein	Your collagen gift has arrived 🎁	The thank-you we mentioned. It is in the box.	yes	1	1	byte-identical
