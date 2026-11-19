@@ -64,7 +64,7 @@ BUYBOX = {
         ("cacao-sticks-7", "7 stick packs", "Seven single-serve packs to try it first.", "", ""),
     ]},
     "vegan": {"default": "vegan-kit", "legend": "Choose your Zeotein Vegan", "options": [
-        ("vegan-kit", "Starter Kit &middot; 30 stick packs", "30 packs, a free CleanBlend shaker and 3 digital guides. First-time subscribers, one per customer.", "Best value", "139.99"),
+        ("vegan-kit", "Starter Kit &middot; 30 stick packs", "30 packs, a free CleanBlend shaker and 3 digital guides. First-time subscribers, one per customer.", "Best value", "134.99"),
         ("vegan-sticks-30", "30 stick packs &middot; buy once", "30 single-serve packs.", "", ""),
         ("vegan-sticks-7", "7 stick packs", "Seven single-serve packs to try it first.", "", ""),
     ]},
