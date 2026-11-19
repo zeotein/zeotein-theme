@@ -163,12 +163,12 @@ Each hit was then sorted as customer-visible or not.
 
 ## Raw links
 
-`https://raw.githubusercontent.com/zeotein/zeotein-theme/<COMMIT>/site-audit/2026-11-19/live-paste-all/<path>`
+`https://raw.githubusercontent.com/zeotein/zeotein-theme/08520e1c1462e0948d95afe02c0c554e8525b6b8/site-audit/2026-11-19/live-paste-all/<path>`
 
 `<path>` is the File column, for example
-`https://raw.githubusercontent.com/zeotein/zeotein-theme/<COMMIT>/site-audit/2026-11-19/live-paste-all/snippets/zt-faq-content.liquid`.
+`https://raw.githubusercontent.com/zeotein/zeotein-theme/08520e1c1462e0948d95afe02c0c554e8525b6b8/site-audit/2026-11-19/live-paste-all/snippets/zt-faq-content.liquid`.
 
-`<COMMIT>` is filled in after the push. If the repository is private and a raw link shows 404, open the same path on github.com (`https://github.com/zeotein/zeotein-theme/blob/<COMMIT>/site-audit/2026-11-19/live-paste-all/<path>`) while signed in, and click **Raw**.
+`08520e1c1462e0948d95afe02c0c554e8525b6b8` is filled in after the push. If the repository is private and a raw link shows 404, open the same path on github.com (`https://github.com/zeotein/zeotein-theme/blob/08520e1c1462e0948d95afe02c0c554e8525b6b8/site-audit/2026-11-19/live-paste-all/<path>`) while signed in, and click **Raw**.
 
 ## Prompt for Dana's Claude in Chrome session
 
@@ -200,9 +200,9 @@ RULES (follow all of them):
    Do not retry, guess or work around it.
 6. Never type file contents yourself. Always copy the whole raw file and paste it.
 
-THE KIT FILES. BASE = https://raw.githubusercontent.com/zeotein/zeotein-theme/<COMMIT>/site-audit/2026-11-19/live-paste-all/
+THE KIT FILES. BASE = https://raw.githubusercontent.com/zeotein/zeotein-theme/08520e1c1462e0948d95afe02c0c554e8525b6b8/site-audit/2026-11-19/live-paste-all/
 For each step, open BASE + path in a new tab. Check that it shows plain text. Press Ctrl+A, Ctrl+C.
-(If it shows 404, open https://github.com/zeotein/zeotein-theme/blob/<COMMIT>/site-audit/2026-11-19/live-paste-all/ + path
+(If it shows 404, open https://github.com/zeotein/zeotein-theme/blob/08520e1c1462e0948d95afe02c0c554e8525b6b8/site-audit/2026-11-19/live-paste-all/ + path
 and click Raw.)
 
 HOW TO DO ONE STEP:
