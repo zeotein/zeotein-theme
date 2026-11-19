@@ -1,0 +1,47 @@
+code	template_id	ghl_updatedAt	ghl_html_bytes	render_file	render_vs_current	method	card_fields_changed
+SUB-D4C	6afb6a9a05c59cec5e75c9fc	2026-11-18T23:52:05.386Z	13451	emails/renders/SUB-D4C__6afb6a9a05c59cec5e75c9fc.html	match	full pixel diff (same size, max blurred row diff 20)	body,links,tpl.ev
+SUB-D4V	6afb6a9b21faac6f2014e72d	2026-11-18T23:53:54.183Z	13446	emails/renders/SUB-D4V__6afb6a9b21faac6f2014e72d.html	match	full pixel diff (same size, max blurred row diff 20)	body,links,tpl.ev
+SUB-D7C	6afb6a9eb5476f5f39c2f96c	2026-11-18T21:24:36.335Z	11394	emails/renders/SUB-D7C__6afb6a9eb5476f5f39c2f96c.html	match	full pixel diff (same size, max blurred row diff 21)	body,links,tpl.ev
+SUB-D7V	6afb6a9c21faac6f2014e738	2026-11-18T22:28:36.923Z	11435	emails/renders/SUB-D7V__6afb6a9c21faac6f2014e738.html	match	full pixel diff (same size, max blurred row diff 23)	body,links,tpl.ev
+SUB-D10C	6afb6a9c05c59cec5e75ca54	2026-11-18T22:29:43.349Z	12468	emails/renders/SUB-D10C__6afb6a9c05c59cec5e75ca54.html	match	full pixel diff (same size, max blurred row diff 17)	body,links,tpl.ev
+SUB-D10V	6afb6aa4dee0710e1f70eb19	2026-11-18T22:30:48.690Z	12457	emails/renders/SUB-D10V__6afb6aa4dee0710e1f70eb19.html	match	full pixel diff (same size, max blurred row diff 21)	body,links,tpl.ev
+SUB-D20C	6afb6aa5dee0710e1f70eb4c	2026-11-18T22:31:52.603Z	12143	emails/renders/SUB-D20C__6afb6aa5dee0710e1f70eb4c.html	match	full pixel diff (same size, max blurred row diff 22)	tpl.ev
+SUB-D20V	6afb6aa6c210e6bdf70e0bad	2026-11-18T22:33:38.203Z	12150	emails/renders/SUB-D20V__6afb6aa6c210e6bdf70e0bad.html	match	full pixel diff (same size, max blurred row diff 21)	tpl.ev
+SUB-D27C	6afb6aa7975818c3a1e188fa	2026-11-18T22:34:38.297Z	12168	emails/renders/SUB-D27C__6afb6aa7975818c3a1e188fa.html	match	full pixel diff (same size, max blurred row diff 17)	body,links,tpl.ev
+SUB-D27V	6afb6aa931e0f04d2fb006a8	2026-11-18T22:36:46.696Z	12206	emails/renders/SUB-D27V__6afb6aa931e0f04d2fb006a8.html	match	full pixel diff (same size, max blurred row diff 17)	body,links,tpl.ev
+PS01	6af304353f62ac8f7f2998e4	2026-11-19T00:00:17.144Z	4816	emails/renders/PS01__6af304353f62ac8f7f2998e4.html	match	full pixel diff (same size, max blurred row diff 31)	body,tpl.ev
+PS03	6af30447f329be6a4fecf5d2	2026-11-19T00:00:54.525Z	5320	emails/renders/PS03__6af30447f329be6a4fecf5d2.html	match	full pixel diff (same size, max blurred row diff 32)	body,tpl.ev
+PS04	6af3045ba4d2770d595d832e	2026-11-19T00:01:33.994Z	5906	emails/renders/PS04__6af3045ba4d2770d595d832e.html	match	full pixel diff (same size, max blurred row diff 31)	body,tpl.ev
+G201	6af30478336730c93ffc75d0	2026-11-19T00:02:13.310Z	7191	emails/renders/G201__6af30478336730c93ffc75d0.html	match	pixel diff of text/layout segments; images on files.leadconnectorhq.com blocked here, sizes consistent	pre,subj,tpl.ev
+G302	6af30489f329be6a4fecfaaf	2026-11-19T00:56:12.914Z	11099	emails/renders/G302__6af30489f329be6a4fecfaaf.html	match	pixel diff of text/layout segments; images on files.leadconnectorhq.com blocked here, sizes consistent	note,pre,subj,tpl.ev
+HG01	6af9e0014ee655dcef70dccd	2026-11-19T03:12:08.835Z	7206	emails/renders/HG01__6af9e0014ee655dcef70dccd.html	match	pixel diff of text/layout segments; images on files.leadconnectorhq.com blocked here, sizes consistent	links,tpl.ev
+HG02	6af9e00167fde87e44a28aa2	2026-11-19T02:02:43.793Z	9286	emails/renders/HG02__6af9e00167fde87e44a28aa2.html	match	pixel diff of text/layout segments; images on files.leadconnectorhq.com blocked here, sizes consistent	body,note,pre,tpl.ev
+HG03	6af9e003afe6cac65456a71c	2026-11-19T00:06:14.714Z	9313	emails/renders/HG03__6af9e003afe6cac65456a71c.html	match	pixel diff of text/layout segments; images on files.leadconnectorhq.com blocked here, sizes consistent	body,note,tpl.ev
+HGW01C	6af9e004afe6cac65456a732	2026-11-19T03:12:37.236Z	7267	emails/renders/HGW01C__6af9e004afe6cac65456a732.html	match	pixel diff of text/layout segments; images on files.leadconnectorhq.com blocked here, sizes consistent	links,tpl.ev
+QZA01	6af748beafe6cac654252669	2026-11-19T00:00:57.186Z	14449	emails/renders/QZA01__6af748beafe6cac654252669.html	match	full pixel diff (same size, max blurred row diff 70)	tpl.ev
+QZP01	6af749bed7a8a278d11e6d2a	2026-11-19T00:01:32.683Z	14866	emails/renders/QZP01__6af749bed7a8a278d11e6d2a.html	match	full pixel diff (same size, max blurred row diff 69)	tpl.ev
+QZB01	6af74c06afe6cac6542593b4	2026-11-19T00:16:40.146Z	13336	emails/renders/QZB01__6af74c06afe6cac6542593b4.html	match	full pixel diff (same size, max blurred row diff 67)	tpl.ev
+QZA02	6af74ad04536f36f36e5202d	2026-11-19T00:02:09.980Z	13378	emails/renders/QZA02__6af74ad04536f36f36e5202d.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
+QZP02	6af74b609762be81ad427281	2026-11-19T00:02:35.819Z	13513	emails/renders/QZP02__6af74b609762be81ad427281.html	match	full pixel diff (same size, max blurred row diff 32)	tpl.ev
+QZB02	6af74cba4536f36f36e56595	2026-11-19T00:17:28.421Z	10797	emails/renders/QZB02__6af74cba4536f36f36e56595.html	match	full pixel diff (same size, max blurred row diff 31)	tpl.ev
+QZA03	6af74d5a4536f36f36e5789a	2026-11-19T00:03:07.924Z	11928	emails/renders/QZA03__6af74d5a4536f36f36e5789a.html	match	full pixel diff (same size, max blurred row diff 32)	tpl.ev
+QZP03	6af74ddd9762be81ad42c6ad	2026-11-19T00:04:25.160Z	15353	emails/renders/QZP03__6af74ddd9762be81ad42c6ad.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
+QZB03	6af74e612eff82c92752e011	2026-11-19T00:19:38.950Z	11917	emails/renders/QZB03__6af74e612eff82c92752e011.html	match	full pixel diff (same size, max blurred row diff 70)	tpl.ev
+QZA04	6af74ee867fde87e4471dade	2026-11-19T00:04:26.632Z	14304	emails/renders/QZA04__6af74ee867fde87e4471dade.html	match	full pixel diff (same size, max blurred row diff 31)	tpl.ev
+QZP04	6af74f6646ba79f7ea87ed91	2026-11-19T00:05:17.958Z	11465	emails/renders/QZP04__6af74f6646ba79f7ea87ed91.html	match	full pixel diff (same size, max blurred row diff 31)	tpl.ev
+QZB04	6af74febafe6cac654261559	2026-11-19T00:20:38.002Z	12533	emails/renders/QZB04__6af74febafe6cac654261559.html	match	full pixel diff (same size, max blurred row diff 69)	tpl.ev
+QZA05	6af7505ed51aa6d2ef3ff147	2026-11-19T00:05:20.665Z	11928	emails/renders/QZA05__6af7505ed51aa6d2ef3ff147.html	match	full pixel diff (same size, max blurred row diff 31)	tpl.ev
+QZP05	6af750cf5e998c45d8fe452a	2026-11-19T00:06:16.060Z	12322	emails/renders/QZP05__6af750cf5e998c45d8fe452a.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
+QZB05	6af7514832cc8e3564a64326	2026-11-19T00:21:28.810Z	11928	emails/renders/QZB05__6af7514832cc8e3564a64326.html	match	full pixel diff (same size, max blurred row diff 31)	tpl.ev
+QZA06	6af751b99762be81ad4352c1	2026-11-19T00:06:13.344Z	11450	emails/renders/QZA06__6af751b99762be81ad4352c1.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
+QZP06	6af7522ad51aa6d2ef4046dc	2026-11-19T00:07:03.698Z	9292	emails/renders/QZP06__6af7522ad51aa6d2ef4046dc.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
+QZB06	6af752916c0601d448dcadce	2026-11-19T00:22:29.727Z	11446	emails/renders/QZB06__6af752916c0601d448dcadce.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
+QZA07	6af752ff4536f36f36e65649	2026-11-19T00:07:02.738Z	11487	emails/renders/QZA07__6af752ff4536f36f36e65649.html	match	full pixel diff (same size, max blurred row diff 32)	tpl.ev
+QZP07	6af7537629ebb4befe778ca3	2026-11-19T00:08:07.903Z	12668	emails/renders/QZP07__6af7537629ebb4befe778ca3.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
+QZB07	6af753f6542d5bc54066fac8	2026-11-19T00:23:24.858Z	11487	emails/renders/QZB07__6af753f6542d5bc54066fac8.html	match	full pixel diff (same size, max blurred row diff 32)	tpl.ev
+QZA09	6af7561546ba79f7ea88ff45	2026-11-19T00:07:48.631Z	10886	emails/renders/QZA09__6af7561546ba79f7ea88ff45.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
+QZP09	6af7569d6c0601d448dd3c8a	2026-11-19T00:09:00.596Z	12761	emails/renders/QZP09__6af7569d6c0601d448dd3c8a.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
+QZB09	6af7854f542d5bc5406d3feb	2026-11-19T00:24:24.650Z	10888	emails/renders/QZB09__6af7854f542d5bc5406d3feb.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
+QZA10	6af787cc46ba79f7ea8f4171	2026-11-19T00:08:47.153Z	11440	emails/renders/QZA10__6af787cc46ba79f7ea8f4171.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
+QZP10	6af787ce2eff82c9275a2d78	2026-11-19T00:15:39.202Z	12300	emails/renders/QZP10__6af787ce2eff82c9275a2d78.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
+QZB10	6af787cfafe6cac6542d31ab	2026-11-19T00:25:45.235Z	11440	emails/renders/QZB10__6af787cfafe6cac6542d31ab.html	match	full pixel diff (same size, max blurred row diff 30)	tpl.ev
