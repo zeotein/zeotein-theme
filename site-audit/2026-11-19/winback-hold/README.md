@@ -35,3 +35,12 @@ Set Sale active back to `no` before tomorrow 12:00 AM CT. The waiting contacts g
 ## Verification
 
 A check is scheduled for 10:50 AM CT. It looks for any WB9002 email sent after 10:30 AM CT today and confirms Sale active is still yes.
+
+## Result, 10:50 AM CT check (19 Nov 16:50 UTC)
+
+The hold worked. WB9002 did not go out.
+- Sale active still reads `yes`. Sale start (2026-11-20) and Sale end (2026-12-01) are unchanged.
+- No email of any kind was sent from GoHighLevel between 10:30 and 10:55 AM CT. The check used `export-messages-by-location` with channel Email.
+- A control search over all of 19 Nov returned 21 emails, so the date filter works. The last one went out at 10:04:50 AM CT, before WB9002 was due.
+
+The contacts waiting on WB9002 now check again once a day. The "Sale active ON" task sets the value to yes again at 12:00 AM CT on 20 Nov, so they keep waiting until the OFF task sets it to no at 12:00 AM CT on 1 Dec.
