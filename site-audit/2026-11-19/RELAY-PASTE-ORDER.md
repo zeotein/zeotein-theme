@@ -296,4 +296,4 @@ BEFORE is what live must show before the paste; AFTER is the line count after it
 
 ## Change log
 
-- 19 Nov 2026, 1:40 PM CT: list written. 1:45 PM CT: the BEFORE, AFTER and TEST details moved from the tables into the per-step check lists, because some quoted code lines contain the | character, which splits Markdown table cells. The steps, order and files are the same. The paste files are unchanged (pinned commits above). Only the two kit READMEs changed, to add the HOLD lines. Any later change to a kit file will be announced in Dana's chat with Claude first and recorded here.
+- 19 Nov 2026, 1:40 PM CT: list written. Minutes later, before it was sent: the BEFORE, AFTER and TEST details moved from the tables into the per-step check lists, because some quoted code lines contain the | character, which splits Markdown table cells. The steps, order and files are the same. The paste files are unchanged (pinned commits above). Only the two kit READMEs changed, to add the HOLD lines. Any later change to a kit file will be announced in Dana's chat with Claude first and recorded here.
