@@ -1,5 +1,7 @@
 # Live paste kit: FAQ, gifts and Difference page (19 Nov 2026)
 
+> **HOLD (19 Nov 2026, 1:40 PM CT): do not run the Chrome prompt in this README.** Relay is the only one pasting into the live theme, one file at a time with a test after each, in the order in `site-audit/2026-11-19/RELAY-PASTE-ORDER.md` (after Relay's current queue). Nobody pastes into the BF theme #187825914069. Step 18 waits for Dana's own yes.
+
 This folder has 20 files. They bring the finished FAQ, gift and Difference page work onto zeotein.com, plus the Vegan Black Friday price display (step 18, needed before Tue 24 Nov).
 Since 19 Nov, Dana's rule is that edits go straight into the live theme, **"Zeotein live theme - edit this one directly"**,
 in Shopify's code editor, one file at a time, and no theme is ever published.
@@ -175,6 +177,9 @@ Each hit was then sorted as customer-visible or not.
 Copy everything in the box and paste it into Claude in Chrome on the laptop, with Shopify admin signed in.
 
 ```text
+HOLD (19 Nov 2026, 1:40 PM CT): DO NOT RUN THIS PROMPT. Stop and tell Dana.
+Relay pastes from site-audit/2026-11-19/RELAY-PASTE-ORDER.md instead.
+
 You are in Dana's Chrome on her laptop, signed in to Shopify admin for zeotein.com:
 https://admin.shopify.com/store/wmzz7i-xw
 Your job: paste 20 files into the LIVE theme's code, one file at a time, in exactly the order below.

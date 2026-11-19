@@ -1,5 +1,7 @@
 # Black Friday into the live theme: paste kit (19 Nov 2026)
 
+> **HOLD (19 Nov 2026, 1:40 PM CT): do not run the Chrome prompt in this README.** Relay is the only one pasting into the live theme, one file at a time with a test after each, in the order in `site-audit/2026-11-19/RELAY-PASTE-ORDER.md` (after Relay's current queue). Nobody pastes into the BF theme #187825914069. BF1 to BF19 and D1 wait for Dana's own yes; H1 to H3 stay on hold.
+
 This folder moves the Black Friday work onto zeotein.com without publishing a theme.
 
 The work was built in the unpublished theme **"Black Friday Store 2026 (draft, publish Nov 27)"** (#187825914069), which was meant to be published at 12:00 AM CT on Fri 27 Nov.
@@ -283,6 +285,9 @@ For example: `https://raw.githubusercontent.com/zeotein/zeotein-theme/ab932f284e
 Copy everything in the box and paste it into Claude in Chrome on the laptop, with Shopify admin signed in.
 
 ```text
+HOLD (19 Nov 2026, 1:40 PM CT): DO NOT RUN THIS PROMPT. Stop and tell Dana.
+Relay pastes from site-audit/2026-11-19/RELAY-PASTE-ORDER.md instead.
+
 You are in Dana's Chrome on her laptop, signed in to Shopify admin for zeotein.com:
 https://admin.shopify.com/store/wmzz7i-xw
 Your job: paste the Black Friday files into the LIVE theme's code, one file at a time, in exactly the order below.
