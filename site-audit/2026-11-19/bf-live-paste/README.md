@@ -267,16 +267,16 @@ Open each page on a computer and a phone. In every page source (right-click > Vi
 
 ## Raw links
 
-`https://raw.githubusercontent.com/zeotein/zeotein-theme/<COMMIT>/site-audit/2026-11-19/bf-live-paste/<kit path>`
+`https://raw.githubusercontent.com/zeotein/zeotein-theme/ab932f284e2d99e91c7d9387c4df9a02ef8006ee/site-audit/2026-11-19/bf-live-paste/<kit path>`
 
 `<kit path>` is the theme path, except:
 - BF19: `merged/snippets/zt-buybox-tidy.liquid`;
 - BF21: `merged/sections/header-group.json`;
 - D1: `dated/snippets/zt-bf-blend-price.liquid`.
 
-For example: `https://raw.githubusercontent.com/zeotein/zeotein-theme/<COMMIT>/site-audit/2026-11-19/bf-live-paste/snippets/zt-bf-bb-extras.liquid`.
+For example: `https://raw.githubusercontent.com/zeotein/zeotein-theme/ab932f284e2d99e91c7d9387c4df9a02ef8006ee/site-audit/2026-11-19/bf-live-paste/snippets/zt-bf-bb-extras.liquid`.
 
-`<COMMIT>` is filled in after the push. If a raw link shows 404, open the same path on github.com (`https://github.com/zeotein/zeotein-theme/blob/<COMMIT>/site-audit/2026-11-19/bf-live-paste/<kit path>`) and click **Raw**.
+`ab932f284e2d99e91c7d9387c4df9a02ef8006ee` is filled in after the push. If a raw link shows 404, open the same path on github.com (`https://github.com/zeotein/zeotein-theme/blob/ab932f284e2d99e91c7d9387c4df9a02ef8006ee/site-audit/2026-11-19/bf-live-paste/<kit path>`) and click **Raw**.
 
 ## Prompt for Dana's Claude in Chrome session
 
@@ -313,9 +313,9 @@ RULES (follow all of them):
 8. Do groups 1, 2 and 3 in order. Do D1 only when its conditions below are met. Never do H1 to H3 unless Dana
    tells you in this chat to do the Stocking Stuffers page.
 
-THE KIT FILES. BASE = https://raw.githubusercontent.com/zeotein/zeotein-theme/<COMMIT>/site-audit/2026-11-19/bf-live-paste/
+THE KIT FILES. BASE = https://raw.githubusercontent.com/zeotein/zeotein-theme/ab932f284e2d99e91c7d9387c4df9a02ef8006ee/site-audit/2026-11-19/bf-live-paste/
 For each step, open BASE + kit path in a new tab. Check that it shows plain text. Press Ctrl+A, Ctrl+C.
-(If it shows 404, open https://github.com/zeotein/zeotein-theme/blob/<COMMIT>/site-audit/2026-11-19/bf-live-paste/ + kit path
+(If it shows 404, open https://github.com/zeotein/zeotein-theme/blob/ab932f284e2d99e91c7d9387c4df9a02ef8006ee/site-audit/2026-11-19/bf-live-paste/ + kit path
 and click Raw.) The kit path is the theme path, unless the step gives another one.
 
 HOW TO DO ONE STEP:
