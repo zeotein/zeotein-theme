@@ -1,0 +1,46 @@
+{%- comment -%}
+  Homepage FAQ (theme block). Since Nov 18 2026 the questions come from one source,
+  snippets/zt-faq-content.liquid (Jewels Roundtable section 07), with FAQPage JSON-LD that matches the
+  visible text exactly. Styles: assets/zt-faq.css.
+{%- endcomment -%}
+{% liquid
+  assign section_id = 'zt-faq-' | append: block.id
+  assign eyebrow = block.settings.eyebrow | default: 'QUESTIONS, ANSWERED'
+  assign heading = block.settings.heading | default: 'Good Questions. Straight Answers.'
+  assign intro = block.settings.intro | default: 'Everything you need to know before making Zeotein part of your routine.'
+  assign bottom_text = block.settings.bottom_text | default: 'Still have a question?'
+  assign bottom_link_text = block.settings.bottom_link_text | default: 'Contact Zeotein'
+%}
+{{ 'zt-faq.css' | asset_url | stylesheet_tag }}
+<section id="{{ section_id }}" class="zt-faq" aria-labelledby="{{ section_id }}-heading" {{ block.shopify_attributes }}>
+  <div class="zt-faq__container">
+    <div class="zt-faq__header">
+      <div class="zt-faq__eyebrow">{{ eyebrow }}</div>
+      <h2 id="{{ section_id }}-heading" class="zt-faq__heading">{{ heading }}</h2>
+      <p class="zt-faq__intro">{{ intro }}</p>
+    </div>
+    <div class="zt-faq__list">
+      {%- render 'zt-faq-content', set: 'all', schema: true -%}
+    </div>
+    <div class="zt-faq__bottom">
+      <div class="zt-faq__bottom-text">{{ bottom_text }}</div>
+      <a href="mailto:hello@zeotein.com" class="zt-faq__bottom-link"><span>{{ bottom_link_text }}</span><span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zeotein FAQ",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "QUESTIONS, ANSWERED" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Good Questions. Straight Answers." },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Everything you need to know before making Zeotein part of your routine." },
+    { "type": "text", "id": "bottom_text", "label": "Bottom Text", "default": "Still have a question?" },
+    { "type": "text", "id": "bottom_link_text", "label": "Contact Link Text", "default": "Contact Zeotein" }
+  ],
+  "presets": [{ "name": "Zeotein FAQ" }]
+}
+{% endschema %}

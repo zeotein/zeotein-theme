@@ -1,0 +1,40 @@
+{%- comment -%}
+  Zeotein FAQ, one source for every page (Nov 18 2026, Jewels Roundtable section 07).
+  Used by blocks/faq.liquid (homepage), sections/zt-pdp-faq.liquid (protein blend product pages) and the FAQ under
+  sections/zt-blend-chooser.liquid (Protein Blends, Shop Cacao, Shop Vegan).
+  Renders the questions as <details> items and, with schema: true, the FAQPage JSON-LD built from the same strings,
+  so the schema always matches the visible text exactly.
+  set: 'all' (12) | 'cacao7' (no subscription question) | 'vegan' (no bone broth question) | 'vegan7'.
+  Each answer: the first sentence answers the question directly, then the detail. Paragraphs are separated by ##.
+  Questions are separated by | and answers by ^^, in the same order. Never use an em dash here.
+{%- endcomment -%}
+{%- capture zq -%}Does Zeotein Cacao taste like bone broth?|What does Zeotein taste like?|What is Zeotein?|What's the difference between Zeotein Cacao and Zeotein Vegan?|How do I mix Zeotein?|Can I drink Zeotein warm?|Can I pause, skip or change my subscription?|Is Zeotein gluten free and dairy free?|Is Zeotein sweetened?|What comes in the free Starter Kit?|Is there a guarantee?|How fast does Zeotein ship?{%- endcapture -%}
+{%- capture za -%}No, not even a little: Zeotein Cacao tastes like rich, unsweetened chocolate, not soup.##The grass-fed bone broth protein we use is flavorless, so the organic raw fermented cacao is what you taste. With zero sugar and zero artificial sweeteners, it reads more like dark chocolate than milk chocolate. Blend it with a banana or your favorite milk if you like it a little sweeter.^^Zeotein Cacao tastes like deep, unsweetened chocolate, and Zeotein Vegan has a mild, earthy taste from organic hemp and pumpkin seed protein.##Neither blend has added sugar, so you can drink them as they are, blend them with fruit, or stir them into coffee or warm milk. This is what clean tastes like.^^Zeotein is a protein shake made with a short, intentional ingredient list.##Zeotein Cacao has six ingredients and 23g of protein per serving from grass-fed bone broth protein and grass-fed collagen peptides. Zeotein Vegan has five ingredients and 20g of plant protein per serving from organic hemp and organic pumpkin seed. Every ingredient is named on the label.^^The difference is the protein source: Zeotein Cacao is made with grass-fed bone broth protein and grass-fed collagen peptides, and Zeotein Vegan is made with organic hemp and organic pumpkin seed protein.##Cacao gives you 23g of protein per serving with zero sugar. Vegan gives you 20g of plant protein per serving with zero added sugar. Cacao comes in a 30-serving bulk bag or stick packs, and Vegan comes in stick packs.^^Shake one serving (two scoops, or one stick pack) into 10 to 12 oz of water, milk or your favorite milk alternative.##A shaker gives the smoothest mix. You can also blend it into a smoothie or stir it into coffee or warm milk.^^Yes, you can drink Zeotein warm.##Stir one serving into warm milk or coffee for a cocoa-style drink. Whisk or froth it for the smoothest cup, and add a little honey or maple syrup if you like it sweeter.^^Yes, your subscription is flexible: skip, pause, swap or cancel anytime.##Choose delivery monthly, every 6 weeks or every 8 weeks, and change it whenever your routine changes. It takes a couple of taps.^^Yes, both Zeotein Cacao and Zeotein Vegan are gluten free and dairy free.##The MCT oil powder is made from coconut, so check the label if coconut is a concern for you.^^No, Zeotein is intentionally unsweetened: Zeotein Cacao has zero sugar and Zeotein Vegan has zero added sugar, with zero artificial sweeteners in both.##You decide how sweet it gets: a banana, a few dates or your favorite milk.^^The free Starter Kit comes with your first order of a 30-day Zeotein protein blend: subscribe to the 30-Day Bulk Bag and you get a CleanBlend shaker, a Save-A-Scoop and three digital guides, a $62.98 value.##The three guides are the Zeotein Starter Guide, the Cacao Recipe Guide and the Vegan Recipe Guide. Subscribe to 30-Day Stick Packs and you get the shaker and all three guides, a $55.99 value. A one-time bulk bag order includes the Save-A-Scoop and the three guides, a $46.99 value. One-time stick pack orders and the 7-Day packs include the three guides, a $40 value.^^Yes, every Zeotein protein blend comes with a 30-day money-back guarantee.##Give it a real try. If it isn't for you, email us within 30 days of delivery and we'll refund it. The guarantee covers one supply on your first order.^^Orders ship in 1 to 2 business days from our warehouse.##Standard U.S. delivery usually takes 2 to 5 business days after that, and shipping is free on orders of $130 or more.{%- endcapture -%}
+{%- liquid
+  assign zq = zq | split: '|'
+  assign za = za | split: '^^'
+  case set
+    when 'vegan'
+      assign zids = '2,3,4,5,6,7,8,9,10,11,12'
+    when 'vegan7'
+      assign zids = '2,3,4,5,6,8,9,10,11,12'
+    when 'cacao7'
+      assign zids = '1,2,3,4,5,6,8,9,10,11,12'
+    else
+      assign zids = '1,2,3,4,5,6,7,8,9,10,11,12'
+  endcase
+  assign zids = zids | split: ','
+-%}
+{%- for zid in zids -%}
+  {%- assign zi = zid | minus: 1 -%}
+  {%- assign zparts = za[zi] | split: '##' -%}
+  <details class="zt-faq__item">
+    <summary class="zt-faq__summary"><span class="zt-faq__question">{{ zq[zi] }}</span><span class="zt-faq__icon" aria-hidden="true">+</span></summary>
+    <div class="zt-faq__answer">{%- for zp in zparts -%}<p>{{ zp }}</p>{%- endfor -%}</div>
+  </details>
+{%- endfor -%}
+{%- if schema -%}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{%- for zid in zids -%}{%- assign zi = zid | minus: 1 -%}{%- assign zt = za[zi] | replace: '##', ' ' -%}{"@type":"Question","name":{{ zq[zi] | json }},"acceptedAnswer":{"@type":"Answer","text":{{ zt | json }}}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}
+</script>
+{%- endif -%}
