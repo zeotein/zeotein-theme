@@ -27,8 +27,9 @@ All four reasons: right save screen, save action reaches the Seal control (frequ
 
 1. Upload `src/zt-cancel-flow.js` and `src/zt-cancel-flow.css` to theme assets.
 2. In `layout/theme.liquid`, inside the existing `{%- if request.path contains '/a/subscriptions' -%}` block, add the stylesheet, `<script>window.ZT_CANCEL_FLOW={videoId:'YOUTUBE_ID'};</script>` and the script with `defer`.
-3. Stage on a copy of the live theme, log in to the portal as the test subscriber with `?preview_theme_id=`, run all four reasons, adjust the `cancelText` / `skipText` / `pauseText` patterns to Seal's real button labels if needed.
-4. Set the four reason labels in Seal (Settings, Customer portal, cancellation reasons) to the list above.
-5. Seal's cancellation confirmation text must not say the subscription can be restarted.
+3. Which theme (note from the website session, 19 Nov): live #188199928021 is about to be replaced by #188281815253 ("Live + FAQ, gifts and Difference page (Claude)", 23 approved changes). Do not copy #188199928021. If #188281815253 is live, copy it; if not, install into #188281815253 itself with themeFilesUpsert (its workspace holds another session's pending edit, so no theme_commit). Also install into the Black Friday theme #187825914069, which goes live 27 Nov 12:00 AM CT, or the flow disappears that day.
+4. Stage it, log in to the portal as the test subscriber with `?preview_theme_id=`, run all four reasons, adjust the `cancelText` / `skipText` / `pauseText` patterns to Seal's real button labels if needed.
+5. Set the four reason labels in Seal (Settings, Customer portal, cancellation reasons) to the list above.
+6. Seal's cancellation confirmation text must not say the subscription can be restarted.
 
 Video: unlisted YouTube, embedded with `youtube-nocookie.com`, `autoplay=1&mute=1&playsinline=1&cc_load_policy=1`. Captions only show if the video has a caption track on YouTube. Set `videoMode:'thumbnail'` for the big-thumbnail fallback.
