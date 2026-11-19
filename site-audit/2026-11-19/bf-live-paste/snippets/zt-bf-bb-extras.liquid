@@ -1,0 +1,141 @@
+<style>
+.zt-bb2__sheet .zt-bb2__nf-chips span {
+display: inline-block;
+background: #f1eaf8;
+color: #5a0d91;
+font-weight: 800;
+border: 0;
+border-radius: 999px;
+padding: 6px 12px;
+}
+.zt-bb2__sheet .zt-bb2__nf-tags span {
+display: inline-block;
+background: #fff;
+color: #5a0d91;
+font-weight: 800;
+border: 2px solid #d6c5e8;
+border-radius: 999px;
+padding: 6px 12px;
+}
+#{{ sid }} .zt-bb2__trust-icon--shield {
+display: grid;
+place-items: center;
+box-sizing: border-box;
+width: 26px;
+height: 26px;
+margin: 3px 0;
+padding: 0;
+border: 0;
+border-radius: 8px;
+background: #E7F6ED;
+color: #1F8A4C;
+box-shadow: none;
+}
+#{{ sid }} .zt-bb2__trust-icon--shield svg {
+display: block;
+width: 15px;
+height: 15px;
+}
+#{{ sid }} .zt-bf__bagprice {
+display: block;
+margin-top: 3px;
+font-size: 14px;
+font-weight: 800;
+letter-spacing: -0.02em;
+color: #171320;
+font-variant-numeric: tabular-nums;
+}
+#{{ sid }} .zt-bb2__bag.is-active .zt-bf__bagprice { color: var(--zt-bb2-primary, #580d93); }
+#{{ sid }} .zt-bf__deadline {
+margin: 8px 0 0;
+padding: 8px 10px;
+border: 1px dashed #d9a94e;
+border-radius: 8px;
+background: #fdf3e2;
+color: #8a5a06;
+font-size: 12.5px;
+font-weight: 800;
+text-align: center;
+line-height: 1.35;
+}
+#{{ sid }} .zt-bb2__banner {
+background: #000000;
+color: #ffffff;
+font-weight: 800;
+letter-spacing: 0.06em;
+text-transform: uppercase;
+}
+#{{ sid }} .zt-bb2__plan.is-active .zt-bb2__price {
+display: inline-block;
+background: #000000;
+color: #ffffff;
+padding: 4px 10px 3px;
+border-radius: 4px;
+font-weight: 800;
+}
+#{{ sid }} .zt-bb2__price-row {
+display: flex;
+flex-wrap: wrap;
+align-items: baseline;
+justify-content: flex-end;
+gap: 8px;
+}
+#{{ sid }} .zt-bb2__was {
+margin: 0;
+font-size: 13px;
+font-weight: 600;
+color: #6b6578;
+text-decoration: line-through;
+text-decoration-thickness: 1.5px;
+}
+#{{ sid }} .zt-bb2__save-label {
+margin: 4px 0 0;
+font-size: 12.5px;
+font-weight: 800;
+color: #580d93;
+letter-spacing: -0.01em;
+line-height: 1.2;
+text-align: right;
+}
+#{{ sid }} .zt-bb2__plan.is-active .zt-bb2__save-label { color: #580d93; }
+</style>
+
+<script>
+(function () {
+var root = document.getElementById({{ sid | json }});
+if (!root || root.dataset.ztBfBound === '1') return;
+root.dataset.ztBfBound = '1';
+var SUB = ['$68.99', '$133.98', '$195.99'];
+var SUB_WAS = ['$172.97', '$282.96', '$392.95'];
+var ONCE_NOW = ['$76.99', '$153.98', '$224.99'];
+var ONCE_WAS = ['$109.99', '$219.98', '$329.97'];
+var ONCE_SAVE = ['Save 30%', 'Save 30%', 'Save 31%'];
+function paint() {
+var once = root.classList.contains('is-once');
+var list = once ? ONCE_NOW : SUB;
+root.querySelectorAll('[data-zt-bf-bagprice]').forEach(function (el) {
+var i = parseInt(el.getAttribute('data-zt-bf-bagprice'), 10) || 0;
+if (list[i]) el.textContent = list[i];
+});
+var bags = root.querySelectorAll('[data-zt-bb-bag]');
+var bi = 0;
+bags.forEach(function (b, j) { if (b.classList.contains('is-active')) bi = j; });
+var pct = root.querySelector('[data-zt-bf-once-pct]');
+if (pct && ONCE_SAVE[bi]) pct.textContent = ONCE_SAVE[bi];
+var oncePrice = root.querySelector('[data-zt-bf-once-price]');
+if (oncePrice && ONCE_NOW[bi]) oncePrice.textContent = ONCE_NOW[bi];
+var onceWas = root.querySelector('[data-zt-bf-once-was]');
+if (onceWas && ONCE_WAS[bi]) onceWas.textContent = ONCE_WAS[bi];
+var subWas = root.querySelector('[data-zt-bf-sub-was]');
+if (subWas && SUB_WAS[bi]) subWas.textContent = SUB_WAS[bi];
+var subSave = root.querySelector('[data-zt-bf-sub-save]');
+if (subSave) subSave.style.display = (bi === 0) ? '' : 'none';
+}
+root.addEventListener('click', function (e) {
+if (!(e.target instanceof Element)) return;
+if (!e.target.closest('[data-zt-bb-plan], [data-zt-bb-bag]')) return;
+requestAnimationFrame(paint);
+});
+paint();
+})();
+</script>

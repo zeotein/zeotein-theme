@@ -1,0 +1,203 @@
+<div class="zt-bb2__panel" aria-label="Purchase options">
+{%- liquid
+assign zt_jm_rating = shop.metafields.judgeme.all_reviews_rating.value | plus: 0
+assign zt_jm_count = shop.metafields.judgeme.all_reviews_count.value | plus: 0
+assign zt_jm_tenths = zt_jm_rating | times: 10 | floor
+assign zt_jm_whole = zt_jm_tenths | divided_by: 10
+assign zt_jm_frac = zt_jm_tenths | modulo: 10
+assign zt_jm_label = zt_jm_whole | append: '.' | append: zt_jm_frac
+-%}
+<a class="zt-bb2__rating" href="#zt-cacao-reviews">
+<span class="zt-bb2__stars" aria-hidden="true">★★★★★</span>
+{%- if zt_jm_count > 0 and zt_jm_tenths > 0 -%}
+4.9 stars · Verified reviews
+{%- else -%}
+Reviews
+{%- endif -%}
+</a>
+
+<h2 class="zt-bb2__title">{{ section.settings.title | default: 'Zeotein Cacao
+30-Day Bulk Bag' | escape | newline_to_br }}</h2>
+<p class="zt-bb2__subtitle">{{ section.settings.subtitle | escape }}</p>
+
+<ul class="zt-bb2__bullets">
+{%- if section.settings.bullet_1 != blank -%}
+<li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ section.settings.bullet_1 | escape }}</li>
+{%- endif -%}
+{%- if section.settings.bullet_2 != blank -%}
+<li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ section.settings.bullet_2 | escape }}</li>
+{%- endif -%}
+{%- if section.settings.bullet_3 != blank -%}
+<li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ section.settings.bullet_3 | escape }}</li>
+{%- endif -%}
+{%- if section.settings.bullet_4 != blank -%}
+<li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ section.settings.bullet_4 | escape }}</li>
+{%- endif -%}
+</ul>
+
+<hr class="zt-bb2__rule">
+
+<div class="zt-bb2__bags-head">
+<h3 class="zt-bb2__label">{{ section.settings.bags_heading | escape }}</h3>
+<span class="zt-bb2__save-pill">
+{%- if section.settings.bags_badge_icon != blank -%}
+{{
+section.settings.bags_badge_icon
+| image_url: width: 64
+| image_tag: class: 'zt-bb2__inline-icon', alt: '', widths: '32, 64', sizes: '14px'
+}}
+{%- else -%}
+<svg viewBox="0 0 24 24" width="12" height="12" fill="none" aria-hidden="true"><path d="M4 12h8M8 8l-4 4 4 4M20 7l-6 10h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{%- endif -%}
+{{ section.settings.bags_badge | escape }}
+</span>
+</div>
+
+<div class="zt-bb2__bags" role="group" aria-label="Bag quantity">
+<button type="button" class="zt-bb2__bag is-active" data-zt-bb-bag aria-pressed="true">1 Bag<span class="zt-bb2__bag-days"> · 30 days</span><span class="zt-bf__bagprice" data-zt-bf-bagprice="0">$68.99</span></button>
+<button type="button" class="zt-bb2__bag" data-zt-bb-bag aria-pressed="false">2 Bags<span class="zt-bb2__bag-days"> · 60 days</span><span class="zt-bf__bagprice" data-zt-bf-bagprice="1">$133.98</span></button>
+<button type="button" class="zt-bb2__bag" data-zt-bb-bag aria-pressed="false">3 Bags<span class="zt-bb2__bag-days"> · 90 days</span><span class="zt-bf__bagprice" data-zt-bf-bagprice="2">$195.99</span></button>
+</div>
+
+<h3 class="zt-bb2__plans-head" id="zt-bb2-offer">{{ section.settings.plans_heading | escape }}</h3>
+<div class="zt-bb2__plans">
+<button type="button" class="zt-bb2__plan is-active" data-zt-bb-plan="sub" aria-pressed="true">
+<div class="zt-bb2__banner" data-zt-bb-sub-banner>{{ section.settings.sub_banner | escape }}</div>
+<div class="zt-bb2__plan-body">
+<div class="zt-bb2__plan-top">
+<span class="zt-bb2__radio" aria-hidden="true"></span>
+<div class="zt-bb2__plan-copy">
+<p class="zt-bb2__plan-title">{{ section.settings.sub_title | escape }}</p>
+<p class="zt-bb2__plan-meta" data-zt-bb-sub-meta>1 bag every 30 days - $2.30 per serving</p>
+</div>
+<div class="zt-bb2__prices">
+<div class="zt-bb2__price-row">
+<s class="zt-bb2__was" data-zt-bf-sub-was>$172.97</s>
+<p class="zt-bb2__price" data-zt-bb-sub-price>$68.99</p>
+</div>
+<p class="zt-bb2__renew" data-zt-bb-sub-renew>renews at $99.99</p>
+<p class="zt-bb2__save-label" data-zt-bf-sub-save>60% off your Starter Kit</p>
+</div>
+</div>
+<ul class="zt-bb2__perks">
+<li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>{{ section.settings.perk_1 | escape }}</li>
+{%- if section.settings.perk_2 != blank -%}<li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>{{ section.settings.perk_2 | escape }}</li>{%- endif -%}
+</ul>
+</div>
+</button>
+
+<button type="button" class="zt-bb2__plan zt-bb2__plan--once" data-zt-bb-plan="once" aria-pressed="false">
+<div class="zt-bb2__plan-top">
+<span class="zt-bb2__radio" aria-hidden="true"></span>
+<div class="zt-bb2__plan-copy">
+<p class="zt-bb2__plan-title">{{ section.settings.once_title | escape }}</p>
+<p class="zt-bb2__plan-meta" data-zt-bb-once-meta>1 bag delivered at once</p>
+</div>
+<div class="zt-bb2__prices">
+<div class="zt-bb2__price-row">
+<s class="zt-bb2__was" data-zt-bf-once-was>$109.99</s>
+<p class="zt-bb2__price" data-zt-bf-once-price>$76.99</p>
+</div>
+<p class="zt-bb2__save-label" data-zt-bf-once-pct>Save 30%</p>
+</div>
+</div>
+</button>
+</div>
+
+<div class="zt-bb2__gifts" data-zt-bb-kit>
+<span class="zt-bb2__gifts-badge">Gifts Unlocked</span>
+<div class="zt-bb2__gift-row">
+<div class="zt-bb2__gift" data-zt-bb-gift="shaker">
+<span class="zt-bb2__gift-icon" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none"><path d="M8 8h8l-1 12H9L8 8zM9 8c0-3 6-3 6 0" stroke="currentColor" stroke-width="1.6"/><path d="M10 12h4" stroke="currentColor" stroke-width="1.6"/></svg>
+<svg class="zt-bb2__lock" viewBox="0 0 24 24" fill="none"><rect x="6" y="11" width="12" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg>
+</span>
+<p class="zt-bb2__gift-name zt-bb2__gift-open">{{ section.settings.shaker_name | escape }}</p>
+<p class="zt-bb2__gift-note zt-bb2__gift-open">{{ section.settings.shaker_note | escape }}</p>
+<p class="zt-bb2__gift-name zt-bb2__gift-locked">Locked</p>
+<p class="zt-bb2__gift-note zt-bb2__gift-locked">Subscribe to unlock</p>
+</div>
+<span class="zt-bb2__plus" aria-hidden="true"><svg viewBox="0 0 12 12" width="12" height="12" fill="none"><path d="M6 1.5v9M1.5 6h9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+<div class="zt-bb2__gift">
+<span class="zt-bb2__gift-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 5h9l3 3v11H6zM15 5v3h3M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.6"/></svg></span>
+<p class="zt-bb2__gift-name">{{ section.settings.guides_name | escape }}</p>
+<p class="zt-bb2__gift-note">{{ section.settings.guides_note | escape }}</p>
+</div>
+<span class="zt-bb2__plus" aria-hidden="true"><svg viewBox="0 0 12 12" width="12" height="12" fill="none"><path d="M6 1.5v9M1.5 6h9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+<div class="zt-bb2__gift">
+<span class="zt-bb2__gift-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 8h16v10H4zM8 8V6h8v2M12 12v4" stroke="currentColor" stroke-width="1.6"/></svg></span>
+<p class="zt-bb2__gift-name">{{ section.settings.scoop_name | escape }}</p>
+<p class="zt-bb2__gift-note">{{ section.settings.scoop_note | escape }}</p>
+</div>
+</div>
+</div>
+
+<button type="button" class="zt-bb2__cta" data-zt-bb-cta>
+<svg class="zt-bb2__cta-check" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+<span data-zt-bb-cta-label>{{ section.settings.cta_sub | escape }}</span>
+</button>
+<p class="zt-bb2__plan-note" data-zt-bb-plan-note>Renews at $99.99 every 30 days. Cancel anytime.</p>
+<p class="zt-bf__deadline">{{ section.settings.deadline_text | default: 'Ends Monday Nov 30 at 11:59pm CT' | escape }}</p>
+<p class="zt-bb2__intro zt-bb2__sub-only">
+{%- if section.settings.intro_icon != blank -%}
+{{
+section.settings.intro_icon
+| image_url: width: 64
+| image_tag: class: 'zt-bb2__inline-icon', alt: '', widths: '32, 64', sizes: '14px'
+}}
+{%- else -%}
+<svg viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden="true"><path d="M4 12h8M8 8l-4 4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+{%- endif -%}
+{{ section.settings.intro_note | escape }}
+</p>
+<p class="zt-bb2__limit zt-bb2__sub-only"><strong>{{ section.settings.limit_lead | escape }}</strong> {{ section.settings.limit_rest | escape }}</p>
+<p class="zt-bb2__status" data-zt-bb-status role="status" aria-live="polite"></p>
+
+<div class="zt-bb2__trust">
+<div class="zt-bb2__trust-item"><span class="zt-bb2__trust-icon zt-bb2__trust-icon--shield" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.4 5.8v5.6c0 4.6 3.1 8.4 7.6 10 4.5-1.6 7.6-5.4 7.6-10V5.8Z"/><path d="m8.7 11.9 2.3 2.3 4.3-4.6"/></svg></span><span>{{ section.settings.trust_1 | escape | newline_to_br }}</span></div>
+<div class="zt-bb2__trust-item"><span class="zt-bb2__trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M3 15h11V7H3zM14 11h4l3 4v4h-7M7 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM17 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" stroke="currentColor" stroke-width="1.6"/></svg></span><span>{{ section.settings.trust_2 | escape | newline_to_br }}</span></div>
+<div class="zt-bb2__trust-item"><span class="zt-bb2__trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"><rect x="6" y="11" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.6"/></svg></span><span>{{ section.settings.trust_3 | escape | newline_to_br }}</span></div>
+</div>
+
+<div id="{{ details_id }}" class="zt-bb2__faq" data-zt-bb-faq>
+{%- for block in section.blocks -%}
+{%- if block.type == 'faq' and block.settings.title != blank -%}
+<details class="zt-bb2__faq-item" {{ block.shopify_attributes }}>
+<summary>
+{{ block.settings.title | escape }}
+<svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+</summary>
+{%- liquid
+assign faq_body = block.settings.body | escape
+assign portal_url = 'https://zeotein.com/a/subscriptions/login'
+capture portal_link
+echo '<a href="https://zeotein.com/a/subscriptions/login" target="_blank" rel="noopener noreferrer">customer portal</a>'
+endcapture
+-%}
+<p>{{ faq_body | replace: portal_url, portal_link }}</p>
+</details>
+{%- endif -%}
+{%- endfor -%}
+</div>
+<div id="{{ reviews_id }}" class="zt-bb2__reviews"></div>
+
+<form class="zt-bb__form" data-zt-bb-form hidden>
+<input type="hidden" name="id" data-zt-bb-variant value="{{ variant_id }}">
+<input type="hidden" name="quantity" data-zt-bb-qty value="1">
+<input type="hidden" name="selling_plan" data-zt-bb-selling-plan value="">
+</form>
+</div>
+<script>
+  /* BF v4 (Nov 15): BF page wording. The shared buy-box script writes "then $X ...";
+     on this page it reads "renews at $X ..." instead. Shared asset untouched. */
+  (function () {
+    document.querySelectorAll('[data-zt-bb-sub-renew]').forEach(function (el) {
+      var fix = function () {
+        var t = el.textContent;
+        if (/^then /i.test(t)) el.textContent = t.replace(/^then /i, 'renews at ');
+      };
+      fix();
+      new MutationObserver(fix).observe(el, { childList: true, characterData: true, subtree: true });
+    });
+  })();
+</script>

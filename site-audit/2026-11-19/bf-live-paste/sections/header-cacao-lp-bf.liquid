@@ -1,0 +1,358 @@
+{%- comment -%}
+  BF LP locked header — logo (BF page only) + cart. No menu.
+  Used only via layout/theme.cacao-lp.liquid → header-group-cacao-lp.
+  Does not change the store-wide header-group.
+{%- endcomment -%}
+
+{%- liquid
+  assign logo = section.settings.logo
+  if logo == blank
+    assign logo = settings.logo
+  endif
+  assign logo_height = section.settings.logo_height | default: 40
+  assign logo_width = logo_height
+  if logo != blank and logo.aspect_ratio != blank
+    assign logo_width = logo_height | times: logo.aspect_ratio | round
+  endif
+  assign pad_y = section.settings.padding_y | default: 22
+-%}
+
+<style>
+  #zt-lp-header-{{ section.id }} {
+    --zt-lp-header-bg: {{ section.settings.bg_color | default: '#f2eee4' }};
+    --zt-lp-header-text: {{ section.settings.text_color | default: '#1e1734' }};
+    --zt-lp-header-pad-y: {{ pad_y }}px;
+    --zt-lp-logo-height: {{ logo_height }}px;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    width: 100%;
+    background: var(--zt-lp-header-bg, #f2eee4);
+    color: var(--zt-lp-header-text, #1e1734);
+    border-bottom: 1px solid rgba(30, 23, 52, 0.08);
+    padding-block: var(--zt-lp-header-pad-y, 22px);
+    box-sizing: border-box;
+  }
+
+  #zt-lp-header-{{ section.id }} .zt-lp-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: min(1240px, calc(100% - 40px));
+    margin: 0 auto;
+  }
+
+  #zt-lp-header-{{ section.id }} .zt-lp-header__logo {
+    display: inline-flex;
+    align-items: center;
+    max-width: min(200px, 55vw);
+    text-decoration: none;
+    color: inherit;
+    line-height: 0;
+  }
+
+  #zt-lp-header-{{ section.id }} .zt-lp-header__logo-img {
+    display: block;
+    width: auto;
+    height: var(--zt-lp-logo-height, 40px);
+    max-width: 100%;
+    object-fit: contain;
+    /* Knock out white logo backgrounds on the cream header */
+    mix-blend-mode: multiply;
+  }
+
+  #zt-lp-header-{{ section.id }} .zt-lp-header__logo-text {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  #zt-lp-header-{{ section.id }} .zt-lp-header__cart {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 4px;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-decoration: none;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  #zt-lp-header-{{ section.id }} .zt-lp-header__cart:hover {
+    opacity: 0.82;
+  }
+
+  #zt-lp-header-{{ section.id }} .zt-lp-header__cart-icon {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    color: inherit;
+  }
+
+  #zt-lp-header-{{ section.id }} .zt-lp-header__cart-icon .zt-header-icon,
+  #zt-lp-header-{{ section.id }} .zt-lp-header__cart-icon svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+  }
+
+  #zt-lp-header-{{ section.id }} .zt-lp-header__cart-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: #580d93;
+    color: #fcfcfc;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  #zt-lp-header-{{ section.id }} .zt-lp-header__cart-count--empty {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    #zt-lp-header-{{ section.id }} .zt-lp-header__cart-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+
+    #zt-lp-header-{{ section.id }} .zt-lp-header__inner {
+      width: min(1240px, calc(100% - 28px));
+    }
+  }
+</style>
+
+<header id="zt-lp-header-{{ section.id }}" class="zt-lp-header" data-zt-lp-header>
+  <div class="zt-lp-header__inner">
+    <a class="zt-lp-header__logo" href="/products/30-day-cacao-bulk-bag-black-friday" aria-label="{{ shop.name | escape }} Black Friday offer">
+      {%- if logo != blank -%}
+        {{
+          logo
+          | image_url: width: 600
+          | image_tag:
+            class: 'zt-lp-header__logo-img',
+            widths: '120, 180, 240, 360, 480, 600',
+            sizes: '(max-width: 749px) 140px, 180px',
+            height: logo_height,
+            width: logo_width,
+            alt: shop.name,
+            loading: 'eager'
+        }}
+      {%- else -%}
+        <span class="zt-lp-header__logo-text">{{ shop.name | escape }}</span>
+      {%- endif -%}
+    </a>
+
+    {%- comment -%}
+      Do NOT use id="cart-icon-bubble". Always a button on this LP — never link
+      to /cart, regardless of theme cart_type (live default is often "page").
+    {%- endcomment -%}
+    <button
+      type="button"
+      class="zt-lp-header__cart"
+      id="zt-lp-cart-link"
+      data-zt-lp-cart
+      data-zt-lp-cart-drawer
+      aria-haspopup="dialog"
+      aria-controls="CartDrawer"
+      aria-expanded="false"
+      aria-label="Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}"
+    >
+      <span class="zt-lp-header__cart-icon" aria-hidden="true">
+        {% render 'zt-header-icon', name: 'cart' %}
+      </span>
+      <span class="zt-lp-header__cart-label">Cart</span>
+      <span
+        class="zt-lp-header__cart-count{% if cart.item_count == 0 %} zt-lp-header__cart-count--empty{% endif %}"
+        data-zt-lp-cart-count
+      >
+        {{ cart.item_count }}
+      </span>
+    </button>
+  </div>
+</header>
+
+<script>
+  (function () {
+    if (window.__ztLpCartHeader) return;
+    window.__ztLpCartHeader = true;
+
+    function setCount(count) {
+      var n = typeof count === 'number' ? count : 0;
+      document.querySelectorAll('[data-zt-lp-cart-count]').forEach(function (el) {
+        el.textContent = String(n);
+        el.classList.toggle('zt-lp-header__cart-count--empty', n === 0);
+      });
+      document.querySelectorAll('[data-zt-lp-cart]').forEach(function (el) {
+        el.setAttribute('aria-label', n > 0 ? 'Cart (' + n + ')' : 'Cart');
+      });
+    }
+
+    function getDrawer() {
+      return document.querySelector('cart-drawer');
+    }
+
+    function openDrawer(opener) {
+      var drawer = getDrawer();
+      if (drawer && typeof drawer.open === 'function') {
+        try {
+          drawer.open(opener || undefined);
+          return true;
+        } catch (e) {}
+      }
+      return false;
+    }
+
+    function openDrawerWhenReady(opener) {
+      var ready = Promise.resolve();
+      if (window.customElements && customElements.whenDefined && !customElements.get('cart-drawer')) {
+        ready = customElements.whenDefined('cart-drawer');
+      }
+      return ready
+        .then(function () {
+          return openDrawer(opener);
+        })
+        .catch(function () {
+          return openDrawer(opener);
+        });
+    }
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target && e.target.closest && e.target.closest('[data-zt-lp-cart-drawer]');
+      if (!trigger) return;
+      e.preventDefault();
+      e.stopPropagation();
+      openDrawerWhenReady(trigger).then(function (ok) {
+        if (ok) return;
+        setTimeout(function () {
+          openDrawer(trigger);
+        }, 200);
+      });
+    });
+
+    function syncFromCartJs() {
+      fetch('/cart.js', { headers: { Accept: 'application/json' }, credentials: 'same-origin' })
+        .then(function (r) { return r.json(); })
+        .then(function (cart) {
+          if (cart && typeof cart.item_count === 'number') setCount(cart.item_count);
+        })
+        .catch(function () {});
+    }
+
+    document.addEventListener('cart:updated', function (e) {
+      var detail = e && e.detail;
+      var count =
+        (detail && detail.cart && detail.cart.item_count) ||
+        (detail && typeof detail.itemCount === 'number' ? detail.itemCount : null) ||
+        (detail && typeof detail.item_count === 'number' ? detail.item_count : null);
+      if (typeof count === 'number') setCount(count);
+      else syncFromCartJs();
+    });
+    document.addEventListener('cart:refresh', syncFromCartJs);
+
+    // Dawn cart.js / cacao-lp-cart-plans publish here — not cart:updated
+    function bindDawnPubSub() {
+      if (typeof subscribe !== 'function' || typeof PUB_SUB_EVENTS === 'undefined') return false;
+      if (!PUB_SUB_EVENTS.cartUpdate) return false;
+      subscribe(PUB_SUB_EVENTS.cartUpdate, function (event) {
+        var count = event && event.cartData && event.cartData.item_count;
+        if (typeof count === 'number') setCount(count);
+        else syncFromCartJs();
+      });
+      return true;
+    }
+    if (!bindDawnPubSub()) {
+      document.addEventListener('DOMContentLoaded', bindDawnPubSub);
+      window.addEventListener('load', bindDawnPubSub);
+    }
+
+    // Drawer empty class ↔ badge (covers last-item remove before pubsub paints)
+    var drawerHost = document.querySelector('cart-drawer');
+    if (drawerHost && typeof MutationObserver === 'function') {
+      var wasEmpty = drawerHost.classList.contains('is-empty');
+      new MutationObserver(function () {
+        var isEmpty = drawerHost.classList.contains('is-empty');
+        if (isEmpty === wasEmpty) return;
+        wasEmpty = isEmpty;
+        if (isEmpty) setCount(0);
+        else syncFromCartJs();
+      }).observe(drawerHost, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    // Keep badge honest when opening the drawer
+    document.addEventListener('click', function (e) {
+      if (e.target && e.target.closest && e.target.closest('[data-zt-lp-cart-drawer]')) {
+        syncFromCartJs();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Header Cacao LP BF",
+  "tag": "section",
+  "class": "section-header-cacao-lp",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Leave empty to use the theme logo (preferred — use a transparent PNG)."
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height",
+      "min": 28,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#f2eee4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text / icon",
+      "default": "#1e1734"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Vertical padding",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header Cacao LP"
+    }
+  ]
+}
+{% endschema %}

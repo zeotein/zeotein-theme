@@ -1,6 +1,6 @@
 # Live paste kit: FAQ, gifts and Difference page (19 Nov 2026)
 
-This folder has 20 files. They bring the finished FAQ, gift and Difference page work onto zeotein.com, plus the Vegan Black Friday price display (step 18, needed before Mon 24 Nov).
+This folder has 20 files. They bring the finished FAQ, gift and Difference page work onto zeotein.com, plus the Vegan Black Friday price display (step 18, needed before Tue 24 Nov).
 Since 19 Nov, Dana's rule is that edits go straight into the live theme, **"Zeotein live theme - edit this one directly"**,
 in Shopify's code editor, one file at a time, and no theme is ever published.
 Claude's Shopify connection can't write to the live theme, so a person or Dana's Claude in Chrome session does the pasting.
@@ -43,8 +43,8 @@ Built 19 Nov 2026, 14:35 UTC (8:35 AM CT), using only read-only Shopify GraphQL 
 | 15 | sections/zt-diff-flex.liquid | New | Delivery options and skip or pause panel | cb5c153a213af38feaf84d1a35dafefd |
 | 16 | sections/zt-diff-close.liquid | New | Closing band with the "Find Your Zeotein" button | 152d2b12645327a38ae5f9ab4d29f8ec |
 | 17 | templates/page.the-zeotein-difference.json | Replace | Switches the Difference page to the new sections (paste LAST) | 76ead86fd6456af3efa32dd582e4b763 |
-| **Group 5: Vegan Black Friday prices (before Mon 24 Nov, 12:00 AM CT)** | | | | |
-| 18 | snippets/zt-bf-blend-price.liquid | Replace | Changes one line: the Vegan 30 Black Friday price lines show $94.49, $183.99, $266.99 and $343.99, matching Cacao and the changed Shopify discounts | 7009330d7158f47abec4f746693f039b |
+| **Group 5: Vegan Black Friday prices (before Tue 24 Nov, 12:00 AM CT)** | | | | |
+| 18 | snippets/zt-bf-blend-price.liquid | Replace | Changes one line: the Vegan 30 Black Friday price lines show $94.49, $183.99, $266.99 and $343.99, matching Cacao and the changed Shopify discounts. **Skip it if the live file already has 238 lines:** that is step D1 of the Black Friday kit (`site-audit/2026-11-19/bf-live-paste/`), which has the same amounts and more | 7009330d7158f47abec4f746693f039b |
 
 Each group only uses files from its own group or an earlier one. Step 17 must come after steps 11 to 16, because Shopify refuses to save a template that names a section file that doesn't exist yet.
 
@@ -255,8 +255,12 @@ GROUP 4, DIFFERENCE PAGE (step 17 LAST)
 17 templates/page.the-zeotein-difference.json | REPLACE | 93
    CHECK: https://zeotein.com/pages/the-zeotein-difference starts with the purple "Intentional by design." banner
    and ends with the teal "Simple on purpose. Made to fit your life." band.
-GROUP 5, VEGAN BLACK FRIDAY PRICES (must be saved before Mon 24 Nov, 12:00 AM CT)
+GROUP 5, VEGAN BLACK FRIDAY PRICES (must be saved before Tue 24 Nov, 12:00 AM CT)
 18 snippets/zt-bf-blend-price.liquid | REPLACE | 71
+   BEFORE: the live file has 71 lines and line 34 reads   assign vegan_off = '4200,8999,14398,20397' | split: ','
+   If it already has 238 lines, step D1 of the Black Friday kit (site-audit/2026-11-19/bf-live-paste/) is in and
+   already carries the new amounts: SKIP step 18, do not paste, and tell Dana. Pasting step 18 over D1 would remove
+   the Black Friday price lines on product pages and cards.
    It changes one line: vegan_off = '4050,8599,13798,19597' (was '4200,8999,14398,20397').
    CHECK: open https://zeotein.com/products/zeotein-vegan-sticks-30, right-click > View page source, search "94.49".
    The hidden Black Friday table must list $94.49, $183.99, $266.99 and $343.99.

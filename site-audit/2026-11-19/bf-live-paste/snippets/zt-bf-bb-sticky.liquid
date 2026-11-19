@@ -1,0 +1,66 @@
+<script>
+(function () {
+function updateZtBb2Sticky() {
+var nodes = document.querySelectorAll(
+'.essential_free_shipping_bar_wrapper, .header-section, .shopify-section-header'
+);
+var offset = 0;
+nodes.forEach(function (el) {
+var style = window.getComputedStyle(el);
+if (style.position !== 'sticky' && style.position !== 'fixed') return;
+var rect = el.getBoundingClientRect();
+if (rect.height < 1 || rect.top > 180) return;
+offset = Math.max(offset, rect.bottom);
+});
+if (!offset) offset = 115;
+document.querySelectorAll('.zt-bb2__gallery').forEach(function (gallery) {
+gallery.style.setProperty('--zt-bb2-sticky-top', Math.ceil(offset + 16) + 'px');
+});
+}
+function sizeZtBb2Thumbs() {
+document.querySelectorAll('.zt-bb2__stage').forEach(function (stage) {
+var main = stage.querySelector('.zt-bb2__main');
+var thumbs = stage.querySelector('.zt-bb2__thumbs');
+var gallery = stage.closest('.zt-bb2__gallery');
+if (!main || !thumbs) return;
+var gap = 8;
+var desktop = window.matchMedia('(min-width: 640px)').matches;
+var size;
+if (desktop) {
+var height = main.getBoundingClientRect().height;
+if (height < 40) return;
+size = (height - gap * 5) / 6;
+thumbs.style.setProperty('--zt-bb2-main-h', height + 'px');
+} else {
+var width = stage.getBoundingClientRect().width;
+if (width < 40) return;
+size = (width - gap * 5) / 6;
+thumbs.style.removeProperty('--zt-bb2-main-h');
+}
+var px = Math.max(36, size) + 'px';
+thumbs.style.setProperty('--zt-bb2-thumb', px);
+if (gallery) gallery.style.setProperty('--zt-bb2-thumb', px);
+});
+}
+function updateZtBb2Gallery() {
+updateZtBb2Sticky();
+sizeZtBb2Thumbs();
+}
+function bindZtBb2Gallery() {
+updateZtBb2Gallery();
+if (!window.ResizeObserver) return;
+document.querySelectorAll('.zt-bb2__main').forEach(function (main) {
+if (main.dataset.ztBb2Observed === 'true') return;
+main.dataset.ztBb2Observed = 'true';
+new ResizeObserver(sizeZtBb2Thumbs).observe(main);
+});
+}
+bindZtBb2Gallery();
+window.addEventListener('resize', updateZtBb2Gallery);
+window.addEventListener('load', bindZtBb2Gallery);
+document.addEventListener('shopify:section:load', bindZtBb2Gallery);
+if (document.readyState === 'loading') {
+document.addEventListener('DOMContentLoaded', bindZtBb2Gallery);
+}
+})();
+</script>

@@ -1,0 +1,1870 @@
+{%- liquid
+  assign sid = 'hbclp-' | append: section.id
+  assign preheadline = section.settings.preheadline
+  assign heading = section.settings.heading
+  assign heading_accent = section.settings.heading_accent
+  assign heading_after = section.settings.heading_after
+  assign subtext = section.settings.subtext
+  assign rating_score = section.settings.rating_score
+  assign rating_label = section.settings.rating_label
+  assign cta_line_1 = section.settings.cta_line_1
+  assign cta_line_2 = section.settings.cta_line_2
+  assign cta_link = section.settings.cta_link
+  assign renew_text = section.settings.renew_text
+  assign formula_label = section.settings.formula_label
+  assign formula_text = section.settings.formula_text
+  assign kit_items = section.settings.kit_items | strip
+  assign show_kit = false
+  if kit_items != blank
+    assign show_kit = true
+  endif
+  assign badge_text = 'WE LOWERED PRICE'
+  assign show_badge = section.settings.show_badge
+  assign badge_offset_x = 12
+  assign badge_offset_y = 12
+  assign badge_size = 116
+  assign formula_border = 1
+
+  comment
+    Store-wide Judge.me aggregate, read live from shop metafields.
+  endcomment
+  assign zt_jm_r = shop.metafields.judgeme.all_reviews_rating
+  if zt_jm_r.value != blank
+    assign zt_jm_r = zt_jm_r.value
+  endif
+  assign zt_jm_c = shop.metafields.judgeme.all_reviews_count
+  if zt_jm_c.value != blank
+    assign zt_jm_c = zt_jm_c.value
+  endif
+  assign zt_jm_rating = zt_jm_r | plus: 0 | times: 10 | floor | divided_by: 10.0
+  assign zt_jm_count = zt_jm_c | plus: 0
+  assign zt_jm_rating_label = zt_jm_rating | append: ''
+  unless zt_jm_rating_label contains '.'
+    assign zt_jm_rating_label = zt_jm_rating_label | append: '.0'
+  endunless
+  assign zt_jm_live = false
+  if zt_jm_count > 0 and zt_jm_rating > 0
+    assign zt_jm_live = true
+  endif
+
+  assign zt_kit_bag = all_products['zeotein-cacao-bag-30-landing-page']
+  assign zt_kit_shaker = all_products['lp-gift-cleanblend-shaker']
+  assign zt_kit_scoop = all_products['lp-gift-save-a-scoop']
+  assign zt_kit_starter = all_products['lp-gift-starter-guide']
+  assign zt_kit_cacao = all_products['lp-gift-cacao-recipe-guide']
+  assign zt_kit_vegan = all_products['lp-gift-vegan-recipe-guide']
+-%}
+
+{{ 'cacao-lp-overflow.css' | asset_url | stylesheet_tag }}
+{{ 'hbclp-reviews.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cacao-lp-scroll-offer.js' | asset_url }}" defer></script>
+<script src="{{ 'hbclp-reviews.js' | asset_url }}" defer></script>
+
+{% content_for 'block', type: 'cacao-type-hero', id: 'cacao-type' %}
+{% content_for 'block', type: 'cacao-type-hero-2', id: 'type-hero-2' %}
+
+<script>
+  (function () {
+    if (window.location.hash !== '#purchase') return;
+    var clean = window.location.pathname + window.location.search;
+    if (window.history.replaceState) window.history.replaceState(null, '', clean);
+    var toTop = function () { window.scrollTo(0, 0); };
+    toTop();
+    window.addEventListener('load', toTop, { once: true });
+  })();
+</script>
+
+<section
+  id="{{ sid }}"
+  class="hbclp"
+  style="
+    --hbclp-bg: {{ section.settings.bg_color }};
+    --hbclp-panel: {{ section.settings.panel_color }};
+    --hbclp-accent: {{ section.settings.accent_color }};
+    --hbclp-text: {{ section.settings.text_color }};
+    --hbclp-muted: {{ section.settings.text_color }};
+    --hbclp-star: {{ section.settings.star_color }};
+    --hbclp-preheadline: {{ section.settings.preheadline_color | default: '#1aa6a0' }};
+    --hbclp-cta: {{ section.settings.cta_bg_color }};
+    --hbclp-cta-text: {{ section.settings.cta_text_color }};
+    --hbclp-shadow: {{ section.settings.shadow_color }};
+    --hbclp-pad-top: {{ section.settings.padding_top }}px;
+    --hbclp-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --hbclp-badge-x: {{ badge_offset_x }}px;
+    --hbclp-badge-y: {{ badge_offset_y }}px;
+    --hbclp-badge-size: {{ badge_size }}px;
+    --hbclp-formula-border: {{ formula_border }}px;
+  "
+>
+  <p class="hbclp__promo">SAVE 55% ON YOUR FIRST ORDER</p>
+
+  <div class="hbclp__inner">
+    {%- comment -%} --- COPY COLUMN --- {%- endcomment -%}
+    <div class="hbclp__copy">
+      {%- if section.settings.show_rating -%}
+        <a class="hbclp__rating" href="#zt-cacao-reviews">
+          <div class="hbclp__avatars" aria-hidden="true">
+            {%- for i in (1..3) -%}
+              {%- assign avatar_key = 'avatar_' | append: i -%}
+              {%- assign avatar_image = section.settings[avatar_key] -%}
+              {%- if avatar_image != blank -%}
+                <span class="hbclp__avatar">
+                  {{
+                    avatar_image
+                    | image_url: width: 96
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '48, 96',
+                      sizes: '44px',
+                      alt: ''
+                  }}
+                </span>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          <div class="hbclp__rating-meta">
+            <div class="hbclp__rating-top">
+              <span class="hbclp__stars" aria-hidden="true">
+                {%- for i in (1..5) -%}
+                  <svg viewBox="0 0 20 20" width="16" height="16" focusable="false">
+                    <path fill="currentColor" d="M10 1.5l2.47 5.01 5.53.8-4 3.9.94 5.52L10 14.27 5.06 16.73 6 11.21l-4-3.9 5.53-.8L10 1.5z"/>
+                  </svg>
+                {%- endfor -%}
+              </span>
+              <strong class="hbclp__rating-score">
+                {%- if zt_jm_live -%}{{ zt_jm_rating_label }} stars{%- else -%}{{ rating_score | escape }}{%- endif -%}
+              </strong>
+            </div>
+            {%- if zt_jm_live -%}
+              <p class="hbclp__rating-label">{{ zt_jm_count }} Zeotein customer reviews</p>
+            {%- elsif rating_label != blank -%}
+              <p class="hbclp__rating-label">{{ rating_label | escape }}</p>
+            {%- endif -%}
+          </div>
+        </a>
+      {%- endif -%}
+
+      {%- if preheadline != blank -%}
+        <p class="hbclp__preheadline">{{ preheadline | escape }}</p>
+      {%- endif -%}
+
+      {%- if heading != blank or heading_accent != blank or heading_after != blank -%}
+        <h1 class="hbclp__heading">
+          {%- if heading != blank -%}
+            <span class="hbclp__heading-main">{{ heading | escape }}</span>
+          {%- endif -%}
+          {%- if heading_accent != blank -%}
+            <span class="hbclp__heading-accent">{{ heading_accent | escape }}</span>
+          {%- endif -%}
+          {%- if heading_after != blank -%}
+            <span class="hbclp__heading-main">{{ heading_after | escape }}</span>
+          {%- endif -%}
+        </h1>
+      {%- endif -%}
+
+      {%- if subtext != blank -%}
+        <p class="hbclp__subtext">{{ subtext | escape }}</p>
+      {%- endif -%}
+
+      {%- comment -%} 1a: plain stat row (replaces the pill chips) {%- endcomment -%}
+      <ul class="hbclp__stats">
+        <li class="hbclp__stat"><span class="hbclp__stat-num">23<span class="hbclp__stat-unit">g</span></span><span class="hbclp__stat-label">Protein</span></li>
+        <li class="hbclp__stat"><span class="hbclp__stat-num">14<span class="hbclp__stat-unit">g</span></span><span class="hbclp__stat-label">Collagen</span></li>
+        <li class="hbclp__stat"><span class="hbclp__stat-num">0<span class="hbclp__stat-unit">g</span></span><span class="hbclp__stat-label">Sugar</span></li>
+      </ul>
+
+      {%- unless show_kit -%}
+        {%- if section.settings.benefit_1 != blank or section.settings.benefit_2 != blank or section.settings.benefit_3 != blank -%}
+          <ul class="hbclp__benefits">
+            {%- for i in (1..3) -%}
+              {%- assign benefit_key = 'benefit_' | append: i -%}
+              {%- assign benefit_text = section.settings[benefit_key] -%}
+              {%- if benefit_text != blank -%}
+                <li class="hbclp__benefit">
+                  <span class="hbclp__check" aria-hidden="true">
+                    <svg viewBox="0 0 20 20" width="12" height="12" focusable="false">
+                      <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5l3.2 3.2 7.8-7.8"/>
+                    </svg>
+                  </span>
+                  <span>{{ benefit_text | escape }}</span>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      {%- endunless -%}
+
+      {%- comment -%} 1b: visual kit card {%- endcomment -%}
+      <div class="hbclp__kc">
+        <p class="hbclp__kc-head">EVERYTHING THAT ARRIVES IN YOUR FIRST ORDER</p>
+        <div class="hbclp__kc-bag">
+          <span class="hbclp__kc-bag-img">
+            {%- if zt_kit_bag.featured_media != blank -%}
+              {{ zt_kit_bag.featured_media | image_url: width: 300 | image_tag: loading: 'lazy', alt: '30-Day Cacao Bulk Bag of Zeotein Cacao protein' }}
+            {%- endif -%}
+          </span>
+          <span class="hbclp__kc-bag-txt">
+            <span class="hbclp__kc-bag-name">30-Day Cacao Bulk Bag</span>
+            <span class="hbclp__kc-bag-meta">30 servings · $109.99</span>
+          </span>
+        </div>
+        <ul class="hbclp__kc-grid">
+          <li class="hbclp__kc-tile">
+            <span class="hbclp__kc-free">FREE</span>
+            <span class="hbclp__kc-img">
+              {%- if zt_kit_shaker.featured_media != blank -%}
+                {{ zt_kit_shaker.featured_media | image_url: width: 200 | image_tag: loading: 'lazy', alt: 'Black Zeotein CleanBlend shaker bottle' }}
+              {%- endif -%}
+            </span>
+            <span class="hbclp__kc-name">CleanBlend Shaker</span>
+            <s class="hbclp__kc-was">$15.99</s>
+          </li>
+          <li class="hbclp__kc-tile">
+            <span class="hbclp__kc-free">FREE</span>
+            <span class="hbclp__kc-img">
+              {%- if zt_kit_scoop.featured_media != blank -%}
+                {{ zt_kit_scoop.featured_media | image_url: width: 200 | image_tag: loading: 'lazy', alt: 'Zeotein Save-A-Scoop scoop holder' }}
+              {%- endif -%}
+            </span>
+            <span class="hbclp__kc-name">Save-A-Scoop</span>
+            <s class="hbclp__kc-was">$6.99</s>
+          </li>
+          <li class="hbclp__kc-tile">
+            <span class="hbclp__kc-free">FREE</span>
+            <span class="hbclp__kc-img">
+              {%- if zt_kit_starter.featured_media != blank -%}
+                {{ zt_kit_starter.featured_media | image_url: width: 200 | image_tag: loading: 'lazy', alt: 'Zeotein Starter Guide cover' }}
+              {%- endif -%}
+            </span>
+            <span class="hbclp__kc-name">Starter Guide</span>
+            <s class="hbclp__kc-was">$12.00</s>
+          </li>
+          <li class="hbclp__kc-tile">
+            <span class="hbclp__kc-free">FREE</span>
+            <span class="hbclp__kc-img hbclp__kc-img--pair">
+              {%- if zt_kit_cacao.featured_media != blank -%}
+                {{ zt_kit_cacao.featured_media | image_url: width: 200 | image_tag: loading: 'lazy', alt: 'Cacao Recipe Guide cover' }}
+              {%- endif -%}
+              {%- if zt_kit_vegan.featured_media != blank -%}
+                {{ zt_kit_vegan.featured_media | image_url: width: 200 | image_tag: loading: 'lazy', alt: 'Vegan Recipe Guide cover' }}
+              {%- endif -%}
+            </span>
+            <span class="hbclp__kc-name">2 Recipe Guides</span>
+            <s class="hbclp__kc-was">$28.00</s>
+          </li>
+        </ul>
+        <div class="hbclp__kc-foot">
+          <p class="hbclp__kc-sep"><span>Bought separately</span><s class="hbclp__kc-sep-val">$172.97</s></p>
+          <p class="hbclp__kc-now">
+            <span class="hbclp__kc-price">$76.99</span>
+            <span class="hbclp__kc-note">your first order</span>
+            <span class="hbclp__kc-save">You save 55%</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="hbclp__actions hbclp__actions--offer">
+        {%- if cta_line_1 != blank -%}
+          <a
+            class="hbclp__cta hbclp__cta--single"
+            href="{{ cta_link | default: '#purchase' }}"
+          >
+            <span class="hbclp__cta-bottom">{{ cta_line_1 | escape }}</span>
+          </a>
+        {%- elsif cta_line_2 != blank -%}
+          <a
+            class="hbclp__cta hbclp__cta--single"
+            href="{{ cta_link | default: '#purchase' }}"
+          >
+            <span class="hbclp__cta-bottom">{{ cta_line_2 | escape }}</span>
+          </a>
+        {%- endif -%}
+
+        {%- comment -%} 1c: guarantee + shipping lines directly under the CTA {%- endcomment -%}
+        {%- if section.settings.show_guarantee -%}
+          <ul class="hbclp__assure">
+            <li class="hbclp__assure-row">
+              <span class="hbclp__assure-icon hbclp__assure-icon--shield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.4 5.8v5.6c0 4.6 3.1 8.4 7.6 10 4.5-1.6 7.6-5.4 7.6-10V5.8Z"/><path d="m8.7 11.9 2.3 2.3 4.3-4.6"/></svg></span>
+              <span class="hbclp__assure-text"><strong>30-day money-back guarantee.</strong> Love it or your money back.</span>
+            </li>
+            <li class="hbclp__assure-row">
+              <span class="hbclp__assure-icon hbclp__assure-icon--truck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.8 7.4h11v9.2h-11z"/><path d="M13.8 10.6h3.6l2.8 3v3h-6.4z"/><circle cx="7" cy="18.4" r="1.8"/><circle cx="16.4" cy="18.4" r="1.8"/></svg></span>
+              <span class="hbclp__assure-text">Ships in 1 to 2 business days. Pause, skip or cancel anytime.</span>
+            </li>
+          </ul>
+        {%- endif -%}
+
+        {%- if renew_text != blank -%}
+          <p class="hbclp__renew">{{ renew_text | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} --- MEDIA COLUMN --- {%- endcomment -%}
+    <div class="hbclp__media">
+      <div class="hbclp__panel{% if section.settings.panel_cover_image != blank %} hbclp__panel--cover{% endif %}">
+        {%- if section.settings.panel_cover_image != blank -%}
+          {{
+            section.settings.panel_cover_image
+            | image_url: width: 1600
+            | image_tag:
+              loading: 'eager',
+              fetchpriority: 'high',
+              widths: '600, 900, 1200, 1600',
+              sizes: '(max-width: 749px) 100vw, 50vw',
+              class: 'hbclp__panel-cover',
+              alt: ''
+          }}
+        {%- endif -%}
+        <div class="hbclp__products{% if section.settings.panel_cover_image != blank %} hbclp__products--covered{% endif %}">
+          <div class="hbclp__product-main">
+            {%- if show_badge -%}
+              <div class="hbclp__badge" aria-hidden="true">
+                {%- if section.settings.badge_image != blank -%}
+                  {{
+                    section.settings.badge_image
+                    | image_url: width: 240
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '120, 180, 240',
+                      sizes: '96px',
+                      class: 'hbclp__badge-img',
+                      alt: badge_text
+                  }}
+                {%- else -%}
+                  <div class="hbclp__badge-seal">
+                    <svg class="hbclp__badge-ring" viewBox="0 0 100 100" focusable="false">
+                      <circle cx="50" cy="50" r="48" fill="currentColor"/>
+                      <circle cx="50" cy="50" r="40" fill="none" stroke="#1c1630" stroke-width="1.5" opacity="0.25"/>
+                    </svg>
+                    <span class="hbclp__badge-copy">
+                      <span class="hbclp__badge-top">{{ badge_text | default: 'WE LOWERED PRICE' | escape }}</span>
+                      <span class="hbclp__badge-pct">%</span>
+                    </span>
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+            {%- if section.settings.product_image != blank -%}
+              {%- assign product_alt = section.settings.product_image.alt | default: heading -%}
+              {{
+                section.settings.product_image
+                | image_url: width: 1200
+                | image_tag:
+                  loading: 'eager',
+                  fetchpriority: 'high',
+                  widths: '400, 600, 800, 1000, 1200',
+                  sizes: '(max-width: 749px) 70vw, 44vw',
+                  class: 'hbclp__product-img hbclp__product-img--primary',
+                  alt: product_alt
+              }}
+            {%- else -%}
+              <div class="hbclp__product-placeholder">
+                {{ 'product-1' | placeholder_svg_tag: 'hbclp__placeholder-svg' }}
+              </div>
+            {%- endif -%}
+          </div>
+          {%- if section.settings.product_image_2 != blank -%}
+            {%- assign product_alt_2 = section.settings.product_image_2.alt | default: heading -%}
+            {{
+              section.settings.product_image_2
+              | image_url: width: 800
+              | image_tag:
+                loading: 'lazy',
+                widths: '240, 400, 600, 800',
+                sizes: '(max-width: 749px) 36vw, 18vw',
+                class: 'hbclp__product-img hbclp__product-img--secondary',
+                alt: product_alt_2
+            }}
+          {%- endif -%}
+        </div>
+
+        {%- if formula_label != blank or formula_text != blank -%}
+          <div class="hbclp__formula">
+            <div class="hbclp__formula-left">
+              {%- if section.settings.formula_icon != blank -%}
+                {{
+                  section.settings.formula_icon
+                  | image_url: width: 96
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '48, 96',
+                    sizes: '20px',
+                    class: 'hbclp__formula-icon-img',
+                    alt: ''
+                }}
+              {%- else -%}
+                <span class="hbclp__formula-shield" aria-hidden="true">
+                  <svg viewBox="0 0 36 40" width="20" height="22" focusable="false">
+                    <path fill="currentColor" d="M18 1.5L4 7v11.2c0 9.1 5.7 16.4 14 19.3 8.3-2.9 14-10.2 14-19.3V7L18 1.5z"/>
+                    <path fill="#fff" d="M15.1 21.8l-3.4-3.4-1.8 1.8 5.2 5.2 9-9-1.8-1.8z"/>
+                  </svg>
+                </span>
+              {%- endif -%}
+              {%- if formula_label != blank -%}
+                <span class="hbclp__formula-label">{{ formula_label | escape }}</span>
+              {%- endif -%}
+            </div>
+            {%- if formula_text != blank -%}
+              <div class="hbclp__formula-divider" aria-hidden="true"></div>
+              <div class="hbclp__formula-text">{{ formula_text | escape }}</div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="hbclp__blocks">
+    {% content_for 'blocks' %}
+  </div>
+</section>
+
+<style>
+  /* Hide orphaned Benefit/Avatar theme blocks that may still exist in the section JSON */
+  .hbclp__blocks .hbclp__benefit,
+  .hbclp__blocks .hbclp__avatar,
+  .hbclp__blocks .hbclp__benefits,
+  .hbclp__blocks .hbclp__check {
+    display: none !important;
+  }
+  .hbclp {
+    --hbclp-bg: #f2eee4;
+    --hbclp-panel: #580d93;
+    --hbclp-accent: #580d93;
+    --hbclp-teal: #4ec6be;
+    --hbclp-text: #1e1734;
+    --hbclp-muted: #1e1734;
+    --hbclp-star: #008159;
+    --hbclp-cta: #580d93;
+    --hbclp-cta-text: #fcfcfc;
+    --hbclp-shadow: #1e1734;
+    width: 100%;
+    background: var(--hbclp-bg);
+    color: var(--hbclp-text);
+    padding: 0 0 var(--hbclp-pad-bottom);
+    overflow: visible;
+    font-family: var(--zt-font, Manrope, Arial, sans-serif);
+  }
+
+  .hbclp *,
+  .hbclp *::before,
+  .hbclp *::after {
+    box-sizing: border-box;
+  }
+
+  /* Round 2: static 55% strip at the very top of the hero. The section's top padding moves below it. */
+  .hbclp .hbclp__promo {
+    display: block;
+    width: 100%;
+    margin: 0 0 var(--hbclp-pad-top, 40px);
+    padding: 8px 16px;
+    background: #5F2D90;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    line-height: 1.3;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .hbclp__blocks {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hbclp__blocks > *,
+  .hbclp__blocks .shopify-block {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .hbclp__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+    width: min(1240px, calc(100% - 64px));
+    margin: 0 auto;
+  }
+
+  .hbclp__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 560px;
+  }
+
+  .hbclp__rating {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    margin-bottom: 18px;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .hbclp__avatars {
+    display: flex;
+    align-items: center;
+  }
+
+  .hbclp__avatar {
+    display: block;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #f2eee4;
+    background: #ddd;
+    margin-left: -12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .hbclp__avatar:first-child {
+    margin-left: 0;
+  }
+
+  .hbclp__avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hbclp__rating-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .hbclp__rating-top {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .hbclp__stars {
+    display: inline-flex;
+    gap: 1px;
+    color: var(--hbclp-star);
+  }
+
+  .hbclp__rating-score {
+    font-family: var(--zt-rating_score-font, inherit);
+    font-size: var(--zt-rating_score-size, 14px);
+    font-weight: var(--zt-rating_score-weight, 800);
+    line-height: 1.3;
+    color: var(--hbclp-text);
+  }
+
+  .hbclp__rating-label {
+    margin: 0;
+    font-family: var(--zt-rating_label-font, inherit);
+    font-size: var(--zt-rating_label-size, 12px);
+    font-weight: var(--zt-rating_label-weight, 800);
+    line-height: 1.3;
+    color: var(--hbclp-text);
+  }
+
+  .hbclp__preheadline {
+    margin: 0 0 10px;
+    font-family: var(--zt-preheadline-font, inherit);
+    font-size: var(--zt-preheadline-size, 13px);
+    font-weight: var(--zt-preheadline-weight, 700);
+    letter-spacing: 0.06em;
+    line-height: 1.35;
+    text-transform: uppercase;
+    color: var(--hbclp-preheadline, #1aa6a0);
+  }
+
+  .hbclp__heading {
+    margin: 0 0 14px;
+    font-family: var(--zt-heading-font, inherit);
+    font-size: var(--zt-heading-size, 54px);
+    font-weight: var(--zt-heading-weight, 800);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: var(--hbclp-text);
+  }
+
+  .hbclp__heading-main {
+    display: inline;
+  }
+
+  .hbclp__heading-accent {
+    display: inline;
+    color: var(--hbclp-accent);
+  }
+
+  .hbclp__benefits {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .hbclp__benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: var(--zt-benefit-font, inherit);
+    font-size: var(--zt-benefit-size, 15px);
+    font-weight: var(--zt-benefit-weight, 500);
+    line-height: 1.35;
+    color: var(--hbclp-muted);
+  }
+
+  .hbclp__check {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background: var(--hbclp-accent);
+    color: #fff;
+  }
+
+  .hbclp__subtext {
+    margin: 0 0 18px;
+    font-family: var(--zt-subtext-font, inherit);
+    font-size: var(--zt-subtext-size, 15px);
+    font-weight: var(--zt-subtext-weight, 600);
+    line-height: 1.4;
+    color: var(--hbclp-text);
+  }
+
+  /* 1a: plain stat row */
+  .hbclp .hbclp__stats {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 0 18px;
+    padding: 9px 0;
+    border-top: 1px solid #ece8f3;
+    border-bottom: 1px solid #ece8f3;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .hbclp .hbclp__stat {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    margin: 0;
+    padding: 0 6px;
+    text-align: center;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .hbclp .hbclp__stat + .hbclp__stat {
+    border-left: 1px solid rgba(95, 45, 144, 0.35);
+  }
+
+  .hbclp__stat-num {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #5F2D90;
+  }
+
+  .hbclp__stat-unit {
+    font-size: 15px;
+    font-weight: 800;
+    vertical-align: baseline;
+  }
+
+  .hbclp__stat-label {
+    font-size: 9.5px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9a93a8;
+  }
+
+  /* 1b: visual kit card */
+  .hbclp__kc {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 0 16px;
+    border: 1px solid #e6e0f0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .hbclp__kc-head {
+    margin: 0;
+    padding: 7px 12px;
+    background: #5F2D90;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    line-height: 1.3;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .hbclp__kc-bag {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-bottom: 1px solid #ece8f3;
+  }
+
+  .hbclp__kc-bag-img {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 56px;
+  }
+
+  .hbclp__kc-bag-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  .hbclp__kc-img img {
+    display: block;
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .hbclp__kc-bag-txt {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+
+  .hbclp__kc-bag-name {
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--hbclp-text);
+  }
+
+  .hbclp__kc-bag-meta {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #4A4458;
+  }
+
+  .hbclp__kc-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+  }
+
+  .hbclp__kc-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin: 0;
+    padding: 10px 4px 7px;
+    text-align: center;
+  }
+
+  .hbclp__kc-tile + .hbclp__kc-tile {
+    border-left: 1px solid #ece8f3;
+  }
+
+  .hbclp__kc-free {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    z-index: 1;
+    padding: 2px 5px;
+    border-radius: 999px;
+    background: #32BAC0;
+    color: #fff;
+    font-size: 6.5px;
+    font-weight: 900;
+    letter-spacing: 0.07em;
+    line-height: 1.1;
+  }
+
+  .hbclp__kc-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: 100%;
+    height: 44px;
+    margin-bottom: 2px;
+  }
+
+  .hbclp__kc-img--pair img {
+    max-width: 48%;
+  }
+
+  .hbclp__kc-name {
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--hbclp-text);
+  }
+
+  .hbclp__kc-was,
+  .hbclp__kc-sep-val {
+    color: #b3abc2;
+    text-decoration: line-through;
+    text-decoration-thickness: 1.3px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hbclp__kc-was {
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .hbclp__kc-foot {
+    padding: 8px 14px 9px;
+    background: #F3EDF9;
+    border-top: 1px solid #ece8f3;
+  }
+
+  .hbclp__kc-sep {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0 0 3px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #4A4458;
+  }
+
+  .hbclp__kc-sep-val {
+    font-weight: 700;
+  }
+
+  .hbclp__kc-now {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 6px;
+    margin: 0;
+  }
+
+  .hbclp__kc-price {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--hbclp-text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hbclp__kc-note {
+    font-size: 12px;
+    font-weight: 600;
+    color: #4A4458;
+  }
+
+  .hbclp__kc-save {
+    margin-left: auto;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #32BAC0;
+    color: #fff;
+    font-size: 11.5px;
+    font-weight: 800;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  /* 1c: guarantee + shipping lines */
+  .hbclp__assure {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    width: 100%;
+    margin: 14px 0 0;
+    padding: 0;
+  }
+
+  .hbclp__assure-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--hbclp-text);
+  }
+
+  .hbclp__assure-row strong {
+    font-weight: 800;
+  }
+
+  .hbclp__assure-icon {
+    flex: 0 0 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+  }
+
+  .hbclp__assure-icon svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+  }
+
+  .hbclp__assure-icon--shield {
+    background: #E7F6ED;
+    color: #1F8A4C;
+  }
+
+  .hbclp__assure-icon--truck {
+    background: #F3EDF9;
+    color: #5F2D90;
+  }
+
+  .hbclp__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(100%, 380px);
+    margin-top: 0;
+  }
+
+  .hbclp__actions--offer {
+    align-items: flex-start;
+    width: min(100%, 520px);
+  }
+
+  .hbclp__cta {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: 100%;
+    min-width: 0;
+    min-height: 71px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    border: 2px solid var(--hbclp-shadow);
+    background: var(--hbclp-cta);
+    color: var(--hbclp-cta-text);
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 5px 5px 0 var(--hbclp-shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .hbclp__cta--single {
+    min-height: 56px;
+    padding: 16px 28px;
+  }
+
+  .hbclp__cta:hover {
+    transform: translateY(1px);
+    box-shadow: 4px 4px 0 var(--hbclp-shadow);
+    color: var(--hbclp-cta-text);
+  }
+
+  .hbclp__cta-bottom {
+    font-family: var(--zt-cta_bottom-font, inherit);
+    font-size: var(--zt-cta_bottom-size, 18px);
+    font-weight: var(--zt-cta_bottom-weight, 700);
+    line-height: 1.15;
+  }
+
+  .hbclp__renew {
+    margin: 12px 0 0;
+    width: 100%;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--hbclp-text);
+    opacity: 0.9;
+  }
+
+  .hbclp__media {
+    position: relative;
+    width: 100%;
+  }
+
+  .hbclp__panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 520px;
+    border-radius: 4px;
+    background: var(--hbclp-panel);
+    overflow: hidden;
+    padding-bottom: 86px;
+  }
+
+  .hbclp__panel-cover {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hbclp__panel--cover {
+    min-height: 0;
+    padding-bottom: 0;
+    justify-content: flex-start;
+  }
+
+  .hbclp__panel--cover .hbclp__panel-cover {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .hbclp__panel--cover .hbclp__products {
+    position: absolute;
+    inset: 0;
+    display: block;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .hbclp__panel--cover .hbclp__product-main {
+    position: static;
+    width: auto;
+    margin: 0;
+  }
+
+  .hbclp__panel--cover .hbclp__badge {
+    top: var(--hbclp-badge-y, 12px);
+    left: var(--hbclp-badge-x, 12px);
+  }
+
+  .hbclp__panel--cover .hbclp__formula {
+    position: relative;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+  }
+
+  .hbclp__products--covered .hbclp__product-img,
+  .hbclp__products--covered .hbclp__product-placeholder {
+    display: none;
+  }
+
+  .hbclp__product-main {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 320px);
+  }
+
+  .hbclp__badge {
+    position: absolute;
+    top: -18px;
+    left: -6px;
+    z-index: 3;
+    width: var(--hbclp-badge-size, 92px);
+    height: var(--hbclp-badge-size, 92px);
+    pointer-events: none;
+  }
+
+  .hbclp__badge-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .hbclp__badge-seal {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    color: var(--hbclp-teal);
+  }
+
+  .hbclp__badge-ring {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hbclp__badge-copy {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 10px;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .hbclp__badge-top {
+    font-family: var(--zt-badge_top-font, inherit);
+    font-size: var(--zt-badge_top-size, 7px);
+    font-weight: var(--zt-badge_top-weight, 800);
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+    text-transform: uppercase;
+    color: #1c1630;
+    max-width: 64px;
+  }
+
+  .hbclp__badge-pct {
+    font-family: var(--zt-badge_pct-font, inherit);
+    font-size: var(--zt-badge_pct-size, 30px);
+    font-weight: var(--zt-badge_pct-weight, 800);
+    line-height: 1;
+    color: #1c1630;
+  }
+
+  .hbclp__products {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex: 1;
+    padding: 48px 24px 12px;
+    min-height: 280px;
+  }
+
+  .hbclp__product-img {
+    display: block;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.28));
+  }
+
+  .hbclp__product-img--primary {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .hbclp__product-img--secondary {
+    position: absolute;
+    right: 4%;
+    bottom: 8%;
+    z-index: 1;
+    width: min(34%, 190px);
+    transform: rotate(7deg);
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.22));
+  }
+
+  .hbclp__product-placeholder {
+    width: min(100%, 360px);
+    aspect-ratio: 4 / 5;
+    opacity: 0.35;
+  }
+
+  .hbclp__placeholder-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hbclp__formula {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+    min-height: 78px;
+    padding: 14px 20px;
+    background: #fcfbfe;
+    color: var(--hbclp-text);
+    border-top: 1px solid rgba(30, 23, 52, 0.12);
+    box-sizing: border-box;
+  }
+
+  .hbclp__formula-left {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 120px;
+    max-width: 120px;
+    padding-right: 12px;
+    border-right: 1px solid var(--hbclp-shadow);
+  }
+
+  .hbclp__formula-icon-img {
+    display: block;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+
+  .hbclp__formula-shield {
+    display: inline-flex;
+    flex: 0 0 auto;
+    color: var(--hbclp-accent);
+  }
+
+  .hbclp__formula-shield svg {
+    display: block;
+    width: 20px;
+    height: 22px;
+    max-width: none;
+  }
+
+  .hbclp__formula-label {
+    font-family: var(--zt-formula_label-font, inherit);
+    font-size: var(--zt-formula_label-size, 12px);
+    font-weight: var(--zt-formula_label-weight, 800);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    color: var(--hbclp-text);
+    text-align: center;
+    white-space: normal;
+  }
+
+  .hbclp__formula-divider {
+    display: none;
+  }
+
+  .hbclp__formula-text {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    margin: 0;
+    font-family: var(--zt-formula_text-font, inherit);
+    font-size: var(--zt-formula_text-size, 16px);
+    font-weight: var(--zt-formula_text-weight, 800);
+    line-height: 1.35;
+    color: var(--hbclp-text);
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  @media screen and (max-width: 989px) {
+    .hbclp__badge-top {
+      font-size: var(--zt-badge_top-size-m, 7px);
+    }
+
+    .hbclp__badge-pct {
+      font-size: var(--zt-badge_pct-size-m, 30px);
+    }
+
+    .hbclp {
+      padding-top: 0;
+      padding-bottom: 24px;
+    }
+
+    .hbclp .hbclp__promo {
+      margin-bottom: 0;
+      padding: 7px 12px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+    }
+
+    .hbclp__inner {
+      display: flex;
+      flex-direction: column;
+      grid-template-columns: 1fr;
+      width: 100%;
+      gap: 0;
+      box-sizing: border-box;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* Copy, stats, kit card and CTA first; the bag photo follows the CTA so the button stays above the fold. */
+    .hbclp__copy {
+      display: contents;
+    }
+
+    .hbclp__rating { order: 1; }
+    .hbclp__preheadline { order: 2; }
+    .hbclp__heading { order: 3; }
+    .hbclp__subtext { order: 4; }
+    .hbclp__benefits { order: 5; }
+    .hbclp .hbclp__stats { order: 5; }
+    .hbclp__kc { order: 6; }
+    .hbclp__actions { order: 7; }
+    .hbclp__media { order: 8; }
+
+    .hbclp__rating,
+    .hbclp__preheadline,
+    .hbclp__heading,
+    .hbclp__subtext,
+    .hbclp .hbclp__stats,
+    .hbclp__kc,
+    .hbclp__actions {
+      align-self: stretch;
+      width: auto !important;
+      max-width: none;
+    }
+    .hbclp__rating {
+      margin-top: 14px;
+      align-self: flex-start;
+    }
+    .hbclp__media {
+      width: auto !important;
+      margin: 22px -20px 0;
+    }
+
+    .hbclp__panel {
+      min-height: 408px;
+      border-radius: 0;
+      padding-bottom: 102px;
+      overflow: hidden;
+    }
+
+    .hbclp__panel--cover {
+      min-height: 0;
+      padding-bottom: 0;
+    }
+
+    .hbclp__panel--cover .hbclp__formula {
+      position: relative;
+      left: 0;
+      right: 0;
+      bottom: auto;
+      width: auto;
+      margin: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .hbclp__panel--cover .hbclp__badge {
+      top: var(--hbclp-badge-y, 12px);
+      left: var(--hbclp-badge-x, 12px);
+    }
+
+    .hbclp__product-main {
+      width: min(52%, 210px);
+      margin-left: -6%;
+    }
+
+    .hbclp__badge {
+      display: block;
+      top: -8px;
+      left: -4px;
+      width: calc(var(--hbclp-badge-size, 92px) * 0.78);
+      height: calc(var(--hbclp-badge-size, 92px) * 0.78);
+    }
+
+    .hbclp__products {
+      padding: 12px 16px 0;
+      min-height: 290px;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .hbclp__product-img--primary {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .hbclp__product-img--secondary {
+      right: 1%;
+      bottom: 0;
+      width: min(36%, 140px);
+    }
+
+    .hbclp__formula {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      width: auto;
+      max-width: none;
+      margin: 0;
+      min-height: 86px;
+      padding: 16px 14px;
+      border: var(--hbclp-formula-border, 1px) solid var(--hbclp-shadow);
+      border-radius: 0;
+      box-shadow: none;
+      background: #fcfbfe;
+      z-index: 4;
+    }
+
+    .hbclp__formula-left {
+      display: flex;
+      width: 104px;
+      max-width: 104px;
+      gap: 6px;
+      padding-right: 10px;
+    }
+
+    .hbclp__formula-icon-img {
+      display: block;
+      width: 24px;
+      height: 24px;
+    }
+
+    .hbclp__formula-shield {
+      display: inline-flex;
+    }
+
+    .hbclp__formula-shield svg {
+      width: 24px;
+      height: 26px;
+    }
+
+    .hbclp__formula-label {
+      font-size: var(--zt-formula_label-size-m, 12px);
+      color: var(--hbclp-text);
+      max-width: 100%;
+    }
+
+    .hbclp__formula-text {
+      font-size: var(--zt-formula_text-size-m, 14px);
+      font-weight: var(--zt-formula_text-weight, 800);
+      line-height: 1.375;
+    }
+
+    .hbclp__copy {
+      max-width: none;
+      width: 100%;
+      padding: 28px 20px 8px;
+      align-items: flex-start;
+    }
+
+    .hbclp__rating {
+      margin-bottom: 10px;
+      gap: 8px 10px;
+    }
+
+    .hbclp__avatar {
+      width: 36px;
+      height: 36px;
+    }
+
+    .hbclp__rating-score {
+      font-size: var(--zt-rating_score-size-m, 14px);
+    }
+
+    .hbclp__rating-label {
+      font-size: var(--zt-rating_label-size-m, 12px);
+    }
+
+    .hbclp__preheadline {
+      font-size: var(--zt-preheadline-size-m, 12px);
+      margin-bottom: 6px;
+    }
+
+    .hbclp__heading {
+      font-size: var(--zt-heading-size-m, 32px);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .hbclp__benefits {
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .hbclp__benefit {
+      font-size: var(--zt-benefit-size-m, 13px);
+      font-weight: var(--zt-benefit-weight, 700);
+      line-height: 1.5;
+      color: var(--hbclp-text);
+    }
+
+    .hbclp__check {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+    }
+
+    .hbclp__check svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .hbclp__subtext {
+      font-size: var(--zt-subtext-size-m, 13px);
+      font-weight: var(--zt-subtext-weight, 800);
+      margin-bottom: 10px;
+    }
+
+    .hbclp .hbclp__stats {
+      margin-bottom: 10px;
+      padding: 6px 0;
+    }
+
+    .hbclp__stat-num {
+      font-size: 22px;
+    }
+
+    .hbclp__stat-unit {
+      font-size: 13px;
+    }
+
+    .hbclp__stat-label {
+      font-size: 8.5px;
+    }
+
+    .hbclp__kc {
+      margin-bottom: 12px;
+      border-radius: 10px;
+    }
+
+    .hbclp__kc-head {
+      padding: 4px 10px;
+      font-size: 8.5px;
+    }
+
+    .hbclp__kc-bag {
+      gap: 8px;
+      padding: 4px 10px;
+    }
+
+    .hbclp__kc-bag-img {
+      width: 52px;
+      height: 40px;
+    }
+
+    .hbclp__kc-bag-name {
+      font-size: 12px;
+    }
+
+    .hbclp__kc-bag-meta {
+      font-size: 11px;
+    }
+
+    .hbclp__kc-tile {
+      padding: 5px 3px 4px;
+      gap: 1px;
+    }
+
+    .hbclp__kc-img {
+      height: 34px;
+      margin-bottom: 1px;
+    }
+
+    .hbclp__kc-name,
+    .hbclp__kc-was {
+      font-size: 9px;
+    }
+
+    .hbclp__kc-foot {
+      padding: 5px 10px 6px;
+    }
+
+    .hbclp__kc-sep {
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    .hbclp__kc-price {
+      font-size: 19px;
+    }
+
+    .hbclp__kc-note {
+      font-size: 11px;
+    }
+
+    .hbclp__kc-save {
+      padding: 3px 8px;
+      font-size: 10.5px;
+    }
+
+    .hbclp__actions,
+    .hbclp__actions--offer {
+      width: 100%;
+    }
+
+    .hbclp__renew {
+      font-size: 12px;
+    }
+
+    .hbclp__assure {
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .hbclp__assure-row {
+      font-size: 12px;
+    }
+
+    .hbclp__cta {
+      width: 100%;
+      min-width: 0;
+      min-height: 56px;
+    }
+
+    .hbclp__cta--single {
+      padding: 14px 24px;
+    }
+
+    .hbclp__cta-bottom {
+      font-size: var(--zt-cta_bottom-size-m, 18px);
+    }
+
+    .hbclp__blocks {
+      margin-top: 28px;
+    }
+  }
+
+  /* Round 2: narrow desktop / tablet (stacked layout). Keep the stat row, kit card, CTA and guarantee lines one 520px block, left-aligned with the headline. */
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    .hbclp .hbclp__stats,
+    .hbclp .hbclp__kc,
+    .hbclp .hbclp__actions {
+      align-self: flex-start;
+      width: 100% !important;
+      max-width: 520px;
+    }
+
+    .hbclp .hbclp__heading,
+    .hbclp .hbclp__subtext {
+      max-width: 600px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .hbclp__formula {
+      gap: 12px;
+      padding: 14px 12px;
+    }
+
+    .hbclp__formula-left {
+      width: 96px;
+      max-width: 96px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    if (window.ztHbclpCtaScroll) return;
+    window.ztHbclpCtaScroll = true;
+
+    document.addEventListener('click', function (event) {
+      var link = event.target.closest('.hbclp__cta');
+      if (!link) return;
+
+      var href = link.getAttribute('href') || '';
+      if (href.charAt(0) !== '#') return;
+
+      var target = document.getElementById(href.slice(1));
+      if (!target) return;
+
+      event.preventDefault();
+
+      if (href === '#purchase' && typeof window.ztScrollToCacaoOffer === 'function') {
+        window.ztScrollToCacaoOffer({ frameKey: 'ztHbclpCtaFrame' });
+        return;
+      }
+
+      var start = window.scrollY || window.pageYOffset;
+      var margin = parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+      var end = target.getBoundingClientRect().top + start - margin;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (window.ztHbclpCtaFrame) {
+        window.cancelAnimationFrame(window.ztHbclpCtaFrame);
+        window.ztHbclpCtaFrame = 0;
+      }
+
+      if (reduce || Math.abs(end - start) < 2) {
+        window.scrollTo(0, end);
+        if (window.history.replaceState) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        return;
+      }
+
+      var duration = 1300;
+      var startTime = null;
+
+      function ease(t) {
+        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      }
+
+      function finish(cancelled) {
+        window.removeEventListener('wheel', cancel);
+        window.removeEventListener('touchstart', cancel);
+        window.ztHbclpCtaFrame = 0;
+        if (!cancelled && window.history.replaceState) {
+          window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+      }
+
+      function cancel() {
+        if (window.ztHbclpCtaFrame) window.cancelAnimationFrame(window.ztHbclpCtaFrame);
+        finish(true);
+      }
+
+      function step(now) {
+        if (startTime === null) startTime = now;
+        var progress = Math.min(1, (now - startTime) / duration);
+        window.scrollTo(0, start + (end - start) * ease(progress));
+        if (progress < 1) {
+          window.ztHbclpCtaFrame = window.requestAnimationFrame(step);
+        } else {
+          finish(false);
+        }
+      }
+
+      window.addEventListener('wheel', cancel, { passive: true });
+      window.addEventListener('touchstart', cancel, { passive: true });
+      window.ztHbclpCtaFrame = window.requestAnimationFrame(step);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hero Banner Cacao LP",
+  "tag": "section",
+  "class": "section-hero-banner-cacao-lp",
+  "settings": [
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#f2eee4" },
+    { "type": "color", "id": "panel_color", "label": "Product panel", "default": "#580d93" },
+    { "type": "color", "id": "accent_color", "label": "Accent (heading / checks)", "default": "#580d93" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#1e1734" },
+    { "type": "color", "id": "star_color", "label": "Star color", "default": "#008159" },
+    { "type": "color", "id": "cta_bg_color", "label": "CTA background", "default": "#580d93" },
+    { "type": "color", "id": "cta_text_color", "label": "CTA text", "default": "#fcfcfc" },
+    { "type": "color", "id": "shadow_color", "label": "Hard shadow", "default": "#1e1734" },
+    { "type": "header", "content": "Social proof" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating row", "default": true },
+    { "type": "image_picker", "id": "avatar_1", "label": "Avatar 1" },
+    { "type": "image_picker", "id": "avatar_2", "label": "Avatar 2" },
+    { "type": "image_picker", "id": "avatar_3", "label": "Avatar 3" },
+    { "type": "text", "id": "rating_score", "label": "Rating score (fallback)", "default": "5.0 stars", "info": "Used only if the Judge.me store-wide metafields are unavailable. The live score and review count come from Judge.me." },
+    { "type": "text", "id": "rating_label", "label": "Rating label (fallback)", "default": "Verified Zeotein customers", "info": "Used only if the Judge.me store-wide metafields are unavailable." },
+    { "type": "header", "content": "Headline & copy" },
+    { "type": "text", "id": "preheadline", "label": "Preheadline", "default": "For anyone who reads the label before they buy" },
+    { "type": "text", "id": "heading", "label": "Heading (before accent)", "default": "Can You Name " },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent", "default": "Everything" },
+    { "type": "text", "id": "heading_after", "label": "Heading (after accent)", "default": " In Your Protein Powder?" },
+    { "type": "text", "id": "subtext", "label": "Subtext", "default": "Grass-fed bone broth, collagen peptides, fermented cacao, MCT, sea moss and zeolite." },
+    { "type": "text", "id": "chips", "label": "Chips under the sub-line (legacy, not shown)", "default": "23g Protein|14g Collagen|0g Sugar", "info": "No longer rendered. The stat row (23g Protein, 14g Collagen, 0g Sugar) is built into the section." },
+    { "type": "color", "id": "preheadline_color", "label": "Preheadline color", "default": "#1AA6A0" },
+    { "type": "header", "content": "Starter kit stack (legacy)" },
+    { "type": "paragraph", "content": "The kit card (images, prices, totals) is built into the section. The fields below are kept for reference and are no longer rendered." },
+    { "type": "text", "id": "kit_title", "label": "Kit title", "default": "Everything that arrives in your first order" },
+    { "type": "textarea", "id": "kit_items", "label": "Kit line items", "default": "Zeotein Cacao 30-Day Bulk Bag|$109.99\nCleanBlend Shaker|$15.99\nSave-A-Scoop|$6.99\nZeotein Starter Guide|$12.00\nCacao + Vegan Recipe Guides|$28.00", "info": "One item per line as Name|Price. When filled, the benefit bullets stay hidden." },
+    { "type": "text", "id": "kit_compare", "label": "Bought-separately total", "default": "$172.97" },
+    { "type": "header", "content": "Offer & CTA" },
+    { "type": "text", "id": "offer_price", "label": "Offer price (legacy, not shown)", "default": "$76.99" },
+    { "type": "text", "id": "offer_price_note", "label": "Offer price note (legacy, not shown)", "default": "your first order" },
+    { "type": "text", "id": "cta_line_1", "label": "CTA button label", "default": "Claim My 55% Off" },
+    { "type": "text", "id": "cta_line_2", "label": "Savings line (legacy, not shown)", "default": "You save $95.98" },
+    { "type": "url", "id": "cta_link", "label": "CTA link", "info": "Leave empty to scroll to the buy box. Add a link to send people somewhere else." },
+    { "type": "text", "id": "renew_text", "label": "Renewal note", "default": "Then $99.99 per delivery. First-time subscribers only." },
+    { "type": "textarea", "id": "risk_free_text", "label": "Reason / guarantee (legacy, not shown)" },
+    { "type": "checkbox", "id": "show_guarantee", "label": "Show guarantee and shipping lines under the button", "default": true },
+    { "type": "text", "id": "guarantee_lead", "label": "Guarantee lead (legacy, not shown)", "default": "30-day money-back guarantee." },
+    { "type": "textarea", "id": "guarantee_text", "label": "Guarantee text (legacy, not shown)", "default": "Love it or your money back." },
+    { "type": "header", "content": "Product panel" },
+    { "type": "image_picker", "id": "panel_cover_image", "label": "Panel cover image", "info": "Optional. Fills the whole purple panel. The product panel color still shows when this is empty. The bag and pouch images stay available and show only when no cover image is set." },
+    { "type": "image_picker", "id": "product_image", "label": "Product image (main bag)" },
+    { "type": "checkbox", "id": "show_badge", "label": "Show lowered-price badge", "default": true },
+    { "type": "image_picker", "id": "badge_image", "label": "Badge image (optional)", "info": "Upload a custom badge to replace the built-in seal." },
+    { "type": "header", "content": "Clean formula bar" },
+    { "type": "text", "id": "formula_label", "label": "Formula label", "default": "EASY START" },
+    { "type": "text", "id": "formula_text", "label": "Formula text", "default": "Ships in 1 to 2 business days. Pause, skip or cancel anytime." },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    { "type": "cacao-type-hero-2" },
+    { "type": "cacao-type-hero" },
+    { "type": "reviews-carousel-cacao-lp" }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner Cacao LP",
+      "settings": {
+        "bg_color": "#f2eee4",
+        "panel_color": "#580d93",
+        "accent_color": "#580d93",
+        "text_color": "#1e1734",
+        "star_color": "#008159",
+        "cta_bg_color": "#580d93",
+        "cta_text_color": "#fcfcfc",
+        "shadow_color": "#1e1734",
+        "show_rating": true,
+        "rating_score": "5.0 stars",
+        "rating_label": "Verified Zeotein customers",
+        "preheadline": "For anyone who reads the label before they buy",
+        "preheadline_color": "#1AA6A0",
+        "heading": "Can You Name ",
+        "heading_accent": "Everything",
+        "heading_after": " In Your Protein Powder?",
+        "subtext": "Grass-fed bone broth, collagen peptides, fermented cacao, MCT, sea moss and zeolite.",
+        "cta_line_1": "Claim My 55% Off",
+        "cta_link": "",
+        "renew_text": "Then $99.99 per delivery. First-time subscribers only.",
+        "show_badge": true,
+        "formula_label": "CLEAN FORMULA",
+        "formula_text": "23g protein. 14g collagen. 0g sugar.",
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
+      "blocks": [
+        { "type": "reviews-carousel-cacao-lp" },
+        { "type": "cacao-type-hero", "id": "cacao-type", "static": true },
+        { "type": "cacao-type-hero-2", "id": "type-hero-2", "static": true }
+      ]
+    }
+  ]
+}
+{% endschema %}

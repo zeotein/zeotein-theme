@@ -1,0 +1,90 @@
+<div class="zt-bb2__gallery" aria-label="Product gallery">
+<div class="zt-bb2__stage">
+<div class="zt-bb2__thumbs" data-zt-bb-thumbs aria-label="Choose product image">
+{%- assign thumb_i = 0 -%}
+{%- if bb_product != blank -%}
+{%- for media in bb_product.media -%}
+{%- if media.media_type == 'image' -%}
+{%- assign thumb_i = thumb_i | plus: 1 -%}
+{%- assign full = media | image_url: width: 1400 -%}
+{%- assign thumb = media | image_url: width: 200 -%}
+<button
+type="button"
+class="zt-bb2__thumb{% if thumb_i == 1 %} is-active{% endif %}"
+data-zt-bb-thumb
+data-zt-bb-full-src="{{ full | escape }}"
+aria-label="Show image {{ thumb_i }}"
+aria-pressed="{% if thumb_i == 1 %}true{% else %}false{% endif %}"
+>
+<img
+src="{{ thumb | escape }}"
+alt=""
+width="128"
+height="128"
+loading="{% if thumb_i <= 6 %}eager{% else %}lazy{% endif %}"
+>
+</button>
+{%- endif -%}
+{%- endfor -%}
+{%- endif -%}
+{%- if thumb_i == 0 -%}
+{%- assign fallbacks = 'zt-bb-main.png|zt-bb-thumb-2.png|zt-bb-thumb-3.png' | split: '|' -%}
+{%- for fallback in fallbacks -%}
+<button
+type="button"
+class="zt-bb2__thumb{% if forloop.first %} is-active{% endif %}"
+data-zt-bb-thumb
+data-zt-bb-full-src="{{ fallback | asset_url | escape }}"
+aria-label="Show image {{ forloop.index }}"
+aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+>
+<img src="{{ fallback | asset_url }}" alt="" width="112" height="112" loading="lazy">
+</button>
+{%- endfor -%}
+{%- endif -%}
+</div>
+
+<div class="zt-bb2__main" data-zt-bb-main tabindex="0">
+{%- if slide_1 != blank -%}
+{%- assign main_alt = slide_1.alt | default: bb_product.title -%}
+{{
+slide_1
+| image_url: width: 1400
+| image_tag:
+class: 'zt-bb2__main-img zt-bb__main-img',
+widths: '600, 900, 1400',
+sizes: '(min-width: 1024px) 640px, 100vw',
+alt: main_alt,
+loading: 'eager'
+}}
+{%- else -%}
+<img
+class="zt-bb2__main-img zt-bb__main-img"
+src="{{ 'zt-bb-main.png' | asset_url }}"
+alt="Zeotein Cacao 30-Day Bulk Bag"
+width="1400"
+height="1400"
+>
+{%- endif -%}
+
+{%- unless section.settings.show_image_benefits == false -%}
+<ul class="zt-bb2__benefits" aria-label="Product facts">
+<li><span class="zt-bb2__benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>14g grass-fed collagen</li>
+<li><span class="zt-bb2__benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>23g protein</li>
+<li><span class="zt-bb2__benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Zero sugar</li>
+<li><span class="zt-bb2__benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Gluten free and dairy free</li>
+<li><span class="zt-bb2__benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>No artificial colors or flavors</li>
+</ul>
+{%- endunless -%}
+
+<div class="zt-bb2__price-chip">
+<p class="zt-bb2__price-chip-kicker">Starter Kit from</p>
+<p class="zt-bb2__price-chip-value" data-zt-bb-kit-price>$68.99</p>
+<p class="zt-bb2__price-chip-note">Your First Order</p>
+</div>
+</div>
+</div>
+<button type="button" class="zt-bb2__nutrition" data-zt-bb-nutrition-open aria-haspopup="dialog" aria-controls="zt-bb2-nutrition-{{ section.id }}">
+{{ section.settings.nutrition_label | default: 'View Nutrition Facts' | escape }}
+</button>
+</div>

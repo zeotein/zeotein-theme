@@ -1,0 +1,89 @@
+<dialog id="zt-bb2-nutrition-{{ section.id }}" class="zt-bb2__sheet" data-zt-bb-nutrition aria-labelledby="zt-bb2-nutrition-title-{{ section.id }}">
+<div class="zt-bb2__sheet-panel">
+<header class="zt-bb2__sheet-head">
+<h2 id="zt-bb2-nutrition-title-{{ section.id }}" class="zt-bb2__sheet-title">Nutrition Facts</h2>
+<button type="button" class="zt-bb2__sheet-x" data-zt-bb-nutrition-close aria-label="Close nutrition facts">
+<svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+</button>
+</header>
+<div class="zt-bb2__sheet-body">
+<p class="zt-bb2__sr">Nutrition facts and ingredients for Zeotein Cacao 30-Day Bulk Bag.</p>
+<section class="zt-bb2__nf-hero">
+<p class="zt-bb2__nf-kicker">Zeotein Cacao</p>
+<h3 class="zt-bb2__nf-name">30-Day Bulk Bag</h3>
+<p class="zt-bb2__nf-serve">Serving Size: 2 Scoops (50 mL each) (38.7 g) · Servings Per Container: 30 · Suggested Use: Mix one serving (2 scoops) with 10–12 oz of water, milk, or your favorite smoothie.</p>
+<div class="zt-bb2__nf-highlights">
+<div><p>14g</p><span>Grass-Fed Collagen</span></div>
+<div><p>23g</p><span>Protein</span></div>
+<div><p>30</p><span>Servings per Bag</span></div>
+</div>
+</section>
+
+<section class="zt-bb2__nf-block" aria-label="Ingredient highlights">
+<h3>What's Inside</h3>
+<div class="zt-bb2__nf-chips">
+<span>Grass-Fed Collagen Peptides</span>
+<span>Grass-Fed Beef Bone Broth</span>
+<span>Organic Fermented Cacao</span>
+<span>Organic MCT Oil Powder</span>
+<span>Organic Purple &amp; Gold Sea Moss</span>
+</div>
+</section>
+
+<section class="zt-bb2__nf-block" aria-label="Clean label">
+<h3>Clean Label</h3>
+<div class="zt-bb2__nf-tags">
+<span>Gluten Free</span>
+<span>Dairy Free</span>
+<span>Soy Free</span>
+<span>Zero Sugar</span>
+<span>Zero Artificial Colors</span>
+<span>Zero Artificial Flavors</span>
+</div>
+</section>
+
+<section class="zt-bb2__nf-block" aria-label="Supplement facts">
+<h3 class="zt-bb2__nf-facts-title">Supplement Facts</h3>
+{%- if section.settings.facts_format == 'photo' -%}
+{%- if section.settings.facts_image != blank -%}
+{{
+section.settings.facts_image
+| image_url: width: 1200
+| image_tag:
+class: 'zt-bb2__nf-photo',
+widths: '400, 600, 800, 1200',
+sizes: '(min-width: 750px) 420px, 90vw',
+alt: 'Zeotein Cacao supplement facts label',
+loading: 'lazy'
+}}
+{%- else -%}
+<img
+class="zt-bb2__nf-photo"
+src="{{ 'cacao-supplement-facts.webp' | asset_url }}"
+alt="Zeotein Cacao supplement facts label"
+width="800"
+height="1000"
+loading="lazy"
+>
+{%- endif -%}
+{%- else -%}
+<div class="zt-bb2__nf-facts-head"><span>Amount Per Serving</span><span>%DV</span></div>
+<dl class="zt-bb2__nf-facts">
+<div class="is-bold"><dt>Calories <span>140</span></dt><dd></dd></div>
+<div class="is-bold"><dt>Total Fat <span>3 g</span></dt><dd>4%</dd></div>
+<div class="is-indent"><dt>Saturated Fat <span>2.5 g</span></dt><dd>13%</dd></div>
+<div class="is-bold"><dt>Sodium <span>420 mg</span></dt><dd>18%</dd></div>
+<div class="is-bold"><dt>Total Carbohydrate <span>2 g</span></dt><dd>1%</dd></div>
+<div class="is-indent"><dt>Dietary Fiber <span>1 g</span></dt><dd>4%</dd></div>
+<div class="is-indent"><dt>Total Sugars <span>0 g</span></dt><dd></dd></div>
+<div class="is-bold"><dt>Protein <span>23 g</span></dt><dd></dd></div>
+</dl>
+<p class="zt-bb2__nf-copy"><strong>Zeotein Cacao Protein Blend 38.7 g †</strong><br>Grass-Fed Hydrolyzed Bovine Collagen Peptides, Grass-Fed Beef Bone Broth Protein, Organic Fermented Cacao Powder, Organic MCT Oil Powder, Clinoptilolite, Organic Purple and Gold Sea Moss Blend (Gracilaria spp.)</p>
+<p class="zt-bb2__nf-fine">* Percent Daily Values are based on a 2,000 calorie diet. † Daily Value not established.</p>
+{%- endif -%}
+</section>
+
+<button type="button" class="zt-bb2__sheet-close" data-zt-bb-nutrition-close>Close</button>
+</div>
+</div>
+</dialog>

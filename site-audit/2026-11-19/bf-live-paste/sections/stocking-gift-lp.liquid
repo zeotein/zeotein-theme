@@ -1,0 +1,327 @@
+{% comment %}Stocking Stuffers gift LP section — unpublished theme only{% endcomment %}
+{% comment %}
+  Stocking Stuffers gift LP — AD9 Dec 1–14.
+  Host product is UNLISTED URL shell. Cart adds live 7-Day variants:
+  Cacao 52342958031061 ($39.99) / Vegan 53059759112405 ($44.99).
+  Full price only. Free-shipping-at-2+ is messaging until shipping rule is wired.
+  Theme: unpublished "Black Friday page build 6 Nov" only. Do not copy to MAIN.
+{% endcomment %}
+<style>
+  .zt-stock {
+    --zt-ink: #1c1630;
+    --zt-green: #008159;
+    --zt-green-deep: #108474;
+    --zt-cream: #f7f3ec;
+    --zt-gold: #e0a800;
+    --zt-card: #ffffff;
+    --zt-line: #e6e0d6;
+    font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--zt-ink);
+    background: var(--zt-cream);
+    padding: 0 0 64px;
+  }
+  .zt-stock * { box-sizing: border-box; }
+
+  /* BF/holiday gift LP: hide SAVE 55 promo + OptiMonk chrome if app embed still injects */
+  .hbclp__promo, [class*="optimonk"], [id*="optimonk"], [class*="om-"], iframe[src*="optimonk"] {
+    display: none !important;
+  }
+
+  .zt-stock a { color: var(--zt-green); }
+  .zt-banner {
+    background: var(--zt-ink);
+    color: #fff;
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .02em;
+  }
+  .zt-banner strong { color: var(--zt-gold); }
+  .zt-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 28px 18px 0;
+  }
+  .zt-hero {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 28px;
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .zt-hero { grid-template-columns: 1fr; }
+  }
+  .zt-kicker {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid var(--zt-line);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--zt-green-deep);
+    margin-bottom: 14px;
+  }
+  .zt-hero h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.1;
+    margin: 0 0 12px;
+    font-weight: 800;
+  }
+  .zt-sub {
+    font-size: 18px;
+    line-height: 1.45;
+    margin: 0 0 18px;
+    max-width: 34ch;
+  }
+  .zt-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px;
+  }
+  .zt-bullets li {
+    position: relative;
+    padding: 8px 0 8px 28px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .zt-bullets li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--zt-green);
+    font-weight: 800;
+  }
+  .zt-card {
+    background: var(--zt-card);
+    border: 1px solid var(--zt-line);
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 10px 30px rgba(28, 22, 48, .06);
+  }
+  .zt-card h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    font-weight: 800;
+  }
+  .zt-card .zt-note {
+    font-size: 13px;
+    color: #5b5470;
+    margin: 0 0 16px;
+  }
+  .zt-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin: 14px 0 8px;
+  }
+  .zt-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .zt-chip {
+    flex: 1 1 120px;
+    border: 2px solid var(--zt-line);
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 10px;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .zt-chip.is-on {
+    border-color: var(--zt-green);
+    box-shadow: 0 0 0 3px rgba(0,129,89,.12);
+  }
+  .zt-chip .t { display: block; font-weight: 800; font-size: 15px; }
+  .zt-chip .d { display: block; font-size: 12px; color: #5b5470; margin-top: 2px; }
+  .zt-price {
+    margin: 18px 0 6px;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -.02em;
+  }
+  .zt-price-sub { font-size: 13px; color: #5b5470; margin-bottom: 14px; }
+  .zt-ship {
+    background: #eaf7f1;
+    color: var(--zt-green-deep);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .zt-cta {
+    width: 100%;
+    border: 0;
+    border-radius: 999px;
+    background: var(--zt-green);
+    color: #fff;
+    font-weight: 800;
+    font-size: 16px;
+    padding: 16px 18px;
+    cursor: pointer;
+  }
+  .zt-cta[disabled] { opacity: .55; cursor: wait; }
+  .zt-cta:hover { background: var(--zt-green-deep); }
+  .zt-msg {
+    min-height: 20px;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .zt-msg.err { color: #b42318; }
+  .zt-msg.ok { color: var(--zt-green-deep); }
+  .zt-foot {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 13px;
+    color: #5b5470;
+  }
+  .zt-foot strong { color: var(--zt-ink); }
+  .zt-hide-native #MainContent > .product, .zt-hide-native .product-form { display: none !important; }
+</style>
+
+<div class="zt-stock zt-hide-native" id="zt-stocking">
+  <div class="zt-banner">Order by <strong>Dec 14</strong> for USPS Ground delivery before Christmas · Full price gift · No discount</div>
+  <div class="zt-wrap">
+    <div class="zt-hero">
+      <div>
+        <span class="zt-kicker">Stocking stuffers under $45</span>
+        <h1>The one gift they’ll actually finish</h1>
+        <p class="zt-sub">Not another candle. A week of clean protein in seven single-serve stick packs — one pouch that fits in a stocking.</p>
+        <ul class="zt-bullets" id="zt-bullets">
+          <li>23g protein per stick · zero added sugar</li>
+          <li>Six real ingredients — that’s the whole list</li>
+          <li>Pick Cacao or Vegan on this page</li>
+          <li>Free shipping when you gift 2 or more pouches</li>
+        </ul>
+        <p style="font-size:13px;color:#5b5470;max-width:42ch;margin:0;">30-day money-back guarantee. Ships from the US. Gift for the person who reads every label.</p>
+      </div>
+      <div class="zt-card">
+        <h2>Gift a 7-Day pouch</h2>
+        <p class="zt-note">Full price. No promo codes. Choose blend + how many stockings you’re filling.</p>
+
+        <span class="zt-label">Blend</span>
+        <div class="zt-row" role="group" aria-label="Blend">
+          <button type="button" class="zt-chip is-on" data-blend="cacao" id="chip-cacao">
+            <span class="t">Cacao</span>
+            <span class="d">Collagen &amp; bone broth · $39.99</span>
+          </button>
+          <button type="button" class="zt-chip" data-blend="vegan" id="chip-vegan">
+            <span class="t">Vegan</span>
+            <span class="d">Pumpkin seed &amp; hemp · $44.99</span>
+          </button>
+        </div>
+
+        <span class="zt-label">How many pouches</span>
+        <div class="zt-row" role="group" aria-label="Quantity">
+          <button type="button" class="zt-chip is-on" data-qty="1"><span class="t">1 pouch</span><span class="d">Standard shipping</span></button>
+          <button type="button" class="zt-chip" data-qty="2"><span class="t">2 pouches</span><span class="d">Free shipping</span></button>
+          <button type="button" class="zt-chip" data-qty="3"><span class="t">3 pouches</span><span class="d">Free shipping</span></button>
+        </div>
+
+        <div class="zt-price" id="zt-price">$39.99</div>
+        <div class="zt-price-sub" id="zt-price-sub">1 × Cacao 7-Day · full price</div>
+        <div class="zt-ship" id="zt-ship">Add a second pouch for free shipping.</div>
+
+        <button type="button" class="zt-cta" id="zt-add">Add gift to cart</button>
+        <div class="zt-msg" id="zt-msg" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="zt-foot"><strong>Order by Dec 14</strong> for USPS Ground before Christmas. After Dec 14, send a digital gift card instead.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var VARIANTS = {
+    cacao: { id: 52342958031061, unit: 39.99, label: 'Cacao 7-Day', bullets: [
+      '23g protein per stick · zero added sugar',
+      'Six real ingredients — that’s the whole list',
+      'Pick Cacao or Vegan on this page',
+      'Free shipping when you gift 2 or more pouches'
+    ]},
+    vegan: { id: 53059759112405, unit: 44.99, label: 'Vegan 7-Day', bullets: [
+      '20g plant protein per stick · zero added sugar',
+      'Pumpkin seed & hemp — clean and simple',
+      'Pick Cacao or Vegan on this page',
+      'Free shipping when you gift 2 or more pouches'
+    ]}
+  };
+  var blend = 'cacao';
+  var qty = 1;
+  var root = document.getElementById('zt-stocking');
+  if (!root) return;
+  var priceEl = document.getElementById('zt-price');
+  var subEl = document.getElementById('zt-price-sub');
+  var shipEl = document.getElementById('zt-ship');
+  var msgEl = document.getElementById('zt-msg');
+  var addBtn = document.getElementById('zt-add');
+  var bulletsEl = document.getElementById('zt-bullets');
+
+  function money(n) { return '$' + n.toFixed(2); }
+  function paint() {
+    var v = VARIANTS[blend];
+    var total = +(v.unit * qty).toFixed(2);
+    priceEl.textContent = money(total);
+    subEl.textContent = qty + ' × ' + v.label + ' · full price';
+    shipEl.textContent = qty >= 2
+      ? 'Free shipping on 2+ pouches (shipping rule still being wired for go-live).'
+      : 'Add a second pouch for free shipping.';
+    if (bulletsEl) {
+      bulletsEl.innerHTML = v.bullets.map(function (b) { return '<li>' + b + '</li>'; }).join('');
+    }
+  }
+  root.querySelectorAll('[data-blend]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      blend = btn.getAttribute('data-blend');
+      root.querySelectorAll('[data-blend]').forEach(function (b) { b.classList.toggle('is-on', b === btn); });
+      paint();
+    });
+  });
+  root.querySelectorAll('[data-qty]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      qty = parseInt(btn.getAttribute('data-qty'), 10);
+      root.querySelectorAll('[data-qty]').forEach(function (b) { b.classList.toggle('is-on', b === btn); });
+      paint();
+    });
+  });
+  addBtn.addEventListener('click', function () {
+    var v = VARIANTS[blend];
+    msgEl.className = 'zt-msg';
+    msgEl.textContent = '';
+    addBtn.disabled = true;
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ items: [{ id: v.id, quantity: qty }] })
+    }).then(function (r) {
+      if (!r.ok) throw new Error('Cart add failed (' + r.status + ')');
+      return r.json();
+    }).then(function () {
+      msgEl.className = 'zt-msg ok';
+      msgEl.textContent = 'Added. Taking you to cart…';
+      window.location.href = '/cart';
+    }).catch(function (err) {
+      msgEl.className = 'zt-msg err';
+      msgEl.textContent = (err && err.message) ? err.message : 'Could not add to cart. Try again.';
+      addBtn.disabled = false;
+    });
+  });
+  paint();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Stocking gift LP",
+  "tag": "section",
+  "class": "section-stocking-gift",
+  "settings": []
+}
+{% endschema %}

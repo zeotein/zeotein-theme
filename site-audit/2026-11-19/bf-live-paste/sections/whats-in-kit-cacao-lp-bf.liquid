@@ -1,0 +1,137 @@
+{%- comment -%}
+  BF Starter Kit page only: "What is the Zeotein Cacao Starter Kit and how do you use it".
+  Kit items are the same five items shown in the hero kit card. Photos: real product shots from Files,
+  plus the realistic "bag open with a shake" photo from this product's own gallery.
+{%- endcomment -%}
+{%- liquid
+  assign sid = 'zt-wik-' | append: section.id
+  assign img_bag = images['zeotein-cacao-bulk-bag-BADGED_1f1ad9f1-3eed-43bf-ad8f-3466c8b9ef9f.png']
+  assign img_shaker = images['zeotein-cleanblend-shaker-bottle-black-27oz_8bca9a57-62d9-430d-9f22-0f734c6b1da5.png']
+  assign img_scoop = images['zeotein-save-a-scoop-protein-powder-scoop_c8a653a0-4d43-4181-991a-de46d4e5785a.png']
+  assign img_g1 = images['zeotein-starter-guide_9f6ff293-adb1-43a1-bc36-1df55b9e2810.png']
+  assign img_g2 = images['cacao_recipe_guide_ad193fb4-5a3e-4bc9-b2f0-238226eb546f.png']
+  assign img_g3 = images['vegan_recipe_guide_17ce770b-95df-4600-ba9a-c61a89e619b0.png']
+  assign img_use = nil
+  if product != blank
+    for m in product.media
+      if m.media_type == 'image'
+        assign m_src = m.preview_image.src | append: ''
+        if m_src contains 'bulk_protein_bag_open'
+          assign img_use = m
+          break
+        endif
+      endif
+    endfor
+  endif
+-%}
+<section id="{{ sid }}" class="zt-wik" aria-labelledby="{{ sid }}-h">
+  <div class="zt-wik__wrap">
+    <header class="zt-wik__head">
+      <p class="zt-wik__eyebrow">New to Zeotein?</p>
+      <h2 id="{{ sid }}-h" class="zt-wik__title">What is the Zeotein Cacao Starter Kit?</h2>
+      <p class="zt-wik__lead">30 days of creamy chocolate protein. 14g grass-fed collagen and 23g protein per serving, plus the tools to make it.</p>
+    </header>
+
+    <h3 class="zt-wik__sub">What's in the box</h3>
+    <ul class="zt-wik__grid" role="list">
+      <li class="zt-wik__item">
+        <div class="zt-wik__pic">{%- if img_bag != blank -%}{{ img_bag | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 600', sizes: '(min-width: 990px) 260px, 45vw', alt: 'Zeotein Cacao 30-Day Bulk Bag' }}{%- endif -%}</div>
+        <p class="zt-wik__name">30-Day Cacao Bulk Bag</p>
+        <p class="zt-wik__note">30 servings</p>
+      </li>
+      <li class="zt-wik__item">
+        <span class="zt-wik__free">Free</span>
+        <div class="zt-wik__pic">{%- if img_shaker != blank -%}{{ img_shaker | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 600', sizes: '(min-width: 990px) 260px, 45vw', alt: 'Zeotein CleanBlend shaker bottle' }}{%- endif -%}</div>
+        <p class="zt-wik__name">CleanBlend Shaker</p>
+        <p class="zt-wik__note">No blender needed</p>
+      </li>
+      <li class="zt-wik__item">
+        <span class="zt-wik__free">Free</span>
+        <div class="zt-wik__pic">{%- if img_scoop != blank -%}{{ img_scoop | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 600', sizes: '(min-width: 990px) 260px, 45vw', alt: 'Zeotein Save-A-Scoop' }}{%- endif -%}</div>
+        <p class="zt-wik__name">Save-A-Scoop</p>
+        <p class="zt-wik__note">Clips to the bag</p>
+      </li>
+      <li class="zt-wik__item">
+        <span class="zt-wik__free">Free</span>
+        <div class="zt-wik__pic zt-wik__pic--guides">
+          {%- if img_g1 != blank -%}{{ img_g1 | image_url: width: 400 | image_tag: loading: 'lazy', alt: 'Zeotein Starter Guide' }}{%- endif -%}
+          {%- if img_g2 != blank -%}{{ img_g2 | image_url: width: 400 | image_tag: loading: 'lazy', alt: 'Cacao Recipe Guide' }}{%- endif -%}
+          {%- if img_g3 != blank -%}{{ img_g3 | image_url: width: 400 | image_tag: loading: 'lazy', alt: 'Vegan Recipe Guide' }}{%- endif -%}
+        </div>
+        <p class="zt-wik__name">3 Digital Guides</p>
+        <p class="zt-wik__note">Emailed to you</p>
+      </li>
+    </ul>
+
+    <div class="zt-wik__use">
+      {%- if img_use != blank -%}
+        <div class="zt-wik__photo">
+          {{ img_use | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600, 900, 1200', sizes: '(min-width: 990px) 560px, 100vw', alt: 'Zeotein Cacao bag next to a glass of chocolate protein shake' }}
+        </div>
+      {%- endif -%}
+      <div class="zt-wik__how">
+        <h3 class="zt-wik__sub zt-wik__sub--left">How to use it</h3>
+        <ol class="zt-wik__steps" role="list">
+          <li class="zt-wik__step"><span class="zt-wik__num" aria-hidden="true">1</span><div><p class="zt-wik__step-t">Scoop</p><p class="zt-wik__step-d">2 scoops in your shaker.</p></div></li>
+          <li class="zt-wik__step"><span class="zt-wik__num" aria-hidden="true">2</span><div><p class="zt-wik__step-t">Shake</p><p class="zt-wik__step-d">Add 10 to 12 oz milk, water or coffee.</p></div></li>
+          <li class="zt-wik__step"><span class="zt-wik__num" aria-hidden="true">3</span><div><p class="zt-wik__step-t">Drink</p><p class="zt-wik__step-d">At home or on the go.</p></div></li>
+        </ol>
+        <a class="zt-wik__cta" href="#purchase">Get 60% Off My Starter Kit</a>
+        <p class="zt-wik__price">$68.99 first order. Renews at $99.99.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #{{ sid }} { background: #ffffff; color: #1e1734; padding: 80px 24px; }
+  #{{ sid }} .zt-wik__wrap { max-width: 1120px; margin: 0 auto; }
+  #{{ sid }} .zt-wik__head { text-align: center; max-width: 680px; margin: 0 auto 48px; }
+  #{{ sid }} .zt-wik__eyebrow { margin: 0 0 10px; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #1aa6a0; }
+  #{{ sid }} .zt-wik__title { margin: 0 0 14px; font-size: 42px; line-height: 1.1; font-weight: 700; letter-spacing: -.02em; color: #1e1734; }
+  #{{ sid }} .zt-wik__lead { margin: 0; font-size: 18px; line-height: 1.55; color: #4a4560; }
+  #{{ sid }} .zt-wik__sub { margin: 0 0 20px; font-size: 14px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #580d93; text-align: center; }
+  #{{ sid }} .zt-wik__sub--left { text-align: left; }
+  #{{ sid }} .zt-wik__grid { list-style: none; margin: 0 0 64px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+  #{{ sid }} .zt-wik__item { position: relative; margin: 0; text-align: center; }
+  #{{ sid }} .zt-wik__pic { aspect-ratio: 1 / 1; background: #ffffff; border: 1px solid #ece8f3; border-radius: 16px; display: flex; align-items: center; justify-content: center; padding: 14%; box-sizing: border-box; overflow: hidden; margin-bottom: 14px; }
+  #{{ sid }} .zt-wik__pic img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  #{{ sid }} .zt-wik__pic--guides { gap: 0; padding: 14% 8%; }
+  #{{ sid }} .zt-wik__pic--guides img { width: 40%; height: auto; max-height: 100%; margin: 0 -4%; }
+  #{{ sid }} .zt-wik__free { position: absolute; top: 12px; right: 12px; z-index: 2; background: #1aa6a0; color: #fff; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
+  #{{ sid }} .zt-wik__name { margin: 0 0 4px; font-size: 17px; font-weight: 700; color: #1e1734; }
+  #{{ sid }} .zt-wik__note { margin: 0; font-size: 14px; line-height: 1.4; color: #6b6680; }
+  #{{ sid }} .zt-wik__use { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; background: #f7f5fa; border-radius: 24px; padding: 40px; }
+  #{{ sid }} .zt-wik__photo { border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3; }
+  #{{ sid }} .zt-wik__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  #{{ sid }} .zt-wik__steps { list-style: none; margin: 0 0 28px; padding: 0; display: grid; gap: 22px; }
+  #{{ sid }} .zt-wik__step { display: flex; gap: 16px; align-items: flex-start; margin: 0; }
+  #{{ sid }} .zt-wik__num { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; background: #580d93; color: #fff; font-weight: 800; font-size: 18px; display: flex; align-items: center; justify-content: center; }
+  #{{ sid }} .zt-wik__step-t { margin: 0 0 2px; font-size: 20px; font-weight: 800; color: #1e1734; }
+  #{{ sid }} .zt-wik__step-d { margin: 0; font-size: 16px; line-height: 1.45; color: #4a4560; }
+  #{{ sid }} .zt-wik__cta { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 0 32px; border-radius: 999px; background: #580d93; color: #fff; font-weight: 700; font-size: 17px; text-decoration: none; box-shadow: 0 4px 0 #1e1734; }
+  #{{ sid }} .zt-wik__cta:hover { filter: brightness(1.08); }
+  #{{ sid }} .zt-wik__price { margin: 14px 0 0; font-size: 14px; color: #6b6680; }
+  @media screen and (max-width: 989px) {
+    #{{ sid }} { padding: 56px 20px; }
+    #{{ sid }} .zt-wik__head { margin-bottom: 36px; }
+    #{{ sid }} .zt-wik__title { font-size: 30px; }
+    #{{ sid }} .zt-wik__lead { font-size: 16px; }
+    #{{ sid }} .zt-wik__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; margin-bottom: 44px; }
+    #{{ sid }} .zt-wik__name { font-size: 15px; }
+    #{{ sid }} .zt-wik__note { font-size: 13px; }
+    #{{ sid }} .zt-wik__free { top: 8px; right: 8px; font-size: 10px; padding: 3px 8px; }
+    #{{ sid }} .zt-wik__use { grid-template-columns: 1fr; gap: 28px; padding: 20px 20px 28px; border-radius: 20px; }
+    #{{ sid }} .zt-wik__cta { width: 100%; box-sizing: border-box; }
+    #{{ sid }} .zt-wik__price { text-align: center; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Starter Kit explainer BF",
+  "tag": "div",
+  "class": "section-whats-in-kit-cacao-lp-bf",
+  "settings": []
+}
+{% endschema %}

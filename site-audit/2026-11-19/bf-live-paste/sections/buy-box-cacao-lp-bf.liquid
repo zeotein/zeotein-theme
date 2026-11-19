@@ -1,0 +1,186 @@
+{% comment %}
+Buy Box Cacao LP - Black Friday.
+Copy of Buy Box Cacao LP v2 with the Black Friday product, Seal plans and price ladder.
+Renders through buy-box-cacao-lp.js on the v2 path, so that file is untouched.
+Markup lives in the zt-bf-bb-* snippets.
+{% endcomment %}
+{%- liquid
+assign sid = 'zt-bb2-' | append: section.id
+assign details_id = 'zt-bb2-details-' | append: section.id
+assign reviews_id = 'zt-bb2-reviews-' | append: section.id
+assign bb_product = all_products['30-day-cacao-bulk-bag-black-friday']
+assign variant = bb_product.selected_or_first_available_variant
+assign variant_id = variant.id | default: '68115835322581'
+assign seal_plan_1 = '6688669909'
+assign seal_plan_2 = '6688702677'
+assign seal_plan_3 = '6688735445'
+
+assign shaker = all_products['lp-gift-cleanblend-shaker']
+assign shaker_variant_id = '67706369704149'
+if shaker != blank and shaker.selected_or_first_available_variant
+assign shaker_variant_id = shaker.selected_or_first_available_variant.id
+endif
+assign scoop_product = all_products['lp-gift-save-a-scoop']
+assign scoop_variant_id = '67706369507541'
+if scoop_product != blank and scoop_product.selected_or_first_available_variant
+assign scoop_variant_id = scoop_product.selected_or_first_available_variant.id
+endif
+assign guide_starter = all_products['lp-gift-starter-guide']
+assign guide_cacao = all_products['lp-gift-cacao-recipe-guide']
+assign guide_vegan = all_products['lp-gift-vegan-recipe-guide']
+assign guide_starter_vid = '67706369540309'
+assign guide_cacao_vid = '67706369605845'
+assign guide_vegan_vid = '67706369638613'
+if guide_starter != blank and guide_starter.selected_or_first_available_variant
+assign guide_starter_vid = guide_starter.selected_or_first_available_variant.id
+endif
+if guide_cacao != blank and guide_cacao.selected_or_first_available_variant
+assign guide_cacao_vid = guide_cacao.selected_or_first_available_variant.id
+endif
+if guide_vegan != blank and guide_vegan.selected_or_first_available_variant
+assign guide_vegan_vid = guide_vegan.selected_or_first_available_variant.id
+endif
+
+if section.settings.layout_width == blank
+assign layout_width = 1180
+else
+assign layout_width = section.settings.layout_width
+endif
+
+assign slide_1 = nil
+if bb_product != blank
+for media in bb_product.media
+if media.media_type == 'image'
+assign slide_1 = media
+break
+endif
+endfor
+endif
+-%}
+
+{{ 'buy-box-cacao-lp-v2.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cacao-lp-scroll-offer.js' | asset_url }}" defer></script>
+<script src="{{ 'buy-box-cacao-lp.js' | asset_url }}" type="module" defer></script>
+{% render 'zt-bf-bb-sticky' %}
+
+{%- capture buybox_config -%}
+{
+"productTitle": {{ bb_product.title | default: 'Zeotein Cacao 30-Day Bulk Bag' | json }},
+"variantId": {{ variant_id | json }},
+"defaultPlan": {{ section.settings.default_plan | default: 'sub' | json }},
+"defaultBag": "1",
+"ctaSub": {{ section.settings.cta_sub | default: 'Get My Black Friday Kit' | json }},
+"ctaOnce": {{ section.settings.cta_once | default: 'Get My Black Friday Kit' | json }},
+"afterAddAction": {{ section.settings.after_add_action | default: 'drawer' | json }},
+"addShakerGift": {{ true | json }},
+"shakerVariantId": {{ shaker_variant_id | json }},
+"addBulkBagGifts": {{ true | json }},
+"giftItems": {
+"bulkBag": [
+{%- assign gift_comma = false -%}
+{%- if scoop_variant_id != blank -%}
+{ "id": {{ scoop_variant_id }}, "key": "save_a_scoop" }
+{%- assign gift_comma = true -%}
+{%- endif -%}
+{%- if guide_starter_vid != blank -%}
+{%- if gift_comma -%},{%- endif -%}
+{ "id": {{ guide_starter_vid }}, "key": "starter_guide" }
+{%- assign gift_comma = true -%}
+{%- endif -%}
+{%- if guide_cacao_vid != blank -%}
+{%- if gift_comma -%},{%- endif -%}
+{ "id": {{ guide_cacao_vid }}, "key": "cacao_recipe_guide" }
+{%- assign gift_comma = true -%}
+{%- endif -%}
+{%- if guide_vegan_vid != blank -%}
+{%- if gift_comma -%},{%- endif -%}
+{ "id": {{ guide_vegan_vid }}, "key": "vegan_recipe_guide" }
+{%- endif -%}
+],
+"subscribeOnly": [
+{%- if shaker_variant_id != blank -%}
+{ "id": {{ shaker_variant_id }}, "key": "cleanblend_shaker" }
+{%- endif -%}
+]
+},
+"tiers": [
+{
+"key": "1",
+"qty": 1,
+"firstPrice": "68.99",
+"renewPrice": "99.99",
+"oncePrice": "",
+"sellingPlanId": {{ seal_plan_1 | json }}
+},
+{
+"key": "2",
+"qty": 2,
+"firstPrice": "133.98",
+"renewPrice": "179.98",
+"oncePrice": "",
+"sellingPlanId": {{ seal_plan_2 | json }}
+},
+{
+"key": "3",
+"qty": 3,
+"firstPrice": "195.99",
+"renewPrice": "239.97",
+"oncePrice": "",
+"sellingPlanId": {{ seal_plan_3 | json }}
+}
+]
+}
+{%- endcapture -%}
+
+
+<style>.hbclp__promo,[class*="optimonk"],[id*="optimonk"],iframe[src*="optimonk"]{display:none!important}</style>
+<section
+id="{{ sid }}"
+class="zt-bb2"
+data-zt-bb
+data-zt-bb-version="v2"
+data-zt-bb-config="zt-bb2-config-{{ section.id }}"
+data-zt-bb-once-extra="{{ section.settings.once_extra | default: 'Save-A-Scoop included' | escape }}"
+style="
+--zt-bb2-primary: {{ section.settings.primary_color }};
+--zt-bb2-pad-top: 24px;
+--zt-bb2-pad-bottom: 40px;
+--zt-bb2-width: {{ layout_width }}px;
+--zt-bb2-bag-cols: 3;
+"
+{{ section.shopify_attributes }}
+>
+<script type="application/json" id="zt-bb2-config-{{ section.id }}">{{ buybox_config }}</script>
+
+<div class="zt-bb2__inner" id="purchase">
+{% render 'zt-bf-bb-gallery', section: section, bb_product: bb_product, slide_1: slide_1 %}
+
+{% render 'zt-bf-bb-panel', section: section, sid: sid, details_id: details_id, reviews_id: reviews_id, variant_id: variant_id %}
+</div>
+
+{% render 'zt-bf-bb-nutrition', section: section %}
+
+{% render 'zt-bf-bb-extras', sid: sid %}
+</section>
+
+{%- comment -%}
+Live theme cart type can be "page" or "notification". Those modes do not print a drawer.
+This slot adds Dawn's existing drawer only on this landing page, so "Open cart drawer"
+works here while other templates keep the theme cart setting.
+{%- endcomment -%}
+{%- comment -%} Nov 13 2026: skipped on cacao-lp* templates; the layout already renders the cart drawer (fixes "CartDrawer has already been declared"). {%- endcomment -%}
+{%- unless settings.cart_type == 'drawer' or template.suffix contains 'cacao-lp' -%}
+{{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+{{ 'component-cart.css' | asset_url | stylesheet_tag }}
+{{ 'component-totals.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+<div data-zt-bb-drawer-slot>
+{%- render 'cart-drawer' -%}
+</div>
+<script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+{% schema %}
+{"name":"Buy Box Cacao LP-BF","tag":"section","class":"section-buy-box-cacao-lp-bf","settings":[{"type":"checkbox","id":"show_image_benefits","label":"Show benefits on product image","default":false},{"type":"select","id":"default_plan","label":"Default plan","default":"sub","options":[{"value":"sub","label":"Subscribe"},{"value":"once","label":"One-time"}]},{"type":"select","id":"after_add_action","label":"After add to cart","default":"drawer","options":[{"value":"drawer","label":"Open cart drawer"},{"value":"cart","label":"Go to cart"},{"value":"checkout","label":"Go to checkout"},{"value":"none","label":"Stay on page"}]},{"type":"textarea","id":"title","label":"Title","default":"Zeotein Cacao\n30-Day Bulk Bag"},{"type":"text","id":"subtitle","label":"Subtitle","default":"14g grass-fed collagen and 23g protein in every serving."},{"type":"text","id":"bullet_1","label":"Bullet 1","default":"Protein from grass-fed beef bone broth, not whey"},{"type":"text","id":"bullet_2","label":"Bullet 2","default":"Grass-fed collagen and bone broth in one serving"},{"type":"text","id":"bullet_3","label":"Bullet 3","default":"Organic fermented cacao, zero sugar"},{"type":"text","id":"bullet_4","label":"Bullet 4","default":"Six ingredients, all printed on the label"},{"type":"text","id":"bags_heading","label":"Quantity heading","default":"How many bags?"},{"type":"text","id":"bags_badge","label":"Quantity badge","default":"Buy More. Save More."},{"type":"image_picker","id":"bags_badge_icon","label":"Quantity badge icon"},{"type":"text","id":"plans_heading","label":"Plans heading","default":"Subscribe and Save:"},{"type":"text","id":"sub_banner","label":"Subscribe banner","default":"Black Friday: Cacao Starter Kit + Free Gifts"},{"type":"text","id":"sub_title","label":"Subscribe title","default":"Subscribe & Save"},{"type":"text","id":"once_title","label":"One-time title","default":"One-Time Purchase"},{"type":"text","id":"once_extra","label":"One-time extra","default":"Save-A-Scoop included"},{"type":"text","id":"perk_1","label":"Subscribe perk 1","default":"Pause or cancel anytime"},{"type":"text","id":"perk_2","label":"Subscribe perk 2","default":"30-Day Money-Back Guarantee"},{"type":"text","id":"shaker_name","label":"Shaker gift","default":"FREE Black Shaker"},{"type":"text","id":"shaker_note","label":"Shaker note","default":"First subscription order"},{"type":"text","id":"guides_name","label":"Guides gift","default":"3 FREE Digital Guides"},{"type":"text","id":"guides_note","label":"Guides note","default":"Emailed after purchase"},{"type":"text","id":"scoop_name","label":"Scoop gift","default":"FREE Save-A-Scoop"},{"type":"text","id":"scoop_note","label":"Scoop note","default":"First Bulk Bag order"},{"type":"text","id":"cta_sub","label":"Subscribe button","default":"Get My Black Friday Kit"},{"type":"text","id":"cta_once","label":"One-time button","default":"Get My Black Friday Kit"},{"type":"text","id":"deadline_text","label":"Deadline strip","default":"Ends Monday Nov 30 at 11:59pm CT"},{"type":"text","id":"intro_note","label":"Intro note","default":"Black Friday price auto-applied"},{"type":"image_picker","id":"intro_icon","label":"Intro note icon"},{"type":"text","id":"limit_lead","label":"Limit lead","default":"First-time subscribers only."},{"type":"text","id":"limit_rest","label":"Limit text","default":"Limit one introductory offer per customer."},{"type":"textarea","id":"trust_1","label":"Trust 1","default":"30-Day Money-Back\nGuarantee"},{"type":"textarea","id":"trust_2","label":"Trust 2","default":"Fast, Tracked\nShipping"},{"type":"textarea","id":"trust_3","label":"Trust 3","default":"Secure\nCheckout"},{"type":"text","id":"nutrition_label","label":"Nutrition button","default":"View Nutrition Facts"},{"type":"select","id":"facts_format","label":"Supplement facts","options":[{"value":"written","label":"Written"},{"value":"photo","label":"Photo"}],"default":"written"},{"type":"image_picker","id":"facts_image","label":"Supplement facts photo"},{"type":"color","id":"primary_color","label":"Primary color","default":"#580d93"},{"type":"range","id":"layout_width","label":"Layout width","min":980,"max":1600,"step":10,"unit":"px","default":1280}],"blocks":[{"type":"faq","name":"Detail","settings":[{"type":"text","id":"title","label":"Title","default":"Detail"},{"type":"textarea","id":"body","label":"Body"}]}],"max_blocks":8,"presets":[{"name":"Buy Box Cacao LP-BF"}]}
+{% endschema %}

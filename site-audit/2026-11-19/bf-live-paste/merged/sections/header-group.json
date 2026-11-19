@@ -1,0 +1,187 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement_marquee": {
+      "type": "announcement-marquee",
+      "blocks": {
+        "am_simple": {
+          "type": "message",
+          "settings": {
+            "text": "Simple on purpose.",
+            "link": ""
+          }
+        },
+        "am_sugar": {
+          "type": "message",
+          "settings": {
+            "text": "Zero sugar.",
+            "link": ""
+          }
+        },
+        "am_sweeteners": {
+          "type": "message",
+          "settings": {
+            "text": "Zero artificial sweeteners.",
+            "link": ""
+          }
+        },
+        "am_gf_df": {
+          "type": "message",
+          "settings": {
+            "text": "Gluten free. Dairy free.",
+            "link": ""
+          }
+        },
+        "am_ingredient": {
+          "type": "message",
+          "settings": {
+            "text": "Every ingredient earns its place.",
+            "link": "/pages/the-zeotein-difference"
+          }
+        },
+        "am_ships": {
+          "type": "message",
+          "settings": {
+            "text": "Ships in 1 to 2 business days.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "am_simple",
+        "am_sugar",
+        "am_sweeteners",
+        "am_gf_df",
+        "am_ingredient",
+        "am_ships"
+      ],
+      "settings": {
+        "heading": "Announcement",
+        "bg_color": "#580D93",
+        "text_color": "#FFFFFF",
+        "icon_color": "#FFFFFF",
+        "border_color": "#e4e0ea",
+        "icon_style": "star",
+        "icon_size": 12,
+        "text_size": 13,
+        "text_size_mobile": 12,
+        "gap": 28,
+        "speed": 36,
+        "padding_y": 8,
+        "pause_on_hover": true
+      }
+    },
+    "header": {
+      "type": "header-custom",
+      "blocks": {
+        "header-logo": {
+          "type": "_header-logo",
+          "static": true,
+          "settings": {
+            "hide_logo_on_home_page": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
+        },
+        "header-menu": {
+          "type": "_header-menu-custom",
+          "static": true,
+          "settings": {
+            "menu": "main-menu",
+            "background_color": "",
+            "text_color": "",
+            "type_font_primary_size": "1rem",
+            "menu_font_style": "inverse",
+            "type_font_primary_link": "heading",
+            "type_case_primary_link": "none",
+            "menu_style": "collection_images",
+            "featured_products_aspect_ratio": "4 / 5",
+            "featured_collections_aspect_ratio": "16 / 9",
+            "image_border_radius": 0,
+            "navigation_bar": false,
+            "background_color_navigation_bar": "",
+            "text_color_navigation_bar": "",
+            "drawer_accordion": false,
+            "drawer_accordion_expand_first": false,
+            "drawer_dividers": false
+          },
+          "blocks": {}
+        }
+      },
+      "name": "Header custom",
+      "settings": {
+        "layout_width": 1440,
+        "logo": "shopify://shop_images/Zeotein_Logo_banner_2.0.png",
+        "logo_position": "left",
+        "menu_position": "center",
+        "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
+        "show_search": true,
+        "search_position": "right",
+        "search_row": "top",
+        "show_market_selector": false,
+        "show_country": true,
+        "country_selector_style": true,
+        "show_language": true,
+        "show_localization_caret": true,
+        "localization_position": "right",
+        "localization_row": "top",
+        "section_width": "page-width",
+        "section_height": "standard",
+        "enable_sticky_header": "always",
+        "divider_width": 0,
+        "divider_color": "",
+        "border_width": 0,
+        "bottom_border_color": "",
+        "actions_display_style": "icon",
+        "background_color_top": "",
+        "text_color_top": "",
+        "background_color_bottom": "",
+        "text_color_bottom": "",
+        "bubble_style": "default",
+        "bubble_background_color": "",
+        "bubble_text_color": "",
+        "enable_transparent_header_home": false,
+        "home_inverse_logo": false,
+        "text_color_transparent_home": "",
+        "enable_transparent_header_product": false,
+        "product_inverse_logo": false,
+        "text_color_transparent_product": "",
+        "enable_transparent_header_collection": false,
+        "collection_inverse_logo": false,
+        "text_color_transparent_collection": ""
+      }
+    },
+    "zt_bf_countdown": {
+      "type": "zt-bf-countdown-sitewide",
+      "settings": {
+        "title": "Black Friday",
+        "offer": "30% off storewide",
+        "sub": "",
+        "label": "Ends in",
+        "cta_text": "Shop the sale",
+        "cta_url": "/collections/shop-all",
+        "start_epoch": 1795759200,
+        "end_epoch": 1796104740,
+        "bg": "#0B0B0D",
+        "accent": "#32BAC0"
+      }
+    }
+  },
+  "order": [
+    "zt_bf_countdown",
+    "announcement_marquee",
+    "header"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "layout": "theme.cacao-lp",
+  "sections": {
+    "stocking_gift": {
+      "type": "stocking-gift-lp",
+      "settings": {}
+    }
+  },
+  "order": [
+    "stocking_gift"
+  ]
+}
