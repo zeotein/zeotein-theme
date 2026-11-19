@@ -1,0 +1,16 @@
+{
+  "read_at": "2026-11-19 ~14:45 UTC (Shopify Admin GraphQL discountNodes)",
+  "note": "Scheduled automatic discounts, 2026-11-24T06:00Z to 2026-12-01T05:59Z, product zeotein-vegan-sticks-30, one-time purchases only, min quantity N, applies once per order, combines with product discounts only.",
+  "discounts": [
+    {"id": "gid://shopify/DiscountAutomaticNode/1534097653973", "title": "BF Vegan Sticks 1 pack", "min_qty": 1, "amount_off": "42.00"},
+    {"id": "gid://shopify/DiscountAutomaticNode/1534097686741", "title": "BF Vegan Sticks 2 packs", "min_qty": 2, "amount_off": "89.99"},
+    {"id": "gid://shopify/DiscountAutomaticNode/1534097719509", "title": "BF Vegan Sticks 3 packs", "min_qty": 3, "amount_off": "143.98"},
+    {"id": "gid://shopify/DiscountAutomaticNode/1534097752277", "title": "BF Vegan Sticks 4 packs", "min_qty": 4, "amount_off": "203.97"}
+  ],
+  "cacao_reference": {
+    "BF Cacao Sticks 2 packs": "85.99 off (gid://shopify/DiscountAutomaticNode/1534097555669)",
+    "BF Cacao Sticks 3 packs": "137.98 off (1534097588437)",
+    "BF Cacao Sticks 4 packs": "195.97 off (1534097621205)",
+    "1 pack": "$94.49 = $134.99 x 0.70 (30% offer)"
+  }
+}

@@ -1,0 +1,59 @@
+{%- render 'zt-diff-head' -%}
+<section class="zt-d zt-d-hero" id="zt-d-hero-{{ section.id }}">
+  <div class="zt-d__wrap">
+    <div class="zt-d-hero__row">
+      <div class="zt-d-hero__copy">
+        {%- if section.settings.eyebrow != blank -%}<p class="zt-d__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h1>{{ section.settings.heading | newline_to_br }}</h1>
+        {%- if section.settings.text != blank -%}<p class="zt-d-hero__text">{{ section.settings.text }}</p>{%- endif -%}
+        <div class="zt-d-hero__btns">
+          {%- if section.settings.btn1_label != blank -%}<a class="zt-d__btn zt-d__btn--teal" href="{{ section.settings.btn1_link | default: '/pages/protein-blends' }}">{{ section.settings.btn1_label }}</a>{%- endif -%}
+          {%- if section.settings.btn2_label != blank -%}<a class="zt-d__btn zt-d__btn--ghost" href="{{ section.settings.btn2_link | default: '#inside' }}">{{ section.settings.btn2_label }}</a>{%- endif -%}
+        </div>
+      </div>
+      <div class="zt-d-hero__media">
+        <div class="zt-d-hero__frame">
+          {%- if section.settings.image != blank -%}
+            {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '480, 720, 960', sizes: '(min-width: 990px) 480px, 100vw', alt: section.settings.image.alt }}
+          {%- endif -%}
+          {%- if section.settings.badge_big != blank -%}
+            <div class="zt-d-hero__badge"><b>{{ section.settings.badge_big }}</b><span>{{ section.settings.badge_small }}</span></div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+    {%- if section.blocks.size > 0 -%}
+      <div class="zt-d-hero__stats">
+        {%- for block in section.blocks -%}
+          <div class="zt-d-hero__stat" {{ block.shopify_attributes }}><b>{{ block.settings.number }}</b><span>{{ block.settings.label }}</span></div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Difference: hero",
+  "tag": "div",
+  "enabled_on": { "templates": ["page"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE ZEOTEIN DIFFERENCE" },
+    { "type": "textarea", "id": "heading", "label": "Heading (new line = line break)", "default": "Intentional\nby design." },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "btn1_label", "label": "Button 1", "default": "Find Your Zeotein" },
+    { "type": "url", "id": "btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "btn2_label", "label": "Button 2", "default": "See What's Inside" },
+    { "type": "text", "id": "btn2_link", "label": "Button 2 link", "default": "#inside" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "badge_big", "label": "Photo badge number", "default": "23g" },
+    { "type": "text", "id": "badge_small", "label": "Photo badge text", "default": "protein per serving, Cacao" }
+  ],
+  "blocks": [
+    { "type": "stat", "name": "Stat", "limit": 4, "settings": [
+      { "type": "text", "id": "number", "label": "Number", "default": "6" },
+      { "type": "text", "id": "label", "label": "Label", "default": "ingredients in Cacao" }
+    ] }
+  ],
+  "presets": [{ "name": "Difference: hero" }]
+}
+{% endschema %}

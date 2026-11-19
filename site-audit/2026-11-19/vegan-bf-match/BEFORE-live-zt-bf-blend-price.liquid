@@ -1,0 +1,71 @@
+{%- comment -%}
+  zt-bf-blend-price, LIVE theme version (Forge, Nov 15 2026). Vegan 30 only.
+  The BF theme (publish Nov 27) has the full version. This live copy has ONLY the Vegan 30 tiers,
+  matching the scheduled Shopify automatic discounts "BF Vegan Sticks 1/2/3/4 packs" (read Nov 15 2026):
+  fixed amount off the order, zeotein-vegan-sticks-30 only, one-time only, Nov 24 12:00 AM to Nov 30 11:59 PM CT.
+  The 30% collection mode was removed on purpose for the live theme. Every other product renders nothing.
+  Subscriptions are never discounted. Gift cards are never discounted.
+  Window: rendered hidden outside the sale; the script in zt-bf-countdown-sitewide shows it on time
+  (and always on an unpublished theme preview, or with ?zt_bf_preview=1).
+  Nov 16 2026 6:35 PM CT per Dana: the panel table no longer has a "You save" percent column (regular and Black Friday prices only).
+  Params: product (required), mode: 'strip' | 'panel' | 'card'
+{%- endcomment -%}
+{%- liquid
+  assign p = product
+  assign mode = mode | default: 'strip'
+  assign kind = ''
+  assign ztbf_start = 1795500000
+  assign ztbf_end = 1796104740
+  if p.handle == 'zeotein-vegan-sticks-30'
+    assign kind = 'vegan'
+  endif
+  if p.gift_card?
+    assign kind = ''
+  endif
+  assign now_s = 'now' | date: '%s' | plus: 0
+  assign ztbf_hidden = true
+  if now_s >= ztbf_start and now_s < ztbf_end
+    assign ztbf_hidden = false
+  endif
+  assign v = p.selected_or_first_available_variant
+  assign reg = v.price
+  assign unit = 'pack'
+  assign units = 'packs'
+  assign vegan_off = '4200,8999,14398,20397' | split: ','
+  assign off1 = vegan_off[0] | plus: 0
+  assign sale1 = reg | minus: off1
+-%}
+{%- if kind == 'vegan' -%}
+{%- capture ztbf_attrs -%}data-ztbf-start="{{ ztbf_start }}" data-ztbf-end="{{ ztbf_end }}"{% if ztbf_hidden %} hidden{% endif %}{%- endcapture -%}
+{%- case mode -%}
+{%- when 'strip' -%}
+<div class="ztbf-strip" {{ ztbf_attrs }}>
+  <span class="ztbf-strip__tag">Black Friday</span>
+  <span>One-time price: <s>{{ reg | money }}</s> <b>{{ sale1 | money }}</b>, and up to 36% off when you buy 2 to 4 packs. Savings show at checkout, no code.</span>
+</div>
+{%- when 'card' -%}
+<p class="ztbf-card" {{ ztbf_attrs }}>
+  <span class="ztbf-card__tag">Black Friday</span>
+  <span><b>{{ sale1 | money }}</b> one-time, up to 36% off 2 to 4 packs</span>
+</p>
+{%- when 'panel' -%}
+<div class="ztbf-panel" {{ ztbf_attrs }}>
+  <p class="ztbf-panel__head"><span class="ztbf-strip__tag">Black Friday</span> One-time prices, through Nov 30 at 11:59 PM CT</p>
+  <table class="ztbf-panel__table">
+    <thead><tr><th scope="col">Buy</th><th scope="col">Regular</th><th scope="col">Black Friday</th></tr></thead>
+    <tbody>
+    {%- for n in (1..4) -%}
+      {%- liquid
+        assign tot = reg | times: n
+        assign i = n | minus: 1
+        assign off = vegan_off[i] | plus: 0
+        assign bf = tot | minus: off
+      -%}
+      <tr><td>{{ n }} {% if n == 1 %}{{ unit }}{% else %}{{ units }}{% endif %}</td><td><s>{{ tot | money }}</s></td><td><b>{{ bf | money }}</b></td></tr>
+    {%- endfor -%}
+    </tbody>
+  </table>
+  <p class="ztbf-panel__fine">Choose One-time purchase and set the quantity. The Black Friday price drops in automatically at checkout, no code needed. Subscription prices stay the same and are not part of the sale.</p>
+</div>
+{%- endcase -%}
+{%- endif -%}

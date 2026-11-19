@@ -1,0 +1,41 @@
+{%- comment -%}
+  Chooser gift card (Nov 18 2026). One card per size and purchase type.
+  csv: comma list of shaker, scoop, guides (guides = all three digital guides, listed one by one).
+  Each item shows its real store price struck through and FREE; the value pill is the sum of those prices,
+  read live from the products, so it always matches the store (bag subscribe $62.98, sticks subscribe $55.99,
+  bag one-time $46.99, sticks one-time and 7-Day $40 as of Nov 18 2026).
+{%- endcomment -%}
+{%- liquid
+  assign g_list = csv | remove: ' ' | split: ','
+  assign g_value = 0
+  assign g_shaker = all_products['zeotein-cleanblend-shaker-27oz-usa-made']
+  assign g_scoop = all_products['save-a-scoop']
+  assign g_g1 = all_products['zeotein-starter-guide']
+  assign g_g2 = all_products['cacao-recipe-guide']
+  assign g_g3 = all_products['vegan-recipe-guide']
+-%}
+{%- capture g_items -%}
+  {%- for g in g_list -%}
+    {%- case g -%}
+      {%- when 'shaker' -%}
+        {%- assign g_value = g_value | plus: g_shaker.price -%}
+        <li class="zt-ch__kit-item"><span class="zt-ch__kit-thumb">{%- if g_shaker.featured_image -%}{{ g_shaker.featured_image | image_url: width: 96 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span><span class="zt-ch__kit-name">CleanBlend Shaker</span><span class="zt-ch__kit-price"><s>{{ g_shaker.price | money_without_trailing_zeros }}</s> <b>FREE</b></span></li>
+      {%- when 'scoop' -%}
+        {%- assign g_value = g_value | plus: g_scoop.price -%}
+        <li class="zt-ch__kit-item"><span class="zt-ch__kit-thumb">{%- if g_scoop.featured_image -%}{{ g_scoop.featured_image | image_url: width: 96 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span><span class="zt-ch__kit-name">Save-A-Scoop</span><span class="zt-ch__kit-price"><s>{{ g_scoop.price | money_without_trailing_zeros }}</s> <b>FREE</b></span></li>
+      {%- when 'guides' -%}
+        {%- assign g_value = g_value | plus: g_g1.price | plus: g_g2.price | plus: g_g3.price -%}
+        <li class="zt-ch__kit-item"><span class="zt-ch__kit-thumb">{%- if g_g1.featured_image -%}{{ g_g1.featured_image | image_url: width: 96 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span><span class="zt-ch__kit-name">Zeotein Starter Guide <small>digital</small></span><span class="zt-ch__kit-price"><s>{{ g_g1.price | money_without_trailing_zeros }}</s> <b>FREE</b></span></li>
+        <li class="zt-ch__kit-item"><span class="zt-ch__kit-thumb">{%- if g_g2.featured_image -%}{{ g_g2.featured_image | image_url: width: 96 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span><span class="zt-ch__kit-name">Cacao Recipe Guide <small>digital</small></span><span class="zt-ch__kit-price"><s>{{ g_g2.price | money_without_trailing_zeros }}</s> <b>FREE</b></span></li>
+        <li class="zt-ch__kit-item"><span class="zt-ch__kit-thumb">{%- if g_g3.featured_image -%}{{ g_g3.featured_image | image_url: width: 96 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span><span class="zt-ch__kit-name">Vegan Recipe Guide <small>digital</small></span><span class="zt-ch__kit-price"><s>{{ g_g3.price | money_without_trailing_zeros }}</s> <b>FREE</b></span></li>
+    {%- endcase -%}
+  {%- endfor -%}
+{%- endcapture -%}
+<div class="zt-ch__kit {{ mode_class }}" data-zt-kit-value="{{ g_value | money_without_trailing_zeros }}">
+  <div class="zt-ch__kit-head">
+    <p class="zt-ch__kit-title">{{ title }}</p>
+    <span class="zt-ch__kit-val">{{ g_value | money_without_trailing_zeros }} value</span>
+  </div>
+  {%- if note != blank -%}<p class="zt-ch__kit-note">{{ note }}</p>{%- endif -%}
+  <ul class="zt-ch__kit-list" role="list">{{ g_items }}</ul>
+</div>

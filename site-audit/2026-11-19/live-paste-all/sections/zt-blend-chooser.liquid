@@ -1,0 +1,527 @@
+{% comment %}
+  ZEOTEIN BLEND CHOOSER (Nov 16 2026, simplified 11:30 AM CT per Dana 11:09 AM CT)
+  All-in-one chooser page: pick blend (when more than one), Subscribe or One-Time, then one product card.
+  One simple choice per product: no 1/2/3 bundle tiers, no "pick 1, 2 or 3" step and no bundle savings line here.
+  Multi-bag savings are shown ONLY on each product's own page (snippets/zt-buybox-tidy.liquid, part 'bundle').
+  The button opens the real product page. Prices come from the products and their selling plans. Nothing is added to the cart here.
+  Nov 16 2026 6:35 PM CT per Dana: no savings callouts on the size cards; each card shows only its real price.
+  Photos are a swipeable gallery of the product's own images, shown in full (contain, not cropped).
+
+  Nov 18 2026 (Jewels Roundtable section 08):
+  - Each size card shows a gift badge ("+ FREE STARTER KIT" on 30-day sizes, "+ 3 FREE GUIDES" on one-time-only 7-Day sizes)
+    and, on the selected card, an inline gift line in the product page style (snippets/zt-ch-perk.liquid; Dana asked for the
+    gifts inside the product selection itself).
+  - The old "Included free" box is replaced by a gift card (snippets/zt-ch-kit.liquid) listing each item with its struck price
+    and FREE, with a value pill that follows the choice. Values are read live from the gift products:
+    bag subscribe $62.98, sticks subscribe $55.99, bag one-time $46.99, sticks one-time $40, 7-Day $40 (Nov 18 2026).
+  - Gifts per size come from the product unless the size block overrides them (kit_sub / kit_once).
+  - Button: "Continue · {price} + Free Starter Kit" (7-Day: "+ 3 Free Guides"); guarantee line under it.
+  - The Zeotein FAQ (snippets/zt-faq-content.liquid) with FAQPage schema renders under the chooser (setting faq_set).
+{% endcomment %}
+
+{%- liquid
+  assign uid = 'zt-chooser-' | append: section.id
+  assign blend_count = 0
+  for b in section.blocks
+    if b.type == 'blend'
+      assign blend_count = blend_count | plus: 1
+    endif
+  endfor
+  assign first_blend = ''
+  for b in section.blocks
+    if b.type == 'blend' and first_blend == ''
+      assign first_blend = b.settings.key
+    endif
+  endfor
+  assign zt_ch_blend = false
+  for b in section.blocks
+    if b.type == 'option' and b.settings.product != blank
+      if b.settings.product.tags contains 'protein-blend'
+        assign zt_ch_blend = true
+      endif
+    endif
+  endfor
+-%}
+
+<section id="{{ uid }}" class="zt-ch" data-zt-chooser data-mode="sub" data-blend="{{ first_blend | escape }}">
+  <div class="zt-ch__inner">
+    <div class="zt-ch__media">
+      {%- for b in section.blocks -%}
+        {%- if b.type == 'option' and b.settings.product != blank -%}
+          {%- assign p = b.settings.product -%}
+          {%- assign zt_imgs = p.media | where: 'media_type', 'image' -%}
+          <div class="zt-ch__img-wrap" data-zt-img="{{ b.id }}" {% unless forloop.first %}hidden{% endunless %}>
+            <div class="zt-ch__gal" data-zt-gal tabindex="0" role="region" aria-roledescription="carousel" aria-label="{{ b.settings.title | escape }} photos">
+              {%- if zt_imgs.size > 0 -%}
+                {%- for m in zt_imgs -%}
+                  {%- liquid
+                    assign zt_alt = m.alt | default: b.settings.title
+                    assign zt_load = 'lazy'
+                    if forloop.first
+                      assign zt_load = 'eager'
+                    endif
+                  -%}
+                  <div class="zt-ch__slide">
+                    {{ m.preview_image | image_url: width: 1100 | image_tag: loading: zt_load, widths: '450, 700, 900, 1100', sizes: '(min-width: 990px) 50vw, 100vw', class: 'zt-ch__img', alt: zt_alt }}
+                  </div>
+                {%- endfor -%}
+              {%- elsif b.settings.image != blank -%}
+                <div class="zt-ch__slide">{{ b.settings.image | image_url: width: 1100 | image_tag: loading: 'eager', widths: '450, 700, 900, 1100', sizes: '(min-width: 990px) 50vw, 100vw', class: 'zt-ch__img', alt: b.settings.title }}</div>
+              {%- elsif p.featured_image -%}
+                <div class="zt-ch__slide">{{ p.featured_image | image_url: width: 1100 | image_tag: loading: 'eager', widths: '450, 700, 900, 1100', sizes: '(min-width: 990px) 50vw, 100vw', class: 'zt-ch__img', alt: b.settings.title }}</div>
+              {%- endif -%}
+            </div>
+            {%- if zt_imgs.size > 1 -%}
+              <button type="button" class="zt-ch__gal-btn zt-ch__gal-btn--prev" data-zt-gal-prev aria-label="Previous photo"><svg aria-hidden="true" focusable="false" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button>
+              <button type="button" class="zt-ch__gal-btn zt-ch__gal-btn--next" data-zt-gal-next aria-label="Next photo"><svg aria-hidden="true" focusable="false" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg></button>
+              <div class="zt-ch__dots">
+                {%- for m in zt_imgs -%}
+                  <button type="button" class="zt-ch__dot{% if forloop.first %} is-active{% endif %}" data-zt-dot="{{ forloop.index0 }}" aria-label="Photo {{ forloop.index }} of {{ zt_imgs.size }}"></button>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="zt-ch__panel">
+      <h1 class="zt-ch__heading">{{ section.settings.heading }} {% if section.settings.heading_accent != blank %}<span>{{ section.settings.heading_accent }}</span>{% endif %}</h1>
+      {%- if section.settings.intro != blank -%}<p class="zt-ch__intro">{{ section.settings.intro }}</p>{%- endif -%}
+      {%- if section.settings.rating_text != blank -%}
+        <p class="zt-ch__rating"><span class="zt-ch__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> {{ section.settings.rating_text }}</p>
+      {%- endif -%}
+
+      {%- if blend_count > 1 -%}
+        <p class="zt-ch__step" id="{{ uid }}-blend-label">{{ section.settings.blend_step }}</p>
+        <div class="zt-ch__blends" role="group" aria-labelledby="{{ uid }}-blend-label">
+          {%- for b in section.blocks -%}
+            {%- if b.type == 'blend' -%}
+              <button type="button" class="zt-ch__blend{% if b.settings.key == first_blend %} is-active{% endif %}" data-zt-blend-btn="{{ b.settings.key | escape }}" aria-pressed="{% if b.settings.key == first_blend %}true{% else %}false{% endif %}" {{ b.shopify_attributes }}>
+                <strong>{{ b.settings.label }}</strong>
+                {%- if b.settings.sublabel != blank -%}<span>{{ b.settings.sublabel }}</span>{%- endif -%}
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <p class="zt-ch__step" id="{{ uid }}-mode-label">{{ section.settings.mode_step }}</p>
+      <div class="zt-ch__modes" role="group" aria-labelledby="{{ uid }}-mode-label">
+        <button type="button" class="zt-ch__mode is-active" data-zt-mode-btn="sub" aria-pressed="true">{{ section.settings.subscribe_label }}</button>
+        <button type="button" class="zt-ch__mode" data-zt-mode-btn="once" aria-pressed="false">{{ section.settings.onetime_label }}</button>
+      </div>
+
+      <p class="zt-ch__step" id="{{ uid }}-size-label">{{ section.settings.size_step }}</p>
+      <div class="zt-ch__options" role="group" aria-labelledby="{{ uid }}-size-label">
+        {%- assign first_done = false -%}
+        {%- for b in section.blocks -%}
+          {%- if b.type == 'option' and b.settings.product != blank -%}
+            {%- liquid
+              assign p = b.settings.product
+              assign v = p.selected_or_first_available_variant
+              assign once_price = v.price
+              assign sub_price = nil
+              assign plan_id = ''
+              assign alloc = nil
+              if b.settings.one_time_only == false
+                if b.settings.selling_plan_id != blank
+                  for a in v.selling_plan_allocations
+                    assign aid = a.selling_plan.id | append: ''
+                    if aid == b.settings.selling_plan_id
+                      assign alloc = a
+                    endif
+                  endfor
+                endif
+                if alloc == nil
+                  assign alloc = v.selling_plan_allocations.first
+                endif
+              endif
+              if alloc
+                assign sub_price = alloc.price
+                assign plan_id = alloc.selling_plan.id
+              endif
+              assign is_first = false
+              if b.settings.blend == first_blend and first_done == false
+                assign is_first = true
+                assign first_done = true
+              endif
+              assign k_sub = b.settings.kit_sub
+              assign k_once = b.settings.kit_once
+              if b.settings.one_time_only
+                assign k_once = k_once | default: 'guides'
+              elsif p.handle contains 'bag'
+                assign k_sub = k_sub | default: 'shaker,scoop,guides'
+                assign k_once = k_once | default: 'scoop,guides'
+              else
+                assign k_sub = k_sub | default: 'shaker,guides'
+                assign k_once = k_once | default: 'guides'
+              endif
+            -%}
+            <button type="button"
+              class="zt-ch__opt{% if is_first %} is-active{% endif %}{% if sub_price == nil %} is-once-only{% endif %}"
+              data-zt-opt="{{ b.id }}"
+              data-blend="{{ b.settings.blend | escape }}"
+              data-url="{{ p.url }}"
+              data-plan="{{ plan_id }}"
+              data-title="{{ b.settings.title | escape }}"
+              data-suffix="{% if b.settings.cta_suffix != blank %}{{ b.settings.cta_suffix | escape }}{% elsif b.settings.one_time_only %}3 Free Guides{% else %}Free Starter Kit{% endif %}"
+              data-once="{{ once_price | money | escape }}"
+              data-sub="{% if sub_price %}{{ sub_price | money | escape }}{% endif %}"
+              aria-pressed="{% if is_first %}true{% else %}false{% endif %}"
+              {{ b.shopify_attributes }}>
+              <span class="zt-ch__opt-thumb">
+                {%- if p.featured_image -%}{{ p.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+              </span>
+              <span class="zt-ch__opt-body">
+                <strong class="zt-ch__opt-title">{{ b.settings.title }}</strong>
+                {%- if b.settings.description != blank -%}<span class="zt-ch__opt-desc">{{ b.settings.description }}</span>{%- endif -%}
+                {%- if b.settings.gift_badge != blank -%}<span class="zt-ch__gbadge">{{ b.settings.gift_badge }}</span>{%- elsif zt_ch_blend -%}<span class="zt-ch__gbadge">{% if b.settings.one_time_only %}+ 3 FREE GUIDES{% else %}+ FREE STARTER KIT{% endif %}</span>{%- endif -%}
+                {%- if sub_price == nil -%}
+                  <span class="zt-ch__opt-note">{{ section.settings.once_only_label }}</span>
+                {%- endif -%}
+              </span>
+              <span class="zt-ch__opt-price">
+                {%- if sub_price -%}
+                  <span class="zt-ch__sub-only"><strong>{{ sub_price | money }}</strong></span>
+                  <span class="zt-ch__once-only"><strong>{{ once_price | money }}</strong></span>
+                {%- else -%}
+                  <strong>{{ once_price | money }}</strong>
+                {%- endif -%}
+              </span>
+              {%- if zt_ch_blend -%}
+                {%- if b.settings.one_time_only -%}
+                  {%- render 'zt-ch-perk', csv: k_once, kind: 'trial', mode_class: '' -%}
+                {%- else -%}
+                  {%- render 'zt-ch-perk', csv: k_sub, kind: 'sub', mode_class: 'zt-ch__sub-only' -%}
+                  {%- render 'zt-ch-perk', csv: k_once, kind: 'once', mode_class: 'zt-ch__once-only' -%}
+                {%- endif -%}
+              {%- endif -%}
+              {%- if b.settings.badge != blank -%}<span class="zt-ch__badge">{{ b.settings.badge }}</span>{%- endif -%}
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if zt_ch_blend -%}
+      <div class="zt-ch__kits">
+        {%- for b in section.blocks -%}
+          {%- if b.type == 'option' and b.settings.product != blank -%}
+            {%- liquid
+              assign k_h = b.settings.product.handle
+              assign k_title = b.settings.kit_title
+              assign k_sub = b.settings.kit_sub
+              assign k_once = b.settings.kit_once
+              if b.settings.one_time_only
+                assign k_title = k_title | default: 'Your 3 FREE Guides'
+                assign k_once = k_once | default: 'guides'
+              else
+                assign k_title = k_title | default: 'Your FREE Starter Kit'
+                if k_h contains 'bag'
+                  assign k_sub = k_sub | default: 'shaker,scoop,guides'
+                  assign k_once = k_once | default: 'scoop,guides'
+                else
+                  assign k_sub = k_sub | default: 'shaker,guides'
+                  assign k_once = k_once | default: 'guides'
+                endif
+              endif
+            -%}
+            <div data-zt-gifts="{{ b.id }}" {% unless forloop.first %}hidden{% endunless %}>
+              {%- if b.settings.one_time_only -%}
+                {%- render 'zt-ch-kit', csv: k_once, title: k_title, note: section.settings.kit_note, mode_class: '' -%}
+              {%- else -%}
+                {%- render 'zt-ch-kit', csv: k_sub, title: k_title, note: section.settings.kit_note, mode_class: 'zt-ch__sub-only' -%}
+                {%- render 'zt-ch-kit', csv: k_once, title: k_title, note: section.settings.kit_note, mode_class: 'zt-ch__once-only' -%}
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      <a class="zt-ch__cta" href="#" data-zt-cta>
+        <span data-zt-cta-label>{{ section.settings.cta_label }}</span>
+        <span class="zt-ch__cta-sep" aria-hidden="true">&middot;</span>
+        <span class="zt-ch__cta-price" data-zt-cta-price></span>
+      </a>
+      <p class="zt-ch__note" data-zt-summary aria-live="polite"></p>
+      {%- if zt_ch_blend and section.settings.guarantee_text != blank -%}
+        <p class="zt-ch__guar"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span>{{ section.settings.guarantee_text }}</span></p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- liquid
+  assign zt_faq_set = section.settings.faq_set
+  if zt_faq_set == 'auto'
+    assign zt_faq_set = 'all'
+    assign zt_has_cacao = false
+    for b in section.blocks
+      if b.type == 'option' and b.settings.product != blank and b.settings.product.handle contains 'cacao'
+        assign zt_has_cacao = true
+      endif
+    endfor
+    if zt_has_cacao == false
+      assign zt_faq_set = 'vegan'
+    endif
+  endif
+-%}
+{%- if zt_ch_blend and zt_faq_set != 'none' -%}
+  {{ 'zt-faq.css' | asset_url | stylesheet_tag }}
+  <section id="{{ uid }}-faq" class="zt-faq zt-ch-faq" aria-labelledby="{{ uid }}-faq-h">
+    <div class="zt-faq__container">
+      <div class="zt-faq__header"><div class="zt-faq__eyebrow">QUESTIONS, ANSWERED</div><h2 id="{{ uid }}-faq-h" class="zt-faq__heading">{{ section.settings.faq_heading }}</h2></div>
+      <div class="zt-faq__list">{%- render 'zt-faq-content', set: zt_faq_set, schema: true -%}</div>
+    </div>
+  </section>
+{%- endif -%}
+
+<style>
+  #{{ uid }} { background: #f8f5f0; padding: 48px 24px 64px; color: #35164f; }
+  #{{ uid }} .zt-ch__inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  #{{ uid }} .zt-ch__media { position: sticky; top: 24px; border-radius: 20px; overflow: hidden; background: #ffffff; }
+  #{{ uid }} .zt-ch__img-wrap { position: relative; }
+  #{{ uid }} .zt-ch__img-wrap[hidden] { display: none; }
+  #{{ uid }} .zt-ch__gal { display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; scrollbar-width: none; outline: none; }
+  #{{ uid }} .zt-ch__gal::-webkit-scrollbar { display: none; }
+  #{{ uid }} .zt-ch__slide { flex: 0 0 100%; aspect-ratio: 1; scroll-snap-align: center; scroll-snap-stop: always; display: flex; align-items: center; justify-content: center; background: #ffffff; }
+  #{{ uid }} .zt-ch__img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  #{{ uid }} .zt-ch__gal-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; padding: 0; border: 1px solid #ece7f1; border-radius: 999px; background: rgba(255, 255, 255, .92); color: #35164f; cursor: pointer; box-shadow: 0 2px 8px rgba(53, 22, 79, .12); }
+  #{{ uid }} .zt-ch__gal-btn--prev { left: 10px; }
+  #{{ uid }} .zt-ch__gal-btn--next { right: 10px; }
+  #{{ uid }} .zt-ch__gal-btn[disabled] { opacity: .35; cursor: default; }
+  #{{ uid }} .zt-ch__dots { position: absolute; left: 0; right: 0; bottom: 10px; display: flex; justify-content: center; gap: 4px; pointer-events: none; }
+  #{{ uid }} .zt-ch__dot { pointer-events: auto; width: 22px; height: 22px; padding: 0; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  #{{ uid }} .zt-ch__dot::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: rgba(255, 255, 255, .85); box-shadow: 0 0 0 1px rgba(53, 22, 79, .35); }
+  #{{ uid }} .zt-ch__dot.is-active::before { width: 10px; height: 10px; background: #47206b; box-shadow: 0 0 0 2px #ffffff; }
+  #{{ uid }} .zt-ch__heading { margin: 0; font-size: clamp(32px, 4vw, 46px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; color: #35164f; }
+  #{{ uid }} .zt-ch__heading span { color: #5a3a86; }
+  #{{ uid }} .zt-ch__intro { margin: 12px 0 0; font-size: 16px; line-height: 1.5; color: #4a3b5a; }
+  #{{ uid }} .zt-ch__rating { margin: 10px 0 0; font-size: 14px; color: #35164f; }
+  #{{ uid }} .zt-ch__stars { color: #e3a008; letter-spacing: 2px; }
+  #{{ uid }} .zt-ch__step { margin: 24px 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #17625f; }
+  #{{ uid }} .zt-ch__blends, #{{ uid }} .zt-ch__modes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  #{{ uid }} .zt-ch__blend, #{{ uid }} .zt-ch__mode, #{{ uid }} .zt-ch__opt { font: inherit; color: inherit; cursor: pointer; text-align: left; background: #ffffff; border: 2px solid #ece7f1; border-radius: 14px; }
+  #{{ uid }} .zt-ch__blend { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; }
+  #{{ uid }} .zt-ch__blend strong { font-size: 16px; }
+  #{{ uid }} .zt-ch__blend span { font-size: 13px; color: #6b5d7a; }
+  #{{ uid }} .zt-ch__blend.is-active { border-color: #47206b; background: #f3eef8; }
+  #{{ uid }} .zt-ch__mode { min-height: 48px; text-align: center; font-weight: 700; font-size: 15px; }
+  #{{ uid }} .zt-ch__mode.is-active { background: #47206b; border-color: #47206b; color: #ffffff; }
+  #{{ uid }} .zt-ch__options { display: grid; gap: 10px; }
+  #{{ uid }} .zt-ch__opt { position: relative; display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 12px 14px; }
+  #{{ uid }} .zt-ch__opt[hidden] { display: none; }
+  #{{ uid }} .zt-ch__opt.is-active { border-color: #47206b; background: #f3eef8; }
+  #{{ uid }} .zt-ch__opt-thumb { width: 56px; height: 56px; border-radius: 10px; overflow: hidden; background: #f1eee9; }
+  #{{ uid }} .zt-ch__opt-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; background: #ffffff; }
+  #{{ uid }} .zt-ch__opt-body { display: flex; flex-direction: column; gap: 2px; }
+  #{{ uid }} .zt-ch__opt-title { font-size: 16px; }
+  #{{ uid }} .zt-ch__opt-desc { font-size: 13px; color: #6b5d7a; }
+  #{{ uid }} .zt-ch__opt-note { font-size: 13px; color: #6b5d7a; }
+  #{{ uid }} .zt-ch__opt-price { text-align: right; }
+  #{{ uid }} .zt-ch__opt-price strong { display: block; font-size: 18px; }
+  #{{ uid }} .zt-ch__badge { position: absolute; top: -10px; right: 12px; padding: 3px 10px; border-radius: 999px; background: #47206b; color: #ffffff; font-size: 11px; font-weight: 700; }
+  #{{ uid }}[data-mode="sub"] .zt-ch__once-only { display: none; }
+  #{{ uid }}[data-mode="once"] .zt-ch__sub-only { display: none; }
+  #{{ uid }}[data-mode="sub"] .zt-ch__opt.is-once-only { opacity: .7; }
+  #{{ uid }} .zt-ch__gbadge { display: inline-block; align-self: flex-start; margin-top: 5px; padding: 3px 9px; border-radius: 999px; background: #32BAC0; color: #0b2c2e; font-size: 11px; font-weight: 800; letter-spacing: .05em; }
+  #{{ uid }} .zt-ch__perk { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; padding: 9px 11px; border-radius: 10px; background: #ece3f7; border: 1px solid #ddd0ee; font-size: 13.5px; line-height: 1.35; color: #2E1748; }
+  #{{ uid }} .zt-ch__perk--once { background: #f2f1f5; border-color: #e6e3ec; color: #3A3546; }
+  #{{ uid }} .zt-ch__opt:not(.is-active) .zt-ch__perk { display: none; }
+  #{{ uid }} .zt-ch__perk-thumbs { display: flex; flex: none; align-items: center; }
+  #{{ uid }} .zt-ch__perk-thumbs > img { width: 32px; height: 32px; object-fit: contain; border-radius: 50%; background: #ffffff; border: 1.5px solid #ffffff; box-shadow: 0 1px 3px rgba(29, 21, 48, .2); }
+  #{{ uid }} .zt-ch__perk-thumbs > img + img, #{{ uid }} .zt-ch__perk-thumbs > img + .zt-ch__perk-fan { margin-left: -9px; }
+  #{{ uid }} .zt-ch__perk-fan { position: relative; display: inline-block; flex: none; width: 44px; height: 34px; }
+  #{{ uid }} .zt-ch__perk-fan img { position: absolute; bottom: 0; width: 21px; height: 30px; object-fit: cover; border-radius: 3px; border: 1px solid #ffffff; background: #ffffff; box-shadow: 0 1px 3px rgba(29, 21, 48, .28); }
+  #{{ uid }} .zt-ch__perk-fan img:nth-child(1) { left: 2px; transform: rotate(-11deg); z-index: 1; }
+  #{{ uid }} .zt-ch__perk-fan img:nth-child(2) { left: 21px; transform: rotate(11deg); z-index: 2; }
+  #{{ uid }} .zt-ch__perk-fan img:nth-child(3) { left: 12px; z-index: 3; }
+  #{{ uid }} .zt-ch__perk-txt { min-width: 0; }
+  #{{ uid }} .zt-ch__perk-txt b { font-weight: 700; color: #4B2380; }
+  #{{ uid }} .zt-ch__perk--once .zt-ch__perk-txt b { color: #2E2A38; }
+  #{{ uid }} .zt-ch__perk-txt small { display: block; margin-top: 1px; font-size: 12.5px; color: #6B6478; }
+  #{{ uid }} .zt-ch__kits { margin-top: 16px; }
+  #{{ uid }} .zt-ch__kits > [hidden] { display: none; }
+  #{{ uid }} .zt-ch__kit { padding: 16px; border-radius: 16px; background: #5F2D90; background-image: linear-gradient(135deg, #5F2D90 0%, #4a2a7c 55%, #2f8a90 100%); color: #ffffff; box-shadow: 0 10px 24px rgba(53, 22, 79, .18); }
+  #{{ uid }} .zt-ch__kit-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  #{{ uid }} .zt-ch__kit-title { margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -.01em; color: #ffffff; }
+  #{{ uid }} .zt-ch__kit-val { padding: 5px 11px; border-radius: 999px; background: #ffffff; color: #5F2D90; font-size: 12px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+  #{{ uid }} .zt-ch__kit-note { margin: 4px 0 0; font-size: 13px; color: #eadcfa; }
+  #{{ uid }} .zt-ch__kit-list { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+  #{{ uid }} .zt-ch__kit-item { display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 7px 10px 7px 7px; border-radius: 11px; background: rgba(255, 255, 255, .13); }
+  #{{ uid }} .zt-ch__kit-thumb { width: 38px; height: 38px; border-radius: 8px; overflow: hidden; background: #ffffff; }
+  #{{ uid }} .zt-ch__kit-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  #{{ uid }} .zt-ch__kit-name { font-size: 14px; font-weight: 700; line-height: 1.25; }
+  #{{ uid }} .zt-ch__kit-name small { font-weight: 500; font-size: 12px; color: #e0d2f3; }
+  #{{ uid }} .zt-ch__kit-price { font-size: 13px; white-space: nowrap; }
+  #{{ uid }} .zt-ch__kit-price s { color: #dccdf0; }
+  #{{ uid }} .zt-ch__kit-price b { margin-left: 4px; padding: 2px 7px; border-radius: 6px; background: #bff0f2; color: #0b2c2e; font-weight: 900; font-size: 12px; letter-spacing: .04em; }
+  #{{ uid }} .zt-ch__cta { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; margin-top: 18px; border-radius: 999px; background: #47206b; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 700; }
+  #{{ uid }} .zt-ch__cta:hover { background: #35164f; }
+  #{{ uid }} .zt-ch__cta-sep { opacity: .7; }
+  #{{ uid }} .zt-ch__note { margin: 10px 0 0; text-align: center; font-size: 13px; line-height: 1.45; color: #4a3b5a; }
+  #{{ uid }} .zt-ch__note:empty { display: none; }
+  #{{ uid }} .zt-ch__guar { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 12px 0 0; font-size: 13.5px; font-weight: 600; color: #35164f; text-align: center; }
+  #{{ uid }} .zt-ch__guar svg { flex: none; color: #14a39a; }
+  #{{ uid }} button:focus-visible, #{{ uid }} a:focus-visible { outline: 3px solid #17625f; outline-offset: 2px; }
+  @media screen and (max-width: 989px) {
+    #{{ uid }} .zt-ch__inner { grid-template-columns: 1fr; gap: 24px; max-width: 620px; }
+    #{{ uid }} .zt-ch__media { position: static; }
+  }
+  @media screen and (max-width: 749px) {
+    #{{ uid }} { padding: 24px 16px 48px; }
+    #{{ uid }} .zt-ch__opt { grid-template-columns: 48px minmax(0, 1fr) auto; gap: 10px; }
+    #{{ uid }} .zt-ch__opt-thumb { width: 48px; height: 48px; }
+    #{{ uid }} .zt-ch__gal-btn { width: 34px; height: 34px; }
+    #{{ uid }} .zt-ch__perk { font-size: 12.5px; padding: 8px 9px; }
+    #{{ uid }} .zt-ch__kit { padding: 14px; }
+    #{{ uid }} .zt-ch__kit-name { font-size: 13px; }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById('{{ uid }}');
+    if (!root) return;
+    var opts = Array.prototype.slice.call(root.querySelectorAll('[data-zt-opt]'));
+    var cta = root.querySelector('[data-zt-cta]');
+    var ctaPrice = root.querySelector('[data-zt-cta-price]');
+    var summary = root.querySelector('[data-zt-summary]');
+    var subLabel = {{ section.settings.subscribe_label | json }};
+    var onceLabel = {{ section.settings.onetime_label | json }};
+    function active() { return root.querySelector('[data-zt-opt].is-active'); }
+    function setPressed(list, el) {
+      list.forEach(function (b) { var on = b === el; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+    }
+    function sync() {
+      var blend = root.getAttribute('data-blend');
+      var mode = root.getAttribute('data-mode');
+      opts.forEach(function (o) { o.hidden = !!blend && o.getAttribute('data-blend') !== blend; });
+      var cur = active();
+      if (!cur || cur.hidden) { cur = opts.filter(function (o) { return !o.hidden; })[0]; if (cur) setPressed(opts, cur); }
+      if (!cur) return;
+      var id = cur.getAttribute('data-zt-opt');
+      root.querySelectorAll('[data-zt-img]').forEach(function (el) { el.hidden = el.getAttribute('data-zt-img') !== id; });
+      root.querySelectorAll('[data-zt-gifts]').forEach(function (el) { el.hidden = el.getAttribute('data-zt-gifts') !== id; });
+      var sub = cur.getAttribute('data-sub');
+      var useSub = mode === 'sub' && sub;
+      var url = cur.getAttribute('data-url');
+      if (useSub && cur.getAttribute('data-plan')) url += (url.indexOf('?') > -1 ? '&' : '?') + 'selling_plan=' + cur.getAttribute('data-plan');
+      cta.setAttribute('href', url);
+      var sfx = cur.getAttribute('data-suffix');
+      ctaPrice.textContent = (useSub ? sub : cur.getAttribute('data-once')) + (sfx ? ' + ' + sfx : '');
+      cta.setAttribute('aria-label', cur.getAttribute('data-title') + ', ' + (useSub ? subLabel : onceLabel) + ', ' + ctaPrice.textContent);
+      if (summary) summary.textContent = cur.getAttribute('data-title') + ', ' + (useSub ? subLabel : onceLabel);
+    }
+    root.querySelectorAll('[data-zt-blend-btn]').forEach(function (b, i, all) {
+      b.addEventListener('click', function () { root.setAttribute('data-blend', b.getAttribute('data-zt-blend-btn')); setPressed(Array.prototype.slice.call(all), b); sync(); });
+    });
+    var modeBtns = Array.prototype.slice.call(root.querySelectorAll('[data-zt-mode-btn]'));
+    modeBtns.forEach(function (b) {
+      b.addEventListener('click', function () { root.setAttribute('data-mode', b.getAttribute('data-zt-mode-btn')); setPressed(modeBtns, b); sync(); });
+    });
+    opts.forEach(function (o) {
+      o.addEventListener('click', function () {
+        setPressed(opts, o);
+        if (!o.getAttribute('data-sub') && root.getAttribute('data-mode') === 'sub') {
+          root.setAttribute('data-mode', 'once');
+          setPressed(modeBtns, root.querySelector('[data-zt-mode-btn="once"]'));
+        }
+        sync();
+      });
+    });
+    root.querySelectorAll('.zt-ch__img-wrap').forEach(function (wrap) {
+      var gal = wrap.querySelector('[data-zt-gal]');
+      if (!gal) return;
+      var dots = Array.prototype.slice.call(wrap.querySelectorAll('[data-zt-dot]'));
+      var prev = wrap.querySelector('[data-zt-gal-prev]');
+      var next = wrap.querySelector('[data-zt-gal-next]');
+      var count = gal.children.length;
+      function idx() { var w = gal.clientWidth || 1; return Math.max(0, Math.min(count - 1, Math.round(gal.scrollLeft / w))); }
+      function go(i) { gal.scrollTo({ left: i * gal.clientWidth, behavior: 'smooth' }); }
+      function mark() {
+        var i = idx();
+        dots.forEach(function (d, j) { d.classList.toggle('is-active', j === i); d.setAttribute('aria-current', j === i ? 'true' : 'false'); });
+        if (prev) prev.disabled = i === 0;
+        if (next) next.disabled = i === count - 1;
+      }
+      var t;
+      gal.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(mark, 60); }, { passive: true });
+      dots.forEach(function (d, j) { d.addEventListener('click', function () { go(j); }); });
+      if (prev) prev.addEventListener('click', function () { go(idx() - 1); });
+      if (next) next.addEventListener('click', function () { go(idx() + 1); });
+      gal.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(idx() + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx() - 1); }
+      });
+      mark();
+    });
+    sync();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Zeotein blend chooser",
+  "tag": "section",
+  "class": "section-zt-blend-chooser",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Protein" },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent word", "default": "Blends" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Subscribe & Save. Every first order comes with free gifts, and you can skip, pause or cancel anytime." },
+    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "Rated 4.9 stars by verified buyers" },
+    { "type": "text", "id": "blend_step", "label": "Blend step label", "default": "Pick your blend" },
+    { "type": "text", "id": "mode_step", "label": "Purchase type step label", "default": "How do you want it?" },
+    { "type": "text", "id": "size_step", "label": "Size step label", "default": "Pick your size" },
+    { "type": "text", "id": "subscribe_label", "label": "Subscribe button", "default": "Subscribe & Save" },
+    { "type": "text", "id": "onetime_label", "label": "One-time button", "default": "One-Time" },
+    { "type": "text", "id": "save_prefix", "label": "Savings prefix (not shown since Nov 16 2026)", "default": "You save" },
+    { "type": "text", "id": "once_only_label", "label": "One-time only label", "default": "One-time only" },
+    { "type": "text", "id": "gifts_heading", "label": "Gifts heading (not shown since Nov 18 2026)", "default": "Included free" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Continue" },
+    { "type": "text", "id": "kit_note", "label": "Gift card note", "default": "Free with your first order" },
+    { "type": "text", "id": "guarantee_text", "label": "Guarantee line under the button", "default": "30-day money-back guarantee · Ships in 1 to 2 business days" },
+    { "type": "select", "id": "faq_set", "label": "FAQ under the chooser", "default": "auto", "options": [
+      { "value": "auto", "label": "Automatic (Vegan set on a Vegan-only page)" },
+      { "value": "all", "label": "All 12 questions" },
+      { "value": "vegan", "label": "Vegan set" },
+      { "value": "none", "label": "None" }
+    ] },
+    { "type": "text", "id": "faq_heading", "label": "FAQ heading", "default": "Good Questions. Straight Answers." }
+  ],
+  "blocks": [
+    {
+      "type": "blend",
+      "name": "Blend",
+      "settings": [
+        { "type": "text", "id": "key", "label": "Blend key (matches the size blocks)", "default": "cacao" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Cacao" },
+        { "type": "text", "id": "sublabel", "label": "Sub label", "default": "Bulk bag or sticks" }
+      ]
+    },
+    {
+      "type": "option",
+      "name": "Size",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "blend", "label": "Blend key", "default": "cacao" },
+        { "type": "text", "id": "title", "label": "Card title (say exactly what it is)", "default": "30-Day Bulk Bag, Cacao" },
+        { "type": "text", "id": "description", "label": "Card description" },
+        { "type": "text", "id": "badge", "label": "Badge" },
+        { "type": "image_picker", "id": "image", "label": "Large photo (blank uses the product photo)" },
+        { "type": "checkbox", "id": "one_time_only", "label": "One-time only", "default": false },
+        { "type": "text", "id": "selling_plan_id", "label": "Selling plan ID for the subscribe price (blank uses the first plan)" },
+        { "type": "textarea", "id": "gifts_sub", "label": "Old gift lines with Subscribe (not shown since Nov 18 2026)" },
+        { "type": "textarea", "id": "gifts_once", "label": "Old gift lines with One-Time (not shown since Nov 18 2026)" },
+        { "type": "text", "id": "gift_badge", "label": "Gift badge", "info": "Blank: + FREE STARTER KIT, or + 3 FREE GUIDES on one-time-only sizes" },
+        { "type": "text", "id": "kit_title", "label": "Gift card title", "info": "Blank: Your FREE Starter Kit, or Your 3 FREE Guides" },
+        { "type": "text", "id": "kit_sub", "label": "Gifts with Subscribe", "info": "Comma list of shaker, scoop, guides. Blank: set by the product" },
+        { "type": "text", "id": "kit_once", "label": "Gifts with One-Time", "info": "Comma list of shaker, scoop, guides. Blank: set by the product" },
+        { "type": "text", "id": "cta_suffix", "label": "Button ending", "info": "Blank: Free Starter Kit, or 3 Free Guides" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Zeotein blend chooser" }]
+}
+{% endschema %}

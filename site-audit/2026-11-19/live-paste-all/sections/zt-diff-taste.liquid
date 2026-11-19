@@ -1,0 +1,35 @@
+{%- render 'zt-diff-head' -%}
+<section class="zt-d zt-d-taste">
+  <div class="zt-d__wrap">
+    <div class="zt-d-taste__box">
+      <div class="zt-d-taste__copy">
+        {%- if section.settings.eyebrow != blank -%}<p class="zt-d__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2>{{ section.settings.heading }}</h2>
+        <p class="zt-d-taste__answer">{{ section.settings.answer }}</p>
+        <p class="zt-d-taste__text">{{ section.settings.text }}</p>
+        <p class="zt-d-taste__closer">{{ section.settings.closer }}</p>
+      </div>
+      <div class="zt-d-taste__media">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600, 900, 1200', sizes: '(min-width: 990px) 600px, 100vw', alt: section.settings.image.alt }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Difference: taste",
+  "tag": "div",
+  "enabled_on": { "templates": ["page"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE QUESTION EVERYONE ASKS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Does it taste like bone broth?" },
+    { "type": "text", "id": "answer", "label": "Answer", "default": "Not even a little." },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "closer", "label": "Closing line", "default": "This is what clean tastes like." },
+    { "type": "image_picker", "id": "image", "label": "Photo" }
+  ],
+  "presets": [{ "name": "Difference: taste" }]
+}
+{% endschema %}

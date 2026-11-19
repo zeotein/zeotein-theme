@@ -1,0 +1,93 @@
+{
+  "sections": {
+    "diff_hero": {
+      "type": "zt-diff-hero",
+      "settings": {
+        "eyebrow": "THE ZEOTEIN DIFFERENCE",
+        "heading": "Intentional\nby design.",
+        "text": "Every ingredient earns its place. Every choice is made on purpose, so the shake in your hand is simple, clean and yours.",
+        "btn1_label": "Find Your Zeotein",
+        "btn1_link": "shopify://pages/protein-blends",
+        "btn2_label": "See What's Inside",
+        "btn2_link": "#inside",
+        "image": "shopify://shop_images/zeo-bulkbag-bright-soft.jpg",
+        "badge_big": "23g",
+        "badge_small": "protein per serving, Cacao"
+      },
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "number": "6", "label": "ingredients in Cacao" } },
+        "s2": { "type": "stat", "settings": { "number": "5", "label": "ingredients in Vegan" } },
+        "s3": { "type": "stat", "settings": { "number": "0g", "label": "sugar in Cacao" } },
+        "s4": { "type": "stat", "settings": { "number": "0g", "label": "added sugar in Vegan" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
+    },
+    "diff_choices": {
+      "type": "zt-diff-choices",
+      "settings": { "eyebrow": "ON PURPOSE", "heading": "Six choices that make Zeotein, Zeotein." },
+      "blocks": {
+        "c1": { "type": "card", "settings": { "kicker": "INTENTIONALLY", "title": "Simple.", "text": "Six ingredients in Cacao, five in Vegan. A short list you can read in one breath.", "style": "light", "teal_title": false } },
+        "c2": { "type": "card", "settings": { "kicker": "INTENTIONALLY", "title": "Unsweetened.", "text": "Zero artificial sweeteners. You decide how sweet it gets: a banana, a few dates, your favorite milk.", "style": "purple", "teal_title": false } },
+        "c3": { "type": "card", "settings": { "kicker": "INTENTIONALLY", "title": "Grass-fed.", "text": "Cacao gets its protein from grass-fed bone broth and grass-fed collagen peptides.", "style": "light", "teal_title": true } },
+        "c4": { "type": "card", "settings": { "kicker": "INTENTIONALLY", "title": "Plant-based.", "text": "Vegan pairs organic hemp with organic pumpkin seed protein for 20g of plant protein.", "style": "light", "teal_title": true } },
+        "c5": { "type": "card", "settings": { "kicker": "INTENTIONAL, BUT", "title": "Flexible.", "text": "Monthly, every 6 weeks or every 8 weeks. Skip, pause, swap or cancel anytime.", "style": "teal", "teal_title": false } },
+        "c6": { "type": "card", "settings": { "kicker": "INTENTIONAL", "title": "For your wellness.", "text": "One serving, real protein, from sources you can say out loud.", "style": "light", "teal_title": false } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6"]
+    },
+    "diff_blends": {
+      "type": "zt-diff-blends",
+      "settings": { "eyebrow": "WHAT'S INSIDE", "heading": "Two blends. One standard.", "anchor": "inside" },
+      "blocks": {
+        "cacao": { "type": "blend", "settings": {
+          "image": "shopify://shop_images/zeo-cacao-04.jpg",
+          "title": "Zeotein Cacao", "stat": "23g protein · 0g sugar",
+          "text": "Six ingredients. Bulk bag or stick packs.",
+          "ingredients": "Bone Broth Protein | GRASS-FED\nCollagen Peptides | GRASS-FED\nRaw Fermented Cacao | ORGANIC\nMCT Oil Powder | ORGANIC\nSea Moss | ORGANIC\nVolcanic Mineral | NATURALLY OCCURRING",
+          "button": "Shop Cacao", "link": "shopify://products/zeotein-cacao-bag-30", "theme": "dark" } },
+        "vegan": { "type": "blend", "settings": {
+          "image": "shopify://shop_images/zeo-vegan-01-tropical-glow.jpg",
+          "title": "Zeotein Vegan", "stat": "20g plant protein · 0g added sugar",
+          "text": "Five ingredients. Single-serve stick packs.",
+          "ingredients": "Hemp Protein | ORGANIC\nPumpkin Seed Protein | ORGANIC\nMCT Oil Powder | ORGANIC\nSea Moss | ORGANIC\nVolcanic Mineral | NATURALLY OCCURRING",
+          "button": "Shop Vegan", "link": "shopify://products/zeotein-vegan-sticks-30", "theme": "light" } }
+      },
+      "block_order": ["cacao", "vegan"]
+    },
+    "diff_taste": {
+      "type": "zt-diff-taste",
+      "settings": {
+        "eyebrow": "THE QUESTION EVERYONE ASKS",
+        "heading": "Does it taste like bone broth?",
+        "answer": "Not even a little.",
+        "text": "Our grass-fed bone broth protein is flavorless, so what you taste is rich, raw fermented cacao. Deep chocolate, intentionally unsweetened. Blend it with banana, stir it into coffee, or warm it up like cocoa.",
+        "closer": "This is what clean tastes like.",
+        "image": "shopify://shop_images/zeo-bag-sticks-soft.jpg"
+      }
+    },
+    "diff_flex": {
+      "type": "zt-diff-flex",
+      "settings": {
+        "image": "shopify://shop_images/zeo-sticks-soft.jpg",
+        "eyebrow": "INTENTIONAL, BUT FLEXIBLE",
+        "heading": "Your routine. Your schedule.",
+        "cad1": "Monthly", "cad1_sub": "the classic",
+        "cad2": "6 weeks", "cad2_sub": "a little more room",
+        "cad3": "8 weeks", "cad3_sub": "your own pace",
+        "chips": "Skip, Pause, Swap, Cancel anytime",
+        "text": "Bulk bag at home, stick packs for the car, the desk and the gym bag. Every first 30-day order comes with a free Starter Kit, and every blend is backed by our 30-day money-back guarantee."
+      }
+    },
+    "diff_close": {
+      "type": "zt-diff-close",
+      "settings": {
+        "eyebrow": "INTENTIONAL FOR YOUR WELLNESS",
+        "heading": "Simple on purpose.\nMade to fit your life.",
+        "button": "Find Your Zeotein",
+        "link": "shopify://pages/protein-blends",
+        "fine": "30-day money-back guarantee · Ships in 1 to 2 business days"
+      }
+    }
+  },
+  "order": ["diff_hero", "diff_choices", "diff_blends", "diff_taste", "diff_flex", "diff_close"]
+}

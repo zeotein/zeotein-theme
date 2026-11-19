@@ -1,0 +1,24 @@
+{%- render 'zt-diff-head' -%}
+<section class="zt-d zt-d-close">
+  <div class="zt-d-close__in">
+    {%- if section.settings.eyebrow != blank -%}<p class="zt-d__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h2>{{ section.settings.heading | newline_to_br }}</h2>
+    {%- if section.settings.button != blank -%}<a class="zt-d__btn zt-d__btn--dark" href="{{ section.settings.link | default: '/pages/protein-blends' }}">{{ section.settings.button }}</a>{%- endif -%}
+    {%- if section.settings.fine != blank -%}<p class="zt-d-close__fine">{{ section.settings.fine }}</p>{%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Difference: close",
+  "tag": "div",
+  "enabled_on": { "templates": ["page"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "INTENTIONAL FOR YOUR WELLNESS" },
+    { "type": "textarea", "id": "heading", "label": "Heading (new line = line break)", "default": "Simple on purpose.\nMade to fit your life." },
+    { "type": "text", "id": "button", "label": "Button", "default": "Find Your Zeotein" },
+    { "type": "url", "id": "link", "label": "Button link" },
+    { "type": "text", "id": "fine", "label": "Small line", "default": "30-day money-back guarantee · Ships in 1 to 2 business days" }
+  ],
+  "presets": [{ "name": "Difference: close" }]
+}
+{% endschema %}
