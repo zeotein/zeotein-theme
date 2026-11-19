@@ -1,0 +1,10 @@
+{
+  "read_at_utc": "2026-11-19, about 14:05 UTC (get-custom-values, location Kch9YmRfzpmQrAs5Bchz)",
+  "Sale active": {"id": "GP17CuDpTqOpdjRpDipR", "fieldKey": "{{ custom_values.sale_active }}", "value": "no"},
+  "Sale start": {"id": "JU4Cdo7pf0MTJp8iH1k0", "value": "2026-11-20"},
+  "Sale end":   {"id": "t9LNok6itznxY9WpT9Dr", "value": "2026-12-01"},
+  "Zeotein From Name": {"id": "Hcy0nBhL8hxE7sorIZDL", "fieldKey": "{{ custom_values.zeotein_from_name }}", "value": "Team Zeotein"},
+  "Zeotein Cacao Guide URL": {"id": "CYKVM9wfvud6s8Ue60JU", "value": "https://assets.cdn.filesafe.space/Kch9YmRfzpmQrAs5Bchz/media/6ac6ab3522bc27f58fc3e9d7.pdf"},
+  "Zeotein Vegan Guide URL": {"id": "AtcFwctBtN5qZzs7RLWC", "value": "https://assets.cdn.filesafe.space/Kch9YmRfzpmQrAs5Bchz/media/6ac6ab41045e774991a86e2c.pdf"},
+  "Zeotein Starter Guide URL": {"id": "kLu4oBx6JFhiOtMKraae", "value": "https://assets.cdn.filesafe.space/Kch9YmRfzpmQrAs5Bchz/media/6acb35b5c478ac55359d9173.pdf"}
+}
