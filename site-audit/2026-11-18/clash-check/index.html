@@ -1,0 +1,314 @@
+<title>Nov 18 Clash Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: purple masthead holding the two actions, then bands (fixed / decide / email and texts / dates) of ruled rows with a state pill; matches the Control Room house style. */
+:root{
+  --bg:#f7f5fa; --surface:#ffffff; --surface-2:#f0ebf6;
+  --fg:#1b1524; --fg-2:#574d64; --fg-3:#7c7289;
+  --line:#e2dbeb; --line-2:#cfc3e0;
+  --purple:#5F2D90; --teal:#32BAC0; --teal-dk:#17797f;
+  --red:#b3362c; --red-soft:#fbeae8; --amber:#8f5d06; --amber-soft:#fdf3e2; --green:#176b47; --green-soft:#e4f4ec;
+  --display:'Archivo',system-ui,-apple-system,sans-serif;
+  --body:'Public Sans',system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121017; --surface:#1c1724; --surface-2:#251d31; --fg:#f4f0f8; --fg-2:#c2b8ce; --fg-3:#958aa3;
+  --line:#342b42; --line-2:#463859; --purple:#a97cdb; --teal:#5fd4d9; --teal-dk:#5fc4c9;
+  --red:#f08879; --red-soft:#3a1f1c; --amber:#e0a34a; --amber-soft:#35270f; --green:#5fc795; --green-soft:#133026;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121017; --surface:#1c1724; --surface-2:#251d31; --fg:#f4f0f8; --fg-2:#c2b8ce; --fg-3:#958aa3;
+  --line:#342b42; --line-2:#463859; --purple:#a97cdb; --teal:#5fd4d9; --teal-dk:#5fc4c9;
+  --red:#f08879; --red-soft:#3a1f1c; --amber:#e0a34a; --amber-soft:#35270f; --green:#5fc795; --green-soft:#133026;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1{font-size:clamp(26px,5vw,40px);font-weight:900;line-height:1.05}
+h2{font-size:clamp(19px,2.8vw,24px);font-weight:800}
+h3{font-size:16px;font-weight:800}
+p{margin:0}
+.eyebrow{font-family:var(--display);font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--purple)}
+.mast{background:#5F2D90}
+.mast .eyebrow{color:#e0c9f5}
+.mast h1{color:#fff;margin-top:6px}
+.mast .kick{color:#ead9fa;font-size:16px;max-width:70ch;margin-top:10px}
+.mast .kick b{color:#fff}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:18px}
+.act{border-radius:12px;padding:15px 17px;display:grid;gap:6px;min-width:0;align-content:start}
+.act.urgent{background:#fff4f2;border:2px solid #f3b4ab}
+.act.urgent .lab{color:#9b2c22}
+.act.urgent .v{color:#3a0f0b}
+.act.urgent .s{color:#5b2a25}
+.act.urgent .s b{color:#3a0f0b}
+.act.click{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28)}
+.act.click .lab{color:#dcc6f2}
+.act.click .v{color:#fff}
+.act.click .s{color:#ead9fa}
+.act.click .s b{color:#fff}
+.act .lab{font-family:var(--display);font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.act .v{font-family:var(--display);font-weight:800;font-size:17px;line-height:1.25}
+.act .s{font-size:14px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px}
+.tile{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:10px 13px;min-width:0}
+.tile .n{font-family:var(--display);font-weight:900;font-size:26px;color:#fff;font-variant-numeric:tabular-nums}
+.tile .t{font-size:12.5px;color:#e0c9f5}
+.band.alt{background:var(--surface-2)}
+.head{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.head p{color:var(--fg-2);max-width:72ch}
+.rows{display:flex;flex-direction:column;gap:10px}
+.row{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:86px 1fr;gap:12px;min-width:0}
+.row > div{min-width:0}
+.pill{font-family:var(--display);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:99px;padding:4px 9px;white-space:nowrap;align-self:start;justify-self:start}
+.pill.done{background:var(--green-soft);color:var(--green)}
+.pill.you{background:var(--amber-soft);color:var(--amber)}
+.pill.risk{background:var(--red-soft);color:var(--red)}
+.row h3{margin-bottom:4px}
+.row p,.row li{font-size:14px;color:var(--fg-2)}
+.row p + p,.row p + .tw,.row .tw + p{margin-top:7px}
+.row b{color:var(--fg)}
+.row ul{margin:6px 0 0;padding-left:18px}
+.rec{margin-top:9px;font-size:13.5px;border-left:3px solid var(--teal);padding:4px 0 4px 10px;color:var(--fg)}
+.rec b{color:var(--teal-dk)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:11px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;background:var(--surface)}
+th,td{padding:8px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+thead th{font-family:var(--display);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);background:var(--surface-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+td.d{white-space:nowrap;font-weight:700;color:var(--purple)}
+.foot{background:#5F2D90}
+.foot p{color:#ead9fa;font-size:13.5px;max-width:78ch}
+.foot p + p{margin-top:9px}
+.foot b{color:#fff}
+.foot ul{margin:6px 0 0;padding-left:18px;color:#ead9fa;font-size:13.5px;max-width:78ch}
+.foot li{margin:4px 0}
+.foot ul + p{margin-top:9px}
+@media (max-width:560px){.row{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="mast">
+  <div class="wrap">
+    <p class="eyebrow">Zeotein · Cross-session check · 18 Nov 2026, 6:30 PM CT</p>
+    <h1>What clashed today, what is fixed, what needs you</h1>
+    <p class="kick">I read 12 conversations in full, plus the summaries of 30 more from 5 to 18 Nov. I also read all 23 scheduled tasks, the Daily Change Feed, the Control Room and the Roundtable recap, and checked the facts against Shopify itself. <b>Most of today's clashes trace back to one moment: the seven conversations started at 3:14 PM CT from the Roundtable, plus the Grok bots, all working in the same store and the same GoHighLevel account without seeing each other.</b></p>
+    <div class="acts">
+      <div class="act urgent">
+        <p class="lab">Before tomorrow 10:35 AM CT</p>
+        <p class="v">Deny the Chrome prompt waiting in "Win-back draft finish" on your Lenovo</p>
+        <p class="s">That conversation is working from Nov 15 instructions to keep the win-back flow "Draft". <b>The flow has been live since Nov 16 and sends WB9002 to about 205 people tomorrow morning.</b> Approving could switch it off. This conversation can't message conversations on your computer, so please deny it, or type there: "WB dbb240d7 is live, do not change it."</p>
+      </div>
+      <div class="act click">
+        <p class="lab">Your one theme click</p>
+        <p class="v">Publish "Live + FAQ, gifts and Difference page (Claude)"</p>
+        <p class="s">It now holds all of today's theme work: my sticky bar, landing page error and Protein Blends fixes, plus the new FAQ, gift lines, 3-guide cart and Difference page. Preview checked: 33 pages, 0 errors. Look at it first, because the FAQ and gifts are new to you. <b>Never publish "Superseded - fixes now in the FAQ + gifts theme" after it.</b></p>
+      </div>
+    </div>
+    <div class="tiles">
+      <div class="tile"><p class="n">8</p><p class="t">clashes fixed and checked</p></div>
+      <div class="tile"><p class="n">11</p><p class="t">need your call</p></div>
+      <div class="tile"><p class="n">7</p><p class="t">dates to watch</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="band">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Fixed tonight</p>
+      <h2>Already handled, each one checked</h2>
+    </div>
+    <div class="rows">
+      <div class="row"><span class="pill done">Fixed</span><div>
+        <h3>Two competing copies of the live theme</h3>
+        <p>At 3:14 PM CT, "Zeotein Shopify store updates" copied live for the FAQ, gifts and Difference page. That copy lacked my five approved fixes, so whichever copy went live last would have erased the other.</p>
+        <p><b>Done:</b> the other session agreed, and I copied my five files into its copy at 6:06 PM CT. I checked the file checksums and its preview: 33 pages, 0 errors, the sticky bar without the guarantee line, all five Protein Blends sections. My old copy is renamed "Superseded - fixes now in the FAQ + gifts theme".</p>
+      </div></div>
+      <div class="row"><span class="pill done">Fixed</span><div>
+        <h3>FAQ twice on the Protein Blends page</h3>
+        <p>The new FAQ under the chooser and the FAQ section I added to the bottom of the page would have shown the same 12 questions twice, each with its own Google FAQ code. <b>Done:</b> the chooser FAQ is off on that page only, so one FAQ remains.</p>
+      </div></div>
+      <div class="row"><span class="pill done">Fixed</span><div>
+        <h3>Vegan product page showed the old price</h3>
+        <p>Vegan 30 sticks dropped to $134.99 one-time at 4:13 PM CT, and subscribe is now $114.99. The product page still said "Subscribe and save. $124.99" and "$4.17 / $4.67 per serving", and Google reads that text too. <b>Done:</b> it now reads $114.99, $3.83 and $4.50. A before-and-after check shows only those two lines changed.</p>
+      </div></div>
+      <div class="row"><span class="pill done">Fixed</span><div>
+        <h3>Two conversations about to make a third theme copy</h3>
+        <p>"Seal Subscriptions cancel flow" planned to install on "a copy of the live theme", and "Never-bought win-back" its countdown bar on "the 18 Nov theme". Either could have started a third competing copy, or landed on a theme that never goes live. <b>Done:</b> both now know the exact theme, and that the Black Friday theme needs the same change. I also warned the win-back one that its code may clash with the Starter Kit gift discount.</p>
+      </div></div>
+      <div class="row"><span class="pill done">Fixed</span><div>
+        <h3>The Black Friday theme would have dropped today's work on Nov 27</h3>
+        <p>It replaces live at 12:00 AM CT Nov 27 and holds none of today's changes. <b>Done:</b> my Nov 26 2:13 PM CT check now knows every file changed today in all three copies. It moves them over without erasing the Black Friday prices and banner.</p>
+      </div></div>
+      <div class="row"><span class="pill done">Fixed</span><div>
+        <h3>A failed save that might have changed files quietly</h3>
+        <p>The other session's 5:45 PM CT save attempt failed with no message. <b>Checked:</b> it wrote nothing. The homepage, chooser templates, layout and settings in its copy still match live.</p>
+      </div></div>
+      <div class="row"><span class="pill done">Fixed</span><div>
+        <h3>Reminders pointing at the wrong theme</h3>
+        <p>My 7:37 AM CT check tomorrow used to remind you to publish the superseded copy. <b>Done:</b> it now verifies whichever theme is live and points only at the merged one.</p>
+      </div></div>
+      <div class="row"><span class="pill done">Told</span><div>
+        <h3>The deliverability conversation's 46 template edits</h3>
+        <p>"Zeotein email deliverability audit" is still editing welcome, PS, gift, Holiday Guide and quiz templates.</p>
+        <ul>
+          <li>None of the 46 has its new render on the Journey Map yet, which your rule requires.</li>
+          <li>Its edits may not be live, because flow steps can keep their own copies.</li>
+          <li>Its domain-wide setting changes would land just before the win-back and Black Friday sends.</li>
+        </ul>
+        <p><b>Done:</b> it has all three points, and the right Repair Log to use.</p>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<div class="band alt">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Your call: store and prices</p>
+      <h2>Decisions only you can make, each with my recommendation</h2>
+      <p>I held these because they involve prices, discounts, Seal or customer sends, which stay with you. Each recommendation is my opinion, not done.</p>
+    </div>
+    <div class="rows">
+      <div class="row"><span class="pill you">Decide</span><div>
+        <h3>1. Black Friday Vegan discounts were sized for $139.99</h3>
+        <p>The four "BF Vegan Sticks 1 to 4 packs" discounts (24 to 30 Nov) take fixed dollar amounts off. At the new $134.99, checkout comes out below what the plans, emails and the Nov 24 cart test expect:</p>
+        <div class="tw"><table><thead><tr><th>Packs</th><th>Checkout now</th><th>Master Pricing, emails, Nov 24 cart test</th></tr></thead><tbody>
+          <tr><td class="num">1</td><td class="num">$92.99</td><td class="num">$97.99</td></tr>
+          <tr><td class="num">2</td><td class="num">$179.99</td><td class="num">$189.99</td></tr>
+          <tr><td class="num">3</td><td class="num">$260.99</td><td class="num">$275.99</td></tr>
+          <tr><td class="num">4</td><td class="num">$335.99</td><td class="num">$355.99</td></tr>
+        </tbody></table></div>
+        <p>The Black Friday price lines on the site follow the live price, so they will show $92.99 and match checkout.</p>
+        <p class="rec"><b>My pick: keep the discounts.</b> Customers pay a little less than advertised, and it still reads as 30% off. Then correct $97.99 wherever it is written. The real risk is the Nov 24, 6:15 AM CT cart test on your Lenovo: it expects $97.99 and is told to "fix anything off", so it could push the old prices back. Its instructions can only be changed from your Lenovo.</p>
+      </div></div>
+      <div class="row"><span class="pill you">Decide</span><div>
+        <h3>2. Current Vegan subscribers may still pay $124.99</h3>
+        <p>New Vegan subscribers pay $114.99. Existing contracts keep their price unless each one is edited in Seal, which Claude cannot reach.</p>
+        <p class="rec"><b>My pick:</b> move them to $114.99 in Seal. Paying $10 more than a new customer is a cancel reason.</p>
+      </div></div>
+      <div class="row"><span class="pill you">Decide</span><div>
+        <h3>3. Three Vegan price leftovers</h3>
+        <ul>
+          <li>The Vegan Starter Kit offer product still allows a one-time purchase at $139.99, $5 above the store price.</li>
+          <li>The "OG Subscriptions" group gets free shipping on subscription orders of $119.99 or more. A Vegan subscription now costs $114.99, so their renewals would pay shipping.</li>
+          <li>The Master Pricing doc still lists Vegan at $139.99 / $124.99 and the old Black Friday table.</li>
+        </ul>
+        <p class="rec"><b>My pick:</b> set the offer product's one-time price to $134.99, and lower that free-shipping minimum to $114.99. Say yes and I will also bring Master Pricing up to date.</p>
+      </div></div>
+      <div class="row"><span class="pill you">Decide</span><div>
+        <h3>4. Every blend order now gets all 3 guides</h3>
+        <p>In the theme you will publish, any blend order gets the Starter Guide plus both recipe guides. Your 13 Nov rule gave only the matching recipe guide. The change makes the cart match "3 free guides" on the product pages and in the product search text rewritten at 6:01 PM CT. Live gives 2 until you publish.</p>
+        <p class="rec"><b>My pick: keep it.</b> The pages promise 3, and the guides cost nothing.</p>
+      </div></div>
+      <div class="row"><span class="pill you">Decide</span><div>
+        <h3>5. A product left the free-guides list without anyone asking</h3>
+        <p>At 11:39 and 11:46 AM CT, along with the two offer products you asked about, the Cacao landing-page bag was taken off the cart's free-guides list in every theme. No Claude conversation did it.</p>
+        <p class="rec"><b>My pick: leave it.</b> That landing page adds its own guides (the Nov 14 order shows them), so its buyers lose nothing.</p>
+      </div></div>
+      <div class="row"><span class="pill you">Decide</span><div>
+        <h3>6. Choices recorded as yours that you did not word</h3>
+        <p>From your "Stop asking for permission. Just do", "Never-bought win-back" logged "Decided by Dana" on three points:</p>
+        <ul>
+          <li>gift emails on Day 0, 2 and 4;</li>
+          <li>the 203 already past the first win-back email finish without the gift;</li>
+          <li>real contacts get it only after 1 Dec.</li>
+        </ul>
+        <p>Its test code also ran 52 minutes with no minimum spend before expiring unused.</p>
+        <p class="rec"><b>My pick:</b> reply yes, or change any of the three, so the record is in your own words.</p>
+      </div></div>
+      <div class="row"><span class="pill you">Decide</span><div>
+        <h3>7. Two content flags in the theme you are about to publish</h3>
+        <ul>
+          <li>The new Difference page hero photo shows ZEOLITE printed on the bag, on a page Google reads.</li>
+          <li>One homepage line still has an em dash.</li>
+          <li>The Difference page's Google title and description already changed live at 4:28 PM CT. They describe the new page, which goes live only when you publish.</li>
+        </ul>
+        <p class="rec"><b>My pick:</b> swap the hero for a photo without the label in view, then publish.</p>
+      </div></div>
+      <div class="row"><span class="pill you">Decide</span><div>
+        <h3>8. Black Friday bag page on Nov 24</h3>
+        <p>Early access emails go out Nov 24 at 9:00 AM CT, but the Black Friday bag page's design exists only in the Black Friday theme, which goes live Nov 27. Until then the bag's link shows the plain product layout. The plan says "live paste about 10 PM on 23 Nov", and no conversation owns that step. The EM3 email link still reads "[BLACK FRIDAY PAGE URL FROM RAFAEL]".</p>
+        <p class="rec"><b>My pick:</b> let me own it. Easiest is to add the page's files to the theme you are about to publish, where they sit unused until the emails link there. Tell me which link EM3 should use.</p>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<div class="band">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Your call: email and texts (GoHighLevel)</p>
+      <h2>Too many editors and sends in the same few days</h2>
+      <p>The urgent one, the "Win-back draft finish" prompt, is at the top of this page.</p>
+    </div>
+    <div class="rows">
+      <div class="row"><span class="pill you">Decide</span><div>
+        <h3>9. One editor at a time in the welcome series and the win-back</h3>
+        <p><b>Welcome series (SUB):</b> three edits are queued for the same flow:</p>
+        <ul>
+          <li>Relay's gate fix, from its handoff;</li>
+          <li>the Recipe Guide conversation's 3 new long-tail steps, from its Chrome prompt;</li>
+          <li>the deliverability conversation's per-step From name edits.</li>
+        </ul>
+        <p><b>Win-back (WB):</b> Relay's fixes are due before WB9002 at 10:35 AM CT tomorrow: remove the ghh filter, exclude cancelled subscribers, add name fallbacks.</p>
+        <p><b>From Nov 20:</b> when "Sale active" turns on, only WB has the sale-hold check. The WBC and PS offers keep sending through Black Friday unless Relay adds the check first.</p>
+        <p class="rec"><b>My pick:</b> Relay finishes WB and SUB first; the journey audit's 12:17 PM CT check tomorrow confirms them. Run the Recipe Guide Chrome prompt only after that. Keep Thomas S. out of the win-back: he is in Australia and never opted in.</p>
+      </div></div>
+      <div class="row"><span class="pill you">Decide</span><div>
+        <h3>10. Four sends hit the same people in six days</h3>
+        <div class="tw"><table><thead><tr><th>When (CT)</th><th>Send</th><th>Who</th></tr></thead><tbody>
+          <tr><td class="d">Thu 19 Nov, 10:35 AM</td><td>WB9002 win-back</td><td>about 205 lapsed buyers</td></tr>
+          <tr><td class="d">Sat 21 Nov</td><td>Recipe Guide invite G1 and text S1</td><td>about 1,102 emails and 464 texts</td></tr>
+          <tr><td class="d">Tue 24 Nov, 9:00 AM</td><td>BF01 early access and SBF01 subscribers</td><td>about 784 plus subscribers</td></tr>
+        </tbody></table></div>
+        <p>The invite list does not leave out win-back or Black Friday contacts. 202 of the 203 win-back contacts are also on the Black Friday list.</p>
+        <p class="rec"><b>My pick:</b> leave the win-back contacts out of the Nov 21 invite. They hear from you on Nov 19 and again on Nov 24.</p>
+      </div></div>
+      <div class="row"><span class="pill you">Decide</span><div>
+        <h3>11. Domain-wide email settings: wait until Dec 1</h3>
+        <p>The deliverability conversation recommends three domain-wide changes:</p>
+        <ul>
+          <li>set the default From name to "Dana at Zeotein";</li>
+          <li>turn off click tracking for the whole sending domain;</li>
+          <li>add a DMARC record at GoDaddy.</li>
+        </ul>
+        <p>The first two would change WB9002 and the Nov 24 Black Friday sends mid-campaign. Click tracking off can also break link-click triggers in live flows. Its three test emails all landed in Promotions, and the From name in a template did not change the sender shown.</p>
+        <p class="rec"><b>My pick:</b> add the DMARC record now, since it changes nothing about sends while set to "none". Do the From name and click tracking on Dec 1, after the sale.</p>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<div class="band alt">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Watch list</p>
+      <h2>Dates where today's changes meet a deadline</h2>
+    </div>
+    <div class="tw"><table><thead><tr><th>When (CT)</th><th>What runs</th><th>What to know</th></tr></thead><tbody>
+      <tr><td class="d">Thu 19 Nov, 7:37 AM</td><td>My theme check</td><td>Verifies the live site if you have published, otherwise sends one last reminder.</td></tr>
+      <tr><td class="d">Thu 19 Nov, 10:35 AM</td><td>WB9002 sends</td><td>Relay's WB fixes must land first, and "Win-back draft finish" must not touch the flow.</td></tr>
+      <tr><td class="d">Thu 19 Nov, 12:17 PM</td><td>Audit check of welcome and win-back fixes</td><td>Writes its results into three docs. Wait for it before more SUB or WB edits.</td></tr>
+      <tr><td class="d">Fri 20 Nov, 12:00 AM</td><td>"Sale active" turns on</td><td>Offer flows with the sale-hold check pause until 1 Dec; WBC and PS do not have it yet.</td></tr>
+      <tr><td class="d">Mon 23 Nov, 9:00 AM</td><td>Black Friday list top-up</td><td>It will flag the EM3 placeholder link. The Black Friday page link still has no owner.</td></tr>
+      <tr><td class="d">Tue 24 Nov, 12:00 to 9:00 AM</td><td>Early access discounts, cart test, first sends</td><td>The 6:15 AM cart test expects the old Vegan prices (decision 1). The bag page needs its design on live (decision 8).</td></tr>
+      <tr><td class="d">Thu 26 Nov, 2:13 PM</td><td>My Black Friday theme check</td><td>Moves today's live changes into the Black Friday theme before you publish it at 12:00 AM Nov 27.</td></tr>
+    </tbody></table></div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="wrap">
+    <p><b>Why this keeps happening.</b> Two AI systems work in the same store and the same GoHighLevel account: the Claude conversations, and the Grok bots (Shopify lists them as "Shopify Grok Connector App", and Relay does the GoHighLevel builder work). Since 14 Nov the Grok side has made the chooser pages, the free-guide products, the quantity discounts and a Black Friday discount. The live theme was also edited directly twice today, at 11:23 and 11:46 AM CT, outside any Claude conversation. Neither side sees the other's work.</p>
+    <p><b>Two rules that prevent it:</b></p>
+    <ul>
+      <li>One "next live" theme at a time, and every theme change goes into that copy. Today that is "Live + FAQ, gifts and Difference page (Claude)".</li>
+      <li>One editor per GoHighLevel flow at a time, in the order on this page. When a conversation offers to make a new copy of live, or to open a live flow, point it here first.</li>
+    </ul>
+    <p>Evidence: Shopify file checksums and dates, the Shopify change log, the conversations' own transcripts, and preview checks of every page. Notes and raw results are in the zeotein-theme repo under site-audit/2026-11-18/ and site-audit/2026-11-17/verify/.</p>
+  </div>
+</div>
