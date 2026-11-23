@@ -1,0 +1,93 @@
+{%- comment -%}
+  Product-page FAQ. Built 3 Nov 2026 for the product page rebuild; every question can be a block.
+  Since Nov 18 2026: on protein blend product pages (tag protein-blend) it shows the standard Zeotein FAQ from
+  snippets/zt-faq-content.liquid by default (Cacao, Cacao 7-Day, Vegan or Vegan 7-Day set, chosen by the product),
+  with FAQPage JSON-LD that matches the visible text exactly. Set "Questions" to "blocks" to use the blocks instead.
+  Styles: assets/zt-faq.css.
+{%- endcomment -%}
+{%- liquid
+  assign section_id = 'zt-faq-' | append: section.id
+  assign zt_std = false
+  if section.settings.content_source != 'blocks' and product and product.tags contains 'protein-blend'
+    assign zt_std = true
+    assign zt_set = 'all'
+    if product.handle contains 'vegan'
+      assign zt_set = 'vegan'
+    endif
+    if product.handle contains 'sticks-7'
+      assign zt_set = zt_set | append: '7' | replace: 'all7', 'cacao7'
+    endif
+  endif
+-%}
+{{ 'zt-faq.css' | asset_url | stylesheet_tag }}
+<section id="{{ section_id }}" class="zt-faq zt-pdp-faq" aria-labelledby="{{ section_id }}-heading">
+  <div class="zt-faq__container">
+    <div class="zt-faq__header">
+      {%- if section.settings.eyebrow != blank -%}<div class="zt-faq__eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h2 id="{{ section_id }}-heading" class="zt-faq__heading">{{ section.settings.heading }}</h2>
+      {%- if section.settings.intro != blank -%}<p class="zt-faq__intro">{{ section.settings.intro }}</p>{%- endif -%}
+    </div>
+    <div class="zt-faq__list">
+      {%- if zt_std -%}
+        {%- render 'zt-faq-content', set: zt_set, schema: true -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          <details class="zt-faq__item" {{ block.shopify_attributes }}>
+            <summary class="zt-faq__summary"><span class="zt-faq__question">{{ block.settings.question }}</span><span class="zt-faq__icon" aria-hidden="true">+</span></summary>
+            <div class="zt-faq__answer">
+              {{ block.settings.answer }}
+              {%- if block.settings.link_label != blank and block.settings.link_url != blank -%}
+                <a href="{{ block.settings.link_url }}" class="zt-faq__answer-link"><span>{{ block.settings.link_label }}</span><span aria-hidden="true">&rarr;</span></a>
+              {%- endif -%}
+            </div>
+          </details>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+    {%- if section.settings.bottom_text != blank -%}
+      <div class="zt-faq__bottom">
+        <div class="zt-faq__bottom-text">{{ section.settings.bottom_text }}</div>
+        <a href="mailto:hello@zeotein.com" class="zt-faq__bottom-link"><span>{{ section.settings.bottom_link_text }}</span><span aria-hidden="true">&rarr;</span></a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+{%- if zt_std == false and section.settings.faq_schema and section.blocks.size > 0 -%}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{%- for block in section.blocks -%}{%- assign zt_ans = block.settings.answer | replace: '</p><p>', '</p> <p>' | strip_html | strip_newlines | strip -%}{"@type":"Question","name":{{ block.settings.question | strip | json }},"acceptedAnswer":{"@type":"Answer","text":{{ zt_ans | json }}}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product FAQ",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": { "templates": ["product", "page", "index"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "QUESTIONS, ANSWERED" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "FAQs" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Everything you need to know before you order." },
+    { "type": "text", "id": "bottom_text", "label": "Bottom Text", "default": "Still have a question?" },
+    { "type": "text", "id": "bottom_link_text", "label": "Contact Link Text", "default": "Contact Zeotein" },
+    { "type": "select", "id": "content_source", "label": "Questions", "default": "standard", "options": [
+      { "value": "standard", "label": "Zeotein standard FAQ on protein blend pages" },
+      { "value": "blocks", "label": "The question blocks below" }
+    ] },
+    { "type": "checkbox", "id": "faq_schema", "label": "FAQ rich results schema for the question blocks", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer" },
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link_url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Product FAQ" } ]
+}
+{% endschema %}

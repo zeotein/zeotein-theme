@@ -1,0 +1,189 @@
+<style>
+.zt-bb2__sheet .zt-bb2__nf-chips span {
+display: inline-block;
+background: #f1eaf8;
+color: #5a0d91;
+font-weight: 800;
+border: 0;
+border-radius: 999px;
+padding: 6px 12px;
+}
+.zt-bb2__sheet .zt-bb2__nf-tags span {
+display: inline-block;
+background: #fff;
+color: #5a0d91;
+font-weight: 800;
+border: 2px solid #d6c5e8;
+border-radius: 999px;
+padding: 6px 12px;
+}
+#{{ sid }} .zt-bb2__trust-icon--shield {
+display: grid;
+place-items: center;
+box-sizing: border-box;
+width: 26px;
+height: 26px;
+margin: 3px 0;
+padding: 0;
+border: 0;
+border-radius: 8px;
+background: #E7F6ED;
+color: #1F8A4C;
+box-shadow: none;
+}
+#{{ sid }} .zt-bb2__trust-icon--shield svg {
+display: block;
+width: 15px;
+height: 15px;
+}
+#{{ sid }} .zt-bf__bagprice {
+display: block;
+margin-top: 3px;
+font-size: 14px;
+font-weight: 800;
+letter-spacing: -0.02em;
+color: #171320;
+font-variant-numeric: tabular-nums;
+}
+#{{ sid }} .zt-bb2__bag.is-active .zt-bf__bagprice { color: var(--zt-bb2-primary, #580d93); }
+#{{ sid }} .zt-bf__deadline {
+margin: 8px 0 0;
+padding: 8px 10px;
+border: 1px dashed #d9a94e;
+border-radius: 8px;
+background: #fdf3e2;
+color: #8a5a06;
+font-size: 12.5px;
+font-weight: 800;
+text-align: center;
+line-height: 1.35;
+}
+#{{ sid }} .zt-bb2__banner {
+background: #000000;
+color: #ffffff;
+font-weight: 800;
+letter-spacing: 0.06em;
+text-transform: uppercase;
+}
+#{{ sid }} .zt-bb2__plan.is-active .zt-bb2__price {
+display: inline-block;
+background: #000000;
+color: #ffffff;
+padding: 4px 10px 3px;
+border-radius: 4px;
+font-weight: 800;
+}
+#{{ sid }} .zt-bb2__price-row {
+display: flex;
+flex-wrap: wrap;
+align-items: baseline;
+justify-content: flex-end;
+gap: 8px;
+}
+#{{ sid }} .zt-bb2__was {
+margin: 0;
+font-size: 13px;
+font-weight: 600;
+color: #6b6578;
+text-decoration: line-through;
+text-decoration-thickness: 1.5px;
+}
+#{{ sid }} .zt-bb2__save-label {
+margin: 4px 0 0;
+font-size: 12.5px;
+font-weight: 800;
+color: #580d93;
+letter-spacing: -0.01em;
+line-height: 1.2;
+text-align: right;
+}
+#{{ sid }} .zt-bb2__plan.is-active .zt-bb2__save-label { color: #580d93; }
+</style>
+
+<script>
+(function () {
+var root = document.getElementById({{ sid | json }});
+if (!root || root.dataset.ztBfBound === '1') return;
+root.dataset.ztBfBound = '1';
+function loadCfg() {
+  var id = root.getAttribute('data-zt-bb-config');
+  var el = id ? document.getElementById(id) : null;
+  if (!el) return null;
+  try { return JSON.parse(el.textContent); } catch (e) { return null; }
+}
+var cfg = loadCfg() || {};
+/* Nov 22 2026 (local currencies): amounts are formatted with the shop money format for the shopper's
+   currency (cfg.moneyFormat = shop.money_format from Liquid), the same rules as Shopify's formatMoney. */
+{% raw %}function ztFormatMoney(cents, format) {
+  var fmt = String(format || '${{amount}}');
+  var c = Math.round(Number(cents) || 0);
+  function grp(n, prec, th, dec) {
+    var s = (n / 100).toFixed(prec);
+    var parts = s.split('.');
+    var whole = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, th);
+    return parts[1] ? whole + dec + parts[1] : whole;
+  }
+  var m = fmt.match(/\{\{\s*(\w+)\s*\}\}/);
+  if (!m) return fmt;
+  var v;
+  switch (m[1]) {
+    case 'amount_no_decimals': v = grp(c, 0, ',', '.'); break;
+    case 'amount_with_comma_separator': v = grp(c, 2, '.', ','); break;
+    case 'amount_no_decimals_with_comma_separator': v = grp(c, 0, '.', ','); break;
+    case 'amount_with_apostrophe_separator': v = grp(c, 2, "'", '.'); break;
+    case 'amount_no_decimals_with_space_separator': v = grp(c, 0, ' ', ''); break;
+    case 'amount_with_space_separator': v = grp(c, 2, ' ', ','); break;
+    case 'amount_with_period_and_space_separator': v = grp(c, 2, ' ', '.'); break;
+    default: v = grp(c, 2, ',', '.');
+  }
+  return fmt.replace(m[0], v);
+}{% endraw %}
+function money(v) {
+  if (v == null || v === '') return '';
+  var s = String(v).trim();
+  if (!s) return '';
+  var n = Number(s);
+  if (!isFinite(n)) return s;
+  return ztFormatMoney(Math.round(n * 100), cfg.moneyFormat);
+}
+var tiers = cfg.tiers || [];
+function paint() {
+  var once = root.classList.contains('is-once');
+  root.querySelectorAll('[data-zt-bf-bagprice]').forEach(function (el) {
+    var i = parseInt(el.getAttribute('data-zt-bf-bagprice'), 10) || 0;
+    var t = tiers[i] || {};
+    var m = money(once ? t.oncePrice : t.firstPrice);
+    if (m) el.textContent = m;
+  });
+  var bags = root.querySelectorAll('[data-zt-bb-bag]');
+  var bi = 0;
+  bags.forEach(function (b, j) { if (b.classList.contains('is-active')) bi = j; });
+  var t = tiers[bi] || {};
+  var pct = root.querySelector('[data-zt-bf-once-pct]');
+  if (pct && t.onceSave) pct.textContent = t.onceSave;
+  var oncePrice = root.querySelector('[data-zt-bf-once-price]');
+  var op = money(t.oncePrice);
+  if (oncePrice && op) oncePrice.textContent = op;
+  var onceWasEl = root.querySelector('[data-zt-bf-once-was]');
+  var ow = money(t.onceWas);
+  if (onceWasEl && ow) {
+    onceWasEl.textContent = ow;
+    onceWasEl.removeAttribute('hidden');
+  }
+  var subWas = root.querySelector('[data-zt-bf-sub-was]');
+  if (subWas && t.subWas) {
+    var sw = money(t.subWas);
+    var prefix = cfg.subWasPrefix || '';
+    if (sw) subWas.textContent = prefix + sw;
+  }
+  var subSave = root.querySelector('[data-zt-bf-sub-save]');
+  if (subSave) subSave.style.display = (bi === 0) ? '' : 'none';
+}
+root.addEventListener('click', function (e) {
+  if (!(e.target instanceof Element)) return;
+  if (!e.target.closest('[data-zt-bb-plan], [data-zt-bb-bag]')) return;
+  requestAnimationFrame(paint);
+});
+paint();
+})();
+</script>

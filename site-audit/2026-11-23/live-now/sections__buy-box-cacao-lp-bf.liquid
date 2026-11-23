@@ -1,0 +1,411 @@
+{% comment %}
+Buy Box Cacao LP - Black Friday.
+Copy of Buy Box Cacao LP v2 with the Black Friday product, Seal plans and price ladder.
+Renders through buy-box-cacao-lp.js on the v2 path, so that file is untouched.
+Markup lives in the zt-bf-bb-* snippets.
+{% endcomment %}
+{%- liquid
+assign sid = 'zt-bb2-' | append: section.id
+assign details_id = 'zt-bb2-details-' | append: section.id
+assign reviews_id = 'zt-bb2-reviews-' | append: section.id
+assign bb_product = all_products['30-day-cacao-bulk-bag-black-friday']
+assign variant = bb_product.selected_or_first_available_variant
+assign variant_id = variant.id | default: '68115835322581'
+# One-time display comes from this variant's price and compare-at, times bag quantity. No hardcoded sale price.
+assign once_unit_cents = variant.price | default: 6999
+assign once_was_cents = variant.compare_at_price | default: 9999
+assign once_p1_d = once_unit_cents | times: 1 | divided_by: 100
+assign once_p1_c = once_unit_cents | times: 1 | modulo: 100 | prepend: '00' | slice: -2, 2
+assign once_price_1 = once_p1_d | append: '.' | append: once_p1_c
+assign once_w1_d = once_was_cents | times: 1 | divided_by: 100
+assign once_w1_c = once_was_cents | times: 1 | modulo: 100 | prepend: '00' | slice: -2, 2
+assign once_was_1 = once_w1_d | append: '.' | append: once_w1_c
+assign once_p2_cents = once_unit_cents | times: 2
+assign once_p2_d = once_p2_cents | divided_by: 100
+assign once_p2_c = once_p2_cents | modulo: 100 | prepend: '00' | slice: -2, 2
+assign once_price_2 = once_p2_d | append: '.' | append: once_p2_c
+assign once_w2_cents = once_was_cents | times: 2
+assign once_w2_d = once_w2_cents | divided_by: 100
+assign once_w2_c = once_w2_cents | modulo: 100 | prepend: '00' | slice: -2, 2
+assign once_was_2 = once_w2_d | append: '.' | append: once_w2_c
+assign once_p3_cents = once_unit_cents | times: 3
+assign once_p3_d = once_p3_cents | divided_by: 100
+assign once_p3_c = once_p3_cents | modulo: 100 | prepend: '00' | slice: -2, 2
+assign once_price_3 = once_p3_d | append: '.' | append: once_p3_c
+assign once_w3_cents = once_was_cents | times: 3
+assign once_w3_d = once_w3_cents | divided_by: 100
+assign once_w3_c = once_w3_cents | modulo: 100 | prepend: '00' | slice: -2, 2
+assign once_was_3 = once_w3_d | append: '.' | append: once_w3_c
+if once_was_cents > once_unit_cents
+  assign once_off_pct = once_was_cents | minus: once_unit_cents | times: 100.0 | divided_by: once_was_cents | round
+  assign once_save_label = 'Save ' | append: once_off_pct | append: '%'
+else
+  assign once_save_label = 'Save 30%'
+endif
+assign seal_plan_1 = '6688669909'
+assign seal_plan_2 = '6688702677'
+assign seal_plan_3 = '6688735445'
+# Nov 22 2026 (Orbit 4:00 PM CT, local currencies): Subscribe tier amounts come from the Seal plan allocations on the
+# BF variant (presentment currency), times bags. US amounts are the same as before: first 68.99/133.98/195.99,
+# renew 89.99/179.98/239.97. Fallbacks are the old US cents, used only if a plan is not on the variant.
+assign sub_first_1 = 6899
+assign sub_first_2 = 13398
+assign sub_first_3 = 19599
+assign sub_renew_1 = 8999
+assign sub_renew_2 = 17998
+assign sub_renew_3 = 23997
+for zt_a in variant.selling_plan_allocations
+  assign zt_aid = zt_a.selling_plan.id | append: ''
+  assign zt_a_renew = zt_a.price
+  if zt_a.price_adjustments.size > 1
+    assign zt_a_renew = zt_a.price_adjustments.last.price
+  endif
+  if zt_aid == seal_plan_1
+    assign sub_first_1 = zt_a.price
+    assign sub_renew_1 = zt_a_renew
+  elsif zt_aid == seal_plan_2
+    assign sub_first_2 = zt_a.price | times: 2
+    assign sub_renew_2 = zt_a_renew | times: 2
+  elsif zt_aid == seal_plan_3
+    assign sub_first_3 = zt_a.price | times: 3
+    assign sub_renew_3 = zt_a_renew | times: 3
+  endif
+endfor
+# Kit value = bag compare-at times bags + the gifts in the box (shaker, Save-A-Scoop, 3 guides), all presentment prices.
+# US: 162.97 / 262.96 / 362.95 as before.
+assign kit_gifts = 0
+assign zt_gift_handles = 'lp-gift-cleanblend-shaker,lp-gift-save-a-scoop,lp-gift-starter-guide,lp-gift-cacao-recipe-guide,lp-gift-vegan-recipe-guide' | split: ','
+for zt_gh in zt_gift_handles
+  assign zt_gp = all_products[zt_gh]
+  if zt_gp != blank and zt_gp.selected_or_first_available_variant
+    assign kit_gifts = kit_gifts | plus: zt_gp.selected_or_first_available_variant.price
+  endif
+endfor
+assign sub_was_1 = once_was_cents | plus: kit_gifts
+assign sub_was_2 = once_was_cents | times: 2 | plus: kit_gifts
+assign sub_was_3 = once_was_cents | times: 3 | plus: kit_gifts
+assign money_format = shop.money_format | strip_html
+
+if section.settings.layout_width == blank
+assign layout_width = 1180
+else
+assign layout_width = section.settings.layout_width
+endif
+
+assign slide_1 = nil
+if bb_product != blank
+for media in bb_product.media
+if media.media_type == 'image'
+assign slide_1 = media
+break
+endif
+endfor
+endif
+-%}
+
+{{ 'buy-box-cacao-lp-v2.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cacao-lp-scroll-offer.js' | asset_url }}" defer></script>
+<script src="{{ 'buy-box-cacao-lp.js' | asset_url }}" type="module" defer></script>
+{% render 'zt-bf-bb-sticky' %}
+
+{%- capture buybox_config -%}
+{
+"productTitle": {{ bb_product.title | default: 'Zeotein Cacao 30-Day Bulk Bag' | json }},
+"variantId": {{ variant_id | json }},
+"defaultPlan": {{ section.settings.default_plan | default: 'sub' | json }},
+"defaultBag": "1",
+"ctaSub": {{ section.settings.cta_sub | default: 'Get My Black Friday Kit' | json }},
+"ctaOnce": {{ section.settings.cta_once | default: 'Get My Black Friday Kit' | json }},
+"afterAddAction": {{ section.settings.after_add_action | default: 'drawer' | json }},
+"moneyFormat": {{ money_format | json }},
+"tiers": [
+{
+"key": "1",
+"qty": 1,
+"firstPrice": {{ sub_first_1 | divided_by: 100.0 | json }},
+"renewPrice": {{ sub_renew_1 | divided_by: 100.0 | json }},
+"oncePrice": {{ once_price_1 | json }},
+"onceWas": {{ once_was_1 | json }},
+"onceSave": {{ once_save_label | json }},
+"subWas": {{ sub_was_1 | divided_by: 100.0 | json }},
+"sellingPlanId": {{ seal_plan_1 | json }}
+},
+{
+"key": "2",
+"qty": 2,
+"firstPrice": {{ sub_first_2 | divided_by: 100.0 | json }},
+"renewPrice": {{ sub_renew_2 | divided_by: 100.0 | json }},
+"oncePrice": {{ once_price_2 | json }},
+"onceWas": {{ once_was_2 | json }},
+"onceSave": {{ once_save_label | json }},
+"subWas": {{ sub_was_2 | divided_by: 100.0 | json }},
+"sellingPlanId": {{ seal_plan_2 | json }}
+},
+{
+"key": "3",
+"qty": 3,
+"firstPrice": {{ sub_first_3 | divided_by: 100.0 | json }},
+"renewPrice": {{ sub_renew_3 | divided_by: 100.0 | json }},
+"oncePrice": {{ once_price_3 | json }},
+"onceWas": {{ once_was_3 | json }},
+"onceSave": {{ once_save_label | json }},
+"subWas": {{ sub_was_3 | divided_by: 100.0 | json }},
+"sellingPlanId": {{ seal_plan_3 | json }}
+}
+]
+}
+{%- endcapture -%}
+
+
+<style>.hbclp__promo,[class*="optimonk"],[id*="optimonk"],iframe[src*="optimonk"]{display:none!important}</style>
+<section
+id="{{ sid }}"
+class="zt-bb2"
+data-zt-bb
+data-zt-bb-version="v2"
+data-zt-bb-config="zt-bb2-config-{{ section.id }}"
+data-zt-bb-once-extra="{{ section.settings.once_extra | default: 'Save-A-Scoop included' | escape }}"
+style="
+--zt-bb2-primary: {{ section.settings.primary_color }};
+--zt-bb2-pad-top: 24px;
+--zt-bb2-pad-bottom: 40px;
+--zt-bb2-width: {{ layout_width }}px;
+--zt-bb2-bag-cols: 3;
+"
+{{ section.shopify_attributes }}
+>
+<script type="application/json" id="zt-bb2-config-{{ section.id }}">{{ buybox_config }}</script>
+
+<div class="zt-bb2__inner" id="purchase">
+{% render 'zt-bf-bb-gallery', section: section, bb_product: bb_product, slide_1: slide_1 %}
+
+{% render 'zt-bf-bb-panel', section: section, sid: sid, details_id: details_id, reviews_id: reviews_id, variant_id: variant_id, once_price: once_price_1, once_was: once_was_1, once_save: once_save_label, once_cents: once_unit_cents, once_was_c: once_was_cents, sub_first_1: sub_first_1, sub_first_2: sub_first_2, sub_first_3: sub_first_3, sub_renew_1: sub_renew_1, sub_was_1: sub_was_1 %}
+</div>
+
+{% render 'zt-bf-bb-nutrition', section: section %}
+
+{% render 'zt-bf-bb-extras', sid: sid %}
+</section>
+
+{%- comment -%}
+Live theme cart type can be "page" or "notification". Those modes do not print a drawer.
+This slot adds Dawn's existing drawer only on this landing page, so "Open cart drawer"
+works here while other templates keep the theme cart setting.
+{%- endcomment -%}
+{%- comment -%} Nov 13 2026: skipped on cacao-lp* templates; the layout already renders the cart drawer (fixes "CartDrawer has already been declared"). {%- endcomment -%}
+{%- unless settings.cart_type == 'drawer' or template.suffix contains 'cacao-lp' -%}
+{{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+{{ 'component-cart.css' | asset_url | stylesheet_tag }}
+{{ 'component-totals.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+<div data-zt-bb-drawer-slot>
+{%- render 'cart-drawer' -%}
+</div>
+<script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+
+{%- comment -%}
+  Mobile sticky ATC. Replaces the older sticky-offer-cacao-lp bar on this page
+  (that section is disabled in the template so the two do not double up).
+  The button uses the same wording as the main CTA and clicks that button, so
+  variant, selling plan, quantity and gift properties stay in sync.
+  Chat and Rewards are hidden on this layout; the offset still applies if they
+  are shown later, so the bar will not cover them.
+{%- endcomment -%}
+<div class="zt-bf-mobi-atc" data-zt-bf-mobi-atc hidden>
+  <div class="zt-bf-mobi-atc__inner">
+    <div class="zt-bf-mobi-atc__price" data-zt-bf-mobi-atc-price hidden></div>
+    <button type="button" class="zt-bf-mobi-atc__btn" data-zt-bf-mobi-atc-btn>
+      <span data-zt-bf-mobi-atc-label>{{ section.settings.cta_sub | default: 'Get My Black Friday Kit' | escape }}</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .zt-bf-mobi-atc {
+    display: none;
+  }
+  @media screen and (max-width: 749px) {
+    .zt-bf-mobi-atc {
+      display: block;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 38;
+      background: #fcfbfd;
+      border-top: 1px solid rgba(30, 23, 52, 0.10);
+      box-shadow: 0 -6px 20px rgba(30, 23, 52, 0.08);
+      padding: 10px 14px calc(12px + env(safe-area-inset-bottom, 0px));
+      box-sizing: border-box;
+    }
+    .zt-bf-mobi-atc[hidden] { display: none !important; }
+    .zt-bf-mobi-atc__inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .zt-bf-mobi-atc__price {
+      flex: 0 1 auto;
+      min-width: 0;
+      font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e1734;
+      line-height: 1.25;
+    }
+    .zt-bf-mobi-atc__btn {
+      flex: 1 1 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 14px 18px;
+      border: 0;
+      border-radius: 12px;
+      background: #580d93;
+      color: #ffffff;
+      font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.2;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 #580d93;
+    }
+    .zt-bf-mobi-atc__btn:focus-visible {
+      outline: 2px solid #1aa6a0;
+      outline-offset: 2px;
+    }
+    html.zt-bf-mobi-atc-on {
+      padding-bottom: var(--zt-bf-mobi-atc-h, 88px);
+    }
+    /* Lift chat and Rewards above the bar if they are visible. */
+    html.zt-bf-mobi-atc-on chat-widget,
+    html.zt-bf-mobi-atc-on #bon-loyalty-btn,
+    html.zt-bf-mobi-atc-on #bon-iframe-container {
+      bottom: calc(var(--zt-bf-mobi-atc-h, 88px) + 12px) !important;
+    }
+  }
+  @media screen and (min-width: 750px) {
+    .zt-bf-mobi-atc { display: none !important; }
+    html.zt-bf-mobi-atc-on { padding-bottom: 0; }
+  }
+</style>
+
+<script>
+  (function () {
+    var bar = document.querySelector('[data-zt-bf-mobi-atc]');
+    if (!bar || bar.dataset.ztBfMobiBound === '1') return;
+    bar.dataset.ztBfMobiBound = '1';
+
+    var btn = bar.querySelector('[data-zt-bf-mobi-atc-btn]');
+    var labelEl = bar.querySelector('[data-zt-bf-mobi-atc-label]');
+    var priceEl = bar.querySelector('[data-zt-bf-mobi-atc-price]');
+    var mq = window.matchMedia('(max-width: 749px)');
+    var io = null;
+
+    function mainCta() {
+      return document.querySelector('[data-zt-bb-cta]');
+    }
+
+    function otherStickyVisible() {
+      var other = document.querySelector('[data-zt-sticky-offer-bar].is-visible, .zt-sticky-offer__bar.is-visible');
+      return !!(other && other.offsetParent !== null);
+    }
+
+    function syncCopy() {
+      var cta = mainCta();
+      if (!cta) return;
+      var src = cta.querySelector('[data-zt-bb-cta-label]') || cta;
+      if (labelEl && src && src.textContent) {
+        labelEl.textContent = src.textContent.trim();
+      }
+      if (!priceEl) return;
+      var root = cta.closest('.zt-bb2') || document;
+      var plan = root.querySelector('[data-zt-bb-plan].is-active, [data-zt-bb-plan][aria-pressed="true"]');
+      var isOnce = plan && plan.getAttribute('data-zt-bb-plan') === 'once';
+      var price = root.querySelector(isOnce ? '[data-zt-bb-once-price]' : '[data-zt-bb-sub-price]');
+      var renew = isOnce ? null : root.querySelector('[data-zt-bb-sub-renew]');
+      var parts = [];
+      if (price && price.textContent.trim()) parts.push(price.textContent.trim());
+      if (renew && renew.textContent.trim()) parts.push(renew.textContent.trim());
+      if (parts.length) {
+        priceEl.hidden = false;
+        priceEl.textContent = parts.join(' · ');
+      } else {
+        priceEl.hidden = true;
+        priceEl.textContent = '';
+      }
+    }
+
+    function setPad(on) {
+      document.documentElement.classList.toggle('zt-bf-mobi-atc-on', on);
+      if (on && bar.offsetHeight) {
+        document.documentElement.style.setProperty('--zt-bf-mobi-atc-h', bar.offsetHeight + 'px');
+      }
+    }
+
+    function setVisible(show) {
+      var want = !!(show && mq.matches && !otherStickyVisible());
+      bar.hidden = !want;
+      setPad(want);
+    }
+
+    function bindIo() {
+      var cta = mainCta();
+      if (!cta) {
+        setVisible(false);
+        return;
+      }
+      syncCopy();
+      if (io) io.disconnect();
+      if (!('IntersectionObserver' in window)) {
+        setVisible(true);
+        return;
+      }
+      io = new IntersectionObserver(function (entries) {
+        var inView = entries.some(function (e) { return e.isIntersecting; });
+        setVisible(!inView);
+      }, { root: null, threshold: 0.2 });
+      io.observe(cta);
+    }
+
+    btn.addEventListener('click', function () {
+      var cta = mainCta();
+      if (!cta) return;
+      cta.click();
+    });
+
+    var box = document.querySelector('.zt-bb2') || document;
+    box.addEventListener('click', function (e) {
+      if (e.target.closest('[data-zt-bb-plan], [data-zt-bb-bag]')) {
+        setTimeout(syncCopy, 0);
+      }
+    });
+
+    mq.addEventListener('change', function () {
+      if (!mq.matches) setVisible(false);
+      else bindIo();
+    });
+    window.addEventListener('resize', function () {
+      if (!bar.hidden && bar.offsetHeight) {
+        document.documentElement.style.setProperty('--zt-bf-mobi-atc-h', bar.offsetHeight + 'px');
+      }
+    });
+    window.addEventListener('load', bindIo);
+    document.addEventListener('shopify:section:load', bindIo);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bindIo);
+    } else {
+      bindIo();
+    }
+  })();
+</script>
+
+{% schema %}
+{"name":"Buy Box Cacao LP-BF","tag":"section","class":"section-buy-box-cacao-lp-bf","settings":[{"type":"checkbox","id":"show_image_benefits","label":"Show benefits on product image","default":false},{"type":"select","id":"default_plan","label":"Default plan","default":"sub","options":[{"value":"sub","label":"Subscribe"},{"value":"once","label":"One-time"}]},{"type":"select","id":"after_add_action","label":"After add to cart","default":"drawer","options":[{"value":"drawer","label":"Open cart drawer"},{"value":"cart","label":"Go to cart"},{"value":"checkout","label":"Go to checkout"},{"value":"none","label":"Stay on page"}]},{"type":"textarea","id":"title","label":"Title","default":"Zeotein Cacao\n30-Day Bulk Bag"},{"type":"text","id":"subtitle","label":"Subtitle","default":"14g grass-fed collagen and 23g protein in every serving."},{"type":"text","id":"bullet_1","label":"Bullet 1","default":"Protein from grass-fed beef bone broth, not whey"},{"type":"text","id":"bullet_2","label":"Bullet 2","default":"Grass-fed collagen and bone broth in one serving"},{"type":"text","id":"bullet_3","label":"Bullet 3","default":"Organic fermented cacao, zero sugar"},{"type":"text","id":"bullet_4","label":"Bullet 4","default":"Six ingredients, all printed on the label"},{"type":"text","id":"bags_heading","label":"Quantity heading","default":"How many bags?"},{"type":"text","id":"bags_badge","label":"Quantity badge","default":"Buy More. Save More."},{"type":"image_picker","id":"bags_badge_icon","label":"Quantity badge icon"},{"type":"text","id":"plans_heading","label":"Plans heading","default":"Subscribe and Save:"},{"type":"text","id":"sub_banner","label":"Subscribe banner","default":"Black Friday: Cacao Starter Kit + Free Gifts"},{"type":"text","id":"sub_title","label":"Subscribe title","default":"Subscribe & Save"},{"type":"text","id":"once_title","label":"One-time title","default":"One-Time Purchase"},{"type":"text","id":"once_extra","label":"One-time extra","default":"Save-A-Scoop included"},{"type":"text","id":"perk_1","label":"Subscribe perk 1","default":"Pause or cancel anytime"},{"type":"text","id":"perk_2","label":"Subscribe perk 2","default":"30-Day Money-Back Guarantee"},{"type":"text","id":"shaker_name","label":"Shaker gift","default":"FREE Black Shaker"},{"type":"text","id":"shaker_note","label":"Shaker note","default":"First subscription order"},{"type":"text","id":"guides_name","label":"Guides gift","default":"3 FREE Digital Guides"},{"type":"text","id":"guides_note","label":"Guides note","default":"Emailed after purchase"},{"type":"text","id":"scoop_name","label":"Scoop gift","default":"FREE Save-A-Scoop"},{"type":"text","id":"scoop_note","label":"Scoop note","default":"First Bulk Bag order"},{"type":"text","id":"cta_sub","label":"Subscribe button","default":"Get My Black Friday Kit"},{"type":"text","id":"cta_once","label":"One-time button","default":"Get My Black Friday Kit"},{"type":"text","id":"deadline_text","label":"Deadline strip","default":"Ends Monday Nov 30 at 11:59pm CT"},{"type":"text","id":"intro_note","label":"Intro note","default":"Black Friday price auto-applied"},{"type":"image_picker","id":"intro_icon","label":"Intro note icon"},{"type":"text","id":"limit_lead","label":"Limit lead","default":"First-time subscribers only."},{"type":"text","id":"limit_rest","label":"Limit text","default":"Limit one introductory offer per customer."},{"type":"textarea","id":"trust_1","label":"Trust 1","default":"30-Day Money-Back\nGuarantee"},{"type":"textarea","id":"trust_2","label":"Trust 2","default":"Fast, Tracked\nShipping"},{"type":"textarea","id":"trust_3","label":"Trust 3","default":"Secure\nCheckout"},{"type":"text","id":"nutrition_label","label":"Nutrition button","default":"View Nutrition Facts"},{"type":"select","id":"facts_format","label":"Supplement facts","options":[{"value":"written","label":"Written"},{"value":"photo","label":"Photo"}],"default":"written"},{"type":"image_picker","id":"facts_image","label":"Supplement facts photo"},{"type":"color","id":"primary_color","label":"Primary color","default":"#580d93"},{"type":"range","id":"layout_width","label":"Layout width","min":980,"max":1600,"step":10,"unit":"px","default":1280}],"blocks":[{"type":"faq","name":"Detail","settings":[{"type":"text","id":"title","label":"Title","default":"Detail"},{"type":"textarea","id":"body","label":"Body"}]}],"max_blocks":8,"presets":[{"name":"Buy Box Cacao LP-BF"}]}
+{% endschema %}

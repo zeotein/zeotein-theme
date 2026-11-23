@@ -1,0 +1,69 @@
+{% comment %}
+  Store-wide Judge.me score for the Cacao LP.
+  Reads shop.metafields.judgeme.all_reviews_rating / all_reviews_count
+  so the number stays live (no hardcoded count).
+
+  @param {string} [format] - hero | buybox | verified
+  @param {string} [fallback] - text when metafields are missing
+
+  Formats:
+    hero     -> "Rated 4.9 stars by verified buyers" (fallback, or that default; no count)
+    buybox   -> "5.0/5.0 (149 Reviews)"
+    verified -> "5.0 from 149 verified customers"
+{% endcomment %}
+
+{% liquid
+  assign rating_mf = shop.metafields.judgeme.all_reviews_rating
+  assign count_mf = shop.metafields.judgeme.all_reviews_count
+
+  if rating_mf.value != blank
+    assign average = rating_mf.value
+  else
+    assign average = rating_mf
+  endif
+
+  if count_mf.value != blank
+    assign review_count = count_mf.value
+  else
+    assign review_count = count_mf
+  endif
+
+  assign average = average | append: '' | strip
+  assign review_count = review_count | append: '' | strip
+  assign score_text = fallback
+
+  if average != blank and average != 'nil' and review_count != blank and review_count != 'nil'
+    assign review_count_n = review_count | plus: 0
+    assign score_tenths = average | plus: 0 | times: 10 | floor
+    assign score_whole = score_tenths | divided_by: 10
+    assign score_frac = score_tenths | modulo: 10
+    assign score_label = score_whole | append: '.' | append: score_frac
+
+    if review_count_n == 1
+      assign review_word = 'Review'
+    else
+      assign review_word = 'Reviews'
+    endif
+
+    assign count_label = review_count_n
+    if review_count_n >= 1000
+      assign thousands = review_count_n | divided_by: 1000
+      assign remainder = review_count_n | modulo: 1000 | prepend: '000' | slice: -3, 3
+      assign count_label = thousands | append: ',' | append: remainder
+    endif
+
+    case format
+      when 'buybox'
+        assign score_text = score_label | append: '/5.0 (' | append: count_label | append: ' ' | append: review_word | append: ')'
+      when 'verified'
+        assign score_text = score_label | append: ' from ' | append: count_label | append: ' verified customers'
+      else
+        if fallback != blank
+          assign score_text = fallback
+        else
+          assign score_text = 'Rated 4.9 stars by verified buyers'
+        endif
+    endcase
+  endif
+%}
+{{- score_text | escape -}}

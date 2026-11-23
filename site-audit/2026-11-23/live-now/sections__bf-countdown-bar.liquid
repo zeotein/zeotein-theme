@@ -1,0 +1,259 @@
+{% comment %}
+  Black Friday countdown bar. Sits above the hero on the Black Friday landing page.
+  Counts down in the viewer's own clock to a fixed UTC instant, so the deadline is
+  the same moment for everyone. Default instant is Nov 30 2026 11:59pm CT, the end of the BF Cacao bag discounts.
+  BF v4 (Nov 15): bigger, bolder black bar with a BLACK FRIDAY tag. After the deadline the clock hides and the ended text shows.
+{% endcomment %}
+{%- liquid
+  assign cid = 'zt-bfc-' | append: section.id
+  assign deadline = section.settings.deadline_utc | default: '2026-12-01T05:59:00Z'
+-%}
+
+<section
+  id="{{ cid }}"
+  class="zt-bfc"
+  data-zt-bfc
+  data-zt-bfc-deadline="{{ deadline | escape }}"
+  style="
+    --zt-bfc-bg: {{ section.settings.bg_color | default: '#171320' }};
+    --zt-bfc-fg: {{ section.settings.text_color | default: '#ffffff' }};
+    --zt-bfc-accent: {{ section.settings.accent_color | default: '#32BAC0' }};
+  "
+  {{ section.shopify_attributes }}
+>
+  <div class="zt-bfc__inner">
+    <p class="zt-bfc__label"><span class="zt-bfc__tag">{{ section.settings.tag | default: 'Black Friday' | escape }}</span> <span class="zt-bfc__text">{{ section.settings.label | escape }}</span></p>
+    <div class="zt-bfc__clock" data-zt-bfc-clock role="timer" aria-live="off">
+      <span class="zt-bfc__unit"><b data-zt-bfc-d>--</b><i>DAYS</i></span>
+      <span class="zt-bfc__unit"><b data-zt-bfc-h>--</b><i>HRS</i></span>
+      <span class="zt-bfc__unit"><b data-zt-bfc-m>--</b><i>MIN</i></span>
+      <span class="zt-bfc__unit"><b data-zt-bfc-s>--</b><i>SEC</i></span>
+    </div>
+    <p class="zt-bfc__ended" data-zt-bfc-ended hidden>{{ section.settings.ended_label | escape }}</p>
+  </div>
+</section>
+
+<style>
+  #{{ cid }} {
+    background: var(--zt-bfc-bg);
+    color: var(--zt-bfc-fg);
+    padding: 10px 16px;
+    text-align: center;
+  }
+  #{{ cid }} .zt-bfc__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  #{{ cid }} .zt-bfc__label {
+    margin: 0;
+    font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-size: 12.5px;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  #{{ cid }} .zt-bfc__clock {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    font-variant-numeric: tabular-nums;
+  }
+  #{{ cid }} .zt-bfc__unit {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 6px;
+    padding: 4px 8px;
+    min-width: 42px;
+    line-height: 1.05;
+  }
+  #{{ cid }} .zt-bfc__unit b {
+    display: block;
+    font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+  }
+  /* BF v4: bold Black Friday bar */
+  #{{ cid }} { padding: 12px 16px; border-bottom: 3px solid var(--zt-bfc-accent); }
+  #{{ cid }} .zt-bfc__label { font-size: 13px; letter-spacing: 0.06em; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; }
+  #{{ cid }} .zt-bfc__tag { background: #ffffff; color: #000000; padding: 4px 8px 3px; border-radius: 3px; font-size: 14px; font-weight: 800; letter-spacing: 0.16em; }
+  #{{ cid }} .zt-bfc__unit { background: var(--zt-bfc-accent); color: #ffffff; min-width: 46px; }
+  #{{ cid }} .zt-bfc__unit b { font-size: 17px; }
+  #{{ cid }} p.zt-bfc__ended { color: #ffffff; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; }
+  #{{ cid }} [hidden] { display: none !important; }
+  #{{ cid }} .zt-bfc__unit i {
+    display: block;
+    font-style: normal;
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    opacity: 0.72;
+    margin-top: 2px;
+  }
+  #{{ cid }} .zt-bfc__ended {
+    margin: 0;
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--zt-bfc-accent);
+  }
+  @media (min-width: 750px) {
+    #{{ cid }} .zt-bfc__inner { flex-direction: row; justify-content: center; gap: 16px; }
+    #{{ cid }} .zt-bfc__label { font-size: 15px; }
+    #{{ cid }} .zt-bfc__tag { font-size: 16px; }
+    #{{ cid }} .zt-bfc__unit b { font-size: 19px; }
+  }
+
+  /* Stick under the header and any announcement bar. Must be on the
+     Shopify section wrapper or sticky would be clipped to this section. */
+  .section-bf-countdown-bar {
+    position: sticky;
+    top: var(--zt-bf-sticky-top, 85px);
+    z-index: 39;
+    background: {{ section.settings.bg_color | default: '#171320' }};
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById({{ cid | json }});
+    if (!root || root.dataset.ztBfcBound === '1') return;
+    root.dataset.ztBfcBound = '1';
+
+    var end = Date.parse(root.getAttribute('data-zt-bfc-deadline'));
+    var clock = root.querySelector('[data-zt-bfc-clock]');
+    var ended = root.querySelector('[data-zt-bfc-ended]');
+    var d = root.querySelector('[data-zt-bfc-d]');
+    var h = root.querySelector('[data-zt-bfc-h]');
+    var m = root.querySelector('[data-zt-bfc-m]');
+    var s = root.querySelector('[data-zt-bfc-s]');
+    if (!end || isNaN(end)) return;
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+    function tick() {
+      var left = end - Date.now();
+      if (left <= 0) {
+        if (clock) clock.hidden = true;
+        var lbl = root.querySelector('.zt-bfc__label');
+        if (lbl) lbl.hidden = true;
+        if (ended) ended.hidden = false;
+        return false;
+      }
+      var sec = Math.floor(left / 1000);
+      d.textContent = String(Math.floor(sec / 86400));
+      h.textContent = pad(Math.floor(sec / 3600) % 24);
+      m.textContent = pad(Math.floor(sec / 60) % 60);
+      s.textContent = pad(sec % 60);
+      return true;
+    }
+
+    if (tick()) {
+      var timer = setInterval(function () {
+        if (!tick()) clearInterval(timer);
+      }, 1000);
+    }
+  })();
+</script>
+
+
+<script>
+  (function () {
+    var wrapper = document.querySelector('.section-bf-countdown-bar');
+    if (!wrapper || wrapper.dataset.ztBfcStickyBound === '1') return;
+    wrapper.dataset.ztBfcStickyBound = '1';
+
+    var SELECTORS = [
+      '.shopify-section-group-header-group',
+      '.section-header-cacao-lp',
+      '[data-zt-lp-header]',
+      '.announcement-bar',
+      '.announcement-bar__message',
+      '.essential_free_shipping_bar_wrapper',
+      '.shopify-section-announcement-bar',
+      '.zeotein-announcement-bar',
+      '#shopify-section-announcement-bar'
+    ];
+
+    function measure() {
+      var offset = 0;
+      document.querySelectorAll(SELECTORS.join(',')).forEach(function (el) {
+        if (wrapper.contains(el)) return;
+        var style = window.getComputedStyle(el);
+        if (style.display === 'none' || style.visibility === 'hidden') return;
+        if (style.position !== 'sticky' && style.position !== 'fixed') return;
+        var rect = el.getBoundingClientRect();
+        if (rect.height < 1) return;
+        if (style.top === 'auto') return;
+        var stickTop = parseFloat(style.top) || 0;
+        offset = Math.max(offset, stickTop + rect.height);
+      });
+      if (!offset) offset = 85;
+      var next = Math.round(offset) + 'px';
+      if (next === lastTop) return;
+      lastTop = next;
+      document.documentElement.style.setProperty('--zt-bf-sticky-top', next);
+    }
+
+    var lastTop = '';
+    var lastW = window.innerWidth;
+    measure();
+    window.addEventListener('resize', function () {
+      if (window.innerWidth === lastW) return;
+      lastW = window.innerWidth;
+      measure();
+    });
+    window.addEventListener('load', measure);
+    document.addEventListener('shopify:section:load', measure);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', measure);
+    }
+    if (window.ResizeObserver) {
+      document.querySelectorAll(SELECTORS.join(',')).forEach(function (el) {
+        if (wrapper.contains(el)) return;
+        new ResizeObserver(measure).observe(el);
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "BF Countdown Bar",
+  "tag": "section",
+  "class": "section-bf-countdown-bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Bar text",
+      "default": "57% off your Starter Kit"
+    },
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Tag text",
+      "default": "Black Friday"
+    },
+    {
+      "type": "text",
+      "id": "deadline_utc",
+      "label": "Deadline (UTC, ISO 8601)",
+      "default": "2026-12-01T05:59:00Z",
+      "info": "Nov 30 2026 at 11:59pm CT is 2026-12-01T05:59:00Z. Everyone counts down to the same moment."
+    },
+    {
+      "type": "text",
+      "id": "ended_label",
+      "label": "Text after the deadline",
+      "default": "Black Friday pricing has ended"
+    },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#171320" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#ffffff" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#32BAC0" }
+  ],
+  "presets": [{ "name": "BF Countdown Bar" }]
+}
+{% endschema %}

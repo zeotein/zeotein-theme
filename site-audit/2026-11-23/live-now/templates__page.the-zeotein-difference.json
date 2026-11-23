@@ -1,0 +1,340 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "zeotein_how_it_works_BHCKQb": {
+      "type": "zeotein-how-it-works",
+      "name": " The Zeotein Difference",
+      "settings": {
+        "eyebrow": "The Zeotein Difference",
+        "headline": "MORE THAN PROTEIN.\nMADE SIMPLE.",
+        "subhead": "Zeotein brings protein and thoughtfully selected ingredients together in convenient single-serve formats. Each formula is presented clearly so you can understand what’s in your daily serving and choose the option that fits your preferences."
+      }
+    },
+    "rich_text_Q99XAU": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_darPKb": {
+          "type": "heading",
+          "settings": {
+            "heading": "THE ZEOTEIN DIFFERENCE"
+          }
+        },
+        "text_NHEtWm": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em><strong>Clean Ingredients. Honest Nutrition. Real Results.</strong></em><br>Your body thrives on clean fuel, real nutrients, and a system that actually supports how you live.<br>Zeotein was created to take the guesswork and overwhelm out of wellness — and replace it with something simple, powerful, and effective.<br>This isn’t just a shake.<br>It’s a smarter daily ritual designed to help your body feel lighter, clearer, and more energized — without the clutter of multiple supplements.<br><br></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_darPKb",
+        "text_NHEtWm"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "title_white": "REAL NUTRITION",
+        "title_teal": "MADE SIMPLE.",
+        "subhead": "Get protein, collagen, minerals, and energy from a single stick pack.",
+        "card_1_title": "RECOVER FASTER, FEEL IT SOONER.",
+        "card_1_text": "23g of clean protein plus collagen help muscles bounce back and joints stay strong.",
+        "card_2_title": "ENERGY THAT LASTS, NO CRASH.",
+        "card_2_text": "MCT fuel that carries you past the 3pm slump with no jitters.",
+        "card_3_title": "ONE HABIT, NOT TEN.",
+        "card_3_text": "Six real ingredients replace a counter full of separate scoops and blends. One stick pack, ten seconds, done.",
+        "card_4_title": "NOTHING TO FEEL GUILTY ABOUT.",
+        "card_4_text": "Zero fillers, zero artificial sweeteners, zero junk. If a clean freak wouldn't approve it, it's not in here."
+      }
+    },
+    "rich_text_bcE4hU": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_EyBRRQ": {
+          "type": "heading",
+          "settings": {
+            "heading": "What Makes Zeotein Different"
+          }
+        },
+        "text_XzNEnF": {
+          "type": "text",
+          "settings": {
+            "text": "<h3><strong>1. A Clean, Multi-Functional Formula</strong></h3><p>Zeotein isn’t built like traditional proteins.<br><br>We use <strong>bone broth and collagen</strong> — giving you:</p><ul>\n<li>Easier digestion<br>\n</li>\n<li>Less bloating<br>\n</li>\n<li>Joint, skin, and gut support<br>\n</li>\n<li>A gentler protein source<br>\n</li>\n</ul><p>Plus the 5 essentials your body needs daily:</p><ul>\n<li>Detox support<br>\n</li>\n<li>Minerals<br>\n</li>\n<li>Nourishment<br>\n</li>\n<li>Clean energy<br>\n</li>\n<li>Restoration<br>\n</li>\n</ul><p>Full-spectrum nutrition — not single-purpose protein.</p><h3><strong>2. The Zeolite Advantage</strong></h3><p>Zeolite is a rare volcanic mineral with a natural negative charge.<br><br>It binds toxins, impurities, and heavy metals that weigh your system down.</p><p>When the body is clearer:</p><ul>\n<li>Digestion improves<br>\n</li>\n<li>Cravings calm<br>\n</li>\n<li>Metabolism responds<br>\n</li>\n<li>Energy stabilizes<br>\n</li>\n<li>Nutrient absorption increases<br>\n</li>\n</ul><p>This is the backbone of the Zeotein difference.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_EyBRRQ",
+        "text_XzNEnF"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "title_white": "REAL NUTRITION",
+        "title_teal": "MADE SIMPLE.",
+        "subhead": "Get protein, collagen, minerals, and energy from a single stick pack.",
+        "card_1_title": "RECOVER FASTER, FEEL IT SOONER.",
+        "card_1_text": "23g of clean protein plus collagen help muscles bounce back and joints stay strong.",
+        "card_2_title": "ENERGY THAT LASTS, NO CRASH.",
+        "card_2_text": "MCT fuel that carries you past the 3pm slump with no jitters.",
+        "card_3_title": "ONE HABIT, NOT TEN.",
+        "card_3_text": "Six real ingredients replace a counter full of separate scoops and blends. One stick pack, ten seconds, done.",
+        "card_4_title": "NOTHING TO FEEL GUILTY ABOUT.",
+        "card_4_text": "Zero fillers, zero artificial sweeteners, zero junk. If a clean freak wouldn't approve it, it's not in here."
+      }
+    },
+    "rich_text_zMXRAb": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_dgmj6Y": {
+          "type": "heading",
+          "settings": {
+            "heading": "More Than a Protein Powder"
+          }
+        },
+        "text_bwLkHn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Your body deserves more than another protein powder.<br><br>It deserves a blend that supports digestion, energy, cravings, detox, and nourishment — all in one simple daily routine.</p><p>Zeotein was created for people who want to feel better without juggling multiple supplements or second-guessing what their body needs.</p><p>This is a new kind of protein — built with purpose, not trends.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_dgmj6Y",
+        "text_bwLkHn"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "title_white": "REAL NUTRITION",
+        "title_teal": "MADE SIMPLE.",
+        "subhead": "Get protein, collagen, minerals, and energy from a single stick pack.",
+        "card_1_title": "RECOVER FASTER, FEEL IT SOONER.",
+        "card_1_text": "23g of clean protein plus collagen help muscles bounce back and joints stay strong.",
+        "card_2_title": "ENERGY THAT LASTS, NO CRASH.",
+        "card_2_text": "MCT fuel that carries you past the 3pm slump with no jitters.",
+        "card_3_title": "ONE HABIT, NOT TEN.",
+        "card_3_text": "Six real ingredients replace a counter full of separate scoops and blends. One stick pack, ten seconds, done.",
+        "card_4_title": "NOTHING TO FEEL GUILTY ABOUT.",
+        "card_4_text": "Zero fillers, zero artificial sweeteners, zero junk. If a clean freak wouldn't approve it, it's not in here."
+      }
+    },
+    "image_with_text_9AVjix": {
+      "type": "image-with-text",
+      "disabled": true,
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "eyebrow": "What you're actually getting.",
+        "title_white": "THE LABEL.",
+        "title_teal": "NOTHING HIDDEN...",
+        "subhead": "Whole-food shoppers read every panel. So here’s ours — up front.",
+        "stat_1_number": "23g",
+        "stat_1_text": "Protein",
+        "stat_2_number": "0g",
+        "stat_2_text": "Added Sugar",
+        "stat_3_number": "140",
+        "stat_3_text": "Calories",
+        "stat_4_number": "6",
+        "stat_4_text": "Ingredients",
+        "badge_1": "Non-GMO",
+        "badge_2": "Gluten-Free",
+        "badge_3": "Zero Added Sugar",
+        "badge_4": "No Artificial Anything",
+        "image": "shopify://shop_images/ChatGPT_Image_Dec_14_2025_07_18_38_PM.png",
+        "ingredients_text": "Organic Hydrolyzed Bovine Collagen Peptides, Beef Bone Broth Protein, Organic Fermented Cacao Powder, Organic MCT Oil Powder, Zeolite, Organic Sea Moss."
+      }
+    },
+    "multicolumn_GUXbUq": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_RBLd7j": {
+          "type": "column",
+          "settings": {
+            "title": "🟣 <strong>Zeolite</strong>",
+            "text": "<p><br>Detox support, gut clarity, reduced cravings.<br><br></p>"
+          }
+        },
+        "column_d3KYyp": {
+          "type": "column",
+          "settings": {
+            "title": "🟣 <strong>Sea Moss</strong>",
+            "text": "<p><br>90+ minerals for metabolism + cellular energy.</p>"
+          }
+        },
+        "column_HgTYbN": {
+          "type": "column",
+          "settings": {
+            "title": "🟣 <strong>Bone Broth & Collagen</strong>",
+            "text": "<p><br>Protein + gut lining repair + joint/skin support.</p>"
+          }
+        },
+        "column_EazxFH": {
+          "type": "column",
+          "settings": {
+            "title": "🟣 <strong>Cacao</strong>",
+            "text": "<p><br>Mood + antioxidant benefits.</p>"
+          }
+        },
+        "column_YRLCrB": {
+          "type": "column",
+          "settings": {
+            "title": "🟣 <strong>MCT</strong>",
+            "text": "<p><br>Clean brain fuel + appetite control.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_RBLd7j",
+        "column_d3KYyp",
+        "column_HgTYbN",
+        "column_EazxFH",
+        "column_YRLCrB"
+      ],
+      "disabled": true,
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title_white": "REAL NUTRITION",
+        "title_teal": "MADE SIMPLE.",
+        "subhead": "Get protein, collagen, minerals, and energy from a single stick pack.",
+        "button_label": "Button label",
+        "button_link": ""
+      }
+    },
+    "collapsible_content_btihBh": {
+      "type": "collapsible-content",
+      "disabled": true,
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "eyebrow": "QUESTIONS, ANSWERED",
+        "heading": "The 5 Essentials Framework",
+        "intro": "Everything you need to know before making Zeotein part of your routine.",
+        "shipping_guarantee_url": "",
+        "bottom_text": "Still have a question?",
+        "bottom_link_text": "Contact Zeotein"
+      }
+    },
+    "rich_text_7xJHpV": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_aVXw9L": {
+          "type": "heading",
+          "settings": {
+            "heading": "Designed for Real-Life Consistency"
+          }
+        },
+        "text_yrbqXH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>No complicated routines.</p><p>No measuring.</p><p>No juggling seven supplements.</p><p>Just one daily packet that supports your body exactly where it needs it most.</p><p>Your wellness routine shouldn’t feel like a second job.</p><p>Zeotein makes it simple.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_aVXw9L",
+        "text_yrbqXH"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "title_white": "REAL NUTRITION",
+        "title_teal": "MADE SIMPLE.",
+        "subhead": "Get protein, collagen, minerals, and energy from a single stick pack.",
+        "card_1_title": "RECOVER FASTER, FEEL IT SOONER.",
+        "card_1_text": "23g of clean protein plus collagen help muscles bounce back and joints stay strong.",
+        "card_2_title": "ENERGY THAT LASTS, NO CRASH.",
+        "card_2_text": "MCT fuel that carries you past the 3pm slump with no jitters.",
+        "card_3_title": "ONE HABIT, NOT TEN.",
+        "card_3_text": "Six real ingredients replace a counter full of separate scoops and blends. One stick pack, ten seconds, done.",
+        "card_4_title": "NOTHING TO FEEL GUILTY ABOUT.",
+        "card_4_text": "Zero fillers, zero artificial sweeteners, zero junk. If a clean freak wouldn't approve it, it's not in here."
+      }
+    },
+    "rich_text_zEx3dH": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_gWxiQR": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand"
+          }
+        },
+        "text_z7tgEx": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_f4QLFB": {
+          "type": "button",
+          "settings": {
+            "label": "Button label",
+            "link": "#"
+          }
+        }
+      },
+      "block_order": [
+        "heading_gWxiQR",
+        "text_z7tgEx",
+        "button_f4QLFB"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "title_white": "REAL NUTRITION",
+        "title_teal": "MADE SIMPLE.",
+        "subhead": "Get protein, collagen, minerals, and energy from a single stick pack.",
+        "card_1_title": "RECOVER FASTER, FEEL IT SOONER.",
+        "card_1_text": "23g of clean protein plus collagen help muscles bounce back and joints stay strong.",
+        "card_2_title": "ENERGY THAT LASTS, NO CRASH.",
+        "card_2_text": "MCT fuel that carries you past the 3pm slump with no jitters.",
+        "card_3_title": "ONE HABIT, NOT TEN.",
+        "card_3_text": "Six real ingredients replace a counter full of separate scoops and blends. One stick pack, ten seconds, done.",
+        "card_4_title": "NOTHING TO FEEL GUILTY ABOUT.",
+        "card_4_text": "Zero fillers, zero artificial sweeteners, zero junk. If a clean freak wouldn't approve it, it's not in here."
+      }
+    },
+    "image_with_text_jd46gr": {
+      "type": "image-with-text",
+      "disabled": true,
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "eyebrow": "What you're actually getting.",
+        "title_white": "THE LABEL.",
+        "title_teal": "NOTHING HIDDEN...",
+        "subhead": "Whole-food shoppers read every panel. So here’s ours — up front.",
+        "stat_1_number": "23g",
+        "stat_1_text": "Protein",
+        "stat_2_number": "0g",
+        "stat_2_text": "Added Sugar",
+        "stat_3_number": "140",
+        "stat_3_text": "Calories",
+        "stat_4_number": "6",
+        "stat_4_text": "Ingredients",
+        "badge_1": "Non-GMO",
+        "badge_2": "Gluten-Free",
+        "badge_3": "Zero Added Sugar",
+        "badge_4": "No Artificial Anything",
+        "ingredients_text": "Organic Hydrolyzed Bovine Collagen Peptides, Beef Bone Broth Protein, Organic Fermented Cacao Powder, Organic MCT Oil Powder, Zeolite, Organic Sea Moss."
+      }
+    }
+  },
+  "order": [
+    "zeotein_how_it_works_BHCKQb",
+    "rich_text_Q99XAU",
+    "rich_text_bcE4hU",
+    "rich_text_zMXRAb",
+    "image_with_text_9AVjix",
+    "multicolumn_GUXbUq",
+    "collapsible_content_btihBh",
+    "rich_text_7xJHpV",
+    "rich_text_zEx3dH",
+    "image_with_text_jd46gr"
+  ]
+}
