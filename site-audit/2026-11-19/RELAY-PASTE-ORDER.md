@@ -1,5 +1,36 @@
 # Relay paste order: kit 1, then kit 2 (19 Nov 2026)
 
+## UPDATE 23 Nov 2026, 1:45 PM CT: read this before any step below
+
+Live has moved on since 19 Nov, and the discounts changed: storewide 30% now starts **Tue 24 Nov**, not Fri 27 Nov. Where this section and the tables below differ, this section wins. Details: `site-audit/2026-11-23/paste-check.md`.
+
+- **Already saved, skip:** K1-2, K1-3, K1-4, K1-6, K1-9 to K1-16; K2-BF2, BF3, BF5, BF12.
+- **Do not paste the kit file.** Live has a newer version, and pasting would undo it (its BEFORE check fails anyway): K1-0, K1-1, K1-5, K1-7, K1-7b, K1-8; K2-BF1, BF4, BF6 to BF11, BF13, BF14, BF15, BF16, BF18, BF19, BF21, BF22.
+- **Still GO as listed:** K1-17. Live still has the old Difference template, so its BEFORE check holds.
+- **HOLD, out of date for the 24 Nov storewide start:** K2-BF20 to BF23 and K2-D1. Claude will rebuild them only if Dana wants Black Friday price lines on product pages and cards.
+- **Replaced, still waiting for Dana's own yes:**
+  - K1-18 is replaced by **R3**;
+  - K2-BF15 and BF16 are replaced by **R1** and **R2**;
+  - K2-BF17 stays as listed (live unchanged).
+
+R source = `https://raw.githubusercontent.com/zeotein/zeotein-theme/b01dcd908e82066e1d17acf43f5c62ebc0763183/site-audit/2026-11-23/rebuilt/` + the live path. Each R file is today's live file with the smallest change. R1 to R3 and BF17 don't depend on each other or on any other step.
+
+- **R1** `snippets/cacao-lp-review-score.liquid` (REPLACE)
+  - BEFORE: 69 lines; line 37 ends with `round` (live md5 e383c869)
+  - AFTER: 69 lines; line 37 ends with `floor`
+  - TEST: /products/cacao-protein-starter-kit loads, 0 Liquid errors
+- **R2** `sections/buy-box-cacao-lp-v2.liquid` (REPLACE)
+  - BEFORE: 994 lines; line 268 ends with `round` (live md5 5a578cd8)
+  - AFTER: 994 lines; line 268 ends with `floor`
+  - TEST: /products/cacao-protein-starter-kit buy box reads "4.9/5.0 (155 Reviews)"
+- **K2-BF17** `sections/hero-banner-cacao-lp.liquid`: as listed below (kit file, live unchanged)
+  - TEST: same page, hero reads "4.9 stars", and "5.0 stars" appears nowhere
+- **R3** `snippets/zt-bf-blend-price.liquid` (REPLACE)
+  - BEFORE: 71 lines; line 34 is the old `vegan_off` line with 4200,8999,14398,20397 (live md5 a99c6fc3)
+  - AFTER: 82 lines
+  - TEST: view source of /products/zeotein-vegan-sticks-30, search "91.00". The Black Friday table lists $91.00, $173.99, $251.99 and $323.99
+
+
 Written 19 Nov 2026, 1:40 PM CT, on Dana's instruction:
 - **Relay is the only one pasting** into the live theme "Zeotein live theme - edit this one directly" (#188199928021): one file at a time, with a test after each.
 - **Nobody pastes into the BF theme** "Black Friday Store 2026 (draft, publish Nov 27)" (#187825914069).
@@ -296,4 +327,5 @@ BEFORE is what live must show before the paste; AFTER is the line count after it
 
 ## Change log
 
+- 23 Nov 2026, 1:45 PM CT: update section added at the top (live state, 24 Nov storewide start, R1 to R3). No kit file changed.
 - 19 Nov 2026, 1:40 PM CT: list written. Minutes later, before it was sent: the BEFORE, AFTER and TEST details moved from the tables into the per-step check lists, because some quoted code lines contain the | character, which splits Markdown table cells. The steps, order and files are the same. The paste files are unchanged (pinned commits above). Only the two kit READMEs changed, to add the HOLD lines. Any later change to a kit file will be announced in Dana's chat with Claude first and recorded here.
