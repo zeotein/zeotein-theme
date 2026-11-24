@@ -1,5 +1,11 @@
 # Relay paste order: kit 1, then kit 2 (19 Nov 2026)
 
+## UPDATE 24 Nov 2026, 12:20 AM CT: read this first
+
+- **Do not paste R1, R2 or K2-BF17.** 4.9 is already live on the Cacao landing page and the homepage (checked 12:15 AM CT), and those live files changed overnight.
+- **Do not paste R3.** It was built for the 2 to 4-pack fixed amounts, which ended on 23 Nov. The new 37% and 44% discounts make it wrong. The Vegan table on live is drawn by another file now.
+- Details: `site-audit/2026-11-24/cart-check.md`.
+
 ## UPDATE 23 Nov 2026, 1:45 PM CT: read this before any step below
 
 Live has moved on since 19 Nov, and the discounts changed: storewide 30% now starts **Tue 24 Nov**, not Fri 27 Nov. Where this section and the tables below differ, this section wins. Details: `site-audit/2026-11-23/paste-check.md`.
@@ -327,5 +333,6 @@ BEFORE is what live must show before the paste; AFTER is the line count after it
 
 ## Change log
 
+- 24 Nov 2026, 12:20 AM CT: R1, R2, K2-BF17 and R3 marked do not paste. No kit file changed.
 - 23 Nov 2026, 1:45 PM CT: update section added at the top (live state, 24 Nov storewide start, R1 to R3). No kit file changed.
 - 19 Nov 2026, 1:40 PM CT: list written. Minutes later, before it was sent: the BEFORE, AFTER and TEST details moved from the tables into the per-step check lists, because some quoted code lines contain the | character, which splits Markdown table cells. The steps, order and files are the same. The paste files are unchanged (pinned commits above). Only the two kit READMEs changed, to add the HOLD lines. Any later change to a kit file will be announced in Dana's chat with Claude first and recorded here.
