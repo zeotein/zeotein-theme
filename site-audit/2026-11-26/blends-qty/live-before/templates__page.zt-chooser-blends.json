@@ -1,0 +1,330 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "chooser": {
+      "type": "zt-blend-chooser",
+      "blocks": {
+        "blend_cacao": {
+          "type": "blend",
+          "settings": {
+            "key": "cacao",
+            "label": "Cacao",
+            "sublabel": "Bulk bag or sticks"
+          }
+        },
+        "blend_vegan": {
+          "type": "blend",
+          "settings": {
+            "key": "vegan",
+            "label": "Vegan",
+            "sublabel": "Stick packs"
+          }
+        },
+        "opt_cacao_bag": {
+          "type": "option",
+          "settings": {
+            "product": "zeotein-cacao-bag-30",
+            "blend": "cacao",
+            "title": "30-Day Bulk Bag – Cacao",
+            "description": "Zeotein Cacao in one resealable bag, 30 servings",
+            "badge": "",
+            "one_time_only": false,
+            "selling_plan_id": "6729892053",
+            "gifts_sub": "Free Save-A-Scoop with your first bag\nFree CleanBlend shaker with your first subscription order\nFree Starter Guide + Cacao Recipe Guide (digital) with your first order",
+            "gifts_once": "Free Save-A-Scoop with your first bag\nFree Starter Guide + Cacao Recipe Guide (digital) with your first order"
+          }
+        },
+        "opt_cacao_30": {
+          "type": "option",
+          "settings": {
+            "product": "zeotein-cacao-sticks-30",
+            "blend": "cacao",
+            "title": "30-Day Stick Packs – Cacao",
+            "description": "Zeotein Cacao in 30 single-serve stick packs",
+            "badge": "",
+            "one_time_only": false,
+            "selling_plan_id": "",
+            "gifts_sub": "Free CleanBlend shaker with your first subscription order\nFree Starter Guide + Cacao Recipe Guide (digital) with your first order",
+            "gifts_once": "Free Starter Guide + Cacao Recipe Guide (digital) with your first order"
+          }
+        },
+        "opt_cacao_7": {
+          "type": "option",
+          "settings": {
+            "product": "zeotein-cacao-sticks-7",
+            "blend": "cacao",
+            "title": "7-Day Stick Packs – Cacao",
+            "description": "Zeotein Cacao in 7 single-serve stick packs, try it for a week",
+            "badge": "",
+            "one_time_only": true,
+            "selling_plan_id": "",
+            "gifts_sub": "Free Starter Guide + Cacao Recipe Guide (digital) with your first order",
+            "gifts_once": "Free Starter Guide + Cacao Recipe Guide (digital) with your first order"
+          }
+        },
+        "opt_vegan_30": {
+          "type": "option",
+          "settings": {
+            "product": "zeotein-vegan-sticks-30",
+            "blend": "vegan",
+            "title": "30-Day Stick Packs – Vegan",
+            "description": "Zeotein Vegan in 30 single-serve stick packs",
+            "badge": "",
+            "one_time_only": false,
+            "selling_plan_id": "",
+            "gifts_sub": "Free CleanBlend shaker with your first subscription order\nFree Starter Guide + Vegan Recipe Guide (digital) with your first order",
+            "gifts_once": "Free Starter Guide + Vegan Recipe Guide (digital) with your first order"
+          }
+        },
+        "opt_vegan_7": {
+          "type": "option",
+          "settings": {
+            "product": "zeotein-vegan-sticks-7",
+            "blend": "vegan",
+            "title": "7-Day Stick Packs – Vegan",
+            "description": "Zeotein Vegan in 7 single-serve stick packs, try it for a week",
+            "badge": "",
+            "one_time_only": true,
+            "selling_plan_id": "",
+            "gifts_sub": "Free Starter Guide + Vegan Recipe Guide (digital) with your first order",
+            "gifts_once": "Free Starter Guide + Vegan Recipe Guide (digital) with your first order"
+          }
+        }
+      },
+      "block_order": [
+        "blend_cacao",
+        "blend_vegan",
+        "opt_cacao_bag",
+        "opt_cacao_30",
+        "opt_cacao_7",
+        "opt_vegan_30",
+        "opt_vegan_7"
+      ],
+      "settings": {
+        "heading": "Protein",
+        "heading_accent": "Blends",
+        "intro": "Subscribe & Save. Stock up. Stay consistent. Free welcome gifts with every subscription, and you can pause or cancel anytime.",
+        "rating_text": "Rated 4.9 stars by verified buyers",
+        "blend_step": "Pick your blend",
+        "mode_step": "How do you want it?",
+        "size_step": "Pick your size",
+        "subscribe_label": "Subscribe & Save",
+        "onetime_label": "One-Time",
+        "save_prefix": "You save",
+        "once_only_label": "One-time only",
+        "gifts_heading": "Included free",
+        "cta_label": "Continue",
+        "faq_set": "none"
+      }
+    },
+    "blends_inside": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5b579f1_bxfUtx": {
+          "type": "whats-inside",
+          "settings": {
+            "section_id": "ingredients",
+            "eyebrow": "WHAT'S INSIDE",
+            "heading": "What's Inside Matters.",
+            "subheading": "Simple formulas. Intentional ingredients. Nothing unnecessary.",
+            "cacao_image": "shopify://shop_images/Cacao-image10-31-26.jpg",
+            "cacao_heading": "Ingredients you can read.",
+            "cacao_intro": "Organic collagen peptides + grass-fed beef bone broth, made for simple, everyday nutrition.",
+            "cacao_cta": "VIEW FULL INGREDIENT DETAILS",
+            "cacao_badge": "23g",
+            "cacao_protein": "Grass-fed collagen and grass-fed bone broth",
+            "cacao_flavor": "Rich fermented cacao",
+            "cacao_format": "Stick packs or a bulk bag",
+            "cacao_quote": "It's so smooth that it makes me think of the old fudgsicles of years ago.",
+            "cacao_quote_name": "Clara George, Zeotein Cacao",
+            "vegan_image": "shopify://shop_images/Vegan-image10-31-26.jpg",
+            "vegan_heading": "Five Ingredients.",
+            "vegan_intro": "Plant-based protein with organic hemp + pumpkin seed protein, made for simple, everyday nutrition.",
+            "vegan_cta": "VIEW FULL INGREDIENT DETAILS",
+            "vegan_badge": "20g",
+            "vegan_protein": "Organic hemp and pumpkin seed",
+            "vegan_flavor": "Natural and nutty",
+            "vegan_format": "Stick packs",
+            "vegan_quote": "Love the nutty flavor and texture.",
+            "vegan_quote_name": "K.W., Zeotein Vegan"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5b579f1_bxfUtx"
+      ],
+      "settings": {},
+      "name": "What's inside (Cacao and Vegan)"
+    },
+    "blends_difference": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_1e2e197_f839tj": {
+          "type": "zt-home-difference",
+          "settings": {
+            "eyebrow": "THE ZEOTEIN DIFFERENCE",
+            "heading": "More Than a Protein Shake.",
+            "intro": "Protein, plus the ingredients you would otherwise buy one tub at a time.",
+            "card_1_title": "Real Protein",
+            "card_1_text": "23g from grass-fed bone broth and grass-fed collagen in Cacao. 20g of plant protein from organic pumpkin seed and hemp in Vegan.",
+            "card_2_title": "Organic MCT Oil Powder",
+            "card_2_text": "MCT oil from coconut, in both blends.",
+            "card_3_title": "Wildcrafted Sea Moss",
+            "card_3_text": "Organic sea moss from St. Lucia, in both blends.",
+            "card_4_title": "A Naturally Occurring Volcanic Mineral",
+            "card_4_text": "The ingredient Zeotein is named for, in both blends.",
+            "card_5_title": "Gluten Free and Dairy Free",
+            "card_5_text": "Zero added sugar in both blends.",
+            "feature_eyebrow": "SIMPLE, HONEST INGREDIENTS",
+            "feature_title": "Every Ingredient Named on the Label.",
+            "feature_link": "See What's Inside",
+            "feature_url": "#ingredients"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_1e2e197_f839tj"
+      ],
+      "settings": {},
+      "name": "More than a protein shake"
+    },
+    "blends_routine": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5795bce_UiymHp": {
+          "type": "routine",
+          "settings": {
+            "eyebrow": "REAL ROUTINES",
+            "heading": "Made for Real Life.",
+            "intro": "From the first sip of the day to wherever the day takes you, Zeotein fits into routines that don't always go according to plan.",
+            "image_1": "shopify://shop_images/breakfast.png",
+            "alt_1": "Woman enjoying a Zeotein protein drink in a bright kitchen",
+            "title_1": "Start Your Day Simply.",
+            "text_1": "An easy addition to the first meal of the day.",
+            "image_2": "shopify://shop_images/post_workout_b13fbe36-061e-4dfd-afd0-422238554e77.png",
+            "alt_2": "Woman holding Zeotein after a workout",
+            "title_2": "Post-Workout",
+            "text_2": "An easy way to add protein to your post-workout routine.",
+            "image_3": "shopify://shop_images/travel.png",
+            "alt_3": "Zeotein packed for a travel day",
+            "title_3": "Travel Day",
+            "text_3": "Simple nutrition that travels with you.",
+            "image_4": "shopify://shop_images/afternoon_protein.png",
+            "alt_4": "Zeotein protein drink enjoyed at home in the afternoon",
+            "title_4": "Afternoon Protein",
+            "text_4": "A simple way to fit protein into the middle of a busy day.",
+            "cta_text": "SEE THE FORMULAS",
+            "cta_url": "#ingredients"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5795bce_UiymHp"
+      ],
+      "settings": {},
+      "name": "Made for real life"
+    },
+    "blends_reviews": {
+      "type": "zt-home-reviews",
+      "blocks": {
+        "review_zt1": {
+          "type": "review",
+          "settings": {
+            "review_text": "I absolutely love this product. The taste and ingredients are amazing.",
+            "customer_name": "Mary Shilling"
+          }
+        },
+        "review_zt2": {
+          "type": "review",
+          "settings": {
+            "review_text": "Tastes wonderful! Keeps me satisfied with no mid-day hunger urges.",
+            "customer_name": "Barbara Ecker"
+          }
+        },
+        "review_zt3": {
+          "type": "review",
+          "settings": {
+            "review_text": "It tastes great and I love how clean the ingredients are. I'm definitely going to keep this as a staple in my house!",
+            "customer_name": "Melissa Meyer"
+          }
+        },
+        "review_zt4": {
+          "type": "review",
+          "settings": {
+            "review_text": "All the good stuff and ready to go in less than a minute.",
+            "customer_name": "Philip Brown"
+          }
+        },
+        "review_zt5": {
+          "type": "review",
+          "settings": {
+            "review_text": "I love knowing I'm getting a high quality protein without sugar and other additives.",
+            "customer_name": "Elsie Unruh"
+          }
+        },
+        "review_zt6": {
+          "type": "review",
+          "settings": {
+            "review_text": "Great taste and mixes very well.",
+            "customer_name": "Josh Moon"
+          }
+        }
+      },
+      "block_order": [
+        "review_zt1",
+        "review_zt2",
+        "review_zt3",
+        "review_zt4",
+        "review_zt5",
+        "review_zt6"
+      ],
+      "name": "Reviews",
+      "settings": {
+        "heading": "Real People. Real Reviews.",
+        "cta_text": "Read More Reviews",
+        "cta_url": "/products/zeotein-cacao-sticks-30#judgeme_product_reviews",
+        "bottom_text": "Real reviews from Zeotein customers. Individual results may vary."
+      }
+    },
+    "blends_faq": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_ba94afc_gVXekm": {
+          "type": "faq",
+          "settings": {
+            "eyebrow": "QUESTIONS, ANSWERED",
+            "heading": "Good Questions. Straight Answers.",
+            "intro": "Everything you need to know before making Zeotein part of your routine.",
+            "bottom_text": "Still have a question?",
+            "bottom_link_text": "Contact Zeotein"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_ba94afc_gVXekm"
+      ],
+      "settings": {},
+      "name": "Questions"
+    }
+  },
+  "order": [
+    "chooser",
+    "blends_inside",
+    "blends_difference",
+    "blends_routine",
+    "blends_reviews",
+    "blends_faq"
+  ]
+}

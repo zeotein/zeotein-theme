@@ -1,0 +1,445 @@
+{%- comment -%}
+  zt-bundle-qty (Forge, Nov 23 2026, per Dana via Orbit 2:58 PM: "let's make these bundling things in the Black Friday page first").
+  "How many?" quantity dropdown (accessible listbox) on the three 30-day products only:
+    zeotein-cacao-bag-30, zeotein-cacao-sticks-30, zeotein-vegan-sticks-30.
+  Labels are the same for Subscribe and One-time, with no prices inside the menu.
+  Picking 1 / 2 / 3 sets the theme quantity box (hidden while this shows), so Add to cart sends that quantity with
+  the selling plan Seal already picked. Shopify automatic discounts do the math in the cart:
+    regular: 1535751258325 / 1535751291093 (bag 2 = 10%, 3 = 20%), 1535751323861 / 1535751389397 (sticks, Cacao + Vegan).
+  Display only. Totals use the cart's rounding (checked with cart.js Nov 23): percent off EACH unit, fraction of a cent dropped,
+  times the quantity. Prices come from the variant and the Seal plan on the page; nothing is typed in.
+  BF:start
+  Black Friday (BF theme only): while the Black Friday price line shows (zt-bf-blend-price, Nov 24 to Nov 30 CT, or on preview),
+  1 = 30%, 2 = 37%, 3 = 44% off the regular total, first order only (discounts 1534034084053 / 1536341868757 for 1,
+  1538758279381 / 1538758312149 bag, 1538758344917 / 1538758377685 sticks for 2 and 3, all recurringCycleLimit 1).
+  Subscriptions then renew at the regular plan price times the quantity. This snippet owns the price line, the Seal rows
+  and the sticky bar price on these three pages; zt-bf-blend-price skips its own price script there.
+  BF:end
+  Without JavaScript nothing changes: the regular quantity box stays.
+  Nov 23 2026 5:40 PM CT (Dana via Orbit, mockup4 "just build it"): each option shows its tier save, its final price and, during BF,
+  a black "+30% Black Friday savings applied" pill; below it the price line shows the regular total struck, the big final price,
+  a "You save $X" pill and one math line (regular, bundle, Black Friday). Same floored math as the cart.
+  Nov 23 2026 6:40 PM CT (Dana via Orbit, "mimic what my live site kinda looks like now"): the price block between the dropdown and
+  the Seal boxes is gone (struck + big price, "You save" pill, math line, "First delivery. Then ..."), so this area matches live.
+  The dropdown pill and the Seal rows (struck regular, Black Friday price, "30% off your first month · For new subscribers only") stay, and in the Black Friday state each
+  Seal box (Subscribe & Save and One-time) gets a small black "Black Friday price applied" tag. ZQ_BF_TIERS. Nov 26 2026 (Dana, AI CMO chat): each option shows its price per bag or box in bold, plus the total under it for 2 and 3, following whichever Seal row (Subscribe and Save or One-time) is picked.
+{%- endcomment -%}
+{%- liquid
+  assign zq_handles = ',zeotein-cacao-bag-30,zeotein-cacao-sticks-30,zeotein-vegan-sticks-30,'
+  assign zq_key = ',' | append: product.handle | append: ','
+-%}
+{%- if zq_handles contains zq_key -%}
+{%- liquid
+  if product.handle contains 'bag'
+    assign zq_labels = '1 bag|2 bags, save 10%|3 bags, save 20%' | split: '|'
+    assign zq_one = 'bag'
+    assign zq_many = 'bags'
+  else
+    assign zq_labels = '1 box|2 boxes, save 10%|3 boxes, save 20%' | split: '|'
+    assign zq_one = 'box'
+    assign zq_many = 'boxes'
+  endif
+  assign zq_v = product.selected_or_first_available_variant
+-%}
+<div class="zq" data-zq hidden data-fmt="{{ shop.money_format | strip_html | escape }}"
+  data-one="{{ zq_one }}" data-many="{{ zq_many }}"
+  data-tiers="0,10,20"
+  {% comment %}BF:start{% endcomment %} data-bf-tiers="30,37,44" data-bf-from="1795500000" data-bf-to="1796104799" {% comment %}BF:end{% endcomment %}
+  data-prices='{"o":{{ zq_v.price }},"p":{ {%- for a in zq_v.selling_plan_allocations -%}{%- liquid
+    assign zq_renew = a.price
+    if a.price_adjustments.size > 1
+      assign zq_renew = a.price_adjustments.last.price
+    endif
+  -%}"{{ a.selling_plan.id }}":[{{ a.price }},{{ zq_renew }}]{% unless forloop.last %},{% endunless %}{%- endfor -%} }}'>
+  <span class="zq__label" id="zq-label">How many?</span>
+  <div class="zq__wrap">
+    <button type="button" class="zq__btn" id="zq-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="zq-label zq-btn">
+      <span class="zq__val" data-zq-val><span class="zq__body"><span class="zq__main"><span class="zq__txt"><b>{{ zq_labels[0] }}</b></span></span></span></span>
+      <svg class="zq__chev" aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 14 14"><path d="M2.5 5l4.5 4.5L11.5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <ul class="zq__list" id="zq-list" role="listbox" tabindex="-1" aria-labelledby="zq-label" hidden>
+      {%- for l in zq_labels -%}
+        {%- assign zq_parts = l | split: ', ' -%}
+        <li class="zq__opt" id="zq-opt-{{ forloop.index }}" role="option" data-qty="{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+          <svg class="zq__tick" aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 14 14"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="zq__body">
+            <span class="zq__main"><span class="zq__txt"><b>{{ zq_parts[0] }}</b>{% if zq_parts.size > 1 %}<span class="zq__save">, {{ zq_parts[1] }}</span>{% endif %}</span><span class="zq__pr"><span class="zq__each" data-zq-each></span><b class="zq__amt" data-zq-amt></b></span></span>
+            <span class="zq__pill">+30% Black Friday savings <em>applied</em></span>
+          </span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+  <span class="visually-hidden" aria-live="polite" data-zq-live></span>
+</div>
+<style>
+  .zq[hidden]{display:none !important}
+  #MainContent .zq:not([hidden]),.zq:not([hidden]){display:block !important;margin:12px 0 14px !important}
+  .zq__label{display:block;margin:0 0 7px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#1D1530}
+  .zq__wrap{position:relative}
+  .zq__btn{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:50px;padding:12px 14px 12px 16px;border:1px solid #CFC6DC;border-radius:10px;background:#fff;color:#1D1530;font:inherit;font-size:16px;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .zq__btn:hover{border-color:#5F2D90}
+  .zq__btn:focus-visible{outline:2px solid #32BAC0;outline-offset:2px}
+  .zq__btn[aria-expanded="true"]{border:2px solid #5F2D90;padding:11px 15px}
+  .zq__val b{font-weight:700}
+  .zq__chev{flex:none;color:#5F2D90;transition:transform .15s ease}
+  .zq__btn[aria-expanded="true"] .zq__chev{transform:rotate(180deg)}
+  .zq__list{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;margin:0;padding:6px;list-style:none;background:#fff;border:1px solid #DDD6E8;border-radius:12px;box-shadow:0 10px 28px rgba(29,21,48,.16)}
+  .zq__list.is-up{top:auto;bottom:calc(100% + 6px)}
+  .zq__list[hidden]{display:none}
+  .zq__list:focus{outline:none}
+  .zq__opt{display:flex;align-items:center;gap:10px;min-height:48px;padding:10px 12px;border-radius:8px;color:#1D1530;font-size:16px;cursor:pointer}
+  .zq__opt:hover,.zq__opt.is-active{background:#F4EEFB}
+  .zq__list:focus-visible .zq__opt.is-active{outline:2px solid #32BAC0;outline-offset:-2px}
+  .zq__tick{flex:none;color:#5F2D90;visibility:hidden}
+  .zq__opt[aria-selected="true"] .zq__tick{visibility:visible}
+  .zq__opt b{font-weight:700}
+  .zq__save{color:#5F2D90;font-weight:600}
+  .zq__val{flex:1;min-width:0}
+  .zq__body{display:flex;flex-direction:column;align-items:stretch;gap:6px;flex:1;min-width:0}
+  .zq__main{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .zq__txt{min-width:0}
+  .zq__pr{display:flex;flex-direction:column;align-items:flex-end;gap:0;white-space:nowrap;text-align:right}
+  .zq__amt{font-weight:800;color:#5F2D90}
+  .zq__amt:empty,.zq__each:empty{display:none}
+  .zq__each{font-size:12px;font-weight:600;color:#6B6478}
+  .zq__val .zq__each{display:none}
+  .zq__pill{display:none;align-self:flex-start;padding:3px 8px;border-radius:5px;background:#0B0B0F;color:#fff;font-size:11.5px;font-weight:700;line-height:1.35;letter-spacing:.01em}
+  .zq__pill em{font-style:normal;color:#32BAC0}
+  .zq--bf .zq__pill{display:inline-block}
+  .zq__opt[aria-selected="true"]{background:#F4EEFB}
+  .zq-savepill{display:inline-block;margin-top:8px;padding:3px 10px;border-radius:999px;background:#32BAC0;color:#fff;font-size:13px;font-weight:700;line-height:1.4}
+  .zq-math{display:block;margin-top:6px;font-size:13.5px;font-weight:500;color:#3A3546;line-height:1.4}
+  .zq-math b{color:#5F2D90;font-weight:700}
+  .zq-on .product-form__quantity,.zq-on .product-form__input--quantity{display:none !important}
+  .zq-p{display:inline-flex;align-items:baseline;gap:6px;white-space:nowrap}
+  .zq-p s{color:#8A8296;font-weight:500;font-size:.9em}
+  .zq-p b{font-weight:800}
+  .zq-p--bf b{color:#5F2D90}
+  /* Keep struck+now price in the top-right of the Seal row (like One-time); stack the 3-month line under it, right-aligned. */
+  #MainContent .sealsubs-container .sls-price{display:flex;flex-direction:column;align-items:flex-end;text-align:right}
+  .zq-prcol{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;gap:2px;margin-left:auto;text-align:right;min-width:0;max-width:min(100%,13.5em)}
+  .zq-note{display:block;margin-top:0;font-size:12px;font-weight:600;color:#5F2D90;line-height:1.3;white-space:normal;text-align:right}
+  .zq-on .ztbf-panel{display:none !important}
+  #MainContent .product__info-container.zq-on > .ztbf-price--pdp{display:none !important}
+  .sls-label-container > .zq-bfapplied{display:none !important} .zq-bfapplied--r{margin:4px 0 2px !important;align-self:flex-end} .zq-bfapplied{display:inline-block;margin:6px 0 2px;padding:2px 8px;border-radius:5px;background:#0B0B0F;color:#fff;font-size:11px;font-weight:700;line-height:1.4;letter-spacing:.02em}
+  .ztbf-price__lbl.zq-lbl{display:block;flex-basis:100%;width:100%;margin-top:8px;text-transform:none;letter-spacing:0}
+  .zq-bftag{display:inline-flex;align-items:center;gap:8px;padding:5px 10px;border-radius:6px;background:#0B0B0F;color:#fff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1.2}
+  .zq-bftag em{font-style:normal;color:#32BAC0}
+  .zq-bfsub{display:block;margin-top:4px;font-size:13.5px;font-weight:500;color:#3A3546;line-height:1.35}
+  .ztbf-price__lbl.ztbf-price__lbl--sub{text-transform:none;letter-spacing:0;font-size:14px;font-weight:600}
+  @media screen and (max-width:749px){
+    .zq__btn,.zq__opt{font-size:15px}
+    .zq__opt .zq__pr{flex-direction:column;align-items:flex-end;gap:0}
+    .zq__each{font-size:11px}
+    .zq__btn{padding:11px 12px 11px 14px}
+    .zq__opt{padding:10px 10px}
+    .ztbf-price__lbl.ztbf-price__lbl--sub{font-size:13px}
+  }
+  /* BF: hide the chat bubble while the HOW MANY list is open (it covered the 3rd option price at 390). */
+  html.zq-open chat-widget{display:none !important}
+  /* Hide the sticky Add to cart bar while the list is open so the last option stays visible and tappable at 390. */
+  html.zq-open .zt-sticky,
+  html.zq-open [data-zt-sticky]{display:none !important}
+  /* Sticky price stays blank until the dropdown has written the selected price (no $99.99 flash on load). */
+  html.zq-stinit [data-zt-sticky-price] b{visibility:hidden}
+  /* Phones: when the sticky shows a cadence, drop the product name so the line is not cut off. */
+  @media (max-width: 749px){ html.zq-stsz .zt-sticky__name > span:first-child{display:none} }
+</style>
+<script>
+(function () {
+  var box = document.querySelector('[data-zq]');
+  if (!box) return;
+  var data;
+  try { data = JSON.parse(box.getAttribute('data-prices')); } catch (e) { return; }
+  var root = document.documentElement;
+  root.classList.add('zq-stinit');
+  setTimeout(function () { root.classList.remove('zq-stinit'); }, 2500);
+  var info = box.closest('.product__info-container') || document.querySelector('#MainContent .product__info-container');
+  var btn = box.querySelector('#zq-btn'), list = box.querySelector('#zq-list'), valEl = box.querySelector('[data-zq-val]'), live = box.querySelector('[data-zq-live]');
+  var opts = Array.prototype.slice.call(list.querySelectorAll('[role="option"]'));
+  var TIERS = box.dataset.tiers.split(',').map(Number);
+  var ONE = box.dataset.one, MANY = box.dataset.many;
+  // BF:start
+  var BF_TIERS = (box.dataset.bfTiers || '').split(',').map(Number);
+  var BF_FROM = Number(box.dataset.bfFrom) * 1000, BF_TO = Number(box.dataset.bfTo) * 1000;
+  // BF:end
+  var q = 1, lastPlan = '';
+  // Option C plans (afterCycle 3). 30% is already the intro price; do not apply the BF 30% again.
+  var THREE_MONTH = {
+    '6735691989': 1, '6735724757': 1, '6735757525': 1,
+    '6735790293': 1, '6735823061': 1, '6735855829': 1
+  };
+  function qSel() { return q; }
+
+  function qtyInput() { return document.querySelector('#MainContent input.quantity__input[name="quantity"], #MainContent .product-form__quantity input[name="quantity"]'); }
+  var FMT = box.getAttribute('data-fmt') || '';
+  {% raw %}function money(cents) {
+    var fmt = String(FMT || '${{amount}}');
+    var c = Math.round(Number(cents) || 0);
+    function grp(n, prec, th, dec) { var p = (n / 100).toFixed(prec).split('.'); var w = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, th); return p[1] ? w + dec + p[1] : w; }
+    var m = fmt.match(/\{\{\s*(\w+)\s*\}\}/);
+    if (!m) return fmt;
+    var v;
+    switch (m[1]) {
+      case 'amount_no_decimals': v = grp(c, 0, ',', '.'); break;
+      case 'amount_with_comma_separator': v = grp(c, 2, '.', ','); break;
+      case 'amount_no_decimals_with_comma_separator': v = grp(c, 0, '.', ','); break;
+      case 'amount_with_apostrophe_separator': v = grp(c, 2, "'", '.'); break;
+      case 'amount_no_decimals_with_space_separator': v = grp(c, 0, ' ', ''); break;
+      case 'amount_with_space_separator': v = grp(c, 2, ' ', ','); break;
+      case 'amount_with_period_and_space_separator': v = grp(c, 2, ' ', '.'); break;
+      default: v = grp(c, 2, ',', '.');
+    }
+    return fmt.replace(m[0], v);
+  }{% endraw %}
+  // Cart rounding: percent off each unit, rounded down to the cent, times the quantity.
+  function total(unit, pct, n) { var off = Math.floor(unit * pct / 100 + 1e-7); return (unit - off) * n; }
+  function setT(el, t) { if (el && el.textContent !== t) el.textContent = t; }
+  function units(n) { return n + ' ' + (n === 1 ? ONE : MANY); }
+
+  // Place the dropdown right under the format tiles, above the price line.
+  var anchor = document.querySelector('#MainContent .ztbf-price--pdp') || document.querySelector('#MainContent [id^="price-template"]');
+  if (anchor && anchor.parentNode && info && info.contains(anchor)) anchor.parentNode.insertBefore(box, document.querySelector('#MainContent [id^="price-template"]') || anchor);
+  box.hidden = false;
+  if (info) info.classList.add('zq-on');
+  document.documentElement.classList.add('zq-page');
+
+  function isBF() {
+    // BF:start
+    var line = document.querySelector('#MainContent .ztbf-price--pdp');
+    if (line && !line.hidden) return true;
+    var t = Date.now();
+    if (BF_FROM && t >= BF_FROM && t < BF_TO) return true;
+    // BF:end
+    return false;
+  }
+  function state() {
+    var c = document.querySelector('#MainContent .sealsubs-container');
+    var subOn = !!(c && c.querySelector('.sls-option-container.sls-active[data-selling-plan-group]'));
+    // Plan: the Seal hidden input while Subscribe is on, else the plan still picked in "Deliver every" (One-time empties the input).
+    var ids = [];
+    var pi = c && c.querySelector('input[name="selling_plan"]'); if (pi && pi.value) ids.push(pi.value);
+    var fi = document.querySelector('#MainContent form[action$="/cart/add"] input[name="selling_plan"]'); if (fi && fi.value) ids.push(fi.value);
+    var se = c && c.querySelector('select'); if (se && se.value) ids.push(se.value);
+    if (lastPlan) ids.push(lastPlan);
+    var plan = null;
+    for (var ii = 0; ii < ids.length && !plan; ii++) { if (data.p && data.p[ids[ii]]) { plan = data.p[ids[ii]]; lastPlan = ids[ii]; } }
+    if (!plan && data.p) { for (var k in data.p) { plan = data.p[k]; break; } }
+    var opt = c && c.querySelector('select option:checked');
+    var lab = (opt ? opt.textContent : 'month').replace(/\s+/g, ' ').trim();
+    return { c: c, subOn: subOn && !!plan, plan: plan, planId: lastPlan, every: lab === 'month' ? '/mo' : ' every ' + lab };
+  }
+  function calc(s, bf, nq) {
+    var q = nq || qSel();
+    var pcts = bf ? BF_TIERS : TIERS;
+    var pct = pcts[q - 1] || 0;
+    var tp = TIERS[q - 1] || 0;
+    var r = { pct: pct, oReg: data.o * q, oNow: total(data.o, pct, q), oTier: total(data.o, tp, q) };
+    if (s.plan) {
+      var three = !!(s.planId && THREE_MONTH[String(s.planId)]);
+      var unit0 = s.plan[0], unit1 = s.plan[1];
+      // Current flats: struck is the pre-sale plan unit * qty; now is 30% BF + tier.
+      // 3-month plans already have $63/$77 baked in: struck is the after-cycle unit * qty, now is intro + qty tier only (no second 30%).
+      r.sReg = (three ? unit1 : unit0) * q;
+      r.sTier = total(unit0, tp, q);
+      r.sNow = total(unit0, three ? tp : pct, q);
+      r.sRenew = total(unit1, TIERS[q - 1] || 0, q); // renewals: plan price with the no-end tier (Shopify floors the per-unit discount to the cent)
+    }
+    return r;
+  }
+  function priceRow(boxEl, key, reg, now, note, bf) {
+    if (!boxEl) return;
+    var orig = boxEl.querySelector(':scope > .money');
+    if (!orig) return;
+    var oldCol = boxEl.querySelector(':scope > .zq-prcol');
+    var old = boxEl.querySelector('.zq-p');
+    if (old && old.getAttribute('data-k') === key) return;
+    if (oldCol) oldCol.remove();
+    if (old && !oldCol) old.remove();
+    var n0 = boxEl.querySelector(':scope > .zq-note'); if (n0) n0.remove();
+    var col = document.createElement('span');
+    col.className = 'zq-prcol';
+    var sp = document.createElement('span');
+    sp.className = 'zq-p' + (bf ? ' zq-p--bf' : '');
+    sp.setAttribute('data-k', key);
+    sp.innerHTML = (reg > now ? '<span class="visually-hidden">Regular price</span><s>' + money(reg) + '</s><span class="visually-hidden">' + (bf ? 'Black Friday price, extra 30% off' : 'Bundle price') + '</span>' : '') + '<b>' + money(now) + '</b>';
+    col.appendChild(sp); if (bf) { var bt = document.createElement('span'); bt.className = 'zq-bfapplied zq-bfapplied--r'; bt.textContent = 'Black Friday price applied'; col.appendChild(bt); }
+    if (note) { var nn = document.createElement('span'); nn.className = 'zq-note'; nn.textContent = note; col.appendChild(nn); }
+    orig.style.display = 'none';
+    orig.parentNode.insertBefore(col, orig.nextSibling);
+  }
+  var descOrig = null, badgeOrig = null;
+  function paint() {
+    var s = state(), bf = isBF(), r = calc(s, bf);
+    var c = s.c;
+    if (c) {
+      var subBox = c.querySelector('.sls-option-container[data-selling-plan-group] .sls-total-price .sls-price');
+      var oneBox = c.querySelector('.sls-one-time-price .sls-price');
+      var subNote = '';
+      // BF:start
+      if (bf && r.sNow != null) {
+        if (s.every === '/mo') subNote = '30% off your first month · For new subscribers only';
+        else subNote = '30% off your first delivery · For new subscribers only';
+      }
+      // BF:end
+      var sWas = r.sReg, oWas = r.oReg;
+      if (r.sNow != null) priceRow(subBox, q + '|' + sWas + '|' + r.sNow + '|' + subNote + '|' + bf, sWas, r.sNow, subNote, bf);
+      priceRow(oneBox, q + '|' + oWas + '|' + r.oNow + '|' + bf, oWas, r.oNow, '', bf);
+      // Seal's "SAVE $x" badge follows the totals (one-time total minus subscription total).
+      var badge = c.querySelector('.sls-savings-badge .money');
+      if (badge) {
+        if (badgeOrig === null) badgeOrig = badge.textContent;
+        if (r.sNow != null && (q > 1 || bf)) setT(badge, money(Math.max(0, r.oNow - r.sNow))); else setT(badge, badgeOrig);
+      }
+      var d = c.querySelector('.sls-selling-plan-description-content');
+      if (d && r.sNow != null) {
+        if (descOrig === null || (d.textContent !== descOrig && !d.hasAttribute('data-zq'))) { descOrig = d.textContent; }
+        var txt = descOrig;
+        if (bf) {
+          if (s.every === '/mo') txt = '30% off your first month, then ' + money(r.sRenew) + '/mo. For new subscribers only. Skip, pause or cancel anytime.';
+          else txt = '30% off your first delivery, then ' + money(r.sRenew) + s.every + '. For new subscribers only. Skip, pause or cancel anytime.';
+        }
+        else if (q > 1) txt = 'Your rate: ' + money(r.sNow) + ' every delivery for ' + units(q) + ', first order and every order after. Cancel, pause or skip anytime.';
+        if (txt !== descOrig) d.setAttribute('data-zq', '1'); else d.removeAttribute('data-zq');
+        setT(d, txt);
+      }
+    }
+    var useSub = s.subOn && r.sNow != null;
+    var reg = useSub ? r.sReg : r.oReg, now = useSub ? r.sNow : r.oNow;
+    // BF:start
+    // Dana Nov 23 6:40 PM: no price block between the dropdown and the Seal boxes (CSS hides .ztbf-price--pdp on these pages).
+    if (c) {
+      Array.prototype.forEach.call(c.querySelectorAll('.sls-option-container .sls-label-container'), function (lc) {
+        var tg = lc.querySelector(':scope > .zq-bfapplied');
+        if (bf && !tg) {
+          tg = document.createElement('span'); tg.className = 'zq-bfapplied'; tg.textContent = 'Black Friday price applied';
+          var fl = lc.querySelector(':scope > .sls-selling-plan-group-first-line');
+          if (fl) fl.parentNode.insertBefore(tg, fl.nextSibling); else lc.appendChild(tg);
+        } else if (!bf && tg) tg.remove();
+      });
+    }
+    // BF:end
+    box.classList.toggle('zq--bf', !!bf);
+    opts.forEach(function (o, k) {
+      var rk = calc(s, bf, k + 1);
+      var nk = useSub ? rk.sNow : rk.oNow;
+      setT(o.querySelector('[data-zq-amt]'), nk != null ? money(nk / (k + 1)) + '/' + ONE : '');
+      setT(o.querySelector('[data-zq-each]'), (nk != null && k > 0) ? money(nk) + ' total' : '');
+    });
+    syncVal();
+    var stEl = document.querySelector('[data-zt-sticky-price]');
+    if (stEl && !stEl.__zq && window.MutationObserver) {
+      stEl.__zq = 1;
+      var stQ = false;
+      // Repaint in the same microtask so the theme's regular price never reaches the screen.
+      new MutationObserver(function () { if (stQ) return; stQ = true; try { paint(); } finally { stQ = false; } }).observe(stEl, { childList: true, subtree: true, characterData: true });
+    }
+    var st = stEl && stEl.querySelector('b');
+    setT(st, money(now));
+    if (st && c) root.classList.remove('zq-stinit');
+    var sz = document.querySelector('[data-zt-sticky-size]');
+    if (sz) {
+      // Phones: show only the cadence ("1 bag every 30 days") so the sticky line fits at 390; the product name is hidden by CSS.
+      var narrow = window.matchMedia && window.matchMedia('(max-width: 749px)').matches;
+      var sep = narrow ? '' : ' \u00b7 ';
+      if (useSub) {
+        var ev = (s.every === '/mo' || !s.every) ? ' every 30 days' : s.every;
+        setT(sz, sep + units(q) + ev);
+      } else {
+        setT(sz, q > 1 ? sep + units(q) : '');
+      }
+      root.classList.toggle('zq-stsz', !!(narrow && sz.textContent));
+    }
+    return { reg: reg, now: now, sub: useSub, bf: bf };
+  }
+
+  function syncVal() {
+    var o = opts[q - 1], b = o && o.querySelector('.zq__body');
+    if (!b) return;
+    var h = b.innerHTML;
+    if (valEl.__h !== h) { valEl.__h = h; valEl.innerHTML = '<span class="zq__body">' + h + '</span>'; }
+  }
+  function choose(n, announce) {
+    q = n;
+    opts.forEach(function (o) { o.setAttribute('aria-selected', Number(o.dataset.qty) === n ? 'true' : 'false'); });
+    var o = opts[n - 1];
+    syncVal();
+    var inp = qtyInput();
+    if (inp && String(inp.value) !== String(n)) {
+      inp.value = n;
+      inp.dispatchEvent(new Event('input', { bubbles: true }));
+      inp.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    var p = paint();
+    if (announce && live) live.textContent = o.textContent.replace(/\s+/g, ' ').trim() + '. ' + money(p.now) + (p.reg > p.now ? ', regular ' + money(p.reg) : '') + '.';
+  }
+  var active = 0;
+  function setActive(i) {
+    active = Math.max(0, Math.min(opts.length - 1, i));
+    opts.forEach(function (o, k) { o.classList.toggle('is-active', k === active); });
+    list.setAttribute('aria-activedescendant', opts[active].id);
+  }
+  function placeList() {
+    list.classList.remove('is-up');
+    var wrap = box.querySelector('.zq__wrap') || list.parentElement;
+    var wr = wrap.getBoundingClientRect();
+    var barH = 0;
+    document.querySelectorAll('iframe').forEach(function (f) {
+      var r = f.getBoundingClientRect();
+      if (r.height > 20 && r.height < 120 && r.bottom >= window.innerHeight - 8) barH = Math.max(barH, r.height);
+    });
+    var need = list.offsetHeight + 12;
+    var roomBelow = window.innerHeight - wr.bottom - barH;
+    if (roomBelow < need && wr.top >= need) list.classList.add('is-up');
+  }
+  function open() {
+    list.hidden = false; btn.setAttribute('aria-expanded', 'true');
+    root.classList.add('zq-open');
+    placeList();
+    setActive(q - 1); list.focus();
+  }
+  function close(focusBtn) {
+    if (list.hidden) return;
+    list.hidden = true; btn.setAttribute('aria-expanded', 'false');
+    list.classList.remove('is-up');
+    root.classList.remove('zq-open');
+    if (focusBtn) btn.focus();
+  }
+  btn.addEventListener('click', function () { if (list.hidden) open(); else close(true); });
+  btn.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); open(); }
+  });
+  list.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setActive(active + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(active - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); setActive(0); }
+    else if (e.key === 'End') { e.preventDefault(); setActive(opts.length - 1); }
+    else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(active + 1, true); close(true); }
+    else if (e.key === 'Escape') { e.preventDefault(); close(true); }
+    else if (e.key === 'Tab') { close(false); }
+  });
+  opts.forEach(function (o, k) {
+    o.addEventListener('mousemove', function () { if (active !== k) setActive(k); });
+    o.addEventListener('click', function () { choose(k + 1, true); close(true); });
+  });
+  document.addEventListener('click', function (e) { if (!box.contains(e.target)) close(false); });
+
+  // Keep the quantity in step if anything else changes the theme box (it is hidden, but stay safe).
+  document.addEventListener('change', function (e) {
+    var inp = qtyInput();
+    if (inp && e.target === inp) { var v = parseInt(inp.value, 10); if (v >= 1 && v <= 3 && v !== q) choose(v, false); }
+    setTimeout(paint, 60); setTimeout(paint, 400); setTimeout(paint, 1300);
+  });
+  document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.sealsubs-container')) { setTimeout(paint, 60); setTimeout(paint, 400); } });
+  var inp0 = qtyInput();
+  choose(inp0 && parseInt(inp0.value, 10) >= 1 && parseInt(inp0.value, 10) <= 3 ? parseInt(inp0.value, 10) : 1, false);
+  setInterval(paint, 500);
+  // Paint again as soon as the sticky bar exists (it renders after this snippet).
+  document.addEventListener('DOMContentLoaded', paint);
+  window.addEventListener('load', paint);
+  (function early(i) { if (document.querySelector('[data-zt-sticky-price] b')) { paint(); return; } if (i < 120) requestAnimationFrame(function () { early(i + 1); }); })(0);
+  window.ztQty = { get: function () { return q; }, set: function (n) { choose(n, false); }, paint: paint };
+})();
+</script>
+{%- endif -%}
