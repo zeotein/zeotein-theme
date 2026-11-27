@@ -1,5 +1,5 @@
 // Renders reel.html to a 1080x1920, 30 fps MP4, one exact frame at a time.
-// Usage: node render_reel.js [outfile.mp4]            full render (needs ffmpeg)
+// Usage: node render_reel.js [--query 'src=pour.html&hold=12.4'] [outfile.mp4]   full render (needs ffmpeg)
 //        node render_reel.js --stills out_dir 1 9 15  stills at those seconds
 const { chromium } = require('playwright');
 const http = require('http'), fs = require('fs'), path = require('path'), { execFileSync } = require('child_process');
@@ -18,12 +18,14 @@ const server = http.createServer((req, res) => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   const errors = []; page.on('pageerror', e => errors.push(e.message));
-  await page.goto(base + '/reel.html', { waitUntil: 'networkidle' });
-  await page.frameLocator('#hero').locator('#zmsvg').waitFor();
+  let args = process.argv.slice(2), query = '';
+  if (args[0] === '--query') { query = args[1]; args = args.slice(2); }
+  await page.goto(base + '/reel.html' + (query ? '?' + query : ''), { waitUntil: 'networkidle' });
+  await page.waitForFunction(() => { const w = document.getElementById('hero').contentWindow; return w && w.__zmSetTime; });
   await page.evaluate(async () => { await document.fonts.ready; await document.getElementById('hero').contentDocument.fonts.ready; });
   await page.waitForTimeout(500);
 
-  const args = process.argv.slice(2);
+  
   if (args[0] === '--stills') {
     const dir = args[1]; fs.mkdirSync(dir, { recursive: true });
     for (const s of args.slice(2)) { await page.evaluate(t => window.__reelSet(t), +s); await page.screenshot({ path: path.join(dir, `reel-${s}.png`) }); }

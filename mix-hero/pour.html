@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zeotein Ingredient Pour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Zeotein Ingredient Pour: homepage hero. The Cacao bag tips, the blend pours out, splits into its six ingredients,
+   each lands in its own pile and gets named. Everything is drawn by render(t), so it also renders frame-exact
+   for video (window.__zmSetTime / __zmLoop, same API as hero.html). */
+.zpr{--purple:#5F2D90;--plum:#2E1650;--teal:#32BAC0;--teal-ink:#12777C;--ink:#221B2E;--muted:#5F5970;--cream:#F7F2EA;--line:#E4DACB;
+  --head:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-family:var(--sans);color:var(--ink);background:radial-gradient(70% 70% at 70% 40%,#FBF8F3 0%,var(--cream) 60%,#F1EADF 100%);-webkit-font-smoothing:antialiased;overflow:hidden;position:relative}
+.zpr *,.zpr *::before,.zpr *::after{box-sizing:border-box;margin:0;padding:0}
+.zpr a{color:inherit;text-decoration:none}
+html,body{margin:0;background:#F7F2EA}
+
+.zpr .bar{position:relative;z-index:5;display:flex;align-items:center;gap:40px;max-width:1280px;margin:0 auto;padding:22px 40px}
+.zpr .logo img{display:block;height:34px;width:auto}
+.zpr .nav{display:flex;gap:30px;margin:0 auto;font-family:var(--head);font-weight:500;font-size:.95rem;color:var(--plum)}
+.zpr .nav a{opacity:.85}.zpr .nav a:hover{opacity:1;color:var(--purple)}
+.zpr .pill{font-family:var(--head);font-weight:600;font-size:.9rem;color:var(--plum);border:1.5px solid var(--plum);border-radius:999px;padding:.55em 1.3em}
+
+.zpr .stage{position:relative;max-width:1280px;margin:0 auto;padding:0 40px 40px;display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);align-items:center;gap:20px;min-height:calc(100vh - 90px);min-height:calc(100svh - 90px)}
+.zpr .eyebrow{font-family:var(--head);font-size:.74rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.zpr .eyebrow::before{content:"";width:22px;height:2px;background:var(--teal);border-radius:2px}
+.zpr h1{font-family:var(--head);font-weight:700;font-size:clamp(2.3rem,4.2vw,3.8rem);line-height:1.03;letter-spacing:-.035em;color:var(--plum);max-width:13ch}
+.zpr h1 em{font-style:normal;color:var(--purple);background:linear-gradient(transparent 68%,rgba(50,186,192,.32) 0)}
+.zpr .lede{margin-top:18px;font-size:1.06rem;line-height:1.6;color:var(--muted);max-width:36ch}
+.zpr .count{margin-top:26px;display:flex;align-items:center;gap:14px}
+.zpr .count b{font-family:var(--head);font-weight:800;font-size:2.6rem;line-height:1;color:var(--plum);min-width:1.1ch;font-variant-numeric:tabular-nums}
+.zpr .count span{font-family:var(--head);font-weight:600;font-size:.9rem;color:var(--plum);line-height:1.3}
+.zpr .pips{display:flex;gap:6px;margin-top:6px}
+.zpr .pips i{width:22px;height:6px;border-radius:6px;background:rgba(46,22,80,.14);transition:none}
+.zpr .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.zpr .btn{display:inline-flex;align-items:center;gap:.6em;min-height:52px;padding:.8em 1.6em;border-radius:999px;font-family:var(--head);font-weight:600;font-size:1rem;transition:transform .15s ease}
+.zpr .btn svg{width:18px;height:18px}
+.zpr .btn.solid{background:var(--plum);color:#fff;box-shadow:0 10px 24px rgba(46,22,80,.22)}
+.zpr .btn.solid:hover{transform:translateY(-1px);background:var(--purple)}
+.zpr .btn.line{border:1.5px solid var(--plum);color:var(--plum)}
+.zpr .fine{margin-top:16px;font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+.zpr .stars{color:#E8A93A;letter-spacing:1px}
+
+.zpr .visual{position:relative;width:100%;aspect-ratio:9/8;max-width:760px;margin-left:auto}
+.zpr .visual canvas{position:absolute;inset:0;width:100%;height:100%}
+.zpr .bag{position:absolute;left:0;top:0;width:42%;height:auto;mix-blend-mode:multiply;filter:brightness(1.025);transform-origin:50% 50%;will-change:transform}
+.zpr .tag{position:absolute;transform:translate(-50%,0);display:flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:7px 14px 7px 8px;box-shadow:0 8px 22px rgba(46,22,80,.13);white-space:nowrap;opacity:0;will-change:transform,opacity}
+.zpr .tag i{width:22px;height:22px;border-radius:50%;flex:none;box-shadow:inset 0 -3px 0 rgba(0,0,0,.12)}
+.zpr .tag b{display:block;font-family:var(--head);font-weight:600;font-size:clamp(.66rem,1vw,.86rem);color:var(--plum);line-height:1.15}
+.zpr .tag .ls{display:none}
+.zpr .tag small{display:block;font-size:clamp(.56rem,.78vw,.68rem);color:var(--muted);line-height:1.2}
+
+@media (max-width:860px){
+  .zpr .bar{padding:16px 20px}.zpr .nav{display:none}.zpr .pill{margin-left:auto}.zpr .logo img{height:28px}
+  .zpr .stage{grid-template-columns:1fr;padding:0 20px 40px;min-height:0}
+  .zpr .visual{order:-1;max-width:520px;margin:0 auto}
+  .zpr .tag{padding:4px 9px 4px 4px;gap:5px}.zpr .tag i{width:12px;height:12px}.zpr .tag small,.zpr .tag .lf{display:none}.zpr .tag .ls{display:inline}.zpr .tag b{font-size:.7rem}
+}
+</style>
+</head>
+<body>
+<section class="zpr" id="zpr" aria-labelledby="zpr-h1">
+  <header class="bar">
+    <a class="logo" href="https://shop.zeotein.com/home"><img src="https://cdn.shopify.com/s/files/1/0775/5458/1717/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?v=1762380884" alt="Zeotein" width="344" height="118"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="https://shop.zeotein.com/cacao">Cacao</a><a href="https://shop.zeotein.com/vegan">Vegan</a>
+      <a href="https://shop.zeotein.com/single-ingredients">Single Ingredients</a><a href="https://shop.zeotein.com/faq">FAQ</a>
+    </nav>
+    <a class="pill" href="https://shop.zeotein.com/cacao">Shop</a>
+  </header>
+
+  <div class="stage">
+    <div class="copy">
+      <p class="eyebrow">Zeotein Cacao</p>
+      <h1 id="zpr-h1">Pour out the bag. <em>Count to six.</em></h1>
+      <p class="lede">Grass-fed bone broth protein and collagen, fermented cacao, MCT oil powder, sea moss and a naturally occurring volcanic mineral. That's the whole label. No sweeteners.</p>
+      <div class="count" aria-hidden="true"><b id="zprN">0</b><div><span id="zprC">ingredients</span><div class="pips"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+      <div class="ctas">
+        <a class="btn solid" href="https://shop.zeotein.com/cacao">Shop Cacao <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn line" href="https://shop.zeotein.com/vegan">Prefer plant protein?</a>
+      </div>
+      <p class="fine"><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.9 from 155 reviews &middot; 23g protein, zero sugar</p>
+    </div>
+
+    <div class="visual" id="zprV" aria-hidden="true">
+      <img class="bag" id="zprBag" src="https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bag-first.webp?v=1794429317&amp;width=900" alt="" width="1024" height="1024">
+      <canvas id="zprCv"></canvas>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var LOOP = 14, W = 720, H = 640;
+  var ING = [
+    {name:'Bone broth protein', short:'Bone broth', sub:'Grass-fed. The protein base.', c:'#C68E52', x:262, y:408},
+    {name:'Collagen peptides', short:'Collagen', sub:'Grass-fed. 14g per serving.',   c:'#E8D2AA', x:440, y:372},
+    {name:'Fermented cacao', short:'Cacao', sub:'Organic. Never alkalized.',     c:'#5A3420', x:612, y:418},
+    {name:'MCT oil powder', short:'MCT', sub:'Organic.',                      c:'#DCCFB2', x:168, y:566},
+    {name:'Sea moss', short:'Sea moss', sub:'Organic.',                      c:'#8C9A5B', x:378, y:580},
+    {name:'Volcanic mineral', short:'Mineral', sub:'Naturally occurring. Named on the label.', c:'#8E9592', x:590, y:572}
+  ];
+  var PER = 230, MW = 70, MH = 40;
+  var vis = document.getElementById('zprV'), cv = document.getElementById('zprCv'), ctx = cv.getContext('2d'), bag = document.getElementById('zprBag');
+  var nEl = document.getElementById('zprN'), cEl = document.getElementById('zprC'), pips = [].slice.call(document.querySelectorAll('.zpr .pips i'));
+
+  var seed = 11; function rnd(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  function clamp(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function seg(t, a, b){ return clamp((t - a) / (b - a)); }
+  function lerp(a, b, k){ return a + (b - a) * k; }
+  function io(k){ return k < .5 ? 4*k*k*k : 1 - Math.pow(-2*k + 2, 3) / 2; }
+  function out(k){ return 1 - Math.pow(1 - k, 3); }
+  function back(k){ var c = 1.70158, c3 = c + 1; return 1 + c3 * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); }
+  function shade(hex, f){ var n = parseInt(hex.slice(1), 16), r = n >> 16, g = n >> 8 & 255, b = n & 255;
+    if (f < 0) { r *= 1 + f; g *= 1 + f; b *= 1 + f; } else { r += (255 - r) * f; g += (255 - g) * f; b += (255 - b) * f; }
+    return 'rgb(' + (r|0) + ',' + (g|0) + ',' + (b|0) + ')'; }
+
+  // tags
+  var tags = ING.map(function(g){ var d = document.createElement('div'); d.className = 'tag';
+    d.innerHTML = '<i style="background:' + g.c + '"></i><div><b><span class="lf">' + g.name + '</span><span class="ls">' + g.short + '</span></b><small>' + g.sub + '</small></div>'; vis.appendChild(d); return d; });
+
+  // bag pose (virtual coords): centre, rotation
+  function bagPose(t){
+    var k1 = out(seg(t, 0, .8)), k2 = io(seg(t, .9, 2.0)), k3 = io(seg(t, 7.6, 8.6));
+    var rot = lerp(0, 112, k2) * (1 - k3) + lerp(0, -6, k3);
+    var cx = lerp(170, 168, k2) - 20 * k3, cy = lerp(270, 160, k2) + lerp(0, 20, k3) - (1 - k1) * 40;
+    var op = k1 * (1 - seg(t, 12.9, 13.6));
+    return {cx:cx, cy:cy, rot:rot, op:op};
+  }
+  function mouth(p){ var a = p.rot * Math.PI / 180, r = 0.36 * 0.42 * W; return [p.cx + r * Math.sin(a), p.cy - r * Math.cos(a), Math.sin(a), -Math.cos(a)]; }
+
+  // particles: each ingredient pours in its own window; slots fill each pile bottom-up
+  var P = [];
+  ING.forEach(function(g, k){
+    var slots = [];
+    while (slots.length < PER) { var x = (rnd() * 2 - 1), y = rnd(); if (y <= 1 - x * x) slots.push([x * MW, -y * MH, y]); }
+    slots.sort(function(a, b){ return a[2] - b[2]; });
+    var parts = [];
+    for (var i = 0; i < PER; i++) { var l = 2.0 + .42 * k + rnd() * 2.9, d = 1.05 + rnd() * .55;
+      parts.push({k:k, l:l, d:d, r:1.7 + rnd() * 2.1, j:(rnd() - .5) * 26, w:rnd() * 6.28, sh:(rnd() - .5) * .5}); }
+    parts.sort(function(a, b){ return (a.l + a.d) - (b.l + b.d); });
+    parts.forEach(function(p, i){ p.sx = g.x + slots[i][0]; p.sy = g.y + slots[i][1]; p.h = slots[i][2]; P.push(p); });
+  });
+  // draw order: piles back to front
+  P.sort(function(a, b){ return a.sy - b.sy; });
+  ING.forEach(function(g, k){ var a = P.filter(function(p){ return p.k === k; }).map(function(p){ return p.l + p.d; }).sort(function(a, b){ return a - b; });
+    g.half = a[Math.floor(a.length * .55)]; g.done = a[a.length - 1]; });
+
+  function pos(p, t, m){
+    var k = clamp((t - p.l) / p.d), e = k * k * (1.6 - .6 * k);           // gravity-ish ease
+    var cx = m[0] + m[2] * 120 + p.j, cy = m[1] + m[3] * 120 + p.j * .5;   // leave the mouth in the pour direction, then fan out
+    var x = (1-e)*(1-e)*m[0] + 2*(1-e)*e*cx + e*e*p.sx, y = (1-e)*(1-e)*m[1] + 2*(1-e)*e*cy + e*e*p.sy;
+    var sw = Math.sin(p.w + k * 9) * 10 * Math.sin(Math.PI * k);         // flowing wobble, zero at both ends
+    return [x + sw, y + sw * .4, k];
+  }
+
+  var scale = 1, dpr = 1;
+  function size(){ var r = vis.getBoundingClientRect(); dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr); scale = r.width / W; }
+  size(); window.addEventListener('resize', function(){ size(); render(last); });
+
+  var last = 0;
+  function render(t){
+    t = ((t % LOOP) + LOOP) % LOOP; last = t;
+    var b = bagPose(t), m = mouth(b), fade = 1 - seg(t, 12.7, 13.6);
+    var bw = .42 * W * scale;
+    bag.style.transform = 'translate(' + (b.cx * scale - bw / 2).toFixed(1) + 'px,' + (b.cy * scale - bw / 2).toFixed(1) + 'px) rotate(' + b.rot.toFixed(2) + 'deg)';
+    bag.style.opacity = b.op.toFixed(3);
+
+    ctx.setTransform(dpr * scale, 0, 0, dpr * scale, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalAlpha = 1;
+    // pile shadows
+    ING.forEach(function(g, k){ var n = seg(t, 2 + .42 * k + .9, g.done) * fade;
+      if (n <= 0) return; var gr = ctx.createRadialGradient(g.x, g.y + 4, 2, g.x, g.y + 4, MW * 1.5);
+      gr.addColorStop(0, 'rgba(46,22,80,' + (.22 * n).toFixed(3) + ')'); gr.addColorStop(1, 'rgba(46,22,80,0)');
+      ctx.fillStyle = gr; ctx.beginPath(); ctx.ellipse(g.x, g.y + 4, MW * 1.45, 14, 0, 0, 6.283); ctx.fill(); });
+
+    // streams + landed grains
+    for (var i = 0; i < P.length; i++) {
+      var p = P[i]; if (t < p.l) continue;
+      var c = ING[p.k].c, q = pos(p, t, m);
+      if (q[2] < 1) {
+        var q0 = pos(p, Math.max(p.l, t - .028), m);
+        ctx.globalAlpha = .9; ctx.strokeStyle = shade(c, p.sh * .4); ctx.lineWidth = p.r * 1.5; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(q0[0], q0[1]); ctx.lineTo(q[0], q[1] + .01); ctx.stroke();
+      } else {
+        var drop = seg(t, 12.7 + (1 - p.h) * .3, 13.5 + (1 - p.h) * .3);
+        ctx.globalAlpha = 1 - drop;
+        var y = q[1] + drop * drop * 40;
+        ctx.fillStyle = shade(c, -.22 * (1 - p.h) + p.sh * .3);
+        ctx.beginPath(); ctx.arc(q[0], y, p.r, 0, 6.283); ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,.28)'; ctx.beginPath(); ctx.arc(q[0] - p.r * .3, y - p.r * .35, p.r * .38, 0, 6.283); ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 1;
+
+    // names and counter
+    var named = 0;
+    ING.forEach(function(g, i){
+      var k = seg(t, g.half, g.half + .45), o = clamp(k * 2) * fade;
+      if (k > 0) named++;
+      tags[i].style.left = (g.x * scale).toFixed(1) + 'px'; tags[i].style.top = ((g.y + 16) * scale).toFixed(1) + 'px';
+      tags[i].style.opacity = o.toFixed(3);
+      tags[i].style.transform = 'translate(-50%,' + ((1 - out(k)) * 14).toFixed(1) + 'px) scale(' + (.75 + .25 * back(k)).toFixed(3) + ')';
+    });
+    var shown = t > 12.9 ? 6 : named;
+    nEl.textContent = shown;
+    cEl.textContent = shown === 1 ? 'ingredient' : (shown === 6 ? 'ingredients. That’s all of them.' : 'ingredients');
+    pips.forEach(function(e, i){ e.style.background = i < shown ? ING[i].c : 'rgba(46,22,80,.14)'; });
+  }
+
+  window.__zmSetTime = render; window.__zmLoop = LOOP;
+  var params = new URLSearchParams(location.search);
+  if (params.has('t')) { render(parseFloat(params.get('t'))); return; }
+  if (params.has('manual')) { render(0); return; }
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { render(11); return; }
+  var start = performance.now(), off = 0, hidden = false;
+  document.addEventListener('visibilitychange', function(){ if (document.hidden) { hidden = true; off = (performance.now() - start) / 1000; } else { hidden = false; start = performance.now() - off * 1000; } });
+  (function frame(now){ if (!hidden) render((now - start) / 1000); requestAnimationFrame(frame); })(performance.now());
+})();
+</script>
+</body>
+</html>

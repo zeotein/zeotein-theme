@@ -64,7 +64,7 @@ html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#CFC3B5
         <div class="shadow"></div>
         <div class="base"><div class="grill" style="left:22px"></div><div class="grill" style="right:22px"></div><div class="kb"></div><div class="pad"></div></div>
         <div class="edge"></div>
-        <div class="lid"><div class="screen"><iframe id="hero" src="hero.html?manual=1" title="Zeotein hero"></iframe><div class="glare"></div></div><div class="notch"></div></div>
+        <div class="lid"><div class="screen"><iframe id="hero" src="about:blank" title="Zeotein hero"></iframe><div class="glare"></div></div><div class="notch"></div></div>
       </div>
     </div>
   </div>
@@ -78,13 +78,19 @@ html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#CFC3B5
   </div>
 </div>
 <script>
-var LEAD = .4, HERO = 18, END = 2.6;
+// ?src=pour.html&hold=12.4&h2=...  (defaults: the mix hero)
+var Q = new URLSearchParams(location.search);
+var SRC = Q.get('src') || 'hero.html', HOLD = parseFloat(Q.get('hold') || '17.38');
+document.getElementById('hero').src = SRC + '?manual=1';
+if (Q.get('h2')) document.querySelector('.end h2').innerHTML = Q.get('h2');
+if (Q.get('p')) document.querySelector('.end p').innerHTML = Q.get('p');
+var LEAD = .4, HERO = HOLD + .62, END = 2.6;
 window.__reelDuration = LEAD + HERO + END;
 function clamp(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
 function io(k){ return k < .5 ? 4*k*k*k : 1 - Math.pow(-2*k + 2, 3) / 2; }
 window.__reelSet = function(T){
   var hero = document.getElementById('hero').contentWindow;
-  var ht = Math.min(Math.max(T - LEAD, 0), HERO - .62);   // hold on the finished pour, before the hero's own loop fade
+  var ht = Math.min(Math.max(T - LEAD, 0), HOLD);   // hold on the finished pour, before the hero's own loop fade
   hero.__zmSetTime(ht);
   var k = io(clamp(T / (LEAD + HERO)));
   var drift = Math.sin(T * .35) * 1.2;
