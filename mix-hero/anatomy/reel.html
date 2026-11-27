@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Zeotein Anatomy Reel</title>
+<style>
+/* 1080x1920: the Anatomy page scrolling on a photographed laptop. The iframe is warped onto the
+   green-screen quad with a homography; render.js calls window.__reelSet(seconds) per frame. */
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#2a1d14}
+.cam{position:absolute;inset:0;transform-origin:420px 800px}
+.photo{position:absolute;left:-100px;top:0;width:1280px;height:1920px}
+#scr{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;transform-origin:0 0;background:#0A0312}
+.glare{position:absolute;left:0;top:0;width:1440px;height:900px;transform-origin:0 0;pointer-events:none;
+  background:linear-gradient(120deg,rgba(255,240,220,.10) 0%,rgba(255,240,220,0) 38%,rgba(255,240,220,0) 75%,rgba(255,240,220,.05) 100%)}
+.vig{position:absolute;inset:0;background:radial-gradient(85% 70% at 45% 45%,rgba(0,0,0,0) 60%,rgba(20,10,5,.35) 100%)}
+</style></head><body>
+<div class="cam" id="cam">
+  <img class="photo" src="img/desk-laptop.webp" alt="">
+  <iframe id="scr" src="index.html?manual=1" scrolling="no"></iframe>
+  <div class="glare" id="glare"></div>
+</div>
+<div class="vig"></div>
+<script>
+// green quad in the 1024x1536 photo, scaled x1.25 and shifted -100px, grown 3px to hide the fringe
+var S = 1.25, OX = -100, G = 3;
+var Q = [[38 - G, 404 - G], [706 + G, 366 - G], [772 + G, 828 + G], [108 - G, 935 + G]].map(function(p){ return [p[0] * S + OX, p[1] * S]; });
+function homography(w, h, q){
+  // maps (0,0),(w,0),(w,h),(0,h) to q[0..3]; returns CSS matrix3d
+  var x0=q[0][0],y0=q[0][1],x1=q[1][0],y1=q[1][1],x2=q[2][0],y2=q[2][1],x3=q[3][0],y3=q[3][1];
+  var dx1=x1-x2, dx2=x3-x2, dx3=x0-x1+x2-x3, dy1=y1-y2, dy2=y3-y2, dy3=y0-y1+y2-y3;
+  var den=dx1*dy2-dx2*dy1, g=(dx3*dy2-dx2*dy3)/den, hh=(dx1*dy3-dx3*dy1)/den;
+  var a=x1-x0+g*x1, b=x3-x0+hh*x3, c=x0, d=y1-y0+g*y1, e=y3-y0+hh*y3, f=y0;
+  a/=w; d/=w; g/=w; b/=h; e/=h; hh/=h;
+  return 'matrix3d(' + [a,d,0,g, b,e,0,hh, 0,0,1,0, c,f,0,1].join(',') + ')';
+}
+var M = homography(1440, 900, Q);
+document.getElementById('scr').style.transform = M;
+document.getElementById('glare').style.transform = M;
+
+// scroll script: hold on the hero, then each chapter, then the finale
+var C0 = .14, CL = .11, KEYS = [[0, 0], [2.2, 0]], t = 2.2;
+for (var i = 0; i < 6; i++) { t += 1.15; KEYS.push([t, C0 + i * CL + .058]); t += 1.75; KEYS.push([t, C0 + i * CL + .062]); }
+t += 1.6; KEYS.push([t, .975]); t += 3.2; KEYS.push([t, .975]);
+window.__reelDuration = t;
+function io(k){ return k < .5 ? 4*k*k*k : 1 - Math.pow(-2*k + 2, 3) / 2; }
+function pAt(T){ for (var i = 1; i < KEYS.length; i++) if (T <= KEYS[i][0]) { var a = KEYS[i-1], b = KEYS[i]; var k = (T - a[0]) / (b[0] - a[0] || 1); return a[1] + (b[1] - a[1]) * io(k); } return KEYS[KEYS.length-1][1]; }
+window.__reelSet = function(T){
+  document.getElementById('scr').contentWindow.__zmSetProgress(pAt(T), T);
+  var k = T / window.__reelDuration;
+  document.getElementById('cam').style.transform = 'scale(' + (1.02 + .07 * k) + ') translate(' + (-6 * k) + 'px,' + (10 * k) + 'px)';
+};
+</script></body></html>

@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zeotein Anatomy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@400;500&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* The Anatomy of a Shake: scroll-driven Zeotein Cacao story.
+   One pinned stage; everything on it is positioned by render(p), p = 0..1 through the section.
+   window.__zmSetProgress(p) renders any point exactly (used by the reel renderer). */
+:root{--bg:#0A0312;--plum:#2E1650;--purple:#5F2D90;--lilac:#C9B6E8;--teal:#32BAC0;--cream:#F4EEE4;--mute:rgba(244,238,228,.62);
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;--head:"Poppins",system-ui,sans-serif;--sans:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--cream);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+.nav{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;gap:36px;padding:20px 40px}
+.nav .logo{display:flex;align-items:center;background:var(--cream);border-radius:999px;padding:7px 16px}
+.nav .logo img{height:24px;width:auto;display:block}
+.nav .links{display:flex;gap:30px;margin-left:auto;font-family:var(--head);font-weight:500;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.nav .links a:hover{color:var(--cream)}
+.nav .cta{font-family:var(--head);font-weight:600;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(244,238,228,.5);padding:11px 20px}
+.nav .cta:hover{background:var(--cream);color:var(--bg)}
+
+.an{position:relative;height:1000vh}
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
+  background:radial-gradient(60% 55% at 50% 42%,#24103C 0%,#140822 45%,var(--bg) 100%)}
+.layer{position:absolute;inset:0;pointer-events:none}
+
+/* light */
+.beam{position:absolute;left:50%;top:-20%;width:62vmin;height:120%;transform:translateX(-50%);
+  background:linear-gradient(180deg,rgba(214,196,255,.34),rgba(214,196,255,.09) 45%,rgba(214,196,255,0) 80%);
+  clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);filter:blur(28px);mix-blend-mode:screen}
+.floor{position:absolute;left:50%;bottom:7%;width:70vmin;height:9vmin;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(closest-side,rgba(201,182,232,.22),rgba(201,182,232,0));filter:blur(6px)}
+
+/* giant type */
+.mega{position:absolute;left:0;top:50%;white-space:nowrap;font-family:var(--serif);font-weight:300;font-size:min(31vw,46vh);line-height:.8;letter-spacing:-.04em;
+  color:transparent;-webkit-text-stroke:1.2px rgba(201,182,232,.22);will-change:transform,opacity}
+.mega.fill{color:rgba(95,45,144,.16);-webkit-text-stroke:0}
+
+/* imagery */
+.shot{position:absolute;left:50%;top:50%;width:min(76vh,58vw);aspect-ratio:1;will-change:transform,opacity,filter;
+  -webkit-mask-image:radial-gradient(closest-side,#000 62%,transparent 100%);mask-image:radial-gradient(closest-side,#000 62%,transparent 100%)}
+.shot img{width:100%;height:100%;display:block}
+.bag{position:absolute;left:50%;top:41%;width:min(50vh,38vw);will-change:transform,opacity,filter}
+.bag img{width:100%;display:block;filter:drop-shadow(0 40px 60px rgba(0,0,0,.6)) drop-shadow(0 0 70px rgba(122,71,174,.45))}
+.halo{position:absolute;left:50%;top:41%;width:min(80vh,62vw);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);
+  background:radial-gradient(closest-side,rgba(95,45,144,.55),rgba(50,186,192,.10) 55%,rgba(0,0,0,0));filter:blur(10px);will-change:opacity,transform}
+canvas.dust{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:screen}
+
+/* copy */
+.hero{position:absolute;left:0;right:0;bottom:6vh;text-align:center;will-change:transform,opacity}
+.kicker{font-family:var(--head);font-weight:600;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--lilac)}
+.hero h1{margin-top:12px;font-family:var(--serif);font-weight:300;font-size:min(6.4vw,10.5vh);line-height:.92;letter-spacing:-.035em}
+.hero h1 i{font-style:italic;color:var(--lilac)}
+.scroll{margin-top:18px;font-family:var(--head);font-size:.64rem;letter-spacing:.4em;text-transform:uppercase;color:var(--mute);display:flex;flex-direction:column;align-items:center;gap:12px}
+.scroll i{display:block;width:1px;height:30px;background:linear-gradient(var(--cream),transparent)}
+
+.ch{position:absolute;top:50%;width:min(34vw,470px);will-change:transform,opacity}
+.ch.l{left:6vw}.ch.r{right:6vw;text-align:right}
+.ch .no{font-family:var(--serif);font-style:italic;font-weight:300;font-size:1.1rem;color:var(--lilac)}
+.ch .eb{margin-top:6px;font-family:var(--head);font-weight:600;font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--teal)}
+.ch h2{margin-top:16px;font-family:var(--serif);font-weight:300;font-size:min(4.6vw,8vh);line-height:.98;letter-spacing:-.03em}
+.ch h2 i{font-style:italic;color:var(--lilac)}
+.ch p{margin-top:18px;font-size:1rem;line-height:1.65;color:var(--mute)}
+.ch .spec{margin-top:22px;padding-top:16px;border-top:1px solid rgba(244,238,228,.18);display:flex;gap:28px;font-family:var(--head);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+.ch.r .spec{justify-content:flex-end}
+.ch .spec b{display:block;margin-top:5px;font-weight:600;color:var(--cream);letter-spacing:.14em}
+.line{display:block;overflow:hidden}.line>span{display:block;will-change:transform}
+
+.rail{position:absolute;right:28px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;align-items:flex-end;font-family:var(--head);font-size:.6rem;letter-spacing:.24em;color:var(--mute)}
+.rail div{display:flex;align-items:center;gap:10px;opacity:.45;transition:none}
+.rail div i{display:block;height:1px;width:14px;background:var(--cream)}
+.rail div.on{opacity:1}.rail div.on i{width:34px;background:var(--teal)}
+
+/* finale */
+.fin{position:absolute;left:6vw;top:50%;width:min(40vw,560px);will-change:transform,opacity}
+.fin h2{font-family:var(--serif);font-weight:300;font-size:min(5.6vw,10vh);line-height:.95;letter-spacing:-.035em}
+.fin h2 i{font-style:italic;color:var(--lilac)}
+.stats{display:flex;gap:34px;margin-top:28px}
+.stats b{display:block;font-family:var(--serif);font-weight:400;font-size:2.6rem;line-height:1;color:var(--cream)}
+.stats span{display:block;margin-top:8px;font-family:var(--head);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px;pointer-events:auto}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:17px 26px;font-family:var(--head);font-weight:600;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase}
+.btn.solid{background:var(--cream);color:var(--bg)}.btn.solid:hover{background:var(--teal)}
+.btn.ghost{border:1px solid rgba(244,238,228,.45)}.btn.ghost:hover{border-color:var(--cream)}
+.fine{margin-top:18px;font-size:.8rem;color:var(--mute)}
+.orb{position:absolute;left:0;top:0;width:min(12vh,8.4vw);aspect-ratio:1;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px rgba(244,238,228,.25),0 14px 30px rgba(0,0,0,.5);will-change:transform,opacity}
+.orb img{width:150%;height:150%;margin:-25%;object-fit:cover;display:block}
+.orb em{position:absolute;left:50%;top:calc(100% + 8px);transform:translateX(-50%);white-space:nowrap;font-style:normal;font-family:var(--head);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream)}
+.orbwrap{position:absolute;inset:0}
+.orbwrap .orb{overflow:visible;border-radius:0;box-shadow:none}
+.orbwrap .orb .disc{position:absolute;inset:0;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px rgba(244,238,228,.28),0 14px 30px rgba(0,0,0,.5)}
+
+.grain{position:absolute;inset:-50%;opacity:.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+.vig{background:radial-gradient(90% 80% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
+
+.after{position:relative;z-index:2;background:var(--bg);padding:90px 40px;text-align:center;border-top:1px solid rgba(244,238,228,.1)}
+.after p{font-family:var(--serif);font-style:italic;font-weight:300;font-size:1.6rem;color:var(--mute)}
+
+@media (max-width:820px){
+  .nav{padding:14px 16px}.nav .links{display:none}.nav .cta{margin-left:auto;padding:9px 14px;font-size:.62rem}
+  .shot{width:min(92vw,52vh);top:36%}.bag{width:min(74vw,44vh);top:40%}.halo{top:38%}
+  .ch,.ch.l,.ch.r{left:20px;right:20px;width:auto;top:auto;bottom:7vh;text-align:left}
+  .ch.r .spec{justify-content:flex-start}
+  .ch h2{font-size:2.3rem}.ch p{font-size:.9rem;margin-top:10px}.ch .spec{margin-top:12px}
+  .rail{display:none}
+  .hero{bottom:7vh}.hero h1{font-size:3.4rem}
+  .mega{font-size:52vw;top:34%}
+  .fin{left:20px;right:20px;width:auto;top:auto;bottom:5vh}
+  .fin h2{font-size:2.5rem}.stats{gap:22px;margin-top:16px}.stats b{font-size:1.9rem}.btns{margin-top:18px}.btn{padding:14px 18px;font-size:.64rem}
+  .orb{width:15vw}.orb em{display:none}
+}
+@media (prefers-reduced-motion:reduce){.an{height:auto}.pin{position:relative}}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Main">
+  <a class="logo" href="https://shop.zeotein.com/home"><img src="https://cdn.shopify.com/s/files/1/0775/5458/1717/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?v=1762380884" alt="Zeotein" width="344" height="118"></a>
+  <div class="links"><a href="https://shop.zeotein.com/cacao">Cacao</a><a href="https://shop.zeotein.com/vegan">Vegan</a><a href="https://shop.zeotein.com/single-ingredients">Singles</a><a href="https://shop.zeotein.com/faq">FAQ</a></div>
+  <a class="cta" href="https://shop.zeotein.com/cacao">Shop the kit</a>
+</nav>
+
+<section class="an" id="an" aria-label="The anatomy of a Zeotein Cacao shake">
+  <div class="pin" id="pin">
+    <div class="layer"><div class="beam" id="beam"></div><div class="floor" id="floor"></div></div>
+    <div class="layer" id="megas" aria-hidden="true"></div>
+    <div class="layer" id="shots" aria-hidden="true"></div>
+    <div class="layer" aria-hidden="true"><div class="halo" id="halo"></div><div class="bag" id="bag"><img src="img/bag-cutout.webp" alt=""></div></div>
+    <canvas class="dust" id="dust" aria-hidden="true"></canvas>
+    <div class="layer" id="orbs" aria-hidden="true"></div>
+
+    <div class="hero" id="hero">
+      <p class="kicker">Zeotein Cacao &middot; Six ingredients</p>
+      <h1>The anatomy<br>of a <i>shake.</i></h1>
+      <div class="scroll"><span>Scroll</span><i></i></div>
+    </div>
+    <div class="layer" id="chs"></div>
+
+    <div class="fin" id="fin">
+      <p class="kicker">Zeotein Cacao Starter Kit</p>
+      <h2 style="margin-top:14px">Six ingredients.<br><i>Nothing hiding.</i></h2>
+      <div class="stats"><div><b>23g</b><span>Protein</span></div><div><b>14g</b><span>Collagen</span></div><div><b>Zero</b><span>Sugar</span></div></div>
+      <div class="btns"><a class="btn solid" href="https://shop.zeotein.com/cacao">Shop the Starter Kit &rarr;</a><a class="btn ghost" href="https://shop.zeotein.com/cacao#zt-label">Read the label</a></div>
+      <p class="fine">$76.99 your first order, with free US shipping &middot; &#9733; 4.9 from 155 reviews</p>
+    </div>
+
+    <div class="rail" id="rail" aria-hidden="true"></div>
+    <div class="layer grain"></div><div class="layer vig"></div>
+  </div>
+</section>
+<div class="after"><p>Grass-fed. Organic. Read in seconds.</p></div>
+
+<script>
+(function(){
+  var CH = [
+    {img:'bonebroth', mega:'Broth',    side:'l', eb:'The base',           t:'Bone broth <i>protein.</i>', p:'Grass-fed beef bone broth protein. The foundation every serving is built on.', s:[['Source','Grass-fed'],['Role','Protein base']]},
+    {img:'collagen',  mega:'Collagen', side:'r', eb:'The second protein', t:'Collagen <i>peptides.</i>',  p:'Hydrolyzed grass-fed bovine collagen. Fourteen grams in every serving.',     s:[['Source','Grass-fed'],['Per serving','14g']]},
+    {img:'cacao',     mega:'Cacao',    side:'l', eb:'The flavor',         t:'Fermented <i>cacao.</i>',    p:'Organic raw cacao, fermented and never alkalized. Where the chocolate comes from, with no sweeteners on top.', s:[['Grade','Organic'],['Process','Never alkalized']]},
+    {img:'mct',       mega:'MCT',      side:'r', eb:'The mixer',          t:'MCT oil <i>powder.</i>',     p:'Organic MCT oil in powder form, so it blends right into the shake.',          s:[['Grade','Organic'],['Form','Powder']]},
+    {img:'seamoss',   mega:'Sea moss', side:'l', eb:'From the sea',       t:'Sea <i>moss.</i>',           p:'Organic sea moss, dried and milled to a fine powder.',                         s:[['Grade','Organic'],['Form','Powder']]},
+    {img:'mineral',   mega:'Mineral',  side:'r', eb:'From the earth',     t:'Volcanic <i>mineral.</i>',   p:'A naturally occurring volcanic mineral, finely milled. Named in full on the Supplement Facts panel printed on every bag.', s:[['Origin','Volcanic'],['Form','Finely milled']]}
+  ];
+  var SHORT = ['Bone broth','Collagen','Cacao','MCT','Sea moss','Mineral'];
+  var $ = function(id){ return document.getElementById(id); };
+  var pin = $('pin'), megas = $('megas'), shots = $('shots'), chs = $('chs'), orbs = $('orbs'), rail = $('rail');
+  var bag = $('bag'), halo = $('halo'), hero = $('hero'), fin = $('fin'), beam = $('beam'), floor = $('floor');
+
+  function el(tag, cls, html, parent){ var e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; parent.appendChild(e); return e; }
+  function lines(s){ return s.split('<br>').map(function(x){ return '<span class="line"><span>' + x + '</span></span>'; }).join(''); }
+
+  var megaEls = [el('div', 'mega fill', 'Zeotein', megas)];
+  CH.forEach(function(c, i){
+    megaEls.push(el('div', 'mega', c.mega, megas));
+    var s = el('div', 'shot', '<img src="img/' + c.img + '.webp" alt="">', shots);
+    var spec = c.s.map(function(x){ return '<div>' + x[0] + '<b>' + x[1] + '</b></div>'; }).join('');
+    var h = el('div', 'ch ' + c.side, '<p class="no">' + String(i + 1).padStart(2, '0') + ' / 06</p><p class="eb">' + c.eb + '</p><h2>' + lines(c.t) + '</h2><p>' + c.p + '</p><div class="spec">' + spec + '</div>', chs);
+    var r = el('div', '', '<span>' + String(i + 1).padStart(2, '0') + '</span><i></i>', rail);
+    var o = el('div', 'orb', '<div class="disc"><img src="img/' + c.img + '.webp" alt=""></div><em>' + SHORT[i] + '</em>', orbs);
+    c.shot = s; c.ch = h; c.rail = r; c.orb = o; c.h2 = [].slice.call(h.querySelectorAll('.line>span')); c.rest = [].slice.call(h.querySelectorAll('.no,.eb,p:not(.no):not(.eb),.spec'));
+  });
+  orbs.className = 'layer orbwrap';
+  var shake = el('div', 'shot', '<img src="img/shake.webp" alt="">', shots);
+
+  // dust motes
+  var cv = $('dust'), ctx = cv.getContext('2d'), motes = [], seed = 5;
+  function rnd(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  for (var i = 0; i < 90; i++) motes.push({x: rnd(), y: rnd(), r: .5 + rnd() * 1.8, s: .2 + rnd() * .8, a: .15 + rnd() * .55, w: rnd() * 6.28});
+
+  function clamp(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function seg(t, a, b){ return clamp((t - a) / (b - a)); }
+  function lerp(a, b, k){ return a + (b - a) * k; }
+  function io(k){ return k < .5 ? 4*k*k*k : 1 - Math.pow(-2*k + 2, 3) / 2; }
+  function out(k){ return 1 - Math.pow(1 - k, 3); }
+  function inn(k){ return k * k * k; }
+
+  // timeline (p): hero 0-.08, dive .08-.14, chapters .14-.80 (.11 each), finale .80-1
+  var C0 = .14, CL = .11, F0 = .80;
+  var W = 0, H = 0, mobile = false;
+  function size(){ W = pin.clientWidth; H = pin.clientHeight; mobile = W <= 820; var d = Math.min(2, devicePixelRatio || 1); cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
+  size(); addEventListener('resize', function(){ size(); render(cur, clock); });
+
+  function render(p, time){
+    time = time || 0;
+    // hero bag: floats, then the camera dives into it
+    var dive = seg(p, .06, .15), back = seg(p, F0, F0 + .1);
+    var bob = Math.sin(time * 1.1) * 8;
+    var bs, by, bx, bo, bb, brot;
+    if (p < F0) { bs = lerp(1, 3.4, inn(dive)); by = bob - dive * 40; bx = 0; bo = 1 - seg(p, .1, .145); bb = dive * 14; brot = -4 + Math.sin(time * .7) * 2 + dive * 8; }
+    else { var k = out(back); bs = lerp(.3, mobile ? .5 : .56, k); bx = lerp(0, mobile ? -22 : 13, k); by = lerp(260, mobile ? 40 : H * .2, k) + bob * .5; bo = k; bb = (1 - k) * 10; brot = lerp(20, -8, k); }
+    bag.style.transform = 'translate(calc(-50% + ' + bx.toFixed(2) + 'vw), calc(-50% + ' + by.toFixed(1) + 'px)) scale(' + bs.toFixed(4) + ') rotate(' + brot.toFixed(2) + 'deg)';
+    bag.style.opacity = bo.toFixed(3); bag.style.filter = 'blur(' + bb.toFixed(1) + 'px)';
+    halo.style.opacity = (p < F0 ? (1 - dive) : out(back)).toFixed(3);
+    halo.style.transform = 'translate(calc(-50% + ' + (p < F0 ? 0 : bx).toFixed(2) + 'vw),-50%) scale(' + (1 + Math.sin(time * .9) * .04).toFixed(3) + ')';
+
+    var hk = seg(p, 0, .07);
+    hero.style.opacity = (1 - hk).toFixed(3); hero.style.transform = 'translateY(' + (-hk * 60).toFixed(1) + 'px)';
+    beam.style.opacity = (.75 + .25 * Math.sin(time * .6)).toFixed(3);
+    beam.style.transform = 'translateX(-50%) rotate(' + (Math.sin(time * .35) * 2.5).toFixed(2) + 'deg)';
+
+    // giant words: drift sideways with scroll, crossfade per chapter
+    megaEls.forEach(function(m, i){
+      var a, b, o;
+      if (i === 0) { a = -1; b = .12; o = 1 - seg(p, .07, .13); }
+      else { a = C0 + (i - 1) * CL; b = a + CL; o = seg(p, a - .01, a + .03) * (1 - seg(p, b - .025, b + .01)); }
+      if (i === 0 && p >= F0) o = out(seg(p, F0 + .04, F0 + .12)) * .8;
+      var u = i === 0 ? (p >= F0 ? seg(p, F0, 1) : p / .12) : seg(p, a, b);
+      var dir = i % 2 ? -1 : 1, x = (i === 0 ? 50 - (p >= F0 ? u * 20 : u * 12) : 50 + dir * (14 - u * 28));
+      m.style.opacity = o.toFixed(3);
+      m.style.transform = 'translate(calc(' + x.toFixed(2) + 'vw - 50%), -50%)';
+    });
+
+    // chapters
+    var active = -1;
+    CH.forEach(function(c, i){
+      var a = C0 + i * CL, b = a + CL, u = seg(p, a, b);
+      var vin = out(seg(p, a - .02, a + .035)), vout = seg(p, b - .03, b + .015);
+      var on = p > a - .02 && p < b + .015;
+      if (p >= a && p < b) active = i;
+      var side = c.side === 'l' ? 1 : -1, shift = mobile ? 0 : side * 12;
+      var sc = lerp(.72, 1, vin) + u * .08 + vout * .25, ry = (1 - vin) * 160 - vout * 120;
+      var rot = (1 - vin) * -8 * side + u * 4 * side;
+      c.shot.style.opacity = on ? (vin * (1 - vout)).toFixed(3) : 0;
+      c.shot.style.transform = 'translate(calc(-50% + ' + shift + 'vw), calc(-50% + ' + ry.toFixed(1) + 'px)) scale(' + sc.toFixed(4) + ') rotate(' + rot.toFixed(2) + 'deg)';
+      c.shot.style.filter = 'blur(' + ((1 - vin) * 16 + vout * 18).toFixed(1) + 'px)';
+      var tin = out(seg(p, a + .005, a + .045)), tout = seg(p, b - .025, b);
+      c.ch.style.opacity = on ? (1 - tout).toFixed(3) : 0;
+      c.ch.style.transform = 'translateY(calc(' + (mobile ? '0%' : '-50%') + ' + ' + (-tout * 40).toFixed(1) + 'px))';
+      c.h2.forEach(function(s, j){ var k = out(seg(p, a + .008 + j * .008, a + .04 + j * .008)); s.style.transform = 'translateY(' + ((1 - k) * 110).toFixed(1) + '%)'; });
+      c.rest.forEach(function(s, j){ var k = out(seg(p, a + .02 + j * .005, a + .05 + j * .005)); s.style.opacity = k.toFixed(3); s.style.transform = 'translateY(' + ((1 - k) * 14).toFixed(1) + 'px)'; });
+      c.rail.classList.toggle('on', i === active);
+    });
+    rail.style.opacity = (seg(p, C0 - .02, C0 + .02) * (1 - seg(p, F0 - .02, F0 + .01))).toFixed(3);
+
+    // finale: the shake, the bag, and all six as orbiting discs
+    var fk = out(seg(p, F0 + .01, F0 + .1)), fo = 1;
+    shake.style.opacity = fk.toFixed(3);
+    var shx = mobile ? 8 : 25;
+    shake.style.transform = 'translate(calc(-50% + ' + shx + 'vw), calc(-50% + ' + ((1 - fk) * 140 + (mobile ? -40 : 0)).toFixed(1) + 'px)) scale(' + lerp(.8, mobile ? .78 : .92, fk).toFixed(3) + ')';
+    shake.style.filter = 'blur(' + ((1 - fk) * 14).toFixed(1) + 'px)';
+    fin.style.opacity = seg(p, F0 + .05, F0 + .11).toFixed(3);
+    fin.style.transform = 'translateY(calc(' + (mobile ? '0%' : '-50%') + ' + ' + ((1 - out(seg(p, F0 + .05, F0 + .12))) * 40).toFixed(1) + 'px))';
+    var ok = seg(p, F0 + .06, F0 + .16), cx = W * (mobile ? .52 : .71), cy = H * (mobile ? .34 : .5), R = Math.min(W, H) * (mobile ? .34 : .33);
+    CH.forEach(function(c, i){
+      var k = out(seg(p, F0 + .06 + i * .012, F0 + .14 + i * .012));
+      var ang = -Math.PI / 2 + i * Math.PI / 3 + time * .12 + (1 - k) * 1.2;
+      var rr = R * lerp(.2, 1, k), x = cx + Math.cos(ang) * rr * (mobile ? 1.05 : 1.12), y = cy + Math.sin(ang) * rr * .82;
+      c.orb.style.opacity = k.toFixed(3);
+      c.orb.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) translate(-50%,-50%) scale(' + lerp(.4, 1, k).toFixed(3) + ')';
+    });
+    floor.style.opacity = (p < .12 ? 1 - seg(p, .06, .12) : fk).toFixed(3);
+
+    // dust
+    ctx.clearRect(0, 0, W, H);
+    motes.forEach(function(m){
+      var y = ((m.y - p * m.s * 1.6 - time * .012 * m.s) % 1 + 1) % 1, x = m.x + Math.sin(time * .3 + m.w) * .01;
+      var inBeam = 1 - Math.min(1, Math.abs(x - .5) / (.18 + y * .25));
+      ctx.globalAlpha = m.a * (.25 + .75 * inBeam);
+      ctx.fillStyle = '#E9DDFF'; ctx.beginPath(); ctx.arc(x * W, y * H, m.r, 0, 6.283); ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  window.__zmSetProgress = function(p, time){ cur = p; render(p, time == null ? clock : time); };
+
+  var cur = 0, target = 0, clock = 0, last = performance.now(), sec = $('an');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, q = new URLSearchParams(location.search);
+  function readScroll(){ var r = sec.getBoundingClientRect(), span = sec.offsetHeight - innerHeight; target = clamp(-r.top / span); }
+  if (q.has('p')) { render(parseFloat(q.get('p')), 0); return; }
+  if (q.has('manual')) { render(0, 0); return; }
+  if (reduce) { render(.93, 0); return; }
+  addEventListener('scroll', readScroll, {passive: true}); readScroll(); cur = target;
+  (function frame(now){ var dt = Math.min(.05, (now - last) / 1000); last = now; clock += dt;
+    cur += (target - cur) * (1 - Math.pow(.0009, dt)); render(cur, clock); requestAnimationFrame(frame); })(last);
+})();
+</script>
+</body>
+</html>
