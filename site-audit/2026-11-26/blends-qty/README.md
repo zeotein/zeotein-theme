@@ -57,3 +57,20 @@ Claude can't write to the published theme, and Dana's team placed a hold on Clau
 6. Test on a phone at https://zeotein.com/pages/protein-blends. Pick 2 bags: the Bulk Bag card shows $56.70/bag and $113.40 total (Subscribe), or $63.00/bag and $126.00 total (One-Time). Pick 1: it shows $63.00 or $70.00 again.
 
 **Undo:** paste the backup from step 3, or the file in `live-before/`.
+
+## Status 27 Nov: ON HOLD, not pasted (read-only live check)
+
+The live chooser was changed separately on 26 Nov at 3:30 PM CT: published theme #188502048981, `sections/zt-blend-chooser.liquid`, now md5 a76fafc0, 61,722 bytes. It is neither this kit's file nor the 692efc7f it was built on.
+
+Checked on zeotein.com/pages/protein-blends with Playwright, desktop 1366 px and iPhone 13, picking 2 and then 3:
+
+| Picked | Bulk Bag, Subscribe | Bulk Bag, One-Time | 30-Day Sticks, Subscribe | 30-Day Sticks, One-Time |
+|---|---|---|---|---|
+| 2 | ~~$179.98~~ $113.40 | ~~$199.98~~ $126.00 | ~~$219.98~~ $138.60 | ~~$259.98~~ $163.80 |
+| 3 | ~~$269.97~~ $151.20 | ~~$299.97~~ $168.00 | ~~$329.97~~ $184.80 | ~~$389.97~~ $218.40 |
+
+The buttons above read "Buy 1 / Buy 2 / Buy 3" with "$56.70 each" and "$113.40 total" (Subscribe, 2). Desktop and mobile showed the same.
+
+So the cards follow the quantity, but they show the **total** with the regular total struck through. They do not show this kit's **per bag or box plus total** ("$56.70/bag" and "$113.40 total"). The answer to "is the 2/3 per-bag display live?" is **no, on both devices**.
+
+This kit stays on hold. Its BEFORE check (692efc7f, 780 lines) no longer matches live, so **do not paste it as is**. If the per-bag format is still wanted, it has to be rebuilt on top of a76fafc0. Screenshots: `live-27nov-mobile-bagcard-sub-2.png` and `live-27nov-desktop-bagcard-sub-2.png`.
