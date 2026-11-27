@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zeotein · Simple on Purpose</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* "Subtraction": an evergreen homepage scroll animation for Zeotein.
+   Act 1 a wall of label text. Act 2 it gets struck out word by word. Act 3 what's left: nine ingredients.
+   Act 4 concept packaging whose label is the list. Act 5 the manifesto and two doors.
+   One pinned stage at a fixed design size (1600x900, phone 420x746), scaled to fit; render(p) draws every frame.
+   window.__zmSetProgress(p, t) renders any frame exactly (used for the recordings). */
+:root{--paper:#F2ECE2;--paper-2:#EAE2D5;--ink:#24163A;--plum:#5F2D90;--plum-d:#2E1650;--teal:#32BAC0;--teal-d:#12777C;--wall:#A89E92;--mute:#6E6578;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;--head:"Poppins",system-ui,sans-serif;--sans:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.scroller{position:relative;height:1200vh}
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:radial-gradient(80% 70% at 50% 40%,#F7F2EA 0%,var(--paper) 60%,var(--paper-2) 100%)}
+.stage{position:absolute;left:50%;top:50%;transform-origin:0 0}
+.abs{position:absolute;left:0;top:0;will-change:transform,opacity}
+.paper{position:absolute;inset:-50%;opacity:.35;pointer-events:none;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .5  0 0 0 0 .44  0 0 0 .35 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>")}
+
+.nav{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;gap:36px;padding:22px 40px}
+.nav img{height:28px;width:auto;display:block}
+.nav .links{display:flex;gap:30px;margin-left:auto;font-family:var(--head);font-weight:500;font-size:.88rem;color:var(--plum-d)}
+.nav .cta{font-family:var(--head);font-weight:600;font-size:.86rem;background:var(--plum-d);color:var(--paper);padding:11px 20px;border-radius:999px}
+@media (max-width:760px){.nav{padding:14px 16px}.nav .links{display:none}.nav .cta{margin-left:auto;padding:9px 14px;font-size:.78rem}.nav img{height:22px}}
+
+/* act 1-2: the wall */
+.wall{font-family:var(--head);font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--wall);text-align:justify;hyphens:none}
+.wall .w{position:relative;display:inline-block;white-space:nowrap}
+.wall .w s{position:absolute;left:-2px;right:-2px;top:52%;height:3px;background:var(--teal);transform-origin:left;transform:scaleX(0);border-radius:2px}
+.wall .lbl{color:var(--ink);font-weight:700}
+.surv{font-family:var(--head);font-weight:500;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;color:var(--plum)}
+.cap{text-align:center;font-family:var(--head);font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--plum-d)}
+.plate{border-radius:50%;background:radial-gradient(closest-side,rgba(247,242,234,.96),rgba(247,242,234,.9) 55%,rgba(247,242,234,0))}
+.h{font-family:var(--serif);font-weight:300;letter-spacing:-.04em;line-height:.95;color:var(--plum-d)}
+.h i{font-style:italic;color:var(--plum)}
+.line{display:block;overflow:hidden;padding-bottom:.08em}.line>span{display:block}
+.kick{font-family:var(--head);font-weight:600;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal-d)}
+.sub{font-size:19px;line-height:1.6;color:var(--mute)}
+.count{font-family:var(--head);font-weight:600;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:12px}
+.count b{font-family:var(--serif);font-weight:400;font-size:44px;letter-spacing:-.03em;color:var(--plum-d);font-variant-numeric:tabular-nums;min-width:1.4em;text-align:right}
+.fine{font-size:11px;color:var(--wall);letter-spacing:.04em}
+/* act 3: specimens */
+.mound{mix-blend-mode:darken;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent 100%);mask-image:radial-gradient(closest-side,#000 70%,transparent 100%)}
+.mound img{display:block;width:100%;height:100%}
+/* act 4: concept pouches */
+.pouch svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.pouch .lab{position:absolute;left:17%;right:17%;top:27%;bottom:13%;padding:7% 7% 5%;display:flex;flex-direction:column}
+.pouch .lab img{width:50%;height:auto;align-self:center}
+.pouch .lab .nm{margin-top:4%;text-align:center;font-family:var(--serif);font-weight:400;letter-spacing:-.02em;color:var(--plum-d);line-height:1}
+.pouch .lab .nm i{font-style:italic;color:var(--plum)}
+.pouch .lab ul{list-style:none;margin-top:6%;border-top:1.5px solid var(--plum-d);border-bottom:1px solid var(--plum-d);padding:4% 0}
+.pouch .lab li{display:flex;align-items:center;gap:6%;font-family:var(--head);font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--plum-d);padding:2.2% 0;border-bottom:1px dashed rgba(46,22,80,.18);white-space:nowrap}
+.pouch .lab li:last-child{border:0}
+.pouch .lab li i{flex:none;border-radius:50%}
+.pouch .lab .ft{margin-top:auto;text-align:center;font-family:var(--head);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+/* act 5 */
+.man{font-family:var(--serif);font-weight:300;letter-spacing:-.05em;line-height:.9;color:var(--plum-d);white-space:nowrap}
+.man i{font-style:italic;color:var(--plum)}
+.door{display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1.5px solid var(--plum-d);padding:22px 4px;font-family:var(--serif);font-weight:400;font-size:40px;letter-spacing:-.03em;color:var(--plum-d);pointer-events:auto}
+.door span{font-family:var(--head);font-weight:600;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--paper);background:var(--plum-d);padding:13px 18px;border-radius:999px}
+.door.t span{background:var(--teal);color:#08292B}
+.m .door{font-size:24px;padding:14px 2px}.m .door span{font-size:10px;padding:9px 12px}
+.m .sub{font-size:14px}.m .kick{font-size:10px}.m .count{font-size:10px}.m .count b{font-size:30px}
+.after{background:var(--paper);padding:80px 20px;text-align:center;font-family:var(--serif);font-style:italic;font-size:1.4rem;color:var(--mute)}
+@media (prefers-reduced-motion:reduce){.scroller{height:auto}.pin{position:relative}}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Main">
+  <a href="https://shop.zeotein.com/home"><img src="https://cdn.shopify.com/s/files/1/0775/5458/1717/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?v=1762380884" alt="Zeotein" width="344" height="118"></a>
+  <div class="links"><a href="https://shop.zeotein.com/cacao">Protein blends</a><a href="https://shop.zeotein.com/single-ingredients">Single ingredients</a><a href="https://shop.zeotein.com/our-story">Our story</a><a href="https://shop.zeotein.com/faq">FAQ</a></div>
+  <a class="cta" href="#doors">Shop</a>
+</nav>
+<section class="scroller" id="scroller" aria-label="Zeotein, simple on purpose">
+  <div class="pin" id="pin"><div class="stage" id="stage"></div><div class="paper"></div></div>
+</section>
+<div class="after" id="doors">Short list. Nothing extra. Nothing to hide.</div>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var pin = $('pin'), stage = $('stage');
+  var LOGO = 'https://cdn.shopify.com/s/files/1/0775/5458/1717/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?v=1762380884';
+
+  // the nine survivors (Zeotein's whole pantry) with the colour of each powder for the label dots
+  var KEEP = [
+    ['bonebroth','Bone broth protein','#C9A266'], ['collagen','Collagen peptides','#EDE6DA'], ['cacao','Fermented cacao','#6B3E26'],
+    ['mct','MCT oil powder','#E9DFC6'], ['seamoss','Sea moss','#D2B176'], ['mineral','Volcanic mineral','#A9B3A6'],
+    ['pumpkin','Pumpkin seed protein','#9BAA72'], ['hemp','Hemp protein','#7F8A4E'], ['lionsmane',"Lion's mane",'#E2D6BD']
+  ];
+  // an illustrative long label (not any one brand); the survivors are hidden in it
+  var NOISE = ['whey protein concentrate','whey protein isolate','cocoa processed with alkali','natural flavors','artificial flavors','sucralose','acesulfame potassium',
+    'stevia leaf extract','monk fruit extract','erythritol','xylitol','maltodextrin','dextrose','cane sugar','corn syrup solids','xanthan gum','guar gum','cellulose gum',
+    'gum arabic','carrageenan','soy lecithin','sunflower lecithin','silicon dioxide','salt','potassium chloride','magnesium oxide','calcium carbonate','tricalcium phosphate',
+    'dicalcium phosphate','vitamin and mineral premix','enzyme blend','non-dairy creamer','sodium caseinate','mono- and diglycerides','caramel color','inulin','polydextrose',
+    'natural vanilla flavor','artificial color','modified food starch','rice flour','canola oil','citric acid','malic acid','sodium citrate','sodium benzoate','potassium sorbate'];
+  var ORDER = [0,1,'k0',2,3,4,5,'k1',6,7,8,9,10,'k2',11,12,13,14,'k3',15,16,17,18,19,'k4',20,21,22,23,24,'k5',25,26,27,28,'k6',29,30,31,32,33,'k7',34,35,36,37,38,'k8',39,40,41,42,43,44,45,46];
+
+  var STOP = {A:[0,.05], B:[.13,.32], C:[.42,.52], D:[.62,.74], E:[.84,1]};
+  var els, mobile, VW, VH;
+
+  function el(html, cls, parent){ var d = document.createElement('div'); d.className = 'abs ' + (cls || ''); d.innerHTML = html; (parent || stage).appendChild(d); return d; }
+  function lines(s){ return s.split('<br>').map(function(x){ return '<span class="line"><span>' + x + '</span></span>'; }).join(''); }
+
+  function pouchSVG(body, band, id){
+    return '<svg viewBox="0 0 300 440" aria-hidden="true"><defs>' +
+      '<linearGradient id="g' + id + '" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".34"/><stop offset=".18" stop-color="#000" stop-opacity=".06"/><stop offset=".32" stop-color="#fff" stop-opacity=".16"/><stop offset=".5" stop-color="#fff" stop-opacity=".03"/><stop offset=".82" stop-color="#000" stop-opacity=".1"/><stop offset="1" stop-color="#000" stop-opacity=".36"/></linearGradient>' +
+      '<linearGradient id="v' + id + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".08"/><stop offset=".85" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient>' +
+      '<radialGradient id="s' + id + '"><stop offset="0" stop-color="#2E1650" stop-opacity=".35"/><stop offset="1" stop-color="#2E1650" stop-opacity="0"/></radialGradient>' +
+      '<clipPath id="c' + id + '"><path d="M22 26 Q22 12 36 12 L264 12 Q278 12 278 26 L284 396 Q285 426 254 428 L46 428 Q15 426 16 396 Z"/></clipPath></defs>' +
+      '<ellipse cx="150" cy="432" rx="150" ry="16" fill="url(#s' + id + ')"/>' +
+      '<g clip-path="url(#c' + id + ')"><rect width="300" height="440" fill="' + body + '"/><rect y="0" width="300" height="58" fill="' + band + '"/>' +
+      '<rect y="58" width="300" height="2.5" fill="#000" opacity=".18"/><path d="M0 34 H300" stroke="#000" stroke-opacity=".18" stroke-width="1.2" stroke-dasharray="3 3"/>' +
+      '<rect width="300" height="440" fill="url(#g' + id + ')"/><rect width="300" height="440" fill="url(#v' + id + ')"/>' +
+      '<path d="M90 70 Q86 250 96 420" stroke="#fff" stroke-opacity=".10" stroke-width="18" fill="none"/></g>' +
+      '<rect x="51" y="119" width="198" height="264" rx="10" fill="#F6F0E6"/><rect x="51" y="119" width="198" height="264" rx="10" fill="url(#g' + id + ')" opacity=".35"/></svg>';
+  }
+
+  function build(){
+    mobile = pin.clientWidth <= 760; VW = mobile ? 420 : 1600; VH = mobile ? 746 : 900;
+    stage.innerHTML = ''; stage.className = 'stage' + (mobile ? ' m' : ''); stage.style.width = VW + 'px'; stage.style.height = VH + 'px';
+    els = {kill:[], keep:[], mounds:[], caps:[], copies:{}, pouches:[], man:[], doors:[]};
+
+    // wall
+    var wall = el('', 'wall'); var pad = mobile ? 18 : 80;
+    wall.style.width = (VW - pad * 2) + 'px'; wall.style.transform = 'translate(' + pad + 'px,' + (mobile ? 70 : 96) + 'px)';
+    var html = '<span class="lbl">Ingredients: </span>';
+    ORDER.forEach(function(o, i){
+      var txt = typeof o === 'string' ? KEEP[+o.slice(1)][1] : NOISE[o];
+      html += '<span class="w" data-k="' + (typeof o === 'string' ? o.slice(1) : '') + '">' + txt + (i < ORDER.length - 1 ? ',' : '.') + '<s></s></span> ';
+    });
+    wall.innerHTML = html;
+    // fit the wall to the stage
+    var lo = 10, hi = mobile ? 30 : 60, target = VH - (mobile ? 240 : 220);
+    for (var it = 0; it < 14; it++) { var mid = (lo + hi) / 2; wall.style.fontSize = mid + 'px'; wall.style.lineHeight = '1.32'; if (wall.offsetHeight > target) hi = mid; else lo = mid; }
+    wall.style.fontSize = lo + 'px';
+    els.wall = wall; els.wallFont = lo;
+    var seed = 3; function rnd(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+    var ws = [].slice.call(wall.querySelectorAll('.w'));
+    var kills = ws.filter(function(w){ return w.dataset.k === ''; });
+    kills.forEach(function(w){ els.kill.push({e:w, s:w.lastChild, t:rnd(), dx:(rnd() - .5) * 60, r:(rnd() - .5) * 20}); });
+    // survivors: hide in the wall, replace with free-moving copies starting at the same spot
+    var wx = pad, wy = mobile ? 70 : 96;
+    ws.filter(function(w){ return w.dataset.k !== ''; }).forEach(function(w){
+      var k = +w.dataset.k, c = el(KEEP[k][1], 'surv');
+      c.style.fontSize = lo + 'px'; c.home = [wx + w.offsetLeft, wy + w.offsetTop]; w.style.visibility = 'hidden';
+      els.keep[k] = c;
+    });
+    els.plate = el('', 'plate');
+
+    // headlines
+    var mk = function(key, kick, h, sub, size, width){ var html = (kick ? '<p class="kick">' + kick + '</p>' : '') + '<h2 class="h" style="font-size:' + size + 'px;margin-top:' + (kick ? 14 : 0) + 'px">' + lines(h) + '</h2>' + (sub ? '<p class="sub" style="margin-top:16px">' + sub + '</p>' : '');
+      var e = el(html, ''); e.style.width = width + 'px'; e.ln = [].slice.call(e.querySelectorAll('.line>span')); e.rest = [].slice.call(e.querySelectorAll('.kick,.sub')); els.copies[key] = e; return e; };
+    mk('A', 'Zeotein', 'Most labels<br><i>keep adding.</i>', '', mobile ? 58 : 124, mobile ? 380 : 1100).style.textAlign = 'center';
+    mk('B', '', 'So we kept<br><i>taking things out.</i>', '', mobile ? 50 : 110, mobile ? 380 : 1100).style.textAlign = 'center';
+    mk('C', 'What’s left', 'Simple <i>on purpose.</i>', 'Nine ingredients. Every Zeotein product starts here, and nothing else gets in.', mobile ? 50 : 104, mobile ? 380 : 1000).style.textAlign = 'center';
+    els.copies.C.querySelector('.sub').style.margin = '16px auto 0'; els.copies.C.querySelector('.sub').style.maxWidth = '560px';
+    mk('D', 'Concept packaging', 'The label<br><i>is the design.</i>', 'If it isn’t on the list, it isn’t in the pouch. Six, five, or one. You can read every one of them in five seconds.', mobile ? 44 : 92, mobile ? 380 : 520);
+    els.count = el('<b>0</b><span>ingredients<br>on this label</span>', 'count');
+    els.fine = el('An illustrative long label, not any one brand.', 'fine');
+
+    // specimens
+    KEEP.forEach(function(g, i){
+      els.mounds[i] = el('<img src="img/' + g[0] + '.webp" alt="">', 'mound');
+    });
+
+    // concept pouches: Cacao (6), Vegan (5), a single (1)
+    var P = [
+      {body:'#3B1D66', band:'#32BAC0', nm:'Cacao <i>protein</i>', items:[0,1,2,3,4,5], ft:'6 ingredients'},
+      {body:'#0F5C5F', band:'#5F2D90', nm:'Vegan <i>protein</i>', items:[6,7,3,4,5], ft:'5 ingredients'},
+      {body:'#D8C9AE', band:'#3B1D66', nm:'Collagen <i>peptides</i>', items:[1], ft:'1 ingredient'}
+    ];
+    P.forEach(function(q, i){
+      var li = q.items.map(function(k){ return '<li><i style="background:' + KEEP[k][2] + ';box-shadow:inset 0 0 0 1px rgba(46,22,80,.25)"></i>' + KEEP[k][1] + '</li>'; }).join('');
+      var e = el(pouchSVG(q.body, q.band, i) + '<div class="lab"><img src="' + LOGO + '" alt=""><p class="nm">' + q.nm + '</p><ul>' + li + '</ul><p class="ft">' + q.ft + '</p></div>', 'pouch');
+      e.li = [].slice.call(e.querySelectorAll('li')); e.q = q; els.pouches.push(e);
+    });
+
+    // manifesto + doors
+    [['Short list.', 1], ['Nothing <i>extra.</i>', -1], ['Nothing to <i>hide.</i>', 1]].forEach(function(m){ var e = el(m[0], 'man'); e.dir = m[1]; els.man.push(e); });
+    els.doors = [el('Protein blends<span>Shop</span>', 'door'), el('Single ingredients<span>Shop</span>', 'door t')];
+    els.doors[0].onclick = function(){ location.href = 'https://shop.zeotein.com/cacao'; };
+    els.doors[1].onclick = function(){ location.href = 'https://shop.zeotein.com/single-ingredients'; };
+    fit();
+  }
+  function fit(){ var W = pin.clientWidth, H = pin.clientHeight, s = Math.min(W / VW, H / VH);
+    stage.style.transform = 'scale(' + s + ') translate(' + (-VW / 2) + 'px,' + (-VH / 2) + 'px)'; }
+
+  function clamp(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function seg(t, a, b){ return clamp((t - a) / (b - a)); }
+  function lerp(a, b, k){ return a + (b - a) * k; }
+  function io(k){ return k < .5 ? 4*k*k*k : 1 - Math.pow(-2*k + 2, 3) / 2; }
+  function out(k){ return 1 - Math.pow(1 - k, 3); }
+  function put(e, x, y, o, extra){ e.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)' + (extra || ''); e.style.opacity = o.toFixed(3); e.style.visibility = o < .005 ? 'hidden' : 'visible'; }
+  function copy(key, x, y, a, b, c, d){ // fade/line-reveal in over [a,b], out over [c,d]
+    var e = els.copies[key], kin = out(seg(p_, a, b)), kout = seg(p_, c, d);
+    put(e, x, y - kout * 30, (key === 'A' ? 1 : kin) * (1 - kout));
+    e.ln.forEach(function(s, j){ var k = key === 'A' ? 1 : out(seg(p_, a + j * .008, b + j * .008)); s.style.transform = 'translateY(' + ((1 - k) * 110).toFixed(1) + '%)'; });
+    e.rest.forEach(function(s, j){ var k = key === 'A' ? 1 : out(seg(p_, a + .01 + j * .006, b + .01 + j * .006)); s.style.opacity = k.toFixed(3); });
+  }
+
+  var p_ = 0;
+  function render(p, time){
+    p_ = p; time = time || 0;
+    var cx = VW / 2;
+    // ---- acts 1-2: the wall gets struck out ----
+    var wallFade = 1 - seg(p, .36, .41);
+    var alive = 0;
+    els.kill.forEach(function(w){
+      var t0 = lerp(.07, .31, w.t), strike = seg(p, t0, t0 + .012), gone = seg(p, t0 + .012, t0 + .03);
+      w.s.style.transform = 'scaleX(' + strike.toFixed(3) + ')';
+      w.e.style.opacity = ((1 - gone) * (1 - strike * .45)).toFixed(3);
+      w.e.style.transform = 'translate(' + (w.dx * gone).toFixed(1) + 'px,' + (gone * gone * 40).toFixed(1) + 'px) rotate(' + (w.r * gone).toFixed(1) + 'deg)';
+      if (gone < .5) alive++;
+    });
+    els.wall.style.opacity = wallFade.toFixed(3);
+    var dimA = 1 - seg(p, .02, .07) * .0;
+    // plate behind the headline so it reads over the wall
+    var plateO = (1 - seg(p, .3, .36));
+    els.plate.style.width = (mobile ? 420 : 1300) + 'px'; els.plate.style.height = (mobile ? 420 : 760) + 'px';
+    put(els.plate, cx - (mobile ? 210 : 650), (mobile ? 200 : 70), plateO * .92);
+    copy('A', cx - (mobile ? 190 : 550), mobile ? 250 : 260, 0, .01, .1, .14);
+    copy('B', cx - (mobile ? 190 : 550), mobile ? 250 : 270, .13, .18, .3, .35);
+    var shown = 9 + alive;
+    els.count.firstChild.textContent = shown;
+    put(els.count, mobile ? 20 : 80, mobile ? 640 : 780, (1 - seg(p, .33, .38)) * (mobile ? 1 : 1));
+    put(els.fine, mobile ? 20 : VW - 360, mobile ? 712 : 812, (1 - seg(p, .3, .36)) * .9);
+
+    // ---- act 3: survivors glide into a row of nine, each blooms into its specimen ----
+    var rowY = mobile ? 0 : 560, sz = mobile ? 150 : 270;
+    KEEP.forEach(function(g, i){
+      var s = els.keep[i], k = io(seg(p, .34 + i * .006, .44 + i * .006));
+      var tx, ty;
+      if (!mobile) { tx = 160 + i * ((VW - 320) / 8); ty = rowY + 70; }
+      else { tx = 75 + (i % 3) * 135; ty = 330 + Math.floor(i / 3) * 135 + 28; }
+      // survivor word: from its spot in the wall to the caption spot, shrinking to caption size
+      var w0 = s.offsetWidth, fsz = lerp(els.wallFont, mobile ? 9 : 12, k);
+      s.style.fontSize = fsz.toFixed(2) + 'px';
+      var x = lerp(s.home[0], tx - s.offsetWidth / 2, k), y = lerp(s.home[1], ty, k);
+      var hl = seg(p, .3, .34);
+      s.style.color = 'rgb(' + Math.round(lerp(168, 95, hl)) + ',' + Math.round(lerp(158, 45, hl)) + ',' + Math.round(lerp(146, 144, hl)) + ')';
+      put(s, x, y, 1 - seg(p, .53, .57)); s.style.fontWeight = k > .5 ? 600 : 500; s.style.letterSpacing = (.04 + .05 * k).toFixed(3) + 'em';
+      // mound
+      var m = els.mounds[i], mk = out(seg(p, .41 + i * .008, .48 + i * .008)), mout = seg(p, .53 + i * .004, .58 + i * .004);
+      var msz = sz * (lerp(.6, 1, mk) - mout * .3) + Math.sin(time * 1.2 + i) * 1.5, mx = tx - msz / 2, my = (mobile ? ty - msz / 2 - 46 : rowY - msz / 2 - 20) + (1 - mk) * 30 - mout * 40;
+      m.style.width = m.style.height = msz.toFixed(1) + 'px';
+      put(m, mx, my, mk * (1 - mout));
+    });
+    copy('C', cx - (mobile ? 190 : 500), mobile ? 100 : 150, .4, .46, .53, .57);
+
+    // ---- act 4: concept pouches ----
+    var pw = mobile ? [190, 150, 120] : [330, 270, 220];
+    var px = mobile ? [130, 300, 350] : [930, 1215, 1430], py = mobile ? [420, 470, 600] : [450, 500, 540];
+    if (mobile) { px = [115, 290, 340]; py = [470, 500, 650]; }
+    els.pouches.forEach(function(e, i){
+      var k = out(seg(p, .56 + i * .025, .64 + i * .025)), kout = seg(p, .76, .82);
+      var w = pw[i], h = w * 440 / 300, bob = Math.sin(time * 1.1 + i * 2) * (mobile ? 2 : 5);
+      e.style.width = w + 'px'; e.style.height = h + 'px';
+      put(e, px[i] - w / 2, py[i] - h / 2 + (1 - k) * 120 + bob + kout * 90, k * (1 - kout), ' rotate(' + ((1 - k) * (i - 1) * 8 + (i - 1) * 3).toFixed(2) + 'deg)');
+      var lab = e.querySelector('.lab'); lab.querySelector('.nm').style.fontSize = (w * .085) + 'px';
+      e.li.forEach(function(l, j){ var lk = out(seg(p, .6 + i * .025 + j * .008, .64 + i * .025 + j * .008)); l.style.opacity = lk.toFixed(3); l.style.fontSize = (w * .03) + 'px'; l.firstChild.style.width = l.firstChild.style.height = (w * .038) + 'px'; });
+      lab.querySelector('.ft').style.fontSize = (w * .028) + 'px';
+    });
+    copy('D', mobile ? 20 : 110, mobile ? 92 : 250, .6, .66, .76, .8);
+    if (mobile) els.copies.D.querySelector('.sub').style.display = 'none';
+
+    // ---- act 5: manifesto + doors ----
+    els.man.forEach(function(e, i){
+      var k = out(seg(p, .8 + i * .025, .88 + i * .025));
+      e.style.fontSize = (mobile ? 62 : 150) + 'px';
+      var y = (mobile ? 110 : 90) + i * (mobile ? 64 : 138), x = mobile ? 20 : 110 + i * 120;
+      put(e, x + e.dir * (1 - k) * (mobile ? 120 : 300), y, k);
+    });
+    els.doors.forEach(function(e, i){
+      var k = out(seg(p, .9 + i * .02, .96 + i * .02));
+      e.style.width = (mobile ? 380 : 640) + 'px';
+      put(e, mobile ? 20 : VW - 110 - 640, (mobile ? 330 : 560) + i * (mobile ? 74 : 98) + (1 - k) * 30, k);
+    });
+  }
+
+  build();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ build(); render(cur, clock); });
+  addEventListener('resize', function(){ var was = mobile; if ((pin.clientWidth <= 760) !== was) build(); else fit(); render(cur, clock); });
+  var cur = 0, target = 0, clock = 0, last = performance.now(), sc = $('scroller');
+  window.__zmSetProgress = function(p, t){ cur = p; render(p, t == null ? clock : t); };
+  var q = new URLSearchParams(location.search);
+  if (q.has('p')) { render(parseFloat(q.get('p')), 0); return; }
+  if (q.has('manual')) { render(0, 0); return; }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { render(.97, 0); return; }
+  function read(){ var r = sc.getBoundingClientRect(), span = sc.offsetHeight - innerHeight; target = clamp(-r.top / span); }
+  addEventListener('scroll', read, {passive: true}); read(); cur = target;
+  (function frame(now){ var dt = Math.min(.05, (now - last) / 1000); last = now; clock += dt;
+    cur += (target - cur) * (1 - Math.pow(.0012, dt)); render(cur, clock); requestAnimationFrame(frame); })(last);
+})();
+</script>
+</body>
+</html>
