@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zeotein · Simple on Purpose</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@400;500&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Homepage scroll animation, "Simple on purpose". One pinned stage drawn at a fixed design size
+   (1600x900 desktop, 420x746 phone) and scaled to fit; render(p) places everything for scroll progress p.
+   window.__zmSetProgress(p, t) renders any frame exactly (used for the screen recordings). */
+:root{--bg:#0A0312;--cream:#F4EEE4;--lilac:#C9B6E8;--teal:#32BAC0;--mute:rgba(244,238,228,.64);
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;--head:"Poppins",system-ui,sans-serif;--sans:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--cream);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.scroller{position:relative;height:1100vh}
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:radial-gradient(70% 60% at 50% 40%,#22103A 0%,#130720 50%,var(--bg) 100%)}
+.stage{position:absolute;left:50%;top:50%;transform-origin:0 0}
+.abs{position:absolute;left:0;top:0;will-change:transform,opacity}
+
+.beam{position:absolute;left:50%;top:-10%;width:62vmin;height:120%;transform:translateX(-50%);pointer-events:none;
+  background:linear-gradient(180deg,rgba(214,196,255,.30),rgba(214,196,255,.08) 45%,rgba(214,196,255,0) 80%);
+  clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);filter:blur(28px);mix-blend-mode:screen}
+canvas.dust{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:screen;pointer-events:none}
+.grain{position:absolute;inset:-50%;opacity:.05;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+.vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(90% 80% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.5) 100%)}
+
+.nav{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;gap:36px;padding:20px 40px}
+.nav .logo{display:flex;background:var(--cream);border-radius:999px;padding:7px 16px}.nav .logo img{height:24px;width:auto;display:block}
+.nav .links{display:flex;gap:30px;margin-left:auto;font-family:var(--head);font-weight:500;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.nav .cta{font-family:var(--head);font-weight:600;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(244,238,228,.5);padding:11px 20px}
+@media (max-width:760px){.nav{padding:14px 16px}.nav .links{display:none}.nav .cta{margin-left:auto;padding:9px 14px;font-size:.62rem}.nav .logo img{height:20px}}
+
+/* giant numerals */
+.mega{font-family:var(--serif);font-weight:300;line-height:.8;letter-spacing:-.05em;white-space:nowrap;color:transparent;-webkit-text-stroke:1.4px rgba(201,182,232,.22)}
+/* products */
+.prod img{display:block;width:100%;height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.55)) drop-shadow(0 0 50px rgba(122,71,174,.35))}
+.card{border-radius:22px;overflow:hidden;box-shadow:0 0 0 1px rgba(244,238,228,.16),0 30px 50px rgba(0,0,0,.5)}
+.card img{display:block;width:100%;height:100%;object-fit:cover}
+.glow{border-radius:50%;background:radial-gradient(closest-side,rgba(95,45,144,.55),rgba(50,186,192,.08) 60%,rgba(0,0,0,0))}
+/* ingredient discs */
+.disc .ph{position:absolute;inset:0;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px rgba(244,238,228,.22),0 18px 34px rgba(0,0,0,.55)}
+.disc .ph img{width:150%;height:150%;margin:-25%;object-fit:cover;display:block}
+.disc .lb{position:absolute;left:50%;top:calc(100% + 12px);transform:translateX(-50%);white-space:nowrap;text-align:center;font-family:var(--head);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream)}
+.disc .lb small{display:block;margin-top:3px;font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.04em;text-transform:none;color:var(--mute)}
+/* copy */
+.kick{font-family:var(--head);font-weight:600;font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:var(--teal)}
+.h{font-family:var(--serif);font-weight:300;letter-spacing:-.035em;line-height:.95}
+.h i{font-style:italic;color:var(--lilac)}
+.line{display:block;overflow:hidden;padding-bottom:.08em}.line>span{display:block}
+.sub{font-size:18px;line-height:1.6;color:var(--mute)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-family:var(--head);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:9px 14px;border-radius:999px;border:1px solid rgba(244,238,228,.3)}
+.chips span.on{background:var(--cream);color:var(--bg);border-color:var(--cream)}
+.scroll{font-family:var(--head);font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--mute);display:flex;flex-direction:column;align-items:center;gap:12px}
+.scroll i{display:block;width:1px;height:40px;background:linear-gradient(var(--cream),transparent)}
+/* choice cards */
+.pick{border-radius:24px;background:rgba(244,238,228,.06);box-shadow:0 0 0 1px rgba(244,238,228,.16);backdrop-filter:blur(8px);padding:22px;display:flex;flex-direction:column}
+.pick .im{height:150px;display:flex;align-items:flex-end;justify-content:center}
+.pick .im img{max-height:100%;max-width:100%;object-fit:contain;filter:drop-shadow(0 16px 20px rgba(0,0,0,.5))}
+.pick .im.ph img{width:100%;height:100%;object-fit:cover;border-radius:14px}
+.pick .n{margin-top:16px;font-family:var(--serif);font-weight:300;font-size:46px;line-height:.9}
+.pick .n small{font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-left:8px}
+.pick b{display:block;margin-top:10px;font-family:var(--head);font-weight:600;font-size:19px}
+.pick p{font-size:14px;color:var(--mute);margin-top:4px}
+.pick .go{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pick .go span{font-family:var(--head);font-weight:600;font-size:15px}
+.pick .go span small{display:block;font-family:var(--sans);font-weight:400;font-size:11px;color:var(--mute)}
+.pick .go a{font-family:var(--head);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;background:var(--cream);color:var(--bg);padding:13px 16px;white-space:nowrap}
+.pick.t .go a{background:var(--teal);color:#08292B}
+.pick.g .go a{background:transparent;color:var(--cream);box-shadow:inset 0 0 0 1px rgba(244,238,228,.6)}
+.m .pick{padding:12px 14px;flex-direction:row;align-items:center;gap:12px;border-radius:18px}
+.m .pick .im{height:74px;width:74px;flex:none}.m .pick .im.ph img{border-radius:10px}
+.m .pick .n{margin:0;font-size:34px}.m .pick b{margin-top:2px;font-size:15px}.m .pick p{display:none}
+.m .pick .go{margin:6px 0 0}.m .pick .go a{padding:9px 10px;font-size:10px}.m .pick .go span{font-size:13px}
+.m .disc .lb{font-size:9px;letter-spacing:.1em;top:calc(100% + 6px)}.m .disc .lb small{display:none}
+.m .sub{font-size:14px}.m .kick{font-size:10px}.m .chips span{font-size:9px;padding:6px 9px}
+.after{position:relative;background:var(--bg);padding:80px 20px;text-align:center;font-family:var(--serif);font-style:italic;font-size:1.5rem;color:var(--mute)}
+@media (prefers-reduced-motion:reduce){.scroller{height:auto}.pin{position:relative}}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Main">
+  <a class="logo" href="https://shop.zeotein.com/home"><img src="https://cdn.shopify.com/s/files/1/0775/5458/1717/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?v=1762380884" alt="Zeotein" width="344" height="118"></a>
+  <div class="links"><a href="https://shop.zeotein.com/cacao">Cacao</a><a href="https://shop.zeotein.com/vegan">Vegan</a><a href="https://shop.zeotein.com/single-ingredients">Singles</a><a href="https://shop.zeotein.com/faq">FAQ</a></div>
+  <a class="cta" href="#pick">Shop</a>
+</nav>
+<section class="scroller" id="scroller" aria-label="Zeotein: simple on purpose">
+  <div class="pin" id="pin">
+    <div class="beam" id="beam"></div>
+    <div class="stage" id="stage"></div>
+    <canvas class="dust" id="dust" aria-hidden="true"></canvas>
+    <div class="grain"></div><div class="vig"></div>
+  </div>
+</section>
+<div class="after" id="pick">Two protein shakes. Eight single ingredients. One short list.</div>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var pin = $('pin'), stageEl = $('stage'), beam = $('beam');
+  var IMG = '../anatomy/img/', CIMG = '../concepts/img/';
+  var ING = [
+    ['bonebroth','Bone broth','Grass-fed'], ['collagen','Collagen','Grass-fed'], ['cacao','Cacao','Organic, fermented'],
+    ['mct','MCT oil','Organic'], ['seamoss','Sea moss','Organic'], ['mineral','Mineral','Volcanic'],
+    ['pumpkin','Pumpkin seed','Organic'], ['hemp','Hemp','Organic'], ['lionsmane',"Lion's mane",'Organic']
+  ];
+  var SRC = function(n){ return (['pumpkin','hemp','lionsmane'].indexOf(n) >= 0 ? CIMG : IMG) + n + '.webp'; };
+
+  // ---------- scroll stops (holds) ----------
+  // H hero, C cacao, V vegan, P pantry, P2 eight solo, S singles, F pick
+  var STOPS = [['H',0,.05],['C',.15,.25],['V',.35,.44],['P',.54,.59],['P2',.63,.66],['S',.75,.81],['F',.89,1]];
+
+  // ---------- layouts: per element, per stop: [x, y, size, opacity, labelOpacity, rot] ----------
+  function layouts(m){
+    var L = {};
+    var off = function(x, y, s){ return [x, y, s || 40, 0, 0, 0]; };
+    if (!m) {
+      var cg = [[1040,330],[1230,330],[1420,330],[1040,580],[1230,580],[1420,580]];
+      var vg = {6:[1040,330],7:[1230,330],3:[1420,330],4:[1135,580],5:[1325,580]};
+      var pg = [[1000,220],[1190,220],[1380,220],[1000,445],[1190,445],[1380,445],[1000,670],[1190,670],[1380,670]];
+      var sr = {0:[600,180],1:[720,180],2:[840,180],3:[960,180],4:[1080,180],6:[1200,180],7:[1320,180],8:[1440,180]};
+      var mouth = [760,250];
+      ING.forEach(function(g, i){
+        var S = {};
+        S.H = i < 6 ? [mouth[0], mouth[1], 30, 0, 0, 0] : off(1800, 300 + i * 40);
+        S.C = i < 6 ? [cg[i][0], cg[i][1], 160, 1, 1, 0] : off(1800, 200 + (i - 6) * 220, 160);
+        S.V = vg[i] ? [vg[i][0], vg[i][1], 160, 1, 1, 0] : (i < 3 ? [cg[i][0] + 60, -200, 120, 0, 0, 30] : off(1800, 450, 160));
+        S.P = [pg[i][0], pg[i][1], 138, 1, 1, 0];
+        S.P2 = [pg[i][0], pg[i][1], 138, i === 5 ? .2 : 1, i === 5 ? .2 : 1, 0];
+        S.S = sr[i] ? [sr[i][0], sr[i][1], 96, 1, 0, 0] : [pg[i][0], pg[i][1] + 40, 60, 0, 0, 0];
+        S.F = sr[i] ? [sr[i][0] - 220 + (i > 5 ? -120 : 0), 110, 54, .0, 0, 0] : [800, 80, 30, 0, 0, 0];
+        L['d' + i] = S;
+      });
+      L.cacao = {H:[800,360,340,1,0,-3], C:[760,470,350,1,0,-4], V:[-260,620,360,0,0,-18], P:[-260,620,360,0,0,0], P2:[-260,620,360,0,0,0], S:[-260,620,360,0,0,0], F:[-260,620,360,0,0,0]};
+      L.vegan = {H:[470,400,290,1,0,4], C:[-280,560,330,0,0,10], V:[760,470,380,1,0,-3], P:[760,760,300,0,0,0], P2:[440,760,300,0,0,0], S:[440,760,300,0,0,0], F:[440,760,300,0,0,0]};
+      L.singles = {H:[1130,400,250,1,0,3], C:[1900,520,290,0,0,10], V:[1900,520,290,0,0,10], P:[1900,520,290,0,0,0], P2:[1900,520,290,0,0,0], S:[1020,560,420,1,0,-2], F:[1020,800,300,0,0,0]};
+      L.glow = {H:[800,380,700,1,0,0], C:[760,470,620,1,0,0], V:[760,470,620,1,0,0], P:[1190,445,820,.8,0,0], P2:[1190,445,820,.8,0,0], S:[1020,560,700,1,0,0], F:[800,560,1100,.6,0,0]};
+    } else {
+      var cg2 = [[90,540],[210,540],[330,540],[90,660],[210,660],[330,660]];
+      var vg2 = {6:[90,540],7:[210,540],3:[330,540],4:[150,660],5:[270,660]};
+      var pg2 = [[90,390],[210,390],[330,390],[90,510],[210,510],[330,510],[90,630],[210,630],[330,630]];
+      var sr2 = {0:[75,330],1:[165,330],2:[255,330],3:[345,330],4:[75,420],6:[165,420],7:[255,420],8:[345,420]};
+      var mo = [210,330];
+      ING.forEach(function(g, i){
+        var S = {};
+        S.H = i < 6 ? [mo[0], mo[1], 20, 0, 0, 0] : off(520, 500 + i * 20);
+        S.C = i < 6 ? [cg2[i][0], cg2[i][1], 86, 1, 1, 0] : off(520, 560, 86);
+        S.V = vg2[i] ? [vg2[i][0], vg2[i][1], 86, 1, 1, 0] : (i < 3 ? [cg2[i][0], 260, 60, 0, 0, 30] : off(520, 600, 86));
+        S.P = [pg2[i][0], pg2[i][1], 80, 1, 1, 0];
+        S.P2 = [pg2[i][0], pg2[i][1], 80, i === 5 ? .2 : 1, i === 5 ? .2 : 1, 0];
+        S.S = sr2[i] ? [sr2[i][0], sr2[i][1], 66, 1, 0, 0] : [pg2[i][0], pg2[i][1], 40, 0, 0, 0];
+        S.F = sr2[i] ? [sr2[i][0], 240, 40, 0, 0, 0] : [210, 240, 30, 0, 0, 0];
+        L['d' + i] = S;
+      });
+      L.cacao = {H:[210,480,230,1,0,-3], C:[210,390,150,1,0,-4], V:[-140,420,150,0,0,-18], P:[-140,420,150,0,0,0], P2:[-140,420,150,0,0,0], S:[-140,420,150,0,0,0], F:[-140,420,150,0,0,0]};
+      L.vegan = {H:[95,560,150,1,0,4], C:[-140,560,150,0,0,10], V:[210,390,160,1,0,-3], P:[210,520,120,0,0,0], P2:[210,520,120,0,0,0], S:[210,520,120,0,0,0], F:[210,520,120,0,0,0]};
+      L.singles = {H:[330,560,120,1,0,3], C:[560,560,120,0,0,10], V:[560,560,120,0,0,10], P:[560,560,120,0,0,0], P2:[560,560,120,0,0,0], S:[210,600,250,1,0,-2], F:[210,760,200,0,0,0]};
+      L.glow = {H:[210,500,460,1,0,0], C:[210,400,360,1,0,0], V:[210,400,360,1,0,0], P:[210,510,460,.8,0,0], P2:[210,510,460,.8,0,0], S:[210,560,420,1,0,0], F:[210,520,520,.6,0,0]};
+    }
+    return L;
+  }
+
+  // ---------- copy blocks per stop ----------
+  var COPY = {
+    H:{k:'Zeotein', h:'Simple<br><i>on purpose.</i>', s:'Two protein shakes. Eight single ingredients. Labels you can read in five seconds.', scroll:1, center:1},
+    C:{k:'Zeotein Cacao', h:'Six ingredients.<br><i>That’s the bag.</i>', s:'Grass-fed protein and real fermented cacao. No sweeteners.', c:['23g protein','14g collagen','Zero sugar']},
+    V:{k:'Zeotein Vegan', h:'Five ingredients.<br><i>All plant.</i>', s:'Three of them are the same as Cacao. Same pantry, plant protein instead.', c:['20g plant protein','Zero added sugar']},
+    P:{k:'The whole pantry', h:'Nine ingredients.<br><i>That’s everything.</i>', s:'Every Zeotein product is made from this one short list.', c:['In Cacao 6','In Vegan 5'], on:-1},
+    S:{k:'Single ingredients', h:'Eight of them<br><i>come solo.</i>', s:'Plain, unsweetened powders. One ingredient each, so you can build your own.', c:['One ingredient each','From $17.99']},
+    F:{k:'Simple on purpose', h:'Pick your <i>simple.</i>', center:1, top:1}
+  };
+  var MEGA = {H:'Simple', C:'06', V:'05', P:'09', S:'08'};
+
+  // ---------- build ----------
+  var els = {}, mobile = false, L;
+  function build(){
+    mobile = pin.clientWidth <= 760;
+    var VW = mobile ? 420 : 1600, VH = mobile ? 746 : 900;
+    stageEl.innerHTML = ''; stageEl.className = 'stage' + (mobile ? ' m' : '');
+    stageEl.style.width = VW + 'px'; stageEl.style.height = VH + 'px';
+    stageEl.dataset.vw = VW; stageEl.dataset.vh = VH;
+    var add = function(html, cls){ var d = document.createElement('div'); d.className = 'abs ' + (cls || ''); d.innerHTML = html; stageEl.appendChild(d); return d; };
+    els = {megas:{}, copy:{}};
+    Object.keys(MEGA).forEach(function(k){ var e = add(MEGA[k], 'mega'); e.style.fontSize = (mobile ? 220 : (k === 'H' ? 360 : 560)) + 'px'; els.megas[k] = e; });
+    els.glow = add('', 'glow');
+    els.vegan = add('<img src="' + CIMG + 'vegan-cutout.webp" alt="">', 'prod');
+    els.cacao = add('<img src="' + IMG + 'bag-cutout.webp" alt="">', 'prod');
+    els.singles = add('<img src="../../google-site/assets/garbled/zeotein-shop-singles.webp" alt="">', 'card');
+    ING.forEach(function(g, i){ els['d' + i] = add('<div class="ph"><img src="' + SRC(g[0]) + '" alt=""></div><div class="lb">' + g[1] + '<small>' + g[2] + '</small></div>', 'disc'); });
+    Object.keys(COPY).forEach(function(k){
+      var c = COPY[k], html = '<p class="kick">' + c.k + '</p><h2 class="h" style="font-size:' + (mobile ? (k === 'H' ? 66 : 44) : (k === 'H' ? 128 : 84)) + 'px;margin-top:' + (mobile ? 10 : 16) + 'px">' +
+        c.h.split('<br>').map(function(x){ return '<span class="line"><span>' + x + '</span></span>'; }).join('') + '</h2>';
+      if (c.s) html += '<p class="sub" style="margin-top:' + (mobile ? 10 : 18) + 'px;max-width:' + (c.center ? 520 : 440) + 'px;' + (c.center ? 'margin-left:auto;margin-right:auto' : '') + '">' + c.s + '</p>';
+      if (c.c) html += '<div class="chips" style="margin-top:' + (mobile ? 12 : 22) + 'px">' + c.c.map(function(x, j){ return '<span' + (j === 0 && k !== 'P' ? ' class="on"' : '') + '>' + x + '</span>'; }).join('') + '</div>';
+      if (c.scroll) html += '<div class="scroll" style="margin-top:' + (mobile ? 16 : 24) + 'px"><span>Scroll</span><i></i></div>';
+      var e = add(html, 'copy'); e.style.width = (mobile ? 380 : (c.center ? 900 : 500)) + 'px'; if (c.center) e.style.textAlign = 'center';
+      e.lines = [].slice.call(e.querySelectorAll('.line>span')); e.rest = [].slice.call(e.querySelectorAll('.kick,.sub,.chips,.scroll'));
+      els.copy[k] = e;
+    });
+    var picks = [
+      ['', IMG + 'bag-cutout.webp', '6', 'Cacao Protein', 'Grass-fed · 23g protein · 14g collagen', '$76.99', 'Starter Kit, first order', 'Shop Cacao', 'https://shop.zeotein.com/cacao'],
+      ['t', CIMG + 'vegan-cutout.webp', '5', 'Vegan Protein', 'Plant-based · 20g protein', '$96.99', 'Starter Kit, first order', 'Shop Vegan', 'https://shop.zeotein.com/vegan'],
+      ['g ph', '../../google-site/assets/garbled/zeotein-shop-singles.webp', '1', 'Single Ingredients', 'Eight plain powders', 'From $17.99', 'One ingredient each', 'Shop Singles', 'https://shop.zeotein.com/single-ingredients']
+    ];
+    els.picks = picks.map(function(q){
+      var e = add('<div class="im ' + (q[0].indexOf('ph') >= 0 ? 'ph' : '') + '"><img src="' + q[1] + '" alt=""></div><div style="min-width:0;flex:1"><div class="n">' + q[2] + '<small>' + (q[2] === '1' ? 'ingredient each' : 'ingredients') + '</small></div><b>' + q[3] + '</b><p>' + q[4] + '</p><div class="go"><span>' + q[5] + '<small>' + q[6] + '</small></span><a href="' + q[8] + '">' + q[7] + '</a></div></div>', 'pick ' + q[0]);
+      e.style.width = (mobile ? 388 : 360) + 'px'; e.style.pointerEvents = 'auto'; return e; });
+    L = layouts(mobile); fit();
+  }
+  function fit(){ var VW = +stageEl.dataset.vw, VH = +stageEl.dataset.vh, W = pin.clientWidth, H = pin.clientHeight, s = Math.min(W / VW, H / VH);
+    stageEl.style.transform = 'scale(' + s + ') translate(' + (-VW / 2) + 'px,' + (-VH / 2) + 'px)'; size(); }
+
+  // ---------- helpers ----------
+  function clamp(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function seg(t, a, b){ return clamp((t - a) / (b - a)); }
+  function lerp(a, b, k){ return a + (b - a) * k; }
+  function io(k){ return k < .5 ? 4*k*k*k : 1 - Math.pow(-2*k + 2, 3) / 2; }
+  function out(k){ return 1 - Math.pow(1 - k, 3); }
+  // which stops p sits between, and progress through that transition
+  function where(p){
+    for (var i = 0; i < STOPS.length; i++) {
+      var s = STOPS[i];
+      if (p <= s[2]) { if (p >= s[1] || i === 0) return {a:i, b:i, u:0, hold:seg(p, s[1], s[2])}; var pr = STOPS[i - 1]; return {a:i - 1, b:i, u:seg(p, pr[2], s[1]), hold:0}; }
+    }
+    return {a:STOPS.length - 1, b:STOPS.length - 1, u:0, hold:1};
+  }
+  function state(key, w, idx, n){
+    var A = L[key][STOPS[w.a][0]], B = L[key][STOPS[w.b][0]];
+    var st = (idx || 0) * .05, k = io(clamp((w.u - st) / (1 - (n || 0) * .05)));
+    // things flying in arc: lift the midpoint
+    var lift = Math.sin(Math.PI * k) * (A[3] < .05 || B[3] < .05 ? 0 : (mobile ? 30 : 80));
+    return [lerp(A[0], B[0], k), lerp(A[1], B[1], k) - lift, lerp(A[2], B[2], k), lerp(A[3], B[3], k), lerp(A[4], B[4], k), lerp(A[5], B[5], k), k];
+  }
+  function place(e, x, y, w, h, o, r, extra){
+    e.style.width = w + 'px'; e.style.height = (h == null ? w : h) + 'px';
+    e.style.transform = 'translate(' + (x - w / 2).toFixed(1) + 'px,' + (y - (h == null ? w : h) / 2).toFixed(1) + 'px) rotate(' + (r || 0).toFixed(2) + 'deg)' + (extra || '');
+    e.style.opacity = o.toFixed(3); e.style.visibility = o < .005 ? 'hidden' : 'visible';
+  }
+
+  var cv = $('dust'), ctx = cv.getContext('2d'), motes = [], seed = 9, W = 0, H = 0;
+  function rnd(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  for (var i = 0; i < 90; i++) motes.push({x: rnd(), y: rnd(), r: .5 + rnd() * 1.8, s: .2 + rnd() * .8, a: .15 + rnd() * .5, w: rnd() * 6.28});
+  function size(){ W = pin.clientWidth; H = pin.clientHeight; var d = Math.min(2, devicePixelRatio || 1); cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
+
+  function render(p, time){
+    time = time || 0;
+    var w = where(p), bob = Math.sin(time * 1.2);
+    // products
+    ['cacao', 'vegan', 'singles', 'glow'].forEach(function(key, j){
+      var s = state(key, w), e = els[key];
+      var ar = key === 'cacao' ? 1 : key === 'vegan' ? 899 / 1007 : 1;
+      place(e, s[0], s[1] + (key === 'glow' ? 0 : bob * (mobile ? 3 : 7) * (j % 2 ? -1 : 1)), s[2], key === 'glow' ? s[2] : s[2] * ar, s[3], s[5] + (key === 'glow' ? 0 : Math.sin(time * .7 + j) * 1.5));
+      if (key !== 'glow') e.style.filter = 'blur(' + ((1 - s[3]) * 10).toFixed(1) + 'px)';
+    });
+    // ingredient discs
+    ING.forEach(function(g, i){
+      var key = 'd' + i, s = state(key, w, i % 6, 5), e = els[key];
+      var fl = Math.sin(time * 1.4 + i * 1.7) * (mobile ? 2 : 5);
+      place(e, s[0], s[1] + fl, s[2], null, s[3], s[5]);
+      e.lastChild.style.opacity = s[4].toFixed(3);
+    });
+    // giant numerals behind
+    Object.keys(MEGA).forEach(function(k){
+      var e = els.megas[k], i = STOPS.findIndex(function(x){ return x[0] === k; }), st = STOPS[i];
+      var a = st[1] - .05, b = st[2] + .05, o = seg(p, a, a + .05) * (1 - seg(p, b - .04, b));
+      if (k === 'H') o = 1 - seg(p, .04, .1);
+      if (k === 'P') o = seg(p, .49, .54) * (1 - seg(p, .66, .7));
+      var drift = (seg(p, a, b) - .5) * (mobile ? 60 : 160), VW = +stageEl.dataset.vw, VH = +stageEl.dataset.vh;
+      var x = mobile ? VW / 2 : (k === 'H' ? VW / 2 : (k === 'P' ? 470 : (k === 'S' ? 1120 : 1230))), y = mobile ? (k === 'H' ? 470 : 560) : (k === 'H' ? 430 : 470);
+      e.style.opacity = (o * .9).toFixed(3); e.style.visibility = o < .005 ? 'hidden' : 'visible';
+      e.style.transform = 'translate(calc(' + (x + drift).toFixed(1) + 'px - 50%), calc(' + y + 'px - 50%))';
+    });
+    // copy
+    Object.keys(COPY).forEach(function(k){
+      var e = els.copy[k], c = COPY[k], i = STOPS.findIndex(function(x){ return x[0] === k; }), st = STOPS[i];
+      var end = k === 'P' ? STOPS[i + 1][2] : st[2];
+      var tin = k === 'H' ? 1 : seg(p, st[1] - .05, st[1] + .01), tout = k === 'F' ? 0 : seg(p, end + .005, end + .04);
+      var o = (k === 'H' ? 1 - seg(p, .03, .09) : out(tin) * (1 - tout));
+      var VW = +stageEl.dataset.vw, x, y;
+      if (mobile) { x = 20; y = c.top ? 110 : (k === 'H' ? 120 : 92); }
+      else if (c.center) { x = (VW - 900) / 2; y = c.top ? 120 : 610; }
+      else { x = 110; y = k === 'S' ? 340 : 290; }
+      if (k === 'P' && !mobile) { x = 120; y = 300; }
+      e.style.opacity = o.toFixed(3); e.style.visibility = o < .005 ? 'hidden' : 'visible';
+      e.style.transform = 'translate(' + x + 'px,' + (y - tout * 30).toFixed(1) + 'px)';
+      e.lines.forEach(function(s, j){ var kk = k === 'H' ? 1 : out(seg(p, st[1] - .045 + j * .012, st[1] + .005 + j * .012)); s.style.transform = 'translateY(' + ((1 - kk) * 110).toFixed(1) + '%)'; });
+      e.rest.forEach(function(s, j){ var kk = k === 'H' ? 1 : out(seg(p, st[1] - .03 + j * .008, st[1] + .015 + j * .008)); s.style.opacity = kk.toFixed(3); s.style.transform = 'translateY(' + ((1 - kk) * 12).toFixed(1) + 'px)'; });
+      if (k === 'P') { var chips = e.querySelectorAll('.chips span'); var two = seg(p, .6, .63); chips[0].className = ''; chips[1].className = ''; if (chips.length) { e.querySelector('.sub').innerHTML = two > .5 ? 'Eight of the nine are also sold on their own. The mineral stays in the blends.' : 'Every Zeotein product is made from this one short list.'; } }
+    });
+    // pick cards
+    els.picks.forEach(function(e, i){
+      var k = out(seg(p, .82 + i * .02, .9 + i * .02));
+      if (mobile) place(e, 210, 300 + i * 132 + (1 - k) * 60, 388, 118, k, 0);
+      else { var x = 800 + (i - 1) * 390; e.style.width = '360px'; e.style.transform = 'translate(' + (x - 180) + 'px,' + (330 + (1 - k) * 90).toFixed(1) + 'px)'; e.style.opacity = k.toFixed(3); e.style.visibility = k < .005 ? 'hidden' : 'visible'; }
+    });
+    beam.style.opacity = (.7 + .3 * Math.sin(time * .6)).toFixed(3);
+    beam.style.transform = 'translateX(-50%) rotate(' + (Math.sin(time * .35) * 2.5).toFixed(2) + 'deg)';
+    ctx.clearRect(0, 0, W, H);
+    motes.forEach(function(m){
+      var y = ((m.y - p * m.s * 1.4 - time * .012 * m.s) % 1 + 1) % 1, x = m.x + Math.sin(time * .3 + m.w) * .01;
+      var inBeam = 1 - Math.min(1, Math.abs(x - .5) / (.18 + y * .25));
+      ctx.globalAlpha = m.a * (.25 + .75 * inBeam); ctx.fillStyle = '#E9DDFF'; ctx.beginPath(); ctx.arc(x * W, y * H, m.r, 0, 6.283); ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  build();
+  addEventListener('resize', function(){ var was = mobile; if ((pin.clientWidth <= 760) !== was) build(); else fit(); render(cur, clock); });
+  var cur = 0, target = 0, clock = 0, last = performance.now(), sc = $('scroller');
+  window.__zmSetProgress = function(p, t){ cur = p; render(p, t == null ? clock : t); };
+  var q = new URLSearchParams(location.search);
+  if (q.has('p')) { render(parseFloat(q.get('p')), 0); return; }
+  if (q.has('manual')) { render(0, 0); return; }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { render(.95, 0); return; }
+  function read(){ var r = sc.getBoundingClientRect(), span = sc.offsetHeight - innerHeight; target = clamp(-r.top / span); }
+  addEventListener('scroll', read, {passive: true}); read(); cur = target;
+  (function frame(now){ var dt = Math.min(.05, (now - last) / 1000); last = now; clock += dt;
+    cur += (target - cur) * (1 - Math.pow(.0012, dt)); render(cur, clock); requestAnimationFrame(frame); })(last);
+})();
+</script>
+</body>
+</html>
