@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Concept 3 · Pick Your Simple</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--plum:#2E1650;--purple:#5F2D90;--teal:#32BAC0;--cream:#F6F1E9;--ink:#1E1430;--mute:#6B6478;--serif:"Fraunces",Georgia,serif;--head:"Poppins",sans-serif;--sans:"Inter",sans-serif}
+body{font-family:var(--sans);-webkit-font-smoothing:antialiased;background:var(--cream);color:var(--ink)}
+.top{background:radial-gradient(80% 90% at 80% 0%,#7A47AE 0%,var(--purple) 35%,var(--plum) 100%);color:#fff;padding-bottom:150px;position:relative;overflow:hidden}
+.top::after{content:"";position:absolute;right:-120px;top:-120px;width:520px;height:520px;border-radius:50%;border:1px solid rgba(255,255,255,.14);box-shadow:0 0 0 90px rgba(255,255,255,.03),0 0 0 180px rgba(255,255,255,.02)}
+.nav{display:flex;align-items:center;gap:34px;padding:24px 56px;position:relative;z-index:2}
+.nav .lg{background:#fff;border-radius:999px;padding:7px 16px;display:flex}.nav .lg img{height:24px}
+.nav .l{display:flex;gap:30px;margin-left:auto;font-family:var(--head);font-weight:500;font-size:.9rem;color:rgba(255,255,255,.8)}
+.nav .b{font-family:var(--head);font-weight:600;font-size:.86rem;background:var(--teal);color:#0F3B3E;padding:11px 20px;border-radius:999px}
+.hd{text-align:center;padding:40px 56px 0;position:relative;z-index:2}
+.k{font-family:var(--head);font-weight:700;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:#9FE3E6}
+h1{margin-top:16px;font-family:var(--serif);font-weight:300;font-size:5.4rem;line-height:.92;letter-spacing:-.04em}
+h1 i{color:#D9C8F5}
+.hd p{margin:18px auto 0;font-size:1.1rem;color:rgba(255,255,255,.78);max-width:46ch}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:0 56px;margin-top:-110px;position:relative;z-index:3}
+.ch{background:#fff;border-radius:26px;padding:26px 26px 24px;box-shadow:0 30px 60px rgba(46,22,80,.18);position:relative;border:2px solid transparent}
+.ch.on{border-color:var(--teal);box-shadow:0 0 0 6px rgba(50,186,192,.18),0 30px 60px rgba(46,22,80,.22)}
+.ch .q{font-family:var(--head);font-weight:700;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+.ch h3{margin-top:8px;font-family:var(--serif);font-weight:400;font-size:2rem;line-height:1.02;letter-spacing:-.02em;color:var(--plum)}
+.ch .pic{height:170px;margin-top:14px;display:flex;align-items:flex-end;justify-content:center}
+.ch .pic img{max-height:100%;max-width:100%;object-fit:contain;filter:drop-shadow(0 16px 20px rgba(46,22,80,.22))}
+.ch .pic.photo img{width:100%;height:170px;object-fit:cover;border-radius:16px}
+.ch .row{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-family:var(--head);font-weight:600;font-size:.86rem;color:var(--plum)}
+.ch .row i{font-style:normal;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--cream)}
+.ch.on .row i{background:var(--teal);color:#fff}
+.ch .badge{position:absolute;top:-13px;right:22px;font-family:var(--head);font-weight:700;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:var(--teal);color:#0F3B3E;padding:7px 12px;border-radius:999px}
+.res{margin:22px 56px 0;background:#fff;border-radius:26px;display:grid;grid-template-columns:auto 1fr auto;gap:34px;align-items:center;padding:26px 34px;box-shadow:0 1px 0 #E6DDCF}
+.res .n{font-family:var(--serif);font-weight:300;font-size:5.2rem;line-height:.8;color:var(--plum)}
+.res .n small{display:block;font-family:var(--head);font-weight:700;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);margin-top:8px}
+.res h4{font-family:var(--head);font-weight:700;font-size:1.2rem;color:var(--plum)}
+.res p{margin-top:6px;color:var(--mute);font-size:.95rem;line-height:1.55}
+.res .stats{display:flex;gap:10px;margin-top:12px}
+.res .stats span{font-family:var(--head);font-weight:600;font-size:.74rem;background:var(--cream);color:var(--plum);padding:7px 12px;border-radius:999px}
+.res .go{text-align:right}
+.res .go a{display:inline-block;font-family:var(--head);font-weight:600;font-size:.95rem;background:var(--plum);color:#fff;padding:17px 26px;border-radius:999px}
+.res .go p{font-size:.78rem;margin-top:10px}
+.trust{display:flex;gap:44px;justify-content:center;padding:30px 0 50px;font-family:var(--head);font-weight:600;font-size:.86rem;color:var(--plum)}
+.trust b{color:#E8A93A;letter-spacing:2px;margin-right:6px}
+@media (max-width:600px){
+  .top{padding-bottom:20px}.top::after{display:none}
+  .nav{padding:14px 18px}.nav .l{display:none}.nav .b{margin-left:auto;padding:9px 14px;font-size:.78rem}.nav .lg img{height:20px}
+  .hd{padding:16px 20px 0;text-align:left}h1{font-size:2.9rem}.hd p{font-size:.95rem;margin-left:0}
+  .choices{grid-template-columns:1fr;margin-top:18px;padding:0 16px;gap:10px}
+  .ch{padding:14px 16px;display:grid;grid-template-columns:1fr 82px;align-items:center;border-radius:18px}
+  .ch h3{font-size:1.3rem}.ch .pic{height:70px;margin:0;grid-row:1/3;grid-column:2}.ch .pic.photo img{height:70px}
+  .ch .row{display:none}.ch .badge{right:auto;left:16px;top:-10px;font-size:.52rem;padding:5px 9px}
+  .res{margin:12px 16px 0;grid-template-columns:auto 1fr;gap:14px;padding:16px}.res .n{font-size:3.2rem}
+  .res p{display:none}.res .stats{flex-wrap:wrap;gap:6px}.res .stats span{font-size:.62rem;padding:5px 8px}
+  .res .go{grid-column:1/-1;text-align:left}.res .go a{display:block;text-align:center;padding:15px}.res .go p{text-align:center}
+  .trust{display:none}
+}
+</style></head><body>
+<div class="top">
+  <nav class="nav"><span class="lg"><img src="https://cdn.shopify.com/s/files/1/0775/5458/1717/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?v=1762380884" alt="Zeotein"></span><div class="l"><span>Cacao</span><span>Vegan</span><span>Single Ingredients</span><span>FAQ</span></div><span class="b">Shop</span></nav>
+  <div class="hd"><p class="k">Simple on purpose</p><h1>Protein, minus the noise.<br><i>Pick your simple.</i></h1><p>Three ways in. Every one of them has a label you can read in five seconds.</p></div>
+</div>
+<section class="choices">
+  <div class="ch on"><span class="badge">Starter Kit $76.99</span><p class="q">I want</p><h3>Grass-fed, with real cacao</h3><div class="pic"><img src="img/bag-cutout.webp" alt=""></div><div class="row">Cacao Protein<i>&#10003;</i></div></div>
+  <div class="ch"><p class="q">I want</p><h3>100% plant protein</h3><div class="pic"><img src="img/vegan-cutout.webp" alt=""></div><div class="row">Vegan Protein<i>&rarr;</i></div></div>
+  <div class="ch"><p class="q">I want</p><h3>Just one ingredient</h3><div class="pic photo"><img src="../../google-site/assets/garbled/zeotein-shop-singles.webp" alt=""></div><div class="row">Single Ingredients<i>&rarr;</i></div></div>
+</section>
+<section class="res">
+  <div class="n">6<small>Ingredients</small></div>
+  <div><h4>Your pick: Zeotein Cacao Starter Kit</h4><p>Bone broth protein, collagen peptides, fermented cacao, MCT oil powder, sea moss and a naturally occurring volcanic mineral. Bag, shaker, Save-A-Scoop and three guides.</p>
+    <div class="stats"><span>23g protein</span><span>14g collagen</span><span>Zero sugar</span><span>No sweeteners</span></div></div>
+  <div class="go"><a>Start with the kit &middot; $76.99</a><p>First order &middot; free US shipping</p></div>
+</section>
+<div class="trust"><span><b>&#9733;&#9733;&#9733;&#9733;&#9733;</b>4.9 from 155 reviews</span><span>30-day money-back guarantee on blends</span><span>Cancel or skip anytime</span></div>
+</body></html>

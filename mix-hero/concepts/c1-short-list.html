@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Concept 1 · The Short List</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F6F1E9;--paper:#FFFDF8;--ink:#1E1430;--plum:#2E1650;--purple:#5F2D90;--teal:#32BAC0;--mute:#6B6478;--line:#E6DDCF;
+  --serif:"Fraunces",Georgia,serif;--head:"Poppins",sans-serif;--sans:"Inter",sans-serif}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.nav{display:flex;align-items:center;gap:34px;padding:24px 56px}
+.nav img{height:30px}
+.nav .l{display:flex;gap:30px;margin-left:auto;font-family:var(--head);font-weight:500;font-size:.9rem;color:var(--plum)}
+.nav .b{font-family:var(--head);font-weight:600;font-size:.86rem;background:var(--plum);color:#fff;padding:11px 20px;border-radius:999px}
+.hero{padding:34px 56px 0;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end}
+.k{font-family:var(--head);font-weight:700;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--purple);display:flex;gap:10px;align-items:center}
+.k::before{content:"";width:24px;height:2px;background:var(--teal)}
+h1{margin-top:18px;font-family:var(--serif);font-weight:300;font-size:7.4rem;line-height:.86;letter-spacing:-.045em;color:var(--plum)}
+h1 i{color:var(--purple)}
+.side{padding-bottom:14px}
+.side p{font-size:1.15rem;line-height:1.6;color:var(--mute);max-width:30ch}
+.side .r{margin-top:18px;font-family:var(--head);font-weight:600;font-size:.9rem;color:var(--plum)}
+.side .r span{color:#E8A93A;letter-spacing:2px;margin-right:8px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:56px 56px 0}
+.card{position:relative;background:var(--paper);border-radius:26px;padding:28px 30px 30px;box-shadow:0 1px 0 var(--line),0 24px 50px rgba(46,22,80,.08);overflow:hidden}
+.card .top{display:flex;align-items:flex-start;justify-content:space-between}
+.num{font-family:var(--serif);font-weight:300;font-size:8.6rem;line-height:.78;letter-spacing:-.06em;color:var(--plum)}
+.num small{display:block;margin-top:14px;font-family:var(--head);font-weight:700;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+.card .img{height:200px;display:flex;justify-content:flex-end}
+.card .img img{height:100%;width:auto;object-fit:contain;filter:drop-shadow(0 18px 24px rgba(46,22,80,.2))}
+.card .img.photo img{width:210px;height:200px;object-fit:cover;border-radius:16px}
+.card h3{margin-top:22px;font-family:var(--head);font-weight:700;font-size:1.35rem;color:var(--plum);letter-spacing:-.01em}
+.card .sub{margin-top:4px;font-size:.92rem;color:var(--mute)}
+.label{margin-top:18px;border-top:2px solid var(--plum);border-bottom:1px solid var(--plum);padding:12px 0}
+.label div{display:flex;justify-content:space-between;font-family:var(--head);font-weight:600;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--plum);padding:6px 0;border-bottom:1px dashed var(--line)}
+.label div:last-child{border:0}
+.label div em{font-style:normal;font-weight:500;color:var(--mute);letter-spacing:.04em;text-transform:none}
+.foot{display:flex;align-items:center;justify-content:space-between;margin-top:22px}
+.foot b{font-family:var(--head);font-weight:700;font-size:1.05rem;color:var(--plum)}
+.foot b small{display:block;font-family:var(--sans);font-weight:500;font-size:.75rem;color:var(--mute)}
+.foot a{font-family:var(--head);font-weight:600;font-size:.86rem;background:var(--plum);color:#fff;padding:13px 20px;border-radius:999px}
+.card.c2 .foot a{background:var(--teal);color:#0F3B3E}
+.card.c3 .foot a{background:transparent;color:var(--plum);box-shadow:inset 0 0 0 1.5px var(--plum)}
+.flip{margin:56px 56px 0;border-radius:26px;background:var(--plum);color:#F6F1E9;display:flex;align-items:center;justify-content:space-between;padding:34px 40px}
+.flip h2{font-family:var(--serif);font-weight:300;font-size:2.6rem;letter-spacing:-.03em}
+.flip h2 i{color:#C9B6E8}
+.flip p{font-family:var(--head);font-weight:600;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:#9FE3E6}
+.trust{display:flex;gap:44px;justify-content:center;padding:30px 0 60px;font-family:var(--head);font-weight:600;font-size:.86rem;color:var(--plum)}
+.trust span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--teal);margin-right:10px;vertical-align:middle}
+@media (max-width:600px){
+  .nav{padding:16px 20px}.nav .l{display:none}.nav .b{margin-left:auto;padding:9px 14px;font-size:.78rem}.nav img{height:24px}
+  .hero{grid-template-columns:1fr;padding:14px 20px 0;gap:14px}h1{font-size:3.7rem}.side p{font-size:1rem}
+  .cards{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:84%;overflow:hidden;padding:26px 20px 0;gap:14px}
+  .num{font-size:6rem}.card .img{height:140px}.card .img.photo img{width:150px;height:140px}
+  .flip,.trust{display:none}
+}
+</style></head><body>
+<nav class="nav"><img src="https://cdn.shopify.com/s/files/1/0775/5458/1717/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?v=1762380884" alt="Zeotein"><div class="l"><span>Cacao</span><span>Vegan</span><span>Single Ingredients</span><span>FAQ</span></div><span class="b">Shop</span></nav>
+<section class="hero">
+  <div><p class="k">Zeotein</p><h1>Simple<br><i>on purpose.</i></h1></div>
+  <div class="side"><p>Two protein shakes and eight single-ingredient powders. Every label short enough to read in five seconds.</p><p class="r"><span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>4.9 from 155 reviews</p></div>
+</section>
+<section class="cards">
+  <article class="card c1">
+    <div class="top"><div class="num">6<small>Ingredients</small></div><div class="img"><img src="img/bag-cutout.webp" alt=""></div></div>
+    <h3>Cacao Protein</h3><p class="sub">Grass-fed &middot; 23g protein &middot; 14g collagen &middot; zero sugar</p>
+    <div class="label"><div>Bone broth protein<em>grass-fed</em></div><div>Collagen peptides<em>grass-fed</em></div><div>Fermented cacao<em>organic</em></div><div>MCT oil powder<em>organic</em></div><div>Sea moss<em>organic</em></div><div>Volcanic mineral<em>naturally occurring</em></div></div>
+    <div class="foot"><b>$76.99<small>Starter Kit, first order</small></b><a>Shop Cacao</a></div>
+  </article>
+  <article class="card c2">
+    <div class="top"><div class="num">5<small>Ingredients</small></div><div class="img"><img src="img/vegan-cutout.webp" alt=""></div></div>
+    <h3>Vegan Protein</h3><p class="sub">Plant-based &middot; 20g protein &middot; zero added sugar</p>
+    <div class="label"><div>Pumpkin seed protein<em>organic</em></div><div>Hemp protein<em>organic</em></div><div>MCT oil powder<em>organic</em></div><div>Sea moss<em>organic</em></div><div>Volcanic mineral<em>naturally occurring</em></div><div style="opacity:.0">.<em>.</em></div></div>
+    <div class="foot"><b>$96.99<small>Starter Kit, first order</small></b><a>Shop Vegan</a></div>
+  </article>
+  <article class="card c3">
+    <div class="top"><div class="num">1<small>Ingredient each</small></div><div class="img photo"><img src="../../google-site/assets/garbled/zeotein-shop-singles.webp" alt=""></div></div>
+    <h3>Single Ingredients</h3><p class="sub">Eight plain powders. Add one to anything.</p>
+    <div class="label"><div>Collagen &middot; Bone broth<em>grass-fed</em></div><div>Hemp &middot; Pumpkin seed<em>organic</em></div><div>Cacao &middot; MCT<em>organic</em></div><div>Sea moss &middot; Lion's mane<em>organic</em></div><div style="opacity:0">.<em>.</em></div><div style="opacity:0">.<em>.</em></div></div>
+    <div class="foot"><b>From $17.99<small>Unsweetened, nothing added</small></b><a>Shop Singles</a></div>
+  </article>
+</section>
+<section class="flip"><h2>Flip your current tub over. <i>Count.</i></h2><p>Then count ours &rarr;</p></section>
+<div class="trust"><span>30-day money-back guarantee on blends</span><span>Free US shipping over $150</span><span>Ships in 1 to 2 business days</span></div>
+</body></html>
