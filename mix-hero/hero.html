@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zeotein Mix Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Zeotein Mix Hero: an animated "build the shake" hero. Every moving part is drawn by render(t) below,
+   so the same file plays live on the site and renders frame-exact for the reel (window.__zmSetTime). */
+.zmh{--purple:#5F2D90;--purple-2:#7A47AE;--plum:#2E1650;--teal:#32BAC0;--teal-ink:#12777C;--ink:#221B2E;--muted:#5F5970;
+  --cream:#F7F2EA;--cream-2:#EFE7DB;--line:#E4DACB;
+  --head:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-family:var(--sans);color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;overflow:hidden;position:relative}
+.zmh *,.zmh *::before,.zmh *::after{box-sizing:border-box;margin:0;padding:0}
+.zmh a{color:inherit;text-decoration:none}
+html,body{margin:0;background:#F7F2EA}
+
+/* header */
+.zmh .bar{position:relative;z-index:5;display:flex;align-items:center;gap:40px;max-width:1280px;margin:0 auto;padding:22px 40px}
+.zmh .logo img{display:block;height:34px;width:auto}
+.zmh .nav{display:flex;gap:30px;margin:0 auto;font-family:var(--head);font-weight:500;font-size:.95rem;color:var(--plum)}
+.zmh .nav a{opacity:.85}.zmh .nav a:hover{opacity:1;color:var(--purple)}
+.zmh .act{display:flex;align-items:center;gap:18px}
+.zmh .act svg{width:20px;height:20px;color:var(--plum)}
+.zmh .pill{font-family:var(--head);font-weight:600;font-size:.9rem;color:var(--plum);border:1.5px solid var(--plum);border-radius:999px;padding:.55em 1.3em}
+.zmh .pill:hover{background:var(--plum);color:var(--cream)}
+
+/* stage */
+.zmh .stage{position:relative;max-width:1280px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);align-items:center;min-height:calc(100vh - 170px);min-height:calc(100svh - 170px)}
+.zmh .copy{position:relative;min-height:330px}
+.zmh .scene{position:absolute;left:0;right:0;top:50%;will-change:transform,opacity}
+.zmh .eyebrow{font-family:var(--head);font-size:.74rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.zmh .eyebrow::before{content:"";width:22px;height:2px;background:var(--teal);border-radius:2px}
+.zmh h1{font-family:var(--head);font-weight:700;font-size:clamp(2.4rem,4.6vw,4.1rem);line-height:1.02;letter-spacing:-.035em;color:var(--plum);max-width:12ch}
+.zmh h1 em{font-style:normal;color:var(--purple);background:linear-gradient(transparent 68%,rgba(50,186,192,.32) 0)}
+.zmh .lede{margin-top:18px;font-size:1.08rem;line-height:1.6;color:var(--muted);max-width:34ch}
+.zmh .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.zmh .btn{display:inline-flex;align-items:center;gap:.6em;min-height:52px;padding:.8em 1.6em;border-radius:999px;font-family:var(--head);font-weight:600;font-size:1rem;transition:transform .15s ease,box-shadow .15s ease}
+.zmh .btn svg{width:18px;height:18px}
+.zmh .btn.solid{background:var(--plum);color:#fff;box-shadow:0 10px 24px rgba(46,22,80,.22)}
+.zmh .btn.solid:hover{transform:translateY(-1px);background:var(--purple)}
+.zmh .btn.line{border:1.5px solid var(--plum);color:var(--plum)}
+.zmh .btn.line:hover{background:rgba(46,22,80,.06)}
+.zmh .fine{margin-top:16px;font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+.zmh .stars{color:#E8A93A;letter-spacing:1px}
+
+/* visual */
+.zmh .visual{position:relative;width:100%;max-width:640px;aspect-ratio:15/16;margin-left:auto}
+.zmh .visual>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.zmh .bagimg{mix-blend-mode:multiply}
+.zmh .card{position:absolute;width:31%;aspect-ratio:4/5;border-radius:16px;padding:6% 7%;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 18px 40px rgba(46,22,80,.18);will-change:transform,opacity;opacity:0}
+.zmh .card b{font-family:var(--head);font-weight:700;font-size:clamp(.95rem,1.55vw,1.35rem);line-height:1.08;letter-spacing:-.02em}
+.zmh .card small{font-size:clamp(.62rem,.8vw,.74rem);line-height:1.35;opacity:.8;letter-spacing:.02em}
+.zmh .card svg{width:46%;height:auto;align-self:flex-end}
+.zmh .c1{background:var(--plum);color:#F7F2EA}
+.zmh .c2{background:#FFFDF9;color:var(--plum)}
+.zmh .c3{background:#D9F1F1;color:#123F44}
+
+/* dots */
+.zmh .dots{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:8px;z-index:6}
+.zmh .dots button{all:unset;cursor:pointer;width:8px;height:8px;border-radius:8px;background:rgba(46,22,80,.22);position:relative;overflow:hidden;transition:width .3s ease}
+.zmh .dots button.on{width:34px}
+.zmh .dots button i{position:absolute;inset:0;background:var(--plum);transform-origin:left;transform:scaleX(0)}
+.zmh .dots button:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+
+/* peek of the next section */
+.zmh .peek{max-width:1280px;margin:0 auto;padding:26px 40px 60px;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:28px}
+.zmh .peek span{font-family:var(--head);font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--purple)}
+.zmh .peek h2{font-family:var(--head);font-weight:700;font-size:1.9rem;letter-spacing:-.03em;color:var(--plum)}
+
+@media (max-width:860px){
+  .zmh .bar{padding:16px 20px;gap:16px}.zmh .nav{display:none}.zmh .act{margin-left:auto}.zmh .logo img{height:28px}
+  .zmh .stage{grid-template-columns:1fr;padding:0 20px 56px;min-height:0}
+  .zmh .visual{order:-1;margin:0 auto 34px;max-width:440px}
+  .zmh .copy{min-height:330px}
+  .zmh .scene{top:0}
+  .zmh .peek{padding:22px 20px 40px;flex-direction:column;gap:6px}.zmh .peek h2{font-size:1.4rem}
+}
+</style>
+</head>
+<body>
+<section class="zmh" id="zmh" aria-label="Zeotein Cacao">
+  <header class="bar">
+    <a class="logo" href="https://shop.zeotein.com/home"><img src="https://cdn.shopify.com/s/files/1/0775/5458/1717/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?v=1762380884" alt="Zeotein" width="344" height="118"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="https://shop.zeotein.com/cacao">Cacao</a>
+      <a href="https://shop.zeotein.com/vegan">Vegan</a>
+      <a href="https://shop.zeotein.com/single-ingredients">Single Ingredients</a>
+      <a href="https://shop.zeotein.com/faq">FAQ</a>
+    </nav>
+    <div class="act">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <a class="pill" href="https://shop.zeotein.com/cacao">Shop</a>
+    </div>
+  </header>
+
+  <div class="stage">
+    <div class="copy">
+      <div class="scene" data-i="0">
+        <p class="eyebrow">Zeotein Cacao</p>
+        <h1>Shake up your <em>usual.</em></h1>
+        <p class="lede">23g protein and 14g grass-fed collagen in every serving. Six ingredients, zero sugar.</p>
+        <div class="ctas"><a class="btn solid" href="https://shop.zeotein.com/cacao">Mix it up <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+      <div class="scene" data-i="1">
+        <p class="eyebrow">The whole label</p>
+        <h1>Six ingredients. <em>That's it.</em></h1>
+        <p class="lede">Bone broth protein, collagen peptides, fermented cacao, MCT oil powder, sea moss and a naturally occurring volcanic mineral. No sweeteners.</p>
+        <div class="ctas"><a class="btn line" href="https://shop.zeotein.com/cacao#zt-label">Read the label <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+      <div class="scene" data-i="2">
+        <p class="eyebrow">Water or milk. Shake.</p>
+        <h1>Good things happen when you <em>shake.</em></h1>
+        <p class="lede">Real fermented cacao flavor, and no sweeteners to cover anything up.</p>
+        <div class="ctas"><a class="btn solid" href="https://shop.zeotein.com/cacao">Mix it up <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+      <div class="scene" data-i="3">
+        <p class="eyebrow">Cacao Starter Kit</p>
+        <h1>Meet your new <em>favorite.</em></h1>
+        <p class="lede">Bag, shaker, Save-A-Scoop and three guides. $76.99 your first order, with free US shipping.</p>
+        <div class="ctas">
+          <a class="btn solid" href="https://shop.zeotein.com/cacao">Shop the Starter Kit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn line" href="https://shop.zeotein.com/cacao#zt-label">See the label</a>
+        </div>
+        <p class="fine"><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.9 from 155 reviews</p>
+      </div>
+    </div>
+
+    <div class="visual" aria-hidden="true">
+      <svg viewBox="0 0 600 640" id="zmsvg">
+        <defs>
+          <linearGradient id="zmGlassFill" x1="0" x2="1">
+            <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".18" stop-color="#fff" stop-opacity=".08"/>
+            <stop offset=".8" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity=".45"/>
+          </linearGradient>
+          <linearGradient id="zmEdge" x1="0" x2="1">
+            <stop offset="0" stop-color="#8E8496" stop-opacity=".55"/><stop offset=".5" stop-color="#B9B0C0" stop-opacity=".2"/><stop offset="1" stop-color="#8E8496" stop-opacity=".55"/>
+          </linearGradient>
+          <linearGradient id="zmLiquid" x1="0" x2="1">
+            <stop offset="0" id="zmL0"/><stop offset=".45" id="zmL1"/><stop offset="1" id="zmL2"/>
+          </linearGradient>
+          <linearGradient id="zmCap" x1="0" x2="1">
+            <stop offset="0" stop-color="#1E0E36"/><stop offset=".35" stop-color="#4A2577"/><stop offset=".55" stop-color="#5F2D90"/><stop offset="1" stop-color="#1E0E36"/>
+          </linearGradient>
+          <linearGradient id="zmIce" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".5" stop-color="#E4F4F6" stop-opacity=".55"/><stop offset="1" stop-color="#C7E6EA" stop-opacity=".8"/>
+          </linearGradient>
+          <radialGradient id="zmShadow"><stop offset="0" stop-color="#2E1650" stop-opacity=".28"/><stop offset="1" stop-color="#2E1650" stop-opacity="0"/></radialGradient>
+          <filter id="zmWhite" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncR type="linear" slope="1.025"/><feFuncG type="linear" slope="1.025"/><feFuncB type="linear" slope="1.025"/></feComponentTransfer></filter>
+          <clipPath id="zmCupClip" clipPathUnits="userSpaceOnUse"><path d="M-91 -326 L91 -326 L69 -16 Q68 -6 58 -6 L-58 -6 Q-68 -6 -69 -16 Z"/></clipPath>
+          <clipPath id="zmGlassClip" clipPathUnits="userSpaceOnUse"><path d="M-60 -168 L60 -168 L52 -8 Q51 -4 46 -4 L-46 -4 Q-51 -4 -52 -8 Z"/></clipPath>
+        </defs>
+
+        <ellipse id="zmCupShadow" cx="330" cy="612" rx="130" ry="16" fill="url(#zmShadow)"/>
+        <ellipse id="zmGlassShadow" cx="150" cy="612" rx="86" ry="11" fill="url(#zmShadow)"/>
+        <g id="zmBag" class="bagimg"><image filter="url(#zmWhite)" href="https://cdn.shopify.com/s/files/1/0775/5458/1717/files/zeotein-cacao-bag-first.webp?v=1794429317&amp;width=900" x="0" y="0" width="330" height="330"/></g>
+
+        <!-- small glass for the pour -->
+        <g id="zmGlass">
+          <path d="M-64 -172 L64 -172 L54 -6 Q53 0 46 0 L-46 0 Q-53 0 -54 -6 Z" fill="url(#zmGlassFill)" stroke="url(#zmEdge)" stroke-width="3"/>
+          <g clip-path="url(#zmGlassClip)"><rect id="zmGlassLiq" x="-80" y="0" width="160" height="200" fill="url(#zmLiquid)"/></g>
+          <ellipse id="zmGlassTop" cx="0" cy="0" rx="50" ry="6" fill="#B58A68" opacity="0"/>
+          <path d="M-46 -150 L-40 -20" stroke="#fff" stroke-opacity=".7" stroke-width="5" stroke-linecap="round"/>
+        </g>
+
+        <path id="zmStream" d="" fill="none" stroke="#7A4E33" stroke-linecap="round" stroke-width="13" opacity="0"/>
+
+        <g id="zmPowder"></g>
+
+        <!-- the shaker -->
+        <g id="zmCup">
+          <path d="M-100 -332 L100 -332 L76 -12 Q74 0 62 0 L-62 0 Q-74 0 -76 -12 Z" fill="#fff" fill-opacity=".22"/>
+          <g clip-path="url(#zmCupClip)">
+            <g id="zmLiqRot">
+              <rect id="zmLiq" x="-300" y="0" width="600" height="600" fill="url(#zmLiquid)"/>
+              <g id="zmSwirl" opacity="0">
+                <path d="M-60 -10 C-30 -60 40 -20 20 -90 S-50 -120 -10 -170" fill="none" stroke="#5A3420" stroke-width="22" stroke-linecap="round" opacity=".55"/>
+                <path d="M50 -20 C10 -70 70 -110 30 -150 S-40 -190 10 -230" fill="none" stroke="#FFF6EA" stroke-width="16" stroke-linecap="round" opacity=".6"/>
+                <path d="M-40 -60 C0 -90 -20 -140 30 -170" fill="none" stroke="#3E2214" stroke-width="12" stroke-linecap="round" opacity=".4"/>
+              </g>
+              <ellipse id="zmSurf" cx="0" cy="0" rx="80" ry="9" fill="#fff" opacity=".35"/>
+              <g id="zmFoam" opacity="0"></g>
+            </g>
+          </g>
+          <g id="zmIceG"></g>
+          <path d="M-100 -332 L100 -332 L76 -12 Q74 0 62 0 L-62 0 Q-74 0 -76 -12 Z" fill="url(#zmGlassFill)" stroke="url(#zmEdge)" stroke-width="3.5"/>
+          <path d="M-82 -300 L-64 -40" stroke="#fff" stroke-opacity=".75" stroke-width="7" stroke-linecap="round"/>
+          <path d="M-62 -300 L-56 -220" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"/>
+          <path d="M78 -300 L62 -60" stroke="#fff" stroke-opacity=".35" stroke-width="4" stroke-linecap="round"/>
+          <g id="zmTicks" stroke="#2E1650" stroke-opacity=".25" stroke-width="2">
+            <path d="M60 -80 h12"/><path d="M63 -130 h12"/><path d="M66 -180 h14"/><path d="M69 -230 h12"/><path d="M72 -280 h12"/>
+          </g>
+          <g id="zmLid" opacity="0">
+            <rect x="-106" y="-382" width="212" height="58" rx="10" fill="url(#zmCap)"/>
+            <rect x="-106" y="-340" width="212" height="8" fill="#32BAC0"/>
+            <rect x="-56" y="-410" width="72" height="30" rx="8" fill="url(#zmCap)"/>
+            <rect x="-96" y="-376" width="6" height="40" rx="3" fill="#fff" opacity=".25"/>
+            <text x="40" y="-348" font-family="Poppins,Arial,sans-serif" font-weight="800" font-size="20" fill="#32BAC0" text-anchor="middle">Z</text>
+          </g>
+        </g>
+      </svg>
+
+      <div class="card c1" id="zmC1">
+        <div><b>Bone broth protein</b></div>
+        <svg viewBox="0 0 60 60" fill="none" stroke="#32BAC0" stroke-width="3" stroke-linecap="round"><path d="M14 46 46 14"/><circle cx="12" cy="42" r="6"/><circle cx="18" cy="48" r="6"/><circle cx="42" cy="12" r="6"/><circle cx="48" cy="18" r="6"/></svg>
+        <small>Grass-fed. The protein base.</small>
+      </div>
+      <div class="card c2" id="zmC2">
+        <div><b>14g collagen peptides</b></div>
+        <svg viewBox="0 0 60 60" fill="none" stroke="#5F2D90" stroke-width="3" stroke-linecap="round"><path d="M30 6c10 14 16 23 16 31a16 16 0 0 1-32 0c0-8 6-17 16-31Z"/><path d="M23 38a7 7 0 0 0 7 7"/></svg>
+        <small>Grass-fed, in every serving.</small>
+      </div>
+      <div class="card c3" id="zmC3">
+        <div><b>Fermented cacao</b></div>
+        <svg viewBox="0 0 60 60" fill="none" stroke="#12777C" stroke-width="3" stroke-linecap="round"><path d="M30 6c12 8 16 18 16 26S40 54 30 54 14 40 14 32 18 14 30 6Z"/><path d="M30 10v42M22 20c4 4 12 4 16 0M20 32c6 4 14 4 20 0M22 44c4 3 12 3 16 0"/></svg>
+        <small>Organic. Never alkalized.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="dots" role="tablist" aria-label="Hero slides">
+    <button role="tab" aria-label="Shake up your usual"><i></i></button>
+    <button role="tab" aria-label="Six ingredients"><i></i></button>
+    <button role="tab" aria-label="Good things happen when you shake"><i></i></button>
+    <button role="tab" aria-label="Meet your new favorite"><i></i></button>
+  </div>
+
+  <div class="peek"><span>Section two</span><h2>Six ingredients. That's the whole list.</h2></div>
+</section>
+
+<script>
+(function(){
+  var SCENE = 4.5, LOOP = SCENE * 4;
+  var root = document.getElementById('zmh'), $ = function(id){ return document.getElementById(id); };
+  var scenes = [].slice.call(root.querySelectorAll('.scene'));
+  var dots = [].slice.call(root.querySelectorAll('.dots button'));
+  var cards = [$('zmC1'), $('zmC2'), $('zmC3')];
+  var cup = $('zmCup'), liqRot = $('zmLiqRot'), liq = $('zmLiq'), surf = $('zmSurf'), swirl = $('zmSwirl'), foam = $('zmFoam');
+  var lid = $('zmLid'), iceG = $('zmIceG'), powderG = $('zmPowder'), bag = $('zmBag'), glass = $('zmGlass');
+  var glassLiq = $('zmGlassLiq'), glassTop = $('zmGlassTop'), stream = $('zmStream'), cupShadow = $('zmCupShadow'), glassShadow = $('zmGlassShadow');
+  var L0 = $('zmL0'), L1 = $('zmL1'), L2 = $('zmL2');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function clamp(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function seg(t, a, b){ return clamp((t - a) / (b - a)); }
+  function lerp(a, b, k){ return a + (b - a) * k; }
+  function io(k){ return k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; }
+  function out(k){ return 1 - Math.pow(1 - k, 3); }
+  function back(k){ var c = 1.70158, c3 = c + 1; return 1 + c3 * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); }
+  function bounce(k){ var n = 7.5625, d = 2.75; if (k < 1/d) return n*k*k; if (k < 2/d) return n*(k-=1.5/d)*k+.75; if (k < 2.5/d) return n*(k-=2.25/d)*k+.9375; return n*(k-=2.625/d)*k+.984375; }
+  function mix(c1, c2, k){ var a = parseInt(c1.slice(1), 16), b = parseInt(c2.slice(1), 16);
+    var r = Math.round(lerp(a >> 16, b >> 16, k)), g = Math.round(lerp(a >> 8 & 255, b >> 8 & 255, k)), bl = Math.round(lerp(a & 255, b & 255, k));
+    return 'rgb(' + r + ',' + g + ',' + bl + ')'; }
+  function el(tag, attrs, parent){ var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; }
+
+  // fixed pseudo-random so every render of a frame is identical
+  var seed = 7; function rnd(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+
+  var ice = [{x:-38,y:-1,r:-14,s:46,d:0},{x:30,y:6,r:18,s:42,d:.16},{x:-2,y:-30,r:8,s:40,d:.32}].map(function(c){
+    var g = el('g', {}, iceG);
+    el('rect', {x:-c.s/2, y:-c.s/2, width:c.s, height:c.s, rx:9, fill:'url(#zmIce)', stroke:'#fff', 'stroke-opacity':.9, 'stroke-width':2}, g);
+    el('path', {d:'M' + (-c.s/2+8) + ' ' + (-c.s/2+10) + ' l' + (c.s*.45) + ' 0', stroke:'#fff', 'stroke-width':3, 'stroke-linecap':'round', opacity:.9}, g);
+    c.g = g; return c; });
+
+  var powder = []; for (var i = 0; i < 70; i++) powder.push({ dx: (rnd() - .5) * 70, d: rnd() * 1.1, r: 2 + rnd() * 4.5, w: rnd() * 6.28,
+    c: ['#5A3420','#6E4128','#8A5A3B','#3E2214'][i % 4], e: el('circle', {r: 3, fill: '#5A3420'}, powderG) });
+
+  var bubbles = []; for (i = 0; i < 16; i++) bubbles.push({ x: (rnd() - .5) * 150, y: rnd() * 14, r: 3 + rnd() * 7, e: el('circle', {fill:'#F6E9DA', opacity:.85}, foam) });
+
+  // cup pose: bottom-center in world coords, rotation (deg) about the cup middle, scale
+  function cupPose(t){
+    var x = 330, y = 600, rot = 0, sc = 1;
+    if (t > 9.9 && t < 12.6) { var env = Math.sin(Math.PI * seg(t, 9.9, 12.6)); rot = 9 * Math.sin((t - 9.9) * 2 * Math.PI * 3.1) * env; y -= 26 * env + 8 * Math.abs(Math.sin((t - 9.9) * 2 * Math.PI * 3.1)) * env; }
+    var k = io(seg(t, 13.1, 14.4));
+    x = lerp(x, 250, k); y = lerp(y, 372, k); sc = lerp(1, .6, k); rot = lerp(rot, -112, io(seg(t, 13.6, 14.7)));
+    return {x:x, y:y, rot:rot, sc:sc};
+  }
+  function world(p, lx, ly){ var a = p.rot * Math.PI / 180, cx = 0, cy = -166;
+    var x = lx - cx, y = ly - cy, rx = x * Math.cos(a) - y * Math.sin(a) + cx, ry = x * Math.sin(a) + y * Math.cos(a) + cy;
+    return [p.x + rx * p.sc, p.y + ry * p.sc]; }
+
+  function render(t){
+    t = ((t % LOOP) + LOOP) % LOOP;
+    var si = Math.min(3, Math.floor(t / SCENE));
+
+    // headline scenes
+    scenes.forEach(function(s, i){
+      var a = i * SCENE, k = seg(t, a + .05, a + .75), x = seg(t, a + SCENE - .45, a + SCENE - .02);
+      if (i === 3 && t < SCENE) { k = 0; x = 0; }
+      var o = out(k) * (1 - x), ty = (1 - out(k)) * 34 - x * 22;
+      s.style.opacity = o.toFixed(3);
+      s.style.transform = 'translateY(calc(' + (s.offsetParent && innerWidth > 860 ? '-50%' : '0px') + ' + ' + ty.toFixed(1) + 'px))';
+      s.style.visibility = o < .01 ? 'hidden' : 'visible';
+      s.setAttribute('aria-hidden', o < .5 ? 'true' : 'false');
+    });
+    dots.forEach(function(d, i){ d.classList.toggle('on', i === si); d.setAttribute('aria-selected', i === si);
+      d.firstChild.style.transform = 'scaleX(' + (i === si ? seg(t, i * SCENE, (i + 1) * SCENE) : 0).toFixed(3) + ')'; });
+
+    // global fade at loop seam
+    var fin = out(seg(t, 0, .45)), fout = 1 - seg(t, 17.35, 17.95);
+    var p = cupPose(t);
+    cup.setAttribute('transform', 'translate(' + p.x.toFixed(2) + ' ' + p.y.toFixed(2) + ') scale(' + p.sc.toFixed(4) + ') rotate(' + p.rot.toFixed(2) + ' 0 -166)');
+    cup.setAttribute('opacity', (fin * fout).toFixed(3));
+    cupShadow.setAttribute('opacity', (fin * fout * (1 - seg(t, 13.1, 13.8))).toFixed(3));
+
+    // liquid: fill level and color
+    var fill = .52 * out(seg(t, .35, 1.6)) + .08 * seg(t, 4.9, 6.4);
+    fill -= .44 * seg(t, 14.5, 16.9);
+    var choc = io(seg(t, 5.3, 8.6)), shake = seg(t, 10.2, 12.2);
+    var base = mix('#F1E7DA', '#8B5B3C', choc);
+    L0.setAttribute('stop-color', mix('#E6D9C8', '#6E4229', choc));
+    L1.setAttribute('stop-color', base);
+    L2.setAttribute('stop-color', mix('#E9DCCB', '#5E3823', choc));
+    var lvl = -8 - fill * 312;
+    liqRot.setAttribute('transform', 'rotate(' + (-p.rot).toFixed(2) + ' 0 -166)');
+    liq.setAttribute('y', lvl.toFixed(1));
+    var hw = 69 + 22 * clamp((-lvl - 8) / 318);
+    surf.setAttribute('cy', lvl.toFixed(1)); surf.setAttribute('rx', hw.toFixed(1));
+    surf.setAttribute('opacity', (.35 * (1 - seg(t, 13.6, 14.2))).toFixed(3));
+    surf.setAttribute('fill', mix('#FFFFFF', '#C79C78', choc));
+    var sw = seg(t, 5.0, 6.2) * (1 - seg(t, 8.2, 10.4));
+    swirl.setAttribute('opacity', sw.toFixed(3));
+    swirl.setAttribute('transform', 'translate(0 ' + (lvl + 300).toFixed(1) + ') rotate(' + (Math.sin(t * 1.4) * 6).toFixed(2) + ' 0 -120) scale(1 ' + (.9 + .1 * Math.sin(t * 2)).toFixed(3) + ')');
+    var fo = seg(t, 10.6, 12.2) * (1 - seg(t, 13.6, 14.2));
+    foam.setAttribute('opacity', fo.toFixed(3));
+    bubbles.forEach(function(b, i){ b.e.setAttribute('cx', b.x.toFixed(1)); b.e.setAttribute('cy', (lvl + 2 + b.y + Math.sin(t * 6 + i) * 2).toFixed(1)); b.e.setAttribute('r', (b.r * (.7 + .3 * Math.sin(t * 5 + i * 2))).toFixed(2)); });
+
+    // ice: drops in during scene one, rides the surface, fades during the shake
+    ice.forEach(function(c){
+      var k = seg(t, 1.25 + c.d, 2.15 + c.d), y0 = -620, ry = lvl + 14 + c.y;
+      var y = k <= 0 ? y0 : lerp(y0, ry, bounce(k));
+      var bob = k >= 1 ? Math.sin(t * 2.2 + c.d * 9) * 3 : 0;
+      var o = (k > 0 ? 1 : 0) * (1 - seg(t, 9.0, 9.6));
+      c.g.setAttribute('transform', 'translate(' + c.x + ' ' + (y + bob).toFixed(1) + ') rotate(' + (c.r + (1 - k) * 60 + bob * 2).toFixed(1) + ')');
+      c.g.setAttribute('opacity', o.toFixed(3));
+    });
+
+    // powder falls in from above during scene two
+    var top = world(p, 0, -330);
+    powder.forEach(function(q){
+      var k = seg(t, 4.75 + q.d, 5.55 + q.d);
+      var on = k > 0 && k < 1;
+      q.e.setAttribute('opacity', on ? (.9 * (1 - k * .4)).toFixed(2) : 0);
+      if (!on) return;
+      var x = p.x + q.dx * (.4 + k * .6) + Math.sin(q.w + k * 6) * 6, y = lerp(-60, p.y + lvl * p.sc + 6, k * k);
+      q.e.setAttribute('cx', x.toFixed(1)); q.e.setAttribute('cy', y.toFixed(1)); q.e.setAttribute('r', q.r.toFixed(2)); q.e.setAttribute('fill', q.c);
+    });
+
+    // lid drops on before the shake
+    var lk = seg(t, 9.2, 9.85);
+    lid.setAttribute('opacity', (lk > 0 ? 1 : 0).toString());
+    lid.setAttribute('transform', 'translate(0 ' + (-(1 - back(lk)) * 240).toFixed(1) + ')');
+
+    // ingredient cards
+    var cs = [
+      {from:[-30, 90], to:[-3, 57], r0:-30, r1:-9, d:0},
+      {from:[10, -40], to:[9, 8], r0:-20, r1:-4, d:.18},
+      {from:[110, 60], to:[71, 40], r0:30, r1:11, d:.36}
+    ];
+    cs.forEach(function(c, i){
+      var k = back(seg(t, 5.6 + c.d, 6.5 + c.d)), ex = io(seg(t, 12.7 + c.d * .5, 13.4 + c.d * .5));
+      var fl = Math.sin(t * 1.6 + i * 2.1), orbit = seg(t, 9.8, 10.6) * (1 - seg(t, 12.4, 13));
+      var x = lerp(c.from[0], c.to[0], k) + orbit * Math.cos(t * 2.4 + i * 2.1) * 3;
+      var y = lerp(c.from[1], c.to[1], k) + fl * 1.2 + orbit * Math.sin(t * 2.4 + i * 2.1) * 3 - ex * 30;
+      var r = lerp(c.r0, c.r1, k) + fl * 1.5 + orbit * Math.sin(t * 3 + i) * 5;
+      var o = clamp(seg(t, 5.6 + c.d, 6.0 + c.d)) * (1 - ex);
+      cards[i].style.left = x.toFixed(2) + '%'; cards[i].style.top = y.toFixed(2) + '%';
+      cards[i].style.transform = 'rotate(' + r.toFixed(2) + 'deg) scale(' + (lerp(.7, 1, k) - ex * .15).toFixed(3) + ')';
+      cards[i].style.opacity = o.toFixed(3);
+    });
+
+    // final scene: bag, glass and the pour
+    var bk = out(seg(t, 13.3, 14.4));
+    bag.setAttribute('transform', 'translate(' + lerp(380, 282, bk).toFixed(1) + ' 276)');
+    bag.setAttribute('opacity', (bk * fout).toFixed(3));
+    var gk = out(seg(t, 13.7, 14.5));
+    glass.setAttribute('transform', 'translate(' + lerp(60, 150, gk).toFixed(1) + ' 610)');
+    glass.setAttribute('opacity', (gk * fout).toFixed(3));
+    glassShadow.setAttribute('opacity', (gk * fout).toFixed(3));
+    var gf = .8 * io(seg(t, 14.9, 17.1)), gl = -6 - gf * 164;
+    glassLiq.setAttribute('y', gl.toFixed(1));
+    glassTop.setAttribute('cy', gl.toFixed(1)); glassTop.setAttribute('opacity', gf > .02 ? .6 : 0);
+    glassTop.setAttribute('rx', (48 + 10 * gf).toFixed(1));
+    var spout = world(p, -96, -332), sk = seg(t, 14.55, 14.95), se = seg(t, 16.85, 17.25);
+    if (sk > 0 && se < 1) {
+      var gx = lerp(60, 150, gk), sy = 610 + gl, sx0 = spout[0], sy0 = spout[1];
+      var yEnd = lerp(sy0, sy, sk), yStart = lerp(sy0, sy, se);
+      var wob = Math.sin(t * 9) * 3;
+      var xs = function(y){ var k2 = clamp((y - sy0) / (sy - sy0)); return lerp(sx0, gx + 4, Math.pow(k2, .6)) + wob * k2; };
+      var d = 'M' + xs(yStart).toFixed(1) + ' ' + yStart.toFixed(1);
+      for (var j = 1; j <= 8; j++) { var yy = lerp(yStart, yEnd, j / 8); d += ' L' + xs(yy).toFixed(1) + ' ' + yy.toFixed(1); }
+      stream.setAttribute('d', d); stream.setAttribute('opacity', 1);
+      stream.setAttribute('stroke-width', (12 - 4 * se).toFixed(1));
+    } else stream.setAttribute('opacity', 0);
+  }
+
+  window.__zmSetTime = render;
+  window.__zmLoop = LOOP;
+
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var params = new URLSearchParams(location.search);
+  if (params.has('t')) { render(parseFloat(params.get('t'))); return; }
+  if (params.has('manual')) { render(0); return; }
+  if (reduce) { render(16.9); return; }
+
+  var start = performance.now(), paused = false, pausedAt = 0;
+  dots.forEach(function(d, i){ d.addEventListener('click', function(){ start = performance.now() - (i * SCENE + .02) * 1000; if (paused) pausedAt = i * SCENE + .02; }); });
+  document.addEventListener('visibilitychange', function(){ if (document.hidden) { paused = true; pausedAt = (performance.now() - start) / 1000; } else { paused = false; start = performance.now() - pausedAt * 1000; } });
+  (function frame(now){ if (!paused) render((now - start) / 1000); requestAnimationFrame(frame); })(performance.now());
+})();
+</script>
+</body>
+</html>

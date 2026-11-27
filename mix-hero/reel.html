@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Zeotein Mix Reel</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* 1080x1920 reel stage: the live hero (hero.html) playing on a laptop on a desk.
+   render_reel.js calls window.__reelSet(seconds) for every frame. */
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#CFC3B5}
+.world{position:absolute;inset:0;overflow:hidden}
+.wall{position:absolute;inset:0 0 38% 0;background:
+  radial-gradient(70% 55% at 72% 30%,rgba(255,246,232,.85),rgba(255,246,232,0) 70%),
+  linear-gradient(180deg,#B9AC9D 0%,#D8CDBF 45%,#E4DACD 100%);filter:blur(1px)}
+.wall::after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(60,40,25,.18))}
+.desk{position:absolute;left:-10%;right:-10%;top:61%;bottom:0;background:
+  repeating-linear-gradient(178deg,rgba(255,255,255,.03) 0 3px,rgba(0,0,0,.05) 3px 7px,rgba(255,255,255,0) 7px 15px),
+  linear-gradient(180deg,#6A4A35 0%,#4E3424 40%,#2F1F15 100%);filter:blur(.6px)}
+.desk::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:linear-gradient(180deg,#8A6A52,#5A3D2B)}
+.desk::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 55% 10%,rgba(255,236,210,.28),rgba(0,0,0,0) 70%)}
+
+.cam{position:absolute;inset:0;perspective:2600px;perspective-origin:50% 44%}
+.rig{position:absolute;left:540px;top:1250px;transform-style:preserve-3d}
+.laptop{position:absolute;left:0;top:0;transform-style:preserve-3d}
+/* lid */
+.lid{position:absolute;left:-760px;top:-1000px;width:1520px;height:990px;border-radius:34px 34px 10px 10px;
+  background:linear-gradient(160deg,#2A2A2E,#0E0E10);box-shadow:0 0 0 3px #5C5C62 inset,0 0 0 5px #1A1A1C inset;transform-origin:50% 100%;transform:rotateX(-6deg)}
+.screen{position:absolute;left:22px;top:22px;width:1476px;height:922px;border-radius:14px;overflow:hidden;background:#F7F2EA}
+.screen iframe{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;transform-origin:0 0;transform:scale(1.025)}
+.glare{position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 32%,rgba(255,255,255,0) 70%,rgba(255,255,255,.06) 100%);pointer-events:none}
+.notch{position:absolute;left:50%;top:0;width:190px;height:30px;margin-left:-95px;background:#0E0E10;border-radius:0 0 12px 12px}
+.chin{position:absolute;left:0;right:0;bottom:0;height:46px;background:linear-gradient(180deg,#141416,#2A2A2E);border-radius:0 0 10px 10px}
+/* base */
+.base{position:absolute;left:-780px;top:-12px;width:1560px;height:1040px;border-radius:12px 12px 40px 40px;transform-origin:50% 0;transform:rotateX(90deg);
+  background:linear-gradient(180deg,#5E5E63 0%,#77777C 45%,#6A6A70 100%);box-shadow:0 0 0 2px #4C4C52 inset}
+.kb{position:absolute;left:150px;right:150px;top:70px;height:470px;border-radius:12px;background:#2C2C30;
+  background-image:repeating-linear-gradient(90deg,#1A1A1D 0 76px,#3A3A3F 76px 82px),repeating-linear-gradient(180deg,rgba(0,0,0,0) 0 76px,#3A3A3F 76px 82px);
+  background-blend-mode:normal;box-shadow:0 0 0 6px #4E4E54}
+.kb::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.05) 0 2px,rgba(0,0,0,0) 2px 82px)}
+.pad{position:absolute;left:470px;right:470px;top:600px;height:360px;border-radius:18px;background:linear-gradient(180deg,#707076,#66666C);box-shadow:0 0 0 2px #58585E inset}
+.grill{position:absolute;top:70px;width:110px;height:470px;background-image:radial-gradient(circle,#55555a 1.6px,rgba(0,0,0,0) 2px);background-size:9px 9px}
+.edge{position:absolute;left:-780px;top:-12px;width:1560px;height:22px;background:linear-gradient(180deg,#8A8A90,#4A4A50);border-radius:0 0 18px 18px;transform-origin:50% 0;transform:translateZ(1040px)}
+.shadow{position:absolute;left:-900px;top:-60px;width:1800px;height:1200px;transform-origin:50% 0;transform:rotateX(90deg) translateZ(-4px);
+  background:radial-gradient(50% 50% at 50% 45%,rgba(20,10,5,.55),rgba(20,10,5,0) 70%);filter:blur(30px)}
+
+.vignette{position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 48%,rgba(0,0,0,0) 55%,rgba(25,15,8,.42) 100%);pointer-events:none}
+.grain{position:absolute;inset:-50%;opacity:.07;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+
+.end{position:absolute;inset:0;background:#F7F2EA;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;opacity:0;font-family:Poppins,Arial,sans-serif;color:#2E1650;text-align:center}
+.end img{width:430px;height:auto}
+.end h2{margin:0;font-size:74px;line-height:1.04;letter-spacing:-.035em;font-weight:700;max-width:12ch}
+.end h2 em{font-style:normal;color:#5F2D90;background:linear-gradient(transparent 68%,rgba(50,186,192,.32) 0)}
+.end p{margin:0;font-family:Inter,Arial,sans-serif;font-size:34px;color:#5F5970}
+.end .url{font-weight:600;font-size:34px;color:#fff;background:#2E1650;border-radius:999px;padding:22px 46px}
+</style>
+</head>
+<body>
+<div class="world">
+  <div class="wall"></div>
+  <div class="desk"></div>
+  <div class="cam">
+    <div class="rig" id="rig">
+      <div class="laptop">
+        <div class="shadow"></div>
+        <div class="base"><div class="grill" style="left:22px"></div><div class="grill" style="right:22px"></div><div class="kb"></div><div class="pad"></div></div>
+        <div class="edge"></div>
+        <div class="lid"><div class="screen"><iframe id="hero" src="hero.html?manual=1" title="Zeotein hero"></iframe><div class="glare"></div></div><div class="notch"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+  <div class="end" id="end">
+    <img src="https://cdn.shopify.com/s/files/1/0775/5458/1717/files/ZEOTEIN_LOGO_low_res_no_stroke_for_website.png?v=1762380884" alt="Zeotein">
+    <h2>Meet your new <em>favorite.</em></h2>
+    <p>Cacao Starter Kit &middot; $76.99 your first order</p>
+    <div class="url">shop.zeotein.com</div>
+  </div>
+</div>
+<script>
+var LEAD = .4, HERO = 18, END = 2.6;
+window.__reelDuration = LEAD + HERO + END;
+function clamp(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+function io(k){ return k < .5 ? 4*k*k*k : 1 - Math.pow(-2*k + 2, 3) / 2; }
+window.__reelSet = function(T){
+  var hero = document.getElementById('hero').contentWindow;
+  var ht = Math.min(Math.max(T - LEAD, 0), HERO - .62);   // hold on the finished pour, before the hero's own loop fade
+  hero.__zmSetTime(ht);
+  var k = io(clamp(T / (LEAD + HERO)));
+  var drift = Math.sin(T * .35) * 1.2;
+  var rig = document.getElementById('rig');
+  rig.style.transform = 'translate3d(' + (70 - 40 * k) + 'px,' + (-30 * k) + 'px,' + (-860 + 230 * k) + 'px) rotateX(' + (-12 + 2 * k) + 'deg) rotateY(' + (15 - 5 * k + drift) + 'deg)';
+  var e = clamp((T - (LEAD + HERO - .2)) / .6);
+  document.getElementById('end').style.opacity = io(e);
+  var tr = 'translateY(' + ((1 - io(e)) * 30) + 'px)';
+  [].forEach.call(document.querySelectorAll('.end > *'), function(n, i){ var ki = clamp((T - (LEAD + HERO + .1 + i * .12)) / .5); n.style.opacity = io(ki); n.style.transform = 'translateY(' + ((1 - io(ki)) * 26) + 'px)'; });
+};
+</script>
+</body>
+</html>
