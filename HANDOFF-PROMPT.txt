@@ -1,0 +1,64 @@
+Handoff: Zeotein conversion build. Check my helper's work and finish what's left.
+
+Context: another Claude session worked on the unpublished theme "Zeotein live theme - edit this one directly" (gid://shopify/OnlineStoreTheme/188199928021). It did not publish and did not touch the Black Friday theme (188502048981). The original rules still apply:
+- Check the checksum (Shopify vs md5sum in theme_bash) before editing any existing file.
+- No em dashes, no new claims, no hardcoded prices.
+- Verify in Playwright at https://zeotein.com/<path>?preview_theme_id=188199928021 and confirm Shopify.theme.id === 188199928021.
+
+COMPLETED AND COMMITTED (verified in a browser unless noted)
+
+1. Single-ingredient pages (all 9), in snippets/zt-pdp-single.liquid
+- Size pills show servings, variant price and price per serving, three across on phones.
+- Button reads "Add to cart · $price" and updates when the size changes.
+- The "final sale" line (.zt-final-sale) is moved under the button by JS, because that element lives in a stale file that could not be edited.
+- Gallery swipe is intact.
+- Tested at 390px and 1440px, clicking every size. One add-to-cart was confirmed via /cart.js, then the cart was cleared.
+
+2. Blend collection cards
+- New snippet snippets/zt-card-blend.liquid, rendered from snippets/card-product.liquid. CSS lives in snippets/zt-audit-layer.liquid.
+- Applies to products tagged protein-blend.
+- Shows "N servings · $X per serving" plus "or $Y with Subscribe & Save".
+- Servings are parsed from the product title. $Y is the lowest selling-plan allocation price.
+- Tested on /collections/all at both widths. Only the 5 blends get it. The 7-day packs correctly show no subscribe line.
+
+3. Cart, phones only (in zt-audit-layer.liquid)
+- A fixed bar shows "Estimated total $X" above a Check out button.
+- It appears only when the real #checkout button is off screen. Tapping it reaches checkout.
+- Tested at 390px with a one-item cart.
+
+4. Four-number strip above the description (in zt-audit-layer.liquid)
+- Cacao bag and Cacao 30 sticks: 23g protein, 14g collagen, 0g sugar, 140 calories.
+- Vegan 30 sticks: 20g plant protein, 170 calories, 0g added sugar, 5 ingredients. These come from that page's own copy.
+- Tested at 390px on all three pages, and at 1440px on Cacao 30 sticks.
+
+NOT COMPLETED
+
+- Reordering the cart add-on row. The real cart DOM has a single card (.zt-sa__addon) rendered by snippets/zt-smart-addon.liquid, not a scrolling row with multiple options.
+  - That snippet already picks the cheapest available item that closes the $115 gap, and the shaker and Save-A-Scoop are not in its pool.
+  - I changed nothing. If a scrolling row exists somewhere else (an app, the cart drawer, or a different cart state), find it and decide whether the reorder is still wanted.
+- The cart files (sections/main-cart-items, main-cart-footer, templates/cart.json, sections/main-product) failed the checksum check, so I left them alone.
+
+THINGS TO CHECK OR FIX
+
+- Stale price copy:
+  - snippets/zt-desc-cacao.liquid states per-serving prices ($3.33 / $3.67 for the bag, $3.83 / $4.50 for the sticks) that do not match current Shopify prices.
+  - The Vegan 30 sticks product description (product data in Shopify, not the theme) says "$3.67 / $4.33".
+  - I left all of these untouched.
+  - Current data: bag $99.99 one-time, sticks $129.99 one-time, lowest subscribe $89.99 (bag) and $109.99 (sticks).
+  - Decide whether to correct them or make them dynamic.
+- Cart bar total refresh: I did not test whether the bar's total updates after a quantity change. It is wired to .totals__total-value via a MutationObserver, so please retest it. The Shopify preview bar also overlaps the bottom of the viewport on the draft preview, but real visitors will not see it.
+- Stats strip: I added a bit more space below it in the last commit and did not re-screenshot after that tweak. Desktop was only checked on the Cacao sticks page.
+- Subscribe & Save wording on the card: it reads the plan group name from the product. Confirm it looks right in context.
+
+TOOLING GOTCHAS
+
+- theme_commit can answer sync_pending and save nothing. Confirm with the checksum or file size on Shopify. I had to append a trailing newline and re-commit once for zt-audit-layer.liquid.
+- The working copy has no python3, so use sed or heredocs.
+- Cloudflare returns 429 to the browser after a handful of page loads. Space tests out and do not try to bypass it.
+- curl and theme_screenshot are unreliable here. Use Playwright.
+
+COMMITS (one per item, plus follow-ups)
+Single pages, pill layout fix, collection cards, cart bar, stat strip, spacing tweak.
+
+PLEASE DO
+Review the diffs in zt-pdp-single.liquid, zt-card-blend.liquid, card-product.liquid and zt-audit-layer.liquid. Re-run browser checks on anything you doubt. Resolve the add-on row question and the stale price copy. Then report back.
